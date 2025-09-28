@@ -7,8 +7,8 @@ import (
 )
 
 type Game struct {
-	content    *fyne.Container
-	backFunc   func()
+	content  *fyne.Container
+	backFunc func()
 }
 
 func NewGame(backFunc func()) *Game {
@@ -19,7 +19,7 @@ func NewGame(backFunc func()) *Game {
 
 func (g *Game) setupUI() {
 	title := widget.NewLabel("Country Guessing Game")
-	
+
 	backBtn := widget.NewButton("← Back to Dashboard", func() {
 		g.backFunc()
 	})

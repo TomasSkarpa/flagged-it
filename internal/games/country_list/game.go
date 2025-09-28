@@ -19,7 +19,7 @@ func NewGame(backFunc func()) *Game {
 
 func (g *Game) setupUI() {
 	title := widget.NewLabel("List All Countries")
-	
+
 	backBtn := widget.NewButton("← Back to Dashboard", func() {
 		g.backFunc()
 	})

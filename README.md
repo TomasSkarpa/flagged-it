@@ -73,11 +73,6 @@ make debug
 make check
 ```
 
-### Run Tests
-```bash
-make test
-```
-
 ## Project Structure
 - `cmd/` - Application entry point
 - `internal/app/` - Main app logic

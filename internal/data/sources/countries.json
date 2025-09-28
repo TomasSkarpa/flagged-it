@@ -1,0 +1,262 @@
+[
+  {
+    "country_name": "Czech Republic",
+    "country_code": "CZ",
+    "continent": "Europe",
+    "region": "Central Europe",
+    "population": 10720000,
+    "capital": "Prague",
+    "geo_position": {
+      "latitude": 49.8175,
+      "longitude": 15.4730
+    },
+    "official_languages": ["Czech"],
+    "facts": [
+      "The capital city is Prague.",
+      "The Czech Republic is a member of the EU and NATO.",
+      "Known for beer production and historic castles.",
+      "Home to the famous Charles Bridge.",
+      "Has over 2000 castles and chateaux."
+    ]
+  },
+  {
+    "country_name": "United States of America",
+    "country_code": "US",
+    "continent": "North America",
+    "region": "Northern America",
+    "population": 331000000,
+    "capital": "Washington, D.C.",
+    "geo_position": {
+      "latitude": 37.0902,
+      "longitude": -95.7129
+    },
+    "official_languages": ["English"],
+    "facts": [
+      "The capital city is Washington, D.C.",
+      "The USA is a federal republic consisting of 50 states.",
+      "Known for technological innovations and Hollywood.",
+      "Has the world's largest economy.",
+      "Home to the Grand Canyon and Yellowstone."
+    ]
+  },
+  {
+    "country_name": "Japan",
+    "country_code": "JP",
+    "continent": "Asia",
+    "region": "Eastern Asia",
+    "population": 125800000,
+    "capital": "Tokyo",
+    "geo_position": {
+      "latitude": 36.2048,
+      "longitude": 138.2529
+    },
+    "official_languages": ["Japanese"],
+    "facts": [
+      "The capital city is Tokyo.",
+      "Japan is an island country in East Asia.",
+      "Known for its culture, technology, and anime.",
+      "Has over 6800 islands.",
+      "Famous for cherry blossoms and Mount Fuji."
+    ]
+  },
+  {
+    "country_name": "Germany",
+    "country_code": "DE",
+    "continent": "Europe",
+    "region": "Western Europe",
+    "population": 83200000,
+    "capital": "Berlin",
+    "geo_position": {
+      "latitude": 51.1657,
+      "longitude": 10.4515
+    },
+    "official_languages": ["German"],
+    "facts": [
+      "The capital city is Berlin.",
+      "Germany is the most populous member state of the EU.",
+      "Known for its automotive industry and Oktoberfest.",
+      "Home to the Brandenburg Gate.",
+      "Has 16 federal states called Länder."
+    ]
+  },
+  {
+    "country_name": "Brazil",
+    "country_code": "BR",
+    "continent": "South America",
+    "region": "South America",
+    "population": 215300000,
+    "capital": "Brasília",
+    "geo_position": {
+      "latitude": -14.2350,
+      "longitude": -51.9253
+    },
+    "official_languages": ["Portuguese"],
+    "facts": [
+      "The capital city is Brasília.",
+      "Brazil is the largest country in South America.",
+      "Known for the Amazon rainforest and Carnival.",
+      "Home to Christ the Redeemer statue.",
+      "Has won the FIFA World Cup 5 times."
+    ]
+  },
+  {
+    "country_name": "Australia",
+    "country_code": "AU",
+    "continent": "Oceania",
+    "region": "Australia and New Zealand",
+    "population": 25700000,
+    "capital": "Canberra",
+    "geo_position": {
+      "latitude": -25.2744,
+      "longitude": 133.7751
+    },
+    "official_languages": ["English"],
+    "facts": [
+      "The capital city is Canberra.",
+      "Australia is both a country and a continent.",
+      "Known for unique wildlife like kangaroos and koalas.",
+      "Home to the Great Barrier Reef.",
+      "Has the Sydney Opera House."
+    ]
+  },
+  {
+    "country_name": "France",
+    "country_code": "FR",
+    "continent": "Europe",
+    "region": "Western Europe",
+    "population": 67800000,
+    "capital": "Paris",
+    "geo_position": {
+      "latitude": 46.2276,
+      "longitude": 2.2137
+    },
+    "official_languages": ["French"],
+    "facts": [
+      "The capital city is Paris.",
+      "France is known for its cuisine and fashion.",
+      "Home to the Eiffel Tower and Louvre Museum.",
+      "Has the most time zones of any country.",
+      "Famous for wine production and cheese."
+    ]
+  },
+  {
+    "country_name": "Canada",
+    "country_code": "CA",
+    "continent": "North America",
+    "region": "Northern America",
+    "population": 38200000,
+    "capital": "Ottawa",
+    "geo_position": {
+      "latitude": 56.1304,
+      "longitude": -106.3468
+    },
+    "official_languages": ["English", "French"],
+    "facts": [
+      "The capital city is Ottawa.",
+      "Canada is the second-largest country by land area.",
+      "Known for maple syrup and ice hockey.",
+      "Has two official languages: English and French.",
+      "Home to Niagara Falls."
+    ]
+  },
+  {
+    "country_name": "United Kingdom",
+    "country_code": "GB",
+    "continent": "Europe",
+    "region": "Northern Europe",
+    "population": 67500000,
+    "capital": "London",
+    "geo_position": {
+      "latitude": 55.3781,
+      "longitude": -3.4360
+    },
+    "official_languages": ["English"],
+    "facts": [
+      "The capital city is London.",
+      "Consists of England, Scotland, Wales, and Northern Ireland.",
+      "Known for Big Ben and Buckingham Palace.",
+      "Birthplace of Shakespeare and The Beatles.",
+      "Has a constitutional monarchy."
+    ]
+  },
+  {
+    "country_name": "Italy",
+    "country_code": "IT",
+    "continent": "Europe",
+    "region": "Southern Europe",
+    "population": 60400000,
+    "capital": "Rome",
+    "geo_position": {
+      "latitude": 41.8719,
+      "longitude": 12.5674
+    },
+    "official_languages": ["Italian"],
+    "facts": [
+      "The capital city is Rome.",
+      "Home to the Vatican City.",
+      "Known for pasta, pizza, and Renaissance art.",
+      "Has the Colosseum and Leaning Tower of Pisa.",
+      "Shaped like a boot on the map."
+    ]
+  },
+  {
+    "country_name": "China",
+    "country_code": "CN",
+    "continent": "Asia",
+    "region": "Eastern Asia",
+    "population": 1412000000,
+    "capital": "Beijing",
+    "geo_position": {
+      "latitude": 35.8617,
+      "longitude": 104.1954
+    },
+    "official_languages": ["Mandarin Chinese"],
+    "facts": [
+      "The capital city is Beijing.",
+      "Most populous country in the world.",
+      "Known for the Great Wall of China.",
+      "Has the Forbidden City and Terracotta Army.",
+      "Invented paper, gunpowder, and the compass."
+    ]
+  },
+  {
+    "country_name": "Russia",
+    "country_code": "RU",
+    "continent": "Europe",
+    "region": "Eastern Europe",
+    "population": 146200000,
+    "capital": "Moscow",
+    "geo_position": {
+      "latitude": 61.5240,
+      "longitude": 105.3188
+    },
+    "official_languages": ["Russian"],
+    "facts": [
+      "The capital city is Moscow.",
+      "Largest country in the world by land area.",
+      "Known for the Red Square and Kremlin.",
+      "Spans 11 time zones.",
+      "Home to the Trans-Siberian Railway."
+    ]
+  },
+  {
+    "country_name": "Egypt",
+    "country_code": "EG",
+    "continent": "Africa",
+    "region": "Northern Africa",
+    "population": 104300000,
+    "capital": "Cairo",
+    "geo_position": {
+      "latitude": 26.8206,
+      "longitude": 30.8025
+    },
+    "official_languages": ["Arabic"],
+    "facts": [
+      "The capital city is Cairo.",
+      "Known for the Pyramids of Giza and the Sphinx.",
+      "Home to the ancient civilization of the Pharaohs.",
+      "The Nile River flows through the country.",
+      "Has the Suez Canal connecting two seas."
+    ]
+  }
+]

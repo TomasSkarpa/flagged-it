@@ -12,14 +12,24 @@ run:
 build:
 	go build -o flagged-it cmd/main.go
 
-# Build for all platforms
-build-all:
+# Build for macOS
+build-macos:
 	go build -o build/flagged-it-macos cmd/main.go
-	echo "Cross-compilation for Windows/Linux requires Docker or native builds"
+
+# Build for Windows (run on Windows)
+build-windows:
+	go build -o build/flagged-it.exe cmd/main.go
+
+# Build for Linux (run on Linux)
+build-linux:
+	go build -o build/flagged-it-linux cmd/main.go
+
+# Build for all platforms
+build-all: build-macos
+	@echo "Note: Windows and Linux builds must be run on their respective platforms"
 
 # Package as macOS app bundle
-package-macos:
-	go build -o build/flagged-it-macos cmd/main.go
+package-macos: build-macos
 	mkdir -p build/Flagged-It.app/Contents/MacOS
 	mkdir -p build/Flagged-It.app/Contents/Resources
 	cp build/flagged-it-macos build/Flagged-It.app/Contents/MacOS/flagged-it
@@ -27,13 +37,11 @@ package-macos:
 	cd build && zip -r Flagged-It-macOS.zip Flagged-It.app
 
 # Package for Windows (run on Windows)
-package-windows:
-	go build -o build/flagged-it.exe cmd/main.go
+package-windows: build-windows
 	cd build && zip flagged-it-windows.zip flagged-it.exe
 
 # Package for Linux (run on Linux)
-package-linux:
-	go build -o build/flagged-it-linux cmd/main.go
+package-linux: build-linux
 	cd build && tar -czf flagged-it-linux.tar.gz flagged-it-linux
 
 # Package for current platform only

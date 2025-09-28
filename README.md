@@ -27,11 +27,33 @@ make build
 ./flagged-it
 ```
 
+### Build for Specific Platforms
+```bash
+make build-macos    # Build for macOS
+make build-windows  # Build for Windows (run on Windows)
+make build-linux    # Build for Linux (run on Linux)
+```
+
 ### Build for All Platforms
 ```bash
 make build-all
 ```
 Executables will be in `build/` folder.
+
+## Packaging for Distribution
+
+### Package for Specific Platforms
+```bash
+make package-macos    # Creates .app bundle + zip
+make package-windows  # Creates .exe + zip (run on Windows)
+make package-linux    # Creates binary + tar.gz (run on Linux)
+```
+
+### Package All
+```bash
+make package-all
+```
+Creates ready-to-distribute files in `build/` folder.
 
 ## Debugging
 

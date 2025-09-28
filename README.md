@@ -24,7 +24,6 @@ make run
 ### Build Executable
 ```bash
 make build
-./flagged-it
 ```
 
 ### Build for Specific Platforms

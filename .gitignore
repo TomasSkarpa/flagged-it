@@ -35,6 +35,10 @@ flagged-it-*
 *.tar.gz
 *.app
 
+# macOS
+.DS_Store
+.DS_Store?
+
 # Editor/IDE
 # .idea/
 # .vscode/

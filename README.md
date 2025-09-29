@@ -6,12 +6,12 @@ Guess countries, letters, or facts – native Windows &amp; macOS app in Go.
 ### Prerequisites
 Install Go 1.21 or later:
 - **macOS**: `brew install go`
-- **Windows**: `winget install ezwinports.make`
+- **Windows**: Download from https://golang.org/dl/
 - **Linux**: `sudo apt install golang-go` (Ubuntu/Debian) or `sudo yum install golang` (CentOS/RHEL)
 
 Install Make:
 - **macOS**: `brew install make`
-- **Windows**: Download from https://gnuwin32.sourceforge.net/packages/make.htm
+- **Windows**: `winget install ezwinports.make`
 - **Linux**: `sudo apt install make`
 
 ### Quick Setup

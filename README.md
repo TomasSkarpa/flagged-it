@@ -6,8 +6,7 @@ Guess countries, letters, or facts – native Windows &amp; macOS app in Go.
 ### Prerequisites
 Install Go 1.21 or later:
 - **macOS**: `brew install go`
-- **Windows**: Download from https://golang.org/dl/
-- Open Powershell with Administrator rights and use the command `$url="https://sourceforge.net/projects/gnuwin32/files/make/3.81/make-3.81-bin.zip/download"; $out="$env:TEMP\make-bin.zip"; $installDir="C:\Program Files (x86)\GnuWin32"; $binDir="$installDir\bin"; (New-Object System.Net.WebClient).DownloadFile($url, $out); New-Item -Path $installDir -ItemType Directory -Force; Expand-Archive -Path $out -DestinationPath $installDir -Force; $path=([System.Environment]::GetEnvironmentVariable("Path", "Machine") -split ';') | Where-Object { $_ -ne $binDir }; [System.Environment]::SetEnvironmentVariable("Path", ("{0};{1}" -f ($path -join ';'), $binDir), "Machine")`
+- **Windows**: `winget install ezwinports.make`
 - **Linux**: `sudo apt install golang-go` (Ubuntu/Debian) or `sudo yum install golang` (CentOS/RHEL)
 
 Install Make:

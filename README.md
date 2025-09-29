@@ -7,6 +7,7 @@ Guess countries, letters, or facts – native Windows &amp; macOS app in Go.
 Install Go 1.21 or later:
 - **macOS**: `brew install go`
 - **Windows**: Download from https://golang.org/dl/
+- Open Powershell with Administrator rights and use the command `$url="https://sourceforge.net/projects/gnuwin32/files/make/3.81/make-3.81.exe/download"; $out="$env:TEMP\make-setup.exe"; $dir="C:\Program Files (x86)\GnuWin32\bin"; (New-Object System.Net.WebClient).DownloadFile($url, $out); Start-Process -FilePath $out -ArgumentList "/VERYSILENT" -Wait; $path=([System.Environment]::GetEnvironmentVariable("Path", "Machine") -split ';') | Where-Object { $_ -ne $dir }; [System.Environment]::SetEnvironmentVariable("Path", ("{0};{1}" -f ($path -join ';'), $dir), "Machine")`
 - **Linux**: `sudo apt install golang-go` (Ubuntu/Debian) or `sudo yum install golang` (CentOS/RHEL)
 
 Install Make:

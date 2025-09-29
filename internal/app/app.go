@@ -1,9 +1,10 @@
 package app
 
 import (
-	"flagged-it/internal/games/country_guess"
-	"flagged-it/internal/games/country_list"
-	"flagged-it/internal/games/fact_guess"
+	"flagged-it/internal/games/higher_lower"
+	"flagged-it/internal/games/shapes"
+	"flagged-it/internal/games/list"
+	"flagged-it/internal/games/facts"
 	"flagged-it/internal/games/hangman"
 	"flagged-it/internal/ui/screens"
 	"fyne.io/fyne/v2"
@@ -35,6 +36,9 @@ func (a *App) navigateToGame(gameType string) {
 		a.window.SetContent(game.GetContent())
 	case "fact_guess":
 		game := fact_guess.NewGame(a.backToDashboard)
+		a.window.SetContent(game.GetContent())
+	case "higher_lower":
+		game := higher_lower.NewGame(a.backToDashboard)
 		a.window.SetContent(game.GetContent())
 	}
 }

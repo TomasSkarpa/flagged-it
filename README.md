@@ -9,6 +9,11 @@ Install Go 1.21 or later:
 - **Windows**: Download from https://golang.org/dl/
 - **Linux**: `sudo apt install golang-go` (Ubuntu/Debian) or `sudo yum install golang` (CentOS/RHEL)
 
+- Install Make:
+- **macOS**: `brew install make`
+- **Windows**: Download from https://gnuwin32.sourceforge.net/packages/make.htm
+- **Linux**: `sudo apt install make`
+
 ### Quick Setup
 ```bash
 make setup

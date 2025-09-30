@@ -1,4 +1,4 @@
-package country_list
+package list
 
 import (
 	"fyne.io/fyne/v2"

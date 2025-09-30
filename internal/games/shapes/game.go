@@ -1,4 +1,4 @@
-package country_guess
+package shapes
 
 import (
 	"fyne.io/fyne/v2"

@@ -1,4 +1,4 @@
-package fact_guess
+package facts
 
 import (
 	"fyne.io/fyne/v2"

@@ -42,4 +42,4 @@ flagged-it-*
 # Editor/IDE
 # .idea/
 # .vscode/
-.code-workspace
+*.code-workspace

@@ -1,67 +1,79 @@
-.PHONY: setup run build clean test
+# -------------------------------------------------------------------
+# Project Makefile for "flagged-it"
+#
+# This Makefile standardizes building, testing, packaging, and cleaning
+# across multiple platforms.
+# Designed with portability and CI/CD pipelines in mind.
+# -------------------------------------------------------------------
 
-# Setup project dependencies
+.PHONY: setup run debug clean build check
+
+# -------------------------------------------------------------------
+# Configurable variables and cross-platform ready commands
+# -------------------------------------------------------------------
+
+BINARY    := flagged-it
+MAIN      := cmd/main.go
+BUILD_DIR := build
+
+# Default target OS/arch
+GOOS   ?= $(shell go env GOOS)
+GOARCH ?= $(shell go env GOARCH)
+
+# Windows binaries need ".exe" extension
+ifeq ($(GOOS),windows)
+  EXT := .exe
+else
+  EXT :=
+endif
+
+# Final output path for current build
+OUT := $(BUILD_DIR)/$(BINARY)-$(GOOS)-$(GOARCH)$(EXT)
+
+PLATFORMS = darwin/amd64 darwin/arm64 linux/amd64 linux/arm64 windows/amd64 windows/386
+
+# Detect Windows for cross-platform commands
+ifeq ($(OS),Windows_NT)
+  MKDIR := if not exist $(BUILD_DIR) mkdir $(BUILD_DIR)
+  EXE_EXT := .exe
+  # Windows-compatible env for Go build
+  GO_BUILD = set GOOS=$(GOOS)&& set GOARCH=$(GOARCH)&& go build -o $(OUT) $(MAIN)
+  RM_RF := if exist $(BUILD_DIR) rmdir /s /q $(BUILD_DIR)
+else
+  MKDIR := mkdir -p $(BUILD_DIR)
+  EXE_EXT :=
+  GO_BUILD = GOOS=$(GOOS) GOARCH=$(GOARCH) go build -o $(OUT) $(MAIN)
+  RM_RF := rm -rf $(BUILD_DIR)
+endif
+
+OUT := $(BUILD_DIR)/$(BINARY)-$(GOOS)-$(GOARCH)$(EXE_EXT)
+
+# -------------------------------------------------------------------
+# Setup and development targets
+# -------------------------------------------------------------------
+
 setup:
 	go mod tidy
 
-# Run in development mode
 run:
-	go run cmd/main.go
+	go run $(MAIN)
 
-# Build executable for current platform
-build:
-	go build -o flagged-it cmd/main.go
+# Run the app with verbose build/run output for troubleshooting
+debug:
+	go run -v $(MAIN)
 
-# Build for macOS
-build-macos:
-	go build -o build/flagged-it-macos cmd/main.go
-
-# Build for Windows (run on Windows)
-build-windows:
-	go build -o build/flagged-it.exe cmd/main.go
-
-# Build for Linux (run on Linux)
-build-linux:
-	go build -o build/flagged-it-linux cmd/main.go
-
-# Build for all platforms
-build-all: build-macos
-	@echo "Note: Windows and Linux builds must be run on their respective platforms"
-
-# Package as macOS app bundle
-package-macos: build-macos
-	mkdir -p build/Flagged-It.app/Contents/MacOS
-	mkdir -p build/Flagged-It.app/Contents/Resources
-	cp build/flagged-it-macos build/Flagged-It.app/Contents/MacOS/flagged-it
-	echo '<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n<plist version="1.0">\n<dict>\n\t<key>CFBundleExecutable</key>\n\t<string>flagged-it</string>\n\t<key>CFBundleIdentifier</key>\n\t<string>com.flagged-it.app</string>\n\t<key>CFBundleName</key>\n\t<string>Flagged It</string>\n\t<key>CFBundleVersion</key>\n\t<string>1.0</string>\n</dict>\n</plist>' > build/Flagged-It.app/Contents/Info.plist
-	cd build && zip -r Flagged-It-macOS.zip Flagged-It.app
-
-# Package for Windows (run on Windows)
-package-windows: build-windows
-	cd build && zip flagged-it-windows.zip flagged-it.exe
-
-# Package for Linux (run on Linux)
-package-linux: build-linux
-	cd build && tar -czf flagged-it-linux.tar.gz flagged-it-linux
-
-# Package for current platform only
-package-all: package-macos
-	@echo "All packages created in build/ folder:"
-	@ls -la build/*.zip build/*.tar.gz build/*.app 2>/dev/null || true
-
-# Clean build artifacts
+# Remove build artifacts (safe for both Linux/macOS and Windows)
 clean:
-	rm -f flagged-it build/*
+	go clean
+	@$(RM_RF)
+	@echo "Cleaned build artifacts"
 
-# Run tests
-test:
-	go test ./...
+build:
+	@$(MKDIR)
+	@$(GO_BUILD)
+	@echo "Built $(OUT)"
 
-# Check code quality
+# Static analysis and formatting
 check:
 	go vet ./...
 	go fmt ./...
-
-# Debug with verbose output
-debug:
-	go run -v cmd/main.go

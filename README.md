@@ -1,84 +1,35 @@
 # flagged-it
-Guess countries, letters, or facts – native Windows &amp; macOS app in Go.
+Learn about countries playing different game modes – native Windows &amp; macOS and Linux app in Go.
 
 ## Setup Instructions
 
-### Prerequisites
 Install Go 1.21 or later:
 - **macOS**: `brew install go`
 - **Windows**: Download from https://golang.org/dl/
 - **Linux**: `sudo apt install golang-go` (Ubuntu/Debian) or `sudo yum install golang` (CentOS/RHEL)
 
-### Quick Setup
-```bash
-make setup
-```
+Install Make:
+- **macOS**: `brew install make`
+- **Windows**: Download from https://gnuwin32.sourceforge.net/packages/make.htm or `winget install ezwinports.make`
+- **Linux**: `sudo apt install make`
 
-## Running the App
+Make Targets
+- `make setup` - Install dependencies
+- `make run` - Run application
+- `make debug` - Run with verbose output
+- `make build` - Builds binary based on your system
+- `make check` - Format and analyze code
+- `make clean` - Remove build artifacts
 
-### Development Mode
-```bash
-make run
-```
+## Versioning Conventions & Contribution
 
-### Build Executable
-```bash
-make build
-```
+### How to Contribute
+Create a pull request, while following the conventions below.
 
-### Build for Specific Platforms
-```bash
-make build-macos    # Build for macOS
-make build-windows  # Build for Windows (run on Windows)
-make build-linux    # Build for Linux (run on Linux)
-```
-
-### Build for All Platforms
-```bash
-make build-all
-```
-Executables will be in `build/` folder.
-
-## Packaging for Distribution
-
-### Package for Specific Platforms
-```bash
-make package-macos    # Creates .app bundle + zip
-make package-windows  # Creates .exe + zip (run on Windows)
-make package-linux    # Creates binary + tar.gz (run on Linux)
-```
-
-### Package All
-```bash
-make package-all
-```
-Creates ready-to-distribute files in `build/` folder.
-
-## Debugging
-
-### View Logs
-Add print statements in your code:
-```go
-fmt.Println("Debug:", variable)
-```
-
-### Run with Verbose Output
-```bash
-make debug
-```
-
-### Check Code Quality
-```bash
-make check
-```
-
-## Project Structure
-- `cmd/` - Application entry point
-- `internal/app/` - Main app logic
-- `internal/games/` - Game modules (each developer works here)
-- `internal/ui/` - User interface components
-
-## Code Conventions
+### Branch Naming Convention
+Use lowercase and kebab-case for branch names, such as:
+- /country-guessing-game
+- /dashboard-refactor
 
 ### Commit Messages
 Use lowercase prefixes:

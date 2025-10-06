@@ -22,11 +22,11 @@ func (d *Dashboard) setupUI() {
 	title.TextStyle = fyne.TextStyle{Bold: true}
 
 	countryGuessBtn := widget.NewButton("Country Guessing", func() {
-		d.navigateFunc("country_guess")
+		d.navigateFunc("shapes")
 	})
 
 	countryListBtn := widget.NewButton("List All Countries", func() {
-		d.navigateFunc("country_list")
+		d.navigateFunc("list")
 	})
 
 	hangmanBtn := widget.NewButton("Hangman", func() {
@@ -34,7 +34,7 @@ func (d *Dashboard) setupUI() {
 	})
 
 	factGuessBtn := widget.NewButton("Guess by Facts", func() {
-		d.navigateFunc("fact_guess")
+		d.navigateFunc("facts")
 	})
 
 	higher_lowerBtn := widget.NewButton("Higher or Lower", func() {

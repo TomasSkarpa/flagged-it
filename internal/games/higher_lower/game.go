@@ -1,21 +1,15 @@
 package higher_lower
 
 import (
-	"encoding/json"
 	"fmt"
 	"math/rand"
-	"os"
-	"path/filepath"
+	"flagged-it/internal/data"
+	"flagged-it/internal/data/models"
 	"flagged-it/internal/ui/components"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 )
-
-type Country struct {
-	CountryName	string `json:"country_name"`
-	Population 	int    `json:"population"`
-}
 
 type Game struct {
 	content  *fyne.Container
@@ -84,27 +78,7 @@ func (g *Game) setupUI() {
 	)
 }
 
-func getDataFilePath(file string) (string, error) {
-	path, err := os.Getwd()
-	if err != nil {
-		return "", err
-	}
-	dir := filepath.Dir(path)
-	fullPath := filepath.Join(dir, "internal", "data", "sources", file)
-	return fullPath, nil
-}
 
-func loadCountries(filename string) ([]Country, error) {
-	file, err := os.Open(filename)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	var countries []Country
-	err = json.NewDecoder(file).Decode(&countries)
-	return countries, err
-}
 
 func guess(isHigher bool, countryOnePop int, countryTwoPop int, scoreLabel *widget.Label) {
 	var score int = 0
@@ -119,14 +93,7 @@ func (g *Game) GetContent() *fyne.Container {
 }
 
 func (g *Game) Start() {
-	path, err := getDataFilePath("countries.json")
-	if err != nil {
-		panic(err)
-	}
-	countries, err := loadCountries(path)
-	if err != nil{
-		panic(err)
-	}
+	countries := data.LoadCountries()
 
 	firstRandomCountry := countries[rand.Intn(len(countries))]
 	secondRandomCountry := countries[rand.Intn(len(countries))]

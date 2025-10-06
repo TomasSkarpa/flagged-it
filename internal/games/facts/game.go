@@ -8,6 +8,7 @@ import (
 
 	"flagged-it/internal/data"
 	"flagged-it/internal/data/models"
+	"flagged-it/internal/ui/components"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
@@ -44,10 +45,7 @@ func (g *Game) loadCountries() {
 }
 
 func (g *Game) setupUI() {
-	title := widget.NewLabel("Guess by Facts")
-	title.TextStyle.Bold = true
-
-	backBtn := widget.NewButton("Back to Dashboard", g.backFunc)
+	topBar := components.NewTopBar("Guess by Facts", g.backFunc, g.newGame)
 
 	g.factLabel = widget.NewLabel("")
 	g.factLabel.Wrapping = fyne.TextWrapWord
@@ -59,13 +57,11 @@ func (g *Game) setupUI() {
 	g.guessBtn = widget.NewButton("Guess", g.makeGuess)
 	g.statusLabel = widget.NewLabel("")
 	g.triesLabel = widget.NewLabel("")
-	g.newGameBtn = widget.NewButton("New Game", g.newGame)
 
 	guessContainer := container.NewGridWithColumns(2, g.guessEntry, g.guessBtn)
-	buttonContainer := container.NewHBox(g.newGameBtn, backBtn)
 
 	g.content = container.NewVBox(
-		title,
+		topBar.GetContainer(),
 		widget.NewSeparator(),
 		g.statusLabel,
 		g.triesLabel,
@@ -73,7 +69,6 @@ func (g *Game) setupUI() {
 		g.factLabel,
 		widget.NewSeparator(),
 		guessContainer,
-		buttonContainer,
 	)
 }
 

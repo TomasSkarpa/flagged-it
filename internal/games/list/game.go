@@ -1,6 +1,7 @@
 package list
 
 import (
+	"flagged-it/internal/ui/components"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
@@ -18,17 +19,12 @@ func NewGame(backFunc func()) *Game {
 }
 
 func (g *Game) setupUI() {
-	title := widget.NewLabel("List All Countries")
-
-	backBtn := widget.NewButton("← Back to Dashboard", func() {
-		g.backFunc()
-	})
+	topBar := components.NewTopBar("List All Countries", g.backFunc, g.Reset)
 
 	gameContent := widget.NewLabel("Country listing game implementation")
 
 	g.content = container.NewVBox(
-		backBtn,
-		title,
+		topBar.GetContainer(),
 		widget.NewSeparator(),
 		gameContent,
 	)

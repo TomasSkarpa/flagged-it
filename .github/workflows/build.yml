@@ -1,0 +1,62 @@
+name: Build Fyne App
+
+# Trigger on push to tags (for releases) or manual workflow dispatch
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Trigger only on version tags like v1.0.0
+  workflow_dispatch:
+
+jobs:
+  build:
+    # Run each OS separately
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        arch: [amd64]
+
+    steps:
+      # 1. Checkout repo
+      - uses: actions/checkout@v3
+
+      # 2. Setup Go
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.25
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: go mod tidy
+
+      # 4. Build
+      - name: Build binary
+        run: |
+          mkdir -p build
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            GOOS=windows GOARCH=amd64 go build -ldflags="-H=windowsgui" -o build/flagged-it-windows-amd64.exe ./cmd
+          elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
+            GOOS=darwin GOARCH=amd64 go build -o build/flagged-it-darwin-amd64 ./cmd
+          else
+            GOOS=linux GOARCH=amd64 go build -o build/flagged-it-linux-amd64 ./cmd
+          fi
+
+      # 5. Archive
+      - name: Archive binary
+        run: |
+          cd build
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            zip flagged-it-windows-amd64.zip flagged-it-windows-amd64.exe
+          elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
+            tar -czf flagged-it-darwin-amd64.tar.gz flagged-it-darwin-amd64
+          else
+            tar -czf flagged-it-linux-amd64.tar.gz flagged-it-linux-amd64
+          fi
+
+      # 6. Upload artifact to Actions (optional for testing)
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: flagged-it-${{ matrix.os }}-amd64
+          path: build/*

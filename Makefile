@@ -6,7 +6,7 @@
 # Designed with portability and CI/CD pipelines in mind.
 # -------------------------------------------------------------------
 
-.PHONY: setup run debug clean build check package-all
+.PHONY: setup run debug clean build check
 
 # -------------------------------------------------------------------
 # Configurable variables and cross-platform ready commands
@@ -77,27 +77,3 @@ build:
 check:
 	go vet ./...
 	go fmt ./...
-
-# -------------------------------------------------------------------
-# Distribution targets
-# -------------------------------------------------------------------
-
-# Build and compress all platform binaries into distributable archives (works only on )
-package-all:
-	@$(MKDIR)
-	@echo "Building and packaging for all platforms..."
-	@for platform in $(PLATFORMS); do \
-		GOOS_VAL=$(echo $platform | cut -d'/' -f1); \
-		GOARCH_VAL=$(echo $platform | cut -d'/' -f2); \
-		if [ "$GOOS_VAL" = "windows" ]; then \
-			EXT_VAL=".exe"; \
-		else \
-			EXT_VAL=""; \
-		fi; \
-		OUTPUT="$(BUILD_DIR)/$(BINARY)-$GOOS_VAL-$GOARCH_VAL$EXT_VAL"; \
-		echo "Building $OUTPUT..."; \
-		GOOS=$GOOS_VAL GOARCH=$GOARCH_VAL go build -o $OUTPUT $(MAIN) || exit 1; \
-		echo "Packaging $OUTPUT..."; \
-		cd $(BUILD_DIR) && zip -j $(basename $OUTPUT).zip $(basename $OUTPUT) && cd ..; \
-	done
-	@echo "All packages created successfully!"

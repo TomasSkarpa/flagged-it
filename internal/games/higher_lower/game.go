@@ -2,9 +2,10 @@ package higher_lower
 
 import (
 	"encoding/json"
-	"os"
 	"fmt"
 	"math/rand"
+	"os"
+	"path/filepath"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
@@ -86,6 +87,16 @@ func (g *Game) setupUI() {
 	)
 }
 
+func getDataFilePath(file string) (string, error) {
+	path, err := os.Getwd()
+	if err != nil {
+		return "", err
+	}
+	dir := filepath.Dir(path)
+	fullPath := filepath.Join(dir, "internal", "data", "sources", file)
+	return fullPath, nil
+}
+
 func loadCountries(filename string) ([]Country, error) {
 	file, err := os.Open(filename)
 	if err != nil {
@@ -111,7 +122,11 @@ func (g *Game) GetContent() *fyne.Container {
 }
 
 func (g *Game) Start() {
-	countries, err := loadCountries("C:/laragon/www/flagged-it/internal/data/sources/countries.json")
+	path, err := getDataFilePath("countries.json")
+	if err != nil {
+		panic(err)
+	}
+	countries, err := loadCountries(path)
 	if err != nil{
 		panic(err)
 	}

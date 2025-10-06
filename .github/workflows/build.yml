@@ -13,8 +13,15 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        arch: [amd64]
+        include:
+          - os: ubuntu-latest
+            arch: amd64
+          - os: windows-latest
+            arch: amd64
+          - os: macos-latest
+            arch: amd64
+          - os: macos-latest
+            arch: arm64
 
     steps:
       # 1. Checkout repo
@@ -54,9 +61,12 @@ jobs:
         if: matrix.os == 'macos-latest'
         env:
           CGO_ENABLED: 1
+          GOARCH: ${{ matrix.arch }}
         run: |
           mkdir -p build
-          go build -o build/flagged-it-darwin-amd64 ./cmd
+          go build -o build/flagged-it-darwin-${{ matrix.arch }} ./cmd
+          # Remove quarantine attribute to prevent Gatekeeper issues
+          xattr -cr build/flagged-it-darwin-${{ matrix.arch }} || true
       
       - name: Build binary (Linux)
         if: matrix.os == 'ubuntu-latest'
@@ -77,7 +87,7 @@ jobs:
         if: matrix.os == 'macos-latest'
         run: |
           cd build
-          tar -czf flagged-it-darwin-amd64.tar.gz flagged-it-darwin-amd64
+          tar -czf flagged-it-darwin-${{ matrix.arch }}.tar.gz flagged-it-darwin-${{ matrix.arch }}
       
       - name: Archive binary (Linux)
         if: matrix.os == 'ubuntu-latest'
@@ -89,5 +99,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: flagged-it-${{ matrix.os }}-amd64
+          name: flagged-it-${{ matrix.os }}-${{ matrix.arch }}
           path: build/*

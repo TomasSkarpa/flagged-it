@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"math/rand"
 	"flagged-it/internal/data"
-	"flagged-it/internal/data/models"
 	"flagged-it/internal/ui/components"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
@@ -17,11 +16,16 @@ type Game struct {
 
 	firstCountry int
 	secondCountry int
+	score int
 
 	countryOneNameLabel	*widget.Label
 	countryTwoNameLabel	*widget.Label
 	countryOnePopLabel 	*widget.Label
 	countryTwoPopLabel 	*widget.Label
+	scoreLabel *widget.Label
+	nextBtn *widget.Button
+	higherBtn *widget.Button
+	lowerBtn *widget.Button
 }
 
 func NewGame(backFunc func()) *Game {
@@ -40,25 +44,29 @@ func (g *Game) setupUI() {
 	g.countryTwoNameLabel = widget.NewLabel("")
 	g.countryTwoPopLabel = widget.NewLabel("")
 
-	scoreLabel := widget.NewLabel("Score: 0")
+	g.scoreLabel = widget.NewLabel("Score: 0")
 
-	var higherBtn, lowerBtn, startBtn *widget.Button
+	var startBtn *widget.Button
 
-	higherBtn = widget.NewButton("Higher", func() {
-		guess(true, g.firstCountry, g.secondCountry, scoreLabel)
+	g.higherBtn = widget.NewButton("Higher", func() {
+		g.makeGuess(true)
 	})
-	lowerBtn = widget.NewButton("Lower", func() {
-		guess(false, g.firstCountry, g.secondCountry, scoreLabel)
+	g.lowerBtn = widget.NewButton("Lower", func() {
+		g.makeGuess(false)
+	})
+	g.nextBtn = widget.NewButton("Next Round", func() {
+		g.nextRound()
 	})
 
-	higherBtn.Hide()
-	lowerBtn.Hide()
+	g.higherBtn.Hide()
+	g.lowerBtn.Hide()
+	g.nextBtn.Hide()
 
 	startBtn = widget.NewButton("Start Game", func() {
 		g.Start()
 		startBtn.Hide()
-		higherBtn.Show()
-		lowerBtn.Show()
+		g.higherBtn.Show()
+		g.lowerBtn.Show()
 	})
 
 	g.content = container.NewVBox(
@@ -72,20 +80,42 @@ func (g *Game) setupUI() {
 		widget.NewSeparator(),
 		g.countryTwoNameLabel,
 		g.countryTwoPopLabel,
-		higherBtn,
-		lowerBtn,
-		scoreLabel,
+		g.higherBtn,
+		g.lowerBtn,
+		g.nextBtn,
+		g.scoreLabel,
 	)
 }
 
 
 
-func guess(isHigher bool, countryOnePop int, countryTwoPop int, scoreLabel *widget.Label) {
-	var score int = 0
-	if(isHigher && countryTwoPop > countryOnePop) || (!isHigher && countryTwoPop < countryOnePop) {
-		score++
+func (g *Game) makeGuess(isHigher bool) {
+	correct := (isHigher && g.secondCountry > g.firstCountry) || (!isHigher && g.secondCountry < g.firstCountry)
+	if correct {
+		g.score++
 	}
-	scoreLabel.SetText(fmt.Sprintf("Score: %d", score))
+	g.scoreLabel.SetText(fmt.Sprintf("Score: %d", g.score))
+	g.countryTwoPopLabel.SetText(fmt.Sprintf("Population: %d", g.secondCountry))
+	g.higherBtn.Hide()
+	g.lowerBtn.Hide()
+	g.nextBtn.Show()
+}
+
+func (g *Game) nextRound() {
+	countries := data.LoadCountries()
+	newCountry := countries[rand.Intn(len(countries))]
+	
+	g.firstCountry = g.secondCountry
+	g.countryOneNameLabel.SetText(g.countryTwoNameLabel.Text)
+	g.countryOnePopLabel.SetText(fmt.Sprintf("Population: %d", g.firstCountry))
+	
+	g.secondCountry = newCountry.Population
+	g.countryTwoNameLabel.SetText(newCountry.CountryName)
+	g.countryTwoPopLabel.SetText("Population: ?")
+	
+	g.nextBtn.Hide()
+	g.higherBtn.Show()
+	g.lowerBtn.Show()
 }
 
 func (g *Game) GetContent() *fyne.Container {
@@ -98,7 +128,7 @@ func (g *Game) Start() {
 	firstRandomCountry := countries[rand.Intn(len(countries))]
 	secondRandomCountry := countries[rand.Intn(len(countries))]
 
-	for firstRandomCountry == secondRandomCountry {
+	for firstRandomCountry.CountryName == secondRandomCountry.CountryName {
 		secondRandomCountry = countries[rand.Intn(len(countries))]
 	}
 
@@ -112,5 +142,7 @@ func (g *Game) Start() {
 }
 
 func (g *Game) Reset() {
+	g.score = 0
+	g.scoreLabel.SetText("Score: 0")
 	g.Start()
 }

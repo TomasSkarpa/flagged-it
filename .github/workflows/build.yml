@@ -64,9 +64,32 @@ jobs:
           GOARCH: ${{ matrix.arch }}
         run: |
           mkdir -p build
-          go build -o build/flagged-it-darwin-${{ matrix.arch }} ./cmd
-          # Remove quarantine attribute to prevent Gatekeeper issues
-          xattr -cr build/flagged-it-darwin-${{ matrix.arch }} || true
+          go build -o build/flagged-it ./cmd
+          # Create proper macOS app bundle
+          mkdir -p build/Flagged-It.app/Contents/MacOS
+          mkdir -p build/Flagged-It.app/Contents/Resources
+          mv build/flagged-it build/Flagged-It.app/Contents/MacOS/
+          # Create Info.plist
+          cat > build/Flagged-It.app/Contents/Info.plist << EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>CFBundleExecutable</key>
+              <string>flagged-it</string>
+              <key>CFBundleIdentifier</key>
+              <string>com.flagged-it.app</string>
+              <key>CFBundleName</key>
+              <string>Flagged It</string>
+              <key>CFBundleVersion</key>
+              <string>1.0</string>
+              <key>CFBundlePackageType</key>
+              <string>APPL</string>
+          </dict>
+          </plist>
+          EOF
+          # Remove quarantine attribute
+          xattr -cr build/Flagged-It.app || true
       
       - name: Build binary (Linux)
         if: matrix.os == 'ubuntu-latest'
@@ -87,7 +110,7 @@ jobs:
         if: matrix.os == 'macos-latest'
         run: |
           cd build
-          tar -czf flagged-it-darwin-${{ matrix.arch }}.tar.gz flagged-it-darwin-${{ matrix.arch }}
+          tar -czf flagged-it-darwin-${{ matrix.arch }}.tar.gz Flagged-It.app
       
       - name: Archive binary (Linux)
         if: matrix.os == 'ubuntu-latest'
@@ -96,8 +119,23 @@ jobs:
           tar -czf flagged-it-linux-amd64.tar.gz flagged-it-linux-amd64
 
       # 7. Upload artifact to Actions (optional for testing)
-      - name: Upload artifact
+      - name: Upload artifact (Windows)
+        if: matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v4
         with:
-          name: flagged-it-${{ matrix.os }}-${{ matrix.arch }}
-          path: build/*
+          name: flagged-it-windows-amd64
+          path: build/flagged-it-windows-amd64.zip
+      
+      - name: Upload artifact (macOS)
+        if: matrix.os == 'macos-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: flagged-it-darwin-${{ matrix.arch }}
+          path: build/flagged-it-darwin-${{ matrix.arch }}.tar.gz
+      
+      - name: Upload artifact (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: flagged-it-linux-amd64
+          path: build/flagged-it-linux-amd64.tar.gz

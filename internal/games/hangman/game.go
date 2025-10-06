@@ -8,6 +8,7 @@ import (
 
 	"flagged-it/internal/data"
 	"flagged-it/internal/data/models"
+	"flagged-it/internal/ui/components"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
@@ -48,10 +49,7 @@ func (g *Game) loadCountries() {
 }
 
 func (g *Game) setupUI() {
-	title := widget.NewLabel("Hangman Game")
-	title.TextStyle.Bold = true
-
-	backBtn := widget.NewButton("Back to Dashboard", g.backFunc)
+	topBar := components.NewTopBar("Hangman Game", g.backFunc, g.newGame)
 
 	g.wordLabel = widget.NewLabel("")
 	g.wordLabel.TextStyle.Monospace = true
@@ -59,20 +57,16 @@ func (g *Game) setupUI() {
 	g.wrongLabel = widget.NewLabel("")
 	g.statusLabel = widget.NewLabel("Guess the country name!")
 
-	g.newGameBtn = widget.NewButton("New Game", func() { g.newGame() })
 	g.setupKeyboard()
 
-	buttonContainer := container.NewHBox(g.newGameBtn, backBtn)
-
 	g.content = container.NewVBox(
-		title,
+		topBar.GetContainer(),
 		widget.NewSeparator(),
 		g.statusLabel,
 		g.wordLabel,
 		g.wrongLabel,
 		widget.NewSeparator(),
 		g.keyboard,
-		buttonContainer,
 	)
 }
 

@@ -1,37 +1,33 @@
 package hangman
 
 import (
-	"encoding/json"
 	"fmt"
 	"math/rand"
-	"os"
 	"strings"
 	"time"
 
+	"flagged-it/internal/data"
+	"flagged-it/internal/data/models"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 )
 
-type Country struct {
-	CountryName string `json:"country_name"`
-}
-
 type Game struct {
-	content       *fyne.Container
-	backFunc      func()
-	countries     []Country
-	currentWord   string
-	guessedWord   []rune
-	wrongGuesses  int
-	maxWrongs     int
+	content        *fyne.Container
+	backFunc       func()
+	countries      []models.Country
+	currentWord    string
+	guessedWord    []rune
+	wrongGuesses   int
+	maxWrongs      int
 	guessedLetters map[rune]bool
-	wordLabel     *widget.Label
-	wrongLabel    *widget.Label
-	statusLabel   *widget.Label
-	newGameBtn    *widget.Button
-	keyboard      *fyne.Container
-	letterButtons map[rune]*widget.Button
+	wordLabel      *widget.Label
+	wrongLabel     *widget.Label
+	statusLabel    *widget.Label
+	newGameBtn     *widget.Button
+	keyboard       *fyne.Container
+	letterButtons  map[rune]*widget.Button
 }
 
 func NewGame(backFunc func()) *Game {
@@ -48,18 +44,14 @@ func NewGame(backFunc func()) *Game {
 }
 
 func (g *Game) loadCountries() {
-	data, err := os.ReadFile("internal/data/sources/countries.json")
-	if err != nil {
-		return
-	}
-	json.Unmarshal(data, &g.countries)
+	g.countries = data.LoadCountries()
 }
 
 func (g *Game) setupUI() {
 	title := widget.NewLabel("Hangman Game")
 	title.TextStyle.Bold = true
 
-	backBtn := widget.NewButton("← Back to Dashboard", g.backFunc)
+	backBtn := widget.NewButton("Back to Dashboard", g.backFunc)
 
 	g.wordLabel = widget.NewLabel("")
 	g.wordLabel.TextStyle.Monospace = true
@@ -114,7 +106,7 @@ func (g *Game) newGame() {
 
 func (g *Game) setupKeyboard() {
 	rows := []string{"QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"}
-	
+
 	keyboardRows := make([]*fyne.Container, len(rows))
 	for i, row := range rows {
 		buttons := make([]fyne.CanvasObject, len(row))
@@ -128,7 +120,7 @@ func (g *Game) setupKeyboard() {
 		}
 		keyboardRows[i] = container.NewHBox(buttons...)
 	}
-	
+
 	g.keyboard = container.NewVBox(
 		keyboardRows[0],
 		keyboardRows[1],

@@ -30,19 +30,26 @@ jobs:
       - name: Install dependencies
         run: go mod tidy
 
-      # 4. Build
+      # 4. Install platform dependencies
+      - name: Install Linux dependencies
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgl1-mesa-dev xorg-dev
+
+      # 5. Build
       - name: Build binary
         run: |
           mkdir -p build
           if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-            GOOS=windows GOARCH=amd64 go build -ldflags="-H=windowsgui" -o build/flagged-it-windows-amd64.exe ./cmd
+            go build -ldflags="-H=windowsgui" -o build/flagged-it-windows-amd64.exe ./cmd
           elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
-            GOOS=darwin GOARCH=amd64 go build -o build/flagged-it-darwin-amd64 ./cmd
+            go build -o build/flagged-it-darwin-amd64 ./cmd
           else
-            GOOS=linux GOARCH=amd64 go build -o build/flagged-it-linux-amd64 ./cmd
+            go build -o build/flagged-it-linux-amd64 ./cmd
           fi
 
-      # 5. Archive
+      # 6. Archive
       - name: Archive binary
         run: |
           cd build
@@ -54,7 +61,7 @@ jobs:
             tar -czf flagged-it-linux-amd64.tar.gz flagged-it-linux-amd64
           fi
 
-      # 6. Upload artifact to Actions (optional for testing)
+      # 7. Upload artifact to Actions (optional for testing)
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:

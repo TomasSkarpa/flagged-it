@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"os"
 	"path/filepath"
+	"flagged-it/internal/ui/components"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
@@ -36,11 +37,7 @@ func NewGame(backFunc func()) *Game {
 }
 
 func (g *Game) setupUI() {
-	title := widget.NewLabel("Higher or Lower Game")
-
-	backBtn := widget.NewButton("← Back to Dashboard", func() {
-		g.backFunc()
-	})
+	topBar := components.NewTopBar("Higher or Lower Game", g.backFunc, g.Reset)
 
 	gameDescription := widget.NewLabel("Try to guess which country has a higher population!")
 
@@ -71,8 +68,8 @@ func (g *Game) setupUI() {
 	})
 
 	g.content = container.NewVBox(
-		backBtn,
-		title,
+		topBar.GetContainer(),
+		widget.NewSeparator(),
 		gameDescription,
 		widget.NewSeparator(),
 		startBtn,
@@ -147,4 +144,6 @@ func (g *Game) Start() {
 	g.countryTwoPopLabel.SetText("Population: ?")
 }
 
-func (g *Game) Reset() {}
+func (g *Game) Reset() {
+	g.Start()
+}

@@ -8,9 +8,11 @@
     "capital": "Prague",
     "geo_position": {
       "latitude": 49.8175,
-      "longitude": 15.4730
+      "longitude": 15.473
     },
-    "official_languages": ["Czech"],
+    "official_languages": [
+      "Czech"
+    ],
     "facts": [
       "The capital city is Prague.",
       "This state is a member of the EU and NATO.",
@@ -30,7 +32,9 @@
       "latitude": 37.0902,
       "longitude": -95.7129
     },
-    "official_languages": ["English"],
+    "official_languages": [
+      "English"
+    ],
     "facts": [
       "The capital city is Washington, D.C.",
       "This state is a federal republic consisting of 50 states.",
@@ -50,7 +54,9 @@
       "latitude": 36.2048,
       "longitude": 138.2529
     },
-    "official_languages": ["Japanese"],
+    "official_languages": [
+      "Japanese"
+    ],
     "facts": [
       "The capital city is Tokyo.",
       "This country is an island country in East Asia.",
@@ -70,7 +76,9 @@
       "latitude": 51.1657,
       "longitude": 10.4515
     },
-    "official_languages": ["German"],
+    "official_languages": [
+      "German"
+    ],
     "facts": [
       "The capital city is Berlin.",
       "This counrty is the most populous member state of the EU.",
@@ -87,10 +95,12 @@
     "population": 215300000,
     "capital": "Brasília",
     "geo_position": {
-      "latitude": -14.2350,
+      "latitude": -14.235,
       "longitude": -51.9253
     },
-    "official_languages": ["Portuguese"],
+    "official_languages": [
+      "Portuguese"
+    ],
     "facts": [
       "The capital city is Brasília.",
       "This country is the largest country in South America.",
@@ -110,7 +120,9 @@
       "latitude": -25.2744,
       "longitude": 133.7751
     },
-    "official_languages": ["English"],
+    "official_languages": [
+      "English"
+    ],
     "facts": [
       "The capital city is Canberra.",
       "This country is both a country and a continent.",
@@ -130,7 +142,9 @@
       "latitude": 46.2276,
       "longitude": 2.2137
     },
-    "official_languages": ["French"],
+    "official_languages": [
+      "French"
+    ],
     "facts": [
       "The capital city is Paris.",
       "This country is known for its cuisine and fashion.",
@@ -150,7 +164,10 @@
       "latitude": 56.1304,
       "longitude": -106.3468
     },
-    "official_languages": ["English", "French"],
+    "official_languages": [
+      "English",
+      "French"
+    ],
     "facts": [
       "The capital city is Ottawa.",
       "This country is the second-largest country by land area.",
@@ -168,9 +185,11 @@
     "capital": "London",
     "geo_position": {
       "latitude": 55.3781,
-      "longitude": -3.4360
+      "longitude": -3.436
     },
-    "official_languages": ["English"],
+    "official_languages": [
+      "English"
+    ],
     "facts": [
       "The capital city is London.",
       "Consists of England, Scotland, Wales, and Northern Ireland.",
@@ -190,7 +209,9 @@
       "latitude": 41.8719,
       "longitude": 12.5674
     },
-    "official_languages": ["Italian"],
+    "official_languages": [
+      "Italian"
+    ],
     "facts": [
       "The capital city is Rome.",
       "Home to the Vatican City.",
@@ -210,7 +231,9 @@
       "latitude": 35.8617,
       "longitude": 104.1954
     },
-    "official_languages": ["Mandarin Chinese"],
+    "official_languages": [
+      "Mandarin Chinese"
+    ],
     "facts": [
       "The capital city is Beijing.",
       "Most populous country in the world.",
@@ -227,10 +250,12 @@
     "population": 146200000,
     "capital": "Moscow",
     "geo_position": {
-      "latitude": 61.5240,
+      "latitude": 61.524,
       "longitude": 105.3188
     },
-    "official_languages": ["Russian"],
+    "official_languages": [
+      "Russian"
+    ],
     "facts": [
       "The capital city is Moscow.",
       "Largest country in the world by land area.",
@@ -250,13 +275,126 @@
       "latitude": 26.8206,
       "longitude": 30.8025
     },
-    "official_languages": ["Arabic"],
+    "official_languages": [
+      "Arabic"
+    ],
     "facts": [
       "The capital city is Cairo.",
       "Known for the Pyramids of Giza and the Sphinx.",
       "Home to the ancient civilization of the Pharaohs.",
       "The Nile River flows through the country.",
       "Has the Suez Canal connecting two seas."
+    ]
+  },
+  {
+    "country_name": "Ethiopia",
+    "country_code": "ET",
+    "continent": "Africa",
+    "region": "Eastern Africa",
+    "population": 109499000,
+    "capital": "Addis Ababa",
+    "geo_position": {
+      "latitude": 9.145,
+      "longitude": 40.4897
+    },
+    "official_languages": [
+      "Amharic"
+    ],
+    "facts": [
+      "The capital city is Addis Ababa.",
+      "Known as the 'Horn of Africa'.",
+      "Home to the ancient rock-hewn churches of Lalibela.",
+      "The only African country that was never colonized.",
+      "Birthplace of coffee."
+    ]
+  },
+  {
+    "country_name": "Kazakhstan",
+    "country_code": "KZ",
+    "continent": "Asia",
+    "region": "Central Asia",
+    "population": 20286084,
+    "capital": "Astana",
+    "geo_position": {
+      "latitude": 51.1694,
+      "longitude": 71.4491
+    },
+    "official_languages": [
+      "Kazakh",
+      "Russian"
+    ],
+    "facts": [
+      "The capital city is Astana.",
+      "The world's largest landlocked country by land area.",
+      "Rich in natural resources, especially oil and gas.",
+      "Home to the Baikonur Cosmodrome, the world's first spaceport.",
+      "Kazakhstan's territory spans both Europe and Asia."
+    ]
+  },
+  {
+    "country_name": "Latvia",
+    "country_code": "LV",
+    "continent": "Europe",
+    "region": "Northern Europe",
+    "population": 1886198,
+    "capital": "Riga",
+    "geo_position": {
+      "latitude": 56.946,
+      "longitude": 24.1059
+    },
+    "official_languages": [
+      "Latvian"
+    ],
+    "facts": [
+      "The capital city is Riga.",
+      "Known for its medieval Old Town, a UNESCO World Heritage site.",
+      "Has a rich tradition in choral music.",
+      "One of the world's greenest countries with vast forests.",
+      "Hosts the annual Riga Opera Festival."
+    ]
+  },
+  {
+    "country_name": "Netherlands",
+    "country_code": "NL",
+    "continent": "Europe",
+    "region": "Western Europe",
+    "population": 18160000,
+    "capital": "Amsterdam",
+    "geo_position": {
+      "latitude": 52.3676,
+      "longitude": 4.9041
+    },
+    "official_languages": [
+      "Dutch"
+    ],
+    "facts": [
+      "The capital city is Amsterdam.",
+      "Known for its extensive canal systems and tulip fields.",
+      "Home to the world's first stock exchange.",
+      "Has a constitutional monarchy.",
+      "Hosts the annual King's Day celebration."
+    ]
+  },
+  {
+    "country_name": "Norway",
+    "country_code": "NO",
+    "continent": "Europe",
+    "region": "Northern Europe",
+    "population": 5421241,
+    "capital": "Oslo",
+    "geo_position": {
+      "latitude": 59.9139,
+      "longitude": 10.7522
+    },
+    "official_languages": [
+      "Norwegian"
+    ],
+    "facts": [
+      "The capital city is Oslo.",
+      "Known for its stunning fjords and mountainous terrain.",
+      "Home to the Nobel Peace Prize ceremony.",
+      "Has a rich Viking history.",
+      "One of the world's wealthiest countries per capita."
     ]
   }
 ]

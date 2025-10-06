@@ -18,13 +18,13 @@ jobs:
 
     steps:
       # 1. Checkout repo
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       # 2. Setup Go
       - name: Setup Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
-          go-version: 1.25
+          go-version: '1.21'
 
       # 3. Install dependencies
       - name: Install dependencies
@@ -36,30 +36,54 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libgl1-mesa-dev xorg-dev
+      
+      - name: Setup Windows C compiler
+        if: matrix.os == 'windows-latest'
+        uses: ilammy/msvc-dev-cmd@v1
 
       # 5. Build
-      - name: Build binary
+      - name: Build binary (Windows)
+        if: matrix.os == 'windows-latest'
+        env:
+          CGO_ENABLED: 1
+        run: |
+          mkdir build
+          go build -ldflags="-H=windowsgui" -o build/flagged-it-windows-amd64.exe ./cmd
+      
+      - name: Build binary (macOS)
+        if: matrix.os == 'macos-latest'
+        env:
+          CGO_ENABLED: 1
         run: |
           mkdir -p build
-          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-            go build -ldflags="-H=windowsgui" -o build/flagged-it-windows-amd64.exe ./cmd
-          elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
-            go build -o build/flagged-it-darwin-amd64 ./cmd
-          else
-            go build -o build/flagged-it-linux-amd64 ./cmd
-          fi
+          go build -o build/flagged-it-darwin-amd64 ./cmd
+      
+      - name: Build binary (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        env:
+          CGO_ENABLED: 1
+        run: |
+          mkdir -p build
+          go build -o build/flagged-it-linux-amd64 ./cmd
 
       # 6. Archive
-      - name: Archive binary
+      - name: Archive binary (Windows)
+        if: matrix.os == 'windows-latest'
         run: |
           cd build
-          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-            zip flagged-it-windows-amd64.zip flagged-it-windows-amd64.exe
-          elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
-            tar -czf flagged-it-darwin-amd64.tar.gz flagged-it-darwin-amd64
-          else
-            tar -czf flagged-it-linux-amd64.tar.gz flagged-it-linux-amd64
-          fi
+          Compress-Archive -Path flagged-it-windows-amd64.exe -DestinationPath flagged-it-windows-amd64.zip
+      
+      - name: Archive binary (macOS)
+        if: matrix.os == 'macos-latest'
+        run: |
+          cd build
+          tar -czf flagged-it-darwin-amd64.tar.gz flagged-it-darwin-amd64
+      
+      - name: Archive binary (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          cd build
+          tar -czf flagged-it-linux-amd64.tar.gz flagged-it-linux-amd64
 
       # 7. Upload artifact to Actions (optional for testing)
       - name: Upload artifact

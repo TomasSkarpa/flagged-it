@@ -3,7 +3,6 @@ Learn about countries playing different game modes – native Windows &amp; macO
 
 ## Setup Instructions
 
-### Prerequisites
 Install Go 1.21 or later:
 - **macOS**: `brew install go`
 - **Windows**: Download from https://golang.org/dl/
@@ -22,7 +21,10 @@ Make Targets
 - `make check` - Format and analyze code
 - `make clean` - Remove build artifacts
 
-## Versioning Conventions
+## Versioning Conventions & Contribution
+
+### How to Contribute
+Create a pull request, while following the conventions below.
 
 ### Branch Naming Convention
 Use lowercase and kebab-case for branch names, such as:

@@ -13,7 +13,7 @@
     "official_languages": ["Czech"],
     "facts": [
       "The capital city is Prague.",
-      "The Czech Republic is a member of the EU and NATO.",
+      "This state is a member of the EU and NATO.",
       "Known for beer production and historic castles.",
       "Home to the famous Charles Bridge.",
       "Has over 2000 castles and chateaux."
@@ -33,7 +33,7 @@
     "official_languages": ["English"],
     "facts": [
       "The capital city is Washington, D.C.",
-      "The USA is a federal republic consisting of 50 states.",
+      "This state is a federal republic consisting of 50 states.",
       "Known for technological innovations and Hollywood.",
       "Has the world's largest economy.",
       "Home to the Grand Canyon and Yellowstone."
@@ -53,7 +53,7 @@
     "official_languages": ["Japanese"],
     "facts": [
       "The capital city is Tokyo.",
-      "Japan is an island country in East Asia.",
+      "This country is an island country in East Asia.",
       "Known for its culture, technology, and anime.",
       "Has over 6800 islands.",
       "Famous for cherry blossoms and Mount Fuji."
@@ -73,7 +73,7 @@
     "official_languages": ["German"],
     "facts": [
       "The capital city is Berlin.",
-      "Germany is the most populous member state of the EU.",
+      "This counrty is the most populous member state of the EU.",
       "Known for its automotive industry and Oktoberfest.",
       "Home to the Brandenburg Gate.",
       "Has 16 federal states called Länder."
@@ -93,7 +93,7 @@
     "official_languages": ["Portuguese"],
     "facts": [
       "The capital city is Brasília.",
-      "Brazil is the largest country in South America.",
+      "This country is the largest country in South America.",
       "Known for the Amazon rainforest and Carnival.",
       "Home to Christ the Redeemer statue.",
       "Has won the FIFA World Cup 5 times."
@@ -113,7 +113,7 @@
     "official_languages": ["English"],
     "facts": [
       "The capital city is Canberra.",
-      "Australia is both a country and a continent.",
+      "This country is both a country and a continent.",
       "Known for unique wildlife like kangaroos and koalas.",
       "Home to the Great Barrier Reef.",
       "Has the Sydney Opera House."
@@ -133,7 +133,7 @@
     "official_languages": ["French"],
     "facts": [
       "The capital city is Paris.",
-      "France is known for its cuisine and fashion.",
+      "This country is known for its cuisine and fashion.",
       "Home to the Eiffel Tower and Louvre Museum.",
       "Has the most time zones of any country.",
       "Famous for wine production and cheese."
@@ -153,7 +153,7 @@
     "official_languages": ["English", "French"],
     "facts": [
       "The capital city is Ottawa.",
-      "Canada is the second-largest country by land area.",
+      "This country is the second-largest country by land area.",
       "Known for maple syrup and ice hockey.",
       "Has two official languages: English and French.",
       "Home to Niagara Falls."
@@ -214,7 +214,7 @@
     "facts": [
       "The capital city is Beijing.",
       "Most populous country in the world.",
-      "Known for the Great Wall of China.",
+      "Known for the Great Wall of ****.",
       "Has the Forbidden City and Terracotta Army.",
       "Invented paper, gunpowder, and the compass."
     ]

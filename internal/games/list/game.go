@@ -116,7 +116,7 @@ func (g *Game) setupGameView() {
 			label := obj.(*widget.Label)
 			country := g.allCountries[id]
 			if g.guessedCountries[strings.ToLower(country)] {
-				label.SetText(fmt.Sprintf("%d. %s ✓", id+1, country))
+				label.SetText(fmt.Sprintf("%d. %s", id+1, country))
 			} else {
 				label.SetText(fmt.Sprintf("%d. ?", id+1))
 			}

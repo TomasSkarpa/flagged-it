@@ -21,8 +21,8 @@ func (d *Dashboard) setupUI() {
 	title := widget.NewLabel("Flagged It - Choose Your Game")
 	title.TextStyle = fyne.TextStyle{Bold: true}
 
-	countryGuessBtn := widget.NewButton("Country Guessing", func() {
-		d.navigateFunc("shapes")
+	countryGuessBtn := widget.NewButton("Guess by Shape", func() {
+		d.navigateFunc("shape")
 	})
 
 	countryListBtn := widget.NewButton("List All Countries", func() {

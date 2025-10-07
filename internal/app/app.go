@@ -5,7 +5,7 @@ import (
 	"flagged-it/internal/games/facts"
 	"flagged-it/internal/games/hangman"
 	"flagged-it/internal/games/list"
-	"flagged-it/internal/games/shapes"
+	"flagged-it/internal/games/shape"
 	"flagged-it/internal/ui/screens"
 	"fyne.io/fyne/v2"
 )
@@ -25,8 +25,8 @@ func (a *App) GetDashboard() *fyne.Container {
 
 func (a *App) navigateToGame(gameType string) {
 	switch gameType {
-	case "shapes":
-		game := shapes.NewGame(a.backToDashboard)
+	case "shape":
+		game := shape.NewGame(a.backToDashboard)
 		a.window.SetContent(game.GetContent())
 	case "list":
 		game := list.NewGame(a.backToDashboard)

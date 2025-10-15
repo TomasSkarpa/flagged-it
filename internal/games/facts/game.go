@@ -18,7 +18,9 @@ type Game struct {
 	content        *fyne.Container
 	backFunc       func()
 	countries      []models.Country
+	factsData      map[string]models.CountryFacts
 	currentCountry *models.Country
+	currentFacts   []string
 	currentFact    int
 	triesLeft      int
 	usedFacts      map[int]bool
@@ -41,7 +43,8 @@ func NewGame(backFunc func()) *Game {
 }
 
 func (g *Game) loadCountries() {
-	g.countries = data.LoadCountryFacts() // Load from facts file instead
+	g.countries = data.LoadCountries()
+	g.factsData = data.LoadCountryFacts()
 }
 
 func (g *Game) setupUI() {
@@ -73,13 +76,27 @@ func (g *Game) setupUI() {
 }
 
 func (g *Game) newGame() {
-	if len(g.countries) == 0 {
+	if len(g.countries) == 0 || len(g.factsData) == 0 {
 		g.statusLabel.SetText("Error loading countries data")
 		return
 	}
 
+	// Find countries that have facts available
+	var availableCountries []models.Country
+	for _, country := range g.countries {
+		if _, hasFacts := g.factsData[country.CCA2]; hasFacts {
+			availableCountries = append(availableCountries, country)
+		}
+	}
+
+	if len(availableCountries) == 0 {
+		g.statusLabel.SetText("No countries with facts available")
+		return
+	}
+
 	rand.Seed(time.Now().UnixNano())
-	g.currentCountry = &g.countries[rand.Intn(len(g.countries))]
+	g.currentCountry = &availableCountries[rand.Intn(len(availableCountries))]
+	g.currentFacts = g.factsData[g.currentCountry.CCA2].Facts
 	g.currentFact = 0
 	g.triesLeft = 3
 	g.usedFacts = make(map[int]bool)
@@ -92,16 +109,16 @@ func (g *Game) newGame() {
 }
 
 func (g *Game) showCurrentFact() {
-	if g.currentCountry != nil && len(g.usedFacts) < len(g.currentCountry.Facts) {
+	if g.currentCountry != nil && len(g.usedFacts) < len(g.currentFacts) {
 		var factIndex int
 		for {
-			factIndex = rand.Intn(len(g.currentCountry.Facts))
+			factIndex = rand.Intn(len(g.currentFacts))
 			if !g.usedFacts[factIndex] {
 				break
 			}
 		}
 		g.usedFacts[factIndex] = true
-		fact := g.currentCountry.Facts[factIndex]
+		fact := g.currentFacts[factIndex]
 		g.factLabel.SetText(fmt.Sprintf("Fact %d: %s", g.currentFact+1, fact))
 	}
 }
@@ -135,7 +152,7 @@ func (g *Game) makeGuess() {
 	}
 
 	g.currentFact++
-	if g.currentFact < 3 && g.currentFact < len(g.currentCountry.Facts) {
+	if g.currentFact < 3 && g.currentFact < len(g.currentFacts) {
 		g.showCurrentFact()
 		g.statusLabel.SetText("Wrong! Try again with the next fact.")
 	} else {

@@ -18,7 +18,7 @@ func NewDashboard(navigateFunc func(string)) *Dashboard {
 }
 
 func (d *Dashboard) setupUI() {
-	title := widget.NewLabel("Flagged It - Choose Your Game")
+	title := widget.NewLabel("Choose Your Game Mode")
 	title.TextStyle = fyne.TextStyle{Bold: true}
 
 	countryGuessBtn := widget.NewButton("Guess by Shape", func() {

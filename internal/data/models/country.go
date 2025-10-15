@@ -14,5 +14,9 @@ type Country struct {
 	Languages  map[string]string `json:"languages"`
 	Latlng     []float64         `json:"latlng"`
 	Population int               `json:"population"`
-	Facts      []string          `json:"facts,omitempty"`
+}
+
+type CountryFacts struct {
+	Name  string   `json:"name"`
+	Facts []string `json:"facts"`
 }

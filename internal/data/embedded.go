@@ -21,8 +21,8 @@ func LoadCountries() []models.Country {
 	return countries
 }
 
-func LoadCountryFacts() []models.Country {
-	var facts []models.Country
+func LoadCountryFacts() map[string]models.CountryFacts {
+	var facts map[string]models.CountryFacts
 	json.Unmarshal(factsData, &facts)
 	return facts
 }

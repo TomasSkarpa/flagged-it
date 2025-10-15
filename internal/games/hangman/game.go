@@ -24,6 +24,7 @@ type Game struct {
 	maxWrongs      int
 	guessedLetters map[rune]bool
 	wordLabel      *widget.Label
+	hintLabel      *widget.Label
 	wrongLabel     *widget.Label
 	statusLabel    *widget.Label
 	newGameBtn     *widget.Button
@@ -54,6 +55,7 @@ func (g *Game) setupUI() {
 	g.wordLabel = widget.NewLabel("")
 	g.wordLabel.TextStyle.Monospace = true
 
+	g.hintLabel = widget.NewLabel("")
 	g.wrongLabel = widget.NewLabel("")
 	g.statusLabel = widget.NewLabel("Guess the country name!")
 
@@ -64,6 +66,7 @@ func (g *Game) setupUI() {
 		widget.NewSeparator(),
 		g.statusLabel,
 		g.wordLabel,
+		g.hintLabel,
 		g.wrongLabel,
 		widget.NewSeparator(),
 		g.keyboard,
@@ -148,7 +151,34 @@ func (g *Game) makeGuess(letter rune) {
 }
 
 func (g *Game) updateDisplay() {
-	g.wordLabel.SetText(string(g.guessedWord))
+	var displayWord strings.Builder
+	for i, char := range g.guessedWord {
+		if char == ' ' {
+			displayWord.WriteString("   ")
+		} else {
+			displayWord.WriteRune(char)
+			if i < len(g.guessedWord)-1 && g.guessedWord[i+1] != ' ' {
+				displayWord.WriteString(" ")
+			}
+		}
+	}
+	
+	letterCount := 0
+	wordCount := 1
+	for _, char := range g.currentWord {
+		if char == ' ' {
+			wordCount++
+		} else {
+			letterCount++
+		}
+	}
+	
+	g.wordLabel.SetText(displayWord.String())
+	wordText := "word"
+	if wordCount != 1 {
+		wordText = "words"
+	}
+	g.hintLabel.SetText(fmt.Sprintf("%d letters, %d %s", letterCount, wordCount, wordText))
 	g.wrongLabel.SetText(fmt.Sprintf("Wrong guesses: %d/%d", g.wrongGuesses, g.maxWrongs))
 }
 

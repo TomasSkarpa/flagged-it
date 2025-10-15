@@ -71,6 +71,8 @@ func (g *Game) setupUI() {
 		widget.NewSeparator(),
 		g.keyboard,
 	)
+
+
 }
 
 func (g *Game) newGame() {
@@ -209,4 +211,13 @@ func (g *Game) Start() {
 
 func (g *Game) Reset() {
 	g.newGame()
+}
+
+func (g *Game) TypedKey(key *fyne.KeyEvent) {
+	if len(string(key.Name)) == 1 {
+		letter := rune(strings.ToUpper(string(key.Name))[0])
+		if letter >= 'A' && letter <= 'Z' {
+			g.makeGuess(letter)
+		}
+	}
 }

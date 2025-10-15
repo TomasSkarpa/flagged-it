@@ -41,7 +41,7 @@ func NewGame(backFunc func()) *Game {
 }
 
 func (g *Game) loadCountries() {
-	g.countries = data.LoadCountries()
+	g.countries = data.LoadCountryFacts() // Load from facts file instead
 }
 
 func (g *Game) setupUI() {
@@ -117,8 +117,8 @@ func (g *Game) makeGuess() {
 		return
 	}
 
-	if strings.EqualFold(guess, g.currentCountry.CountryName) {
-		g.statusLabel.SetText(fmt.Sprintf("Correct! It was %s!", g.currentCountry.CountryName))
+	if strings.EqualFold(guess, g.currentCountry.Name.Common) {
+		g.statusLabel.SetText(fmt.Sprintf("Correct! It was %s!", g.currentCountry.Name.Common))
 		g.guessEntry.Disable()
 		g.guessBtn.Disable()
 		return
@@ -128,7 +128,7 @@ func (g *Game) makeGuess() {
 	g.guessEntry.SetText("")
 
 	if g.triesLeft == 0 {
-		g.statusLabel.SetText(fmt.Sprintf("Game Over! It was %s", g.currentCountry.CountryName))
+		g.statusLabel.SetText(fmt.Sprintf("Game Over! It was %s", g.currentCountry.Name.Common))
 		g.guessEntry.Disable()
 		g.guessBtn.Disable()
 		return

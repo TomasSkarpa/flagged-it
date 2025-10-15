@@ -6,8 +6,11 @@ import (
 	"flagged-it/internal/data/models"
 )
 
-//go:embed sources/countries.json
+//go:embed sources/countries_main.json
 var countriesData []byte
+
+//go:embed sources/countries_facts.json
+var factsData []byte
 
 //go:embed sources/geo.json
 var geoData []byte
@@ -16,6 +19,12 @@ func LoadCountries() []models.Country {
 	var countries []models.Country
 	json.Unmarshal(countriesData, &countries)
 	return countries
+}
+
+func LoadCountryFacts() []models.Country {
+	var facts []models.Country
+	json.Unmarshal(factsData, &facts)
+	return facts
 }
 
 func LoadGeoData() models.GeoJSON {

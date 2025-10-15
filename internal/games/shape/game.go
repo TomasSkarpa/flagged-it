@@ -79,11 +79,8 @@ func (g *Game) setupSelectionView() {
 	europeBtn := widget.NewButton("🇪🇺 Europe", func() {
 		g.startRegionGame("Europe")
 	})
-	northAmericaBtn := widget.NewButton("🇺🇸 North America", func() {
-		g.startRegionGame("North America")
-	})
-	southAmericaBtn := widget.NewButton("🇧🇷 South America", func() {
-		g.startRegionGame("South America")
+	americasBtn := widget.NewButton("🌎 Americas", func() {
+		g.startRegionGame("Americas")
 	})
 	asiaBtn := widget.NewButton("🇯🇵 Asia", func() {
 		g.startRegionGame("Asia")
@@ -101,8 +98,7 @@ func (g *Game) setupSelectionView() {
 		widget.NewSeparator(),
 		worldBtn,
 		europeBtn,
-		northAmericaBtn,
-		southAmericaBtn,
+		americasBtn,
 		asiaBtn,
 		africaBtn,
 		oceaniaBtn,

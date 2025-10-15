@@ -1,18 +1,18 @@
 package models
 
-type GeoPosition struct {
-	Latitude  float64 `json:"latitude"`
-	Longitude float64 `json:"longitude"`
+type CountryName struct {
+	Common   string `json:"common"`
+	Official string `json:"official"`
 }
 
 type Country struct {
-	CountryName       string      `json:"country_name"`
-	CountryCode       string      `json:"country_code"`
-	Continent         string      `json:"continent"`
-	Region            string      `json:"region"`
-	Population        int         `json:"population"`
-	Capital           string      `json:"capital"`
-	GeoPosition       GeoPosition `json:"geo_position"`
-	OfficialLanguages []string    `json:"official_languages"`
-	Facts             []string    `json:"facts"`
+	Name       CountryName       `json:"name"`
+	CCA2       string            `json:"cca2"`
+	Capital    []string          `json:"capital"`
+	Region     string            `json:"region"`
+	Subregion  string            `json:"subregion"`
+	Languages  map[string]string `json:"languages"`
+	Latlng     []float64         `json:"latlng"`
+	Population int               `json:"population"`
+	Facts      []string          `json:"facts,omitempty"`
 }

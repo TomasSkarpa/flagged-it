@@ -34,6 +34,7 @@ func (a *App) navigateToGame(gameType string) {
 	case "hangman":
 		game := hangman.NewGame(a.backToDashboard)
 		a.window.SetContent(game.GetContent())
+		a.window.Canvas().SetOnTypedKey(game.TypedKey)
 	case "facts":
 		game := facts.NewGame(a.backToDashboard)
 		a.window.SetContent(game.GetContent())

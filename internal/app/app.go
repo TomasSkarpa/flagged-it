@@ -3,6 +3,7 @@ package app
 import (
 	"flagged-it/internal/games/higher_lower"
 	"flagged-it/internal/games/facts"
+	"flagged-it/internal/games/flag"
 	"flagged-it/internal/games/hangman"
 	"flagged-it/internal/games/list"
 	"flagged-it/internal/games/shape"
@@ -40,6 +41,9 @@ func (a *App) navigateToGame(gameType string) {
 		a.window.SetContent(game.GetContent())
 	case "higher_lower":
 		game := higher_lower.NewGame(a.backToDashboard)
+		a.window.SetContent(game.GetContent())
+	case "flag":
+		game := flag.NewGame(a.backToDashboard)
 		a.window.SetContent(game.GetContent())
 	}
 }

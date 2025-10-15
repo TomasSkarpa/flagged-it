@@ -41,6 +41,10 @@ func (d *Dashboard) setupUI() {
 		d.navigateFunc("higher_lower")
 	})
 
+	flagBtn := widget.NewButton("Guess by Flag", func() {
+		d.navigateFunc("flag")
+	})
+
 	d.content = container.NewVBox(
 		title,
 		widget.NewSeparator(),
@@ -49,6 +53,7 @@ func (d *Dashboard) setupUI() {
 		hangmanBtn,
 		factGuessBtn,
 		higher_lowerBtn,
+		flagBtn,
 	)
 }
 

@@ -110,7 +110,7 @@ func (g *Game) nextRound() {
 	g.countryOnePopLabel.SetText(fmt.Sprintf("Population: %d", g.firstCountry))
 	
 	g.secondCountry = newCountry.Population
-	g.countryTwoNameLabel.SetText(newCountry.CountryName)
+	g.countryTwoNameLabel.SetText(newCountry.Name.Common)
 	g.countryTwoPopLabel.SetText("Population: ?")
 	
 	g.nextBtn.Hide()
@@ -128,16 +128,16 @@ func (g *Game) Start() {
 	firstRandomCountry := countries[rand.Intn(len(countries))]
 	secondRandomCountry := countries[rand.Intn(len(countries))]
 
-	for firstRandomCountry.CountryName == secondRandomCountry.CountryName {
+	for firstRandomCountry.Name.Common == secondRandomCountry.Name.Common {
 		secondRandomCountry = countries[rand.Intn(len(countries))]
 	}
 
 	g.firstCountry = firstRandomCountry.Population
 	g.secondCountry = secondRandomCountry.Population
 
-	g.countryOneNameLabel.SetText(firstRandomCountry.CountryName)
+	g.countryOneNameLabel.SetText(firstRandomCountry.Name.Common)
 	g.countryOnePopLabel.SetText(fmt.Sprintf("Population: %d", firstRandomCountry.Population))
-	g.countryTwoNameLabel.SetText(secondRandomCountry.CountryName) 
+	g.countryTwoNameLabel.SetText(secondRandomCountry.Name.Common) 
 	g.countryTwoPopLabel.SetText("Population: ?")
 }
 

@@ -78,7 +78,7 @@ func (g *Game) newGame() {
 
 	rand.Seed(time.Now().UnixNano())
 	country := g.countries[rand.Intn(len(g.countries))]
-	g.currentWord = strings.ToUpper(country.CountryName)
+	g.currentWord = strings.ToUpper(country.Name.Common)
 	g.guessedWord = make([]rune, len(g.currentWord))
 	g.wrongGuesses = 0
 	g.guessedLetters = make(map[rune]bool)

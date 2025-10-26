@@ -16,7 +16,7 @@ Install Make:
 Make Targets
 - `make setup` - Install dependencies
 - `make run` - Run application
-- `make debug` - Run with verbose output
+- `make debug` - Run with verbose output (and possibility to edit the json data)
 - `make build` - Builds binary based on your system
 - `make check` - Format and analyze code
 - `make clean` - Remove build artifacts

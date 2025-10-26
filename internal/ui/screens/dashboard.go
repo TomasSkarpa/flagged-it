@@ -1,18 +1,28 @@
 package screens
 
 import (
+	"flagged-it/internal/utils"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
 
 type Dashboard struct {
 	content      *fyne.Container
 	navigateFunc func(string)
+	debugFunc    func()
+	window       fyne.Window
+	debugManager *utils.DebugManager
 }
 
-func NewDashboard(navigateFunc func(string)) *Dashboard {
-	d := &Dashboard{navigateFunc: navigateFunc}
+func NewDashboard(navigateFunc func(string), debugFunc func(), window fyne.Window) *Dashboard {
+	d := &Dashboard{
+		navigateFunc: navigateFunc,
+		debugFunc:    debugFunc,
+		window:       window,
+		debugManager: utils.NewDebugManager(),
+	}
 	d.setupUI()
 	return d
 }
@@ -21,6 +31,20 @@ func (d *Dashboard) setupUI() {
 	title := widget.NewLabel("Choose Your Game Mode")
 	title.TextStyle = fyne.TextStyle{Bold: true}
 
+	// Header with title and optional settings button
+	var header *fyne.Container
+	if d.debugManager.IsDebugEnabled() {
+		settingsBtn := widget.NewButtonWithIcon("", theme.SettingsIcon(), d.debugFunc)
+		header = container.NewBorder(
+			nil, nil,
+			nil, settingsBtn,
+			container.NewCenter(title),
+		)
+	} else {
+		header = container.NewCenter(title)
+	}
+
+	// Game buttons
 	countryGuessBtn := widget.NewButton("Guess by Shape", func() {
 		d.navigateFunc("shape")
 	})
@@ -46,7 +70,7 @@ func (d *Dashboard) setupUI() {
 	})
 
 	d.content = container.NewVBox(
-		title,
+		header,
 		widget.NewSeparator(),
 		countryGuessBtn,
 		countryListBtn,

@@ -1,29 +1,29 @@
 package list
 
 import (
-	"fmt"
-	"sort"
-	"strings"
 	"flagged-it/internal/data"
 	"flagged-it/internal/ui/components"
+	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
+	"sort"
+	"strings"
 )
 
 type Game struct {
-	content  *fyne.Container
-	backFunc func()
-	selectionView *fyne.Container
-	gameView *fyne.Container
-	mainContent *fyne.Container
+	content           *fyne.Container
+	backFunc          func()
+	selectionView     *fyne.Container
+	gameView          *fyne.Container
+	mainContent       *fyne.Container
 	selectedContinent string
-	allCountries []string
-	guessedCountries map[string]bool
-	guessEntry *widget.Entry
-	progressLabel *widget.Label
-	countryList *widget.List
-	statusLabel *widget.Label
+	allCountries      []string
+	guessedCountries  map[string]bool
+	guessEntry        *widget.Entry
+	progressLabel     *widget.Label
+	countryList       *widget.List
+	statusLabel       *widget.Label
 }
 
 func NewGame(backFunc func()) *Game {
@@ -140,21 +140,21 @@ func (g *Game) setupGameView() {
 func (g *Game) startGame(continent string) {
 	g.selectedContinent = continent
 	countries := data.LoadCountries()
-	
+
 	g.allCountries = []string{}
 	for _, country := range countries {
 		if continent == "World" || country.Region == continent {
 			g.allCountries = append(g.allCountries, country.Name.Common)
 		}
 	}
-	
+
 	sort.Strings(g.allCountries)
 	g.guessedCountries = make(map[string]bool)
-	
+
 	g.updateProgress()
 	g.statusLabel.SetText("Start guessing countries!")
 	g.guessEntry.SetText("")
-	
+
 	g.mainContent.RemoveAll()
 	g.mainContent.Add(g.gameView)
 	g.mainContent.Refresh()
@@ -166,10 +166,10 @@ func (g *Game) makeGuess() {
 	if guess == "" {
 		return
 	}
-	
+
 	guessLower := strings.ToLower(guess)
 	found := false
-	
+
 	for _, country := range g.allCountries {
 		if strings.ToLower(country) == guessLower && !g.guessedCountries[strings.ToLower(country)] {
 			g.guessedCountries[strings.ToLower(country)] = true
@@ -177,7 +177,7 @@ func (g *Game) makeGuess() {
 			break
 		}
 	}
-	
+
 	if found {
 		g.statusLabel.SetText(fmt.Sprintf("Correct! %s added to the list.", guess))
 		g.updateProgress()
@@ -187,7 +187,7 @@ func (g *Game) makeGuess() {
 	} else {
 		g.statusLabel.SetText("Not found or already guessed. Try again!")
 	}
-	
+
 	g.guessEntry.SetText("")
 	g.countryList.Refresh()
 }

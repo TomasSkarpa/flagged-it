@@ -1,31 +1,31 @@
 package higher_lower
 
 import (
-	"fmt"
-	"math/rand"
 	"flagged-it/internal/data"
 	"flagged-it/internal/ui/components"
+	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
+	"math/rand"
 )
 
 type Game struct {
 	content  *fyne.Container
 	backFunc func()
 
-	firstCountry int
+	firstCountry  int
 	secondCountry int
-	score int
+	score         int
 
-	countryOneNameLabel	*widget.Label
-	countryTwoNameLabel	*widget.Label
-	countryOnePopLabel 	*widget.Label
-	countryTwoPopLabel 	*widget.Label
-	scoreLabel *widget.Label
-	nextBtn *widget.Button
-	higherBtn *widget.Button
-	lowerBtn *widget.Button
+	countryOneNameLabel *widget.Label
+	countryTwoNameLabel *widget.Label
+	countryOnePopLabel  *widget.Label
+	countryTwoPopLabel  *widget.Label
+	scoreLabel          *widget.Label
+	nextBtn             *widget.Button
+	higherBtn           *widget.Button
+	lowerBtn            *widget.Button
 }
 
 func NewGame(backFunc func()) *Game {
@@ -87,8 +87,6 @@ func (g *Game) setupUI() {
 	)
 }
 
-
-
 func (g *Game) makeGuess(isHigher bool) {
 	correct := (isHigher && g.secondCountry > g.firstCountry) || (!isHigher && g.secondCountry < g.firstCountry)
 	if correct {
@@ -104,15 +102,15 @@ func (g *Game) makeGuess(isHigher bool) {
 func (g *Game) nextRound() {
 	countries := data.LoadCountries()
 	newCountry := countries[rand.Intn(len(countries))]
-	
+
 	g.firstCountry = g.secondCountry
 	g.countryOneNameLabel.SetText(g.countryTwoNameLabel.Text)
 	g.countryOnePopLabel.SetText(fmt.Sprintf("Population: %d", g.firstCountry))
-	
+
 	g.secondCountry = newCountry.Population
 	g.countryTwoNameLabel.SetText(newCountry.Name.Common)
 	g.countryTwoPopLabel.SetText("Population: ?")
-	
+
 	g.nextBtn.Hide()
 	g.higherBtn.Show()
 	g.lowerBtn.Show()
@@ -137,7 +135,7 @@ func (g *Game) Start() {
 
 	g.countryOneNameLabel.SetText(firstRandomCountry.Name.Common)
 	g.countryOnePopLabel.SetText(fmt.Sprintf("Population: %d", firstRandomCountry.Population))
-	g.countryTwoNameLabel.SetText(secondRandomCountry.Name.Common) 
+	g.countryTwoNameLabel.SetText(secondRandomCountry.Name.Common)
 	g.countryTwoPopLabel.SetText("Population: ?")
 }
 

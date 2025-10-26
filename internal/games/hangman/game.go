@@ -72,7 +72,6 @@ func (g *Game) setupUI() {
 		g.keyboard,
 	)
 
-
 }
 
 func (g *Game) newGame() {
@@ -164,7 +163,7 @@ func (g *Game) updateDisplay() {
 			}
 		}
 	}
-	
+
 	letterCount := 0
 	wordCount := 1
 	for _, char := range g.currentWord {
@@ -174,7 +173,7 @@ func (g *Game) updateDisplay() {
 			letterCount++
 		}
 	}
-	
+
 	g.wordLabel.SetText(displayWord.String())
 	wordText := "word"
 	if wordCount != 1 {

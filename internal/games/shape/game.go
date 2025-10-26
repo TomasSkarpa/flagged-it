@@ -112,7 +112,7 @@ func (g *Game) setupGameView() {
 
 	g.scoreLabel = widget.NewLabel("Score: 0/0")
 	g.progressLabel = widget.NewLabel("")
-	
+
 	g.guessEntry = widget.NewEntry()
 	g.guessEntry.SetPlaceHolder("Enter country name...")
 	g.guessEntry.OnSubmitted = g.checkGuess
@@ -124,10 +124,10 @@ func (g *Game) setupGameView() {
 	// Create main shape canvas and island container
 	g.shapeCanvas = container.NewWithoutLayout()
 	g.islandContainer = container.NewVBox()
-	
+
 	// Create main shape window
 	mainShapeWindow := container.NewMax(g.shapeCanvas)
-	
+
 	// Layout with islands on left, main shape taking full width
 	shapeWindow := container.NewBorder(nil, nil, g.islandContainer, nil, mainShapeWindow)
 
@@ -145,7 +145,6 @@ func (g *Game) setupGameView() {
 		topSection, nil, nil, nil,
 		shapeWindow,
 	)
-	
 
 }
 
@@ -160,12 +159,12 @@ func (g *Game) drawShape(coords [][][][]float64) {
 
 	// Find largest polygon for main display
 	mainPolygon, otherPolygons := g.separatePolygons(coords)
-	
+
 	// Draw main shape (largest polygon)
 	if len(mainPolygon) > 0 {
 		g.drawMainShape([][][][]float64{mainPolygon})
 	}
-	
+
 	// Draw individual island windows if there are detached islands
 	if len(otherPolygons) > 0 {
 		for _, island := range otherPolygons {
@@ -181,11 +180,11 @@ func (g *Game) separatePolygons(coords [][][][]float64) ([][][]float64, [][][][]
 		}
 		return nil, nil
 	}
-	
+
 	// Find largest polygon by area
 	largestIdx := 0
 	largestArea := 0.0
-	
+
 	for i, polygon := range coords {
 		if len(polygon) > 0 {
 			area := g.calculatePolygonArea(polygon[0])
@@ -195,7 +194,7 @@ func (g *Game) separatePolygons(coords [][][][]float64) ([][][]float64, [][][][]
 			}
 		}
 	}
-	
+
 	// Separate main from others
 	mainPolygon := coords[largestIdx]
 	otherPolygons := make([][][][]float64, 0)
@@ -204,7 +203,7 @@ func (g *Game) separatePolygons(coords [][][][]float64) ([][][]float64, [][][][]
 			otherPolygons = append(otherPolygons, polygon)
 		}
 	}
-	
+
 	return mainPolygon, otherPolygons
 }
 
@@ -247,22 +246,22 @@ func (g *Game) drawMainShape(coords [][][][]float64) {
 
 	raster := canvas.NewRaster(func(w, h int) image.Image {
 		img := image.NewRGBA(image.Rect(0, 0, w, h))
-		
+
 		for y := 0; y < h; y++ {
 			for x := 0; x < w; x++ {
 				img.Set(x, y, color.RGBA{255, 255, 255, 255})
 			}
 		}
-		
+
 		for _, polygon := range coords {
 			if len(polygon) > 0 {
 				g.fillPolygon(img, polygon[0], minX, minY, scale, offsetX, offsetY, float64(h), color.RGBA{0, 0, 0, 255})
 			}
 		}
-		
+
 		return img
 	})
-	
+
 	raster.Resize(fyne.NewSize(float32(width), float32(height)))
 	g.shapeCanvas.Add(raster)
 }
@@ -287,14 +286,14 @@ func (g *Game) drawIslandWindow(coords [][][][]float64) {
 
 	raster := canvas.NewRaster(func(w, h int) image.Image {
 		img := image.NewRGBA(image.Rect(0, 0, w, h))
-		
+
 		// White background
 		for y := 0; y < h; y++ {
 			for x := 0; x < w; x++ {
 				img.Set(x, y, color.RGBA{255, 255, 255, 255})
 			}
 		}
-		
+
 		// Black border (2px)
 		for i := 0; i < 2; i++ {
 			for x := 0; x < w; x++ {
@@ -306,24 +305,24 @@ func (g *Game) drawIslandWindow(coords [][][][]float64) {
 				img.Set(w-1-i, y, color.RGBA{0, 0, 0, 255})
 			}
 		}
-		
+
 		for _, polygon := range coords {
 			if len(polygon) > 0 {
 				g.fillPolygon(img, polygon[0], minX, minY, scale, offsetX, offsetY, float64(h), color.RGBA{0, 0, 0, 255})
 			}
 		}
-		
+
 		return img
 	})
-	
+
 	raster.Resize(fyne.NewSize(float32(width), float32(height)))
-	
+
 	// Create container for this island and add to stack
 	islandCanvas := container.NewWithoutLayout()
 	islandCanvas.Add(raster)
 	islandWindow := container.NewBorder(nil, nil, nil, nil, islandCanvas)
 	islandWindow.Resize(fyne.NewSize(float32(width), float32(height)))
-	
+
 	g.islandContainer.Add(islandWindow)
 }
 
@@ -340,10 +339,18 @@ func (g *Game) calculateBounds(coords [][][][]float64) (minX, maxX, minY, maxY f
 					minX, maxX, minY, maxY = lon, lon, lat, lat
 					first = false
 				} else {
-					if lon < minX { minX = lon }
-					if lon > maxX { maxX = lon }
-					if lat < minY { minY = lat }
-					if lat > maxY { maxY = lat }
+					if lon < minX {
+						minX = lon
+					}
+					if lon > maxX {
+						maxX = lon
+					}
+					if lat < minY {
+						minY = lat
+					}
+					if lat > maxY {
+						maxY = lat
+					}
 				}
 			}
 		}
@@ -371,18 +378,18 @@ func (g *Game) fillPolygon(img *image.RGBA, ring [][]float64, minX, minY, scale,
 	bounds := img.Bounds()
 	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
 		intersections := []int{}
-		
+
 		// Find intersections with polygon edges
 		for i := 0; i < len(points); i++ {
 			j := (i + 1) % len(points)
 			p1, p2 := points[i], points[j]
-			
+
 			if (p1[1] <= y && y < p2[1]) || (p2[1] <= y && y < p1[1]) {
 				x := p1[0] + (y-p1[1])*(p2[0]-p1[0])/(p2[1]-p1[1])
 				intersections = append(intersections, x)
 			}
 		}
-		
+
 		// Sort intersections and fill between pairs
 		sort.Ints(intersections)
 		for i := 0; i < len(intersections); i += 2 {
@@ -404,7 +411,7 @@ func (g *Game) nextCountry() {
 
 	g.currentCountry = g.regionCountries[g.currentIndex]
 	g.currentIndex++
-	
+
 	// Handle both Polygon and MultiPolygon geometries
 	var coords [][][][]float64
 	switch g.currentCountry.Geometry.Type {
@@ -459,13 +466,13 @@ func (g *Game) nextCountry() {
 		g.nextCountry()
 		return
 	}
-	
+
 	if len(coords) == 0 {
 		// Try again with a different country
 		g.nextCountry()
 		return
 	}
-	
+
 	g.drawShape(coords)
 	g.guessEntry.SetText("")
 	g.resultLabel.SetText("")
@@ -510,23 +517,23 @@ func (g *Game) GetContent() *fyne.Container {
 func (g *Game) startRegionGame(region string) {
 	g.selectedRegion = region
 	g.regionCountries = []models.Feature{}
-	
+
 	// Filter countries by region
 	for _, country := range g.countries {
 		if region == "World" || country.Properties.Continent == region {
 			g.regionCountries = append(g.regionCountries, country)
 		}
 	}
-	
+
 	g.score = 0
 	g.total = 0
 	g.currentIndex = 0
 	g.updateProgress()
-	
+
 	g.mainContent.RemoveAll()
 	g.mainContent.Add(g.gameView)
 	g.mainContent.Refresh()
-	
+
 	g.nextCountry()
 }
 

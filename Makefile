@@ -58,9 +58,9 @@ setup:
 run:
 	go run $(MAIN)
 
-# Run the app with verbose build/run output for troubleshooting
+# Run the app in debug mode
 debug:
-	go run -v $(MAIN)
+	go run $(MAIN) -v
 
 # Remove build artifacts (safe for both Linux/macOS and Windows)
 clean:

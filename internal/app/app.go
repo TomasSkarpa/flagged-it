@@ -1,10 +1,10 @@
 package app
 
 import (
-	"flagged-it/internal/games/higher_lower"
 	"flagged-it/internal/games/facts"
 	"flagged-it/internal/games/flag"
 	"flagged-it/internal/games/hangman"
+	"flagged-it/internal/games/higher_lower"
 	"flagged-it/internal/games/list"
 	"flagged-it/internal/games/shape"
 	"flagged-it/internal/ui/screens"
@@ -20,7 +20,7 @@ func NewApp(window fyne.Window) *App {
 }
 
 func (a *App) GetDashboard() *fyne.Container {
-	dashboard := screens.NewDashboard(a.navigateToGame)
+	dashboard := screens.NewDashboard(a.navigateToGame, a.navigateToDebug, a.window)
 	return dashboard.GetContent()
 }
 
@@ -50,4 +50,8 @@ func (a *App) navigateToGame(gameType string) {
 
 func (a *App) backToDashboard() {
 	a.window.SetContent(a.GetDashboard())
+}
+func (a *App) navigateToDebug() {
+	debugScreen := screens.NewDebugScreen(a.backToDashboard, a.window)
+	a.window.SetContent(debugScreen.GetContent())
 }

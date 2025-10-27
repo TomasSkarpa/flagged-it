@@ -6,7 +6,7 @@
 # Designed with portability and CI/CD pipelines in mind.
 # -------------------------------------------------------------------
 
-.PHONY: setup run debug clean build check
+.PHONY: setup run debug clean build check web
 
 # -------------------------------------------------------------------
 # Configurable variables and cross-platform ready commands
@@ -61,6 +61,22 @@ run:
 # Run the app in debug mode
 debug:
 	go run $(MAIN) -v
+
+# Run the app in web mode
+web:
+	@$(MKDIR)
+	@GOOS=js GOARCH=wasm go build -o $(BUILD_DIR)/flagged-it.wasm cmd/web/main.go
+	@if [ -f "$$(go env GOROOT)/lib/wasm/wasm_exec.js" ]; then \
+		cp "$$(go env GOROOT)/lib/wasm/wasm_exec.js" $(BUILD_DIR)/; \
+	elif [ -f "$$(go env GOROOT)/misc/wasm/wasm_exec.js" ]; then \
+		cp "$$(go env GOROOT)/misc/wasm/wasm_exec.js" $(BUILD_DIR)/; \
+	else \
+		curl -s https://raw.githubusercontent.com/golang/go/master/misc/wasm/wasm_exec.js -o $(BUILD_DIR)/wasm_exec.js; \
+	fi
+	@cp web/index.html $(BUILD_DIR)/
+	@echo "Built WebAssembly to $(BUILD_DIR)/"
+	@echo "Starting server at http://localhost:8080"
+	@cd $(BUILD_DIR) && python3 -m http.server 8080
 
 # Remove build artifacts (safe for both Linux/macOS and Windows)
 clean:

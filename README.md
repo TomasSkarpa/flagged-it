@@ -1,5 +1,5 @@
 # flagged-it
-Learn about countries playing different game modes – native Windows &amp; macOS and Linux app in Go.
+Learn about countries playing different game modes – native Windows, macOS, Linux and web application in Go.
 
 ## Setup Instructions
 

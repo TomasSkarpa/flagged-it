@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Flag question favicon">
+  <rect width="64" height="64" rx="8" ry="8" fill="#0d47a1"/>
+  <rect x="8" y="10" width="4" height="44" rx="2" fill="#333"/>
+  <g transform="translate(14,12)">
+    <rect width="40" height="8" fill="#ffd54f"/>
+    <rect y="8" width="40" height="8" fill="#ef5350"/>
+    <rect y="16" width="40" height="8" fill="#66bb6a"/>
+  </g>
+</svg>

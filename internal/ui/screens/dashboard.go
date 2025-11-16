@@ -2,6 +2,7 @@ package screens
 
 import (
 	"flagged-it/internal/utils"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/theme"
@@ -45,27 +46,27 @@ func (d *Dashboard) setupUI() {
 	}
 
 	// Game buttons
-	countryGuessBtn := widget.NewButton("Guess by Shape", func() {
+	countryGuessBtn := widget.NewButtonWithIcon("Guess by Shape", theme.VisibilityIcon(), func() {
 		d.navigateFunc("shape")
 	})
 
-	countryListBtn := widget.NewButton("List All Countries", func() {
+	countryListBtn := widget.NewButtonWithIcon("List All Countries", theme.ListIcon(), func() {
 		d.navigateFunc("list")
 	})
 
-	hangmanBtn := widget.NewButton("Hangman", func() {
+	hangmanBtn := widget.NewButtonWithIcon("Hangman", theme.HelpIcon(), func() {
 		d.navigateFunc("hangman")
 	})
 
-	factGuessBtn := widget.NewButton("Guess by Facts", func() {
+	factGuessBtn := widget.NewButtonWithIcon("Guess by Facts", theme.InfoIcon(), func() {
 		d.navigateFunc("facts")
 	})
 
-	higher_lowerBtn := widget.NewButton("Higher or Lower", func() {
+	higher_lowerBtn := widget.NewButtonWithIcon("Higher or Lower", theme.ContentRedoIcon(), func() {
 		d.navigateFunc("higher_lower")
 	})
 
-	flagBtn := widget.NewButton("Guess by Flag", func() {
+	flagBtn := widget.NewButtonWithIcon("Guess by Flag", theme.ColorPaletteIcon(), func() {
 		d.navigateFunc("flag")
 	})
 

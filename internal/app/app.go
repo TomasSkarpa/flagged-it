@@ -3,6 +3,7 @@ package app
 import (
 	"flagged-it/internal/games/facts"
 	"flagged-it/internal/games/flag"
+	"flagged-it/internal/games/guessing"
 	"flagged-it/internal/games/hangman"
 	"flagged-it/internal/games/higher_lower"
 	"flagged-it/internal/games/list"
@@ -44,6 +45,9 @@ func (a *App) navigateToGame(gameType string) {
 		a.window.SetContent(game.GetContent())
 	case "flag":
 		game := flag.NewGame(a.backToDashboard)
+		a.window.SetContent(game.GetContent())
+	case "guessing":
+		game := guessing.NewGame(a.backToDashboard)
 		a.window.SetContent(game.GetContent())
 	}
 }

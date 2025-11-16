@@ -70,6 +70,10 @@ func (d *Dashboard) setupUI() {
 		d.navigateFunc("flag")
 	})
 
+	guessingBtn := widget.NewButtonWithIcon("What Country is This", theme.GridIcon(), func(){
+		d.navigateFunc("guessing")
+	})
+
 	d.content = container.NewVBox(
 		header,
 		widget.NewSeparator(),
@@ -79,6 +83,7 @@ func (d *Dashboard) setupUI() {
 		factGuessBtn,
 		higher_lowerBtn,
 		flagBtn,
+		guessingBtn,
 	)
 }
 

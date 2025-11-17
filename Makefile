@@ -37,12 +37,12 @@ ifeq ($(OS),Windows_NT)
   MKDIR := if not exist $(BUILD_DIR) mkdir $(BUILD_DIR)
   EXE_EXT := .exe
   # Windows-compatible env for Go build
-  GO_BUILD = set GOOS=$(GOOS)&& set GOARCH=$(GOARCH)&& go build -o $(OUT) $(MAIN)
+  GO_BUILD = set GOOS=$(GOOS)&& set GOARCH=$(GOARCH)&& go build -tags no_emoji -o $(OUT) $(MAIN)
   RM_RF := if exist $(BUILD_DIR) rmdir /s /q $(BUILD_DIR)
 else
   MKDIR := mkdir -p $(BUILD_DIR)
   EXE_EXT :=
-  GO_BUILD = GOOS=$(GOOS) GOARCH=$(GOARCH) go build -o $(OUT) $(MAIN)
+  GO_BUILD = GOOS=$(GOOS) GOARCH=$(GOARCH) go build -tags no_emoji -o $(OUT) $(MAIN)
   RM_RF := rm -rf $(BUILD_DIR)
 endif
 
@@ -56,16 +56,16 @@ setup:
 	go mod tidy
 
 run:
-	go run $(MAIN)
+	go run -tags no_emoji $(MAIN)
 
 # Run the app in debug mode
 debug:
-	go run $(MAIN) -v
+	go run -tags no_emoji $(MAIN) -v
 
 # Run the app in web mode
 web:
 	@$(MKDIR)
-	@GOOS=js GOARCH=wasm go build -o $(BUILD_DIR)/flagged-it.wasm cmd/web/main.go
+	@GOOS=js GOARCH=wasm go build -tags no_emoji -o $(BUILD_DIR)/flagged-it.wasm cmd/web/main.go
 	@if [ -f "$$(go env GOROOT)/lib/wasm/wasm_exec.js" ]; then \
 		cp "$$(go env GOROOT)/lib/wasm/wasm_exec.js" $(BUILD_DIR)/; \
 	elif [ -f "$$(go env GOROOT)/misc/wasm/wasm_exec.js" ]; then \

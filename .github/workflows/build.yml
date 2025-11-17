@@ -55,7 +55,7 @@ jobs:
           CGO_ENABLED: 1
         run: |
           mkdir build
-          go build -tags no_emoji -ldflags="-H=windowsgui" -o build/flagged-it-windows-amd64.exe ./cmd
+          go build -ldflags="-H=windowsgui" -o build/flagged-it-windows-amd64.exe ./cmd
       
       - name: Build binary (macOS)
         if: matrix.os == 'macos-latest'
@@ -64,7 +64,7 @@ jobs:
           GOARCH: ${{ matrix.arch }}
         run: |
           mkdir -p build
-          go build -tags no_emoji -o build/flagged-it ./cmd
+          go build -o build/flagged-it ./cmd
           # Create proper macOS app bundle
           mkdir -p build/Flagged-It.app/Contents/MacOS
           mkdir -p build/Flagged-It.app/Contents/Resources
@@ -99,7 +99,7 @@ jobs:
           CGO_ENABLED: 1
         run: |
           mkdir -p build
-          go build -tags no_emoji -o build/flagged-it-linux-amd64 ./cmd
+          go build -o build/flagged-it-linux-amd64 ./cmd
 
       # 6. Archive
       - name: Archive binary (Windows)

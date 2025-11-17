@@ -57,22 +57,22 @@ func (g *Game) setupSelectionView() {
 
 	description := widget.NewLabel("Choose a region and try to name all countries in it!")
 
-	worldBtn := widget.NewButton("🌍 World (All Countries)", func() {
+	worldBtn := widget.NewButton("World (All Countries)", func() {
 		g.startGame("World")
 	})
-	europeBtn := widget.NewButton("🇪🇺 Europe", func() {
+	europeBtn := widget.NewButton("Europe", func() {
 		g.startGame("Europe")
 	})
-	americasBtn := widget.NewButton("🌎 Americas", func() {
+	americasBtn := widget.NewButton("Americas", func() {
 		g.startGame("Americas")
 	})
-	asiaBtn := widget.NewButton("🇯🇵 Asia", func() {
+	asiaBtn := widget.NewButton("Asia", func() {
 		g.startGame("Asia")
 	})
-	africaBtn := widget.NewButton("🇪🇬 Africa", func() {
+	africaBtn := widget.NewButton("Africa", func() {
 		g.startGame("Africa")
 	})
-	oceaniaBtn := widget.NewButton("🇦🇺 Oceania", func() {
+	oceaniaBtn := widget.NewButton("Oceania", func() {
 		g.startGame("Oceania")
 	})
 

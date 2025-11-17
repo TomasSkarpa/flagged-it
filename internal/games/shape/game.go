@@ -73,22 +73,22 @@ func (g *Game) setupSelectionView() {
 
 	description := widget.NewLabel("Choose a region and guess all country shapes!")
 
-	worldBtn := widget.NewButton("🌍 World (All Countries)", func() {
+	worldBtn := widget.NewButton("World (All Countries)", func() {
 		g.startRegionGame("World")
 	})
-	europeBtn := widget.NewButton("🇪🇺 Europe", func() {
+	europeBtn := widget.NewButton("Europe", func() {
 		g.startRegionGame("Europe")
 	})
-	americasBtn := widget.NewButton("🌎 Americas", func() {
+	americasBtn := widget.NewButton("Americas", func() {
 		g.startRegionGame("Americas")
 	})
-	asiaBtn := widget.NewButton("🇯🇵 Asia", func() {
+	asiaBtn := widget.NewButton("Asia", func() {
 		g.startRegionGame("Asia")
 	})
-	africaBtn := widget.NewButton("🇪🇬 Africa", func() {
+	africaBtn := widget.NewButton("Africa", func() {
 		g.startRegionGame("Africa")
 	})
-	oceaniaBtn := widget.NewButton("🇦🇺 Oceania", func() {
+	oceaniaBtn := widget.NewButton("Oceania", func() {
 		g.startRegionGame("Oceania")
 	})
 

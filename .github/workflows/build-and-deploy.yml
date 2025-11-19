@@ -26,6 +26,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y fonts-inter fonts-noto-color-emoji
+          fc-cache -f -v
 
       - name: Cache Go modules
         uses: actions/cache@v3
@@ -44,7 +45,7 @@ jobs:
         run: cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" .
 
       - name: Build Go WASM
-        run: GOOS=js GOARCH=wasm go build -tags no_emoji -o flagged-it.wasm cmd/web/main.go
+        run: FYNE_FONT="/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf" GOOS=js GOARCH=wasm go build -tags no_emoji -o flagged-it.wasm cmd/web/main.go
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

@@ -91,7 +91,7 @@ func (g *Game) makeGuess(isHigher bool) {
 	correct := (isHigher && g.secondCountry > g.firstCountry) || (!isHigher && g.secondCountry < g.firstCountry)
 	if correct {
 		g.score++
-	}else{
+	} else {
 		g.score = 0
 	}
 	g.scoreLabel.SetText(fmt.Sprintf("Score: %d", g.score))
@@ -104,8 +104,8 @@ func (g *Game) makeGuess(isHigher bool) {
 func (g *Game) nextRound() {
 	countries := data.LoadCountries()
 	newCountry := countries[rand.Intn(len(countries))]
-	
-	for newCountry.Name.Common == g.countryTwoNameLabel.Text{
+
+	for newCountry.Name.Common == g.countryTwoNameLabel.Text {
 		newCountry = countries[rand.Intn(len(countries))]
 	}
 

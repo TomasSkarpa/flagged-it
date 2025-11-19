@@ -74,7 +74,7 @@ web:
 		curl -s https://raw.githubusercontent.com/golang/go/master/misc/wasm/wasm_exec.js -o $(BUILD_DIR)/wasm_exec.js; \
 	fi
 	@cp index.html $(BUILD_DIR)/
-	@cp assets/favicon.svg $(BUILD_DIR)/
+	@cp -r assets $(BUILD_DIR)/
 	@echo "Built WebAssembly to $(BUILD_DIR)/"
 	@echo "Starting server at http://localhost:8080"
 	@cd $(BUILD_DIR) && python3 -m http.server 8080

@@ -22,6 +22,11 @@ jobs:
         with:
           go-version: '1.21'
 
+      - name: Install Inter + Noto Color Emoji
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-inter fonts-noto-color-emoji
+
       - name: Cache Go modules
         uses: actions/cache@v3
         with:
@@ -39,7 +44,7 @@ jobs:
         run: cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" .
 
       - name: Build Go WASM
-        run: GOOS=js GOARCH=wasm go build -tags no_emoji -o flagged-it.wasm cmd/web/main.go
+        run: GOOS=js GOARCH=wasm go build -o flagged-it.wasm cmd/web/main.go
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

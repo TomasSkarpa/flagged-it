@@ -65,7 +65,7 @@ debug:
 # Run the app in web mode
 web:
 	@$(MKDIR)
-	@GOOS=js GOARCH=wasm go build -tags no_emoji -o $(BUILD_DIR)/flagged-it.wasm cmd/web/main.go
+	@GOOS=js GOARCH=wasm go build -o $(BUILD_DIR)/flagged-it.wasm cmd/web/main.go
 	@if [ -f "$$(go env GOROOT)/lib/wasm/wasm_exec.js" ]; then \
 		cp "$$(go env GOROOT)/lib/wasm/wasm_exec.js" $(BUILD_DIR)/; \
 	elif [ -f "$$(go env GOROOT)/misc/wasm/wasm_exec.js" ]; then \

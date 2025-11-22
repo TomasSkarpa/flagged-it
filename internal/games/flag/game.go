@@ -3,6 +3,7 @@ package flag
 import (
 	"fmt"
 	"math/rand"
+	"runtime"
 	"time"
 
 	"flagged-it/internal/data"
@@ -46,7 +47,7 @@ func (g *Game) setupUI() {
 
 	g.flagImage = canvas.NewImageFromResource(nil)
 	g.flagImage.FillMode = canvas.ImageFillContain
-	g.flagImage.SetMinSize(fyne.NewSize(200, 133))
+	g.flagImage.SetMinSize(fyne.NewSize(338, 225))
 	g.statusLabel = widget.NewLabel("Which country does this flag belong to?")
 
 	g.content = container.NewVBox(
@@ -85,10 +86,24 @@ func (g *Game) newGame() {
 }
 
 func (g *Game) displayFlag() {
-	flagPath := fmt.Sprintf("assets/twemoji_flags_cca2/%s.svg", g.currentCountry.CCA2)
-	flagResource := storage.NewFileURI(flagPath)
-	resource, _ := storage.LoadResourceFromURI(flagResource)
-	g.flagImage.Resource = resource
+	var flagResource fyne.Resource
+	var err error
+	
+	if runtime.GOOS == "js" {
+		// For WebAssembly, load via HTTP with absolute URL
+		flagURL := fmt.Sprintf("http://localhost:8080/assets/twemoji_flags_cca2/%s.svg", g.currentCountry.CCA2)
+		flagURI := storage.NewURI(flagURL)
+		flagResource, err = storage.LoadResourceFromURI(flagURI)
+	} else {
+		// For desktop, load from local file
+		flagPath := fmt.Sprintf("assets/twemoji_flags_cca2/%s.svg", g.currentCountry.CCA2)
+		flagURI := storage.NewFileURI(flagPath)
+		flagResource, err = storage.LoadResourceFromURI(flagURI)
+	}
+	
+	if err == nil {
+		g.flagImage.Resource = flagResource
+	}
 	g.flagImage.Refresh()
 }
 

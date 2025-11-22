@@ -9,6 +9,7 @@ import (
 	"flagged-it/internal/data"
 	"flagged-it/internal/data/models"
 	"flagged-it/internal/ui/components"
+	"flagged-it/internal/utils"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
@@ -25,11 +26,16 @@ type Game struct {
 	flagImage      *canvas.Image
 	statusLabel    *widget.Label
 	buttons        []*widget.Button
+	score          int
+	total          int
+	scoreLabel     *widget.Label
+	scoreManager   *utils.ScoreManager
 }
 
-func NewGame(backFunc func()) *Game {
+func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
 	g := &Game{
-		backFunc: backFunc,
+		backFunc:     backFunc,
+		scoreManager: scoreManager,
 	}
 	g.loadCountries()
 	g.setupUI()
@@ -48,10 +54,12 @@ func (g *Game) setupUI() {
 	g.flagImage.FillMode = canvas.ImageFillContain
 	g.flagImage.SetMinSize(fyne.NewSize(338, 225))
 	g.statusLabel = widget.NewLabel("Which country does this flag belong to?")
+	g.scoreLabel = widget.NewLabel("Score: 0/10")
 
 	g.content = container.NewVBox(
 		topBar.GetContainer(),
 		widget.NewSeparator(),
+		g.scoreLabel,
 		g.statusLabel,
 		g.flagImage,
 		widget.NewSeparator(),
@@ -122,18 +130,36 @@ func (g *Game) createButtons() {
 }
 
 func (g *Game) makeGuess(guessed models.Country) {
+	g.total++
 	if guessed.CCA2 == g.currentCountry.CCA2 {
+		g.score++
 		g.statusLabel.SetText(fmt.Sprintf("Correct! It's %s!", g.currentCountry.Name.Common))
 	} else {
 		g.statusLabel.SetText(fmt.Sprintf("Wrong! It was %s", g.currentCountry.Name.Common))
 	}
 
+	g.scoreLabel.SetText(fmt.Sprintf("Score: %d/10", g.score))
+
 	for _, btn := range g.buttons {
 		btn.Disable()
 	}
+
+	if g.total >= 10 {
+		g.scoreManager.SetTotal("flag", 10)
+		g.scoreManager.UpdateScore("flag", g.score)
+		time.AfterFunc(1500*time.Millisecond, func() {
+			fyne.Do(func() {
+				g.statusLabel.SetText(fmt.Sprintf("Game Complete! Final Score: %d/10 (%.0f%%)", g.score, float64(g.score)/10*100))
+			})
+		})
+	} else {
+		time.AfterFunc(1500*time.Millisecond, func() {
+			fyne.Do(func() {
+				g.newGame()
+			})
+		})
+	}
 }
-
-
 
 func (g *Game) GetContent() *fyne.Container {
 	return g.content
@@ -144,5 +170,8 @@ func (g *Game) Start() {
 }
 
 func (g *Game) Reset() {
+	g.score = 0
+	g.total = 0
+	g.scoreLabel.SetText("Score: 0/10")
 	g.newGame()
 }

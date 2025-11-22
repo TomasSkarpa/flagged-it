@@ -40,3 +40,12 @@ fix: resolve navigation bug
 ref: refactor dashboard component
 docs: update setup instructions
 ```
+
+## Attributions
+
+This project uses the following open source libraries and assets:
+
+- **[Fyne](https://fyne.io/)** - Cross-platform GUI toolkit for Go (BSD 3-Clause License)
+- **[Twemoji](https://twemoji.twitter.com/)** - Flag graphics by Twitter (MIT License)
+
+See the `licenses/` directory for full license texts.

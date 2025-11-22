@@ -39,11 +39,16 @@ type Game struct {
 	guessBtn         *widget.Button
 	newGameBtn       *widget.Button
 	historyContainer *fyne.Container
+	score            int
+	total            int
+	scoreLabel       *widget.Label
+	scoreManager     *utils.ScoreManager
 }
 
-func NewGame(backFunc func()) *Game {
+func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
 	g := &Game{
-		backFunc: backFunc,
+		backFunc:     backFunc,
+		scoreManager: scoreManager,
 	}
 	g.loadCountries()
 	g.setupUI()
@@ -69,6 +74,7 @@ func (g *Game) setupUI() {
 	g.guessBtn = widget.NewButton("Guess", g.makeGuess)
 	g.statusLabel = widget.NewLabel("")
 	g.triesLabel = widget.NewLabel("")
+	g.scoreLabel = widget.NewLabel("Score: 0/5")
 
 	guessContainer := container.NewGridWithColumns(2, g.guessEntry, g.guessBtn)
 	g.historyContainer = container.NewVBox()
@@ -76,6 +82,7 @@ func (g *Game) setupUI() {
 	g.content = container.NewVBox(
 		topBar.GetContainer(),
 		widget.NewSeparator(),
+		g.scoreLabel,
 		g.statusLabel,
 		g.triesLabel,
 		widget.NewSeparator(),
@@ -89,6 +96,15 @@ func (g *Game) setupUI() {
 func (g *Game) newGame() {
 	if len(g.countries) == 0 || len(g.factsData) == 0 {
 		g.statusLabel.SetText("Error loading countries data")
+		return
+	}
+
+	if g.total >= 5 {
+		g.scoreManager.SetTotal("facts", 5)
+		g.scoreManager.UpdateScore("facts", g.score)
+		g.statusLabel.SetText(fmt.Sprintf("Game Complete! Final Score: %d/5 (%.0f%%)", g.score, float64(g.score)/5*100))
+		g.guessEntry.Disable()
+		g.guessBtn.Disable()
 		return
 	}
 
@@ -155,9 +171,17 @@ func (g *Game) makeGuess() {
 		})
 		g.updateHistoryUI()
 
+		g.total++
+		g.score++
+		g.scoreLabel.SetText(fmt.Sprintf("Score: %d/5", g.score))
 		g.statusLabel.SetText(fmt.Sprintf("Correct! It was %s!", g.currentCountry.Name.Common))
 		g.guessEntry.Disable()
 		g.guessBtn.Disable()
+		time.AfterFunc(1500*time.Millisecond, func() {
+			fyne.Do(func() {
+				g.newGame()
+			})
+		})
 		return
 	}
 
@@ -174,8 +198,15 @@ func (g *Game) makeGuess() {
 	if g.triesLeft == 0 {
 		flagEmoji := countryCodeToFlag(g.currentCountry.CCA2)
 		g.statusLabel.SetText(fmt.Sprintf("Game Over! It was %s %s", g.currentCountry.Name.Common, flagEmoji))
+		g.total++
+		g.scoreLabel.SetText(fmt.Sprintf("Score: %d/5", g.score))
 		g.guessEntry.Disable()
 		g.guessBtn.Disable()
+		time.AfterFunc(1500*time.Millisecond, func() {
+			fyne.Do(func() {
+				g.newGame()
+			})
+		})
 		return
 	}
 
@@ -245,6 +276,9 @@ func (g *Game) updateHistoryUI() {
 }
 
 func (g *Game) Reset() {
+	g.score = 0
+	g.total = 0
+	g.scoreLabel.SetText("Score: 0/5")
 	g.newGame()
 }
 

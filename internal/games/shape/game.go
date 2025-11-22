@@ -41,12 +41,14 @@ type Game struct {
 	currentCoords   [][][][]float64
 	coordCache      map[int][][][][]float64
 	cacheMutex      sync.RWMutex
+	scoreManager    *utils.ScoreManager
 }
 
-func NewGame(backFunc func()) *Game {
+func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
 	g := &Game{
-		backFunc:  backFunc,
-		countries: data.LoadGeoData().Features,
+		backFunc:     backFunc,
+		scoreManager: scoreManager,
+		countries:    data.LoadGeoData().Features,
 	}
 	g.setupUI()
 	return g
@@ -513,14 +515,18 @@ func (g *Game) checkGuess(guess string) {
 
 	// Check if all countries are done
 	if g.currentIndex >= len(g.regionCountries)-1 {
+		g.scoreManager.SetTotal("shape", g.total)
+		g.scoreManager.UpdateScore("shape", g.score)
 		g.resultLabel.SetText(fmt.Sprintf("Game Complete! Final Score: %d/%d (%.1f%%)", g.score, g.total, float64(g.score)/float64(g.total)*100))
 		return
 	}
 
 	// Auto-advance to next country after 2 seconds
 	time.AfterFunc(2*time.Second, func() {
-		g.guessEntry.Enable()
-		g.nextCountry()
+		fyne.Do(func() {
+			g.guessEntry.Enable()
+			g.nextCountry()
+		})
 	})
 }
 

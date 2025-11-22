@@ -27,10 +27,15 @@ type Game struct {
 	progressLabel     *widget.Label
 	countryList       *widget.List
 	statusLabel       *widget.Label
+	scoreLabel        *widget.Label
+	scoreManager      *utils.ScoreManager
 }
 
-func NewGame(backFunc func()) *Game {
-	g := &Game{backFunc: backFunc}
+func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
+	g := &Game{
+		backFunc:     backFunc,
+		scoreManager: scoreManager,
+	}
 	g.setupUI()
 	return g
 }
@@ -66,6 +71,7 @@ func (g *Game) setupSelectionView() {
 func (g *Game) setupGameView() {
 	g.progressLabel = widget.NewLabel("")
 	g.statusLabel = widget.NewLabel("")
+	g.scoreLabel = widget.NewLabel("")
 
 	g.guessEntry = widget.NewEntry()
 	g.guessEntry.SetPlaceHolder("Enter country name...")
@@ -92,6 +98,7 @@ func (g *Game) setupGameView() {
 	guessContainer := container.NewGridWithColumns(2, g.guessEntry, guessBtn)
 
 	topSection := container.NewVBox(
+		g.scoreLabel,
 		g.progressLabel,
 		g.statusLabel,
 		widget.NewSeparator(),
@@ -123,6 +130,7 @@ func (g *Game) startGame(continent string) {
 
 	g.updateProgress()
 	g.statusLabel.SetText("Start guessing countries!")
+	g.scoreLabel.SetText("Completion: 0%")
 	g.guessEntry.SetText("")
 
 	g.mainContent.RemoveAll()
@@ -152,6 +160,8 @@ func (g *Game) makeGuess() {
 	if found {
 		g.statusLabel.SetText(fmt.Sprintf("Correct! %s added to the list.", matchedCountry.Name.Common))
 		g.updateProgress()
+		percent := float64(len(g.guessedCountries)) / float64(len(g.allCountries)) * 100
+		g.scoreLabel.SetText(fmt.Sprintf("Completion: %.0f%%", percent))
 		if len(g.guessedCountries) == len(g.allCountries) {
 			g.statusLabel.SetText("Congratulations! You've listed all countries!")
 		}

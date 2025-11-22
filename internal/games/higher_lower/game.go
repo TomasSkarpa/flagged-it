@@ -3,6 +3,7 @@ package higher_lower
 import (
 	"flagged-it/internal/data"
 	"flagged-it/internal/ui/components"
+	"flagged-it/internal/utils"
 	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
@@ -26,10 +27,11 @@ type Game struct {
 	nextBtn             *widget.Button
 	higherBtn           *widget.Button
 	lowerBtn            *widget.Button
+	scoreManager        *utils.ScoreManager
 }
 
-func NewGame(backFunc func()) *Game {
-	g := &Game{backFunc: backFunc}
+func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
+	g := &Game{backFunc: backFunc, scoreManager: scoreManager}
 	g.setupUI()
 	return g
 }
@@ -92,6 +94,8 @@ func (g *Game) makeGuess(isHigher bool) {
 	if correct {
 		g.score++
 	} else {
+		g.scoreManager.SetTotal("higher_lower", g.score)
+		g.scoreManager.UpdateScore("higher_lower", g.score)
 		g.score = 0
 	}
 	g.scoreLabel.SetText(fmt.Sprintf("Score: %d", g.score))

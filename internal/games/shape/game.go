@@ -15,6 +15,7 @@ import (
 	"math"
 	"sort"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -38,6 +39,8 @@ type Game struct {
 	total           int
 	selectedRegion  string
 	currentCoords   [][][][]float64
+	coordCache      map[int][][][][]float64
+	cacheMutex      sync.RWMutex
 }
 
 func NewGame(backFunc func()) *Game {
@@ -371,77 +374,123 @@ func (g *Game) fillPolygon(img *image.RGBA, ring [][]float64, minX, minY, scale,
 }
 
 func (g *Game) nextCountry() {
-	if len(g.regionCountries) == 0 || g.currentIndex >= len(g.regionCountries) {
-		return
+	for g.currentIndex < len(g.regionCountries) {
+		idx := g.currentIndex
+		g.currentCountry = g.regionCountries[idx]
+		g.currentIndex++
+
+		g.cacheMutex.RLock()
+		coords, exists := g.coordCache[idx]
+		g.cacheMutex.RUnlock()
+
+		if !exists {
+			coords = g.parseCoordinates(g.currentCountry.Geometry)
+			g.cacheMutex.Lock()
+			g.coordCache[idx] = coords
+			g.cacheMutex.Unlock()
+		}
+
+		if len(coords) > 0 {
+			g.drawShape(coords)
+			g.guessEntry.SetText("")
+			g.resultLabel.SetText("")
+			return
+		}
 	}
+}
 
-	g.currentCountry = g.regionCountries[g.currentIndex]
-	g.currentIndex++
-
-	// Handle both Polygon and MultiPolygon geometries
+func (g *Game) parseCoordinates(geom models.Geometry) [][][][]float64 {
 	var coords [][][][]float64
-	switch g.currentCountry.Geometry.Type {
+
+	switch geom.Type {
 	case "Polygon":
-		// Polygon: coordinates are [][][]float64 (array of rings)
-		if coordsInterface, ok := g.currentCountry.Geometry.Coordinates.([]interface{}); ok {
-			var polygonCoords [][][]float64
-			for _, ringInterface := range coordsInterface {
-				if ringArray, ok := ringInterface.([]interface{}); ok {
-					var ring [][]float64
-					for _, pointInterface := range ringArray {
-						if pointArray, ok := pointInterface.([]interface{}); ok && len(pointArray) >= 2 {
-							if lon, ok1 := pointArray[0].(float64); ok1 {
-								if lat, ok2 := pointArray[1].(float64); ok2 {
-									ring = append(ring, []float64{lon, lat})
-								}
-							}
-						}
-					}
-					polygonCoords = append(polygonCoords, ring)
-				}
-			}
+		if polygonCoords := g.parsePolygon(geom.Coordinates); len(polygonCoords) > 0 {
 			coords = [][][][]float64{polygonCoords}
 		}
 	case "MultiPolygon":
-		// MultiPolygon: coordinates are [][][][]float64 (array of polygons)
-		if coordsInterface, ok := g.currentCountry.Geometry.Coordinates.([]interface{}); ok {
-			for _, polygonInterface := range coordsInterface {
-				if polygonArray, ok := polygonInterface.([]interface{}); ok {
-					var polygonCoords [][][]float64
-					for _, ringInterface := range polygonArray {
-						if ringArray, ok := ringInterface.([]interface{}); ok {
-							var ring [][]float64
-							for _, pointInterface := range ringArray {
-								if pointArray, ok := pointInterface.([]interface{}); ok && len(pointArray) >= 2 {
-									if lon, ok1 := pointArray[0].(float64); ok1 {
-										if lat, ok2 := pointArray[1].(float64); ok2 {
-											ring = append(ring, []float64{lon, lat})
-										}
-									}
-								}
-							}
-							polygonCoords = append(polygonCoords, ring)
-						}
-					}
+		if multiCoords, ok := geom.Coordinates.([]interface{}); ok {
+			for _, poly := range multiCoords {
+				if polygonCoords := g.parsePolygon(poly); len(polygonCoords) > 0 {
 					coords = append(coords, polygonCoords)
 				}
 			}
 		}
-	default:
-		// Skip unsupported geometry types
-		g.nextCountry()
-		return
 	}
 
-	if len(coords) == 0 {
-		// Try again with a different country
-		g.nextCountry()
-		return
+	return coords
+}
+
+func (g *Game) parsePolygon(coordsInterface interface{}) [][][]float64 {
+	var polygonCoords [][][]float64
+
+	if coordsArray, ok := coordsInterface.([]interface{}); ok {
+		for _, ringInterface := range coordsArray {
+			if ring := g.parseRing(ringInterface); len(ring) > 0 {
+				polygonCoords = append(polygonCoords, ring)
+			}
+		}
 	}
 
-	g.drawShape(coords)
-	g.guessEntry.SetText("")
-	g.resultLabel.SetText("")
+	return polygonCoords
+}
+
+func (g *Game) parseRing(ringInterface interface{}) [][]float64 {
+	var ring [][]float64
+
+	if ringArray, ok := ringInterface.([]interface{}); ok {
+		for _, pointInterface := range ringArray {
+			if pointArray, ok := pointInterface.([]interface{}); ok && len(pointArray) >= 2 {
+				if lon, ok1 := pointArray[0].(float64); ok1 {
+					if lat, ok2 := pointArray[1].(float64); ok2 {
+						ring = append(ring, []float64{lon, lat})
+					}
+				}
+			}
+		}
+	}
+
+	return ring
+}
+
+func (g *Game) startRegionGame(region string) {
+	g.selectedRegion = region
+	g.regionCountries = []models.Feature{}
+	g.coordCache = make(map[int][][][][]float64)
+
+	// Filter countries by region
+	for _, country := range g.countries {
+		if region == "World" || country.Properties.Continent == region {
+			g.regionCountries = append(g.regionCountries, country)
+		}
+	}
+
+	g.score = 0
+	g.total = 0
+	g.currentIndex = 0
+	g.updateProgress()
+
+	g.mainContent.RemoveAll()
+	g.mainContent.Add(g.gameView)
+	g.mainContent.Refresh()
+
+	// Preprocess coordinates in background
+	go g.preprocessCoordinates()
+	g.nextCountry()
+}
+
+func (g *Game) preprocessCoordinates() {
+	for i := range g.regionCountries {
+		g.cacheMutex.RLock()
+		_, exists := g.coordCache[i]
+		g.cacheMutex.RUnlock()
+
+		if !exists {
+			coords := g.parseCoordinates(g.regionCountries[i].Geometry)
+			g.cacheMutex.Lock()
+			g.coordCache[i] = coords
+			g.cacheMutex.Unlock()
+		}
+	}
 }
 
 func (g *Game) checkGuess(guess string) {
@@ -477,29 +526,6 @@ func (g *Game) checkGuess(guess string) {
 
 func (g *Game) GetContent() *fyne.Container {
 	return g.content
-}
-
-func (g *Game) startRegionGame(region string) {
-	g.selectedRegion = region
-	g.regionCountries = []models.Feature{}
-
-	// Filter countries by region
-	for _, country := range g.countries {
-		if region == "World" || country.Properties.Continent == region {
-			g.regionCountries = append(g.regionCountries, country)
-		}
-	}
-
-	g.score = 0
-	g.total = 0
-	g.currentIndex = 0
-	g.updateProgress()
-
-	g.mainContent.RemoveAll()
-	g.mainContent.Add(g.gameView)
-	g.mainContent.Refresh()
-
-	g.nextCountry()
 }
 
 func (g *Game) updateProgress() {

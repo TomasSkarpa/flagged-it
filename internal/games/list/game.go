@@ -2,7 +2,9 @@ package list
 
 import (
 	"flagged-it/internal/data"
+	"flagged-it/internal/data/models"
 	"flagged-it/internal/ui/components"
+	"flagged-it/internal/utils"
 	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
@@ -18,7 +20,7 @@ type Game struct {
 	gameView          *fyne.Container
 	mainContent       *fyne.Container
 	selectedContinent string
-	allCountries      []string
+	allCountries      []models.Country
 	guessedCountries  map[string]bool
 	guessEntry        *widget.Entry
 	progressLabel     *widget.Label
@@ -111,8 +113,8 @@ func (g *Game) setupGameView() {
 		func(id widget.ListItemID, obj fyne.CanvasObject) {
 			label := obj.(*widget.Label)
 			country := g.allCountries[id]
-			if g.guessedCountries[strings.ToLower(country)] {
-				label.SetText(fmt.Sprintf("%d. %s", id+1, country))
+			if g.guessedCountries[strings.ToLower(country.Name.Common)] {
+				label.SetText(fmt.Sprintf("%d. %s", id+1, country.Name.Common))
 			} else {
 				label.SetText(fmt.Sprintf("%d. ?", id+1))
 			}
@@ -141,14 +143,16 @@ func (g *Game) startGame(continent string) {
 	g.selectedContinent = continent
 	countries := data.LoadCountries()
 
-	g.allCountries = []string{}
+	g.allCountries = []models.Country{}
 	for _, country := range countries {
 		if continent == "World" || country.Region == continent {
-			g.allCountries = append(g.allCountries, country.Name.Common)
+			g.allCountries = append(g.allCountries, country)
 		}
 	}
 
-	sort.Strings(g.allCountries)
+	sort.Slice(g.allCountries, func(i, j int) bool {
+		return g.allCountries[i].Name.Common < g.allCountries[j].Name.Common
+	})
 	g.guessedCountries = make(map[string]bool)
 
 	g.updateProgress()
@@ -167,19 +171,20 @@ func (g *Game) makeGuess() {
 		return
 	}
 
-	guessLower := strings.ToLower(guess)
 	found := false
+	var matchedCountry models.Country
 
 	for _, country := range g.allCountries {
-		if strings.ToLower(country) == guessLower && !g.guessedCountries[strings.ToLower(country)] {
-			g.guessedCountries[strings.ToLower(country)] = true
+		if utils.MatchesCountry(guess, country) && !g.guessedCountries[strings.ToLower(country.Name.Common)] {
+			g.guessedCountries[strings.ToLower(country.Name.Common)] = true
+			matchedCountry = country
 			found = true
 			break
 		}
 	}
 
 	if found {
-		g.statusLabel.SetText(fmt.Sprintf("Correct! %s added to the list.", guess))
+		g.statusLabel.SetText(fmt.Sprintf("Correct! %s added to the list.", matchedCountry.Name.Common))
 		g.updateProgress()
 		if len(g.guessedCountries) == len(g.allCountries) {
 			g.statusLabel.SetText("Congratulations! You've listed all countries!")

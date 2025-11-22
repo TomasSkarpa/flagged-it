@@ -9,6 +9,7 @@ import (
 	"flagged-it/internal/data"
 	"flagged-it/internal/data/models"
 	"flagged-it/internal/ui/components"
+	"flagged-it/internal/utils"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
@@ -134,7 +135,7 @@ func (g *Game) makeGuess() {
 		return
 	}
 
-	if strings.EqualFold(guess, g.currentCountry.Name.Common) {
+	if utils.MatchesCountry(guess, *g.currentCountry) {
 		g.statusLabel.SetText(fmt.Sprintf("Correct! It was %s!", g.currentCountry.Name.Common))
 		g.guessEntry.Disable()
 		g.guessBtn.Disable()

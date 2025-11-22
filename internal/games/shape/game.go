@@ -4,6 +4,7 @@ import (
 	"flagged-it/internal/data"
 	"flagged-it/internal/data/models"
 	"flagged-it/internal/ui/components"
+	"flagged-it/internal/utils"
 	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
@@ -479,15 +480,14 @@ func (g *Game) nextCountry() {
 }
 
 func (g *Game) checkGuess(guess string) {
-	guess = strings.TrimSpace(strings.ToLower(guess))
+	guess = strings.TrimSpace(guess)
 	if guess == "" {
 		return
 	}
 
 	g.total++
-	countryName := strings.ToLower(g.currentCountry.Properties.Name)
 
-	if guess == countryName {
+	if utils.MatchesCountryByName(guess, g.currentCountry.Properties.Name) {
 		g.score++
 		g.resultLabel.SetText("Correct! It's " + g.currentCountry.Properties.Name)
 	} else {

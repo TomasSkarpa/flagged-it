@@ -15,6 +15,11 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
+type GuessHistory struct {
+	Guess string
+	Fact  string
+}
+
 type Game struct {
 	content        *fyne.Container
 	backFunc       func()
@@ -25,12 +30,14 @@ type Game struct {
 	currentFact    int
 	triesLeft      int
 	usedFacts      map[int]bool
+	guessHistory   []GuessHistory
 	factLabel      *widget.Label
 	guessEntry     *widget.Entry
 	statusLabel    *widget.Label
 	triesLabel     *widget.Label
 	guessBtn       *widget.Button
 	newGameBtn     *widget.Button
+	historyContainer *fyne.Container
 }
 
 func NewGame(backFunc func()) *Game {
@@ -63,6 +70,7 @@ func (g *Game) setupUI() {
 	g.triesLabel = widget.NewLabel("")
 
 	guessContainer := container.NewGridWithColumns(2, g.guessEntry, g.guessBtn)
+	g.historyContainer = container.NewVBox()
 
 	g.content = container.NewVBox(
 		topBar.GetContainer(),
@@ -73,6 +81,7 @@ func (g *Game) setupUI() {
 		g.factLabel,
 		widget.NewSeparator(),
 		guessContainer,
+		g.historyContainer,
 	)
 }
 
@@ -101,9 +110,11 @@ func (g *Game) newGame() {
 	g.currentFact = 0
 	g.triesLeft = 3
 	g.usedFacts = make(map[int]bool)
+	g.guessHistory = []GuessHistory{}
 	g.guessEntry.SetText("")
 	g.guessEntry.Enable()
 	g.guessBtn.Enable()
+	g.updateHistoryUI()
 
 	g.showCurrentFact()
 	g.updateStatus()
@@ -136,11 +147,25 @@ func (g *Game) makeGuess() {
 	}
 
 	if utils.MatchesCountry(guess, *g.currentCountry) {
+		currentFactText := g.factLabel.Text
+		g.guessHistory = append(g.guessHistory, GuessHistory{
+			Guess: fmt.Sprintf("%s ✅", guess),
+			Fact:  currentFactText,
+		})
+		g.updateHistoryUI()
+		
 		g.statusLabel.SetText(fmt.Sprintf("Correct! It was %s!", g.currentCountry.Name.Common))
 		g.guessEntry.Disable()
 		g.guessBtn.Disable()
 		return
 	}
+
+	currentFactText := g.factLabel.Text
+	g.guessHistory = append(g.guessHistory, GuessHistory{
+		Guess: guess,
+		Fact:  currentFactText,
+	})
+	g.updateHistoryUI()
 
 	g.triesLeft--
 	g.guessEntry.SetText("")
@@ -168,6 +193,53 @@ func (g *Game) GetContent() *fyne.Container {
 
 func (g *Game) Start() {
 	g.newGame()
+}
+
+func (g *Game) updateHistoryUI() {
+	g.historyContainer.RemoveAll()
+	
+	if len(g.guessHistory) == 0 {
+		return
+	}
+
+	historyTitle := widget.NewLabel("Previous Guesses:")
+	historyTitle.TextStyle.Bold = true
+	g.historyContainer.Add(historyTitle)
+	g.historyContainer.Add(widget.NewSeparator())
+
+	for i, history := range g.guessHistory {
+		// Create guess header (emoji already included in history.Guess for correct answers)
+		guessText := history.Guess
+		if !strings.Contains(guessText, "✅") {
+			guessText = fmt.Sprintf("%s ❌", guessText)
+		}
+		guessHeader := widget.NewLabel(fmt.Sprintf("Guess %d: %s", i+1, guessText))
+		guessHeader.TextStyle.Bold = true
+		
+		// Create fact text (remove "Fact X:" prefix for cleaner display)
+		factText := history.Fact
+		if strings.Contains(factText, ": ") {
+			parts := strings.SplitN(factText, ": ", 2)
+			if len(parts) == 2 {
+				factText = parts[1]
+			}
+		}
+		factLabel := widget.NewLabel(fmt.Sprintf("Fact: %s", factText))
+		factLabel.Wrapping = fyne.TextWrapWord
+		
+		// Create a card-like container for each guess
+		guessCard := container.NewVBox(
+			guessHeader,
+			factLabel,
+		)
+		
+		g.historyContainer.Add(guessCard)
+		if i < len(g.guessHistory)-1 {
+			g.historyContainer.Add(widget.NewSeparator())
+		}
+	}
+	
+	g.historyContainer.Refresh()
 }
 
 func (g *Game) Reset() {

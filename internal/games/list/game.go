@@ -6,11 +6,12 @@ import (
 	"flagged-it/internal/ui/components"
 	"flagged-it/internal/utils"
 	"fmt"
+	"sort"
+	"strings"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
-	"sort"
-	"strings"
 )
 
 type Game struct {
@@ -54,48 +55,15 @@ func (g *Game) setupUI() {
 }
 
 func (g *Game) setupSelectionView() {
-	title := widget.NewLabel("Select Region")
-	title.TextStyle.Bold = true
-
-	description := widget.NewLabel("Choose a region and try to name all countries in it!")
-
-	worldBtn := widget.NewButton("World (All Countries)", func() {
-		g.startGame("World")
-	})
-	europeBtn := widget.NewButton("Europe", func() {
-		g.startGame("Europe")
-	})
-	americasBtn := widget.NewButton("Americas", func() {
-		g.startGame("Americas")
-	})
-	asiaBtn := widget.NewButton("Asia", func() {
-		g.startGame("Asia")
-	})
-	africaBtn := widget.NewButton("Africa", func() {
-		g.startGame("Africa")
-	})
-	oceaniaBtn := widget.NewButton("Oceania", func() {
-		g.startGame("Oceania")
-	})
-
-	g.selectionView = container.NewVBox(
-		title,
-		description,
-		widget.NewSeparator(),
-		worldBtn,
-		europeBtn,
-		americasBtn,
-		asiaBtn,
-		africaBtn,
-		oceaniaBtn,
+	regionSelector := components.NewRegionSelector(
+		"Select Region",
+		"Choose a region and try to name all countries in it!",
+		g.startGame,
 	)
+	g.selectionView = regionSelector.GetContainer()
 }
 
 func (g *Game) setupGameView() {
-	backBtn := widget.NewButton("Back to Selection", func() {
-		g.showSelection()
-	})
-
 	g.progressLabel = widget.NewLabel("")
 	g.statusLabel = widget.NewLabel("")
 
@@ -124,8 +92,6 @@ func (g *Game) setupGameView() {
 	guessContainer := container.NewGridWithColumns(2, g.guessEntry, guessBtn)
 
 	topSection := container.NewVBox(
-		backBtn,
-		widget.NewSeparator(),
 		g.progressLabel,
 		g.statusLabel,
 		widget.NewSeparator(),

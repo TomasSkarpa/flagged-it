@@ -90,8 +90,8 @@ func (g *Game) displayFlag() {
 	var err error
 	
 	if runtime.GOOS == "js" {
-		// For WebAssembly, load via HTTP with absolute URL
-		flagURL := fmt.Sprintf("http://localhost:8080/assets/twemoji_flags_cca2/%s.svg", g.currentCountry.CCA2)
+		// For WebAssembly, load via HTTP with relative URL
+		flagURL := fmt.Sprintf("./assets/twemoji_flags_cca2/%s.svg", g.currentCountry.CCA2)
 		flagURI := storage.NewURI(flagURL)
 		flagResource, err = storage.LoadResourceFromURI(flagURI)
 	} else {

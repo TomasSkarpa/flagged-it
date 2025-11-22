@@ -13,7 +13,6 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/storage"
 	"fyne.io/fyne/v2/widget"
 )
 
@@ -88,19 +87,13 @@ func (g *Game) newGame() {
 func (g *Game) displayFlag() {
 	var flagResource fyne.Resource
 	var err error
-	
 	if runtime.GOOS == "js" {
-		// For WebAssembly, load via HTTP with relative URL
-		flagURL := fmt.Sprintf("./assets/twemoji_flags_cca2/%s.svg", g.currentCountry.CCA2)
-		flagURI := storage.NewURI(flagURL)
-		flagResource, err = storage.LoadResourceFromURI(flagURI)
+		flagURL := fmt.Sprintf("assets/twemoji_flags_cca2/%s.svg", g.currentCountry.CCA2)
+		flagResource, err = fyne.LoadResourceFromURLString(flagURL)
 	} else {
-		// For desktop, load from local file
 		flagPath := fmt.Sprintf("assets/twemoji_flags_cca2/%s.svg", g.currentCountry.CCA2)
-		flagURI := storage.NewFileURI(flagPath)
-		flagResource, err = storage.LoadResourceFromURI(flagURI)
+		flagResource, err = fyne.LoadResourceFromPath(flagPath)
 	}
-	
 	if err == nil {
 		g.flagImage.Resource = flagResource
 	}

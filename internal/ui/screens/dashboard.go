@@ -46,39 +46,34 @@ func (d *Dashboard) setupUI() {
 	}
 
 	// Game buttons
-	countryGuessBtn := widget.NewButtonWithIcon("Guess by Shape", theme.VisibilityIcon(), func() {
-		d.navigateFunc("shape")
+	flagBtn := widget.NewButtonWithIcon("Guess by Flag", theme.MailForwardIcon(), func() {
+		d.navigateFunc("flag")
 	})
-
 	countryListBtn := widget.NewButtonWithIcon("List All Countries", theme.ListIcon(), func() {
 		d.navigateFunc("list")
 	})
-
-	hangmanBtn := widget.NewButtonWithIcon("Hangman", theme.HelpIcon(), func() {
+	countryGuessBtn := widget.NewButtonWithIcon("Guess by Shape", theme.MediaRecordIcon(), func() {
+		d.navigateFunc("shape")
+	})
+	hangmanBtn := widget.NewButtonWithIcon("Hangman", theme.AccountIcon(), func() {
 		d.navigateFunc("hangman")
 	})
-
 	factGuessBtn := widget.NewButtonWithIcon("Guess by Facts", theme.InfoIcon(), func() {
 		d.navigateFunc("facts")
 	})
-
-	higher_lowerBtn := widget.NewButtonWithIcon("Higher or Lower", theme.ContentRedoIcon(), func() {
+	higher_lowerBtn := widget.NewButtonWithIcon("Higher or Lower", theme.UploadIcon(), func() {
 		d.navigateFunc("higher_lower")
-	})
-
-	flagBtn := widget.NewButtonWithIcon("Guess by Flag", theme.ColorPaletteIcon(), func() {
-		d.navigateFunc("flag")
 	})
 
 	d.content = container.NewVBox(
 		header,
 		widget.NewSeparator(),
-		countryGuessBtn,
+		flagBtn,
 		countryListBtn,
+		countryGuessBtn,
 		hangmanBtn,
 		factGuessBtn,
 		higher_lowerBtn,
-		flagBtn,
 	)
 }
 

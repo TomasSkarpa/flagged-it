@@ -10,7 +10,7 @@ import (
 
 func main() {
 	myApp := fyneApp.New()
-	myApp.Settings().SetTheme(&scaledTheme{scale: 1.2})
+	myApp.Settings().SetTheme(&scaledTheme{scale: 1.4})
 	myWindow := myApp.NewWindow("Flagged It - Country Guessing Games")
 	myWindow.Resize(fyne.NewSize(960, 720))
 

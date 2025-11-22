@@ -8,6 +8,7 @@ type CountryName struct {
 type Country struct {
 	Name       CountryName       `json:"name"`
 	CCA2       string            `json:"cca2"`
+	CCA3       string            `json:"cca3"`
 	Capital    []string          `json:"capital"`
 	Region     string            `json:"region"`
 	Subregion  string            `json:"subregion"`

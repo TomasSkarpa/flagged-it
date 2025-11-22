@@ -4,6 +4,7 @@ import (
 	"flagged-it/internal/data"
 	"flagged-it/internal/data/models"
 	"flagged-it/internal/ui/components"
+	"flagged-it/internal/utils"
 	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
@@ -68,48 +69,15 @@ func (g *Game) setupUI() {
 }
 
 func (g *Game) setupSelectionView() {
-	title := widget.NewLabel("Select Region")
-	title.TextStyle.Bold = true
-
-	description := widget.NewLabel("Choose a region and guess all country shapes!")
-
-	worldBtn := widget.NewButton("World (All Countries)", func() {
-		g.startRegionGame("World")
-	})
-	europeBtn := widget.NewButton("Europe", func() {
-		g.startRegionGame("Europe")
-	})
-	americasBtn := widget.NewButton("Americas", func() {
-		g.startRegionGame("Americas")
-	})
-	asiaBtn := widget.NewButton("Asia", func() {
-		g.startRegionGame("Asia")
-	})
-	africaBtn := widget.NewButton("Africa", func() {
-		g.startRegionGame("Africa")
-	})
-	oceaniaBtn := widget.NewButton("Oceania", func() {
-		g.startRegionGame("Oceania")
-	})
-
-	g.selectionView = container.NewVBox(
-		title,
-		description,
-		widget.NewSeparator(),
-		worldBtn,
-		europeBtn,
-		americasBtn,
-		asiaBtn,
-		africaBtn,
-		oceaniaBtn,
+	regionSelector := components.NewRegionSelector(
+		"Select Region",
+		"Choose a region and guess all country shapes!",
+		g.startRegionGame,
 	)
+	g.selectionView = regionSelector.GetContainer()
 }
 
 func (g *Game) setupGameView() {
-	backBtn := widget.NewButton("Back to Selection", func() {
-		g.showSelection()
-	})
-
 	g.scoreLabel = widget.NewLabel("Score: 0/0")
 	g.progressLabel = widget.NewLabel("")
 
@@ -132,8 +100,6 @@ func (g *Game) setupGameView() {
 	shapeWindow := container.NewBorder(nil, nil, g.islandContainer, nil, mainShapeWindow)
 
 	topSection := container.NewVBox(
-		backBtn,
-		widget.NewSeparator(),
 		g.scoreLabel,
 		g.progressLabel,
 		guessContainer,
@@ -479,15 +445,14 @@ func (g *Game) nextCountry() {
 }
 
 func (g *Game) checkGuess(guess string) {
-	guess = strings.TrimSpace(strings.ToLower(guess))
+	guess = strings.TrimSpace(guess)
 	if guess == "" {
 		return
 	}
 
 	g.total++
-	countryName := strings.ToLower(g.currentCountry.Properties.Name)
 
-	if guess == countryName {
+	if utils.MatchesCountryByName(guess, g.currentCountry.Properties.Name) {
 		g.score++
 		g.resultLabel.SetText("Correct! It's " + g.currentCountry.Properties.Name)
 	} else {

@@ -12,6 +12,7 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/storage"
 	"fyne.io/fyne/v2/widget"
 )
 
@@ -21,7 +22,7 @@ type Game struct {
 	countries      []models.Country
 	currentCountry *models.Country
 	options        []models.Country
-	flagLabel      *canvas.Text
+	flagImage      *canvas.Image
 	statusLabel    *widget.Label
 	buttons        []*widget.Button
 }
@@ -43,16 +44,16 @@ func (g *Game) loadCountries() {
 func (g *Game) setupUI() {
 	topBar := components.NewTopBar("Guess by Flag", g.backFunc, g.newGame)
 
-	g.flagLabel = canvas.NewText("🏳️", nil)
-	g.flagLabel.Alignment = fyne.TextAlignCenter
-	g.flagLabel.TextSize = 100
+	g.flagImage = canvas.NewImageFromResource(nil)
+	g.flagImage.FillMode = canvas.ImageFillContain
+	g.flagImage.SetMinSize(fyne.NewSize(200, 133))
 	g.statusLabel = widget.NewLabel("Which country does this flag belong to?")
 
 	g.content = container.NewVBox(
 		topBar.GetContainer(),
 		widget.NewSeparator(),
 		g.statusLabel,
-		g.flagLabel,
+		g.flagImage,
 		widget.NewSeparator(),
 	)
 }
@@ -84,9 +85,11 @@ func (g *Game) newGame() {
 }
 
 func (g *Game) displayFlag() {
-	flagEmoji := g.getFlagEmoji(g.currentCountry.CCA2)
-	g.flagLabel.Text = flagEmoji
-	g.flagLabel.Refresh()
+	flagPath := fmt.Sprintf("assets/twemoji_flags_cca2/%s.svg", g.currentCountry.CCA2)
+	flagResource := storage.NewFileURI(flagPath)
+	resource, _ := storage.LoadResourceFromURI(flagResource)
+	g.flagImage.Resource = resource
+	g.flagImage.Refresh()
 }
 
 func (g *Game) createButtons() {
@@ -122,15 +125,7 @@ func (g *Game) makeGuess(guessed models.Country) {
 	}
 }
 
-func (g *Game) getFlagEmoji(countryCode string) string {
-	if len(countryCode) != 2 {
-		return "🏳️"
-	}
 
-	first := rune(countryCode[0]-'A') + 0x1F1E6
-	second := rune(countryCode[1]-'A') + 0x1F1E6
-	return string(first) + string(second)
-}
 
 func (g *Game) GetContent() *fyne.Container {
 	return g.content

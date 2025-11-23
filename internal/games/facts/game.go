@@ -76,7 +76,11 @@ func (g *Game) setupUI() {
 	g.triesLabel = widget.NewLabel("")
 	g.scoreLabel = widget.NewLabel("Score: 0/5")
 
-	guessContainer := container.NewGridWithColumns(2, g.guessEntry, g.guessBtn)
+	guessContainer := container.NewBorder(
+		nil, nil,
+		g.guessBtn, nil,
+		g.guessEntry,
+	)
 	g.historyContainer = container.NewVBox()
 
 	g.content = container.NewVBox(

@@ -138,9 +138,9 @@ func (g *Game) setupKeyboard() {
 	}
 
 	g.keyboard = container.NewVBox(
-		keyboardRows[0],
-		keyboardRows[1],
-		keyboardRows[2],
+		container.NewCenter(keyboardRows[0]),
+		container.NewCenter(keyboardRows[1]),
+		container.NewCenter(keyboardRows[2]),
 	)
 }
 

@@ -71,21 +71,23 @@ func (g *Game) setupUI() {
 		g.lowerBtn.Show()
 	})
 
+	// Create responsive button grid
+	buttonGrid := container.NewGridWithColumns(2, g.higherBtn, g.lowerBtn)
+
 	g.content = container.NewVBox(
 		topBar.GetContainer(),
 		widget.NewSeparator(),
 		gameDescription,
 		widget.NewSeparator(),
-		startBtn,
-		g.countryOneNameLabel,
-		g.countryOnePopLabel,
-		widget.NewSeparator(),
-		g.countryTwoNameLabel,
-		g.countryTwoPopLabel,
-		g.higherBtn,
-		g.lowerBtn,
-		g.nextBtn,
 		g.scoreLabel,
+		startBtn,
+		container.NewCenter(g.countryOneNameLabel),
+		container.NewCenter(g.countryOnePopLabel),
+		widget.NewSeparator(),
+		container.NewCenter(g.countryTwoNameLabel),
+		container.NewCenter(g.countryTwoPopLabel),
+		buttonGrid,
+		g.nextBtn,
 	)
 }
 

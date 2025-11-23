@@ -3,10 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Learn about countries playing different game modes - guessing games, flag recognition, and shape identification.">
+    <meta name="theme-color" content="#1a1a1a">
     <title>Flagged It - Country Guessing Games</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=1">
-    <script src="wasm_exec.js"></script>
+    <link rel="apple-touch-icon" href="assets/favicon.svg?v=1">
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             margin: 0;
             padding: 0;
@@ -21,16 +26,24 @@
         }
         #loading {
             text-align: center;
+            user-select: none;
+            transform: translateY(-10vh);
         }
         #loading h1 {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-size: 40px;
+        }
+        #loading p {
+            margin-top: 25px;
+            font-size: 17.5px;
+            color: #aaa;
         }
         .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top: 4px solid #fff;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-top: 5px solid #fff;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             animation: spin 1s linear infinite;
             margin: 0 auto;
         }
@@ -41,23 +54,60 @@
         #fyne-canvas {
             width: 100%;
             height: 100vh;
+            display: block;
+            max-width: 100%;
+        }
+        @media (max-width: 768px) {
+            #loading h1 {
+                font-size: 28px;
+            }
+            #loading p {
+                font-size: 14px;
+            }
+        }
+        #error {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        #error h1 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+        }
+        #error p {
+            max-width: 500px;
+            margin: 10px auto;
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
     <div id="loading">
-        <h1>Flagged It</h1>
+        <h1>🌍 Flagged It</h1>
         <div class="spinner"></div>
         <p>Loading application...</p>
     </div>
+    <div id="error"></div>
+    <script src="wasm_exec.js" onerror="showError('Failed to load wasm_exec.js')"></script>
     <script>
-        const go = new Go();
-        WebAssembly.instantiateStreaming(fetch("flagged-it.wasm"), go.importObject).then((result) => {
+        function showError(msg) {
             document.getElementById('loading').style.display = 'none';
-            go.run(result.instance);
-        }).catch((err) => {
-            document.getElementById('loading').innerHTML = '<h1>Error</h1><p>Failed to load application: ' + err + '</p>';
-        });
+            const errorDiv = document.getElementById('error');
+            errorDiv.style.display = 'block';
+            errorDiv.innerHTML = '<h1>⚠️ Error Loading Application</h1><p>Failed to load the application. Please refresh the page and try again.</p><p style="font-size: 12px; color: #999;">' + msg + '</p>';
+        }
+
+        if (typeof Go === 'undefined') {
+            showError('Go runtime not available');
+        } else {
+            const go = new Go();
+            WebAssembly.instantiateStreaming(fetch("flagged-it.wasm"), go.importObject).then((result) => {
+                document.getElementById('loading').style.display = 'none';
+                go.run(result.instance);
+            }).catch((err) => {
+                showError(err);
+            });
+        }
     </script>
 </body>
 </html>

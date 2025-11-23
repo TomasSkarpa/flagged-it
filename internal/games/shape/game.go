@@ -22,8 +22,8 @@ import (
 )
 
 const (
-	canvasWidth  = 800.0
-	canvasHeight = 600.0
+	canvasWidth  = 1000.0
+	canvasHeight = 700.0
 )
 
 type Game struct {
@@ -80,12 +80,43 @@ func (g *Game) setupUI() {
 }
 
 func (g *Game) setupSelectionView() {
+	availableRegions := g.getAvailableRegions()
 	regionSelector := components.NewRegionSelector(
 		"Select Region",
 		"Choose a region and guess all country shapes!",
+		availableRegions,
 		g.startRegionGame,
 	)
 	g.selectionView = regionSelector.GetContainer()
+}
+
+func (g *Game) getAvailableRegions() []string {
+	regionMap := make(map[string]bool)
+	regionMap["World"] = true
+
+	for _, country := range g.countries {
+		if country.Properties.Continent != "" {
+			regionMap[country.Properties.Continent] = true
+		}
+	}
+
+	var regions []string
+	for region := range regionMap {
+		regions = append(regions, region)
+	}
+
+	// Sort with World first
+	sort.Slice(regions, func(i, j int) bool {
+		if regions[i] == "World" {
+			return true
+		}
+		if regions[j] == "World" {
+			return false
+		}
+		return regions[i] < regions[j]
+	})
+
+	return regions
 }
 
 func (g *Game) setupGameView() {
@@ -98,7 +129,11 @@ func (g *Game) setupGameView() {
 
 	guessBtn := widget.NewButton("Guess", func() { g.checkGuess(g.guessEntry.Text) })
 	g.resultLabel = widget.NewLabel("")
-	guessContainer := container.NewGridWithColumns(2, g.guessEntry, guessBtn)
+	guessContainer := container.NewBorder(
+		nil, nil,
+		guessBtn, nil,
+		g.guessEntry,
+	)
 
 	// Create main shape canvas
 	g.shapeCanvas = container.NewWithoutLayout()
@@ -182,7 +217,8 @@ func (g *Game) drawMainShape(coords [][][][]float64) {
 	if canvasSize.Width > 0 && canvasSize.Height > 0 {
 		raster.Resize(canvasSize)
 	} else {
-		raster.Resize(fyne.NewSize(float32(canvasWidth), float32(canvasHeight)))
+		// Use 90% of default canvas for padding
+		raster.Resize(fyne.NewSize(float32(canvasWidth*0.9), float32(canvasHeight*0.9)))
 	}
 	g.shapeCanvas.Add(raster)
 }

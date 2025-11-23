@@ -26,6 +26,7 @@ type Game struct {
 	flagImage      *canvas.Image
 	statusLabel    *widget.Label
 	buttons        []*widget.Button
+	buttonGrid     *fyne.Container
 	score          int
 	total          int
 	scoreLabel     *widget.Label
@@ -52,17 +53,22 @@ func (g *Game) setupUI() {
 
 	g.flagImage = canvas.NewImageFromResource(nil)
 	g.flagImage.FillMode = canvas.ImageFillContain
-	g.flagImage.SetMinSize(fyne.NewSize(338, 225))
+	g.flagImage.SetMinSize(fyne.NewSize(400, 250))
 	g.statusLabel = widget.NewLabel("Which country does this flag belong to?")
+	g.statusLabel.Wrapping = fyne.TextWrapWord
 	g.scoreLabel = widget.NewLabel("Score: 0/10")
+
+	// Create responsive button grid
+	g.buttonGrid = container.NewGridWithColumns(2)
 
 	g.content = container.NewVBox(
 		topBar.GetContainer(),
 		widget.NewSeparator(),
 		g.scoreLabel,
 		g.statusLabel,
-		g.flagImage,
+		container.NewCenter(g.flagImage),
 		widget.NewSeparator(),
+		g.buttonGrid,
 	)
 }
 
@@ -109,13 +115,7 @@ func (g *Game) displayFlag() {
 }
 
 func (g *Game) createButtons() {
-	if len(g.buttons) > 0 {
-		for i := len(g.content.Objects) - 1; i >= 0; i-- {
-			if _, ok := g.content.Objects[i].(*widget.Button); ok {
-				g.content.Objects = append(g.content.Objects[:i], g.content.Objects[i+1:]...)
-			}
-		}
-	}
+	g.buttonGrid.RemoveAll()
 
 	g.buttons = make([]*widget.Button, 4)
 	for i, country := range g.options {
@@ -124,9 +124,9 @@ func (g *Game) createButtons() {
 			g.makeGuess(country)
 		})
 		g.buttons[i] = btn
-		g.content.Add(btn)
+		g.buttonGrid.Add(btn)
 	}
-	g.content.Refresh()
+	g.buttonGrid.Refresh()
 }
 
 func (g *Game) makeGuess(guessed models.Country) {

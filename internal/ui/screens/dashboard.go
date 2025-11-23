@@ -184,8 +184,16 @@ func (d *Dashboard) createScoresBox() *fyne.Container {
 		return container.NewVBox()
 	}
 
-	// Create grid of score boxes
-	scoresGrid := container.NewGridWithColumns(4, boxes...)
+	// Create responsive grid
+	columns := 2
+	if len(boxes) > 4 {
+		columns = 3
+	}
+	if len(boxes) > 6 {
+		columns = 4
+	}
+
+	scoresGrid := container.NewGridWithColumns(columns, boxes...)
 
 	return container.NewVBox(
 		widget.NewSeparator(),

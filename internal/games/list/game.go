@@ -60,12 +60,44 @@ func (g *Game) setupUI() {
 }
 
 func (g *Game) setupSelectionView() {
+	availableRegions := g.getAvailableRegions()
 	regionSelector := components.NewRegionSelector(
 		"Select Region",
 		"Choose a region and try to name all countries in it!",
+		availableRegions,
 		g.startGame,
 	)
 	g.selectionView = regionSelector.GetContainer()
+}
+
+func (g *Game) getAvailableRegions() []string {
+	countries := data.LoadCountries()
+	regionMap := make(map[string]bool)
+	regionMap["World"] = true
+
+	for _, country := range countries {
+		if country.Region != "" {
+			regionMap[country.Region] = true
+		}
+	}
+
+	var regions []string
+	for region := range regionMap {
+		regions = append(regions, region)
+	}
+
+	// Sort with World first
+	sort.Slice(regions, func(i, j int) bool {
+		if regions[i] == "World" {
+			return true
+		}
+		if regions[j] == "World" {
+			return false
+		}
+		return regions[i] < regions[j]
+	})
+
+	return regions
 }
 
 func (g *Game) setupGameView() {
@@ -95,7 +127,11 @@ func (g *Game) setupGameView() {
 		},
 	)
 
-	guessContainer := container.NewGridWithColumns(2, g.guessEntry, guessBtn)
+	guessContainer := container.NewBorder(
+		nil, nil,
+		guessBtn, nil,
+		g.guessEntry,
+	)
 
 	topSection := container.NewVBox(
 		g.scoreLabel,

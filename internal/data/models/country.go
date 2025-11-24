@@ -14,6 +14,7 @@ type Country struct {
 	Languages  map[string]string `json:"languages"`
 	Latlng     []float64         `json:"latlng"`
 	Population int               `json:"population"`
+	Area	   float64           `json:"area"`
 }
 
 type CountryFacts struct {

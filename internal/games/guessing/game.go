@@ -11,17 +11,23 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
+	"fyne.io/fyne/v2/theme"
 )
 
 type Game struct {
 	content        *fyne.Container
+	popContent     *fyne.Container
+	areaContent    *fyne.Container
 	backFunc       func()
 	countries      []models.Country
 	currentCountry *models.Country
 	guessEntry     *widget.Entry
 	statusLabel    *widget.Label
 	popLabel	   *widget.Label
+	areaLabel	   *widget.Label
 	continentLabel *widget.Label
+	popIcon        *widget.Icon
+	areaIcon	   *widget.Icon
 	guessBtn       *widget.Button
 }
 
@@ -44,7 +50,13 @@ func (g *Game) setupUI() {
 
 	g.continentLabel = widget.NewLabel("Continent: ")
 	g.popLabel = widget.NewLabel("Population: ")
+	g.areaLabel = widget.NewLabel("Area: ")
 	g.statusLabel = widget.NewLabel("Make a guess!")
+
+	g.popIcon = widget.NewIcon(theme.MoveUpIcon())
+	g.areaIcon = widget.NewIcon(theme.MoveUpIcon())
+	g.popIcon.Hide()
+	g.areaIcon.Hide()
 
 	g.guessEntry = widget.NewEntry()
 	g.guessEntry.SetPlaceHolder("Enter country name...")
@@ -53,6 +65,8 @@ func (g *Game) setupUI() {
 	g.guessBtn = widget.NewButton("Guess", g.makeGuess)
 
 	guessContainer := container.NewGridWithColumns(2, g.guessEntry, g.guessBtn)
+	g.popContent = container.NewHBox(g.popLabel, g.popIcon)
+	g.areaContent = container.NewHBox(g.areaLabel, g.areaIcon)
 
 	g.content = container.NewVBox(
 		topBar.GetContainer(),
@@ -62,7 +76,8 @@ func (g *Game) setupUI() {
 		widget.NewSeparator(),
 		guessContainer,
 		g.continentLabel,
-		g.popLabel,
+		g.popContent,
+		g.areaContent,
 	)
 }
 
@@ -79,8 +94,23 @@ func (g *Game) updateLabels(country *models.Country) {
 	if country == nil{
 		g.statusLabel.SetText("Enter a valid country name!")
 	}else{
+		if country.Population > g.currentCountry.Population{
+			g.popIcon.SetResource(theme.MoveDownIcon())
+		}else{
+			g.popIcon.SetResource(theme.MoveUpIcon())
+		}
+		if country.Area > g.currentCountry.Area{
+			g.areaIcon.SetResource(theme.MoveDownIcon())
+		}else{
+			g.areaIcon.SetResource(theme.MoveUpIcon())
+		}
 		g.popLabel.SetText(fmt.Sprintf("Population: %d", country.Population))
 		g.continentLabel.SetText(fmt.Sprintf("Continent: %s", country.Region))
+		g.areaLabel.SetText(fmt.Sprintf("Area: %.2f km²", country.Area)) 
+		g.popContent = container.NewHBox(g.popLabel, g.popIcon)
+		g.areaContent = container.NewHBox(g.areaLabel, g.areaIcon)
+		g.popIcon.Show()
+		g.areaIcon.Show()
 	}
 }
 

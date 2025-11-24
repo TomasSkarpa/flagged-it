@@ -2,6 +2,7 @@ package flag
 
 import (
 	"fmt"
+	"image/color"
 	"math/rand"
 	"runtime"
 	"time"
@@ -17,6 +18,24 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
+type coloredButton struct {
+	widget.BaseWidget
+	button *widget.Button
+	rect   *canvas.Rectangle
+}
+
+func (c *coloredButton) CreateRenderer() fyne.WidgetRenderer {
+	return widget.NewSimpleRenderer(container.NewStack(
+		c.rect,
+		c.button,
+	))
+}
+
+func (c *coloredButton) SetBgColor(col color.Color) {
+	c.rect.FillColor = col
+	c.Refresh()
+}
+
 type Game struct {
 	content        *fyne.Container
 	backFunc       func()
@@ -26,6 +45,7 @@ type Game struct {
 	flagImage      *canvas.Image
 	statusLabel    *widget.Label
 	buttons        []*widget.Button
+	coloredButtons []*coloredButton
 	buttonGrid     *fyne.Container
 	score          int
 	total          int
@@ -118,20 +138,29 @@ func (g *Game) createButtons() {
 	g.buttonGrid.RemoveAll()
 
 	g.buttons = make([]*widget.Button, 4)
+	g.coloredButtons = make([]*coloredButton, 4)
 	for i, country := range g.options {
 		country := country
-		btn := widget.NewButton(country.Name.Common, func() {
+		btn := widget.NewButtonWithIcon(country.Name.Common, nil, func() {
 			g.makeGuess(country)
 		})
+		btn.Importance = widget.LowImportance
 		g.buttons[i] = btn
-		g.buttonGrid.Add(btn)
+
+		rect := canvas.NewRectangle(color.Transparent)
+
+		colored := &coloredButton{button: btn, rect: rect}
+		colored.ExtendBaseWidget(colored)
+		g.coloredButtons[i] = colored
+		g.buttonGrid.Add(colored)
 	}
 	g.buttonGrid.Refresh()
 }
 
 func (g *Game) makeGuess(guessed models.Country) {
 	g.total++
-	if guessed.CCA2 == g.currentCountry.CCA2 {
+	isCorrect := guessed.CCA2 == g.currentCountry.CCA2
+	if isCorrect {
 		g.score++
 		g.statusLabel.SetText(fmt.Sprintf("Correct! It's %s!", g.currentCountry.Name.Common))
 	} else {
@@ -140,7 +169,14 @@ func (g *Game) makeGuess(guessed models.Country) {
 
 	g.scoreLabel.SetText(fmt.Sprintf("Score: %d/10", g.score))
 
-	for _, btn := range g.buttons {
+	for i, btn := range g.buttons {
+		var bgColor color.Color
+		if btn.Text == g.currentCountry.Name.Common {
+			bgColor = color.RGBA{30, 180, 80, 255}
+		} else {
+			bgColor = color.RGBA{255, 99, 71, 255}
+		}
+		g.coloredButtons[i].SetBgColor(bgColor)
 		btn.Disable()
 	}
 

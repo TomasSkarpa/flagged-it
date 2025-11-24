@@ -88,9 +88,9 @@ func (d *Dashboard) setupUI() {
 	d.content = container.NewVBox(
 		header,
 		widget.NewSeparator(),
-		d.scoresGrid,
-		widget.NewSeparator(),
 		gameButtons,
+		widget.NewSeparator(),
+		d.scoresGrid,
 	)
 }
 
@@ -197,7 +197,6 @@ func (d *Dashboard) createScoresBox() *fyne.Container {
 	scoresGrid := container.NewGridWithColumns(columns, boxes...)
 
 	return container.NewVBox(
-		widget.NewSeparator(),
 		scoresGrid,
 	)
 }

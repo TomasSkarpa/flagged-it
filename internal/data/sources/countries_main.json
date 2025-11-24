@@ -1287,24 +1287,6 @@
         "cca3": "ARE"
     },
     {
-        "capital": [],
-        "cca2": "AQ",
-        "languages": {},
-        "latlng": [
-            -90,
-            0
-        ],
-        "name": {
-            "common": "Antarctica",
-            "nativeName": {},
-            "official": "Antarctica"
-        },
-        "population": 1000,
-        "region": "Antarctic",
-        "subregion": "",
-        "cca3": "ATA"
-    },
-    {
         "capital": [
             "Moroni"
         ],

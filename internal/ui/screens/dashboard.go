@@ -75,21 +75,22 @@ func (d *Dashboard) setupUI() {
 	// Score boxes
 	d.scoresGrid = d.createScoresBox()
 
-	d.content = container.NewBorder(
-		container.NewVBox(
-			header,
-			widget.NewSeparator(),
-		),
+	// Game buttons in responsive grid
+	gameButtons := container.NewGridWithColumns(2,
+		flagBtn,
+		countryListBtn,
+		countryGuessBtn,
+		hangmanBtn,
+		factGuessBtn,
+		higher_lowerBtn,
+	)
+
+	d.content = container.NewVBox(
+		header,
+		widget.NewSeparator(),
+		gameButtons,
+		widget.NewSeparator(),
 		d.scoresGrid,
-		nil, nil,
-		container.NewVBox(
-			flagBtn,
-			countryListBtn,
-			countryGuessBtn,
-			hangmanBtn,
-			factGuessBtn,
-			higher_lowerBtn,
-		),
 	)
 }
 
@@ -184,7 +185,7 @@ func (d *Dashboard) createScoresBox() *fyne.Container {
 		return container.NewVBox()
 	}
 
-	// Create responsive grid
+	// Create responsive grid - 2 columns on mobile
 	columns := 2
 	if len(boxes) > 4 {
 		columns = 3
@@ -196,7 +197,6 @@ func (d *Dashboard) createScoresBox() *fyne.Container {
 	scoresGrid := container.NewGridWithColumns(columns, boxes...)
 
 	return container.NewVBox(
-		widget.NewSeparator(),
 		scoresGrid,
 	)
 }

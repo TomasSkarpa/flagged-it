@@ -2,6 +2,7 @@ package main
 
 import (
 	"flagged-it/internal/app"
+	"runtime"
 	"fyne.io/fyne/v2"
 	fyneApp "fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/theme"
@@ -10,10 +11,18 @@ import (
 
 func main() {
 	myApp := fyneApp.New()
-	myApp.Settings().SetTheme(&scaledTheme{scale: 1.4})
 	myWindow := myApp.NewWindow("Flagged It - Country Guessing Games")
 	myWindow.Resize(fyne.NewSize(1024, 768))
 	myWindow.SetOnClosed(myApp.Quit)
+	myWindow.SetMaster()
+
+	scale := float32(1.4)
+	if runtime.GOOS == "js" {
+		scale = 1.0
+	} else if myWindow.Canvas().Size().Width < 768 {
+		scale = 1.0
+	}
+	myApp.Settings().SetTheme(&scaledTheme{scale: scale})
 
 	appController := app.NewApp(myWindow)
 	myWindow.SetContent(appController.GetDashboard())

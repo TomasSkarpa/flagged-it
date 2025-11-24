@@ -2,19 +2,26 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
     <meta name="description" content="Learn about countries playing different game modes - guessing games, flag recognition, and shape identification.">
     <meta name="theme-color" content="#1a1a1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Flagged It - Country Guessing Games</title>
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=1">
-    <link rel="apple-touch-icon" href="assets/favicon.svg?v=1">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=1">
+    <link rel="apple-touch-icon" href="/assets/favicon.svg?v=1">
     <style>
         * {
             box-sizing: border-box;
-        }
-        body {
             margin: 0;
             padding: 0;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: #1a1a1a;
             color: #fff;
@@ -22,7 +29,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
         }
         #loading {
             text-align: center;
@@ -52,18 +58,12 @@
             100% { transform: rotate(360deg); }
         }
         #fyne-canvas {
-            width: 100%;
+            width: 100vw;
             height: 100vh;
             display: block;
-            max-width: 100%;
-        }
-        @media (max-width: 768px) {
-            #loading h1 {
-                font-size: 28px;
-            }
-            #loading p {
-                font-size: 14px;
-            }
+            position: fixed;
+            top: 0;
+            left: 0;
         }
         #error {
             display: none;
@@ -79,6 +79,19 @@
             margin: 10px auto;
             line-height: 1.6;
         }
+        @media (max-width: 768px) {
+            #loading h1 {
+                font-size: 28px;
+            }
+            #loading p {
+                font-size: 14px;
+            }
+            body {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -88,7 +101,7 @@
         <p>Loading application...</p>
     </div>
     <div id="error"></div>
-    <script src="wasm_exec.js" onerror="showError('Failed to load wasm_exec.js')"></script>
+    <script src="/wasm_exec.js" onerror="showError('Failed to load wasm_exec.js')"></script>
     <script>
         function showError(msg) {
             document.getElementById('loading').style.display = 'none';
@@ -101,7 +114,7 @@
             showError('Go runtime not available');
         } else {
             const go = new Go();
-            WebAssembly.instantiateStreaming(fetch("flagged-it.wasm"), go.importObject).then((result) => {
+            WebAssembly.instantiateStreaming(fetch("/flagged-it.wasm"), go.importObject).then((result) => {
                 document.getElementById('loading').style.display = 'none';
                 go.run(result.instance);
             }).catch((err) => {

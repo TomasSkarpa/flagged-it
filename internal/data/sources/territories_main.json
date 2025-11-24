@@ -1,0 +1,848 @@
+[
+    {
+        "cca2": "AI",
+        "name": {
+            "common": "Anguilla"
+        },
+        "capital": [
+            "The Valley"
+        ],
+        "region": "Americas",
+        "subregion": "Caribbean",
+        "population": 15094,
+        "languages": {
+            "eng": "English"
+        },
+        "latlng": [
+            18.22,
+            -63.17
+        ],
+        "cca3": "AIA",
+        "official": "Anguilla",
+        "nativeName": null
+    },
+    {
+        "cca2": "BM",
+        "name": {
+            "common": "Bermuda"
+        },
+        "capital": [
+            "Hamilton"
+        ],
+        "region": "Americas",
+        "subregion": "North America",
+        "population": 63903,
+        "languages": {
+            "eng": "English"
+        },
+        "latlng": [
+            32.33,
+            -64.75
+        ],
+        "cca3": "BMU",
+        "official": "Bermuda",
+        "nativeName": null
+    },
+    {
+        "cca2": "IO",
+        "name": {
+            "common": "British Indian Ocean Territory"
+        },
+        "capital": [
+            "Diego Garcia"
+        ],
+        "region": "Africa",
+        "subregion": "Eastern Africa",
+        "population": 3000,
+        "languages": {
+            "eng": "English"
+        },
+        "latlng": [
+            -6,
+            71.5
+        ],
+        "cca3": "IOT",
+        "official": "British Indian Ocean Territory",
+        "nativeName": null
+    },
+    {
+        "cca2": "VG",
+        "name": {
+            "common": "British Virgin Islands"
+        },
+        "capital": [
+            "Road Town"
+        ],
+        "region": "Americas",
+        "subregion": "Caribbean",
+        "population": 30237,
+        "languages": {
+            "eng": "English"
+        },
+        "latlng": [
+            18.43,
+            -64.22
+        ],
+        "cca3": "VGB",
+        "official": "British Virgin Islands",
+        "nativeName": null
+    },
+    {
+        "cca2": "KY",
+        "name": {
+            "common": "Cayman Islands"
+        },
+        "capital": [
+            "George Town"
+        ],
+        "region": "Americas",
+        "subregion": "Caribbean",
+        "population": 67277,
+        "languages": {
+            "eng": "English"
+        },
+        "latlng": [
+            19.5,
+            -80.57
+        ],
+        "cca3": "CYM",
+        "official": "Cayman Islands",
+        "nativeName": null
+    },
+    {
+        "cca2": "FK",
+        "name": {
+            "common": "Falkland Islands"
+        },
+        "capital": [
+            "Stanley"
+        ],
+        "region": "Americas",
+        "subregion": "South America",
+        "population": 3662,
+        "languages": {
+            "eng": "English"
+        },
+        "latlng": [
+            -51.75,
+            -59.5
+        ],
+        "cca3": "FLK",
+        "official": "Falkland Islands",
+        "nativeName": null
+    },
+    {
+        "cca2": "GI",
+        "name": {
+            "common": "Gibraltar"
+        },
+        "capital": [
+            "Gibraltar"
+        ],
+        "region": "Europe",
+        "subregion": "Southern Europe",
+        "population": 33701,
+        "languages": {
+            "eng": "English"
+        },
+        "latlng": [
+            36.13,
+            -5.35
+        ],
+        "cca3": "GIB",
+        "official": "Gibraltar",
+        "nativeName": null
+    },
+    {
+        "cca2": "MS",
+        "name": {
+            "common": "Montserrat"
+        },
+        "capital": [
+            "Brades"
+        ],
+        "region": "Americas",
+        "subregion": "Caribbean",
+        "population": 4922,
+        "languages": {
+            "eng": "English"
+        },
+        "latlng": [
+            16.75,
+            -62.19
+        ],
+        "cca3": "MSR",
+        "official": "Montserrat",
+        "nativeName": null
+    },
+    {
+        "cca2": "PN",
+        "name": {
+            "common": "Pitcairn Islands"
+        },
+        "capital": [
+            "Adamstown"
+        ],
+        "region": "Oceania",
+        "subregion": "Polynesia",
+        "population": 50,
+        "languages": {
+            "eng": "English"
+        },
+        "latlng": [
+            -25.07,
+            -130.1
+        ],
+        "cca3": "PCN",
+        "official": "Pitcairn Islands",
+        "nativeName": null
+    },
+    {
+        "cca2": "SH",
+        "name": {
+            "common": "Saint Helena"
+        },
+        "capital": [
+            "Jamestown"
+        ],
+        "region": "Africa",
+        "subregion": "Western Africa",
+        "population": 6077,
+        "languages": {
+            "eng": "English"
+        },
+        "latlng": [
+            -15.97,
+            -5.73
+        ],
+        "cca3": "SHN",
+        "official": "Saint Helena, Ascension and Tristan da Cunha",
+        "nativeName": null
+    },
+    {
+        "cca2": "GS",
+        "name": {
+            "common": "South Georgia"
+        },
+        "capital": [
+            "King Edward Point"
+        ],
+        "region": "Americas",
+        "subregion": "South America",
+        "population": 30,
+        "languages": {
+            "eng": "English"
+        },
+        "latlng": [
+            -54.5,
+            -37
+        ],
+        "cca3": "SGS",
+        "official": "South Georgia and the South Sandwich Islands",
+        "nativeName": null
+    },
+    {
+        "cca2": "TC",
+        "name": {
+            "common": "Turks and Caicos Islands"
+        },
+        "capital": [
+            "Cockburn Town"
+        ],
+        "region": "Americas",
+        "subregion": "Caribbean",
+        "population": 38717,
+        "languages": {
+            "eng": "English"
+        },
+        "latlng": [
+            21.94,
+            -71.58
+        ],
+        "cca3": "TCA",
+        "official": "Turks and Caicos Islands",
+        "nativeName": null
+    },
+    {
+        "cca2": "AS",
+        "name": {
+            "common": "American Samoa"
+        },
+        "capital": [
+            "Pago Pago"
+        ],
+        "region": "Oceania",
+        "subregion": "Polynesia",
+        "population": 55197,
+        "languages": {
+            "eng": "English",
+            "smo": "Samoan"
+        },
+        "latlng": [
+            -14.33,
+            -170
+        ],
+        "cca3": "ASM",
+        "official": "American Samoa",
+        "nativeName": null
+    },
+    {
+        "cca2": "GU",
+        "name": {
+            "common": "Guam"
+        },
+        "capital": [
+            "Hagåtña"
+        ],
+        "region": "Oceania",
+        "subregion": "Micronesia",
+        "population": 168783,
+        "languages": {
+            "cha": "Chamorro",
+            "eng": "English",
+            "spa": "Spanish"
+        },
+        "latlng": [
+            13.47,
+            144.78
+        ],
+        "cca3": "GUM",
+        "official": "Guam",
+        "nativeName": null
+    },
+    {
+        "cca2": "MP",
+        "name": {
+            "common": "Northern Mariana Islands"
+        },
+        "capital": [
+            "Saipan"
+        ],
+        "region": "Oceania",
+        "subregion": "Micronesia",
+        "population": 57557,
+        "languages": {
+            "cal": "Carolinian",
+            "cha": "Chamorro",
+            "eng": "English"
+        },
+        "latlng": [
+            15.2,
+            145.75
+        ],
+        "cca3": "MNP",
+        "official": "Commonwealth of the Northern Mariana Islands",
+        "nativeName": null
+    },
+    {
+        "cca2": "PR",
+        "name": {
+            "common": "Puerto Rico"
+        },
+        "capital": [
+            "San Juan"
+        ],
+        "region": "Americas",
+        "subregion": "Caribbean",
+        "population": 3194176,
+        "languages": {
+            "eng": "English",
+            "spa": "Spanish"
+        },
+        "latlng": [
+            18.25,
+            -66.5
+        ],
+        "cca3": "PRI",
+        "official": "Puerto Rico",
+        "nativeName": null
+    },
+    {
+        "cca2": "VI",
+        "name": {
+            "common": "U.S. Virgin Islands"
+        },
+        "capital": [
+            "Charlotte Amalie"
+        ],
+        "region": "Americas",
+        "subregion": "Caribbean",
+        "population": 106405,
+        "languages": {
+            "eng": "English"
+        },
+        "latlng": [
+            18.34,
+            -64.9
+        ],
+        "cca3": "VIR",
+        "official": "Virgin Islands of the United States",
+        "nativeName": null
+    },
+    {
+        "cca2": "UM",
+        "name": {
+            "common": "U.S. Minor Outlying Islands"
+        },
+        "capital": [],
+        "region": "Oceania",
+        "subregion": "Micronesia",
+        "population": 0,
+        "languages": {
+            "eng": "English"
+        },
+        "latlng": [],
+        "cca3": "UMI",
+        "official": "United States Minor Outlying Islands",
+        "nativeName": null
+    },
+    {
+        "cca2": "GF",
+        "name": {
+            "common": "French Guiana"
+        },
+        "capital": [
+            "Cayenne"
+        ],
+        "region": "Americas",
+        "subregion": "South America",
+        "population": 290691,
+        "languages": {
+            "fra": "French"
+        },
+        "latlng": [
+            3.93,
+            -53.13
+        ],
+        "cca3": "GUF",
+        "official": "French Guiana",
+        "nativeName": null
+    },
+    {
+        "cca2": "GP",
+        "name": {
+            "common": "Guadeloupe"
+        },
+        "capital": [
+            "Basse-Terre"
+        ],
+        "region": "Americas",
+        "subregion": "Caribbean",
+        "population": 395700,
+        "languages": {
+            "fra": "French"
+        },
+        "latlng": [
+            16.27,
+            -61.55
+        ],
+        "cca3": "GLP",
+        "official": "Guadeloupe",
+        "nativeName": null
+    },
+    {
+        "cca2": "MF",
+        "name": {
+            "common": "Saint Martin"
+        },
+        "capital": [
+            "Marigot"
+        ],
+        "region": "Americas",
+        "subregion": "Caribbean",
+        "population": 38659,
+        "languages": {
+            "eng": "English",
+            "fra": "French",
+            "nld": "Dutch"
+        },
+        "latlng": [
+            18.08,
+            -63.05
+        ],
+        "cca3": "MAF",
+        "official": "Saint Martin",
+        "nativeName": null
+    },
+    {
+        "cca2": "MQ",
+        "name": {
+            "common": "Martinique"
+        },
+        "capital": [
+            "Fort-de-France"
+        ],
+        "region": "Americas",
+        "subregion": "Caribbean",
+        "population": 375265,
+        "languages": {
+            "fra": "French"
+        },
+        "latlng": [
+            14.64,
+            -61.08
+        ],
+        "cca3": "MTQ",
+        "official": "Martinique",
+        "nativeName": null
+    },
+    {
+        "cca2": "NC",
+        "name": {
+            "common": "New Caledonia"
+        },
+        "capital": [
+            "Nouméa"
+        ],
+        "region": "Oceania",
+        "subregion": "Melanesia",
+        "population": 271960,
+        "languages": {
+            "fra": "French"
+        },
+        "latlng": [
+            -21.5,
+            165.5
+        ],
+        "cca3": "NCL",
+        "official": "New Caledonia",
+        "nativeName": null
+    },
+    {
+        "cca2": "PF",
+        "name": {
+            "common": "French Polynesia"
+        },
+        "capital": [
+            "Papeete"
+        ],
+        "region": "Oceania",
+        "subregion": "Polynesia",
+        "population": 280026,
+        "languages": {
+            "fra": "French"
+        },
+        "latlng": [
+            -17.54,
+            -149.57
+        ],
+        "cca3": "PYF",
+        "official": "French Polynesia",
+        "nativeName": null
+    },
+    {
+        "cca2": "PM",
+        "name": {
+            "common": "Saint Pierre and Miquelon"
+        },
+        "capital": [
+            "Saint-Pierre"
+        ],
+        "region": "Americas",
+        "subregion": "North America",
+        "population": 5794,
+        "languages": {
+            "fra": "French"
+        },
+        "latlng": [
+            46.83,
+            -56.33
+        ],
+        "cca3": "SPM",
+        "official": "Saint Pierre and Miquelon",
+        "nativeName": null
+    },
+    {
+        "cca2": "RE",
+        "name": {
+            "common": "Réunion"
+        },
+        "capital": [
+            "Saint-Denis"
+        ],
+        "region": "Africa",
+        "subregion": "Eastern Africa",
+        "population": 859959,
+        "languages": {
+            "fra": "French"
+        },
+        "latlng": [
+            -21.13,
+            55.5
+        ],
+        "cca3": "REU",
+        "official": "Réunion",
+        "nativeName": null
+    },
+    {
+        "cca2": "BL",
+        "name": {
+            "common": "Saint Barthélemy"
+        },
+        "capital": [
+            "Gustavia"
+        ],
+        "region": "Americas",
+        "subregion": "Caribbean",
+        "population": 9417,
+        "languages": {
+            "fra": "French"
+        },
+        "latlng": [
+            17.9,
+            -62.83
+        ],
+        "cca3": "BLM",
+        "official": "Saint Barthélemy",
+        "nativeName": null
+    },
+    {
+        "cca2": "WF",
+        "name": {
+            "common": "Wallis and Futuna"
+        },
+        "capital": [
+            "Mata-Utu"
+        ],
+        "region": "Oceania",
+        "subregion": "Polynesia",
+        "population": 11239,
+        "languages": {
+            "fra": "French"
+        },
+        "latlng": [
+            -13.3,
+            -176.2
+        ],
+        "cca3": "WLF",
+        "official": "Wallis and Futuna",
+        "nativeName": null
+    },
+    {
+        "cca2": "YT",
+        "name": {
+            "common": "Mayotte"
+        },
+        "capital": [
+            "Mamoudzou"
+        ],
+        "region": "Africa",
+        "subregion": "Eastern Africa",
+        "population": 279396,
+        "languages": {
+            "fra": "French"
+        },
+        "latlng": [
+            -12.83,
+            45.17
+        ],
+        "cca3": "MYT",
+        "official": "Mayotte",
+        "nativeName": null
+    },
+    {
+        "cca2": "AW",
+        "name": {
+            "common": "Aruba"
+        },
+        "capital": [
+            "Oranjestad"
+        ],
+        "region": "Americas",
+        "subregion": "Caribbean",
+        "population": 106314,
+        "languages": {
+            "nld": "Dutch",
+            "pap": "Papiamento"
+        },
+        "latlng": [
+            12.17,
+            -69.93
+        ],
+        "cca3": "ABW",
+        "official": "Aruba",
+        "nativeName": null
+    },
+    {
+        "cca2": "CW",
+        "name": {
+            "common": "Curaçao"
+        },
+        "capital": [
+            "Willemstad"
+        ],
+        "region": "Americas",
+        "subregion": "Caribbean",
+        "population": 155014,
+        "languages": {
+            "eng": "English",
+            "nld": "Dutch",
+            "pap": "Papiamento"
+        },
+        "latlng": [
+            12.17,
+            -69
+        ],
+        "cca3": "CUW",
+        "official": "Country of Curaçao",
+        "nativeName": null
+    },
+    {
+        "cca2": "SX",
+        "name": {
+            "common": "Sint Maarten"
+        },
+        "capital": [
+            "Philipsburg"
+        ],
+        "region": "Americas",
+        "subregion": "Caribbean",
+        "population": 40812,
+        "languages": {
+            "eng": "English",
+            "fra": "French",
+            "nld": "Dutch"
+        },
+        "latlng": [
+            18.03,
+            -63.05
+        ],
+        "cca3": "SXM",
+        "official": "Sint Maarten",
+        "nativeName": null
+    },
+    {
+        "cca2": "BQ",
+        "name": {
+            "common": "Bonaire, Sint Eustatius and Saba"
+        },
+        "capital": [
+            "Kralendijk"
+        ],
+        "region": "Americas",
+        "subregion": "Caribbean",
+        "population": 25157,
+        "languages": {
+            "nld": "Dutch"
+        },
+        "latlng": [
+            12.17,
+            -68.25
+        ],
+        "cca3": "BES",
+        "official": "Bonaire, Sint Eustatius and Saba",
+        "nativeName": null
+    },
+    {
+        "cca2": "FO",
+        "name": {
+            "common": "Faroe Islands"
+        },
+        "capital": [
+            "Tórshavn"
+        ],
+        "region": "Europe",
+        "subregion": "Northern Europe",
+        "population": 51628,
+        "languages": {
+            "fao": "Faroese"
+        },
+        "latlng": [
+            62,
+            -7
+        ],
+        "cca3": "FRO",
+        "official": "Faroe Islands",
+        "nativeName": null
+    },
+    {
+        "cca2": "GL",
+        "name": {
+            "common": "Greenland"
+        },
+        "capital": [
+            "Nuuk"
+        ],
+        "region": "Americas",
+        "subregion": "North America",
+        "population": 56326,
+        "languages": {
+            "kal": "Kalaallisut"
+        },
+        "latlng": [
+            72,
+            -40
+        ],
+        "cca3": "GRL",
+        "official": "Greenland",
+        "nativeName": null
+    },
+    {
+        "cca2": "HK",
+        "name": {
+            "common": "Hong Kong"
+        },
+        "capital": [
+            "City of Victoria"
+        ],
+        "region": "Asia",
+        "subregion": "Eastern Asia",
+        "population": 7500700,
+        "languages": {
+            "eng": "English",
+            "zho": "Chinese"
+        },
+        "latlng": [
+            22.27,
+            114.19
+        ],
+        "cca3": "HKG",
+        "official": "Hong Kong Special Administrative Region of the People's Republic of China",
+        "nativeName": null
+    },
+    {
+        "cca2": "MO",
+        "name": {
+            "common": "Macao"
+        },
+        "capital": [
+            "Macao"
+        ],
+        "region": "Asia",
+        "subregion": "Eastern Asia",
+        "population": 683100,
+        "languages": {
+            "por": "Portuguese",
+            "zho": "Chinese"
+        },
+        "latlng": [
+            22.17,
+            113.54
+        ],
+        "cca3": "MAC",
+        "official": "Macao Special Administrative Region of the People's Republic of China",
+        "nativeName": null
+    },
+    {
+        "cca2": "NF",
+        "name": {
+            "common": "Norfolk Island"
+        },
+        "capital": [
+            "Kingston"
+        ],
+        "region": "Oceania",
+        "subregion": "Australasia",
+        "population": 2302,
+        "languages": {
+            "eng": "English"
+        },
+        "latlng": [
+            -29.04,
+            167.95
+        ],
+        "cca3": "NFK",
+        "official": "Norfolk Island",
+        "nativeName": null
+    }
+]

@@ -1,0 +1,344 @@
+{
+    "AI": {
+        "facts": [
+            "This British Overseas Territory is known for its beautiful coral reefs and pristine white-sand beaches.",
+            "The name is derived from the Italian word for 'eel' due to the island's long, narrow shape.",
+            "The national sport is **boat racing**, with competitive races held on holidays and special occasions.",
+            "The flag features three dolphins symbolizing endurance, unity, and strength."
+        ],
+        "name": "Anguilla"
+    },
+    "AS": {
+        "facts": [
+            "It is an unincorporated territory of the United States located in the South Pacific Ocean.",
+            "The territory is known for its Samoan culture, traditions, and language.",
+            "The territory is home to the National Park, featuring tropical rainforests and coral reefs.",
+            "The economy is primarily based on fishing, government employment, and tourism."
+        ],
+        "name": "American Samoa"
+    },
+    "AW": {
+        "facts": [
+            "The island's unofficial motto is **'One Happy Island'**.",
+            "The territory is a constituent country of the Kingdom of the Netherlands.",
+            "The distinctive, trade-wind-bent **Divi-Divi tree** is a common natural compass.",
+            "The territory lies **outside the main hurricane belt**, giving it a low risk of tropical storms."
+        ],
+        "name": "Aruba"
+    },
+    "BL": {
+        "facts": [
+            "The territory is known for its upscale resorts, luxury shopping, and pristine beaches.",
+            "The territory is a popular destination for wealthy tourists and celebrities.",
+            "The island has a unique blend of French and Caribbean cultures.",
+            "The territory is known for its excellent French cuisine and fine dining establishments."
+        ],
+        "name": "Saint Barthélemy"
+    },
+    "BM": {
+        "facts": [
+            "It is the northernmost point of the Sargasso Sea and is surrounded by coral reefs.",
+            "The island is famous for its pink sand beaches, caused by the presence of red and pink coral.",
+            "The territory is one of the wealthiest territories in the world, with a strong financial services industry.",
+            "The territory has no natural freshwater sources and relies on rainwater collection."
+        ],
+        "name": "Bermuda"
+    },
+    "BQ": {
+        "facts": [
+            "The territory consists of three islands in the Caribbean, each with unique characteristics.",
+            "The territory is known for its excellent diving and snorkeling opportunities.",
+            "Sint Eustatius has a rich history as a major trading hub in the colonial era.",
+            "Saba is known for its pristine natural environment and hiking trails."
+        ],
+        "name": "Bonaire, Sint Eustatius and Saba"
+    },
+    "CW": {
+        "facts": [
+            "The territory is known for its colorful colonial architecture and vibrant culture.",
+            "The territory is a constituent country of the Kingdom of the Netherlands.",
+            "The island is famous for its pristine beaches and excellent diving opportunities.",
+            "The territory has a unique blend of Dutch, African, and Caribbean cultures."
+        ],
+        "name": "Curaçao"
+    },
+    "FK": {
+        "facts": [
+            "The islands are located in the South Atlantic Ocean, about 300 miles east of Argentina.",
+            "They are home to large populations of penguins, seals, and other marine wildlife.",
+            "The territory was the subject of a military conflict between the UK and Argentina in 1982.",
+            "The economy is primarily based on sheep farming and fishing."
+        ],
+        "name": "Falkland Islands"
+    },
+    "FO": {
+        "facts": [
+            "The territory is an autonomous region of Denmark located in the North Atlantic Ocean.",
+            "The territory is known for their dramatic cliffs, waterfalls, and rugged landscape.",
+            "The territory has a unique culture and language distinct from Denmark.",
+            "The territory is known for their fishing industry and traditional way of life."
+        ],
+        "name": "Faroe Islands"
+    },
+    "GF": {
+        "facts": [
+            "It is the only territory on the South American continent that is part of the European Union.",
+            "The territory is home to the European Space Agency's primary launch site for rockets.",
+            "The territory is known for its dense rainforests and unique biodiversity.",
+            "The territory has a diverse population with influences from French, African, and indigenous cultures."
+        ],
+        "name": "French Guiana"
+    },
+    "GI": {
+        "facts": [
+            "It is a British Overseas Territory located at the southern tip of the Iberian Peninsula.",
+            "The Rock of Gibraltar is a massive limestone promontory and a major landmark.",
+            "The territory is home to the famous Barbary Macaques, the only wild primates in Europe.",
+            "The territory has been a strategic military location for centuries, controlling the strait between Europe and Africa."
+        ],
+        "name": "Gibraltar"
+    },
+    "GL": {
+        "facts": [
+            "The territory is the world's largest island and is an autonomous territory of Denmark.",
+            "The territory is known for its vast ice sheets, glaciers, and Arctic wilderness.",
+            "The territory is home to the Inuit (Kalaallit) people and their unique culture.",
+            "The territory is known for its northern lights and unique Arctic ecosystems."
+        ],
+        "name": "Greenland"
+    },
+    "GP": {
+        "facts": [
+            "The territory consists of two main islands, Basse-Terre and Grande-Terre, connected by a narrow isthmus.",
+            "The territory is known for its beautiful beaches, tropical climate, and vibrant Creole culture.",
+            "The territory is a major producer of bananas, sugar, and rum.",
+            "The territory is a popular tourist destination known for its natural beauty and cultural heritage."
+        ],
+        "name": "Guadeloupe"
+    },
+    "GS": {
+        "facts": [
+            "The territory is located in the South Atlantic Ocean, about 1,400 km southeast of the Falkland Islands.",
+            "It is home to one of the world's largest populations of king penguins.",
+            "The territory has no permanent human inhabitants, only research stations.",
+            "The territory is known for its dramatic glaciated mountains and pristine wilderness."
+        ],
+        "name": "South Georgia and the South Sandwich Islands"
+    },
+    "GU": {
+        "facts": [
+            "It is the westernmost point of the United States and a major strategic military location.",
+            "The territory is known for its beautiful beaches, tropical climate, and diverse marine life.",
+            "The territory has a unique blend of Chamorro, Spanish, and American cultures.",
+            "The territory is a popular tourist destination and home to several U.S. military bases."
+        ],
+        "name": "Guam"
+    },
+    "HK": {
+        "facts": [
+            "The territory is a Special Administrative Region of China with a unique political status.",
+            "The territory is known for its stunning harbor, towering skyscrapers, and vibrant culture.",
+            "The territory is a major financial center and one of the world's most important ports.",
+            "The territory is known for its blend of Eastern and Western cultures and cuisines."
+        ],
+        "name": "Hong Kong"
+    },
+    "IO": {
+        "facts": [
+            "It consists of the Chagos Archipelago, a group of coral atolls in the Indian Ocean.",
+            "The territory is home to one of the world's largest military bases, Diego Garcia.",
+            "It has a unique ecosystem with rare species found nowhere else on Earth.",
+            "The territory has been the subject of territorial disputes and diplomatic negotiations."
+        ],
+        "name": "British Indian Ocean Territory"
+    },
+    "KY": {
+        "facts": [
+            "It is one of the world's largest financial centers, with a thriving offshore banking industry.",
+            "The territory is famous for its Seven Mile Beach, one of the world's best beaches.",
+            "The territory is a major diving destination, known for their coral reefs and shipwrecks.",
+            "The territory has no natural freshwater sources and relies on desalination."
+        ],
+        "name": "Cayman Islands"
+    },
+    "MF": {
+        "facts": [
+            "The island is shared between France and the Netherlands, making it unique in the Caribbean.",
+            "The territory is known for its beautiful beaches, water sports, and duty-free shopping.",
+            "The territory has a diverse population with French, Dutch, and Caribbean influences.",
+            "The territory is a popular cruise ship destination and tourist attraction."
+        ],
+        "name": "Saint Martin"
+    },
+    "MO": {
+        "facts": [
+            "The territory is a Special Administrative Region of China known for its casinos and gaming industry.",
+            "The territory is known for its Portuguese colonial architecture and unique culture.",
+            "The territory is one of the world's most densely populated regions.",
+            "The territory is a major tourist destination known for its entertainment and shopping."
+        ],
+        "name": "Macao"
+    },
+    "MP": {
+        "facts": [
+            "The territory consists of 14 islands in the western Pacific Ocean.",
+            "Mount Lasso on Saipan is the highest point in the world when measured from the Mariana Trench.",
+            "The territory is known for its pristine beaches, diving, and World War II historical sites.",
+            "The territory has a unique culture blending Chamorro, Carolinian, and American influences."
+        ],
+        "name": "Northern Mariana Islands"
+    },
+    "MQ": {
+        "facts": [
+            "The territory is known for its volcanic landscape, including the active Mount Pelée.",
+            "The territory is famous for its rum production and is home to several renowned distilleries.",
+            "The island has a rich cultural heritage influenced by French, African, and indigenous Carib traditions.",
+            "The territory is a popular destination for tourists seeking beaches, hiking, and cultural experiences."
+        ],
+        "name": "Martinique"
+    },
+    "MS": {
+        "facts": [
+            "The island is dominated by the Soufrière Hills volcano, which erupted catastrophically in 1997.",
+            "The eruption destroyed the capital, Plymouth, and made much of the island uninhabitable.",
+            "The territory is known for its lush tropical vegetation and dramatic volcanic landscape.",
+            "The territory is gradually recovering and rebuilding after the volcanic disaster."
+        ],
+        "name": "Montserrat"
+    },
+    "NC": {
+        "facts": [
+            "The territory is known for its unique biodiversity and is home to many endemic species.",
+            "The territory has one of the world's largest nickel reserves and is a major nickel producer.",
+            "The territory is known for its beautiful lagoons and coral reefs, part of the Coral Triangle.",
+            "The territory has a unique culture blending Melanesian, French, and other influences."
+        ],
+        "name": "New Caledonia"
+    },
+    "NF": {
+        "facts": [
+            "The territory is an external territory of Australia located in the South Pacific Ocean.",
+            "The island is known for its unique ecosystem and endemic species.",
+            "The territory has a unique culture and history, including a population descended from Bounty mutineers.",
+            "The island is a popular tourist destination known for its natural beauty and historical sites."
+        ],
+        "name": "Norfolk Island"
+    },
+    "PF": {
+        "facts": [
+            "The territory consists of 118 islands spread across an area of the Pacific Ocean larger than Western Europe.",
+            "The territory is famous for its stunning tropical islands, including Tahiti, Bora Bora, and Moorea.",
+            "The territory is known for its pristine beaches, crystal-clear waters, and excellent diving and snorkeling.",
+            "The territory has a rich Polynesian culture and is a major tourist destination."
+        ],
+        "name": "French Polynesia"
+    },
+    "PM": {
+        "facts": [
+            "The territory is the only French territory in North America, located off the coast of Newfoundland.",
+            "The territory is known for its fishing industry and maritime heritage.",
+            "The territory has a unique French culture and traditions distinct from mainland France.",
+            "The islands are a popular destination for tourists interested in French culture and maritime history."
+        ],
+        "name": "Saint Pierre and Miquelon"
+    },
+    "PN": {
+        "facts": [
+            "The islands are among the most remote inhabited territories in the world.",
+            "They were settled by mutineers from the HMS Bounty and Tahitian women in 1790.",
+            "The population is extremely small, with only a few dozen residents.",
+            "The islands are known for their unique culture and history of maritime exploration."
+        ],
+        "name": "Pitcairn Islands"
+    },
+    "PR": {
+        "facts": [
+            "It is an unincorporated territory of the United States with a population of over 3 million.",
+            "The territory is known for its beautiful beaches, tropical rainforests, and vibrant culture.",
+            "The territory is home to El Yunque National Forest, the only tropical rainforest in the U.S. National Forest System.",
+            "The territory has a rich history of music, art, and cuisine influenced by Spanish, African, and indigenous Taíno cultures."
+        ],
+        "name": "Puerto Rico"
+    },
+    "RE": {
+        "facts": [
+            "The territory is home to Piton de la Fournaise, one of the world's most active volcanoes.",
+            "The territory is known for its dramatic volcanic landscape, lush vegetation, and diverse ecosystems.",
+            "The territory is a major producer of sugar, vanilla, and other tropical products.",
+            "The territory has a unique culture blending French, African, Indian, and Chinese influences."
+        ],
+        "name": "Réunion"
+    },
+    "SH": {
+        "facts": [
+            "The island is famous as the place of exile for Napoleon Bonaparte from 1815 to 1821.",
+            "It is one of the most remote inhabited islands in the world, located in the South Atlantic.",
+            "The island has a unique ecosystem with many endemic species found nowhere else.",
+            "The territory was an important stop for ships traveling between Europe and Asia before the Suez Canal."
+        ],
+        "name": "Saint Helena"
+    },
+    "SX": {
+        "facts": [
+            "The island is shared between the territory (Dutch) and Saint Martin (French).",
+            "The territoryis known for its beautiful beaches, water sports, and duty-free shopping.",
+            "The territory is a constituent country of the Kingdom of the Netherlands.",
+            "The territory is a popular cruise ship destination and tourist attraction."
+        ],
+        "name": "Sint Maarten"
+    },
+    "TC": {
+        "facts": [
+            "The territory consists of more than 40 islands and cays in the Caribbean.",
+            "It is known for its world-class beaches and excellent diving and snorkeling opportunities.",
+            "The islands have a thriving tourism industry and are a popular destination for beach vacations.",
+            "The territory is also a significant financial center with a growing offshore financial services sector."
+        ],
+        "name": "Turks and Caicos Islands"
+    },
+    "UM": {
+        "facts": [
+            "The territory consists of a collection of small, remote islands scattered across the Pacific and Atlantic Oceans.",
+            "Many of these islands are uninhabited and serve as wildlife refuges and research stations.",
+            "The islands are important for their strategic location and unique ecosystems.",
+            "Some islands are home to rare and endangered species found nowhere else on Earth."
+        ],
+        "name": "U.S. Minor Outlying Islands"
+    },
+    "VG": {
+        "facts": [
+            "The territory consists of about 60 islands and cays, with Tortola being the largest.",
+            "It is a major financial center and offshore financial services hub.",
+            "The islands are known for their pristine beaches and excellent sailing conditions.",
+            "The territory has a rich pirate history, with famous pirates like Blackbeard operating in the area."
+        ],
+        "name": "British Virgin Islands"
+    },
+    "VI": {
+        "facts": [
+            "The territory consists of three main islands: Saint Croix, Saint John, and Saint Thomas.",
+            "The territory are known for their pristine beaches, clear waters, and excellent diving.",
+            "The territory has a rich history of sugar plantations and colonial architecture.",
+            "The islands are a popular cruise ship destination and tourist attraction in the Caribbean."
+        ],
+        "name": "U.S. Virgin Islands"
+    },
+    "WF": {
+        "facts": [
+            "The territory consists of three main volcanic islands in the South Pacific Ocean.",
+            "The territory is known for its pristine natural environment and traditional Polynesian culture.",
+            "The territory has a small population and limited tourism infrastructure.",
+            "The islands are known for their beautiful lagoons and coral reefs."
+        ],
+        "name": "Wallis and Futuna"
+    },
+    "YT": {
+        "facts": [
+            "The territory is located in the Mozambique Channel between Mozambique and Madagascar.",
+            "The territory is known for its unique biodiversity and is home to many endemic species.",
+            "The territory has a diverse population with African, Arab, and French influences.",
+            "The territory is known for its beautiful beaches, coral reefs, and marine life."
+        ],
+        "name": "Mayotte"
+    }
+}

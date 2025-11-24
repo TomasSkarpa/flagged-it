@@ -2,11 +2,11 @@ package main
 
 import (
 	"flagged-it/internal/app"
-	"runtime"
+	"image/color"
+
 	"fyne.io/fyne/v2"
 	fyneApp "fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/theme"
-	"image/color"
 )
 
 func main() {
@@ -16,10 +16,8 @@ func main() {
 	myWindow.SetOnClosed(myApp.Quit)
 	myWindow.SetMaster()
 
-	scale := float32(1.4)
-	if runtime.GOOS == "js" {
-		scale = 1.0
-	} else if myWindow.Canvas().Size().Width < 768 {
+	scale := float32(1.7)
+	if myWindow.Canvas().Size().Width < 768 {
 		scale = 1.0
 	}
 	myApp.Settings().SetTheme(&scaledTheme{scale: scale})

@@ -101,7 +101,7 @@
         <p>Loading application...</p>
     </div>
     <div id="error"></div>
-    <script src="/wasm_exec.js" onerror="showError('Failed to load wasm_exec.js')"></script>
+    <script src="wasm_exec.js" onerror="showError('Failed to load wasm_exec.js')"></script>
     <script>
         function showError(msg) {
             document.getElementById('loading').style.display = 'none';
@@ -114,7 +114,7 @@
             showError('Go runtime not available');
         } else {
             const go = new Go();
-            WebAssembly.instantiateStreaming(fetch("/flagged-it.wasm"), go.importObject).then((result) => {
+            WebAssembly.instantiateStreaming(fetch("flagged-it.wasm"), go.importObject).then((result) => {
                 document.getElementById('loading').style.display = 'none';
                 go.run(result.instance);
             }).catch((err) => {

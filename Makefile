@@ -75,15 +75,12 @@ web:
 	fi
 	@cp index.html $(BUILD_DIR)/
 	@cp -r assets $(BUILD_DIR)/
-	@echo "Built WebAssembly to $(BUILD_DIR)/"
-	@echo "Starting server at http://0.0.0.0:8080"
-	@echo "OS: $(shell uname -s)"
+	@echo "Built WebAssembly to /$(BUILD_DIR)"
 ifeq ($(shell uname -s),Darwin)
-	@echo "Local IP: $$(ifconfig | grep "inet " | grep -v 127.0.0.1 | head -1 | awk '{print $$2}')"
-else
-	@echo "Local IP: $$(hostname -I | awk '{print $$1}')"
-endif
 	@echo "Access from other devices: http://$$(ifconfig | grep "inet " | grep -v 127.0.0.1 | head -1 | awk '{print $$2}'):8080"
+else
+	@echo "Access from other devices: http://$$(hostname -I | awk '{print $$1}'):8080"
+endif
 	@cd $(BUILD_DIR) && python3 -m http.server 8080 --bind 0.0.0.0
 
 # Remove build artifacts (safe for both Linux/macOS and Windows)

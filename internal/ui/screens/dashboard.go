@@ -72,9 +72,14 @@ func (d *Dashboard) setupUI() {
 		d.navigateFunc("higher_lower")
 	})
 
-	// Score boxes
-	d.scoresGrid = d.createScoresBox()
+	guessingBtn := widget.NewButtonWithIcon("What Country is This", theme.GridIcon(), func(){
+		d.navigateFunc("guessing")
+	})
 
+	d.content = container.NewVBox(
+		header,
+		widget.NewSeparator(),
+		countryGuessBtn,
 	// Game buttons in responsive grid
 	gameButtons := container.NewGridWithColumns(2,
 		flagBtn,
@@ -83,7 +88,12 @@ func (d *Dashboard) setupUI() {
 		hangmanBtn,
 		factGuessBtn,
 		higher_lowerBtn,
+		flagBtn,
+		guessingBtn,
 	)
+
+  // Score boxes
+	d.scoresGrid = d.createScoresBox()
 
 	d.content = container.NewVBox(
 		header,

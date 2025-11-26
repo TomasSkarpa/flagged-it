@@ -3,6 +3,7 @@ package higher_lower
 import (
 	"flagged-it/internal/data"
 	"flagged-it/internal/ui/components"
+	"flagged-it/internal/utils"
 	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
@@ -26,10 +27,11 @@ type Game struct {
 	nextBtn             *widget.Button
 	higherBtn           *widget.Button
 	lowerBtn            *widget.Button
+	scoreManager        *utils.ScoreManager
 }
 
-func NewGame(backFunc func()) *Game {
-	g := &Game{backFunc: backFunc}
+func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
+	g := &Game{backFunc: backFunc, scoreManager: scoreManager}
 	g.setupUI()
 	return g
 }
@@ -69,21 +71,23 @@ func (g *Game) setupUI() {
 		g.lowerBtn.Show()
 	})
 
+	// Create responsive button grid
+	buttonGrid := container.NewGridWithColumns(2, g.higherBtn, g.lowerBtn)
+
 	g.content = container.NewVBox(
 		topBar.GetContainer(),
 		widget.NewSeparator(),
 		gameDescription,
 		widget.NewSeparator(),
-		startBtn,
-		g.countryOneNameLabel,
-		g.countryOnePopLabel,
-		widget.NewSeparator(),
-		g.countryTwoNameLabel,
-		g.countryTwoPopLabel,
-		g.higherBtn,
-		g.lowerBtn,
-		g.nextBtn,
 		g.scoreLabel,
+		startBtn,
+		container.NewCenter(g.countryOneNameLabel),
+		container.NewCenter(g.countryOnePopLabel),
+		widget.NewSeparator(),
+		container.NewCenter(g.countryTwoNameLabel),
+		container.NewCenter(g.countryTwoPopLabel),
+		buttonGrid,
+		g.nextBtn,
 	)
 }
 
@@ -91,7 +95,9 @@ func (g *Game) makeGuess(isHigher bool) {
 	correct := (isHigher && g.secondCountry > g.firstCountry) || (!isHigher && g.secondCountry < g.firstCountry)
 	if correct {
 		g.score++
-	}else{
+	} else {
+		g.scoreManager.SetTotal("higher_lower", g.score)
+		g.scoreManager.UpdateScore("higher_lower", g.score)
 		g.score = 0
 	}
 	g.scoreLabel.SetText(fmt.Sprintf("Score: %d", g.score))
@@ -104,8 +110,8 @@ func (g *Game) makeGuess(isHigher bool) {
 func (g *Game) nextRound() {
 	countries := data.LoadCountries()
 	newCountry := countries[rand.Intn(len(countries))]
-	
-	for newCountry.Name.Common == g.countryTwoNameLabel.Text{
+
+	for newCountry.Name.Common == g.countryTwoNameLabel.Text {
 		newCountry = countries[rand.Intn(len(countries))]
 	}
 

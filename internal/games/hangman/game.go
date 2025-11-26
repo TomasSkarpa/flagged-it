@@ -9,6 +9,7 @@ import (
 	"flagged-it/internal/data"
 	"flagged-it/internal/data/models"
 	"flagged-it/internal/ui/components"
+	"flagged-it/internal/utils"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
@@ -30,14 +31,19 @@ type Game struct {
 	newGameBtn     *widget.Button
 	keyboard       *fyne.Container
 	letterButtons  map[rune]*widget.Button
+	score          int
+	total          int
+	scoreLabel     *widget.Label
+	scoreManager   *utils.ScoreManager
 }
 
-func NewGame(backFunc func()) *Game {
+func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
 	g := &Game{
 		backFunc:       backFunc,
 		maxWrongs:      6,
 		guessedLetters: make(map[rune]bool),
 		letterButtons:  make(map[rune]*widget.Button),
+		scoreManager:   scoreManager,
 	}
 	g.loadCountries()
 	g.setupUI()
@@ -58,12 +64,14 @@ func (g *Game) setupUI() {
 	g.hintLabel = widget.NewLabel("")
 	g.wrongLabel = widget.NewLabel("")
 	g.statusLabel = widget.NewLabel("Guess the country name!")
+	g.scoreLabel = widget.NewLabel("Score: 0/5")
 
 	g.setupKeyboard()
 
 	g.content = container.NewVBox(
 		topBar.GetContainer(),
 		widget.NewSeparator(),
+		g.scoreLabel,
 		g.statusLabel,
 		g.wordLabel,
 		g.hintLabel,
@@ -77,6 +85,16 @@ func (g *Game) setupUI() {
 func (g *Game) newGame() {
 	if len(g.countries) == 0 {
 		g.statusLabel.SetText("Error loading countries data")
+		return
+	}
+
+	if g.total >= 5 {
+		g.scoreManager.SetTotal("hangman", 5)
+		g.scoreManager.UpdateScore("hangman", g.score)
+		g.statusLabel.SetText(fmt.Sprintf("Game Complete! Final Score: %d/5 (%.0f%%)", g.score, float64(g.score)/5*100))
+		for _, btn := range g.letterButtons {
+			btn.Disable()
+		}
 		return
 	}
 
@@ -120,9 +138,9 @@ func (g *Game) setupKeyboard() {
 	}
 
 	g.keyboard = container.NewVBox(
-		keyboardRows[0],
-		keyboardRows[1],
-		keyboardRows[2],
+		container.NewCenter(keyboardRows[0]),
+		container.NewCenter(keyboardRows[1]),
+		container.NewCenter(keyboardRows[2]),
 	)
 }
 
@@ -189,6 +207,13 @@ func (g *Game) checkGameEnd() {
 		for _, btn := range g.letterButtons {
 			btn.Disable()
 		}
+		g.total++
+		g.scoreLabel.SetText(fmt.Sprintf("Score: %d/5", g.score))
+		time.AfterFunc(1500*time.Millisecond, func() {
+			fyne.Do(func() {
+				g.newGame()
+			})
+		})
 		return
 	}
 
@@ -197,6 +222,14 @@ func (g *Game) checkGameEnd() {
 		for _, btn := range g.letterButtons {
 			btn.Disable()
 		}
+		g.total++
+		g.score++
+		g.scoreLabel.SetText(fmt.Sprintf("Score: %d/5", g.score))
+		time.AfterFunc(1500*time.Millisecond, func() {
+			fyne.Do(func() {
+				g.newGame()
+			})
+		})
 	}
 }
 
@@ -209,6 +242,9 @@ func (g *Game) Start() {
 }
 
 func (g *Game) Reset() {
+	g.score = 0
+	g.total = 0
+	g.scoreLabel.SetText("Score: 0/5")
 	g.newGame()
 }
 

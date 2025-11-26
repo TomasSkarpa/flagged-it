@@ -35,15 +35,6 @@
         ],
         "name": "Antigua and Barbuda"
     },
-    "AI": {
-        "facts": [
-            "This British Overseas Territory is known for its beautiful coral reefs and pristine white-sand beaches, with tourism being the main industry.",
-            "The name is derived from the Italian word for 'eel' due to the island's long, narrow shape.",
-            "The national sport is **boat racing**, with competitive races held on holidays and special occasions.",
-            "The flag features three dolphins symbolizing endurance, unity, and strength."
-        ],
-        "name": "Anguilla"
-    },
     "AL": {
         "facts": [
             "For many years during the Cold War, it followed a policy of extreme **isolationism**, largely cutting itself off from the outside world.",
@@ -71,15 +62,6 @@
         ],
         "name": "Angola"
     },
-    "AQ": {
-        "facts": [
-            "It is the **coldest, driest, and windiest continent** on Earth and is technically classified as a **desert**.",
-            "Approximately **90% of the world's ice** and about 70% of the world's freshwater is frozen in the Antarctic Ice Sheet.",
-            "No single country owns this place; it is governed by a specific **Treaty System**, which reserves the continent for **peaceful, scientific research**.",
-            "There are **no permanent human inhabitants**; the people present are scientists and support staff on rotation."
-        ],
-        "name": "Antarctica"
-    },
     "AR": {
         "facts": [
             "It is the birthplace of the **Tango** dance.",
@@ -88,15 +70,6 @@
             "The national sport is **Pato** (Spanish for 'duck'), a fast-paced game played on horseback that combines elements of polo and basketball."
         ],
         "name": "Argentina"
-    },
-    "AS": {
-        "facts": [
-            "This is an unincorporated territory of the United States, located in the South Pacific Ocean.",
-            "The national park covers five small islands and a portion of the main island, featuring tropical rainforests and coral reefs.",
-            "The main island, **Tutuila**, is formed by two large volcanic shields.",
-            "**Fagatele Bay** is the only underwater national marine sanctuary in the territory, known for its diverse coral ecosystem."
-        ],
-        "name": "American Samoa"
     },
     "AT": {
         "facts": [
@@ -115,24 +88,6 @@
             "Around **90%** of the population lives within 100 miles of the coast, leaving the vast interior (the 'Outback') sparsely populated."
         ],
         "name": "Australia"
-    },
-    "AW": {
-        "facts": [
-            "The island's unofficial motto is **'One Happy Island'**.",
-            "It is a constituent country of the **Kingdom of the Netherlands**.",
-            "The distinctive, trade-wind-bent **Divi-Divi tree** is a common natural compass, with its branches pointing consistently southwest.",
-            "It is a popular destination because it lies **outside the main hurricane belt**, giving it a low risk of tropical storms."
-        ],
-        "name": "Aruba"
-    },
-    "AX": {
-        "facts": [
-            "This autonomous region of Finland is **monolingual Swedish-speaking**.",
-            "It has been demilitarized and neutralized since the **Treaty of Paris in 1856**, meaning no military installations or forces are allowed.",
-            "The islands have their own parliament, flag, and issue their own stamps, but they use the **Euro** as currency.",
-            "The main industry is a combination of ferry traffic, trade, and financial services."
-        ],
-        "name": "Åland Islands"
     },
     "AZ": {
         "facts": [
@@ -166,7 +121,7 @@
             "It is the home of the **Sundarbans**, the world's largest single block of tidal halophytic mangrove forest, which is also home to the **Royal Bengal Tiger**.",
             "This country is one of the **most densely populated** major nations in the world, with its capital, Dhaka, being one of the world's fastest-expanding megacities.",
             "The country has one of the world's longest natural sea beaches, **Cox's Bazar**, which stretches for about 120 km (75 mi).",
-            "It achieved independence from Pakistan in 1971 following the ********* Liberation War**."
+            "It achieved independence from Pakistan in 1971 following a liberation war."
         ],
         "name": "Bangladesh"
     },
@@ -224,24 +179,6 @@
         ],
         "name": "Benin"
     },
-    "BL": {
-        "facts": [
-            "This Caribbean island is a **French overseas collectivity** and is officially part of the European Union, despite its location.",
-            "The island's capital, **Gustavia**, was named after a Swedish king and features remnants of the Swedish colonial era, including its old forts.",
-            "It is globally renowned as a **luxurious, high-end destination** with exclusive resorts and designer boutiques, often attracting celebrity visitors.",
-            "Due to limited fresh water resources, the territory relies heavily on **desalination of seawater** and rainwater collection."
-        ],
-        "name": "Saint Barthélemy"
-    },
-    "BM": {
-        "facts": [
-            "This British Overseas Territory is famous for the stretch of the Atlantic Ocean known as the **'Bermuda Triangle'**.",
-            "The beaches are known for their unique **pink sand**, which is a result of crushed shell and coral particles.",
-            "The traditional business attire includes **Bermuda shorts**, often worn with knee-socks, a blazer, and tie.",
-            "The oldest self-governing parliament in the Commonwealth outside of the UK is located here."
-        ],
-        "name": "Bermuda"
-    },
     "BN": {
         "facts": [
             "This small nation on the island of **Borneo** is one of the world's richest countries per capita due to its oil and natural gas fields.",
@@ -259,15 +196,6 @@
             "Indigenous peoples, particularly the Aymara and Quechua, make up a significant portion of the population."
         ],
         "name": "Bolivia"
-    },
-    "BQ": {
-        "facts": [
-            "These are three special municipalities of the Netherlands in the Caribbean, collectively known as the **Caribbean Netherlands**.",
-            "**Saba** is home to **Mount Scenery**, the **highest point in the entire Kingdom of the Netherlands**.",
-            "**Bonaire** has striking **pink beaches** and vast, protected **flamingo breeding grounds**.",
-            "**Sint Eustatius** is historically significant, being the **first foreign government to officially recognize the United States of America** in 1776."
-        ],
-        "name": "Bonaire, Sint Eustatius and Saba"
     },
     "BR": {
         "facts": [
@@ -295,15 +223,6 @@
             "Until 1999, **television and the internet were banned** to protect its culture from outside influence."
         ],
         "name": "Bhutan"
-    },
-    "BV": {
-        "facts": [
-            "This uninhabited sub-Antarctic island is a dependent territory of Norway and is considered the **most remote island in the world**.",
-            "Over **90% of the island is covered by glaciers**.",
-            "It is the location of the setting of the movie **'Alien vs. Predator'**.",
-            "The island is difficult to access due to thick ice and severe weather."
-        ],
-        "name": "Bouvet Island"
     },
     "BW": {
         "facts": [
@@ -341,15 +260,6 @@
         ],
         "name": "Canada"
     },
-    "CC": {
-        "facts": [
-            "This territory consists of 27 coral islands in two atolls, but only two of the islands are inhabited.",
-            "The population is split between predominantly ethnic Malays who are mostly Sunni Muslim, and a smaller number of European expatriates.",
-            "The only way to reach this remote place is by flying from Perth, Western Australia, as there are no direct flights from other countries.",
-            "The main industry is small-scale tourism and the production of copra (dried coconut meat)."
-        ],
-        "name": "Cocos (Keeling) Islands"
-    },
     "CD": {
         "facts": [
             "It is the second-largest country in Africa by area and the largest sub-Saharan African nation.",
@@ -370,7 +280,7 @@
     },
     "CG": {
         "facts": [
-            "It lies within the ******* Basin**, which holds the world's second-largest tropical **rainforest**.",
+            "It lies within a major river basin, which holds the world's second-largest tropical **rainforest**.",
             "The country's economy is heavily reliant on **oil exports**, which account for a vast majority of its revenue.",
             "The capital, **Brazzaville**, is located directly across the Congo River from **Kinshasa**, making them the two closest capital cities in the world (excluding Rome/Vatican City).",
             "The country has become known for the **'La Sape'** subculture, originating from its capital, which emphasizes elegant designer clothing."
@@ -466,24 +376,6 @@
             "The country is famous for its lively **Morna** music, a mournful and expressive musical genre often compared to Portuguese Fado."
         ],
         "name": "Cabo Verde"
-    },
-    "CW": {
-        "facts": [
-            "This Dutch Caribbean island is famous for its brightly colored, colonial-style architecture in the capital, **Willemstad**, which is a UNESCO World Heritage site.",
-            "The unique liqueur, **Blue Curaçao**, gets its vibrant color and citrus flavor from the dried peels of the Laraha citrus fruit, which is native to the island.",
-            "The local language is **Papiamentu**, a Creole language derived from Spanish, Portuguese, Dutch, and African languages.",
-            "It remains a constituent country of the Kingdom of the Netherlands."
-        ],
-        "name": "Curaçao"
-    },
-    "CX": {
-        "facts": [
-            "This Australian external territory is famous for its annual mass migration of **red crabs**, which travel from the forest to the sea to spawn.",
-            "The island is the top of an **undersea mountain** (Guyot) rising over 5,000 meters from the ocean floor.",
-            "The primary industries are phosphate mining and government administration.",
-            "It has a significant population of people of **Chinese and Malay descent**."
-        ],
-        "name": "Christmas Island"
     },
     "CY": {
         "facts": [
@@ -584,15 +476,6 @@
         ],
         "name": "Egypt"
     },
-    "EH": {
-        "facts": [
-            "It is a disputed territory, largely controlled by **Morocco**, with the remainder controlled by the **Polisario Front**.",
-            "The territory is primarily composed of **desert and semi-desert terrain**, with minimal rainfall.",
-            "It has one of the **lowest population densities** in the world.",
-            "The region has significant offshore **phosphate reserves** and a rich Atlantic **fishing ground**."
-        ],
-        "name": "Western Sahara"
-    },
     "ER": {
         "facts": [
             "It has an extensive coastline along the **Red Sea**, and the Dahlak Archipelago is a major feature.",
@@ -638,15 +521,6 @@
         ],
         "name": "Fiji"
     },
-    "FK": {
-        "facts": [
-            "This country's islands are an archipelago known for their immense biodiversity, especially their five species of breeding penguins.",
-            "The capital, Stanley, is one of the southernmost capital cities in the world.",
-            "The islands are a British Overseas Territory, whose sovereignty is disputed by Argentina.",
-            "The local motto is 'Desire the Right,' inspired by the name of the ship on which the islands were first recorded by a British explorer."
-        ],
-        "name": "Falkland Islands"
-    },
     "FM": {
         "facts": [
             "The nation is composed of **607 islands** spread across the western Pacific Ocean.",
@@ -655,15 +529,6 @@
             "The four stars on the national flag represent the four main island states: Chuuk, Kosrae, Pohnpei, and Yap."
         ],
         "name": "Federated States of Micronesia"
-    },
-    "FO": {
-        "facts": [
-            "This self-governing archipelago is a constituent country of the **Kingdom of Denmark**.",
-            "The weather is highly changeable, with frequent fog and strong winds, and the landscapes are dominated by steep cliffs and rolling hills.",
-            "It is famous for its unique traditional **grass-roofed houses**.",
-            "The local population of **sheep** outnumbers the human population."
-        ],
-        "name": "Faroe Islands"
     },
     "FR": {
         "facts": [
@@ -710,24 +575,6 @@
         ],
         "name": "Georgia"
     },
-    "GF": {
-        "facts": [
-            "This overseas department of France is the site of the **Guiana Space Centre**, Europe's primary launch site for rockets.",
-            "It is covered by one of the largest continuous tracts of **tropical rainforest** in the world.",
-            "The infamous former penal colony, **Devil's Island** (Île du Diable), is located just off its coast.",
-            "The country's coast is often used as a nesting ground for various species of sea turtles."
-        ],
-        "name": "French Guiana"
-    },
-    "GG": {
-        "facts": [
-            "This is a **British Overseas Territory** located in the remote South Atlantic Ocean.",
-            "The islands are a critical haven for wildlife, home to an estimated **five million seals** and over 60 million breeding birds.",
-            "It is the only place in the world where the endemic **South Georgia pipit**, the world's only sub-Antarctic songbird, can be found.",
-            "The territory is the site of one of the world's **largest sustainable use Marine Protected Areas (MPAs)**."
-        ],
-        "name": "South Georgia and the South Sandwich Islands"
-    },
     "GH": {
         "facts": [
             "This country was the first sub-Saharan African nation to gain independence from colonial rule in 1957.",
@@ -736,24 +583,6 @@
             "Traditional Kente cloth, known for its vibrant patterns and symbolism, was originally worn exclusively by royalty."
         ],
         "name": "Ghana"
-    },
-    "GI": {
-        "facts": [
-            "This British Overseas Territory is dominated by the **Rock of Gibraltar**, a massive limestone promontory.",
-            "The only wild monkey population in Europe, the **Barbary Macaques**, lives on the Rock.",
-            "Its territory is connected to mainland Spain by a narrow sandy isthmus.",
-            "The runway of the international airport is intersected by a **busy main road**."
-        ],
-        "name": "Gibraltar"
-    },
-    "GL": {
-        "facts": [
-            "It is the **world's largest island** that is not a continent.",
-            "Approximately **80% of its surface is covered by an ice cap**, which holds about 7% of the world's fresh water.",
-            "The territory is a self-governing constituent country within the **Kingdom of Denmark**.",
-            "With a population density of about 0.03 people per square kilometer, it is one of the **most sparsely populated** territories in the world."
-        ],
-        "name": "Greenland"
     },
     "GM": {
         "facts": [
@@ -773,15 +602,6 @@
         ],
         "name": "Guinea"
     },
-    "GP": {
-        "facts": [
-            "This overseas region of France is an archipelago shaped like a **butterfly**, with two main islands separated by a narrow channel.",
-            "It is home to the active volcano **Soufrière**, the highest peak in the Lesser Antilles.",
-            "The local culture blends French and West Indian influences, particularly in its **Creole cuisine and music**.",
-            "It is a popular destination for its distinctive blend of beautiful beaches and mountainous rainforests."
-        ],
-        "name": "Guadeloupe"
-    },
     "GQ": {
         "facts": [
             "It is the **only Spanish-speaking country in Africa**, a legacy of its colonial past.",
@@ -800,15 +620,6 @@
         ],
         "name": "Greece"
     },
-    "GS": {
-        "facts": [
-            "This British Overseas Territory is a bleak, sub-Antarctic archipelago with no permanent human population.",
-            "The island of South Georgia was a major **whaling station** in the early 20th century.",
-            "The famous Antarctic explorer **Sir Ernest Shackleton** is buried here.",
-            "The islands are home to massive colonies of **King Penguins** and fur seals."
-        ],
-        "name": "South Georgia and the South Sandwich Islands"
-    },
     "GT": {
         "facts": [
             "The **ancient Maya civilization** was highly influential here; the site of **Tikal** is one of the largest Mayan archaeological complexes.",
@@ -817,15 +628,6 @@
             "Old American school buses are famously recycled and used as colorful public transport, known as **'chicken buses'**."
         ],
         "name": "Guatemala"
-    },
-    "GU": {
-        "facts": [
-            "This unincorporated territory of the United States is the **largest island in Micronesia**.",
-            "It is famous for being the location of the **'day that never was'** on the International Date Line.",
-            "The indigenous people are the **Chamorros**, who have a unique language and culture.",
-            "Its economy is largely dependent on **tourism** and the presence of US military bases."
-        ],
-        "name": "Guam"
     },
     "GW": {
         "facts": [
@@ -843,24 +645,6 @@
             "The country's interior is covered by vast, pristine **rainforests**."
         ],
         "name": "Guyana"
-    },
-    "HK": {
-        "facts": [
-            "It is famous for its dramatic, vertical **skyline** and extremely high population density.",
-            "The territory was returned to **China** by the United Kingdom in 1997 under a 'one country, two systems' principle.",
-            "The city is a major global financial center and one of the world's most successful economies.",
-            "The traditional fishing vessel, the **Junk**, is a frequent sight in its harbor."
-        ],
-        "name": "Hong Kong"
-    },
-    "HM": {
-        "facts": [
-            "This external territory of Australia is an uninhabited, sub-Antarctic group of barren volcanic islands.",
-            "It is home to **Mawson Peak**, an active volcano which is the highest mountain in all Australian territory.",
-            "The islands are protected as a UNESCO World Heritage site due to their pristine ecosystem and geological significance.",
-            "The islands are remote and have only been visited by scientists and conservationists."
-        ],
-        "name": "Heard Island and McDonald Islands"
     },
     "HN": {
         "facts": [
@@ -925,15 +709,6 @@
         ],
         "name": "Israel"
     },
-    "IM": {
-        "facts": [
-            "It has the **longest continuously running parliament in the world**, the Tynwald, which dates back over 1,000 years.",
-            "The native **Manx cat** is famous for being **tailless** due to a naturally occurring genetic mutation.",
-            "A superstition holds that people must greet the **'little people' (fairies)** when crossing the **Fairy Bridge** to avoid bad luck.",
-            "The island is renowned for the annual Tourist Trophy, one of the world's most famous and dangerous motorcycle races."
-        ],
-        "name": "Isle of Man"
-    },
     "IN": {
         "facts": [
             "It is the **world's most populous country** and the largest democracy.",
@@ -942,15 +717,6 @@
             "The **Ganges River** (Ganga) is considered a sacred river by Hindus."
         ],
         "name": "India"
-    },
-    "IO": {
-        "facts": [
-            "This overseas territory consists of the **Chagos Archipelago**, a group of seven atolls in the Indian Ocean.",
-            "The largest and most strategically important island is **Diego Garcia**, which hosts a large military base operated by the United States and the United Kingdom.",
-            "The entire territory is a vast **Marine Protected Area (MPA)**, the largest in the world when it was established in 2010.",
-            "There is no permanent civilian population, as the original inhabitants (the Chagossians) were forcibly removed in the 1960s and 70s."
-        ],
-        "name": "British Indian Ocean Territory"
     },
     "IQ": {
         "facts": [
@@ -987,15 +753,6 @@
             "The country's distinct **'boot shape'** is a famous geographic feature, with the island of Sicily often considered to be the 'ball' being kicked."
         ],
         "name": "Italy"
-    },
-    "JE": {
-        "facts": [
-            "This **Crown Dependency** is self-governing, though defense and international relations are managed by the UK.",
-            "The island is famous for its local breed of **Jersey cattle**, known for producing rich milk.",
-            "The local Norman language variant is known as **Jèrriais**.",
-            "It is the largest of the **Channel Islands**."
-        ],
-        "name": "Jersey"
     },
     "JM": {
         "facts": [
@@ -1105,15 +862,6 @@
         ],
         "name": "Kuwait"
     },
-    "KY": {
-        "facts": [
-            "This British Overseas Territory is a major **global financial hub** and a popular offshore banking destination.",
-            "The islands are famously known as the home of the **Stingray City**, a series of shallow sandbars where visitors can interact with large Atlantic Southern Stingrays.",
-            "It consists of three islands: Grand Cayman, Cayman Brac, and Little Cayman.",
-            "The national bird is the **Grand Cayman Parrot**, a subspecies endemic to the island."
-        ],
-        "name": "Cayman Islands"
-    },
     "KZ": {
         "facts": [
             "It is the **largest landlocked country in the world** by land area.",
@@ -1181,7 +929,7 @@
         "facts": [
             "This territory is an **enclaved country** completely surrounded by one single country, South Africa.",
             "It is nicknamed the 'Kingdom in the Sky' because it is the only country in the world to have **all of its land situated above 1,000 meters** (3,281 ft) in elevation.",
-            "The traditional Basotho blanket, the ***Kobo***, is a crucial cultural garment worn as everyday attire.",
+            "The traditional Basotho blanket is a crucial cultural garment worn as everyday attire.",
             "It holds the 'highest lowest point' of any country in the world, which is 1,400 meters above sea level."
         ],
         "name": "Lesotho"
@@ -1258,15 +1006,6 @@
         ],
         "name": "Montenegro"
     },
-    "MF": {
-        "facts": [
-            "It shares an island with a French Collectivity of the same name and a Dutch constituent country (Sint Maarten).",
-            "The island is famous for **Maho Beach**, where aircraft from the nearby Princess Juliana International Airport fly extremely low over sunbathers.",
-            "The island has a thriving tourist economy due to its beautiful beaches and duty-free shopping.",
-            "The border between the French and Dutch sides is one of the oldest in the world without fortifications."
-        ],
-        "name": "Saint Martin"
-    },
     "MG": {
         "facts": [
             "It is the **fourth-largest island in the world**.",
@@ -1321,33 +1060,6 @@
         ],
         "name": "Mongolia"
     },
-    "MO": {
-        "facts": [
-            "It was a **Portuguese colony for over 400 years**, giving it a unique Luso-Chinese cultural mix.",
-            "It is the **'Vegas of Asia'** and is the **world's largest gambling hub** by revenue.",
-            "The ******* Tower** features one of the **world's highest commercial bungee jumps**.",
-            "The Historic Centre of this country is a **UNESCO World Heritage site** with a blend of Chinese temples and Portuguese-style buildings."
-        ],
-        "name": "Macao (Macau)"
-    },
-    "MP": {
-        "facts": [
-            "It is a **Commonwealth in political union with the United States**; residents are U.S. citizens.",
-            "The capital, **Saipan**, is geographically close to the **Mariana Trench**, the deepest point on Earth.",
-            "The islands were the site of major battles during **World War II**, notably on Saipan and Tinian.",
-            "The islands are known for their ancient **Latte stones**, which are large stone support pillars for traditional buildings."
-        ],
-        "name": "Northern Mariana Islands"
-    },
-    "MQ": {
-        "facts": [
-            "This overseas department of France is an island in the Caribbean known as the **'Isle of Flowers'**.",
-            "The catastrophic eruption of **Mount Pelée** in 1902 destroyed the former capital, Saint-Pierre.",
-            "It is the birthplace of the famous political theorist and writer **Frantz Fanon**.",
-            "The traditional local rum, **Rhum Agricole**, is produced from sugarcane juice rather than molasses."
-        ],
-        "name": "Martinique"
-    },
     "MR": {
         "facts": [
             "The vast majority of the population and the capital, **Nouakchott**, are situated on the Atlantic coast.",
@@ -1357,19 +1069,10 @@
         ],
         "name": "Mauritania"
     },
-    "MS": {
-        "facts": [
-            "The island is nicknamed the **'Emerald Isle of the Caribbean'** due to its lush green landscape and historical ties to Irish settlers.",
-            "It is the **only country outside of Ireland** where St. Patrick's Day is a public holiday, celebrating the anniversary of a failed slave revolt on that date.",
-            "In 1995, the capital, **Plymouth**, was devastated and eventually buried by pyroclastic flows from the eruption of the **Soufrière Hills volcano**.",
-            "This country is a **British Overseas Territory**, and its currency is the East Caribbean Dollar (XCD)."
-        ],
-        "name": "Montserrat"
-    },
     "MT": {
         "facts": [
             "The **Ġgantija Temples** on Gozo island are older than both **Stonehenge and the Pyramids of Giza**.",
-            "The **George Cross** medal for gallantry during the Siege of ***** in WWII is **embedded in the national flag**.",
+            "The **George Cross** medal for gallantry during a WWII siege is **embedded in the national flag**.",
             "The name of this country is thought to derive from the Greek word *meli*, meaning **'honey'**, due to its long history of beekeeping.",
             "Its capital, **Valletta**, is a UNESCO World Heritage site and one of the most concentrated historic areas in the world."
         ],
@@ -1438,15 +1141,6 @@
         ],
         "name": "Namibia"
     },
-    "NC": {
-        "facts": [
-            "It is a **French special collectivity** located in the Southwest Pacific Ocean, east of Australia.",
-            "The territory is surrounded by the ***** ******* Barrier Reef**, the world's second-longest coral reef after the Australian Great Barrier Reef.",
-            "This country holds approximately a quarter of the world's known **nickel resources**, making mining a vital part of its economy.",
-            "The capital, **Nouméa**, is sometimes referred to as the 'Paris of the Pacific' due to its French influence and architecture."
-        ],
-        "name": "New Caledonia"
-    },
     "NE": {
         "facts": [
             "Over **80% of its land area is covered by the Sahara Desert**.",
@@ -1455,15 +1149,6 @@
             "The country has one of the **highest fertility rates** in the world."
         ],
         "name": "Niger"
-    },
-    "NF": {
-        "facts": [
-            "This small island territory of Australia was once a penal colony, and its capital, **Kingston**, is a UNESCO World Heritage site.",
-            "The **Norfolk Island pine** tree, which is featured on the territory's flag, is endemic and a major symbol.",
-            "Many of the current residents are descendants of the **Bounty mutineers** and their Tahitian companions, who settled here from Pitcairn Island.",
-            "The local language is a mix of 18th-century English and Tahitian."
-        ],
-        "name": "Norfolk Island"
     },
     "NG": {
         "facts": [
@@ -1564,15 +1249,6 @@
         ],
         "name": "Peru"
     },
-    "PF": {
-        "facts": [
-            "This overseas collectivity of France includes the famous island of **Tahiti**, which is home to the capital, Papeete.",
-            "The islands are known for cultivating and exporting high-quality **black pearls**.",
-            "It was a major site for **French nuclear testing** between 1966 and 1996.",
-            "The islands feature dramatic volcanic peaks and surrounding turquoise lagoons and coral reefs."
-        ],
-        "name": "French Polynesia"
-    },
     "PG": {
         "facts": [
             "It is considered one of the most **culturally diverse** countries on Earth, with over 850 indigenous languages.",
@@ -1608,33 +1284,6 @@
             "It is often considered the geographical center of Europe."
         ],
         "name": "Poland"
-    },
-    "PM": {
-        "facts": [
-            "It is the **only remaining overseas collectivity of France** in North America, located just south of Newfoundland, Canada.",
-            "The residents speak **French**, and the island's culture is a blend of French and North American influences.",
-            "The archipelago is famous for its **colorful wooden houses**, a tradition dating back to the 1950s.",
-            "You can often spot **seals, dolphins, and even whales** in the surrounding marine environment."
-        ],
-        "name": "Saint Pierre and Miquelon"
-    },
-    "PN": {
-        "facts": [
-            "It is one of the **least populated territories in the world**, with fewer than 50 residents.",
-            "The population consists almost entirely of the **descendants of the *HMS Bounty* mutineers** and the Tahitian women who accompanied them.",
-            "The inhabitants speak a unique creole language called **Pitkern**, which blends 18th-century English with Tahitian.",
-            "The island produces what is often regarded as some of the **purest honey in the world** due to the island's isolation and lack of pollution."
-        ],
-        "name": "Pitcairn Islands"
-    },
-    "PR": {
-        "facts": [
-            "This unincorporated territory of the United States has its own Olympic team.",
-            "The most famous frog species, the **'Coquí'**, is a major cultural symbol known for its distinct two-note call.",
-            "The historic fortress of **El Morro** (Castillo San Felipe del Morro) in San Juan is a popular landmark.",
-            "The island has several bays that exhibit **bioluminescent waters** at night."
-        ],
-        "name": "Puerto Rico"
     },
     "PS": {
         "facts": [
@@ -1680,15 +1329,6 @@
         ],
         "name": "Qatar"
     },
-    "RE": {
-        "facts": [
-            "This French overseas department is located in the Indian Ocean, east of Madagascar.",
-            "It is home to **Piton de la Fournaise**, one of the world's most active volcanoes.",
-            "It has a diverse culture that blends European, African, and Asian influences, particularly in its Creole cuisine and music.",
-            "Sugarcane cultivation is a major industry, covering a significant part of the available arable land."
-        ],
-        "name": "Réunion"
-    },
     "RO": {
         "facts": [
             "The region of **Transylvania** is famously associated with the legend of Dracula and the historical figure Vlad the Impaler.",
@@ -1721,7 +1361,7 @@
             "It is known as the **'Land of a Thousand Hills'** (**Igihugu cy'Imisozi Igihumbi**) due to its mountainous geography.",
             "The country is globally famous for the critically endangered **mountain gorillas**, which live in the Volcanoes National Park.",
             "The government mandates a monthly national community service day called **Umuganda**, where all citizens participate in public works like cleaning streets and building schools.",
-            "The ****** Parliament consistently has one of the **highest percentages of female members** in the world."
+            "The national Parliament consistently has one of the **highest percentages of female members** in the world."
         ],
         "name": "Rwanda"
     },
@@ -1779,15 +1419,6 @@
         ],
         "name": "Singapore"
     },
-    "SH": {
-        "facts": [
-            "This country is famous as the place of **Napoleon Bonaparte's final exile and death**.",
-            "**Tristan da Cunha** is cited as the **most remote inhabited archipelago in the world**.",
-            "All three islands are **volcanic** and extremely isolated in the South Atlantic Ocean.",
-            "Ascension Island is a critical nesting ground for the **green turtle**."
-        ],
-        "name": "Saint Helena, Ascension and Tristan da Cunha"
-    },
     "SI": {
         "facts": [
             "It is considered one of the **most forested countries** in Europe, with over 60% of its land covered by trees.",
@@ -1796,15 +1427,6 @@
             "The world-famous **Lipizzaner horses** have their origins in the village of Lipica here."
         ],
         "name": "Slovenia"
-    },
-    "SJ": {
-        "facts": [
-            "This archipelago is part of Norway but operates under a special international treaty, allowing citizens of signatory countries to reside there.",
-            "The main island, Svalbard, is famous for its requirement that residents carry **rifles for protection against polar bears**.",
-            "The **Global Seed Vault**, a secure seed bank designed to store duplicates of seeds from genebanks worldwide, is located here.",
-            "During the summer, the islands experience **midnight sun**; in winter, they have a polar night."
-        ],
-        "name": "Svalbard and Jan Mayen"
     },
     "SK": {
         "facts": [
@@ -1836,9 +1458,9 @@
     "SN": {
         "facts": [
             "The capital, **Dakar**, is the westernmost city on the African mainland, situated on the Cap-Vert peninsula.",
-            "The most popular spectator sport is traditional *********** wrestling (Laamb)**, where matches can draw huge crowds and are often accompanied by mystical rituals.",
+            "The most popular spectator sport is traditional wrestling (Laamb), where matches can draw huge crowds and are often accompanied by mystical rituals.",
             "It is known for the **Lac Rose (Pink Lake)**, which gets its distinctive color from *Dunaliella salina* algae in its high-salt water.",
-            "The country has a long tradition of **'Teranga,'** which means hospitality, often considered a pillar of the ******** national identity."
+            "The country has a long tradition of **'Teranga,'** which means hospitality, often considered a pillar of the national identity."
         ],
         "name": "Senegal"
     },
@@ -1887,15 +1509,6 @@
         ],
         "name": "El Salvador"
     },
-    "SX": {
-        "facts": [
-            "It is a constituent country of the Kingdom of the Netherlands and shares an island with a French collectivity (Saint Martin).",
-            "The famous **Maho Beach** is located here, where commercial jets land extremely low over the sand.",
-            "The economy is heavily focused on **tourism**, especially duty-free shopping and casinos.",
-            "The capital, **Philipsburg**, is known for its narrow strip of land between the sea and a salt pond."
-        ],
-        "name": "Sint Maarten"
-    },
     "SY": {
         "facts": [
             "The capital, **Damascus**, is widely considered to be one of the oldest continuously inhabited cities in the world.",
@@ -1914,32 +1527,14 @@
         ],
         "name": "Eswatini"
     },
-    "TC": {
-        "facts": [
-            "The nation is a **British Overseas Territory** but uses the **US Dollar** as its official currency.",
-            "A significant local treasure is **JoJo**, a wild Atlantic bottlenose dolphin who has interacted with humans in the surrounding waters for decades.",
-            "The islands have **no permanent rivers or lakes**, depending entirely on desalination and rainfall for freshwater.",
-            "The territory's flag features a yellow shield displaying a conch shell, a lobster, and a native cactus."
-        ],
-        "name": "Turks and Caicos Islands"
-    },
     "TD": {
         "facts": [
             "It is the **largest landlocked country in Africa** by land area.",
-            "The country's name is derived from **Lake ******, a large, shallow lake that has shrunk drastically due to climate change and water diversion.",
+            "The country's name is derived from a large, shallow lake, a large, shallow lake that has shrunk drastically due to climate change and water diversion.",
             "Due to low light pollution from industry and cities, the country's rural areas are known for having a spectacularly clear **night sky**.",
             "The official languages are **French and Arabic**."
         ],
         "name": "Chad"
-    },
-    "TF": {
-        "facts": [
-            "This overseas territory of France is a collection of volcanic islands in the sub-Antarctic Indian Ocean and a claim on Antarctica.",
-            "It is home to the active volcano **Mont Ross**, the highest point in the territory.",
-            "The islands are permanently inhabited only by **scientific researchers and military personnel**.",
-            "The territory is a vast nature reserve, famous for its large populations of penguins and seals."
-        ],
-        "name": "French Southern and Antarctic Lands"
     },
     "TG": {
         "facts": [
@@ -1968,15 +1563,6 @@
         ],
         "name": "Tajikistan"
     },
-    "TK": {
-        "facts": [
-            "This territory of New Zealand consists of three tropical coral **atolls** in the South Pacific.",
-            "It is the first territory in the world to be **100% solar powered** for its electricity needs.",
-            "There are no airfields; the islands are only accessible by **boat** from Samoa.",
-            "The traditional form of government is a council of elders (*Taupulega*)."
-        ],
-        "name": "Tokelau"
-    },
     "TL": {
         "facts": [
             "It is one of the **youngest countries in the world**, gaining full independence in 2002.",
@@ -1999,7 +1585,7 @@
         "facts": [
             "The country is home to the ancient city of **Carthage**, a major power in the Mediterranean until its defeat by Rome.",
             "It was the **birthplace of the 'Arab Spring'** movement in 2010-2011.",
-            "The ****** desert was a primary filming location for the planet **Tatooine** in the original **Star Wars** saga.",
+            "The A major desert here was a primary filming location for the planet **Tatooine** in the original **Star Wars** saga.",
             "The ancient Roman amphitheater of **El Jem** is one of the best-preserved in the world, rivaling the Colosseum."
         ],
         "name": "Tunisia"
@@ -2040,15 +1626,6 @@
         ],
         "name": "Tuvalu"
     },
-    "TW": {
-        "facts": [
-            "It operates as a democratic, self-ruled state, though it is claimed by the People's Republic of China.",
-            "The former world's tallest building, **Taipei 101**, is known for its massive tuned mass damper designed to withstand typhoons and earthquakes.",
-            "It is one of the world leaders in the production of **computer hardware and semiconductors**.",
-            "The local cuisine is famous for its **night markets** and street food culture."
-        ],
-        "name": "Taiwan"
-    },
     "TZ": {
         "facts": [
             "It is home to **Mount Kilimanjaro**, the highest mountain in Africa and the highest single freestanding mountain in the world.",
@@ -2075,15 +1652,6 @@
             "The local currency is the **Ugandan Shilling**."
         ],
         "name": "Uganda"
-    },
-    "UM": {
-        "facts": [
-            "This is a statistical designation for **nine uninhabited territories** of the United States in the Pacific and Caribbean.",
-            "The territories include **Midway Atoll** and **Wake Island**, which were key sites during World War II.",
-            "They are administered by the Department of the Interior and primarily serve as **wildlife refuges**.",
-            "The islands are generally remote and have no permanent resident population."
-        ],
-        "name": "United States Minor Outlying Islands"
     },
     "US": {
         "facts": [
@@ -2139,24 +1707,6 @@
         ],
         "name": "Venezuela"
     },
-    "VG": {
-        "facts": [
-            "This British Overseas Territory is a global center for **offshore financial services** and company incorporation.",
-            "The islands are a premier destination for **yachting and sailing**, with numerous protected anchorages.",
-            "The famous rock formations known as **'The Baths'** on Virgin Gorda are a major tourist attraction.",
-            "The capital is **Road Town**, located on the island of Tortola."
-        ],
-        "name": "British Virgin Islands"
-    },
-    "VI": {
-        "facts": [
-            "This unincorporated territory of the United States consists of three main islands: **Saint Croix, Saint John, and Saint Thomas**.",
-            "The islands are the only place in the US where people **drive on the left side** of the road, although the cars are left-hand drive.",
-            "The capital, **Charlotte Amalie** (on St. Thomas), is famous for its picturesque harbor and historic Danish colonial architecture.",
-            "The **Virgin Islands National Park** covers two-thirds of the island of Saint John."
-        ],
-        "name": "U.S. Virgin Islands"
-    },
     "VN": {
         "facts": [
             "The capital, **Hanoi**, is famous for its **'36 streets'** in the Old Quarter, each traditionally specializing in a particular trade.",
@@ -2175,32 +1725,14 @@
         ],
         "name": "Vanuatu"
     },
-    "WF": {
-        "facts": [
-            "It is a **French island collectivity** in the South Pacific, consisting of three main islands.",
-            "The territory is named after the English explorer **Samuel Wallis** and the Dutch explorers **Schouten and Le Maire** (who named Futuna).",
-            "Traditional life is governed by a few **hereditary kings** that coexist with the French administrative system.",
-            "A main cultural event is the **kava ceremony**, a traditional drink preparation with social and political significance."
-        ],
-        "name": "Wallis and Futuna"
-    },
     "WS": {
         "facts": [
             "This country **skipped an entire day** (December 30, 2011) by moving to the west side of the International Date Line to better align with its trade partners.",
             "The national rugby team performs a traditional war dance called the **'Siva Tau'** before games.",
             "The famous Scottish author **Robert Louis Stevenson** (*Treasure Island*) spent his last years here and is buried on a mountain overlooking Apia.",
-            "The traditional ****** tattoo, the *tatau*, is an elaborate and sacred rite of passage, with male tattoos called *Pe'a*."
+            "The traditional tattoo, the *tatau*, is an elaborate and sacred rite of passage, with male tattoos called *Pe'a*."
         ],
         "name": "Samoa"
-    },
-    "XK": {
-        "facts": [
-            "It is one of the **youngest countries in the world**, having unilaterally declared independence from Serbia in February 2008.",
-            "The capital, Pristina, features the **'Newborn'** monument, which is repainted every year with a new design to mark its independence anniversary.",
-            "The country's highest point is **Gjeravica**, part of the Accursed Mountains.",
-            "Its official currency is the **Euro (€)**, despite not being a member of the Eurozone or the European Union."
-        ],
-        "name": "Kosovo"
     },
     "YE": {
         "facts": [
@@ -2210,15 +1742,6 @@
             "The country is situated at the southwestern corner of the **Arabian Peninsula**."
         ],
         "name": "Yemen"
-    },
-    "YT": {
-        "facts": [
-            "It is an **overseas department and region of France**, located in the Indian Ocean between Mozambique and Madagascar.",
-            "This country is nicknamed the **'perfume island'** due to the cultivation of ylang-ylang and other fragrant plants.",
-            "A significant portion of the population (over 95%) adheres to **Islam**, making it the only French department with a Muslim majority.",
-            "The lagoon surrounding this country is one of the **largest and deepest coral lagoons in the world**."
-        ],
-        "name": "Mayotte"
     },
     "ZA": {
         "facts": [

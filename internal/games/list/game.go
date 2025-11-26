@@ -2,13 +2,16 @@ package list
 
 import (
 	"flagged-it/internal/data"
+	"flagged-it/internal/data/models"
 	"flagged-it/internal/ui/components"
+	"flagged-it/internal/utils"
 	"fmt"
+	"sort"
+	"strings"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
-	"sort"
-	"strings"
 )
 
 type Game struct {
@@ -18,16 +21,21 @@ type Game struct {
 	gameView          *fyne.Container
 	mainContent       *fyne.Container
 	selectedContinent string
-	allCountries      []string
+	allCountries      []models.Country
 	guessedCountries  map[string]bool
 	guessEntry        *widget.Entry
 	progressLabel     *widget.Label
 	countryList       *widget.List
 	statusLabel       *widget.Label
+	scoreLabel        *widget.Label
+	scoreManager      *utils.ScoreManager
 }
 
-func NewGame(backFunc func()) *Game {
-	g := &Game{backFunc: backFunc}
+func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
+	g := &Game{
+		backFunc:     backFunc,
+		scoreManager: scoreManager,
+	}
 	g.setupUI()
 	return g
 }
@@ -52,50 +60,50 @@ func (g *Game) setupUI() {
 }
 
 func (g *Game) setupSelectionView() {
-	title := widget.NewLabel("Select Region")
-	title.TextStyle.Bold = true
-
-	description := widget.NewLabel("Choose a region and try to name all countries in it!")
-
-	worldBtn := widget.NewButton("🌍 World (All Countries)", func() {
-		g.startGame("World")
-	})
-	europeBtn := widget.NewButton("🇪🇺 Europe", func() {
-		g.startGame("Europe")
-	})
-	americasBtn := widget.NewButton("🌎 Americas", func() {
-		g.startGame("Americas")
-	})
-	asiaBtn := widget.NewButton("🇯🇵 Asia", func() {
-		g.startGame("Asia")
-	})
-	africaBtn := widget.NewButton("🇪🇬 Africa", func() {
-		g.startGame("Africa")
-	})
-	oceaniaBtn := widget.NewButton("🇦🇺 Oceania", func() {
-		g.startGame("Oceania")
-	})
-
-	g.selectionView = container.NewVBox(
-		title,
-		description,
-		widget.NewSeparator(),
-		worldBtn,
-		europeBtn,
-		americasBtn,
-		asiaBtn,
-		africaBtn,
-		oceaniaBtn,
+	availableRegions := g.getAvailableRegions()
+	regionSelector := components.NewRegionSelector(
+		"Select Region",
+		"Choose a region and try to name all countries in it!",
+		availableRegions,
+		g.startGame,
 	)
+	g.selectionView = regionSelector.GetContainer()
+}
+
+func (g *Game) getAvailableRegions() []string {
+	countries := data.LoadCountries()
+	regionMap := make(map[string]bool)
+	regionMap["World"] = true
+
+	for _, country := range countries {
+		if country.Region != "" {
+			regionMap[country.Region] = true
+		}
+	}
+
+	var regions []string
+	for region := range regionMap {
+		regions = append(regions, region)
+	}
+
+	// Sort with World first
+	sort.Slice(regions, func(i, j int) bool {
+		if regions[i] == "World" {
+			return true
+		}
+		if regions[j] == "World" {
+			return false
+		}
+		return regions[i] < regions[j]
+	})
+
+	return regions
 }
 
 func (g *Game) setupGameView() {
-	backBtn := widget.NewButton("Back to Selection", func() {
-		g.showSelection()
-	})
-
 	g.progressLabel = widget.NewLabel("")
 	g.statusLabel = widget.NewLabel("")
+	g.scoreLabel = widget.NewLabel("")
 
 	g.guessEntry = widget.NewEntry()
 	g.guessEntry.SetPlaceHolder("Enter country name...")
@@ -111,19 +119,22 @@ func (g *Game) setupGameView() {
 		func(id widget.ListItemID, obj fyne.CanvasObject) {
 			label := obj.(*widget.Label)
 			country := g.allCountries[id]
-			if g.guessedCountries[strings.ToLower(country)] {
-				label.SetText(fmt.Sprintf("%d. %s", id+1, country))
+			if g.guessedCountries[strings.ToLower(country.Name.Common)] {
+				label.SetText(fmt.Sprintf("%d. %s", id+1, country.Name.Common))
 			} else {
 				label.SetText(fmt.Sprintf("%d. ?", id+1))
 			}
 		},
 	)
 
-	guessContainer := container.NewGridWithColumns(2, g.guessEntry, guessBtn)
+	guessContainer := container.NewBorder(
+		nil, nil,
+		guessBtn, nil,
+		g.guessEntry,
+	)
 
 	topSection := container.NewVBox(
-		backBtn,
-		widget.NewSeparator(),
+		g.scoreLabel,
 		g.progressLabel,
 		g.statusLabel,
 		widget.NewSeparator(),
@@ -141,18 +152,21 @@ func (g *Game) startGame(continent string) {
 	g.selectedContinent = continent
 	countries := data.LoadCountries()
 
-	g.allCountries = []string{}
+	g.allCountries = []models.Country{}
 	for _, country := range countries {
 		if continent == "World" || country.Region == continent {
-			g.allCountries = append(g.allCountries, country.Name.Common)
+			g.allCountries = append(g.allCountries, country)
 		}
 	}
 
-	sort.Strings(g.allCountries)
+	sort.Slice(g.allCountries, func(i, j int) bool {
+		return g.allCountries[i].Name.Common < g.allCountries[j].Name.Common
+	})
 	g.guessedCountries = make(map[string]bool)
 
 	g.updateProgress()
 	g.statusLabel.SetText("Start guessing countries!")
+	g.scoreLabel.SetText("Completion: 0%")
 	g.guessEntry.SetText("")
 
 	g.mainContent.RemoveAll()
@@ -167,20 +181,23 @@ func (g *Game) makeGuess() {
 		return
 	}
 
-	guessLower := strings.ToLower(guess)
 	found := false
+	var matchedCountry models.Country
 
 	for _, country := range g.allCountries {
-		if strings.ToLower(country) == guessLower && !g.guessedCountries[strings.ToLower(country)] {
-			g.guessedCountries[strings.ToLower(country)] = true
+		if utils.MatchesCountry(guess, country) && !g.guessedCountries[strings.ToLower(country.Name.Common)] {
+			g.guessedCountries[strings.ToLower(country.Name.Common)] = true
+			matchedCountry = country
 			found = true
 			break
 		}
 	}
 
 	if found {
-		g.statusLabel.SetText(fmt.Sprintf("Correct! %s added to the list.", guess))
+		g.statusLabel.SetText(fmt.Sprintf("Correct! %s added to the list.", matchedCountry.Name.Common))
 		g.updateProgress()
+		percent := float64(len(g.guessedCountries)) / float64(len(g.allCountries)) * 100
+		g.scoreLabel.SetText(fmt.Sprintf("Completion: %.0f%%", percent))
 		if len(g.guessedCountries) == len(g.allCountries) {
 			g.statusLabel.SetText("Congratulations! You've listed all countries!")
 		}

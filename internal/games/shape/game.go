@@ -4,17 +4,26 @@ import (
 	"flagged-it/internal/data"
 	"flagged-it/internal/data/models"
 	"flagged-it/internal/ui/components"
+	"flagged-it/internal/utils"
 	"fmt"
+	"image"
+	"image/color"
+	"math"
+	"math/rand"
+	"sort"
+	"strings"
+	"sync"
+	"time"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
-	"image"
-	"image/color"
-	"math"
-	"sort"
-	"strings"
-	"time"
+)
+
+const (
+	canvasWidth  = 1000.0
+	canvasHeight = 700.0
 )
 
 type Game struct {
@@ -28,7 +37,6 @@ type Game struct {
 	regionCountries []models.Feature
 	currentIndex    int
 	shapeCanvas     *fyne.Container
-	islandContainer *fyne.Container
 	guessEntry      *widget.Entry
 	resultLabel     *widget.Label
 	scoreLabel      *widget.Label
@@ -37,12 +45,16 @@ type Game struct {
 	total           int
 	selectedRegion  string
 	currentCoords   [][][][]float64
+	coordCache      map[int][][][][]float64
+	cacheMutex      sync.RWMutex
+	scoreManager    *utils.ScoreManager
 }
 
-func NewGame(backFunc func()) *Game {
+func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
 	g := &Game{
-		backFunc:  backFunc,
-		countries: data.LoadGeoData().Features,
+		backFunc:     backFunc,
+		scoreManager: scoreManager,
+		countries:    data.LoadGeoData().Features,
 	}
 	g.setupUI()
 	return g
@@ -68,48 +80,46 @@ func (g *Game) setupUI() {
 }
 
 func (g *Game) setupSelectionView() {
-	title := widget.NewLabel("Select Region")
-	title.TextStyle.Bold = true
-
-	description := widget.NewLabel("Choose a region and guess all country shapes!")
-
-	worldBtn := widget.NewButton("🌍 World (All Countries)", func() {
-		g.startRegionGame("World")
-	})
-	europeBtn := widget.NewButton("🇪🇺 Europe", func() {
-		g.startRegionGame("Europe")
-	})
-	americasBtn := widget.NewButton("🌎 Americas", func() {
-		g.startRegionGame("Americas")
-	})
-	asiaBtn := widget.NewButton("🇯🇵 Asia", func() {
-		g.startRegionGame("Asia")
-	})
-	africaBtn := widget.NewButton("🇪🇬 Africa", func() {
-		g.startRegionGame("Africa")
-	})
-	oceaniaBtn := widget.NewButton("🇦🇺 Oceania", func() {
-		g.startRegionGame("Oceania")
-	})
-
-	g.selectionView = container.NewVBox(
-		title,
-		description,
-		widget.NewSeparator(),
-		worldBtn,
-		europeBtn,
-		americasBtn,
-		asiaBtn,
-		africaBtn,
-		oceaniaBtn,
+	availableRegions := g.getAvailableRegions()
+	regionSelector := components.NewRegionSelector(
+		"Select Region",
+		"Choose a region and guess all country shapes!",
+		availableRegions,
+		g.startRegionGame,
 	)
+	g.selectionView = regionSelector.GetContainer()
+}
+
+func (g *Game) getAvailableRegions() []string {
+	regionMap := make(map[string]bool)
+	regionMap["World"] = true
+
+	for _, country := range g.countries {
+		if country.Properties.Continent != "" {
+			regionMap[country.Properties.Continent] = true
+		}
+	}
+
+	var regions []string
+	for region := range regionMap {
+		regions = append(regions, region)
+	}
+
+	// Sort with World first
+	sort.Slice(regions, func(i, j int) bool {
+		if regions[i] == "World" {
+			return true
+		}
+		if regions[j] == "World" {
+			return false
+		}
+		return regions[i] < regions[j]
+	})
+
+	return regions
 }
 
 func (g *Game) setupGameView() {
-	backBtn := widget.NewButton("Back to Selection", func() {
-		g.showSelection()
-	})
-
 	g.scoreLabel = widget.NewLabel("Score: 0/0")
 	g.progressLabel = widget.NewLabel("")
 
@@ -119,21 +129,19 @@ func (g *Game) setupGameView() {
 
 	guessBtn := widget.NewButton("Guess", func() { g.checkGuess(g.guessEntry.Text) })
 	g.resultLabel = widget.NewLabel("")
-	guessContainer := container.NewGridWithColumns(2, g.guessEntry, guessBtn)
+	guessContainer := container.NewBorder(
+		nil, nil,
+		guessBtn, nil,
+		g.guessEntry,
+	)
 
-	// Create main shape canvas and island container
+	// Create main shape canvas
 	g.shapeCanvas = container.NewWithoutLayout()
-	g.islandContainer = container.NewVBox()
 
 	// Create main shape window
-	mainShapeWindow := container.NewMax(g.shapeCanvas)
-
-	// Layout with islands on left, main shape taking full width
-	shapeWindow := container.NewBorder(nil, nil, g.islandContainer, nil, mainShapeWindow)
+	shapeWindow := container.NewMax(g.shapeCanvas)
 
 	topSection := container.NewVBox(
-		backBtn,
-		widget.NewSeparator(),
 		g.scoreLabel,
 		g.progressLabel,
 		guessContainer,
@@ -151,60 +159,12 @@ func (g *Game) setupGameView() {
 func (g *Game) drawShape(coords [][][][]float64) {
 	g.currentCoords = coords
 	g.shapeCanvas.RemoveAll()
-	g.islandContainer.RemoveAll()
 
 	if len(coords) == 0 {
 		return
 	}
 
-	// Find largest polygon for main display
-	mainPolygon, otherPolygons := g.separatePolygons(coords)
-
-	// Draw main shape (largest polygon)
-	if len(mainPolygon) > 0 {
-		g.drawMainShape([][][][]float64{mainPolygon})
-	}
-
-	// Draw individual island windows if there are detached islands
-	if len(otherPolygons) > 0 {
-		for _, island := range otherPolygons {
-			g.drawIslandWindow([][][][]float64{island})
-		}
-	}
-}
-
-func (g *Game) separatePolygons(coords [][][][]float64) ([][][]float64, [][][][]float64) {
-	if len(coords) <= 1 {
-		if len(coords) == 1 {
-			return coords[0], nil
-		}
-		return nil, nil
-	}
-
-	// Find largest polygon by area
-	largestIdx := 0
-	largestArea := 0.0
-
-	for i, polygon := range coords {
-		if len(polygon) > 0 {
-			area := g.calculatePolygonArea(polygon[0])
-			if area > largestArea {
-				largestArea = area
-				largestIdx = i
-			}
-		}
-	}
-
-	// Separate main from others
-	mainPolygon := coords[largestIdx]
-	otherPolygons := make([][][][]float64, 0)
-	for i, polygon := range coords {
-		if i != largestIdx {
-			otherPolygons = append(otherPolygons, polygon)
-		}
-	}
-
-	return mainPolygon, otherPolygons
+	g.drawMainShape(coords)
 }
 
 func (g *Game) calculatePolygonArea(ring [][]float64) float64 {
@@ -226,104 +186,41 @@ func (g *Game) drawMainShape(coords [][][][]float64) {
 		return
 	}
 
-	// Use dynamic canvas size for 100% width
+	raster := canvas.NewRaster(func(w, h int) image.Image {
+		img := image.NewRGBA(image.Rect(0, 0, w, h))
+
+		for y := 0; y < h; y++ {
+			for x := 0; x < w; x++ {
+				img.Set(x, y, color.RGBA{0, 0, 0, 0})
+			}
+		}
+
+		scaleX := float64(w) / (maxX - minX)
+		scaleY := float64(h) / (maxY - minY)
+		scale := math.Min(scaleX, scaleY) * 0.9
+
+		shapeWidth := (maxX - minX) * scale
+		shapeHeight := (maxY - minY) * scale
+		offsetX := (float64(w) - shapeWidth) / 2
+		offsetY := (float64(h) - shapeHeight) / 2
+
+		for _, polygon := range coords {
+			if len(polygon) > 0 {
+				g.fillPolygon(img, polygon[0], minX, minY, scale, offsetX, offsetY, float64(h))
+			}
+		}
+
+		return img
+	})
+
 	canvasSize := g.shapeCanvas.Size()
-	width, height := float64(canvasSize.Width), float64(canvasSize.Height)
-	if width == 0 || height == 0 {
-		width, height = 600.0, 400.0
+	if canvasSize.Width > 0 && canvasSize.Height > 0 {
+		raster.Resize(canvasSize)
+	} else {
+		// Use 90% of default canvas for padding
+		raster.Resize(fyne.NewSize(float32(canvasWidth*0.9), float32(canvasHeight*0.9)))
 	}
-
-	padding := 30.0
-
-	scaleX := (width - 2*padding) / (maxX - minX)
-	scaleY := (height - 2*padding) / (maxY - minY)
-	scale := math.Min(scaleX, scaleY)
-
-	shapeWidth := (maxX - minX) * scale
-	shapeHeight := (maxY - minY) * scale
-	offsetX := (width - shapeWidth) / 2
-	offsetY := (height - shapeHeight) / 2
-
-	raster := canvas.NewRaster(func(w, h int) image.Image {
-		img := image.NewRGBA(image.Rect(0, 0, w, h))
-
-		for y := 0; y < h; y++ {
-			for x := 0; x < w; x++ {
-				img.Set(x, y, color.RGBA{255, 255, 255, 255})
-			}
-		}
-
-		for _, polygon := range coords {
-			if len(polygon) > 0 {
-				g.fillPolygon(img, polygon[0], minX, minY, scale, offsetX, offsetY, float64(h), color.RGBA{0, 0, 0, 255})
-			}
-		}
-
-		return img
-	})
-
-	raster.Resize(fyne.NewSize(float32(width), float32(height)))
 	g.shapeCanvas.Add(raster)
-}
-
-func (g *Game) drawIslandWindow(coords [][][][]float64) {
-	minX, maxX, minY, maxY := g.calculateBounds(coords)
-	if minX == maxX || minY == maxY {
-		return
-	}
-
-	width, height := 150.0, 100.0
-	padding := 8.0
-
-	scaleX := (width - 2*padding) / (maxX - minX)
-	scaleY := (height - 2*padding) / (maxY - minY)
-	scale := math.Min(scaleX, scaleY)
-
-	shapeWidth := (maxX - minX) * scale
-	shapeHeight := (maxY - minY) * scale
-	offsetX := (width - shapeWidth) / 2
-	offsetY := (height - shapeHeight) / 2
-
-	raster := canvas.NewRaster(func(w, h int) image.Image {
-		img := image.NewRGBA(image.Rect(0, 0, w, h))
-
-		// White background
-		for y := 0; y < h; y++ {
-			for x := 0; x < w; x++ {
-				img.Set(x, y, color.RGBA{255, 255, 255, 255})
-			}
-		}
-
-		// Black border (2px)
-		for i := 0; i < 2; i++ {
-			for x := 0; x < w; x++ {
-				img.Set(x, i, color.RGBA{0, 0, 0, 255})
-				img.Set(x, h-1-i, color.RGBA{0, 0, 0, 255})
-			}
-			for y := 0; y < h; y++ {
-				img.Set(i, y, color.RGBA{0, 0, 0, 255})
-				img.Set(w-1-i, y, color.RGBA{0, 0, 0, 255})
-			}
-		}
-
-		for _, polygon := range coords {
-			if len(polygon) > 0 {
-				g.fillPolygon(img, polygon[0], minX, minY, scale, offsetX, offsetY, float64(h), color.RGBA{0, 0, 0, 255})
-			}
-		}
-
-		return img
-	})
-
-	raster.Resize(fyne.NewSize(float32(width), float32(height)))
-
-	// Create container for this island and add to stack
-	islandCanvas := container.NewWithoutLayout()
-	islandCanvas.Add(raster)
-	islandWindow := container.NewBorder(nil, nil, nil, nil, islandCanvas)
-	islandWindow.Resize(fyne.NewSize(float32(width), float32(height)))
-
-	g.islandContainer.Add(islandWindow)
 }
 
 func (g *Game) calculateBounds(coords [][][][]float64) (minX, maxX, minY, maxY float64) {
@@ -358,12 +255,11 @@ func (g *Game) calculateBounds(coords [][][][]float64) (minX, maxX, minY, maxY f
 	return
 }
 
-func (g *Game) fillPolygon(img *image.RGBA, ring [][]float64, minX, minY, scale, offsetX, offsetY, height float64, fillColor color.RGBA) {
+func (g *Game) fillPolygon(img *image.RGBA, ring [][]float64, minX, minY, scale, offsetX, offsetY, height float64) {
 	if len(ring) < 3 {
 		return
 	}
 
-	// Convert coordinates to screen space
 	points := make([][2]int, len(ring))
 	for i, point := range ring {
 		if len(point) < 2 {
@@ -374,12 +270,10 @@ func (g *Game) fillPolygon(img *image.RGBA, ring [][]float64, minX, minY, scale,
 		points[i] = [2]int{x, y}
 	}
 
-	// Simple polygon fill using scanline algorithm
 	bounds := img.Bounds()
 	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
 		intersections := []int{}
 
-		// Find intersections with polygon edges
 		for i := 0; i < len(points); i++ {
 			j := (i + 1) % len(points)
 			p1, p2 := points[i], points[j]
@@ -390,13 +284,12 @@ func (g *Game) fillPolygon(img *image.RGBA, ring [][]float64, minX, minY, scale,
 			}
 		}
 
-		// Sort intersections and fill between pairs
 		sort.Ints(intersections)
 		for i := 0; i < len(intersections); i += 2 {
 			if i+1 < len(intersections) {
 				for x := intersections[i]; x <= intersections[i+1]; x++ {
 					if x >= bounds.Min.X && x < bounds.Max.X {
-						img.Set(x, y, fillColor)
+						img.Set(x, y, color.RGBA{255, 255, 255, 255})
 					}
 				}
 			}
@@ -405,89 +298,139 @@ func (g *Game) fillPolygon(img *image.RGBA, ring [][]float64, minX, minY, scale,
 }
 
 func (g *Game) nextCountry() {
-	if len(g.regionCountries) == 0 || g.currentIndex >= len(g.regionCountries) {
-		return
+	for g.currentIndex < len(g.regionCountries) {
+		idx := g.currentIndex
+		g.currentCountry = g.regionCountries[idx]
+		g.currentIndex++
+
+		g.cacheMutex.RLock()
+		coords, exists := g.coordCache[idx]
+		g.cacheMutex.RUnlock()
+
+		if !exists {
+			coords = g.parseCoordinates(g.currentCountry.Geometry)
+			g.cacheMutex.Lock()
+			g.coordCache[idx] = coords
+			g.cacheMutex.Unlock()
+		}
+
+		if len(coords) > 0 {
+			g.drawShape(coords)
+			g.guessEntry.SetText("")
+			g.resultLabel.SetText("")
+			return
+		}
 	}
+}
 
-	g.currentCountry = g.regionCountries[g.currentIndex]
-	g.currentIndex++
-
-	// Handle both Polygon and MultiPolygon geometries
+func (g *Game) parseCoordinates(geom models.Geometry) [][][][]float64 {
 	var coords [][][][]float64
-	switch g.currentCountry.Geometry.Type {
+
+	switch geom.Type {
 	case "Polygon":
-		// Polygon: coordinates are [][][]float64 (array of rings)
-		if coordsInterface, ok := g.currentCountry.Geometry.Coordinates.([]interface{}); ok {
-			var polygonCoords [][][]float64
-			for _, ringInterface := range coordsInterface {
-				if ringArray, ok := ringInterface.([]interface{}); ok {
-					var ring [][]float64
-					for _, pointInterface := range ringArray {
-						if pointArray, ok := pointInterface.([]interface{}); ok && len(pointArray) >= 2 {
-							if lon, ok1 := pointArray[0].(float64); ok1 {
-								if lat, ok2 := pointArray[1].(float64); ok2 {
-									ring = append(ring, []float64{lon, lat})
-								}
-							}
-						}
-					}
-					polygonCoords = append(polygonCoords, ring)
-				}
-			}
+		if polygonCoords := g.parsePolygon(geom.Coordinates); len(polygonCoords) > 0 {
 			coords = [][][][]float64{polygonCoords}
 		}
 	case "MultiPolygon":
-		// MultiPolygon: coordinates are [][][][]float64 (array of polygons)
-		if coordsInterface, ok := g.currentCountry.Geometry.Coordinates.([]interface{}); ok {
-			for _, polygonInterface := range coordsInterface {
-				if polygonArray, ok := polygonInterface.([]interface{}); ok {
-					var polygonCoords [][][]float64
-					for _, ringInterface := range polygonArray {
-						if ringArray, ok := ringInterface.([]interface{}); ok {
-							var ring [][]float64
-							for _, pointInterface := range ringArray {
-								if pointArray, ok := pointInterface.([]interface{}); ok && len(pointArray) >= 2 {
-									if lon, ok1 := pointArray[0].(float64); ok1 {
-										if lat, ok2 := pointArray[1].(float64); ok2 {
-											ring = append(ring, []float64{lon, lat})
-										}
-									}
-								}
-							}
-							polygonCoords = append(polygonCoords, ring)
-						}
-					}
+		if multiCoords, ok := geom.Coordinates.([]interface{}); ok {
+			for _, poly := range multiCoords {
+				if polygonCoords := g.parsePolygon(poly); len(polygonCoords) > 0 {
 					coords = append(coords, polygonCoords)
 				}
 			}
 		}
-	default:
-		// Skip unsupported geometry types
-		g.nextCountry()
-		return
 	}
 
-	if len(coords) == 0 {
-		// Try again with a different country
-		g.nextCountry()
-		return
+	return coords
+}
+
+func (g *Game) parsePolygon(coordsInterface interface{}) [][][]float64 {
+	var polygonCoords [][][]float64
+
+	if coordsArray, ok := coordsInterface.([]interface{}); ok {
+		for _, ringInterface := range coordsArray {
+			if ring := g.parseRing(ringInterface); len(ring) > 0 {
+				polygonCoords = append(polygonCoords, ring)
+			}
+		}
 	}
 
-	g.drawShape(coords)
-	g.guessEntry.SetText("")
-	g.resultLabel.SetText("")
+	return polygonCoords
+}
+
+func (g *Game) parseRing(ringInterface interface{}) [][]float64 {
+	var ring [][]float64
+
+	if ringArray, ok := ringInterface.([]interface{}); ok {
+		for _, pointInterface := range ringArray {
+			if pointArray, ok := pointInterface.([]interface{}); ok && len(pointArray) >= 2 {
+				if lon, ok1 := pointArray[0].(float64); ok1 {
+					if lat, ok2 := pointArray[1].(float64); ok2 {
+						ring = append(ring, []float64{lon, lat})
+					}
+				}
+			}
+		}
+	}
+
+	return ring
+}
+
+func (g *Game) startRegionGame(region string) {
+	g.selectedRegion = region
+	g.regionCountries = []models.Feature{}
+	g.coordCache = make(map[int][][][][]float64)
+
+	// Filter countries by region
+	for _, country := range g.countries {
+		if region == "World" || country.Properties.Continent == region {
+			g.regionCountries = append(g.regionCountries, country)
+		}
+	}
+
+	// Shuffle countries
+	rand.Shuffle(len(g.regionCountries), func(i, j int) {
+		g.regionCountries[i], g.regionCountries[j] = g.regionCountries[j], g.regionCountries[i]
+	})
+
+	g.score = 0
+	g.total = len(g.regionCountries)
+	g.currentIndex = 0
+	g.updateProgress()
+
+	g.mainContent.RemoveAll()
+	g.mainContent.Add(g.gameView)
+	g.mainContent.Refresh()
+
+	// Preprocess coordinates in background
+	go g.preprocessCoordinates()
+	g.nextCountry()
+}
+
+func (g *Game) preprocessCoordinates() {
+	for i := range g.regionCountries {
+		g.cacheMutex.RLock()
+		_, exists := g.coordCache[i]
+		g.cacheMutex.RUnlock()
+
+		if !exists {
+			coords := g.parseCoordinates(g.regionCountries[i].Geometry)
+			g.cacheMutex.Lock()
+			g.coordCache[i] = coords
+			g.cacheMutex.Unlock()
+		}
+	}
 }
 
 func (g *Game) checkGuess(guess string) {
-	guess = strings.TrimSpace(strings.ToLower(guess))
+	guess = strings.TrimSpace(guess)
 	if guess == "" {
 		return
 	}
 
 	g.total++
-	countryName := strings.ToLower(g.currentCountry.Properties.Name)
 
-	if guess == countryName {
+	if utils.MatchesCountryByName(guess, g.currentCountry.Properties.Name) {
 		g.score++
 		g.resultLabel.SetText("Correct! It's " + g.currentCountry.Properties.Name)
 	} else {
@@ -499,42 +442,23 @@ func (g *Game) checkGuess(guess string) {
 
 	// Check if all countries are done
 	if g.currentIndex >= len(g.regionCountries)-1 {
+		g.scoreManager.SetTotal("shape", g.total)
+		g.scoreManager.UpdateScore("shape", g.score)
 		g.resultLabel.SetText(fmt.Sprintf("Game Complete! Final Score: %d/%d (%.1f%%)", g.score, g.total, float64(g.score)/float64(g.total)*100))
 		return
 	}
 
 	// Auto-advance to next country after 2 seconds
 	time.AfterFunc(2*time.Second, func() {
-		g.guessEntry.Enable()
-		g.nextCountry()
+		fyne.Do(func() {
+			g.guessEntry.Enable()
+			g.nextCountry()
+		})
 	})
 }
 
 func (g *Game) GetContent() *fyne.Container {
 	return g.content
-}
-
-func (g *Game) startRegionGame(region string) {
-	g.selectedRegion = region
-	g.regionCountries = []models.Feature{}
-
-	// Filter countries by region
-	for _, country := range g.countries {
-		if region == "World" || country.Properties.Continent == region {
-			g.regionCountries = append(g.regionCountries, country)
-		}
-	}
-
-	g.score = 0
-	g.total = 0
-	g.currentIndex = 0
-	g.updateProgress()
-
-	g.mainContent.RemoveAll()
-	g.mainContent.Add(g.gameView)
-	g.mainContent.Refresh()
-
-	g.nextCountry()
 }
 
 func (g *Game) updateProgress() {

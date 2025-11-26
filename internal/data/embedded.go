@@ -45,5 +45,3 @@ func LoadGeoData() models.GeoJSON {
 	})
 	return cachedGeoData
 }
-
-

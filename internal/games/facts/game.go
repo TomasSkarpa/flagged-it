@@ -9,32 +9,46 @@ import (
 	"flagged-it/internal/data"
 	"flagged-it/internal/data/models"
 	"flagged-it/internal/ui/components"
+	"flagged-it/internal/utils"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 )
 
-type Game struct {
-	content        *fyne.Container
-	backFunc       func()
-	countries      []models.Country
-	factsData      map[string]models.CountryFacts
-	currentCountry *models.Country
-	currentFacts   []string
-	currentFact    int
-	triesLeft      int
-	usedFacts      map[int]bool
-	factLabel      *widget.Label
-	guessEntry     *widget.Entry
-	statusLabel    *widget.Label
-	triesLabel     *widget.Label
-	guessBtn       *widget.Button
-	newGameBtn     *widget.Button
+type GuessHistory struct {
+	Guess string
+	Fact  string
 }
 
-func NewGame(backFunc func()) *Game {
+type Game struct {
+	content          *fyne.Container
+	backFunc         func()
+	countries        []models.Country
+	factsData        map[string]models.CountryFacts
+	currentCountry   *models.Country
+	currentFacts     []string
+	currentFact      int
+	triesLeft        int
+	usedFacts        map[int]bool
+	guessHistory     []GuessHistory
+	factLabel        *widget.Label
+	guessEntry       *widget.Entry
+	statusLabel      *widget.Label
+	triesLabel       *widget.Label
+	guessBtn         *widget.Button
+	newGameBtn       *widget.Button
+	historyContainer *fyne.Container
+	score            int
+	total            int
+	scoreLabel       *widget.Label
+	scoreManager     *utils.ScoreManager
+}
+
+func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
 	g := &Game{
-		backFunc: backFunc,
+		backFunc:     backFunc,
+		scoreManager: scoreManager,
 	}
 	g.loadCountries()
 	g.setupUI()
@@ -60,24 +74,41 @@ func (g *Game) setupUI() {
 	g.guessBtn = widget.NewButton("Guess", g.makeGuess)
 	g.statusLabel = widget.NewLabel("")
 	g.triesLabel = widget.NewLabel("")
+	g.scoreLabel = widget.NewLabel("Score: 0/5")
 
-	guessContainer := container.NewGridWithColumns(2, g.guessEntry, g.guessBtn)
+	guessContainer := container.NewBorder(
+		nil, nil,
+		g.guessBtn, nil,
+		g.guessEntry,
+	)
+	g.historyContainer = container.NewVBox()
 
 	g.content = container.NewVBox(
 		topBar.GetContainer(),
 		widget.NewSeparator(),
+		g.scoreLabel,
 		g.statusLabel,
 		g.triesLabel,
 		widget.NewSeparator(),
 		g.factLabel,
 		widget.NewSeparator(),
 		guessContainer,
+		g.historyContainer,
 	)
 }
 
 func (g *Game) newGame() {
 	if len(g.countries) == 0 || len(g.factsData) == 0 {
 		g.statusLabel.SetText("Error loading countries data")
+		return
+	}
+
+	if g.total >= 5 {
+		g.scoreManager.SetTotal("facts", 5)
+		g.scoreManager.UpdateScore("facts", g.score)
+		g.statusLabel.SetText(fmt.Sprintf("Game Complete! Final Score: %d/5 (%.0f%%)", g.score, float64(g.score)/5*100))
+		g.guessEntry.Disable()
+		g.guessBtn.Disable()
 		return
 	}
 
@@ -100,9 +131,11 @@ func (g *Game) newGame() {
 	g.currentFact = 0
 	g.triesLeft = 3
 	g.usedFacts = make(map[int]bool)
+	g.guessHistory = []GuessHistory{}
 	g.guessEntry.SetText("")
 	g.guessEntry.Enable()
 	g.guessBtn.Enable()
+	g.updateHistoryUI()
 
 	g.showCurrentFact()
 	g.updateStatus()
@@ -134,20 +167,50 @@ func (g *Game) makeGuess() {
 		return
 	}
 
-	if strings.EqualFold(guess, g.currentCountry.Name.Common) {
+	if utils.MatchesCountry(guess, *g.currentCountry) {
+		currentFactText := g.factLabel.Text
+		g.guessHistory = append(g.guessHistory, GuessHistory{
+			Guess: fmt.Sprintf("%s ✅", guess),
+			Fact:  currentFactText,
+		})
+		g.updateHistoryUI()
+
+		g.total++
+		g.score++
+		g.scoreLabel.SetText(fmt.Sprintf("Score: %d/5", g.score))
 		g.statusLabel.SetText(fmt.Sprintf("Correct! It was %s!", g.currentCountry.Name.Common))
 		g.guessEntry.Disable()
 		g.guessBtn.Disable()
+		time.AfterFunc(1500*time.Millisecond, func() {
+			fyne.Do(func() {
+				g.newGame()
+			})
+		})
 		return
 	}
+
+	currentFactText := g.factLabel.Text
+	g.guessHistory = append(g.guessHistory, GuessHistory{
+		Guess: guess,
+		Fact:  currentFactText,
+	})
+	g.updateHistoryUI()
 
 	g.triesLeft--
 	g.guessEntry.SetText("")
 
 	if g.triesLeft == 0 {
-		g.statusLabel.SetText(fmt.Sprintf("Game Over! It was %s", g.currentCountry.Name.Common))
+		flagEmoji := countryCodeToFlag(g.currentCountry.CCA2)
+		g.statusLabel.SetText(fmt.Sprintf("Game Over! It was %s %s", g.currentCountry.Name.Common, flagEmoji))
+		g.total++
+		g.scoreLabel.SetText(fmt.Sprintf("Score: %d/5", g.score))
 		g.guessEntry.Disable()
 		g.guessBtn.Disable()
+		time.AfterFunc(1500*time.Millisecond, func() {
+			fyne.Do(func() {
+				g.newGame()
+			})
+		})
 		return
 	}
 
@@ -169,6 +232,63 @@ func (g *Game) Start() {
 	g.newGame()
 }
 
+func (g *Game) updateHistoryUI() {
+	g.historyContainer.RemoveAll()
+
+	if len(g.guessHistory) == 0 {
+		return
+	}
+
+	historyTitle := widget.NewLabel("Previous Guesses:")
+	historyTitle.TextStyle.Bold = true
+	g.historyContainer.Add(historyTitle)
+	g.historyContainer.Add(widget.NewSeparator())
+
+	for i, history := range g.guessHistory {
+		// Create guess header (emoji already included in history.Guess for correct answers)
+		guessText := history.Guess
+		if !strings.Contains(guessText, "✅") {
+			guessText = fmt.Sprintf("%s ❌", guessText)
+		}
+		guessHeader := widget.NewLabel(fmt.Sprintf("Guess %d: %s", i+1, guessText))
+		guessHeader.TextStyle.Bold = true
+
+		// Create fact text (remove "Fact X:" prefix for cleaner display)
+		factText := history.Fact
+		if strings.Contains(factText, ": ") {
+			parts := strings.SplitN(factText, ": ", 2)
+			if len(parts) == 2 {
+				factText = parts[1]
+			}
+		}
+		factLabel := widget.NewLabel(fmt.Sprintf("Fact: %s", factText))
+		factLabel.Wrapping = fyne.TextWrapWord
+
+		// Create a card-like container for each guess
+		guessCard := container.NewVBox(
+			guessHeader,
+			factLabel,
+		)
+
+		g.historyContainer.Add(guessCard)
+		if i < len(g.guessHistory)-1 {
+			g.historyContainer.Add(widget.NewSeparator())
+		}
+	}
+
+	g.historyContainer.Refresh()
+}
+
 func (g *Game) Reset() {
+	g.score = 0
+	g.total = 0
+	g.scoreLabel.SetText("Score: 0/5")
 	g.newGame()
+}
+
+func countryCodeToFlag(code string) string {
+	if len(code) != 2 {
+		return ""
+	}
+	return string([]rune{rune(0x1F1E6 + rune(code[0]-'A')), rune(0x1F1E6 + rune(code[1]-'A'))})
 }

@@ -65,7 +65,7 @@ debug:
 # Run the app in web mode
 web:
 	@$(MKDIR)
-	@GOOS=js GOARCH=wasm go build -o $(BUILD_DIR)/flagged-it.wasm cmd/web/main.go
+	@GOOS=js GOARCH=wasm go build -o $(BUILD_DIR)/flagged-it.wasm $(MAIN)
 	@if [ -f "$$(go env GOROOT)/lib/wasm/wasm_exec.js" ]; then \
 		cp "$$(go env GOROOT)/lib/wasm/wasm_exec.js" $(BUILD_DIR)/; \
 	elif [ -f "$$(go env GOROOT)/misc/wasm/wasm_exec.js" ]; then \
@@ -74,10 +74,14 @@ web:
 		curl -s https://raw.githubusercontent.com/golang/go/master/misc/wasm/wasm_exec.js -o $(BUILD_DIR)/wasm_exec.js; \
 	fi
 	@cp index.html $(BUILD_DIR)/
-	@cp assets/favicon.svg $(BUILD_DIR)/
-	@echo "Built WebAssembly to $(BUILD_DIR)/"
-	@echo "Starting server at http://localhost:8080"
-	@cd $(BUILD_DIR) && python3 -m http.server 8080
+	@cp -r assets $(BUILD_DIR)/
+	@echo "Built WebAssembly to /$(BUILD_DIR)"
+ifeq ($(shell uname -s),Darwin)
+	@echo "Access from other devices: http://$$(ifconfig | grep "inet " | grep -v 127.0.0.1 | head -1 | awk '{print $$2}'):8080"
+else
+	@echo "Access from other devices: http://$$(hostname -I | awk '{print $$1}'):8080"
+endif
+	@cd $(BUILD_DIR) && python3 -m http.server 8080 --bind 0.0.0.0
 
 # Remove build artifacts (safe for both Linux/macOS and Windows)
 clean:

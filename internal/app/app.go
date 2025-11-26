@@ -9,42 +9,52 @@ import (
 	"flagged-it/internal/games/list"
 	"flagged-it/internal/games/shape"
 	"flagged-it/internal/ui/screens"
+	"flagged-it/internal/utils"
 	"fyne.io/fyne/v2"
 )
 
 type App struct {
-	window fyne.Window
+	window       fyne.Window
+	scoreManager *utils.ScoreManager
+	dashboard    *screens.Dashboard
 }
 
 func NewApp(window fyne.Window) *App {
-	return &App{window: window}
+	return &App{
+		window:       window,
+		scoreManager: utils.NewScoreManager(),
+	}
 }
 
 func (a *App) GetDashboard() *fyne.Container {
-	dashboard := screens.NewDashboard(a.navigateToGame, a.navigateToDebug, a.window)
-	return dashboard.GetContent()
+	if a.dashboard == nil {
+		a.dashboard = screens.NewDashboard(a.navigateToGame, a.navigateToDebug, a.window, a.scoreManager)
+	} else {
+		a.dashboard.RefreshScores()
+	}
+	return a.dashboard.GetContent()
 }
 
 func (a *App) navigateToGame(gameType string) {
 	switch gameType {
 	case "shape":
-		game := shape.NewGame(a.backToDashboard)
+		game := shape.NewGame(a.backToDashboard, a.scoreManager)
 		a.window.SetContent(game.GetContent())
 	case "list":
-		game := list.NewGame(a.backToDashboard)
+		game := list.NewGame(a.backToDashboard, a.scoreManager)
 		a.window.SetContent(game.GetContent())
 	case "hangman":
-		game := hangman.NewGame(a.backToDashboard)
+		game := hangman.NewGame(a.backToDashboard, a.scoreManager)
 		a.window.SetContent(game.GetContent())
 		a.window.Canvas().SetOnTypedKey(game.TypedKey)
 	case "facts":
-		game := facts.NewGame(a.backToDashboard)
+		game := facts.NewGame(a.backToDashboard, a.scoreManager)
 		a.window.SetContent(game.GetContent())
 	case "higher_lower":
-		game := higher_lower.NewGame(a.backToDashboard)
+		game := higher_lower.NewGame(a.backToDashboard, a.scoreManager)
 		a.window.SetContent(game.GetContent())
 	case "flag":
-		game := flag.NewGame(a.backToDashboard)
+		game := flag.NewGame(a.backToDashboard, a.scoreManager)
 		a.window.SetContent(game.GetContent())
 	case "guessing":
 		game := guessing.NewGame(a.backToDashboard)
@@ -55,6 +65,7 @@ func (a *App) navigateToGame(gameType string) {
 func (a *App) backToDashboard() {
 	a.window.SetContent(a.GetDashboard())
 }
+
 func (a *App) navigateToDebug() {
 	debugScreen := screens.NewDebugScreen(a.backToDashboard, a.window)
 	a.window.SetContent(debugScreen.GetContent())

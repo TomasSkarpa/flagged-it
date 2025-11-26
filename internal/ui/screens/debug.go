@@ -98,13 +98,13 @@ func (d *DebugScreen) loadFile(fileName string) {
 
 	content, err := os.ReadFile(filePath)
 	if err != nil {
-		dialog.ShowError(fmt.Errorf("failed to read file: %v", err), d.window)
+		dialog.ShowError(fmt.Errorf("Failed to read file: %v", err), d.window)
 		return
 	}
 
 	var rawData interface{}
 	if err := json.Unmarshal(content, &rawData); err != nil {
-		dialog.ShowError(fmt.Errorf("invalid JSON: %v", err), d.window)
+		dialog.ShowError(fmt.Errorf("Invalid JSON: %v", err), d.window)
 		return
 	}
 
@@ -282,7 +282,7 @@ func (d *DebugScreen) renameParameter(index int, oldKey, newKey string) {
 	}
 
 	if _, exists := d.data[index][newKey]; exists {
-		dialog.ShowError(fmt.Errorf("parameter '%s' already exists", newKey), d.window)
+		dialog.ShowError(fmt.Errorf("Parameter '%s' already exists", newKey), d.window)
 		return
 	}
 
@@ -361,12 +361,12 @@ func (d *DebugScreen) saveFile() {
 
 	jsonData, err := json.MarshalIndent(outputData, "", "    ")
 	if err != nil {
-		dialog.ShowError(fmt.Errorf("failed to marshal JSON: %v", err), d.window)
+		dialog.ShowError(fmt.Errorf("Failed to marshal JSON: %v", err), d.window)
 		return
 	}
 
 	if err := os.WriteFile(d.currentFile, jsonData, 0644); err != nil {
-		dialog.ShowError(fmt.Errorf("failed to save file: %v", err), d.window)
+		dialog.ShowError(fmt.Errorf("Failed to save file: %v", err), d.window)
 		return
 	}
 
@@ -375,7 +375,7 @@ func (d *DebugScreen) saveFile() {
 
 func (d *DebugScreen) addElement() {
 	if d.currentFile == "" {
-		dialog.ShowError(fmt.Errorf("please select a file first"), d.window)
+		dialog.ShowError(fmt.Errorf("Please select a file first"), d.window)
 		return
 	}
 
@@ -402,7 +402,7 @@ func (d *DebugScreen) addElement() {
 func (d *DebugScreen) removeElement() {
 	selected := d.elementSelect.Selected
 	if selected == "" {
-		dialog.ShowError(fmt.Errorf("please select an element to remove"), d.window)
+		dialog.ShowError(fmt.Errorf("Please select an element to remove"), d.window)
 		return
 	}
 

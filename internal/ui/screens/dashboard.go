@@ -84,7 +84,6 @@ func (d *Dashboard) setupUI() {
 		hangmanBtn,
 		factGuessBtn,
 		higher_lowerBtn,
-		flagBtn,
 		guessingBtn,
 	)
 

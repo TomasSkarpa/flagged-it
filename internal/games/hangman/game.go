@@ -56,7 +56,7 @@ func (g *Game) loadCountries() {
 }
 
 func (g *Game) setupUI() {
-	topBar := components.NewTopBar("Hangman Game", g.backFunc, g.newGame)
+	topBar := components.NewTopBar("Hangman Game", g.backFunc, g.Reset)
 
 	g.wordLabel = widget.NewLabel("")
 	g.wordLabel.TextStyle.Monospace = true

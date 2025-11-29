@@ -62,7 +62,7 @@ func (g *Game) loadCountries() {
 }
 
 func (g *Game) setupUI() {
-	topBar := components.NewTopBar("Guess by Facts", g.backFunc, g.newGame)
+	topBar := components.NewTopBar("Guess by Facts", g.backFunc, g.Reset)
 
 	g.factLabel = widget.NewLabel("")
 	g.factLabel.Wrapping = fyne.TextWrapWord

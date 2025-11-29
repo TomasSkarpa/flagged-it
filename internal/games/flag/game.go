@@ -112,10 +112,13 @@ func (g *Game) newGame() {
 	g.currentCountry = newCountry
 
 	g.options = []models.Country{*g.currentCountry}
+	usedOptions := make(map[string]bool)
+	usedOptions[g.currentCountry.CCA2] = true
 	for len(g.options) < 4 {
 		option := g.countries[rand.Intn(len(g.countries))]
-		if option.CCA2 != g.currentCountry.CCA2 {
+		if !usedOptions[option.CCA2] {
 			g.options = append(g.options, option)
+			usedOptions[option.CCA2] = true
 		}
 	}
 

@@ -58,6 +58,7 @@ func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
 	g := &Game{
 		backFunc:     backFunc,
 		scoreManager: scoreManager,
+		usedCountries: make(map[string]bool),
 	}
 	g.loadCountries()
 	g.setupUI()

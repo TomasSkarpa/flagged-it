@@ -69,7 +69,7 @@ func (g *Game) loadCountries() {
 }
 
 func (g *Game) setupUI() {
-	topBar := components.NewTopBar("Guess by Flag", g.backFunc, g.newGame)
+	topBar := components.NewTopBar("Guess by Flag", g.backFunc, g.Reset)
 
 	g.flagImage = canvas.NewImageFromResource(nil)
 	g.flagImage.FillMode = canvas.ImageFillContain

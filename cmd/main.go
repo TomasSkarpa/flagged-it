@@ -2,6 +2,7 @@ package main
 
 import (
 	"flagged-it/internal/app"
+	"flagged-it/internal/utils"
 	"image/color"
 
 	"fyne.io/fyne/v2"
@@ -17,7 +18,7 @@ func main() {
 	myWindow.SetMaster()
 
 	scale := float32(1.7)
-	if myWindow.Canvas().Size().Width < 768 {
+	if utils.IsMobile() {
 		scale = 1.0
 	}
 	myApp.Settings().SetTheme(&scaledTheme{scale: scale})

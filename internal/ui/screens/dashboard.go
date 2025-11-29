@@ -77,7 +77,11 @@ func (d *Dashboard) setupUI() {
 	})
 
 	// Game buttons in responsive grid
-	gameButtons := container.NewGridWithColumns(2,
+	columns := 2
+	if utils.IsMobile() {
+		columns = 1
+	}
+	gameButtons := container.NewGridWithColumns(columns,
 		flagBtn,
 		countryListBtn,
 		countryGuessBtn,

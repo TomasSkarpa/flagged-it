@@ -105,7 +105,6 @@ func (g *Game) getAvailableRegions() []string {
 		regions = append(regions, region)
 	}
 
-	// Sort with World first
 	sort.Slice(regions, func(i, j int) bool {
 		if regions[i] == "World" {
 			return true
@@ -135,10 +134,7 @@ func (g *Game) setupGameView() {
 		g.guessEntry,
 	)
 
-	// Create main shape canvas
 	g.shapeCanvas = container.NewWithoutLayout()
-
-	// Create main shape window
 	shapeWindow := container.NewMax(g.shapeCanvas)
 
 	topSection := container.NewVBox(
@@ -153,7 +149,6 @@ func (g *Game) setupGameView() {
 		topSection, nil, nil, nil,
 		shapeWindow,
 	)
-
 }
 
 func (g *Game) drawShape(coords [][][][]float64) {
@@ -217,7 +212,6 @@ func (g *Game) drawMainShape(coords [][][][]float64) {
 	if canvasSize.Width > 0 && canvasSize.Height > 0 {
 		raster.Resize(canvasSize)
 	} else {
-		// Use 90% of default canvas for padding
 		raster.Resize(fyne.NewSize(float32(canvasWidth*0.9), float32(canvasHeight*0.9)))
 	}
 	g.shapeCanvas.Add(raster)
@@ -381,14 +375,12 @@ func (g *Game) startRegionGame(region string) {
 	g.regionCountries = []models.Feature{}
 	g.coordCache = make(map[int][][][][]float64)
 
-	// Filter countries by region
 	for _, country := range g.countries {
 		if region == "World" || country.Properties.Continent == region {
 			g.regionCountries = append(g.regionCountries, country)
 		}
 	}
 
-	// Shuffle countries
 	rand.Shuffle(len(g.regionCountries), func(i, j int) {
 		g.regionCountries[i], g.regionCountries[j] = g.regionCountries[j], g.regionCountries[i]
 	})
@@ -402,7 +394,6 @@ func (g *Game) startRegionGame(region string) {
 	g.mainContent.Add(g.gameView)
 	g.mainContent.Refresh()
 
-	// Preprocess coordinates in background
 	go g.preprocessCoordinates()
 	g.nextCountry()
 }
@@ -440,7 +431,6 @@ func (g *Game) checkGuess(guess string) {
 	g.updateProgress()
 	g.guessEntry.Disable()
 
-	// Check if all countries are done
 	if g.currentIndex >= len(g.regionCountries)-1 {
 		g.scoreManager.SetTotal("shape", g.total)
 		g.scoreManager.UpdateScore("shape", g.score)
@@ -448,7 +438,6 @@ func (g *Game) checkGuess(guess string) {
 		return
 	}
 
-	// Auto-advance to next country after 2 seconds
 	time.AfterFunc(2*time.Second, func() {
 		fyne.Do(func() {
 			g.guessEntry.Enable()

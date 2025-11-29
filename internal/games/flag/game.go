@@ -41,6 +41,7 @@ type Game struct {
 	backFunc       func()
 	countries      []models.Country
 	currentCountry *models.Country
+	usedCountries  map[string]bool
 	options        []models.Country
 	flagImage      *canvas.Image
 	statusLabel    *widget.Label
@@ -99,7 +100,15 @@ func (g *Game) newGame() {
 	}
 
 	rand.Seed(time.Now().UnixNano())
-	g.currentCountry = &g.countries[rand.Intn(len(g.countries))]
+	var newCountry *models.Country
+	for {
+		newCountry = &g.countries[rand.Intn(len(g.countries))]
+		if !g.usedCountries[newCountry.CCA2] {
+			break
+		}
+	}
+	g.usedCountries[newCountry.CCA2] = true
+	g.currentCountry = newCountry
 
 	g.options = []models.Country{*g.currentCountry}
 	for len(g.options) < 4 {
@@ -208,6 +217,7 @@ func (g *Game) Start() {
 func (g *Game) Reset() {
 	g.score = 0
 	g.total = 0
+	g.usedCountries = make(map[string]bool)
 	g.scoreLabel.SetText("Score: 0/10")
 	g.newGame()
 }

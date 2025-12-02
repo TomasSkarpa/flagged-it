@@ -18,6 +18,7 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
 
@@ -264,6 +265,13 @@ func (g *Game) fillPolygon(img *image.RGBA, ring [][]float64, minX, minY, scale,
 		points[i] = [2]int{x, y}
 	}
 
+	var fillColor color.RGBA
+	if fyne.CurrentApp().Settings().ThemeVariant() == theme.VariantDark {
+		fillColor = color.RGBA{255, 255, 255, 255}
+	} else {
+		fillColor = color.RGBA{0, 0, 0, 255}
+	}
+
 	bounds := img.Bounds()
 	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
 		intersections := []int{}
@@ -283,7 +291,7 @@ func (g *Game) fillPolygon(img *image.RGBA, ring [][]float64, minX, minY, scale,
 			if i+1 < len(intersections) {
 				for x := intersections[i]; x <= intersections[i+1]; x++ {
 					if x >= bounds.Min.X && x < bounds.Max.X {
-						img.Set(x, y, color.RGBA{255, 255, 255, 255})
+						img.Set(x, y, fillColor)
 					}
 				}
 			}

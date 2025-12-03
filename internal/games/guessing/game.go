@@ -10,6 +10,7 @@ import (
 	"flagged-it/internal/data"
 	"flagged-it/internal/data/models"
 	"flagged-it/internal/ui/components"
+	"flagged-it/internal/utils"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
@@ -221,7 +222,7 @@ func (g *Game) newGame() {
 
 func (g *Game) getCountry(countries []models.Country, name string) *models.Country {
 	for _, country := range countries {
-		if strings.EqualFold(country.Name.Common, name) {
+		if utils.MatchCountry(name, country, utils.MatchAll) {
 			return &country
 		}
 	}
@@ -243,7 +244,7 @@ func (g *Game) makeGuess() {
 	g.guesses = append(g.guesses, *guessedCountry)
 	g.addGuessRow(guessedCountry)
 
-	if strings.EqualFold(guess, g.currentCountry.Name.Common) {
+	if utils.MatchCountry(guess, *g.currentCountry, utils.MatchAll) {
 		g.statusLabel.SetText(fmt.Sprintf("Correct! It was %s!", g.currentCountry.Name.Common))
 		g.guessEntry.Disable()
 		g.guessBtn.Disable()

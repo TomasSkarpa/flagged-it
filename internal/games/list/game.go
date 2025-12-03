@@ -185,7 +185,7 @@ func (g *Game) makeGuess() {
 	var matchedCountry models.Country
 
 	for _, country := range g.allCountries {
-		if utils.MatchesCountry(guess, country) && !g.guessedCountries[strings.ToLower(country.Name.Common)] {
+		if utils.MatchCountry(guess, country, utils.MatchCommon|utils.MatchOfficial) && !g.guessedCountries[strings.ToLower(country.Name.Common)] {
 			g.guessedCountries[strings.ToLower(country.Name.Common)] = true
 			matchedCountry = country
 			found = true

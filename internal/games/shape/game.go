@@ -429,7 +429,7 @@ func (g *Game) checkGuess(guess string) {
 
 	g.total++
 
-	if utils.MatchesCountryByName(guess, g.currentCountry.Properties.Name) {
+	if utils.MatchCountry(guess, models.Country{Name: models.CountryName{Common: g.currentCountry.Properties.Name}}, utils.MatchAll) {
 		g.score++
 		g.resultLabel.SetText("Correct! It's " + g.currentCountry.Properties.Name)
 	} else {

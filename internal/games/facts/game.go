@@ -167,7 +167,7 @@ func (g *Game) makeGuess() {
 		return
 	}
 
-	if utils.MatchesCountry(guess, *g.currentCountry) {
+	if utils.MatchCountry(guess, *g.currentCountry, utils.MatchAll) {
 		currentFactText := g.factLabel.Text
 		g.guessHistory = append(g.guessHistory, GuessHistory{
 			Guess: fmt.Sprintf("%s ✅", guess),

@@ -1,7 +1,7 @@
 package data
 
 import (
-	_ "embed"
+	"embed"
 	"encoding/json"
 	"flagged-it/internal/data/models"
 	"sync"
@@ -13,16 +13,14 @@ var countriesData []byte
 //go:embed sources/countries_facts.json
 var factsData []byte
 
-//go:embed sources/geo.json
-var geoData []byte
+//go:embed sources/geo/*.json
+var geoFS embed.FS
 
 var (
 	cachedCountries    []models.Country
 	cachedCountryFacts map[string]models.CountryFacts
-	cachedGeoData      models.GeoJSON
 	countriesOnce      sync.Once
 	factsOnce          sync.Once
-	geoDataOnce        sync.Once
 )
 
 func LoadCountries() []models.Country {
@@ -39,9 +37,12 @@ func LoadCountryFacts() map[string]models.CountryFacts {
 	return cachedCountryFacts
 }
 
-func LoadGeoData() models.GeoJSON {
-	geoDataOnce.Do(func() {
-		json.Unmarshal(geoData, &cachedGeoData)
-	})
-	return cachedGeoData
+func LoadGeoData(cca3 string) (models.GeoJSON, error) {
+	data, err := geoFS.ReadFile("sources/geo/" + cca3 + ".json")
+	if err != nil {
+		return models.GeoJSON{}, err
+	}
+	var geoData models.GeoJSON
+	err = json.Unmarshal(data, &geoData)
+	return geoData, err
 }

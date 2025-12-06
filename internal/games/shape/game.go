@@ -33,9 +33,9 @@ type Game struct {
 	selectionView   *fyne.Container
 	gameView        *fyne.Container
 	mainContent     *fyne.Container
-	currentCountry  models.Feature
-	countries       []models.Feature
-	regionCountries []models.Feature
+	currentCountry  models.Country
+	countries       []models.Country
+	regionCountries []models.Country
 	currentIndex    int
 	shapeCanvas     *fyne.Container
 	guessEntry      *widget.Entry
@@ -55,7 +55,7 @@ func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
 	g := &Game{
 		backFunc:     backFunc,
 		scoreManager: scoreManager,
-		countries:    data.LoadGeoData().Features,
+		countries:    data.LoadCountries(),
 	}
 	g.setupUI()
 	return g
@@ -96,8 +96,8 @@ func (g *Game) getAvailableRegions() []string {
 	regionMap["World"] = true
 
 	for _, country := range g.countries {
-		if country.Properties.Continent != "" {
-			regionMap[country.Properties.Continent] = true
+		if country.Region != "" {
+			regionMap[country.Region] = true
 		}
 	}
 
@@ -305,23 +305,38 @@ func (g *Game) nextCountry() {
 		g.currentCountry = g.regionCountries[idx]
 		g.currentIndex++
 
+		if g.currentCountry.CCA3 == "" {
+			continue
+		}
+
 		g.cacheMutex.RLock()
 		coords, exists := g.coordCache[idx]
 		g.cacheMutex.RUnlock()
 
 		if !exists {
-			coords = g.parseCoordinates(g.currentCountry.Geometry)
+			geoData, err := data.LoadGeoData(g.currentCountry.CCA3)
+			if err == nil && len(geoData.Features) > 0 {
+				coords = g.parseCoordinates(geoData.Features[0].Geometry)
+			}
 			g.cacheMutex.Lock()
 			g.coordCache[idx] = coords
 			g.cacheMutex.Unlock()
 		}
 
 		if len(coords) > 0 {
+			g.total++
 			g.drawShape(coords)
 			g.guessEntry.SetText("")
 			g.resultLabel.SetText("")
+			g.updateProgress()
 			return
 		}
+	}
+
+	if g.total > 0 {
+		g.scoreManager.SetTotal("shape", g.total)
+		g.scoreManager.UpdateScore("shape", g.score)
+		g.resultLabel.SetText(fmt.Sprintf("Game Complete! Final Score: %d/%d (%.1f%%)", g.score, g.total, float64(g.score)/float64(g.total)*100))
 	}
 }
 
@@ -380,11 +395,11 @@ func (g *Game) parseRing(ringInterface interface{}) [][]float64 {
 
 func (g *Game) startRegionGame(region string) {
 	g.selectedRegion = region
-	g.regionCountries = []models.Feature{}
+	g.regionCountries = []models.Country{}
 	g.coordCache = make(map[int][][][][]float64)
 
 	for _, country := range g.countries {
-		if region == "World" || country.Properties.Continent == region {
+		if region == "World" || country.Region == region {
 			g.regionCountries = append(g.regionCountries, country)
 		}
 	}
@@ -394,9 +409,8 @@ func (g *Game) startRegionGame(region string) {
 	})
 
 	g.score = 0
-	g.total = len(g.regionCountries)
+	g.total = 0
 	g.currentIndex = 0
-	g.updateProgress()
 
 	g.mainContent.RemoveAll()
 	g.mainContent.Add(g.gameView)
@@ -412,11 +426,14 @@ func (g *Game) preprocessCoordinates() {
 		_, exists := g.coordCache[i]
 		g.cacheMutex.RUnlock()
 
-		if !exists {
-			coords := g.parseCoordinates(g.regionCountries[i].Geometry)
-			g.cacheMutex.Lock()
-			g.coordCache[i] = coords
-			g.cacheMutex.Unlock()
+		if !exists && g.regionCountries[i].CCA3 != "" {
+			geoData, err := data.LoadGeoData(g.regionCountries[i].CCA3)
+			if err == nil && len(geoData.Features) > 0 {
+				coords := g.parseCoordinates(geoData.Features[0].Geometry)
+				g.cacheMutex.Lock()
+				g.coordCache[i] = coords
+				g.cacheMutex.Unlock()
+			}
 		}
 	}
 }
@@ -427,24 +444,14 @@ func (g *Game) checkGuess(guess string) {
 		return
 	}
 
-	g.total++
-
-	if utils.MatchCountry(guess, models.Country{Name: models.CountryName{Common: g.currentCountry.Properties.Name}}, utils.MatchAll) {
+	if utils.MatchCountry(guess, g.currentCountry, utils.MatchAll) {
 		g.score++
-		g.resultLabel.SetText("Correct! It's " + g.currentCountry.Properties.Name)
+		g.resultLabel.SetText("Correct! It's " + g.currentCountry.Name.Common)
 	} else {
-		g.resultLabel.SetText("Wrong! It's " + g.currentCountry.Properties.Name)
+		g.resultLabel.SetText("Wrong! It's " + g.currentCountry.Name.Common)
 	}
 
-	g.updateProgress()
 	g.guessEntry.Disable()
-
-	if g.currentIndex >= len(g.regionCountries)-1 {
-		g.scoreManager.SetTotal("shape", g.total)
-		g.scoreManager.UpdateScore("shape", g.score)
-		g.resultLabel.SetText(fmt.Sprintf("Game Complete! Final Score: %d/%d (%.1f%%)", g.score, g.total, float64(g.score)/float64(g.total)*100))
-		return
-	}
 
 	time.AfterFunc(2*time.Second, func() {
 		fyne.Do(func() {
@@ -460,7 +467,7 @@ func (g *Game) GetContent() *fyne.Container {
 
 func (g *Game) updateProgress() {
 	g.scoreLabel.SetText(fmt.Sprintf("Score: %d/%d", g.score, g.total))
-	g.progressLabel.SetText(fmt.Sprintf("%s: Country %d/%d", g.selectedRegion, g.currentIndex+1, len(g.regionCountries)))
+	g.progressLabel.SetText(fmt.Sprintf("%s: Country %d/%d", g.selectedRegion, g.currentIndex, g.total))
 }
 
 func (g *Game) showSelection() {

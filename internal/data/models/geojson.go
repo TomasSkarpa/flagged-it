@@ -7,15 +7,13 @@ type GeoJSON struct {
 
 type Feature struct {
 	Type       string     `json:"type"`
+	ID         string     `json:"id"`
 	Properties Properties `json:"properties"`
 	Geometry   Geometry   `json:"geometry"`
 }
 
 type Properties struct {
-	Name      string `json:"name"`
-	NameLong  string `json:"name_long"`
-	ISO_A3    string `json:"iso_a3"`
-	Continent string `json:"continent"`
+	Name string `json:"name"`
 }
 
 type Geometry struct {

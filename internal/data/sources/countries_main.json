@@ -1,9 +1,20 @@
 [
   {
+    "area": 65300,
     "capital": [
       "Vilnius"
     ],
     "cca2": "LT",
+    "cca3": "LTU",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Republic",
+    "independence": 1991,
+    "landlocked": "0",
     "languages": {
       "lit": "Lithuanian"
     },
@@ -23,25 +34,26 @@
     },
     "population": 2894886,
     "region": "Europe",
-    "subregion": "Northern Europe",
-    "area": 65300.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1991,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Northern Europe",
     "temperature": 7.38
   },
   {
+    "area": 756102,
     "capital": [
       "Santiago"
     ],
     "cca2": "CL",
+    "cca3": "CHL",
+    "currencies": {
+      "CLP": {
+        "name": "Chilean peso",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1810,
+    "landlocked": "0",
     "languages": {
       "spa": "Spanish"
     },
@@ -61,25 +73,26 @@
     },
     "population": 20206953,
     "region": "Americas",
-    "subregion": "South America",
-    "area": 756102.0,
-    "currencies": {
-      "CLP": {
-        "symbol": "$",
-        "name": "Chilean peso"
-      }
-    },
-    "independence": 1810,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "South America",
     "temperature": 9.39
   },
   {
+    "area": 112622,
     "capital": [
       "Porto-Novo"
     ],
     "cca2": "BJ",
+    "cca3": "BEN",
+    "currencies": {
+      "XOF": {
+        "name": "West African CFA franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1960,
+    "landlocked": "0",
     "languages": {
       "fra": "French"
     },
@@ -99,25 +112,26 @@
     },
     "population": 13224860,
     "region": "Africa",
-    "subregion": "Western Africa",
-    "area": 112622.0,
-    "currencies": {
-      "XOF": {
-        "symbol": "Fr",
-        "name": "West African CFA franc"
-      }
-    },
-    "independence": 1960,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Western Africa",
     "temperature": 28.02
   },
   {
+    "area": 69700,
     "capital": [
       "Tbilisi"
     ],
     "cca2": "GE",
+    "cca3": "GEO",
+    "currencies": {
+      "GEL": {
+        "name": "lari",
+        "symbol": "₾"
+      }
+    },
+    "government": "Republic",
+    "independence": 1991,
+    "landlocked": "0",
     "languages": {
       "kat": "Georgian"
     },
@@ -137,25 +151,26 @@
     },
     "population": 4000921,
     "region": "Asia",
-    "subregion": "Western Asia",
-    "area": 69700.0,
-    "currencies": {
-      "GEL": {
-        "symbol": "₾",
-        "name": "lari"
-      }
-    },
-    "independence": 1991,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Western Asia",
     "temperature": 9.01
   },
   {
+    "area": 9251,
     "capital": [
       "Nicosia"
     ],
     "cca2": "CY",
+    "cca3": "CYP",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Republic",
+    "independence": 1960,
+    "landlocked": "0",
     "languages": {
       "ell": "Greek",
       "tur": "Turkish"
@@ -180,25 +195,26 @@
     },
     "population": 1442614,
     "region": "Europe",
-    "subregion": "Southern Europe",
-    "area": 9251.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1960,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Southern Europe",
     "temperature": 18.95
   },
   {
+    "area": 238533,
     "capital": [
       "Accra"
     ],
     "cca2": "GH",
+    "cca3": "GHA",
+    "currencies": {
+      "GHS": {
+        "name": "Ghanaian cedi",
+        "symbol": "₵"
+      }
+    },
+    "government": "Republic",
+    "independence": 1957,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -218,25 +234,26 @@
     },
     "population": 33742380,
     "region": "Africa",
-    "subregion": "Western Africa",
-    "area": 238533.0,
-    "currencies": {
-      "GHS": {
-        "symbol": "₵",
-        "name": "Ghanaian cedi"
-      }
-    },
-    "independence": 1957,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Western Africa",
     "temperature": 27.66
   },
   {
+    "area": 30528,
     "capital": [
       "Brussels"
     ],
     "cca2": "BE",
+    "cca3": "BEL",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Federation Constitutional Monarchy",
+    "independence": 1830,
+    "landlocked": "0",
     "languages": {
       "deu": "German",
       "fra": "French",
@@ -266,25 +283,30 @@
     },
     "population": 11825551,
     "region": "Europe",
-    "subregion": "Western Europe",
-    "area": 30528.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1830,
-    "government": "Federation Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Western Europe",
     "temperature": 10.67
   },
   {
+    "area": 109884,
     "capital": [
       "Havana"
     ],
     "cca2": "CU",
+    "cca3": "CUB",
+    "currencies": {
+      "CUC": {
+        "name": "Cuban convertible peso",
+        "symbol": "$"
+      },
+      "CUP": {
+        "name": "Cuban peso",
+        "symbol": "$"
+      }
+    },
+    "government": "Socialistic Republic",
+    "independence": 1902,
+    "landlocked": "0",
     "languages": {
       "spa": "Spanish"
     },
@@ -304,29 +326,26 @@
     },
     "population": 9748007,
     "region": "Americas",
-    "subregion": "Caribbean",
-    "area": 109884.0,
-    "currencies": {
-      "CUC": {
-        "symbol": "$",
-        "name": "Cuban convertible peso"
-      },
-      "CUP": {
-        "symbol": "$",
-        "name": "Cuban peso"
-      }
-    },
-    "independence": 1902,
-    "government": "Socialistic Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Caribbean",
     "temperature": 25.81
   },
   {
+    "area": 468,
     "capital": [
       "Andorra la Vella"
     ],
     "cca2": "AD",
+    "cca3": "AND",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Parliamentary Coprincipality",
+    "independence": 1278,
+    "landlocked": "1",
     "languages": {
       "cat": "Catalan"
     },
@@ -346,25 +365,26 @@
     },
     "population": 88406,
     "region": "Europe",
-    "subregion": "Southern Europe",
-    "area": 468.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1278,
-    "government": "Parliamentary Coprincipality",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Southern Europe",
     "temperature": 8.27
   },
   {
+    "area": 2780400,
     "capital": [
       "Buenos Aires"
     ],
     "cca2": "AR",
+    "cca3": "ARG",
+    "currencies": {
+      "ARS": {
+        "name": "Argentine peso",
+        "symbol": "$"
+      }
+    },
+    "government": "Federal Republic",
+    "independence": 1816,
+    "landlocked": "0",
     "languages": {
       "grn": "Guaraní",
       "spa": "Spanish"
@@ -389,25 +409,26 @@
     },
     "population": 46735004,
     "region": "Americas",
-    "subregion": "South America",
-    "area": 2780400.0,
-    "currencies": {
-      "ARS": {
-        "symbol": "$",
-        "name": "Argentine peso"
-      }
-    },
-    "independence": 1816,
-    "government": "Federal Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "South America",
     "temperature": 15.11
   },
   {
+    "area": 21041,
     "capital": [
       "San Salvador"
     ],
     "cca2": "SV",
+    "cca3": "SLV",
+    "currencies": {
+      "USD": {
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1841,
+    "landlocked": "0",
     "languages": {
       "spa": "Spanish"
     },
@@ -427,25 +448,26 @@
     },
     "population": 6029976,
     "region": "Americas",
-    "subregion": "Central America",
-    "area": 21041.0,
-    "currencies": {
-      "USD": {
-        "symbol": "$",
-        "name": "United States dollar"
-      }
-    },
-    "independence": 1841,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Central America",
     "temperature": 25.23
   },
   {
+    "area": 447400,
     "capital": [
       "Tashkent"
     ],
     "cca2": "UZ",
+    "cca3": "UZB",
+    "currencies": {
+      "UZS": {
+        "name": "Uzbekistani soʻm",
+        "symbol": "so'm"
+      }
+    },
+    "government": "Republic",
+    "independence": 1991,
+    "landlocked": "1",
     "languages": {
       "rus": "Russian",
       "uzb": "Uzbek"
@@ -470,25 +492,26 @@
     },
     "population": 37859698,
     "region": "Asia",
-    "subregion": "Central Asia",
-    "area": 447400.0,
-    "currencies": {
-      "UZS": {
-        "symbol": "so'm",
-        "name": "Uzbekistani soʻm"
-      }
-    },
-    "independence": 1991,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Islam",
+    "subregion": "Central Asia",
     "temperature": 13.69
   },
   {
+    "area": 22966,
     "capital": [
       "Belmopan"
     ],
     "cca2": "BZ",
+    "cca3": "BLZ",
+    "currencies": {
+      "BZD": {
+        "name": "Belize dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1981,
+    "landlocked": "0",
     "languages": {
       "bjz": "Belizean Creole",
       "eng": "English",
@@ -518,25 +541,26 @@
     },
     "population": 417634,
     "region": "Americas",
-    "subregion": "Central America",
-    "area": 22966.0,
-    "currencies": {
-      "BZD": {
-        "symbol": "$",
-        "name": "Belize dollar"
-      }
-    },
-    "independence": 1981,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Central America",
     "temperature": 25.7
   },
   {
+    "area": 64559,
     "capital": [
       "Riga"
     ],
     "cca2": "LV",
+    "cca3": "LVA",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Republic",
+    "independence": 1991,
+    "landlocked": "0",
     "languages": {
       "lav": "Latvian"
     },
@@ -556,25 +580,26 @@
     },
     "population": 1829000,
     "region": "Europe",
-    "subregion": "Northern Europe",
-    "area": 64559.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1991,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Northern Europe",
     "temperature": 6.87
   },
   {
+    "area": 322463,
     "capital": [
       "Yamoussoukro"
     ],
     "cca2": "CI",
+    "cca3": "CIV",
+    "currencies": {
+      "XOF": {
+        "name": "West African CFA franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1960,
+    "landlocked": "0",
     "languages": {
       "fra": "French"
     },
@@ -594,25 +619,26 @@
     },
     "population": 31719275,
     "region": "Africa",
-    "subregion": "Western Africa",
-    "area": 322463.0,
-    "currencies": {
-      "XOF": {
-        "symbol": "Fr",
-        "name": "West African CFA franc"
-      }
-    },
-    "independence": 1960,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Africa",
     "temperature": 26.8
   },
   {
+    "area": 543908,
     "capital": [
       "Paris"
     ],
     "cca2": "FR",
+    "cca3": "FRA",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Republic",
+    "independence": 843,
+    "landlocked": "0",
     "languages": {
       "fra": "French"
     },
@@ -632,25 +658,26 @@
     },
     "population": 66351959,
     "region": "Europe",
-    "subregion": "Western Europe",
-    "area": 543908.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 843,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Western Europe",
     "temperature": 11.65
   },
   {
+    "area": 342000,
     "capital": [
       "Brazzaville"
     ],
     "cca2": "CG",
+    "cca3": "COG",
+    "currencies": {
+      "XAF": {
+        "name": "Central African CFA franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1960,
+    "landlocked": "0",
     "languages": {
       "fra": "French",
       "kon": "Kikongo",
@@ -680,25 +707,26 @@
     },
     "population": 6142180,
     "region": "Africa",
-    "subregion": "Middle Africa",
-    "area": 342000.0,
-    "currencies": {
-      "XAF": {
-        "symbol": "Fr",
-        "name": "Central African CFA franc"
-      }
-    },
-    "independence": 1960,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Middle Africa",
     "temperature": 25.28
   },
   {
+    "area": 147570,
     "capital": [
       "Dhaka"
     ],
     "cca2": "BD",
+    "cca3": "BGD",
+    "currencies": {
+      "BDT": {
+        "name": "Bangladeshi taka",
+        "symbol": "৳"
+      }
+    },
+    "government": "Republic",
+    "independence": 1971,
+    "landlocked": "0",
     "languages": {
       "ben": "Bengali"
     },
@@ -718,25 +746,26 @@
     },
     "population": 169828911,
     "region": "Asia",
-    "subregion": "Southern Asia",
-    "area": 147570.0,
-    "currencies": {
-      "BDT": {
-        "symbol": "৳",
-        "name": "Bangladeshi taka"
-      }
-    },
-    "independence": 1971,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Southern Asia",
     "temperature": 25.71
   },
   {
+    "area": 459,
     "capital": [
       "Ngerulmud"
     ],
     "cca2": "PW",
+    "cca3": "PLW",
+    "currencies": {
+      "USD": {
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1994,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "pau": "Palauan"
@@ -761,25 +790,26 @@
     },
     "population": 16733,
     "region": "Oceania",
-    "subregion": "Micronesia",
-    "area": 459.0,
-    "currencies": {
-      "USD": {
-        "symbol": "$",
-        "name": "United States dollar"
-      }
-    },
-    "independence": 1994,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Micronesia",
     "temperature": 27.9
   },
   {
+    "area": 652230,
     "capital": [
       "Kabul"
     ],
     "cca2": "AF",
+    "cca3": "AFG",
+    "currencies": {
+      "AFN": {
+        "name": "Afghan afghani",
+        "symbol": "؋"
+      }
+    },
+    "government": "Islamic Emirate",
+    "independence": 1919,
+    "landlocked": "1",
     "languages": {
       "prs": "Dari",
       "pus": "Pashto",
@@ -809,25 +839,26 @@
     },
     "population": 43844000,
     "region": "Asia",
-    "subregion": "Southern Asia",
-    "area": 652230.0,
-    "currencies": {
-      "AFN": {
-        "symbol": "؋",
-        "name": "Afghan afghani"
-      }
-    },
-    "independence": 1919,
-    "government": "Islamic Emirate",
-    "landlocked": "1",
     "religion": "Islam",
+    "subregion": "Southern Asia",
     "temperature": 13.37
   },
   {
+    "area": 1104300,
     "capital": [
       "Addis Ababa"
     ],
     "cca2": "ET",
+    "cca3": "ETH",
+    "currencies": {
+      "ETB": {
+        "name": "Ethiopian birr",
+        "symbol": "Br"
+      }
+    },
+    "government": "Republic",
+    "independence": -1000,
+    "landlocked": "1",
     "languages": {
       "amh": "Amharic"
     },
@@ -847,25 +878,26 @@
     },
     "population": 111652998,
     "region": "Africa",
-    "subregion": "Eastern Africa",
-    "area": 1104300.0,
-    "currencies": {
-      "ETB": {
-        "symbol": "Br",
-        "name": "Ethiopian birr"
-      }
-    },
-    "independence": -1000,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Eastern Africa",
     "temperature": 23.37
   },
   {
+    "area": 488100,
     "capital": [
       "Ashgabat"
     ],
     "cca2": "TM",
+    "cca3": "TKM",
+    "currencies": {
+      "TMT": {
+        "name": "Turkmenistan manat",
+        "symbol": "m"
+      }
+    },
+    "government": "Republic",
+    "independence": 1991,
+    "landlocked": "1",
     "languages": {
       "rus": "Russian",
       "tuk": "Turkmen"
@@ -890,25 +922,26 @@
     },
     "population": 7057841,
     "region": "Asia",
-    "subregion": "Central Asia",
-    "area": 488100.0,
-    "currencies": {
-      "TMT": {
-        "symbol": "m",
-        "name": "Turkmenistan manat"
-      }
-    },
-    "independence": 1991,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Islam",
+    "subregion": "Central Asia",
     "temperature": 16.66
   },
   {
+    "area": 89342,
     "capital": [
       "Amman"
     ],
     "cca2": "JO",
+    "cca3": "JOR",
+    "currencies": {
+      "JOD": {
+        "name": "Jordanian dinar",
+        "symbol": "د.ا"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1946,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic"
     },
@@ -928,25 +961,26 @@
     },
     "population": 11734000,
     "region": "Asia",
-    "subregion": "Western Asia",
-    "area": 89342.0,
-    "currencies": {
-      "JOD": {
-        "symbol": "د.ا",
-        "name": "Jordanian dinar"
-      }
-    },
-    "independence": 1946,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Asia",
     "temperature": 19.52
   },
   {
+    "area": 110879,
     "capital": [
       "Sofia"
     ],
     "cca2": "BG",
+    "cca3": "BGR",
+    "currencies": {
+      "BGN": {
+        "name": "Bulgarian lev",
+        "symbol": "лв"
+      }
+    },
+    "government": "Republic",
+    "independence": 1908,
+    "landlocked": "0",
     "languages": {
       "bul": "Bulgarian"
     },
@@ -966,25 +1000,26 @@
     },
     "population": 6437360,
     "region": "Europe",
-    "subregion": "Southeast Europe",
-    "area": 110879.0,
-    "currencies": {
-      "BGN": {
-        "symbol": "лв",
-        "name": "Bulgarian lev"
-      }
-    },
-    "independence": 1908,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Southeast Europe",
     "temperature": 11.35
   },
   {
+    "area": 616,
     "capital": [
       "Castries"
     ],
     "cca2": "LC",
+    "cca3": "LCA",
+    "currencies": {
+      "XCD": {
+        "name": "Eastern Caribbean dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1979,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -1004,25 +1039,26 @@
     },
     "population": 184100,
     "region": "Americas",
-    "subregion": "Caribbean",
-    "area": 616.0,
-    "currencies": {
-      "XCD": {
-        "symbol": "$",
-        "name": "Eastern Caribbean dollar"
-      }
-    },
-    "independence": 1979,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Caribbean",
     "temperature": 27
   },
   {
+    "area": 196722,
     "capital": [
       "Dakar"
     ],
     "cca2": "SN",
+    "cca3": "SEN",
+    "currencies": {
+      "XOF": {
+        "name": "West African CFA franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1960,
+    "landlocked": "0",
     "languages": {
       "fra": "French"
     },
@@ -1042,25 +1078,26 @@
     },
     "population": 18593258,
     "region": "Africa",
-    "subregion": "Western Africa",
-    "area": 196722.0,
-    "currencies": {
-      "XOF": {
-        "symbol": "Fr",
-        "name": "West African CFA franc"
-      }
-    },
-    "independence": 1960,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Africa",
     "temperature": 28.9
   },
   {
+    "area": 181034,
     "capital": [
       "Montevideo"
     ],
     "cca2": "UY",
+    "cca3": "URY",
+    "currencies": {
+      "UYU": {
+        "name": "Uruguayan peso",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1828,
+    "landlocked": "0",
     "languages": {
       "spa": "Spanish"
     },
@@ -1080,25 +1117,26 @@
     },
     "population": 3499451,
     "region": "Americas",
-    "subregion": "South America",
-    "area": 181034.0,
-    "currencies": {
-      "UYU": {
-        "symbol": "$",
-        "name": "Uruguayan peso"
-      }
-    },
-    "independence": 1828,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "South America",
     "temperature": 17.97
   },
   {
+    "area": 36125,
     "capital": [
       "Bissau"
     ],
     "cca2": "GW",
+    "cca3": "GNB",
+    "currencies": {
+      "XOF": {
+        "name": "West African CFA franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1974,
+    "landlocked": "0",
     "languages": {
       "por": "Portuguese",
       "pov": "Upper Guinea Creole"
@@ -1123,25 +1161,26 @@
     },
     "population": 1781308,
     "region": "Africa",
-    "subregion": "Western Africa",
-    "area": 36125.0,
-    "currencies": {
-      "XOF": {
-        "symbol": "Fr",
-        "name": "West African CFA franc"
-      }
-    },
-    "independence": 1974,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Africa",
     "temperature": 27.98
   },
   {
+    "area": 342353,
     "capital": [
       "Manila"
     ],
     "cca2": "PH",
+    "cca3": "PHL",
+    "currencies": {
+      "PHP": {
+        "name": "Philippine peso",
+        "symbol": "₱"
+      }
+    },
+    "government": "Republic",
+    "independence": 1946,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "fil": "Filipino"
@@ -1166,25 +1205,26 @@
     },
     "population": 114123600,
     "region": "Asia",
-    "subregion": "South-Eastern Asia",
-    "area": 342353.0,
-    "currencies": {
-      "PHP": {
-        "symbol": "₱",
-        "name": "Philippine peso"
-      }
-    },
-    "independence": 1946,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "South-Eastern Asia",
     "temperature": 26.27
   },
   {
+    "area": 947303,
     "capital": [
       "Dodoma"
     ],
     "cca2": "TZ",
+    "cca3": "TZA",
+    "currencies": {
+      "TZS": {
+        "name": "Tanzanian shilling",
+        "symbol": "Sh"
+      }
+    },
+    "government": "Republic",
+    "independence": 1961,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "swa": "Swahili"
@@ -1209,25 +1249,26 @@
     },
     "population": 68153004,
     "region": "Africa",
-    "subregion": "Eastern Africa",
-    "area": 947303.0,
-    "currencies": {
-      "TZS": {
-        "symbol": "Sh",
-        "name": "Tanzanian shilling"
-      }
-    },
-    "independence": 1961,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Eastern Africa",
     "temperature": 22.92
   },
   {
+    "area": 1886068,
     "capital": [
       "Khartoum"
     ],
     "cca2": "SD",
+    "cca3": "SDN",
+    "currencies": {
+      "SDG": {
+        "name": "Sudanese pound",
+        "symbol": "ج.س"
+      }
+    },
+    "government": "Islamic Republic",
+    "independence": 1956,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic",
       "eng": "English"
@@ -1252,25 +1293,26 @@
     },
     "population": 51662000,
     "region": "Africa",
-    "subregion": "Northern Africa",
-    "area": 1886068.0,
-    "currencies": {
-      "SDG": {
-        "symbol": "ج.س",
-        "name": "Sudanese pound"
-      }
-    },
-    "independence": 1956,
-    "government": "Islamic Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Northern Africa",
     "temperature": 27.95
   },
   {
+    "area": 71740,
     "capital": [
       "Freetown"
     ],
     "cca2": "SL",
+    "cca3": "SLE",
+    "currencies": {
+      "SLE": {
+        "name": "Leone",
+        "symbol": "Le"
+      }
+    },
+    "government": "Republic",
+    "independence": 1961,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -1290,25 +1332,26 @@
     },
     "population": 9077691,
     "region": "Africa",
-    "subregion": "Western Africa",
-    "area": 71740.0,
-    "currencies": {
-      "SLE": {
-        "symbol": "Le",
-        "name": "Leone"
-      }
-    },
-    "independence": 1961,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Africa",
     "temperature": 26.54
   },
   {
+    "area": 1284000,
     "capital": [
       "N'Djamena"
     ],
     "cca2": "TD",
+    "cca3": "TCD",
+    "currencies": {
+      "XAF": {
+        "name": "Central African CFA franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1960,
+    "landlocked": "1",
     "languages": {
       "ara": "Arabic",
       "fra": "French"
@@ -1333,25 +1376,26 @@
     },
     "population": 19340757,
     "region": "Africa",
-    "subregion": "Middle Africa",
-    "area": 1284000.0,
-    "currencies": {
-      "XAF": {
-        "symbol": "Fr",
-        "name": "Central African CFA franc"
-      }
-    },
-    "independence": 1960,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Islam",
+    "subregion": "Middle Africa",
     "temperature": 27.63
   },
   {
+    "area": 12189,
     "capital": [
       "Port Vila"
     ],
     "cca2": "VU",
+    "cca3": "VUT",
+    "currencies": {
+      "VUV": {
+        "name": "Vanuatu vatu",
+        "symbol": "Vt"
+      }
+    },
+    "government": "Republic",
+    "independence": 1980,
+    "landlocked": "0",
     "languages": {
       "bis": "Bislama",
       "eng": "English",
@@ -1381,25 +1425,26 @@
     },
     "population": 321409,
     "region": "Oceania",
-    "subregion": "Melanesia",
-    "area": 12189.0,
-    "currencies": {
-      "VUV": {
-        "symbol": "Vt",
-        "name": "Vanuatu vatu"
-      }
-    },
-    "independence": 1980,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Melanesia",
     "temperature": 24.44
   },
   {
+    "area": 26338,
     "capital": [
       "Kigali"
     ],
     "cca2": "RW",
+    "cca3": "RWA",
+    "currencies": {
+      "RWF": {
+        "name": "Rwandan franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1962,
+    "landlocked": "1",
     "languages": {
       "eng": "English",
       "fra": "French",
@@ -1429,25 +1474,26 @@
     },
     "population": 14104969,
     "region": "Africa",
-    "subregion": "Eastern Africa",
-    "area": 26338.0,
-    "currencies": {
-      "RWF": {
-        "symbol": "Fr",
-        "name": "Rwandan franc"
-      }
-    },
-    "independence": 1962,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Eastern Africa",
     "temperature": 19.2
   },
   {
+    "area": 56785,
     "capital": [
       "Lomé"
     ],
     "cca2": "TG",
+    "cca3": "TGO",
+    "currencies": {
+      "XOF": {
+        "name": "West African CFA franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1960,
+    "landlocked": "0",
     "languages": {
       "fra": "French"
     },
@@ -1467,25 +1513,26 @@
     },
     "population": 8095498,
     "region": "Africa",
-    "subregion": "Western Africa",
-    "area": 56785.0,
-    "currencies": {
-      "XOF": {
-        "symbol": "Fr",
-        "name": "West African CFA franc"
-      }
-    },
-    "independence": 1960,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Western Africa",
     "temperature": 27.33
   },
   {
+    "area": 83600,
     "capital": [
       "Abu Dhabi"
     ],
     "cca2": "AE",
+    "cca3": "ARE",
+    "currencies": {
+      "AED": {
+        "name": "United Arab Emirates dirham",
+        "symbol": "د.إ"
+      }
+    },
+    "government": "Emirate Federation",
+    "independence": 1971,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic"
     },
@@ -1505,25 +1552,26 @@
     },
     "population": 11294243,
     "region": "Asia",
-    "subregion": "Western Asia",
-    "area": 83600.0,
-    "currencies": {
-      "AED": {
-        "symbol": "د.إ",
-        "name": "United Arab Emirates dirham"
-      }
-    },
-    "independence": 1971,
-    "government": "Emirate Federation",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Asia",
     "temperature": 28.17
   },
   {
+    "area": 1862,
     "capital": [
       "Moroni"
     ],
     "cca2": "KM",
+    "cca3": "COM",
+    "currencies": {
+      "KMF": {
+        "name": "Comorian franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1975,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic",
       "fra": "French",
@@ -1553,25 +1601,26 @@
     },
     "population": 919901,
     "region": "Africa",
-    "subregion": "Eastern Africa",
-    "area": 1862.0,
-    "currencies": {
-      "KMF": {
-        "symbol": "Fr",
-        "name": "Comorian franc"
-      }
-    },
-    "independence": 1975,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Eastern Africa",
     "temperature": 23.73
   },
   {
+    "area": 10908,
     "capital": [
       "Pristina"
     ],
     "cca2": "XK",
+    "cca3": "CS-KM",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Parliamentary Republic",
+    "independence": 2008,
+    "landlocked": "0",
     "languages": {
       "sqi": "Albanian",
       "srp": "Serbian"
@@ -1596,25 +1645,26 @@
     },
     "population": 1585566,
     "region": "Europe",
-    "subregion": "Southeast Europe",
-    "area": 10908.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 2008,
-    "government": "Parliamentary Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Southeast Europe",
     "temperature": 9.96
   },
   {
+    "area": 33847,
     "capital": [
       "Chișinău"
     ],
     "cca2": "MD",
+    "cca3": "MDA",
+    "currencies": {
+      "MDL": {
+        "name": "Moldovan leu",
+        "symbol": "L"
+      }
+    },
+    "government": "Republic",
+    "independence": 1991,
+    "landlocked": "1",
     "languages": {
       "ron": "Romanian"
     },
@@ -1634,25 +1684,26 @@
     },
     "population": 2749076,
     "region": "Europe",
-    "subregion": "Eastern Europe",
-    "area": 33847.0,
-    "currencies": {
-      "MDL": {
-        "symbol": "L",
-        "name": "Moldovan leu"
-      }
-    },
-    "independence": 1991,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Eastern Europe",
     "temperature": 10.89
   },
   {
+    "area": 199951,
     "capital": [
       "Bishkek"
     ],
     "cca2": "KG",
+    "cca3": "KGZ",
+    "currencies": {
+      "KGS": {
+        "name": "Kyrgyzstani som",
+        "symbol": "с"
+      }
+    },
+    "government": "Republic",
+    "independence": 1991,
+    "landlocked": "1",
     "languages": {
       "kir": "Kyrgyz",
       "rus": "Russian"
@@ -1677,25 +1728,26 @@
     },
     "population": 7281800,
     "region": "Asia",
-    "subregion": "Central Asia",
-    "area": 199951.0,
-    "currencies": {
-      "KGS": {
-        "symbol": "с",
-        "name": "Kyrgyzstani som"
-      }
-    },
-    "independence": 1991,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Islam",
+    "subregion": "Central Asia",
     "temperature": 2.65
   },
   {
+    "area": 4033,
     "capital": [
       "Praia"
     ],
     "cca2": "CV",
+    "cca3": "CPV",
+    "currencies": {
+      "CVE": {
+        "name": "Cape Verdean escudo",
+        "symbol": "Esc"
+      }
+    },
+    "government": "Republic",
+    "independence": 1975,
+    "landlocked": "0",
     "languages": {
       "por": "Portuguese"
     },
@@ -1715,25 +1767,26 @@
     },
     "population": 491233,
     "region": "Africa",
-    "subregion": "Western Africa",
-    "area": 4033.0,
-    "currencies": {
-      "CVE": {
-        "symbol": "Esc",
-        "name": "Cape Verdean escudo"
-      }
-    },
-    "independence": 1975,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Western Africa",
     "temperature": 22.53
   },
   {
+    "area": 9525067,
     "capital": [
       "Washington, D.C."
     ],
     "cca2": "US",
+    "cca3": "USA",
+    "currencies": {
+      "USD": {
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Federal Republic",
+    "independence": 1776,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -1753,25 +1806,26 @@
     },
     "population": 340110988,
     "region": "Americas",
-    "subregion": "North America",
-    "area": 9525067.0,
-    "currencies": {
-      "USD": {
-        "symbol": "$",
-        "name": "United States dollar"
-      }
-    },
-    "independence": 1776,
-    "government": "Federal Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "North America",
     "temperature": 9.46
   },
   {
+    "area": 916445,
     "capital": [
       "Caracas"
     ],
     "cca2": "VE",
+    "cca3": "VEN",
+    "currencies": {
+      "VES": {
+        "name": "Venezuelan bolívar soberano",
+        "symbol": "Bs.S."
+      }
+    },
+    "government": "Federal Republic",
+    "independence": 1811,
+    "landlocked": "0",
     "languages": {
       "spa": "Spanish"
     },
@@ -1791,25 +1845,26 @@
     },
     "population": 28517000,
     "region": "Americas",
-    "subregion": "South America",
-    "area": 916445.0,
-    "currencies": {
-      "VES": {
-        "symbol": "Bs.S.",
-        "name": "Venezuelan bolívar soberano"
-      }
-    },
-    "independence": 1811,
-    "government": "Federal Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "South America",
     "temperature": 25.71
   },
   {
+    "area": 28896,
     "capital": [
       "Honiara"
     ],
     "cca2": "SB",
+    "cca3": "SLB",
+    "currencies": {
+      "SBD": {
+        "name": "Solomon Islands dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1978,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -1829,25 +1884,26 @@
     },
     "population": 750325,
     "region": "Oceania",
-    "subregion": "Melanesia",
-    "area": 28896.0,
-    "currencies": {
-      "SBD": {
-        "symbol": "$",
-        "name": "Solomon Islands dollar"
-      }
-    },
-    "independence": 1978,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Melanesia",
     "temperature": 25.92
   },
   {
+    "area": 276841,
     "capital": [
       "Quito"
     ],
     "cca2": "EC",
+    "cca3": "ECU",
+    "currencies": {
+      "USD": {
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1822,
+    "landlocked": "0",
     "languages": {
       "spa": "Spanish"
     },
@@ -1867,25 +1923,26 @@
     },
     "population": 18103660,
     "region": "Americas",
-    "subregion": "South America",
-    "area": 276841.0,
-    "currencies": {
-      "USD": {
-        "symbol": "$",
-        "name": "United States dollar"
-      }
-    },
-    "independence": 1822,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "South America",
     "temperature": 21.43
   },
   {
+    "area": 316,
     "capital": [
       "Valletta"
     ],
     "cca2": "MT",
+    "cca3": "MLT",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Republic",
+    "independence": 1964,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "mlt": "Maltese"
@@ -1910,25 +1967,26 @@
     },
     "population": 574250,
     "region": "Europe",
-    "subregion": "Southern Europe",
-    "area": 316.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1964,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Southern Europe",
     "temperature": 19.58
   },
   {
+    "area": 622984,
     "capital": [
       "Bangui"
     ],
     "cca2": "CF",
+    "cca3": "CAF",
+    "currencies": {
+      "XAF": {
+        "name": "Central African CFA franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1960,
+    "landlocked": "1",
     "languages": {
       "fra": "French",
       "sag": "Sango"
@@ -1953,25 +2011,26 @@
     },
     "population": 6470307,
     "region": "Africa",
-    "subregion": "Middle Africa",
-    "area": 622984.0,
-    "currencies": {
-      "XAF": {
-        "symbol": "Fr",
-        "name": "Central African CFA franc"
-      }
-    },
-    "independence": 1960,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Middle Africa",
     "temperature": 25.47
   },
   {
+    "area": 747,
     "capital": [
       "Nuku'alofa"
     ],
     "cca2": "TO",
+    "cca3": "TON",
+    "currencies": {
+      "TOP": {
+        "name": "Tongan paʻanga",
+        "symbol": "T$"
+      }
+    },
+    "government": "Monarchy",
+    "independence": 1970,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "ton": "Tongan"
@@ -1996,25 +2055,26 @@
     },
     "population": 100179,
     "region": "Oceania",
-    "subregion": "Polynesia",
-    "area": 747.0,
-    "currencies": {
-      "TOP": {
-        "symbol": "T$",
-        "name": "Tongan paʻanga"
-      }
-    },
-    "independence": 1970,
-    "government": "Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Polynesia",
     "temperature": 25.01
   },
   {
+    "area": 131990,
     "capital": [
       "Athens"
     ],
     "cca2": "GR",
+    "cca3": "GRC",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Republic",
+    "independence": 1830,
+    "landlocked": "0",
     "languages": {
       "ell": "Greek"
     },
@@ -2034,25 +2094,26 @@
     },
     "population": 10400720,
     "region": "Europe",
-    "subregion": "Southern Europe",
-    "area": 131990.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1830,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Southern Europe",
     "temperature": 14.26
   },
   {
+    "area": 83871,
     "capital": [
       "Vienna"
     ],
     "cca2": "AT",
+    "cca3": "AUT",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Federal Republic",
+    "independence": 1918,
+    "landlocked": "1",
     "languages": {
       "deu": "German"
     },
@@ -2072,25 +2133,26 @@
     },
     "population": 9200931,
     "region": "Europe",
-    "subregion": "Central Europe",
-    "area": 83871.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1918,
-    "government": "Federal Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Central Europe",
     "temperature": 7.44
   },
   {
+    "area": 261,
     "capital": [
       "Basseterre"
     ],
     "cca2": "KN",
+    "cca3": "KNA",
+    "currencies": {
+      "XCD": {
+        "name": "Eastern Caribbean dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1983,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -2110,25 +2172,26 @@
     },
     "population": 51320,
     "region": "Americas",
-    "subregion": "Caribbean",
-    "area": 261.0,
-    "currencies": {
-      "XCD": {
-        "symbol": "$",
-        "name": "Eastern Caribbean dollar"
-      }
-    },
-    "independence": 1983,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Caribbean",
     "temperature": 27.47
   },
   {
+    "area": 923768,
     "capital": [
       "Abuja"
     ],
     "cca2": "NG",
+    "cca3": "NGA",
+    "currencies": {
+      "NGN": {
+        "name": "Nigerian naira",
+        "symbol": "₦"
+      }
+    },
+    "government": "Federal Republic",
+    "independence": 1960,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -2148,25 +2211,26 @@
     },
     "population": 223800000,
     "region": "Africa",
-    "subregion": "Western Africa",
-    "area": 923768.0,
-    "currencies": {
-      "NGN": {
-        "symbol": "₦",
-        "name": "Nigerian naira"
-      }
-    },
-    "independence": 1960,
-    "government": "Federal Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Western Africa",
     "temperature": 27.3
   },
   {
+    "area": 78865,
     "capital": [
       "Prague"
     ],
     "cca2": "CZ",
+    "cca3": "CZE",
+    "currencies": {
+      "CZK": {
+        "name": "Czech koruna",
+        "symbol": "Kč"
+      }
+    },
+    "government": "Parliamentary Republic",
+    "independence": 1993,
+    "landlocked": "1",
     "languages": {
       "ces": "Czech",
       "slk": "Slovak"
@@ -2191,25 +2255,26 @@
     },
     "population": 10882341,
     "region": "Europe",
-    "subregion": "Central Europe",
-    "area": 78865.0,
-    "currencies": {
-      "CZK": {
-        "symbol": "Kč",
-        "name": "Czech koruna"
-      }
-    },
-    "independence": 1993,
-    "government": "Parliamentary Republic",
-    "landlocked": "1",
     "religion": null,
+    "subregion": "Central Europe",
     "temperature": 10.06
   },
   {
+    "area": 61,
     "capital": [
       "City of San Marino"
     ],
     "cca2": "SM",
+    "cca3": "SMR",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Republic",
+    "independence": 885,
+    "landlocked": "1",
     "languages": {
       "ita": "Italian"
     },
@@ -2229,25 +2294,26 @@
     },
     "population": 34132,
     "region": "Europe",
-    "subregion": "Southern Europe",
-    "area": 61.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 885,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Southern Europe",
     "temperature": 12.83
   },
   {
+    "area": 11586,
     "capital": [
       "Doha"
     ],
     "cca2": "QA",
+    "cca3": "QAT",
+    "currencies": {
+      "QAR": {
+        "name": "Qatari riyal",
+        "symbol": "ر.ق"
+      }
+    },
+    "government": "Monarchy",
+    "independence": 1971,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic"
     },
@@ -2267,25 +2333,26 @@
     },
     "population": 3173024,
     "region": "Asia",
-    "subregion": "Western Asia",
-    "area": 11586.0,
-    "currencies": {
-      "QAR": {
-        "symbol": "ر.ق",
-        "name": "Qatari riyal"
-      }
-    },
-    "independence": 1971,
-    "government": "Monarchy",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Asia",
     "temperature": 28.02
   },
   {
+    "area": 108889,
     "capital": [
       "Guatemala City"
     ],
     "cca2": "GT",
+    "cca3": "GTM",
+    "currencies": {
+      "GTQ": {
+        "name": "Guatemalan quetzal",
+        "symbol": "Q"
+      }
+    },
+    "government": "Republic",
+    "independence": 1821,
+    "landlocked": "0",
     "languages": {
       "spa": "Spanish"
     },
@@ -2305,25 +2372,26 @@
     },
     "population": 18079810,
     "region": "Americas",
-    "subregion": "Central America",
-    "area": 108889.0,
-    "currencies": {
-      "GTQ": {
-        "symbol": "Q",
-        "name": "Guatemalan quetzal"
-      }
-    },
-    "independence": 1821,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Central America",
     "temperature": 23.65
   },
   {
+    "area": 163610,
     "capital": [
       "Tunis"
     ],
     "cca2": "TN",
+    "cca3": "TUN",
+    "currencies": {
+      "TND": {
+        "name": "Tunisian dinar",
+        "symbol": "د.ت"
+      }
+    },
+    "government": "Republic",
+    "independence": 1956,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic"
     },
@@ -2343,25 +2411,30 @@
     },
     "population": 11972169,
     "region": "Africa",
-    "subregion": "Northern Africa",
-    "area": 163610.0,
-    "currencies": {
-      "TND": {
-        "symbol": "د.ت",
-        "name": "Tunisian dinar"
-      }
-    },
-    "independence": 1956,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Northern Africa",
     "temperature": 20.53
   },
   {
+    "area": 38394,
     "capital": [
       "Thimphu"
     ],
     "cca2": "BT",
+    "cca3": "BTN",
+    "currencies": {
+      "BTN": {
+        "name": "Bhutanese ngultrum",
+        "symbol": "Nu."
+      },
+      "INR": {
+        "name": "Indian rupee",
+        "symbol": "₹"
+      }
+    },
+    "government": "Monarchy",
+    "independence": 1910,
+    "landlocked": "1",
     "languages": {
       "dzo": "Dzongkha"
     },
@@ -2381,29 +2454,26 @@
     },
     "population": 784043,
     "region": "Asia",
-    "subregion": "Southern Asia",
-    "area": 38394.0,
-    "currencies": {
-      "BTN": {
-        "symbol": "Nu.",
-        "name": "Bhutanese ngultrum"
-      },
-      "INR": {
-        "symbol": "₹",
-        "name": "Indian rupee"
-      }
-    },
-    "independence": 1910,
-    "government": "Monarchy",
-    "landlocked": "1",
     "religion": "Buddhism",
+    "subregion": "Southern Asia",
     "temperature": 10.38
   },
   {
+    "area": 2842,
     "capital": [
       "Apia"
     ],
     "cca2": "WS",
+    "cca3": "WSM",
+    "currencies": {
+      "WST": {
+        "name": "Samoan tālā",
+        "symbol": "T"
+      }
+    },
+    "government": "Parliamentary Republic",
+    "independence": 1962,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "smo": "Samoan"
@@ -2428,25 +2498,26 @@
     },
     "population": 205557,
     "region": "Oceania",
-    "subregion": "Polynesia",
-    "area": 2842.0,
-    "currencies": {
-      "WST": {
-        "symbol": "T",
-        "name": "Samoan tālā"
-      }
-    },
-    "independence": 1962,
-    "government": "Parliamentary Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Polynesia",
     "temperature": 27.58
   },
   {
+    "area": 143100,
     "capital": [
       "Dushanbe"
     ],
     "cca2": "TJ",
+    "cca3": "TJK",
+    "currencies": {
+      "TJS": {
+        "name": "Tajikistani somoni",
+        "symbol": "ЅМ"
+      }
+    },
+    "government": "Republic",
+    "independence": 1991,
+    "landlocked": "1",
     "languages": {
       "rus": "Russian",
       "tgk": "Tajik"
@@ -2471,25 +2542,26 @@
     },
     "population": 10499000,
     "region": "Asia",
-    "subregion": "Central Asia",
-    "area": 143100.0,
-    "currencies": {
-      "TJS": {
-        "symbol": "ЅМ",
-        "name": "Tajikistani somoni"
-      }
-    },
-    "independence": 1991,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Islam",
+    "subregion": "Central Asia",
     "temperature": 3.85
   },
   {
+    "area": 21937,
     "capital": [
       "Jerusalem"
     ],
     "cca2": "IL",
+    "cca3": "ISR",
+    "currencies": {
+      "ILS": {
+        "name": "Israeli new shekel",
+        "symbol": "₪"
+      }
+    },
+    "government": "Republic",
+    "independence": 1948,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic",
       "heb": "Hebrew"
@@ -2514,25 +2586,26 @@
     },
     "population": 10134800,
     "region": "Asia",
-    "subregion": "Western Asia",
-    "area": 21937.0,
-    "currencies": {
-      "ILS": {
-        "symbol": "₪",
-        "name": "Israeli new shekel"
-      }
-    },
-    "independence": 1948,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Judaism",
+    "subregion": "Western Asia",
     "temperature": 19.99
   },
   {
+    "area": 637657,
     "capital": [
       "Mogadishu"
     ],
     "cca2": "SO",
+    "cca3": "SOM",
+    "currencies": {
+      "SOS": {
+        "name": "Somali shilling",
+        "symbol": "Sh"
+      }
+    },
+    "government": "Republic",
+    "independence": 1960,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic",
       "som": "Somali"
@@ -2557,25 +2630,26 @@
     },
     "population": 19655000,
     "region": "Africa",
-    "subregion": "Eastern Africa",
-    "area": 637657.0,
-    "currencies": {
-      "SOS": {
-        "symbol": "Sh",
-        "name": "Somali shilling"
-      }
-    },
-    "independence": 1960,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Eastern Africa",
     "temperature": 26.95
   },
   {
+    "area": 338455,
     "capital": [
       "Helsinki"
     ],
     "cca2": "FI",
+    "cca3": "FIN",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Republic",
+    "independence": 1917,
+    "landlocked": "0",
     "languages": {
       "fin": "Finnish",
       "swe": "Swedish"
@@ -2600,25 +2674,30 @@
     },
     "population": 5650325,
     "region": "Europe",
-    "subregion": "Northern Europe",
-    "area": 338455.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1917,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Northern Europe",
     "temperature": 2.46
   },
   {
+    "area": 30355,
     "capital": [
       "Maseru"
     ],
     "cca2": "LS",
+    "cca3": "LSO",
+    "currencies": {
+      "LSL": {
+        "name": "Lesotho loti",
+        "symbol": "L"
+      },
+      "ZAR": {
+        "name": "South African rand",
+        "symbol": "R"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1966,
+    "landlocked": "1",
     "languages": {
       "eng": "English",
       "sot": "Sotho"
@@ -2643,29 +2722,26 @@
     },
     "population": 2116427,
     "region": "Africa",
-    "subregion": "Southern Africa",
-    "area": 30355.0,
-    "currencies": {
-      "LSL": {
-        "symbol": "L",
-        "name": "Lesotho loti"
-      },
-      "ZAR": {
-        "symbol": "R",
-        "name": "South African rand"
-      }
-    },
-    "independence": 1966,
-    "government": "Constitutional Monarchy",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Southern Africa",
     "temperature": 12.38
   },
   {
+    "area": 17098246,
     "capital": [
       "Moscow"
     ],
     "cca2": "RU",
+    "cca3": "RUS",
+    "currencies": {
+      "RUB": {
+        "name": "Russian ruble",
+        "symbol": "₽"
+      }
+    },
+    "government": "Federal Republic",
+    "independence": 1991,
+    "landlocked": "0",
     "languages": {
       "rus": "Russian"
     },
@@ -2685,25 +2761,26 @@
     },
     "population": 146028325,
     "region": "Europe",
-    "subregion": "Eastern Europe",
-    "area": 17098246.0,
-    "currencies": {
-      "RUB": {
-        "symbol": "₽",
-        "name": "Russian ruble"
-      }
-    },
-    "independence": 1991,
-    "government": "Federal Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Eastern Europe",
     "temperature": -3.79
   },
   {
+    "area": 70273,
     "capital": [
       "Dublin"
     ],
     "cca2": "IE",
+    "cca3": "IRL",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Republic",
+    "independence": 1921,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "gle": "Irish"
@@ -2728,25 +2805,26 @@
     },
     "population": 5458600,
     "region": "Europe",
-    "subregion": "Northern Europe",
-    "area": 70273.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1921,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Northern Europe",
     "temperature": 9.73
   },
   {
+    "area": 86600,
     "capital": [
       "Baku"
     ],
     "cca2": "AZ",
+    "cca3": "AZE",
+    "currencies": {
+      "AZN": {
+        "name": "Azerbaijani manat",
+        "symbol": "₼"
+      }
+    },
+    "government": "Federal Republic",
+    "independence": 1991,
+    "landlocked": "1",
     "languages": {
       "aze": "Azerbaijani"
     },
@@ -2766,25 +2844,26 @@
     },
     "population": 10241722,
     "region": "Asia",
-    "subregion": "Western Asia",
-    "area": 86600.0,
-    "currencies": {
-      "AZN": {
-        "symbol": "₼",
-        "name": "Azerbaijani manat"
-      }
-    },
-    "independence": 1991,
-    "government": "Federal Republic",
-    "landlocked": "1",
     "religion": "Islam",
+    "subregion": "Western Asia",
     "temperature": 12.96
   },
   {
+    "area": 10991,
     "capital": [
       "Kingston"
     ],
     "cca2": "JM",
+    "cca3": "JAM",
+    "currencies": {
+      "JMD": {
+        "name": "Jamaican dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1962,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "jam": "Jamaican Patois"
@@ -2809,25 +2888,30 @@
     },
     "population": 2825544,
     "region": "Americas",
-    "subregion": "Caribbean",
-    "area": 10991.0,
-    "currencies": {
-      "JMD": {
-        "symbol": "$",
-        "name": "Jamaican dollar"
-      }
-    },
-    "independence": 1962,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Caribbean",
     "temperature": 25.91
   },
   {
+    "area": 17364,
     "capital": [
       "Mbabane"
     ],
     "cca2": "SZ",
+    "cca3": "SWZ",
+    "currencies": {
+      "SZL": {
+        "name": "Swazi lilangeni",
+        "symbol": "L"
+      },
+      "ZAR": {
+        "name": "South African rand",
+        "symbol": "R"
+      }
+    },
+    "government": "Monarchy",
+    "independence": 1968,
+    "landlocked": "1",
     "languages": {
       "eng": "English",
       "ssw": "Swazi"
@@ -2852,29 +2936,26 @@
     },
     "population": 1235549,
     "region": "Africa",
-    "subregion": "Southern Africa",
-    "area": 17364.0,
-    "currencies": {
-      "SZL": {
-        "symbol": "L",
-        "name": "Swazi lilangeni"
-      },
-      "ZAR": {
-        "symbol": "R",
-        "name": "South African rand"
-      }
-    },
-    "independence": 1968,
-    "government": "Monarchy",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Southern Africa",
     "temperature": 20.64
   },
   {
+    "area": 267668,
     "capital": [
       "Libreville"
     ],
     "cca2": "GA",
+    "cca3": "GAB",
+    "currencies": {
+      "XAF": {
+        "name": "Central African CFA franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1960,
+    "landlocked": "0",
     "languages": {
       "fra": "French"
     },
@@ -2894,25 +2975,30 @@
     },
     "population": 2469296,
     "region": "Africa",
-    "subregion": "Middle Africa",
-    "area": 267668.0,
-    "currencies": {
-      "XAF": {
-        "symbol": "Fr",
-        "name": "Central African CFA franc"
-      }
-    },
-    "independence": 1960,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Middle Africa",
     "temperature": 25.2
   },
   {
+    "area": 181035,
     "capital": [
       "Phnom Penh"
     ],
     "cca2": "KH",
+    "cca3": "KHM",
+    "currencies": {
+      "KHR": {
+        "name": "Cambodian riel",
+        "symbol": "៛"
+      },
+      "USD": {
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1953,
+    "landlocked": "0",
     "languages": {
       "khm": "Khmer"
     },
@@ -2932,29 +3018,26 @@
     },
     "population": 17577760,
     "region": "Asia",
-    "subregion": "South-Eastern Asia",
-    "area": 181035.0,
-    "currencies": {
-      "KHR": {
-        "symbol": "៛",
-        "name": "Cambodian riel"
-      },
-      "USD": {
-        "symbol": "$",
-        "name": "United States dollar"
-      }
-    },
-    "independence": 1953,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Buddhism",
+    "subregion": "South-Eastern Asia",
     "temperature": 27.41
   },
   {
+    "area": 2149690,
     "capital": [
       "Riyadh"
     ],
     "cca2": "SA",
+    "cca3": "SAU",
+    "currencies": {
+      "SAR": {
+        "name": "Saudi riyal",
+        "symbol": "ر.س"
+      }
+    },
+    "government": "Monarchy",
+    "independence": 1932,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic"
     },
@@ -2974,25 +3057,26 @@
     },
     "population": 35300280,
     "region": "Asia",
-    "subregion": "Western Asia",
-    "area": 2149690.0,
-    "currencies": {
-      "SAR": {
-        "symbol": "ر.س",
-        "name": "Saudi riyal"
-      }
-    },
-    "independence": 1932,
-    "government": "Monarchy",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Asia",
     "temperature": 25.94
   },
   {
+    "area": 702,
     "capital": [
       "Palikir"
     ],
     "cca2": "FM",
+    "cca3": "FSM",
+    "currencies": {
+      "USD": {
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Federal Republic",
+    "independence": 1986,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -3012,25 +3096,26 @@
     },
     "population": 105564,
     "region": "Oceania",
-    "subregion": "Micronesia",
-    "area": 702.0,
-    "currencies": {
-      "USD": {
-        "symbol": "$",
-        "name": "United States dollar"
-      }
-    },
-    "independence": 1986,
-    "government": "Federal Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Micronesia",
     "temperature": 27.96
   },
   {
+    "area": 120538,
     "capital": [
       "Pyongyang"
     ],
     "cca2": "KP",
+    "cca3": "PRK",
+    "currencies": {
+      "KPW": {
+        "name": "North Korean won",
+        "symbol": "₩"
+      }
+    },
+    "government": "Socialistic Republic",
+    "independence": 1948,
+    "landlocked": "0",
     "languages": {
       "kor": "Korean"
     },
@@ -3050,25 +3135,26 @@
     },
     "population": 25950000,
     "region": "Asia",
-    "subregion": "Eastern Asia",
-    "area": 120538.0,
-    "currencies": {
-      "KPW": {
-        "symbol": "₩",
-        "name": "North Korean won"
-      }
-    },
-    "independence": 1948,
-    "government": "Socialistic Republic",
-    "landlocked": "0",
     "religion": null,
+    "subregion": "Eastern Asia",
     "temperature": 6.98
   },
   {
+    "area": 28051,
     "capital": [
       "Malabo"
     ],
     "cca2": "GQ",
+    "cca3": "GNQ",
+    "currencies": {
+      "XAF": {
+        "name": "Central African CFA franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1968,
+    "landlocked": "0",
     "languages": {
       "fra": "French",
       "por": "Portuguese",
@@ -3098,25 +3184,26 @@
     },
     "population": 1668768,
     "region": "Africa",
-    "subregion": "Middle Africa",
-    "area": 28051.0,
-    "currencies": {
-      "XAF": {
-        "symbol": "Fr",
-        "name": "Central African CFA franc"
-      }
-    },
-    "independence": 1968,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Middle Africa",
     "temperature": 24.66
   },
   {
+    "area": 1964375,
     "capital": [
       "Mexico City"
     ],
     "cca2": "MX",
+    "cca3": "MEX",
+    "currencies": {
+      "MXN": {
+        "name": "Mexican peso",
+        "symbol": "$"
+      }
+    },
+    "government": "Federal Republic",
+    "independence": 1810,
+    "landlocked": "0",
     "languages": {
       "spa": "Spanish"
     },
@@ -3136,25 +3223,26 @@
     },
     "population": 130575786,
     "region": "Americas",
-    "subregion": "North America",
-    "area": 1964375.0,
-    "currencies": {
-      "MXN": {
-        "symbol": "$",
-        "name": "Mexican peso"
-      }
-    },
-    "independence": 1810,
-    "government": "Federal Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "North America",
     "temperature": 21.31
   },
   {
+    "area": 8515767,
     "capital": [
       "Brasília"
     ],
     "cca2": "BR",
+    "cca3": "BRA",
+    "currencies": {
+      "BRL": {
+        "name": "Brazilian real",
+        "symbol": "R$"
+      }
+    },
+    "government": "Federal Republic",
+    "independence": 1822,
+    "landlocked": "0",
     "languages": {
       "por": "Portuguese"
     },
@@ -3174,25 +3262,26 @@
     },
     "population": 213421037,
     "region": "Americas",
-    "subregion": "South America",
-    "area": 8515767.0,
-    "currencies": {
-      "BRL": {
-        "symbol": "R$",
-        "name": "Brazilian real"
-      }
-    },
-    "independence": 1822,
-    "government": "Federal Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "South America",
     "temperature": 25.44
   },
   {
+    "area": 21,
     "capital": [
       "Yaren"
     ],
     "cca2": "NR",
+    "cca3": "NRU",
+    "currencies": {
+      "AUD": {
+        "name": "Australian dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1968,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "nau": "Nauru"
@@ -3217,25 +3306,26 @@
     },
     "population": 11680,
     "region": "Oceania",
-    "subregion": "Micronesia",
-    "area": 21.0,
-    "currencies": {
-      "AUD": {
-        "symbol": "$",
-        "name": "Australian dollar"
-      }
-    },
-    "independence": 1968,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Micronesia",
     "temperature": 27.83
   },
   {
+    "area": 1648195,
     "capital": [
       "Tehran"
     ],
     "cca2": "IR",
+    "cca3": "IRN",
+    "currencies": {
+      "IRR": {
+        "name": "Iranian rial",
+        "symbol": "﷼"
+      }
+    },
+    "government": "Islamic Republic",
+    "independence": 1906,
+    "landlocked": "0",
     "languages": {
       "fas": "Persian (Farsi)"
     },
@@ -3255,25 +3345,26 @@
     },
     "population": 85961000,
     "region": "Asia",
-    "subregion": "Southern Asia",
-    "area": 1648195.0,
-    "currencies": {
-      "IRR": {
-        "symbol": "﷼",
-        "name": "Iranian rial"
-      }
-    },
-    "independence": 1906,
-    "government": "Islamic Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Southern Asia",
     "temperature": 18.34
   },
   {
+    "area": 1246700,
     "capital": [
       "Luanda"
     ],
     "cca2": "AO",
+    "cca3": "AGO",
+    "currencies": {
+      "AOA": {
+        "name": "Angolan kwanza",
+        "symbol": "Kz"
+      }
+    },
+    "government": "Republic",
+    "independence": 1975,
+    "landlocked": "0",
     "languages": {
       "por": "Portuguese"
     },
@@ -3293,25 +3384,26 @@
     },
     "population": 36170961,
     "region": "Africa",
-    "subregion": "Middle Africa",
-    "area": 1246700.0,
-    "currencies": {
-      "AOA": {
-        "symbol": "Kz",
-        "name": "Angolan kwanza"
-      }
-    },
-    "independence": 1975,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Middle Africa",
     "temperature": 21.77
   },
   {
+    "area": 676578,
     "capital": [
       "Naypyidaw"
     ],
     "cca2": "MM",
+    "cca3": "MMR",
+    "currencies": {
+      "MMK": {
+        "name": "Burmese kyat",
+        "symbol": "Ks"
+      }
+    },
+    "government": "Republic",
+    "independence": 1948,
+    "landlocked": "0",
     "languages": {
       "mya": "Burmese"
     },
@@ -3331,25 +3423,26 @@
     },
     "population": 51316756,
     "region": "Asia",
-    "subregion": "South-Eastern Asia",
-    "area": 676578.0,
-    "currencies": {
-      "MMK": {
-        "symbol": "Ks",
-        "name": "Burmese kyat"
-      }
-    },
-    "independence": 1948,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Buddhism",
+    "subregion": "South-Eastern Asia",
     "temperature": 23.82
   },
   {
+    "area": 1002450,
     "capital": [
       "Cairo"
     ],
     "cca2": "EG",
+    "cca3": "EGY",
+    "currencies": {
+      "EGP": {
+        "name": "Egyptian pound",
+        "symbol": "£"
+      }
+    },
+    "government": "Republic",
+    "independence": 1922,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic"
     },
@@ -3369,25 +3462,26 @@
     },
     "population": 107271260,
     "region": "Africa",
-    "subregion": "Northern Africa",
-    "area": 1002450.0,
-    "currencies": {
-      "EGP": {
-        "symbol": "£",
-        "name": "Egyptian pound"
-      }
-    },
-    "independence": 1922,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Northern Africa",
     "temperature": 23.14
   },
   {
+    "area": 301336,
     "capital": [
       "Rome"
     ],
     "cca2": "IT",
+    "cca3": "ITA",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Republic",
+    "independence": 1861,
+    "landlocked": "0",
     "languages": {
       "cat": "Catalan",
       "ita": "Italian"
@@ -3408,25 +3502,26 @@
     },
     "population": 58927633,
     "region": "Europe",
-    "subregion": "Southern Europe",
-    "area": 301336.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1861,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Southern Europe",
     "temperature": 13.22
   },
   {
+    "area": 7692024,
     "capital": [
       "Canberra"
     ],
     "cca2": "AU",
+    "cca3": "AUS",
+    "currencies": {
+      "AUD": {
+        "name": "Australian dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Federation Constitutional Monarchy",
+    "independence": 1901,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -3446,25 +3541,26 @@
     },
     "population": 27536874,
     "region": "Oceania",
-    "subregion": "Australia and New Zealand",
-    "area": 7692024.0,
-    "currencies": {
-      "AUD": {
-        "symbol": "$",
-        "name": "Australian dollar"
-      }
-    },
-    "independence": 1901,
-    "government": "Federation Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Australia and New Zealand",
     "temperature": 22.05
   },
   {
+    "area": 582000,
     "capital": [
       "Gaborone"
     ],
     "cca2": "BW",
+    "cca3": "BWA",
+    "currencies": {
+      "BWP": {
+        "name": "Botswana pula",
+        "symbol": "P"
+      }
+    },
+    "government": "Republic",
+    "independence": 1966,
+    "landlocked": "1",
     "languages": {
       "eng": "English",
       "tsn": "Tswana"
@@ -3489,25 +3585,26 @@
     },
     "population": 2359609,
     "region": "Africa",
-    "subregion": "Southern Africa",
-    "area": 582000.0,
-    "currencies": {
-      "BWP": {
-        "symbol": "P",
-        "name": "Botswana pula"
-      }
-    },
-    "independence": 1966,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Southern Africa",
     "temperature": 22.09
   },
   {
+    "area": 0.49,
     "capital": [
       "Vatican City"
     ],
     "cca2": "VA",
+    "cca3": "VAT",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Theocracy",
+    "independence": 1929,
+    "landlocked": "1",
     "languages": {
       "ita": "Italian",
       "lat": "Latin"
@@ -3532,25 +3629,26 @@
     },
     "population": 882,
     "region": "Europe",
-    "subregion": "Southern Europe",
-    "area": 0.49,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1929,
-    "government": "Theocracy",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Southern Europe",
     "temperature": 16
   },
   {
+    "area": 111369,
     "capital": [
       "Monrovia"
     ],
     "cca2": "LR",
+    "cca3": "LBR",
+    "currencies": {
+      "LRD": {
+        "name": "Liberian dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1847,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -3570,25 +3668,26 @@
     },
     "population": 5248621,
     "region": "Africa",
-    "subregion": "Western Africa",
-    "area": 111369.0,
-    "currencies": {
-      "LRD": {
-        "symbol": "$",
-        "name": "Liberian dollar"
-      }
-    },
-    "independence": 1847,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Western Africa",
     "temperature": 25.45
   },
   {
+    "area": 92090,
     "capital": [
       "Lisbon"
     ],
     "cca2": "PT",
+    "cca3": "PRT",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Republic",
+    "independence": 1143,
+    "landlocked": "0",
     "languages": {
       "por": "Portuguese"
     },
@@ -3608,25 +3707,26 @@
     },
     "population": 10749635,
     "region": "Europe",
-    "subregion": "Southern Europe",
-    "area": 92090.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1143,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Southern Europe",
     "temperature": 15.85
   },
   {
+    "area": 185180,
     "capital": [
       "Damascus"
     ],
     "cca2": "SY",
+    "cca3": "SYR",
+    "currencies": {
+      "SYP": {
+        "name": "Syrian pound",
+        "symbol": "£"
+      }
+    },
+    "government": "Republic",
+    "independence": 1941,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic"
     },
@@ -3646,25 +3746,26 @@
     },
     "population": 25620000,
     "region": "Asia",
-    "subregion": "Western Asia",
-    "area": 185180.0,
-    "currencies": {
-      "SYP": {
-        "symbol": "£",
-        "name": "Syrian pound"
-      }
-    },
-    "independence": 1941,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Asia",
     "temperature": 18.75
   },
   {
+    "area": 43094,
     "capital": [
       "Copenhagen"
     ],
     "cca2": "DK",
+    "cca3": "DNK",
+    "currencies": {
+      "DKK": {
+        "name": "Danish krone",
+        "symbol": "kr"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 800,
+    "landlocked": "0",
     "languages": {
       "dan": "Danish"
     },
@@ -3684,25 +3785,26 @@
     },
     "population": 6011488,
     "region": "Europe",
-    "subregion": "Northern Europe",
-    "area": 43094.0,
-    "currencies": {
-      "DKK": {
-        "symbol": "kr",
-        "name": "Danish krone"
-      }
-    },
-    "independence": 800,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Northern Europe",
     "temperature": 8.9
   },
   {
+    "area": 28748,
     "capital": [
       "Tirana"
     ],
     "cca2": "AL",
+    "cca3": "ALB",
+    "currencies": {
+      "ALL": {
+        "name": "Albanian lek",
+        "symbol": "L"
+      }
+    },
+    "government": "Republic",
+    "independence": 1912,
+    "landlocked": "0",
     "languages": {
       "sqi": "Albanian"
     },
@@ -3722,25 +3824,26 @@
     },
     "population": 2363314,
     "region": "Europe",
-    "subregion": "Southeast Europe",
-    "area": 28748.0,
-    "currencies": {
-      "ALL": {
-        "symbol": "L",
-        "name": "Albanian lek"
-      }
-    },
-    "independence": 1912,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Southeast Europe",
     "temperature": 12.44
   },
   {
+    "area": 49037,
     "capital": [
       "Bratislava"
     ],
     "cca2": "SK",
+    "cca3": "SVK",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Republic",
+    "independence": 1993,
+    "landlocked": "1",
     "languages": {
       "slk": "Slovak"
     },
@@ -3760,25 +3863,26 @@
     },
     "population": 5413813,
     "region": "Europe",
-    "subregion": "Central Europe",
-    "area": 49037.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1993,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Central Europe",
     "temperature": 8.83
   },
   {
+    "area": 752612,
     "capital": [
       "Lusaka"
     ],
     "cca2": "ZM",
+    "cca3": "ZMB",
+    "currencies": {
+      "ZMW": {
+        "name": "Zambian kwacha",
+        "symbol": "ZK"
+      }
+    },
+    "government": "Republic",
+    "independence": 1964,
+    "landlocked": "1",
     "languages": {
       "eng": "English"
     },
@@ -3798,25 +3902,26 @@
     },
     "population": 19693423,
     "region": "Africa",
-    "subregion": "Eastern Africa",
-    "area": 752612.0,
-    "currencies": {
-      "ZMW": {
-        "symbol": "ZK",
-        "name": "Zambian kwacha"
-      }
-    },
-    "independence": 1964,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Eastern Africa",
     "temperature": 22.23
   },
   {
+    "area": 964,
     "capital": [
       "São Tomé"
     ],
     "cca2": "ST",
+    "cca3": "STP",
+    "currencies": {
+      "STN": {
+        "name": "São Tomé and Príncipe dobra",
+        "symbol": "Db"
+      }
+    },
+    "government": "Unitary Semi-Presidential Republic",
+    "independence": 1975,
+    "landlocked": "0",
     "languages": {
       "por": "Portuguese"
     },
@@ -3836,25 +3941,30 @@
     },
     "population": 209607,
     "region": "Africa",
-    "subregion": "Middle Africa",
-    "area": 964.0,
-    "currencies": {
-      "STN": {
-        "symbol": "Db",
-        "name": "São Tomé and Príncipe dobra"
-      }
-    },
-    "independence": 1975,
-    "government": "Unitary Semi-Presidential Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Middle Africa",
     "temperature": 24.7
   },
   {
+    "area": 13943,
     "capital": [
       "Nassau"
     ],
     "cca2": "BS",
+    "cca3": "BHS",
+    "currencies": {
+      "BSD": {
+        "name": "Bahamian dollar",
+        "symbol": "$"
+      },
+      "USD": {
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1973,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -3874,29 +3984,26 @@
     },
     "population": 398165,
     "region": "Americas",
-    "subregion": "Caribbean",
-    "area": 13943.0,
-    "currencies": {
-      "BSD": {
-        "symbol": "$",
-        "name": "Bahamian dollar"
-      },
-      "USD": {
-        "symbol": "$",
-        "name": "United States dollar"
-      }
-    },
-    "independence": 1973,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Caribbean",
     "temperature": 25.58
   },
   {
+    "area": 41865,
     "capital": [
       "Amsterdam"
     ],
     "cca2": "NL",
+    "cca3": "NLD",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1581,
+    "landlocked": "0",
     "languages": {
       "nld": "Dutch"
     },
@@ -3916,25 +4023,26 @@
     },
     "population": 18100436,
     "region": "Europe",
-    "subregion": "Western Europe",
-    "area": 41865.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1581,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Western Europe",
     "temperature": 10.49
   },
   {
+    "area": 1098581,
     "capital": [
       "Sucre"
     ],
     "cca2": "BO",
+    "cca3": "BOL",
+    "currencies": {
+      "BOB": {
+        "name": "Bolivian boliviano",
+        "symbol": "Bs."
+      }
+    },
+    "government": "Republic",
+    "independence": 1825,
+    "landlocked": "1",
     "languages": {
       "aym": "Aymara",
       "grn": "Guaraní",
@@ -3969,25 +4077,26 @@
     },
     "population": 11365333,
     "region": "Americas",
-    "subregion": "South America",
-    "area": 1098581.0,
-    "currencies": {
-      "BOB": {
-        "symbol": "Bs.",
-        "name": "Bolivian boliviano"
-      }
-    },
-    "independence": 1825,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "South America",
     "temperature": 20.76
   },
   {
+    "area": 357114,
     "capital": [
       "Berlin"
     ],
     "cca2": "DE",
+    "cca3": "DEU",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Federal Republic",
+    "independence": 1955,
+    "landlocked": "0",
     "languages": {
       "deu": "German"
     },
@@ -4007,25 +4116,26 @@
     },
     "population": 83491249,
     "region": "Europe",
-    "subregion": "Western Europe",
-    "area": 357114.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1955,
-    "government": "Federal Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Western Europe",
     "temperature": 9.59
   },
   {
+    "area": 117600,
     "capital": [
       "Asmara"
     ],
     "cca2": "ER",
+    "cca3": "ERI",
+    "currencies": {
+      "ERN": {
+        "name": "Eritrean nakfa",
+        "symbol": "Nfk"
+      }
+    },
+    "government": "Republic",
+    "independence": 1993,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic",
       "eng": "English",
@@ -4055,25 +4165,26 @@
     },
     "population": 3607000,
     "region": "Africa",
-    "subregion": "Eastern Africa",
-    "area": 117600.0,
-    "currencies": {
-      "ERN": {
-        "symbol": "Nfk",
-        "name": "Eritrean nakfa"
-      }
-    },
-    "independence": 1993,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Eastern Africa",
     "temperature": 26.63
   },
   {
+    "area": 45227,
     "capital": [
       "Tallinn"
     ],
     "cca2": "EE",
+    "cca3": "EST",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Republic",
+    "independence": 1991,
+    "landlocked": "0",
     "languages": {
       "est": "Estonian"
     },
@@ -4093,25 +4204,26 @@
     },
     "population": 1369995,
     "region": "Europe",
-    "subregion": "Northern Europe",
-    "area": 45227.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1991,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": null,
+    "subregion": "Northern Europe",
     "temperature": 6.34
   },
   {
+    "area": 1240192,
     "capital": [
       "Bamako"
     ],
     "cca2": "ML",
+    "cca3": "MLI",
+    "currencies": {
+      "XOF": {
+        "name": "West African CFA franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1960,
+    "landlocked": "1",
     "languages": {
       "fra": "French"
     },
@@ -4131,25 +4243,26 @@
     },
     "population": 22395489,
     "region": "Africa",
-    "subregion": "Western Africa",
-    "area": 1240192.0,
-    "currencies": {
-      "XOF": {
-        "symbol": "Fr",
-        "name": "West African CFA franc"
-      }
-    },
-    "independence": 1960,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Islam",
+    "subregion": "Western Africa",
     "temperature": 29.21
   },
   {
+    "area": 17818,
     "capital": [
       "Kuwait City"
     ],
     "cca2": "KW",
+    "cca3": "KWT",
+    "currencies": {
+      "KWD": {
+        "name": "Kuwaiti dinar",
+        "symbol": "د.ك"
+      }
+    },
+    "government": "Constitutional Monarchy (Emirate)",
+    "independence": 1961,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic"
     },
@@ -4169,25 +4282,26 @@
     },
     "population": 4881254,
     "region": "Asia",
-    "subregion": "Western Asia",
-    "area": 17818.0,
-    "currencies": {
-      "KWD": {
-        "symbol": "د.ك",
-        "name": "Kuwaiti dinar"
-      }
-    },
-    "independence": 1961,
-    "government": "Constitutional Monarchy (Emirate)",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Asia",
     "temperature": 26.31
   },
   {
+    "area": 2344858,
     "capital": [
       "Kinshasa"
     ],
     "cca2": "CD",
+    "cca3": "COD",
+    "currencies": {
+      "CDF": {
+        "name": "Congolese franc",
+        "symbol": "FC"
+      }
+    },
+    "government": "Republic",
+    "independence": 1960,
+    "landlocked": "0",
     "languages": {
       "fra": "French",
       "kon": "Kikongo",
@@ -4227,25 +4341,26 @@
     },
     "population": 112832000,
     "region": "Africa",
-    "subregion": "Middle Africa",
-    "area": 2344858.0,
-    "currencies": {
-      "CDF": {
-        "symbol": "FC",
-        "name": "Congolese franc"
-      }
-    },
-    "independence": 1960,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Middle Africa",
     "temperature": 25.28
   },
   {
+    "area": 93028,
     "capital": [
       "Budapest"
     ],
     "cca2": "HU",
+    "cca3": "HUN",
+    "currencies": {
+      "HUF": {
+        "name": "Hungarian forint",
+        "symbol": "Ft"
+      }
+    },
+    "government": "Republic",
+    "independence": 1918,
+    "landlocked": "1",
     "languages": {
       "hun": "Hungarian"
     },
@@ -4265,25 +4380,26 @@
     },
     "population": 9539502,
     "region": "Europe",
-    "subregion": "Central Europe",
-    "area": 93028.0,
-    "currencies": {
-      "HUF": {
-        "symbol": "Ft",
-        "name": "Hungarian forint"
-      }
-    },
-    "independence": 1918,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Central Europe",
     "temperature": 11.5
   },
   {
+    "area": 1759540,
     "capital": [
       "Tripoli"
     ],
     "cca2": "LY",
+    "cca3": "LBY",
+    "currencies": {
+      "LYD": {
+        "name": "Libyan dinar",
+        "symbol": "ل.د"
+      }
+    },
+    "government": "Socialistic State",
+    "independence": 1951,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic"
     },
@@ -4303,25 +4419,24 @@
     },
     "population": 7459000,
     "region": "Africa",
-    "subregion": "Northern Africa",
-    "area": 1759540.0,
-    "currencies": {
-      "LYD": {
-        "symbol": "ل.د",
-        "name": "Libyan dinar"
-      }
-    },
-    "independence": 1951,
-    "government": "Socialistic State",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Northern Africa",
     "temperature": 22.81
   },
   {
+    "area": 13812,
     "capital": [
       "Podgorica"
     ],
     "cca2": "ME",
+    "cca3": "MNE",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "independence": 2006,
     "languages": {
       "cnr": "Montenegrin"
     },
@@ -4341,22 +4456,25 @@
     },
     "population": 623327,
     "region": "Europe",
-    "subregion": "Southeast Europe",
-    "area": 13812.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 2006,
-    "religion": "Christianity"
+    "religion": "Christianity",
+    "subregion": "Southeast Europe"
   },
   {
+    "area": 406752,
     "capital": [
       "Asunción"
     ],
     "cca2": "PY",
+    "cca3": "PRY",
+    "currencies": {
+      "PYG": {
+        "name": "Paraguayan guaraní",
+        "symbol": "₲"
+      }
+    },
+    "government": "Republic",
+    "independence": 1811,
+    "landlocked": "1",
     "languages": {
       "grn": "Guaraní",
       "spa": "Spanish"
@@ -4381,25 +4499,26 @@
     },
     "population": 6109644,
     "region": "Americas",
-    "subregion": "South America",
-    "area": 406752.0,
-    "currencies": {
-      "PYG": {
-        "symbol": "₲",
-        "name": "Paraguayan guaraní"
-      }
-    },
-    "independence": 1811,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "South America",
     "temperature": 23.92
   },
   {
+    "area": 1285216,
     "capital": [
       "Lima"
     ],
     "cca2": "PE",
+    "cca3": "PER",
+    "currencies": {
+      "PEN": {
+        "name": "Peruvian sol",
+        "symbol": "S/ "
+      }
+    },
+    "government": "Republic",
+    "independence": 1821,
+    "landlocked": "0",
     "languages": {
       "aym": "Aymara",
       "que": "Quechua",
@@ -4429,25 +4548,26 @@
     },
     "population": 34350244,
     "region": "Americas",
-    "subregion": "South America",
-    "area": 1285216.0,
-    "currencies": {
-      "PEN": {
-        "symbol": "S/ ",
-        "name": "Peruvian sol"
-      }
-    },
-    "independence": 1821,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "South America",
     "temperature": 19.72
   },
   {
+    "area": 27834,
     "capital": [
       "Gitega"
     ],
     "cca2": "BI",
+    "cca3": "BDI",
+    "currencies": {
+      "BIF": {
+        "name": "Burundian franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1962,
+    "landlocked": "1",
     "languages": {
       "fra": "French",
       "run": "Kirundi"
@@ -4472,25 +4592,26 @@
     },
     "population": 12332788,
     "region": "Africa",
-    "subregion": "Eastern Africa",
-    "area": 27834.0,
-    "currencies": {
-      "BIF": {
-        "symbol": "Fr",
-        "name": "Burundian franc"
-      }
-    },
-    "independence": 1962,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Eastern Africa",
     "temperature": 20.51
   },
   {
+    "area": 236800,
     "capital": [
       "Vientiane"
     ],
     "cca2": "LA",
+    "cca3": "LAO",
+    "currencies": {
+      "LAK": {
+        "name": "Lao kip",
+        "symbol": "₭"
+      }
+    },
+    "government": "Republic",
+    "independence": 1953,
+    "landlocked": "1",
     "languages": {
       "lao": "Lao"
     },
@@ -4510,25 +4631,26 @@
     },
     "population": 7647000,
     "region": "Asia",
-    "subregion": "South-Eastern Asia",
-    "area": 236800.0,
-    "currencies": {
-      "LAK": {
-        "symbol": "₭",
-        "name": "Lao kip"
-      }
-    },
-    "independence": 1953,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Buddhism",
+    "subregion": "South-Eastern Asia",
     "temperature": 24.16
   },
   {
+    "area": 619745,
     "capital": [
       "Juba"
     ],
     "cca2": "SS",
+    "cca3": "SSD",
+    "currencies": {
+      "SSP": {
+        "name": "South Sudanese pound",
+        "symbol": "£"
+      }
+    },
+    "government": null,
+    "independence": 2011,
+    "landlocked": "1",
     "languages": {
       "eng": "English"
     },
@@ -4548,25 +4670,26 @@
     },
     "population": 15786898,
     "region": "Africa",
-    "subregion": "Middle Africa",
-    "area": 619745.0,
-    "currencies": {
-      "SSP": {
-        "symbol": "£",
-        "name": "South Sudanese pound"
-      }
-    },
-    "independence": 2011,
-    "government": null,
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Middle Africa",
     "temperature": 27.97
   },
   {
+    "area": 25713,
     "capital": [
       "Skopje"
     ],
     "cca2": "MK",
+    "cca3": "MKD",
+    "currencies": {
+      "MKD": {
+        "name": "denar",
+        "symbol": "den"
+      }
+    },
+    "government": "Republic",
+    "independence": 1991,
+    "landlocked": "1",
     "languages": {
       "mkd": "Macedonian"
     },
@@ -4586,25 +4709,26 @@
     },
     "population": 1822612,
     "region": "Europe",
-    "subregion": "Southeast Europe",
-    "area": 25713.0,
-    "currencies": {
-      "MKD": {
-        "symbol": "den",
-        "name": "denar"
-      }
-    },
-    "independence": 1991,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Southeast Europe",
     "temperature": 10.79
   },
   {
+    "area": 446550,
     "capital": [
       "Rabat"
     ],
     "cca2": "MA",
+    "cca3": "MAR",
+    "currencies": {
+      "MAD": {
+        "name": "Moroccan dirham",
+        "symbol": "د.م."
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1956,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic",
       "ber": "Berber"
@@ -4629,25 +4753,26 @@
     },
     "population": 36828330,
     "region": "Africa",
-    "subregion": "Northern Africa",
-    "area": 446550.0,
-    "currencies": {
-      "MAD": {
-        "symbol": "د.م.",
-        "name": "Moroccan dirham"
-      }
-    },
-    "independence": 1956,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Northern Africa",
     "temperature": 18.14
   },
   {
+    "area": 10452,
     "capital": [
       "Beirut"
     ],
     "cca2": "LB",
+    "cca3": "LBN",
+    "currencies": {
+      "LBP": {
+        "name": "Lebanese pound",
+        "symbol": "ل.ل"
+      }
+    },
+    "government": "Republic",
+    "independence": 1941,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic",
       "fra": "French"
@@ -4672,25 +4797,26 @@
     },
     "population": 5490000,
     "region": "Asia",
-    "subregion": "Western Asia",
-    "area": 10452.0,
-    "currencies": {
-      "LBP": {
-        "symbol": "ل.ل",
-        "name": "Lebanese pound"
-      }
-    },
-    "independence": 1941,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Asia",
     "temperature": 15.45
   },
   {
+    "area": 245857,
     "capital": [
       "Conakry"
     ],
     "cca2": "GN",
+    "cca3": "GIN",
+    "currencies": {
+      "GNF": {
+        "name": "Guinean franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1958,
+    "landlocked": "0",
     "languages": {
       "fra": "French"
     },
@@ -4710,25 +4836,26 @@
     },
     "population": 14363931,
     "region": "Africa",
-    "subregion": "Western Africa",
-    "area": 245857.0,
-    "currencies": {
-      "GNF": {
-        "symbol": "Fr",
-        "name": "Guinean franc"
-      }
-    },
-    "independence": 1958,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Africa",
     "temperature": 25.86
   },
   {
+    "area": 130373,
     "capital": [
       "Managua"
     ],
     "cca2": "NI",
+    "cca3": "NIC",
+    "currencies": {
+      "NIO": {
+        "name": "Nicaraguan córdoba",
+        "symbol": "C$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1838,
+    "landlocked": "0",
     "languages": {
       "spa": "Spanish"
     },
@@ -4748,25 +4875,26 @@
     },
     "population": 6803886,
     "region": "Americas",
-    "subregion": "Central America",
-    "area": 130373.0,
-    "currencies": {
-      "NIO": {
-        "symbol": "C$",
-        "name": "Nicaraguan córdoba"
-      }
-    },
-    "independence": 1838,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Central America",
     "temperature": 25.88
   },
   {
+    "area": 65610,
     "capital": [
       "Sri Jayawardenepura Kotte"
     ],
     "cca2": "LK",
+    "cca3": "LKA",
+    "currencies": {
+      "LKR": {
+        "name": "Sri Lankan rupee",
+        "symbol": "Rs  රු"
+      }
+    },
+    "government": "Unitary Semi-Presidential Republic",
+    "independence": 1948,
+    "landlocked": "0",
     "languages": {
       "sin": "Sinhala",
       "tam": "Tamil"
@@ -4791,25 +4919,26 @@
     },
     "population": 21763170,
     "region": "Asia",
-    "subregion": "Southern Asia",
-    "area": 65610.0,
-    "currencies": {
-      "LKR": {
-        "symbol": "Rs  රු",
-        "name": "Sri Lankan rupee"
-      }
-    },
-    "independence": 1948,
-    "government": "Unitary Semi-Presidential Republic",
-    "landlocked": "0",
     "religion": "Buddhism",
+    "subregion": "Southern Asia",
     "temperature": 27.25
   },
   {
+    "area": 9706961,
     "capital": [
       "Beijing"
     ],
     "cca2": "CN",
+    "cca3": "CHN",
+    "currencies": {
+      "CNY": {
+        "name": "Chinese yuan",
+        "symbol": "¥"
+      }
+    },
+    "government": "People's Republic",
+    "independence": -1523,
+    "landlocked": "0",
     "languages": {
       "zho": "Chinese"
     },
@@ -4829,25 +4958,26 @@
     },
     "population": 1408280000,
     "region": "Asia",
-    "subregion": "Eastern Asia",
-    "area": 9706961.0,
-    "currencies": {
-      "CNY": {
-        "symbol": "¥",
-        "name": "Chinese yuan"
-      }
-    },
-    "independence": -1523,
-    "government": "People's Republic",
-    "landlocked": "0",
     "religion": null,
+    "subregion": "Eastern Asia",
     "temperature": 7.59
   },
   {
+    "area": 765,
     "capital": [
       "Manama"
     ],
     "cca2": "BH",
+    "cca3": "BHR",
+    "currencies": {
+      "BHD": {
+        "name": "Bahraini dinar",
+        "symbol": ".د.ب"
+      }
+    },
+    "government": "Monarchy (Emirate)",
+    "independence": 1971,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic"
     },
@@ -4867,25 +4997,26 @@
     },
     "population": 1594654,
     "region": "Asia",
-    "subregion": "Western Asia",
-    "area": 765.0,
-    "currencies": {
-      "BHD": {
-        "symbol": ".د.ب",
-        "name": "Bahraini dinar"
-      }
-    },
-    "independence": 1971,
-    "government": "Monarchy (Emirate)",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Asia",
     "temperature": 27.69
   },
   {
+    "area": 181,
     "capital": [
       "Majuro"
     ],
     "cca2": "MH",
+    "cca3": "MHL",
+    "currencies": {
+      "USD": {
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1990,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "mah": "Marshallese"
@@ -4910,25 +5041,26 @@
     },
     "population": 42418,
     "region": "Oceania",
-    "subregion": "Micronesia",
-    "area": 181.0,
-    "currencies": {
-      "USD": {
-        "symbol": "$",
-        "name": "United States dollar"
-      }
-    },
-    "independence": 1990,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Micronesia",
     "temperature": 28.01
   },
   {
+    "area": 603550,
     "capital": [
       "Kyiv"
     ],
     "cca2": "UA",
+    "cca3": "UKR",
+    "currencies": {
+      "UAH": {
+        "name": "Ukrainian hryvnia",
+        "symbol": "₴"
+      }
+    },
+    "government": "Republic",
+    "independence": 1991,
+    "landlocked": "0",
     "languages": {
       "ukr": "Ukrainian"
     },
@@ -4948,27 +5080,28 @@
     },
     "population": 32862000,
     "region": "Europe",
-    "subregion": "Eastern Europe",
-    "area": 603550.0,
-    "currencies": {
-      "UAH": {
-        "symbol": "₴",
-        "name": "Ukrainian hryvnia"
-      }
-    },
-    "independence": 1991,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Eastern Europe",
     "temperature": 9.27
   },
   {
+    "area": 1221037,
     "capital": [
       "Pretoria",
       "Bloemfontein",
       "Cape Town"
     ],
     "cca2": "ZA",
+    "cca3": "ZAF",
+    "currencies": {
+      "ZAR": {
+        "name": "South African rand",
+        "symbol": "R"
+      }
+    },
+    "government": "Republic",
+    "independence": 1910,
+    "landlocked": "0",
     "languages": {
       "afr": "Afrikaans",
       "eng": "English",
@@ -5038,25 +5171,26 @@
     },
     "population": 63100945,
     "region": "Africa",
-    "subregion": "Southern Africa",
-    "area": 1221037.0,
-    "currencies": {
-      "ZAR": {
-        "symbol": "R",
-        "name": "South African rand"
-      }
-    },
-    "independence": 1910,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Southern Africa",
     "temperature": 18.23
   },
   {
+    "area": 389,
     "capital": [
       "Kingstown"
     ],
     "cca2": "VC",
+    "cca3": "VCT",
+    "currencies": {
+      "XCD": {
+        "name": "Eastern Caribbean dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1979,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -5076,25 +5210,26 @@
     },
     "population": 110872,
     "region": "Americas",
-    "subregion": "Caribbean",
-    "area": 389.0,
-    "currencies": {
-      "XCD": {
-        "symbol": "$",
-        "name": "Eastern Caribbean dollar"
-      }
-    },
-    "independence": 1979,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Caribbean",
     "temperature": 26.17
   },
   {
+    "area": 452,
     "capital": [
       "Victoria"
     ],
     "cca2": "SC",
+    "cca3": "SYC",
+    "currencies": {
+      "SCR": {
+        "name": "Seychellois rupee",
+        "symbol": "₨"
+      }
+    },
+    "government": "Republic",
+    "independence": 1976,
+    "landlocked": "0",
     "languages": {
       "crs": "Seychellois Creole",
       "eng": "English",
@@ -5124,25 +5259,26 @@
     },
     "population": 122729,
     "region": "Africa",
-    "subregion": "Eastern Africa",
-    "area": 452.0,
-    "currencies": {
-      "SCR": {
-        "symbol": "₨",
-        "name": "Seychellois rupee"
-      }
-    },
-    "independence": 1976,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Eastern Africa",
     "temperature": 27.09
   },
   {
+    "area": 48671,
     "capital": [
       "Santo Domingo"
     ],
     "cca2": "DO",
+    "cca3": "DOM",
+    "currencies": {
+      "DOP": {
+        "name": "Dominican peso",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1844,
+    "landlocked": "0",
     "languages": {
       "spa": "Spanish"
     },
@@ -5162,25 +5298,26 @@
     },
     "population": 10771504,
     "region": "Americas",
-    "subregion": "Caribbean",
-    "area": 48671.0,
-    "currencies": {
-      "DOP": {
-        "symbol": "$",
-        "name": "Dominican peso"
-      }
-    },
-    "independence": 1844,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Caribbean",
     "temperature": 24.55
   },
   {
+    "area": 1904569,
     "capital": [
       "Jakarta"
     ],
     "cca2": "ID",
+    "cca3": "IDN",
+    "currencies": {
+      "IDR": {
+        "name": "Indonesian rupiah",
+        "symbol": "Rp"
+      }
+    },
+    "government": "Republic",
+    "independence": 1945,
+    "landlocked": "0",
     "languages": {
       "ind": "Indonesian"
     },
@@ -5200,25 +5337,26 @@
     },
     "population": 284438782,
     "region": "Asia",
-    "subregion": "South-Eastern Asia",
-    "area": 1904569.0,
-    "currencies": {
-      "IDR": {
-        "symbol": "Rp",
-        "name": "Indonesian rupiah"
-      }
-    },
-    "independence": 1945,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "South-Eastern Asia",
     "temperature": 25.96
   },
   {
+    "area": 118484,
     "capital": [
       "Lilongwe"
     ],
     "cca2": "MW",
+    "cca3": "MWI",
+    "currencies": {
+      "MWK": {
+        "name": "Malawian kwacha",
+        "symbol": "MK"
+      }
+    },
+    "government": "Republic",
+    "independence": 1964,
+    "landlocked": "1",
     "languages": {
       "eng": "English",
       "nya": "Chewa"
@@ -5243,25 +5381,26 @@
     },
     "population": 20734262,
     "region": "Africa",
-    "subregion": "Eastern Africa",
-    "area": 118484.0,
-    "currencies": {
-      "MWK": {
-        "symbol": "MK",
-        "name": "Malawian kwacha"
-      }
-    },
-    "independence": 1964,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Eastern Africa",
     "temperature": 22.66
   },
   {
+    "area": 475442,
     "capital": [
       "Yaoundé"
     ],
     "cca2": "CM",
+    "cca3": "CMR",
+    "currencies": {
+      "XAF": {
+        "name": "Central African CFA franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1960,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "fra": "French"
@@ -5286,25 +5425,26 @@
     },
     "population": 29442327,
     "region": "Africa",
-    "subregion": "Middle Africa",
-    "area": 475442.0,
-    "currencies": {
-      "XAF": {
-        "symbol": "Fr",
-        "name": "Central African CFA franc"
-      }
-    },
-    "independence": 1960,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Middle Africa",
     "temperature": 24.8
   },
   {
+    "area": 587041,
     "capital": [
       "Antananarivo"
     ],
     "cca2": "MG",
+    "cca3": "MDG",
+    "currencies": {
+      "MGA": {
+        "name": "Malagasy ariary",
+        "symbol": "Ar"
+      }
+    },
+    "government": "Federal Republic",
+    "independence": 1960,
+    "landlocked": "0",
     "languages": {
       "fra": "French",
       "mlg": "Malagasy"
@@ -5329,25 +5469,30 @@
     },
     "population": 31727042,
     "region": "Africa",
-    "subregion": "Eastern Africa",
-    "area": 587041.0,
-    "currencies": {
-      "MGA": {
-        "symbol": "Ar",
-        "name": "Malagasy ariary"
-      }
-    },
-    "independence": 1960,
-    "government": "Federal Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Eastern Africa",
     "temperature": 22.64
   },
   {
+    "area": 811,
     "capital": [
       "South Tarawa"
     ],
     "cca2": "KI",
+    "cca3": "KIR",
+    "currencies": {
+      "AUD": {
+        "name": "Australian dollar",
+        "symbol": "$"
+      },
+      "KID": {
+        "name": "Kiribati dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1979,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "gil": "Gilbertese"
@@ -5372,29 +5517,26 @@
     },
     "population": 120740,
     "region": "Oceania",
-    "subregion": "Micronesia",
-    "area": 811.0,
-    "currencies": {
-      "AUD": {
-        "symbol": "$",
-        "name": "Australian dollar"
-      },
-      "KID": {
-        "symbol": "$",
-        "name": "Kiribati dollar"
-      }
-    },
-    "independence": 1979,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Micronesia",
     "temperature": 27.77
   },
   {
+    "area": 18272,
     "capital": [
       "Suva"
     ],
     "cca2": "FJ",
+    "cca3": "FJI",
+    "currencies": {
+      "FJD": {
+        "name": "Fijian dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Parliamentary Republic",
+    "independence": 1970,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "fij": "Fijian",
@@ -5424,25 +5566,26 @@
     },
     "population": 900869,
     "region": "Oceania",
-    "subregion": "Melanesia",
-    "area": 18272.0,
-    "currencies": {
-      "FJD": {
-        "symbol": "$",
-        "name": "Fijian dollar"
-      }
-    },
-    "independence": 1970,
-    "government": "Parliamentary Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Melanesia",
     "temperature": 25.5
   },
   {
+    "area": 796095,
     "capital": [
       "Islamabad"
     ],
     "cca2": "PK",
+    "cca3": "PAK",
+    "currencies": {
+      "PKR": {
+        "name": "Pakistani rupee",
+        "symbol": "₨"
+      }
+    },
+    "government": "Republic",
+    "independence": 1947,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "urd": "Urdu"
@@ -5467,25 +5610,26 @@
     },
     "population": 241499431,
     "region": "Asia",
-    "subregion": "Southern Asia",
-    "area": 796095.0,
-    "currencies": {
-      "PKR": {
-        "symbol": "₨",
-        "name": "Pakistani rupee"
-      }
-    },
-    "independence": 1947,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Southern Asia",
     "temperature": 21.38
   },
   {
+    "area": 163820,
     "capital": [
       "Paramaribo"
     ],
     "cca2": "SR",
+    "cca3": "SUR",
+    "currencies": {
+      "SRD": {
+        "name": "Surinamese dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1975,
+    "landlocked": "0",
     "languages": {
       "nld": "Dutch"
     },
@@ -5505,25 +5649,26 @@
     },
     "population": 616500,
     "region": "Americas",
-    "subregion": "South America",
-    "area": 163820.0,
-    "currencies": {
-      "SRD": {
-        "symbol": "$",
-        "name": "Surinamese dollar"
-      }
-    },
-    "independence": 1975,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "South America",
     "temperature": 26.58
   },
   {
+    "area": 23200,
     "capital": [
       "Djibouti"
     ],
     "cca2": "DJ",
+    "cca3": "DJI",
+    "currencies": {
+      "DJF": {
+        "name": "Djiboutian franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1977,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic",
       "fra": "French"
@@ -5548,25 +5693,26 @@
     },
     "population": 1066809,
     "region": "Africa",
-    "subregion": "Eastern Africa",
-    "area": 23200.0,
-    "currencies": {
-      "DJF": {
-        "symbol": "Fr",
-        "name": "Djiboutian franc"
-      }
-    },
-    "independence": 1977,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Eastern Africa",
     "temperature": 28.49
   },
   {
+    "area": 10689,
     "capital": [
       "Banjul"
     ],
     "cca2": "GM",
+    "cca3": "GMB",
+    "currencies": {
+      "GMD": {
+        "name": "dalasi",
+        "symbol": "D"
+      }
+    },
+    "government": "Republic",
+    "independence": 1965,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -5586,25 +5732,26 @@
     },
     "population": 2422712,
     "region": "Africa",
-    "subregion": "Western Africa",
-    "area": 10689.0,
-    "currencies": {
-      "GMD": {
-        "symbol": "D",
-        "name": "dalasi"
-      }
-    },
-    "independence": 1965,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Africa",
     "temperature": 28.38
   },
   {
+    "area": 1564110,
     "capital": [
       "Ulan Bator"
     ],
     "cca2": "MN",
+    "cca3": "MNG",
+    "currencies": {
+      "MNT": {
+        "name": "Mongolian tögrög",
+        "symbol": "₮"
+      }
+    },
+    "government": "Republic",
+    "independence": 1921,
+    "landlocked": "1",
     "languages": {
       "mon": "Mongolian"
     },
@@ -5624,25 +5771,26 @@
     },
     "population": 3544835,
     "region": "Asia",
-    "subregion": "Eastern Asia",
-    "area": 1564110.0,
-    "currencies": {
-      "MNT": {
-        "symbol": "₮",
-        "name": "Mongolian tögrög"
-      }
-    },
-    "independence": 1921,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Buddhism",
+    "subregion": "Eastern Asia",
     "temperature": 1.07
   },
   {
+    "area": 390757,
     "capital": [
       "Harare"
     ],
     "cca2": "ZW",
+    "cca3": "ZWE",
+    "currencies": {
+      "ZWL": {
+        "name": "Zimbabwean dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1980,
+    "landlocked": "1",
     "languages": {
       "bwg": "Chibarwe",
       "eng": "English",
@@ -5732,25 +5880,26 @@
     },
     "population": 17073087,
     "region": "Africa",
-    "subregion": "Southern Africa",
-    "area": 390757.0,
-    "currencies": {
-      "ZWL": {
-        "symbol": "$",
-        "name": "Zimbabwean dollar"
-      }
-    },
-    "independence": 1980,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Southern Africa",
     "temperature": 21.9
   },
   {
+    "area": 103000,
     "capital": [
       "Reykjavik"
     ],
     "cca2": "IS",
+    "cca3": "ISL",
+    "currencies": {
+      "ISK": {
+        "name": "Icelandic króna",
+        "symbol": "kr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1944,
+    "landlocked": "0",
     "languages": {
       "isl": "Icelandic"
     },
@@ -5770,25 +5919,26 @@
     },
     "population": 391810,
     "region": "Europe",
-    "subregion": "Northern Europe",
-    "area": 103000.0,
-    "currencies": {
-      "ISK": {
-        "symbol": "kr",
-        "name": "Icelandic króna"
-      }
-    },
-    "independence": 1944,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Northern Europe",
     "temperature": 1.85
   },
   {
+    "area": 27750,
     "capital": [
       "Port-au-Prince"
     ],
     "cca2": "HT",
+    "cca3": "HTI",
+    "currencies": {
+      "HTG": {
+        "name": "Haitian gourde",
+        "symbol": "G"
+      }
+    },
+    "government": "Republic",
+    "independence": 1804,
+    "landlocked": "0",
     "languages": {
       "fra": "French",
       "hat": "Haitian Creole"
@@ -5813,25 +5963,26 @@
     },
     "population": 11867032,
     "region": "Americas",
-    "subregion": "Caribbean",
-    "area": 27750.0,
-    "currencies": {
-      "HTG": {
-        "symbol": "G",
-        "name": "Haitian gourde"
-      }
-    },
-    "independence": 1804,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Caribbean",
     "temperature": 24.95
   },
   {
+    "area": 238391,
     "capital": [
       "Bucharest"
     ],
     "cca2": "RO",
+    "cca3": "ROU",
+    "currencies": {
+      "RON": {
+        "name": "Romanian leu",
+        "symbol": "lei"
+      }
+    },
+    "government": "Republic",
+    "independence": 1878,
+    "landlocked": "0",
     "languages": {
       "ron": "Romanian"
     },
@@ -5851,25 +6002,26 @@
     },
     "population": 19036031,
     "region": "Europe",
-    "subregion": "Southeast Europe",
-    "area": 238391.0,
-    "currencies": {
-      "RON": {
-        "symbol": "lei",
-        "name": "Romanian leu"
-      }
-    },
-    "independence": 1878,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Southeast Europe",
     "temperature": 10.18
   },
   {
+    "area": 51100,
     "capital": [
       "San José"
     ],
     "cca2": "CR",
+    "cca3": "CRI",
+    "currencies": {
+      "CRC": {
+        "name": "Costa Rican colón",
+        "symbol": "₡"
+      }
+    },
+    "government": "Republic",
+    "independence": 1821,
+    "landlocked": "0",
     "languages": {
       "spa": "Spanish"
     },
@@ -5889,25 +6041,26 @@
     },
     "population": 5309625,
     "region": "Americas",
-    "subregion": "Central America",
-    "area": 51100.0,
-    "currencies": {
-      "CRC": {
-        "symbol": "₡",
-        "name": "Costa Rican colón"
-      }
-    },
-    "independence": 1821,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Central America",
     "temperature": 24.83
   },
   {
+    "area": 56594,
     "capital": [
       "Zagreb"
     ],
     "cca2": "HR",
+    "cca3": "HRV",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Republic",
+    "independence": 1991,
+    "landlocked": "0",
     "languages": {
       "hrv": "Croatian"
     },
@@ -5927,25 +6080,26 @@
     },
     "population": 3866233,
     "region": "Europe",
-    "subregion": "Southeast Europe",
-    "area": 56594.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1991,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Southeast Europe",
     "temperature": 11.96
   },
   {
+    "area": 331212,
     "capital": [
       "Hanoi"
     ],
     "cca2": "VN",
+    "cca3": "VNM",
+    "currencies": {
+      "VND": {
+        "name": "Vietnamese đồng",
+        "symbol": "₫"
+      }
+    },
+    "government": "Socialistic Republic",
+    "independence": 1945,
+    "landlocked": "0",
     "languages": {
       "vie": "Vietnamese"
     },
@@ -5965,25 +6119,26 @@
     },
     "population": 101343800,
     "region": "Asia",
-    "subregion": "South-Eastern Asia",
-    "area": 331212.0,
-    "currencies": {
-      "VND": {
-        "symbol": "₫",
-        "name": "Vietnamese đồng"
-      }
-    },
-    "independence": 1945,
-    "government": "Socialistic Republic",
-    "landlocked": "0",
     "religion": "Folk Religions",
+    "subregion": "South-Eastern Asia",
     "temperature": 24.79
   },
   {
+    "area": 100210,
     "capital": [
       "Seoul"
     ],
     "cca2": "KR",
+    "cca3": "KOR",
+    "currencies": {
+      "KRW": {
+        "name": "South Korean won",
+        "symbol": "₩"
+      }
+    },
+    "government": "Republic",
+    "independence": 1948,
+    "landlocked": "0",
     "languages": {
       "kor": "Korean"
     },
@@ -6003,25 +6158,26 @@
     },
     "population": 51159889,
     "region": "Asia",
-    "subregion": "Eastern Asia",
-    "area": 100210.0,
-    "currencies": {
-      "KRW": {
-        "symbol": "₩",
-        "name": "South Korean won"
-      }
-    },
-    "independence": 1948,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": null,
+    "subregion": "Eastern Asia",
     "temperature": 12.22
   },
   {
+    "area": 9984670,
     "capital": [
       "Ottawa"
     ],
     "cca2": "CA",
+    "cca3": "CAN",
+    "currencies": {
+      "CAD": {
+        "name": "Canadian dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Constitutional Monarchy, Federation",
+    "independence": 1867,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "fra": "French"
@@ -6046,25 +6202,26 @@
     },
     "population": 41651653,
     "region": "Americas",
-    "subregion": "North America",
-    "area": 9984670.0,
-    "currencies": {
-      "CAD": {
-        "symbol": "$",
-        "name": "Canadian dollar"
-      }
-    },
-    "independence": 1867,
-    "government": "Constitutional Monarchy, Federation",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "North America",
     "temperature": -4.03
   },
   {
+    "area": 160,
     "capital": [
       "Vaduz"
     ],
     "cca2": "LI",
+    "cca3": "LIE",
+    "currencies": {
+      "CHF": {
+        "name": "Swiss franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1806,
+    "landlocked": "1",
     "languages": {
       "deu": "German"
     },
@@ -6084,25 +6241,26 @@
     },
     "population": 40900,
     "region": "Europe",
-    "subregion": "Western Europe",
-    "area": 160.0,
-    "currencies": {
-      "CHF": {
-        "symbol": "Fr",
-        "name": "Swiss franc"
-      }
-    },
-    "independence": 1806,
-    "government": "Constitutional Monarchy",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Western Europe",
     "temperature": 7.55
   },
   {
+    "area": 2.02,
     "capital": [
       "Monaco"
     ],
     "cca2": "MC",
+    "cca3": "MCO",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1861,
+    "landlocked": "0",
     "languages": {
       "fra": "French"
     },
@@ -6122,25 +6280,30 @@
     },
     "population": 38423,
     "region": "Europe",
-    "subregion": "Western Europe",
-    "area": 2.02,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1861,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Western Europe",
     "temperature": 13.53
   },
   {
+    "area": 26,
     "capital": [
       "Funafuti"
     ],
     "cca2": "TV",
+    "cca3": "TUV",
+    "currencies": {
+      "AUD": {
+        "name": "Australian dollar",
+        "symbol": "$"
+      },
+      "TVD": {
+        "name": "Tuvaluan dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1978,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "tvl": "Tuvaluan"
@@ -6165,29 +6328,26 @@
     },
     "population": 10643,
     "region": "Oceania",
-    "subregion": "Polynesia",
-    "area": 26.0,
-    "currencies": {
-      "AUD": {
-        "symbol": "$",
-        "name": "Australian dollar"
-      },
-      "TVD": {
-        "symbol": "$",
-        "name": "Tuvaluan dollar"
-      }
-    },
-    "independence": 1978,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Polynesia",
     "temperature": 28.62
   },
   {
+    "area": 2040,
     "capital": [
       "Port Louis"
     ],
     "cca2": "MU",
+    "cca3": "MUS",
+    "currencies": {
+      "MUR": {
+        "name": "Mauritian rupee",
+        "symbol": "₨"
+      }
+    },
+    "government": "Republic",
+    "independence": 1968,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "fra": "French",
@@ -6217,25 +6377,26 @@
     },
     "population": 1243741,
     "region": "Africa",
-    "subregion": "Eastern Africa",
-    "area": 2040.0,
-    "currencies": {
-      "MUR": {
-        "symbol": "₨",
-        "name": "Mauritian rupee"
-      }
-    },
-    "independence": 1968,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Hinduism",
+    "subregion": "Eastern Africa",
     "temperature": 23.33
   },
   {
+    "area": 462840,
     "capital": [
       "Port Moresby"
     ],
     "cca2": "PG",
+    "cca3": "PNG",
+    "currencies": {
+      "PGK": {
+        "name": "Papua New Guinean kina",
+        "symbol": "K"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1975,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "hmo": "Hiri Motu",
@@ -6265,25 +6426,26 @@
     },
     "population": 11781559,
     "region": "Oceania",
-    "subregion": "Melanesia",
-    "area": 462840.0,
-    "currencies": {
-      "PGK": {
-        "symbol": "K",
-        "name": "Papua New Guinean kina"
-      }
-    },
-    "independence": 1975,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Melanesia",
     "temperature": 24.74
   },
   {
+    "area": 2724900,
     "capital": [
       "Astana"
     ],
     "cca2": "KZ",
+    "cca3": "KAZ",
+    "currencies": {
+      "KZT": {
+        "name": "Kazakhstani tenge",
+        "symbol": "₸"
+      }
+    },
+    "government": "Republic",
+    "independence": 1991,
+    "landlocked": "1",
     "languages": {
       "kaz": "Kazakh",
       "rus": "Russian"
@@ -6308,25 +6470,26 @@
     },
     "population": 20426568,
     "region": "Asia",
-    "subregion": "Central Asia",
-    "area": 2724900.0,
-    "currencies": {
-      "KZT": {
-        "symbol": "₸",
-        "name": "Kazakhstani tenge"
-      }
-    },
-    "independence": 1991,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Islam",
+    "subregion": "Central Asia",
     "temperature": 7.11
   },
   {
+    "area": 330803,
     "capital": [
       "Kuala Lumpur"
     ],
     "cca2": "MY",
+    "cca3": "MYS",
+    "currencies": {
+      "MYR": {
+        "name": "Malaysian ringgit",
+        "symbol": "RM"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1957,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "msa": "Malay"
@@ -6351,25 +6514,26 @@
     },
     "population": 34231700,
     "region": "Asia",
-    "subregion": "South-Eastern Asia",
-    "area": 330803.0,
-    "currencies": {
-      "MYR": {
-        "symbol": "RM",
-        "name": "Malaysian ringgit"
-      }
-    },
-    "independence": 1957,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "South-Eastern Asia",
     "temperature": 26.38
   },
   {
+    "area": 241550,
     "capital": [
       "Kampala"
     ],
     "cca2": "UG",
+    "cca3": "UGA",
+    "currencies": {
+      "UGX": {
+        "name": "Ugandan shilling",
+        "symbol": "Sh"
+      }
+    },
+    "government": "Republic",
+    "independence": 1962,
+    "landlocked": "1",
     "languages": {
       "eng": "English",
       "swa": "Swahili"
@@ -6394,25 +6558,26 @@
     },
     "population": 45905417,
     "region": "Africa",
-    "subregion": "Eastern Africa",
-    "area": 241550.0,
-    "currencies": {
-      "UGX": {
-        "symbol": "Sh",
-        "name": "Ugandan shilling"
-      }
-    },
-    "independence": 1962,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Eastern Africa",
     "temperature": 23.25
   },
   {
+    "area": 272967,
     "capital": [
       "Ouagadougou"
     ],
     "cca2": "BF",
+    "cca3": "BFA",
+    "currencies": {
+      "XOF": {
+        "name": "West African CFA franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1960,
+    "landlocked": "1",
     "languages": {
       "fra": "French"
     },
@@ -6432,25 +6597,26 @@
     },
     "population": 24070553,
     "region": "Africa",
-    "subregion": "Western Africa",
-    "area": 272967.0,
-    "currencies": {
-      "XOF": {
-        "symbol": "Fr",
-        "name": "West African CFA franc"
-      }
-    },
-    "independence": 1960,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Islam",
+    "subregion": "Western Africa",
     "temperature": 29.26
   },
   {
+    "area": 344,
     "capital": [
       "St. George's"
     ],
     "cca2": "GD",
+    "cca3": "GRD",
+    "currencies": {
+      "XCD": {
+        "name": "Eastern Caribbean dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1974,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -6470,25 +6636,26 @@
     },
     "population": 109021,
     "region": "Americas",
-    "subregion": "Caribbean",
-    "area": 344.0,
-    "currencies": {
-      "XCD": {
-        "symbol": "$",
-        "name": "Eastern Caribbean dollar"
-      }
-    },
-    "independence": 1974,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Caribbean",
     "temperature": 26.49
   },
   {
+    "area": 710,
     "capital": [
       "Singapore"
     ],
     "cca2": "SG",
+    "cca3": "SGP",
+    "currencies": {
+      "SGD": {
+        "name": "Singapore dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1965,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "msa": "Malay",
@@ -6523,25 +6690,26 @@
     },
     "population": 6110200,
     "region": "Asia",
-    "subregion": "South-Eastern Asia",
-    "area": 710.0,
-    "currencies": {
-      "SGD": {
-        "symbol": "$",
-        "name": "Singapore dollar"
-      }
-    },
-    "independence": 1965,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Buddhism",
+    "subregion": "South-Eastern Asia",
     "temperature": 27.68
   },
   {
+    "area": 300,
     "capital": [
       "Malé"
     ],
     "cca2": "MV",
+    "cca3": "MDV",
+    "currencies": {
+      "MVR": {
+        "name": "Maldivian rufiyaa",
+        "symbol": ".ރ"
+      }
+    },
+    "government": "Republic",
+    "independence": 1965,
+    "landlocked": "0",
     "languages": {
       "div": "Maldivian"
     },
@@ -6561,25 +6729,26 @@
     },
     "population": 515132,
     "region": "Asia",
-    "subregion": "Southern Asia",
-    "area": 300.0,
-    "currencies": {
-      "MVR": {
-        "symbol": ".ރ",
-        "name": "Maldivian rufiyaa"
-      }
-    },
-    "independence": 1965,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Southern Asia",
     "temperature": 28.11
   },
   {
+    "area": 527968,
     "capital": [
       "Sana'a"
     ],
     "cca2": "YE",
+    "cca3": "YEM",
+    "currencies": {
+      "YER": {
+        "name": "Yemeni rial",
+        "symbol": "﷼"
+      }
+    },
+    "government": "Republic",
+    "independence": 1918,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic"
     },
@@ -6599,25 +6768,26 @@
     },
     "population": 32684503,
     "region": "Asia",
-    "subregion": "Western Asia",
-    "area": 527968.0,
-    "currencies": {
-      "YER": {
-        "symbol": "﷼",
-        "name": "Yemeni rial"
-      }
-    },
-    "independence": 1918,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Asia",
     "temperature": 25.54
   },
   {
+    "area": 442,
     "capital": [
       "Saint John's"
     ],
     "cca2": "AG",
+    "cca3": "ATG",
+    "currencies": {
+      "XCD": {
+        "name": "Eastern Caribbean dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1981,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -6637,25 +6807,30 @@
     },
     "population": 103603,
     "region": "Americas",
-    "subregion": "Caribbean",
-    "area": 442.0,
-    "currencies": {
-      "XCD": {
-        "symbol": "$",
-        "name": "Eastern Caribbean dollar"
-      }
-    },
-    "independence": 1981,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Caribbean",
     "temperature": 27.2
   },
   {
+    "area": 75417,
     "capital": [
       "Panama City"
     ],
     "cca2": "PA",
+    "cca3": "PAN",
+    "currencies": {
+      "PAB": {
+        "name": "Panamanian balboa",
+        "symbol": "B/."
+      },
+      "USD": {
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1903,
+    "landlocked": "0",
     "languages": {
       "spa": "Spanish"
     },
@@ -6675,29 +6850,26 @@
     },
     "population": 4064780,
     "region": "Americas",
-    "subregion": "Central America",
-    "area": 75417.0,
-    "currencies": {
-      "PAB": {
-        "symbol": "B/.",
-        "name": "Panamanian balboa"
-      },
-      "USD": {
-        "symbol": "$",
-        "name": "United States dollar"
-      }
-    },
-    "independence": 1903,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Central America",
     "temperature": 25.6
   },
   {
+    "area": 513120,
     "capital": [
       "Bangkok"
     ],
     "cca2": "TH",
+    "cca3": "THA",
+    "currencies": {
+      "THB": {
+        "name": "Thai baht",
+        "symbol": "฿"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1350,
+    "landlocked": "0",
     "languages": {
       "tha": "Thai"
     },
@@ -6717,25 +6889,26 @@
     },
     "population": 65859640,
     "region": "Asia",
-    "subregion": "South-Eastern Asia",
-    "area": 513120.0,
-    "currencies": {
-      "THB": {
-        "symbol": "฿",
-        "name": "Thai baht"
-      }
-    },
-    "independence": 1350,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Buddhism",
+    "subregion": "South-Eastern Asia",
     "temperature": 26.85
   },
   {
+    "area": 450295,
     "capital": [
       "Stockholm"
     ],
     "cca2": "SE",
+    "cca3": "SWE",
+    "currencies": {
+      "SEK": {
+        "name": "Swedish krona",
+        "symbol": "kr"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 836,
+    "landlocked": "0",
     "languages": {
       "swe": "Swedish"
     },
@@ -6755,25 +6928,26 @@
     },
     "population": 10605098,
     "region": "Europe",
-    "subregion": "Northern Europe",
-    "area": 450295.0,
-    "currencies": {
-      "SEK": {
-        "symbol": "kr",
-        "name": "Swedish krona"
-      }
-    },
-    "independence": 836,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Northern Europe",
     "temperature": 3.23
   },
   {
+    "area": 2381741,
     "capital": [
       "Algiers"
     ],
     "cca2": "DZ",
+    "cca3": "DZA",
+    "currencies": {
+      "DZD": {
+        "name": "Algerian dinar",
+        "symbol": "د.ج"
+      }
+    },
+    "government": "Republic",
+    "independence": 1962,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic"
     },
@@ -6793,25 +6967,26 @@
     },
     "population": 47400000,
     "region": "Africa",
-    "subregion": "Northern Africa",
-    "area": 2381741.0,
-    "currencies": {
-      "DZD": {
-        "symbol": "د.ج",
-        "name": "Algerian dinar"
-      }
-    },
-    "independence": 1962,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Northern Africa",
     "temperature": 23.6
   },
   {
+    "area": 801590,
     "capital": [
       "Maputo"
     ],
     "cca2": "MZ",
+    "cca3": "MOZ",
+    "currencies": {
+      "MZN": {
+        "name": "Mozambican metical",
+        "symbol": "MT"
+      }
+    },
+    "government": "Republic",
+    "independence": 1975,
+    "landlocked": "0",
     "languages": {
       "por": "Portuguese"
     },
@@ -6831,25 +7006,30 @@
     },
     "population": 34090466,
     "region": "Africa",
-    "subregion": "Eastern Africa",
-    "area": 801590.0,
-    "currencies": {
-      "MZN": {
-        "symbol": "MT",
-        "name": "Mozambican metical"
-      }
-    },
-    "independence": 1975,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Eastern Africa",
     "temperature": 24.41
   },
   {
+    "area": 825615,
     "capital": [
       "Windhoek"
     ],
     "cca2": "NA",
+    "cca3": "NAM",
+    "currencies": {
+      "NAD": {
+        "name": "Namibian dollar",
+        "symbol": "$"
+      },
+      "ZAR": {
+        "name": "South African rand",
+        "symbol": "R"
+      }
+    },
+    "government": "Republic",
+    "independence": 1990,
+    "landlocked": "0",
     "languages": {
       "afr": "Afrikaans",
       "deu": "German",
@@ -6909,29 +7089,26 @@
     },
     "population": 3022401,
     "region": "Africa",
-    "subregion": "Southern Africa",
-    "area": 825615.0,
-    "currencies": {
-      "NAD": {
-        "symbol": "$",
-        "name": "Namibian dollar"
-      },
-      "ZAR": {
-        "symbol": "R",
-        "name": "South African rand"
-      }
-    },
-    "independence": 1990,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Southern Africa",
     "temperature": 20.45
   },
   {
+    "area": 430,
     "capital": [
       "Bridgetown"
     ],
     "cca2": "BB",
+    "cca3": "BRB",
+    "currencies": {
+      "BBD": {
+        "name": "Barbadian dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1966,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -6951,25 +7128,26 @@
     },
     "population": 267800,
     "region": "Americas",
-    "subregion": "Caribbean",
-    "area": 430.0,
-    "currencies": {
-      "BBD": {
-        "symbol": "$",
-        "name": "Barbadian dollar"
-      }
-    },
-    "independence": 1966,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Caribbean",
     "temperature": 26.61
   },
   {
+    "area": 112492,
     "capital": [
       "Tegucigalpa"
     ],
     "cca2": "HN",
+    "cca3": "HND",
+    "currencies": {
+      "HNL": {
+        "name": "Honduran lempira",
+        "symbol": "L"
+      }
+    },
+    "government": "Republic",
+    "independence": 1838,
+    "landlocked": "0",
     "languages": {
       "spa": "Spanish"
     },
@@ -6989,25 +7167,26 @@
     },
     "population": 9892632,
     "region": "Americas",
-    "subregion": "Central America",
-    "area": 112492.0,
-    "currencies": {
-      "HNL": {
-        "symbol": "L",
-        "name": "Honduran lempira"
-      }
-    },
-    "independence": 1838,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Central America",
     "temperature": 24.72
   },
   {
+    "area": 377930,
     "capital": [
       "Tokyo"
     ],
     "cca2": "JP",
+    "cca3": "JPN",
+    "currencies": {
+      "JPY": {
+        "name": "Japanese yen",
+        "symbol": "¥"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": -660,
+    "landlocked": "0",
     "languages": {
       "jpn": "Japanese"
     },
@@ -7027,25 +7206,26 @@
     },
     "population": 123210000,
     "region": "Asia",
-    "subregion": "Eastern Asia",
-    "area": 377930.0,
-    "currencies": {
-      "JPY": {
-        "symbol": "¥",
-        "name": "Japanese yen"
-      }
-    },
-    "independence": -660,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": null,
+    "subregion": "Eastern Asia",
     "temperature": 11.78
   },
   {
+    "area": 207600,
     "capital": [
       "Minsk"
     ],
     "cca2": "BY",
+    "cca3": "BLR",
+    "currencies": {
+      "BYN": {
+        "name": "Belarusian ruble",
+        "symbol": "Br"
+      }
+    },
+    "government": "Republic",
+    "independence": 1991,
+    "landlocked": "1",
     "languages": {
       "bel": "Belarusian",
       "rus": "Russian"
@@ -7070,25 +7250,26 @@
     },
     "population": 9109280,
     "region": "Europe",
-    "subregion": "Eastern Europe",
-    "area": 207600.0,
-    "currencies": {
-      "BYN": {
-        "symbol": "Br",
-        "name": "Belarusian ruble"
-      }
-    },
-    "independence": 1991,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Eastern Europe",
     "temperature": 7.45
   },
   {
+    "area": 51209,
     "capital": [
       "Sarajevo"
     ],
     "cca2": "BA",
+    "cca3": "BIH",
+    "currencies": {
+      "BAM": {
+        "name": "Bosnia and Herzegovina convertible mark",
+        "symbol": "KM"
+      }
+    },
+    "government": "Federal Republic",
+    "independence": 1992,
+    "landlocked": "0",
     "languages": {
       "bos": "Bosnian",
       "hrv": "Croatian",
@@ -7118,25 +7299,26 @@
     },
     "population": 3422000,
     "region": "Europe",
-    "subregion": "Southeast Europe",
-    "area": 51209.0,
-    "currencies": {
-      "BAM": {
-        "symbol": "KM",
-        "name": "Bosnia and Herzegovina convertible mark"
-      }
-    },
-    "independence": 1992,
-    "government": "Federal Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Southeast Europe",
     "temperature": 10.35
   },
   {
+    "area": 580367,
     "capital": [
       "Nairobi"
     ],
     "cca2": "KE",
+    "cca3": "KEN",
+    "currencies": {
+      "KES": {
+        "name": "Kenyan shilling",
+        "symbol": "Sh"
+      }
+    },
+    "government": "Republic",
+    "independence": 1963,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "swa": "Swahili"
@@ -7161,25 +7343,26 @@
     },
     "population": 53330978,
     "region": "Africa",
-    "subregion": "Eastern Africa",
-    "area": 580367.0,
-    "currencies": {
-      "KES": {
-        "symbol": "Sh",
-        "name": "Kenyan shilling"
-      }
-    },
-    "independence": 1963,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Eastern Africa",
     "temperature": 25.08
   },
   {
+    "area": 268838,
     "capital": [
       "Wellington"
     ],
     "cca2": "NZ",
+    "cca3": "NZL",
+    "currencies": {
+      "NZD": {
+        "name": "New Zealand dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1907,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "mri": "Māori",
@@ -7209,25 +7392,26 @@
     },
     "population": 5324700,
     "region": "Oceania",
-    "subregion": "Australia and New Zealand",
-    "area": 268838.0,
-    "currencies": {
-      "NZD": {
-        "symbol": "$",
-        "name": "New Zealand dollar"
-      }
-    },
-    "independence": 1907,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Australia and New Zealand",
     "temperature": 10.46
   },
   {
+    "area": 214969,
     "capital": [
       "Georgetown"
     ],
     "cca2": "GY",
+    "cca3": "GUY",
+    "currencies": {
+      "GYD": {
+        "name": "Guyanese dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1966,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -7247,25 +7431,26 @@
     },
     "population": 772975,
     "region": "Americas",
-    "subregion": "South America",
-    "area": 214969.0,
-    "currencies": {
-      "GYD": {
-        "symbol": "$",
-        "name": "Guyanese dollar"
-      }
-    },
-    "independence": 1966,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "South America",
     "temperature": 26.12
   },
   {
+    "area": 147181,
     "capital": [
       "Kathmandu"
     ],
     "cca2": "NP",
+    "cca3": "NPL",
+    "currencies": {
+      "NPR": {
+        "name": "Nepalese rupee",
+        "symbol": "₨"
+      }
+    },
+    "government": "Federal parliamentary republic",
+    "independence": 1923,
+    "landlocked": "1",
     "languages": {
       "nep": "Nepali"
     },
@@ -7285,25 +7470,26 @@
     },
     "population": 29911840,
     "region": "Asia",
-    "subregion": "Southern Asia",
-    "area": 147181.0,
-    "currencies": {
-      "NPR": {
-        "symbol": "₨",
-        "name": "Nepalese rupee"
-      }
-    },
-    "independence": 1923,
-    "government": "Federal parliamentary republic",
-    "landlocked": "1",
     "religion": "Hinduism",
+    "subregion": "Southern Asia",
     "temperature": 14.17
   },
   {
+    "area": 3287263,
     "capital": [
       "New Delhi"
     ],
     "cca2": "IN",
+    "cca3": "IND",
+    "currencies": {
+      "INR": {
+        "name": "Indian rupee",
+        "symbol": "₹"
+      }
+    },
+    "government": "Federal Republic",
+    "independence": 1947,
+    "landlocked": "0",
     "languages": {
       "eng": "English",
       "hin": "Hindi",
@@ -7333,25 +7519,26 @@
     },
     "population": 1417492000,
     "region": "Asia",
-    "subregion": "Southern Asia",
-    "area": 3287263.0,
-    "currencies": {
-      "INR": {
-        "symbol": "₹",
-        "name": "Indian rupee"
-      }
-    },
-    "independence": 1947,
-    "government": "Federal Republic",
-    "landlocked": "0",
     "religion": "Hinduism",
+    "subregion": "Southern Asia",
     "temperature": 24.94
   },
   {
+    "area": 5130,
     "capital": [
       "Port of Spain"
     ],
     "cca2": "TT",
+    "cca3": "TTO",
+    "currencies": {
+      "TTD": {
+        "name": "Trinidad and Tobago dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1962,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -7371,25 +7558,26 @@
     },
     "population": 1367764,
     "region": "Americas",
-    "subregion": "Caribbean",
-    "area": 5130.0,
-    "currencies": {
-      "TTD": {
-        "symbol": "$",
-        "name": "Trinidad and Tobago dollar"
-      }
-    },
-    "independence": 1962,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Caribbean",
     "temperature": 26.55
   },
   {
+    "area": 2586,
     "capital": [
       "Luxembourg"
     ],
     "cca2": "LU",
+    "cca3": "LUX",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1867,
+    "landlocked": "1",
     "languages": {
       "deu": "German",
       "fra": "French",
@@ -7419,25 +7607,26 @@
     },
     "population": 681973,
     "region": "Europe",
-    "subregion": "Western Europe",
-    "area": 2586.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1867,
-    "government": "Constitutional Monarchy",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Western Europe",
     "temperature": 10.02
   },
   {
+    "area": 41284,
     "capital": [
       "Bern"
     ],
     "cca2": "CH",
+    "cca3": "CHE",
+    "currencies": {
+      "CHF": {
+        "name": "Swiss franc",
+        "symbol": "Fr."
+      }
+    },
+    "government": "Federation",
+    "independence": 1499,
+    "landlocked": "1",
     "languages": {
       "fra": "French",
       "gsw": "Swiss German",
@@ -7472,25 +7661,26 @@
     },
     "population": 9082848,
     "region": "Europe",
-    "subregion": "Western Europe",
-    "area": 41284.0,
-    "currencies": {
-      "CHF": {
-        "symbol": "Fr.",
-        "name": "Swiss franc"
-      }
-    },
-    "independence": 1499,
-    "government": "Federation",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Western Europe",
     "temperature": 6.47
   },
   {
+    "area": 36197,
     "capital": [
       "Taipei"
     ],
     "cca2": "TW",
+    "cca3": "TWN",
+    "currencies": {
+      "TWD": {
+        "name": "New Taiwan dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Democratic Republic",
+    "independence": 1949,
+    "landlocked": "0",
     "languages": {
       "zho": "Chinese"
     },
@@ -7510,25 +7700,26 @@
     },
     "population": 23317031,
     "region": "Asia",
-    "subregion": "Eastern Asia",
-    "area": 36197.0,
-    "currencies": {
-      "TWD": {
-        "symbol": "$",
-        "name": "New Taiwan dollar"
-      }
-    },
-    "independence": 1949,
-    "government": "Democratic Republic",
-    "landlocked": "0",
     "religion": "Buddhism",
+    "subregion": "Eastern Asia",
     "temperature": 21
   },
   {
+    "area": 438317,
     "capital": [
       "Baghdad"
     ],
     "cca2": "IQ",
+    "cca3": "IRQ",
+    "currencies": {
+      "IQD": {
+        "name": "Iraqi dinar",
+        "symbol": "ع.د"
+      }
+    },
+    "government": "Republic",
+    "independence": 1932,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic",
       "arc": "Aramaic",
@@ -7558,25 +7749,26 @@
     },
     "population": 46118793,
     "region": "Asia",
-    "subregion": "Western Asia",
-    "area": 438317.0,
-    "currencies": {
-      "IQD": {
-        "symbol": "ع.د",
-        "name": "Iraqi dinar"
-      }
-    },
-    "independence": 1932,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Asia",
     "temperature": 22.95
   },
   {
+    "area": 386224,
     "capital": [
       "Oslo"
     ],
     "cca2": "NO",
+    "cca3": "NOR",
+    "currencies": {
+      "NOK": {
+        "name": "Norwegian krone",
+        "symbol": "kr"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1905,
+    "landlocked": "0",
     "languages": {
       "nno": "Norwegian Nynorsk",
       "nob": "Norwegian Bokmål",
@@ -7606,25 +7798,26 @@
     },
     "population": 5606944,
     "region": "Europe",
-    "subregion": "Northern Europe",
-    "area": 386224.0,
-    "currencies": {
-      "NOK": {
-        "symbol": "kr",
-        "name": "Norwegian krone"
-      }
-    },
-    "independence": 1905,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Northern Europe",
     "temperature": 2.21
   },
   {
+    "area": 309500,
     "capital": [
       "Muscat"
     ],
     "cca2": "OM",
+    "cca3": "OMN",
+    "currencies": {
+      "OMR": {
+        "name": "Omani rial",
+        "symbol": "ر.ع."
+      }
+    },
+    "government": "Monarchy (Sultanate)",
+    "independence": 1951,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic"
     },
@@ -7644,25 +7837,26 @@
     },
     "population": 5343630,
     "region": "Asia",
-    "subregion": "Western Asia",
-    "area": 309500.0,
-    "currencies": {
-      "OMR": {
-        "symbol": "ر.ع.",
-        "name": "Omani rial"
-      }
-    },
-    "independence": 1951,
-    "government": "Monarchy (Sultanate)",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Asia",
     "temperature": 27.64
   },
   {
+    "area": 244376,
     "capital": [
       "London"
     ],
     "cca2": "GB",
+    "cca3": "GBR",
+    "currencies": {
+      "GBP": {
+        "name": "British pound",
+        "symbol": "£"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1066,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -7682,25 +7876,26 @@
     },
     "population": 69281437,
     "region": "Europe",
-    "subregion": "Northern Europe",
-    "area": 244376.0,
-    "currencies": {
-      "GBP": {
-        "symbol": "£",
-        "name": "British pound"
-      }
-    },
-    "independence": 1066,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Northern Europe",
     "temperature": 9.24
   },
   {
+    "area": 751,
     "capital": [
       "Roseau"
     ],
     "cca2": "DM",
+    "cca3": "DMA",
+    "currencies": {
+      "XCD": {
+        "name": "Eastern Caribbean dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1978,
+    "landlocked": "0",
     "languages": {
       "eng": "English"
     },
@@ -7720,25 +7915,26 @@
     },
     "population": 67408,
     "region": "Americas",
-    "subregion": "Caribbean",
-    "area": 751.0,
-    "currencies": {
-      "XCD": {
-        "symbol": "$",
-        "name": "Eastern Caribbean dollar"
-      }
-    },
-    "independence": 1978,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Caribbean",
     "temperature": 26.83
   },
   {
+    "area": 505992,
     "capital": [
       "Madrid"
     ],
     "cca2": "ES",
+    "cca3": "ESP",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Constitutional Monarchy",
+    "independence": 1492,
+    "landlocked": "0",
     "languages": {
       "cat": "Catalan",
       "eus": "Basque",
@@ -7761,25 +7957,26 @@
     },
     "population": 49315949,
     "region": "Europe",
-    "subregion": "Southern Europe",
-    "area": 505992.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1492,
-    "government": "Constitutional Monarchy",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Southern Europe",
     "temperature": 14.07
   },
   {
+    "area": 77589,
     "capital": [
       "Belgrade"
     ],
     "cca2": "RS",
+    "cca3": "SRB",
+    "currencies": {
+      "RSD": {
+        "name": "Serbian dinar",
+        "symbol": "дин."
+      }
+    },
+    "government": "Republic",
+    "independence": 2006,
+    "landlocked": "1",
     "languages": {
       "srp": "Serbian"
     },
@@ -7799,25 +7996,26 @@
     },
     "population": 6567783,
     "region": "Europe",
-    "subregion": "Southeast Europe",
-    "area": 77589.0,
-    "currencies": {
-      "RSD": {
-        "symbol": "дин.",
-        "name": "Serbian dinar"
-      }
-    },
-    "independence": 2006,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Southeast Europe",
     "temperature": 11.4
   },
   {
+    "area": 20273,
     "capital": [
       "Ljubljana"
     ],
     "cca2": "SI",
+    "cca3": "SVN",
+    "currencies": {
+      "EUR": {
+        "name": "Euro",
+        "symbol": "€"
+      }
+    },
+    "government": "Republic",
+    "independence": 1991,
+    "landlocked": "0",
     "languages": {
       "slv": "Slovene"
     },
@@ -7837,25 +8035,26 @@
     },
     "population": 2130638,
     "region": "Europe",
-    "subregion": "Central Europe",
-    "area": 20273.0,
-    "currencies": {
-      "EUR": {
-        "symbol": "€",
-        "name": "Euro"
-      }
-    },
-    "independence": 1991,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Central Europe",
     "temperature": 9.86
   },
   {
+    "area": 29743,
     "capital": [
       "Yerevan"
     ],
     "cca2": "AM",
+    "cca3": "ARM",
+    "currencies": {
+      "AMD": {
+        "name": "Armenian dram",
+        "symbol": "֏"
+      }
+    },
+    "government": "Republic",
+    "independence": 1991,
+    "landlocked": "1",
     "languages": {
       "hye": "Armenian"
     },
@@ -7875,25 +8074,26 @@
     },
     "population": 3076200,
     "region": "Asia",
-    "subregion": "Western Asia",
-    "area": 29743.0,
-    "currencies": {
-      "AMD": {
-        "symbol": "֏",
-        "name": "Armenian dram"
-      }
-    },
-    "independence": 1991,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Christianity",
+    "subregion": "Western Asia",
     "temperature": 7.82
   },
   {
+    "area": 1267000,
     "capital": [
       "Niamey"
     ],
     "cca2": "NE",
+    "cca3": "NER",
+    "currencies": {
+      "XOF": {
+        "name": "West African CFA franc",
+        "symbol": "Fr"
+      }
+    },
+    "government": "Republic",
+    "independence": 1960,
+    "landlocked": "1",
     "languages": {
       "fra": "French"
     },
@@ -7913,25 +8113,26 @@
     },
     "population": 26312034,
     "region": "Africa",
-    "subregion": "Western Africa",
-    "area": 1267000.0,
-    "currencies": {
-      "XOF": {
-        "symbol": "Fr",
-        "name": "West African CFA franc"
-      }
-    },
-    "independence": 1960,
-    "government": "Republic",
-    "landlocked": "1",
     "religion": "Islam",
+    "subregion": "Western Africa",
     "temperature": 28.04
   },
   {
+    "area": 1141748,
     "capital": [
       "Bogotá"
     ],
     "cca2": "CO",
+    "cca3": "COL",
+    "currencies": {
+      "COP": {
+        "name": "Colombian peso",
+        "symbol": "$"
+      }
+    },
+    "government": "Republic",
+    "independence": 1810,
+    "landlocked": "0",
     "languages": {
       "spa": "Spanish"
     },
@@ -7951,25 +8152,26 @@
     },
     "population": 53057212,
     "region": "Americas",
-    "subregion": "South America",
-    "area": 1141748.0,
-    "currencies": {
-      "COP": {
-        "symbol": "$",
-        "name": "Colombian peso"
-      }
-    },
-    "independence": 1810,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "South America",
     "temperature": 25
   },
   {
+    "area": 312679,
     "capital": [
       "Warsaw"
     ],
     "cca2": "PL",
+    "cca3": "POL",
+    "currencies": {
+      "PLN": {
+        "name": "Polish złoty",
+        "symbol": "zł"
+      }
+    },
+    "government": "Republic",
+    "independence": 1918,
+    "landlocked": "0",
     "languages": {
       "pol": "Polish"
     },
@@ -7989,25 +8191,26 @@
     },
     "population": 37392000,
     "region": "Europe",
-    "subregion": "Central Europe",
-    "area": 312679.0,
-    "currencies": {
-      "PLN": {
-        "symbol": "zł",
-        "name": "Polish złoty"
-      }
-    },
-    "independence": 1918,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Christianity",
+    "subregion": "Central Europe",
     "temperature": 8.78
   },
   {
+    "area": 783562,
     "capital": [
       "Ankara"
     ],
     "cca2": "TR",
+    "cca3": "TUR",
+    "currencies": {
+      "TRY": {
+        "name": "Turkish lira",
+        "symbol": "₺"
+      }
+    },
+    "government": "Republic",
+    "independence": 1923,
+    "landlocked": "0",
     "languages": {
       "tur": "Turkish"
     },
@@ -8027,25 +8230,30 @@
     },
     "population": 85664944,
     "region": "Asia",
-    "subregion": "Western Asia",
-    "area": 783562.0,
-    "currencies": {
-      "TRY": {
-        "symbol": "₺",
-        "name": "Turkish lira"
-      }
-    },
-    "independence": 1923,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Asia",
     "temperature": 11.66
   },
   {
+    "area": 5765,
     "capital": [
       "Bandar Seri Begawan"
     ],
     "cca2": "BN",
+    "cca3": "BRN",
+    "currencies": {
+      "BND": {
+        "name": "Brunei dollar",
+        "symbol": "$"
+      },
+      "SGD": {
+        "name": "Singapore dollar",
+        "symbol": "$"
+      }
+    },
+    "government": "Monarchy (Sultanate)",
+    "independence": 1984,
+    "landlocked": "0",
     "languages": {
       "msa": "Malay"
     },
@@ -8065,29 +8273,26 @@
     },
     "population": 455500,
     "region": "Asia",
-    "subregion": "South-Eastern Asia",
-    "area": 5765.0,
-    "currencies": {
-      "BND": {
-        "symbol": "$",
-        "name": "Brunei dollar"
-      },
-      "SGD": {
-        "symbol": "$",
-        "name": "Singapore dollar"
-      }
-    },
-    "independence": 1984,
-    "government": "Monarchy (Sultanate)",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "South-Eastern Asia",
     "temperature": 26.95
   },
   {
+    "area": 1030700,
     "capital": [
       "Nouakchott"
     ],
     "cca2": "MR",
+    "cca3": "MRT",
+    "currencies": {
+      "MRU": {
+        "name": "Mauritanian ouguiya",
+        "symbol": "UM"
+      }
+    },
+    "government": "Republic",
+    "independence": 1960,
+    "landlocked": "0",
     "languages": {
       "ara": "Arabic"
     },
@@ -8107,18 +8312,8 @@
     },
     "population": 4927532,
     "region": "Africa",
-    "subregion": "Western Africa",
-    "area": 1030700.0,
-    "currencies": {
-      "MRU": {
-        "symbol": "UM",
-        "name": "Mauritanian ouguiya"
-      }
-    },
-    "independence": 1960,
-    "government": "Republic",
-    "landlocked": "0",
     "religion": "Islam",
+    "subregion": "Western Africa",
     "temperature": 28.82
   }
 ]

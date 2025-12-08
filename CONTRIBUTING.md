@@ -22,7 +22,7 @@ We welcome contributions to **Flagged-It**! By contributing, you help improve th
 ## Code Style & Quality
  
 - Write clear and concise code comments where necessary.  
-- Run `make clean` before submitting to ensure formatting and code analysis pass.  
+- Run `make check` before submitting to ensure formatting and code analysis pass.  
 
 ## Reporting Issues
 

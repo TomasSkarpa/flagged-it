@@ -15,6 +15,7 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/lang"
 	"fyne.io/fyne/v2/widget"
 )
 
@@ -56,8 +57,8 @@ type Game struct {
 
 func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
 	g := &Game{
-		backFunc:     backFunc,
-		scoreManager: scoreManager,
+		backFunc:      backFunc,
+		scoreManager:  scoreManager,
 		usedCountries: make(map[string]bool),
 	}
 	g.loadCountries()
@@ -71,14 +72,14 @@ func (g *Game) loadCountries() {
 }
 
 func (g *Game) setupUI() {
-	topBar := components.NewTopBar("Guess by Flag", g.backFunc, g.Reset)
+	topBar := components.NewTopBar(lang.X("game.flag.title", "Guess by Flag"), g.backFunc, g.Reset)
 
 	g.flagImage = canvas.NewImageFromResource(nil)
 	g.flagImage.FillMode = canvas.ImageFillContain
 	g.flagImage.SetMinSize(fyne.NewSize(400, 250))
-	g.statusLabel = widget.NewLabel("Which country does this flag belong to?")
+	g.statusLabel = widget.NewLabel(lang.X("game.flag.question", "Which country does this flag belong to?"))
 	g.statusLabel.Wrapping = fyne.TextWrapWord
-	g.scoreLabel = widget.NewLabel("Score: 0/10")
+	g.scoreLabel = widget.NewLabel(lang.L("game.score", map[string]any{"Score": 0}))
 
 	// Create responsive button grid
 	g.buttonGrid = container.NewGridWithColumns(2)
@@ -96,7 +97,7 @@ func (g *Game) setupUI() {
 
 func (g *Game) newGame() {
 	if len(g.countries) == 0 {
-		g.statusLabel.SetText("Error loading countries data")
+		g.statusLabel.SetText(lang.X("error.loading_countries", "Error loading countries data"))
 		return
 	}
 
@@ -128,7 +129,7 @@ func (g *Game) newGame() {
 
 	g.displayFlag()
 	g.createButtons()
-	g.statusLabel.SetText("Which country does this flag belong to?")
+	g.statusLabel.SetText(lang.X("game.flag.question", "Which country does this flag belong to?"))
 }
 
 func (g *Game) displayFlag() {
@@ -175,12 +176,12 @@ func (g *Game) makeGuess(guessed models.Country) {
 	isCorrect := guessed.CCA2 == g.currentCountry.CCA2
 	if isCorrect {
 		g.score++
-		g.statusLabel.SetText(fmt.Sprintf("Correct! It's %s!", g.currentCountry.Name.Common))
+		g.statusLabel.SetText(lang.L("game.correct", map[string]any{"Country": g.currentCountry.Name.Common}))
 	} else {
-		g.statusLabel.SetText(fmt.Sprintf("Wrong! It was %s", g.currentCountry.Name.Common))
+		g.statusLabel.SetText(lang.L("game.wrong", map[string]any{"Country": g.currentCountry.Name.Common}))
 	}
 
-	g.scoreLabel.SetText(fmt.Sprintf("Score: %d/10", g.score))
+	g.scoreLabel.SetText(lang.L("game.score", map[string]any{"Score": g.score}))
 
 	for i, btn := range g.buttons {
 		var bgColor color.Color
@@ -198,7 +199,7 @@ func (g *Game) makeGuess(guessed models.Country) {
 		g.scoreManager.UpdateScore("flag", g.score)
 		time.AfterFunc(1500*time.Millisecond, func() {
 			fyne.Do(func() {
-				g.statusLabel.SetText(fmt.Sprintf("Game Complete! Final Score: %d/10 (%.0f%%)", g.score, float64(g.score)/10*100))
+				g.statusLabel.SetText(lang.L("game.complete", map[string]any{"Score": g.score, "Percent": int(float64(g.score)/10*100)}))
 			})
 		})
 	} else {
@@ -222,6 +223,6 @@ func (g *Game) Reset() {
 	g.score = 0
 	g.total = 0
 	g.usedCountries = make(map[string]bool)
-	g.scoreLabel.SetText("Score: 0/10")
+	g.scoreLabel.SetText(lang.L("game.score", map[string]any{"Score": 0}))
 	g.newGame()
 }

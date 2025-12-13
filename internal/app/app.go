@@ -27,11 +27,7 @@ func NewApp(window fyne.Window) *App {
 }
 
 func (a *App) GetDashboard() *fyne.Container {
-	if a.dashboard == nil {
-		a.dashboard = screens.NewDashboard(a.navigateToGame, a.navigateToDebug, a.window, a.scoreManager)
-	} else {
-		a.dashboard.RefreshScores()
-	}
+	a.dashboard = screens.NewDashboard(a.navigateToGame, a.navigateToDebug, a.window, a.scoreManager)
 	return a.dashboard.GetContent()
 }
 

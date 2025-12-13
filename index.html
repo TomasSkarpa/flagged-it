@@ -107,6 +107,23 @@
     <div id="error"></div>
     <script src="wasm_exec.js" onerror="showError('Failed to load wasm_exec.js')"></script>
     <script>
+        const userLang = (navigator.language || navigator.userLanguage).split('-')[0];
+        document.documentElement.lang = userLang;
+
+        const translations = {
+            en: { loading: 'Shifting tectonic plates to form countries...' },
+            es: { loading: 'Desplazando placas tectónicas para formar países...' },
+            fr: { loading: 'Déplacement des plaques tectoniques pour former des pays...' },
+            de: { loading: 'Verschieben tektonischer Platten zur Bildung von Ländern...' },
+            cs: { loading: 'Posouváme tektonické desky a formujeme státy...' },
+            sk: { loading: 'Posúvame tektonické dosky a formujeme štáty...' },
+            pl: { loading: 'Przesuwamy płyty tektoniczne, aby uformować państwa...' },
+            it: { loading: 'Spostando le placche tettoniche per formare i paesi...' }
+        };
+
+        const t = translations[userLang] || translations.en;
+        document.querySelector('#loading p').textContent = t.loading;
+
         function showError(msg) {
             document.getElementById('loading').style.display = 'none';
             const errorDiv = document.getElementById('error');

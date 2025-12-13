@@ -15,6 +15,7 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/lang"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
@@ -70,15 +71,15 @@ func (g *Game) loadCountries() {
 }
 
 func (g *Game) setupUI() {
-	topBar := components.NewTopBar("What country is this?", g.backFunc, g.newGame)
+	topBar := components.NewTopBar(lang.X("game.guessing.title", "What country is this?"), g.backFunc, g.newGame)
 
-	g.statusLabel = widget.NewLabel("Make a guess!")
+	g.statusLabel = widget.NewLabel(lang.X("game.guessing.make_guess", "Make a guess!"))
 
 	g.guessEntry = widget.NewEntry()
-	g.guessEntry.SetPlaceHolder("Enter country name...")
+	g.guessEntry.SetPlaceHolder(lang.X("game.guessing.enter_country", "Enter country name..."))
 	g.guessEntry.OnSubmitted = func(text string) { g.makeGuess() }
 
-	g.guessBtn = widget.NewButton("Guess", g.makeGuess)
+	g.guessBtn = widget.NewButton(lang.X("game.guessing.guess", "Guess"), g.makeGuess)
 
 	guessContainer := container.NewGridWithColumns(2, g.guessEntry, g.guessBtn)
 
@@ -94,7 +95,7 @@ func (g *Game) setupUI() {
 		widget.NewSeparator(),
 		guessContainer,
 		widget.NewSeparator(),
-		widget.NewLabel("Guess History:"),
+		widget.NewLabel(lang.X("game.guessing.history", "Guess History:")),
 		g.headerGrid,
 	)
 
@@ -114,11 +115,11 @@ func (g *Game) setupUI() {
 }
 
 func (g *Game) addHeaderRow() {
-	g.headerGrid.Add(g.createTile("Flag", nil, color.RGBA{100, 100, 100, 255}))
-	g.headerGrid.Add(g.createTile("Country", nil, color.RGBA{100, 100, 100, 255}))
-	g.headerGrid.Add(g.createTile("Continent", nil, color.RGBA{100, 100, 100, 255}))
-	g.headerGrid.Add(g.createTile("Population", nil, color.RGBA{100, 100, 100, 255}))
-	g.headerGrid.Add(g.createTile("Area", nil, color.RGBA{100, 100, 100, 255}))
+	g.headerGrid.Add(g.createTile(lang.X("game.guessing.flag", "Flag"), nil, color.RGBA{100, 100, 100, 255}))
+	g.headerGrid.Add(g.createTile(lang.X("game.guessing.country", "Country"), nil, color.RGBA{100, 100, 100, 255}))
+	g.headerGrid.Add(g.createTile(lang.X("game.guessing.continent", "Continent"), nil, color.RGBA{100, 100, 100, 255}))
+	g.headerGrid.Add(g.createTile(lang.X("game.guessing.population", "Population"), nil, color.RGBA{100, 100, 100, 255}))
+	g.headerGrid.Add(g.createTile(lang.X("game.guessing.area", "Area"), nil, color.RGBA{100, 100, 100, 255}))
 }
 
 func (g *Game) createTile(text string, icon fyne.Resource, bgColor color.Color) fyne.CanvasObject {
@@ -207,7 +208,7 @@ func (g *Game) addGuessRow(country *models.Country) {
 
 func (g *Game) newGame() {
 	if len(g.countries) == 0 {
-		g.statusLabel.SetText("Error loading countries data")
+		g.statusLabel.SetText(lang.X("error.loading_countries", "Error loading countries data"))
 		return
 	}
 
@@ -217,7 +218,7 @@ func (g *Game) newGame() {
 	g.guessEntry.SetText("")
 	g.guessEntry.Enable()
 	g.guessBtn.Enable()
-	g.statusLabel.SetText("Make a guess!")
+	g.statusLabel.SetText(lang.X("game.guessing.make_guess", "Make a guess!"))
 }
 
 func (g *Game) getCountry(countries []models.Country, name string) *models.Country {
@@ -237,7 +238,7 @@ func (g *Game) makeGuess() {
 
 	guessedCountry := g.getCountry(g.countries, guess)
 	if guessedCountry == nil {
-		g.statusLabel.SetText("Country not found!")
+		g.statusLabel.SetText(lang.X("game.guessing.not_found", "Country not found!"))
 		return
 	}
 
@@ -245,7 +246,7 @@ func (g *Game) makeGuess() {
 	g.addGuessRow(guessedCountry)
 
 	if utils.MatchCountry(guess, *g.currentCountry, utils.MatchAll) {
-		g.statusLabel.SetText(fmt.Sprintf("Correct! It was %s!", g.currentCountry.Name.Common))
+		g.statusLabel.SetText(fmt.Sprintf(lang.X("game.guessing.correct", "Correct! It was %s!"), g.currentCountry.Name.Common))
 		g.guessEntry.Disable()
 		g.guessBtn.Disable()
 		return

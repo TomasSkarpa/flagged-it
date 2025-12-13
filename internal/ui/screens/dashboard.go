@@ -1,6 +1,7 @@
 package screens
 
 import (
+	"flagged-it/internal/translations"
 	"flagged-it/internal/utils"
 	"fmt"
 	"image/color"
@@ -9,6 +10,7 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/lang"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
@@ -36,43 +38,70 @@ func NewDashboard(navigateFunc func(string), debugFunc func(), window fyne.Windo
 }
 
 func (d *Dashboard) setupUI() {
-	title := widget.NewLabel("Choose Your Game Mode")
+	title := widget.NewLabel(lang.X("dashboard.title", "Choose Your Game Mode"))
 	title.TextStyle = fyne.TextStyle{Bold: true}
 
-	// Header with title and optional settings button
+	// Language selector
+	languageList := make([]string, len(translations.TranslationsInfo))
+	var langSelIndex int
+	currentLocale := utils.GetCurrentLocale()
+	for i, tr := range translations.TranslationsInfo {
+		languageList[i] = tr.DisplayName
+		if tr.Name == currentLocale {
+			langSelIndex = i
+		}
+	}
+
+	langSelect := widget.NewSelect(languageList, nil)
+	langSelect.SetSelectedIndex(langSelIndex)
+	langSelect.OnChanged = func(_ string) {
+		if i := langSelect.SelectedIndex(); i >= 0 {
+			utils.SetCurrentLocale(translations.TranslationsInfo[i].Name)
+			utils.LoadTranslation(translations.TranslationsInfo[i].Name)
+			d.window.SetContent(NewDashboard(d.navigateFunc, d.debugFunc, d.window, d.scoreManager).GetContent())
+		}
+	}
+
+	// Header with language selector, title and optional settings button
 	var header *fyne.Container
 	if d.debugManager.IsDebugEnabled() {
 		settingsBtn := widget.NewButtonWithIcon("", theme.SettingsIcon(), d.debugFunc)
 		header = container.NewBorder(
 			nil, nil,
-			nil, settingsBtn,
-			container.NewCenter(title),
+			langSelect,
+			settingsBtn,
+			container.NewHBox(widget.NewLabel(""), title),
 		)
 	} else {
-		header = container.NewCenter(title)
+		header = container.NewBorder(
+			nil, nil,
+			langSelect,
+			nil,
+			container.NewHBox(widget.NewLabel(""), title),
+		)
 	}
 
 	// Game buttons
-	flagBtn := widget.NewButtonWithIcon("Guess by Flag", theme.MailForwardIcon(), func() {
+	flagBtn := widget.NewButtonWithIcon(lang.X("game.flag.title", "Guess by Flag"), theme.MailForwardIcon(), func() {
 		d.navigateFunc("flag")
 	})
-	countryListBtn := widget.NewButtonWithIcon("List All Countries", theme.ListIcon(), func() {
+	countryListBtn := widget.NewButtonWithIcon(lang.X("game.list.title", "List All Countries"), theme.ListIcon(), func() {
 		d.navigateFunc("list")
 	})
-	countryGuessBtn := widget.NewButtonWithIcon("Guess by Shape", theme.MediaRecordIcon(), func() {
+	countryGuessBtn := widget.NewButtonWithIcon(lang.X("game.shape.title", "Guess by Shape"), theme.MediaRecordIcon(), func() {
 		d.navigateFunc("shape")
 	})
-	hangmanBtn := widget.NewButtonWithIcon("Hangman", theme.AccountIcon(), func() {
+	hangmanBtn := widget.NewButtonWithIcon(lang.X("game.hangman.title", "Hangman"), theme.AccountIcon(), func() {
 		d.navigateFunc("hangman")
 	})
-	factGuessBtn := widget.NewButtonWithIcon("Guess by Facts", theme.InfoIcon(), func() {
+	factGuessBtn := widget.NewButtonWithIcon(lang.X("game.facts.title", "Guess by Facts"), theme.InfoIcon(), func() {
 		d.navigateFunc("facts")
 	})
-	higher_lowerBtn := widget.NewButtonWithIcon("Higher or Lower", theme.UploadIcon(), func() {
+	higher_lowerBtn := widget.NewButtonWithIcon(lang.X("game.higher_lower.title", "Higher or Lower"), theme.UploadIcon(), func() {
 		d.navigateFunc("higher_lower")
 	})
 
-	guessingBtn := widget.NewButtonWithIcon("What Country is This", theme.GridIcon(), func() {
+	guessingBtn := widget.NewButtonWithIcon(lang.X("game.guessing.title", "What Country is This"), theme.GridIcon(), func() {
 		d.navigateFunc("guessing")
 	})
 

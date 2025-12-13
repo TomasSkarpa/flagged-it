@@ -12,6 +12,7 @@ import (
 	"flagged-it/internal/utils"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/lang"
 	"fyne.io/fyne/v2/widget"
 )
 
@@ -56,15 +57,15 @@ func (g *Game) loadCountries() {
 }
 
 func (g *Game) setupUI() {
-	topBar := components.NewTopBar("Hangman Game", g.backFunc, g.Reset)
+	topBar := components.NewTopBar(lang.X("game.hangman.title", "Hangman"), g.backFunc, g.Reset)
 
 	g.wordLabel = widget.NewLabel("")
 	g.wordLabel.TextStyle.Monospace = true
 
 	g.hintLabel = widget.NewLabel("")
 	g.wrongLabel = widget.NewLabel("")
-	g.statusLabel = widget.NewLabel("Guess the country name!")
-	g.scoreLabel = widget.NewLabel("Score: 0/5")
+	g.statusLabel = widget.NewLabel(lang.X("game.hangman.guess_country", "Guess the country name!"))
+	g.scoreLabel = widget.NewLabel(fmt.Sprintf(lang.X("game.hangman.score", "Score: %d/5"), 0))
 
 	g.setupKeyboard()
 
@@ -84,14 +85,14 @@ func (g *Game) setupUI() {
 
 func (g *Game) newGame() {
 	if len(g.countries) == 0 {
-		g.statusLabel.SetText("Error loading countries data")
+		g.statusLabel.SetText(lang.X("error.loading_countries", "Error loading countries data"))
 		return
 	}
 
 	if g.total >= 5 {
 		g.scoreManager.SetTotal("hangman", 5)
 		g.scoreManager.UpdateScore("hangman", g.score)
-		g.statusLabel.SetText(fmt.Sprintf("Game Complete! Final Score: %d/5 (%.0f%%)", g.score, float64(g.score)/5*100))
+		g.statusLabel.SetText(fmt.Sprintf(lang.X("game.complete", "Game Complete! Final Score: %d/10 (%.0f%%)"), g.score, float64(g.score)/5*100))
 		for _, btn := range g.letterButtons {
 			btn.Disable()
 		}
@@ -114,7 +115,7 @@ func (g *Game) newGame() {
 	}
 
 	g.updateDisplay()
-	g.statusLabel.SetText("Guess the country name!")
+	g.statusLabel.SetText(lang.X("game.hangman.guess_country", "Guess the country name!"))
 	for _, btn := range g.letterButtons {
 		btn.Enable()
 	}
@@ -146,7 +147,7 @@ func (g *Game) setupKeyboard() {
 
 func (g *Game) makeGuess(letter rune) {
 	if g.guessedLetters[letter] {
-		g.statusLabel.SetText("Already guessed that letter!")
+		g.statusLabel.SetText(lang.X("game.hangman.already_guessed", "Already guessed that letter!"))
 		return
 	}
 
@@ -193,22 +194,22 @@ func (g *Game) updateDisplay() {
 	}
 
 	g.wordLabel.SetText(displayWord.String())
-	wordText := "word"
+	wordText := lang.X("game.hangman.word", "word")
 	if wordCount != 1 {
-		wordText = "words"
+		wordText = lang.X("game.hangman.words", "words")
 	}
-	g.hintLabel.SetText(fmt.Sprintf("%d letters, %d %s", letterCount, wordCount, wordText))
-	g.wrongLabel.SetText(fmt.Sprintf("Wrong guesses: %d/%d", g.wrongGuesses, g.maxWrongs))
+	g.hintLabel.SetText(fmt.Sprintf(lang.X("game.hangman.letters_words", "%d letters, %d %s"), letterCount, wordCount, wordText))
+	g.wrongLabel.SetText(fmt.Sprintf(lang.X("game.hangman.wrong_guesses", "Wrong guesses: %d/%d"), g.wrongGuesses, g.maxWrongs))
 }
 
 func (g *Game) checkGameEnd() {
 	if g.wrongGuesses >= g.maxWrongs {
-		g.statusLabel.SetText(fmt.Sprintf("Game Over! The word was: %s", g.currentWord))
+		g.statusLabel.SetText(fmt.Sprintf(lang.X("game.hangman.game_over", "Game Over! The word was: %s"), g.currentWord))
 		for _, btn := range g.letterButtons {
 			btn.Disable()
 		}
 		g.total++
-		g.scoreLabel.SetText(fmt.Sprintf("Score: %d/5", g.score))
+		g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.hangman.score", "Score: %d/5"), g.score))
 		time.AfterFunc(1500*time.Millisecond, func() {
 			fyne.Do(func() {
 				g.newGame()
@@ -218,13 +219,13 @@ func (g *Game) checkGameEnd() {
 	}
 
 	if !strings.Contains(string(g.guessedWord), "_") {
-		g.statusLabel.SetText("Congratulations! You won!")
+		g.statusLabel.SetText(lang.X("game.hangman.congratulations", "Congratulations! You won!"))
 		for _, btn := range g.letterButtons {
 			btn.Disable()
 		}
 		g.total++
 		g.score++
-		g.scoreLabel.SetText(fmt.Sprintf("Score: %d/5", g.score))
+		g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.hangman.score", "Score: %d/5"), g.score))
 		time.AfterFunc(1500*time.Millisecond, func() {
 			fyne.Do(func() {
 				g.newGame()
@@ -244,7 +245,7 @@ func (g *Game) Start() {
 func (g *Game) Reset() {
 	g.score = 0
 	g.total = 0
-	g.scoreLabel.SetText("Score: 0/5")
+	g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.hangman.score", "Score: %d/5"), 0))
 	g.newGame()
 }
 

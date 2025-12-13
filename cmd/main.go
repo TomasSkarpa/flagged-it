@@ -11,7 +11,9 @@ import (
 )
 
 func main() {
+	utils.LoadTranslation(utils.GetCurrentLocale())
 	myApp := fyneApp.New()
+	
 	myWindow := myApp.NewWindow("Flagged It - Country Guessing Games")
 	myWindow.Resize(fyne.NewSize(1024, 768))
 	myWindow.SetOnClosed(myApp.Quit)

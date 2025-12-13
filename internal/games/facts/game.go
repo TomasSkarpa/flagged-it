@@ -13,6 +13,7 @@ import (
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/lang"
 	"fyne.io/fyne/v2/widget"
 )
 
@@ -68,13 +69,13 @@ func (g *Game) setupUI() {
 	g.factLabel.Wrapping = fyne.TextWrapWord
 
 	g.guessEntry = widget.NewEntry()
-	g.guessEntry.SetPlaceHolder("Enter country name...")
+	g.guessEntry.SetPlaceHolder(lang.X("game.facts.enter_country", "Enter country name..."))
 	g.guessEntry.OnSubmitted = func(text string) { g.makeGuess() }
 
-	g.guessBtn = widget.NewButton("Guess", g.makeGuess)
+	g.guessBtn = widget.NewButton(lang.X("game.facts.guess", "Guess"), g.makeGuess)
 	g.statusLabel = widget.NewLabel("")
 	g.triesLabel = widget.NewLabel("")
-	g.scoreLabel = widget.NewLabel("Score: 0/5")
+	g.scoreLabel = widget.NewLabel(fmt.Sprintf(lang.X("game.facts.score", "Score: %d/5"), 0))
 
 	guessContainer := container.NewBorder(
 		nil, nil,
@@ -99,14 +100,14 @@ func (g *Game) setupUI() {
 
 func (g *Game) newGame() {
 	if len(g.countries) == 0 || len(g.factsData) == 0 {
-		g.statusLabel.SetText("Error loading countries data")
+		g.statusLabel.SetText(lang.X("error.loading_countries", "Error loading countries data"))
 		return
 	}
 
 	if g.total >= 5 {
 		g.scoreManager.SetTotal("facts", 5)
 		g.scoreManager.UpdateScore("facts", g.score)
-		g.statusLabel.SetText(fmt.Sprintf("Game Complete! Final Score: %d/5 (%.0f%%)", g.score, float64(g.score)/5*100))
+		g.statusLabel.SetText(fmt.Sprintf(lang.X("game.facts.complete", "Game Complete! Final Score: %d/5 (%.0f%%)"), g.score, float64(g.score)/5*100))
 		g.guessEntry.Disable()
 		g.guessBtn.Disable()
 		return
@@ -121,7 +122,7 @@ func (g *Game) newGame() {
 	}
 
 	if len(availableCountries) == 0 {
-		g.statusLabel.SetText("No countries with facts available")
+		g.statusLabel.SetText(lang.X("game.facts.no_facts", "No countries with facts available"))
 		return
 	}
 
@@ -152,13 +153,13 @@ func (g *Game) showCurrentFact() {
 		}
 		g.usedFacts[factIndex] = true
 		fact := g.currentFacts[factIndex]
-		g.factLabel.SetText(fmt.Sprintf("Fact %d: %s", g.currentFact+1, fact))
+		g.factLabel.SetText(fmt.Sprintf(lang.X("game.facts.fact_number", "Fact %d: %s"), g.currentFact+1, fact))
 	}
 }
 
 func (g *Game) updateStatus() {
-	g.statusLabel.SetText("Guess the country based on the fact!")
-	g.triesLabel.SetText(fmt.Sprintf("Tries left: %d", g.triesLeft))
+	g.statusLabel.SetText(lang.X("game.facts.guess_country", "Guess the country based on the fact!"))
+	g.triesLabel.SetText(fmt.Sprintf(lang.X("game.facts.tries_left", "Tries left: %d"), g.triesLeft))
 }
 
 func (g *Game) makeGuess() {
@@ -177,8 +178,8 @@ func (g *Game) makeGuess() {
 
 		g.total++
 		g.score++
-		g.scoreLabel.SetText(fmt.Sprintf("Score: %d/5", g.score))
-		g.statusLabel.SetText(fmt.Sprintf("Correct! It was %s!", g.currentCountry.Name.Common))
+		g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.facts.score", "Score: %d/5"), g.score))
+		g.statusLabel.SetText(fmt.Sprintf(lang.X("game.facts.correct", "Correct! It was %s!"), g.currentCountry.Name.Common))
 		g.guessEntry.Disable()
 		g.guessBtn.Disable()
 		time.AfterFunc(1500*time.Millisecond, func() {
@@ -201,9 +202,9 @@ func (g *Game) makeGuess() {
 
 	if g.triesLeft == 0 {
 		flagEmoji := countryCodeToFlag(g.currentCountry.CCA2)
-		g.statusLabel.SetText(fmt.Sprintf("Game Over! It was %s %s", g.currentCountry.Name.Common, flagEmoji))
+		g.statusLabel.SetText(fmt.Sprintf(lang.X("game.facts.game_over", "Game Over! It was %s %s"), g.currentCountry.Name.Common, flagEmoji))
 		g.total++
-		g.scoreLabel.SetText(fmt.Sprintf("Score: %d/5", g.score))
+		g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.facts.score", "Score: %d/5"), g.score))
 		g.guessEntry.Disable()
 		g.guessBtn.Disable()
 		time.AfterFunc(1500*time.Millisecond, func() {
@@ -217,9 +218,9 @@ func (g *Game) makeGuess() {
 	g.currentFact++
 	if g.currentFact < 3 && g.currentFact < len(g.currentFacts) {
 		g.showCurrentFact()
-		g.statusLabel.SetText("Wrong! Try again with the next fact.")
+		g.statusLabel.SetText(lang.X("game.facts.wrong_next", "Wrong! Try again with the next fact."))
 	} else {
-		g.statusLabel.SetText("Wrong! No more facts available.")
+		g.statusLabel.SetText(lang.X("game.facts.wrong_no_more", "Wrong! No more facts available."))
 	}
 	g.updateStatus()
 }
@@ -239,7 +240,7 @@ func (g *Game) updateHistoryUI() {
 		return
 	}
 
-	historyTitle := widget.NewLabel("Previous Guesses:")
+	historyTitle := widget.NewLabel(lang.X("game.facts.previous_guesses", "Previous Guesses:"))
 	historyTitle.TextStyle.Bold = true
 	g.historyContainer.Add(historyTitle)
 	g.historyContainer.Add(widget.NewSeparator())
@@ -261,7 +262,7 @@ func (g *Game) updateHistoryUI() {
 				factText = parts[1]
 			}
 		}
-		factLabel := widget.NewLabel(fmt.Sprintf("Fact: %s", factText))
+		factLabel := widget.NewLabel(fmt.Sprintf(lang.X("game.facts.fact_label", "Fact: %s"), factText))
 		factLabel.Wrapping = fyne.TextWrapWord
 
 		// Create a card-like container for each guess
@@ -282,7 +283,7 @@ func (g *Game) updateHistoryUI() {
 func (g *Game) Reset() {
 	g.score = 0
 	g.total = 0
-	g.scoreLabel.SetText("Score: 0/5")
+	g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.facts.score", "Score: %d/5"), 0))
 	g.newGame()
 }
 

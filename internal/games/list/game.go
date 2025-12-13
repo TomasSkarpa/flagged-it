@@ -11,6 +11,7 @@ import (
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/lang"
 	"fyne.io/fyne/v2/widget"
 )
 
@@ -41,7 +42,7 @@ func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
 }
 
 func (g *Game) setupUI() {
-	topBar := components.NewTopBar("List All Countries", g.backFunc, g.Reset)
+	topBar := components.NewTopBar(lang.X("game.list.title", "List All Countries"), g.backFunc, g.Reset)
 
 	g.setupSelectionView()
 	g.setupGameView()
@@ -62,8 +63,8 @@ func (g *Game) setupUI() {
 func (g *Game) setupSelectionView() {
 	availableRegions := g.getAvailableRegions()
 	regionSelector := components.NewRegionSelector(
-		"Select Region",
-		"Choose a region and try to name all countries in it!",
+		lang.X("game.list.select_region", "Select Region"),
+		lang.X("game.list.choose_region", "Choose a region and try to name all countries in it!"),
 		availableRegions,
 		g.startGame,
 	)
@@ -106,10 +107,10 @@ func (g *Game) setupGameView() {
 	g.scoreLabel = widget.NewLabel("")
 
 	g.guessEntry = widget.NewEntry()
-	g.guessEntry.SetPlaceHolder("Enter country name...")
+	g.guessEntry.SetPlaceHolder(lang.X("game.list.enter_country", "Enter country name..."))
 	g.guessEntry.OnSubmitted = func(text string) { g.makeGuess() }
 
-	guessBtn := widget.NewButton("Guess", g.makeGuess)
+	guessBtn := widget.NewButton(lang.X("game.list.guess", "Guess"), g.makeGuess)
 
 	g.countryList = widget.NewList(
 		func() int { return len(g.allCountries) },
@@ -165,8 +166,8 @@ func (g *Game) startGame(continent string) {
 	g.guessedCountries = make(map[string]bool)
 
 	g.updateProgress()
-	g.statusLabel.SetText("Start guessing countries!")
-	g.scoreLabel.SetText("Completion: 0%")
+	g.statusLabel.SetText(lang.X("game.list.start_guessing", "Start guessing countries!"))
+	g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.list.completion", "Completion: %.0f%%"), 0.0))
 	g.guessEntry.SetText("")
 
 	g.mainContent.RemoveAll()
@@ -194,15 +195,15 @@ func (g *Game) makeGuess() {
 	}
 
 	if found {
-		g.statusLabel.SetText(fmt.Sprintf("Correct! %s added to the list.", matchedCountry.Name.Common))
+		g.statusLabel.SetText(fmt.Sprintf(lang.X("game.list.correct_added", "Correct! %s added to the list."), matchedCountry.Name.Common))
 		g.updateProgress()
 		percent := float64(len(g.guessedCountries)) / float64(len(g.allCountries)) * 100
-		g.scoreLabel.SetText(fmt.Sprintf("Completion: %.0f%%", percent))
+		g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.list.completion", "Completion: %.0f%%"), percent))
 		if len(g.guessedCountries) == len(g.allCountries) {
-			g.statusLabel.SetText("Congratulations! You've listed all countries!")
+			g.statusLabel.SetText(lang.X("game.list.congratulations", "Congratulations! You've listed all countries!"))
 		}
 	} else {
-		g.statusLabel.SetText("Not found or already guessed. Try again!")
+		g.statusLabel.SetText(lang.X("game.list.not_found", "Not found or already guessed. Try again!"))
 	}
 
 	g.guessEntry.SetText("")
@@ -210,7 +211,7 @@ func (g *Game) makeGuess() {
 }
 
 func (g *Game) updateProgress() {
-	g.progressLabel.SetText(fmt.Sprintf("%s: %d/%d countries found", g.selectedContinent, len(g.guessedCountries), len(g.allCountries)))
+	g.progressLabel.SetText(fmt.Sprintf(lang.X("game.list.progress", "%s: %d/%d countries found"), g.selectedContinent, len(g.guessedCountries), len(g.allCountries)))
 }
 
 func (g *Game) showSelection() {

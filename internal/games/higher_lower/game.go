@@ -5,10 +5,12 @@ import (
 	"flagged-it/internal/ui/components"
 	"flagged-it/internal/utils"
 	"fmt"
+	"math/rand"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/lang"
 	"fyne.io/fyne/v2/widget"
-	"math/rand"
 )
 
 type Game struct {
@@ -37,26 +39,26 @@ func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
 }
 
 func (g *Game) setupUI() {
-	topBar := components.NewTopBar("Higher or Lower Game", g.backFunc, g.Reset)
+	topBar := components.NewTopBar(lang.X("game.higher_lower.title", "Higher or Lower Game"), g.backFunc, g.Reset)
 
-	gameDescription := widget.NewLabel("Try to guess which country has a higher population!")
+	gameDescription := widget.NewLabel(lang.X("game.higher_lower.description", "Try to guess which country has a higher population!"))
 
 	g.countryOneNameLabel = widget.NewLabel("")
 	g.countryOnePopLabel = widget.NewLabel("")
 	g.countryTwoNameLabel = widget.NewLabel("")
 	g.countryTwoPopLabel = widget.NewLabel("")
 
-	g.scoreLabel = widget.NewLabel("Score: 0")
+	g.scoreLabel = widget.NewLabel(fmt.Sprintf(lang.X("game.higher_lower.score", "Score: %d"), 0))
 
 	var startBtn *widget.Button
 
-	g.higherBtn = widget.NewButton("Higher", func() {
+	g.higherBtn = widget.NewButton(lang.X("game.higher_lower.higher", "Higher"), func() {
 		g.makeGuess(true)
 	})
-	g.lowerBtn = widget.NewButton("Lower", func() {
+	g.lowerBtn = widget.NewButton(lang.X("game.higher_lower.lower", "Lower"), func() {
 		g.makeGuess(false)
 	})
-	g.nextBtn = widget.NewButton("Next Round", func() {
+	g.nextBtn = widget.NewButton(lang.X("game.higher_lower.next_round", "Next Round"), func() {
 		g.nextRound()
 	})
 
@@ -64,7 +66,7 @@ func (g *Game) setupUI() {
 	g.lowerBtn.Hide()
 	g.nextBtn.Hide()
 
-	startBtn = widget.NewButton("Start Game", func() {
+	startBtn = widget.NewButton(lang.X("game.higher_lower.start", "Start Game"), func() {
 		g.Start()
 		startBtn.Hide()
 		g.higherBtn.Show()
@@ -100,8 +102,8 @@ func (g *Game) makeGuess(isHigher bool) {
 		g.scoreManager.UpdateScore("higher_lower", g.score)
 		g.score = 0
 	}
-	g.scoreLabel.SetText(fmt.Sprintf("Score: %d", g.score))
-	g.countryTwoPopLabel.SetText(fmt.Sprintf("Population: %d", g.secondCountry))
+	g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.higher_lower.score", "Score: %d"), g.score))
+	g.countryTwoPopLabel.SetText(fmt.Sprintf(lang.X("game.higher_lower.population", "Population: %d"), g.secondCountry))
 	g.higherBtn.Hide()
 	g.lowerBtn.Hide()
 	g.nextBtn.Show()
@@ -117,11 +119,11 @@ func (g *Game) nextRound() {
 
 	g.firstCountry = g.secondCountry
 	g.countryOneNameLabel.SetText(g.countryTwoNameLabel.Text)
-	g.countryOnePopLabel.SetText(fmt.Sprintf("Population: %d", g.firstCountry))
+	g.countryOnePopLabel.SetText(fmt.Sprintf(lang.X("game.higher_lower.population", "Population: %d"), g.firstCountry))
 
 	g.secondCountry = newCountry.Population
 	g.countryTwoNameLabel.SetText(newCountry.Name.Common)
-	g.countryTwoPopLabel.SetText("Population: ?")
+	g.countryTwoPopLabel.SetText(lang.X("game.higher_lower.population_unknown", "Population: ?"))
 
 	g.nextBtn.Hide()
 	g.higherBtn.Show()
@@ -146,13 +148,13 @@ func (g *Game) Start() {
 	g.secondCountry = secondRandomCountry.Population
 
 	g.countryOneNameLabel.SetText(firstRandomCountry.Name.Common)
-	g.countryOnePopLabel.SetText(fmt.Sprintf("Population: %d", firstRandomCountry.Population))
+	g.countryOnePopLabel.SetText(fmt.Sprintf(lang.X("game.higher_lower.population", "Population: %d"), firstRandomCountry.Population))
 	g.countryTwoNameLabel.SetText(secondRandomCountry.Name.Common)
-	g.countryTwoPopLabel.SetText("Population: ?")
+	g.countryTwoPopLabel.SetText(lang.X("game.higher_lower.population_unknown", "Population: ?"))
 }
 
 func (g *Game) Reset() {
 	g.score = 0
-	g.scoreLabel.SetText("Score: 0")
+	g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.higher_lower.score", "Score: %d"), 0))
 	g.Start()
 }

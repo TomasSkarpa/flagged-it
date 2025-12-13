@@ -1,10 +1,6 @@
 package shape
 
 import (
-	"flagged-it/internal/data"
-	"flagged-it/internal/data/models"
-	"flagged-it/internal/ui/components"
-	"flagged-it/internal/utils"
 	"fmt"
 	"image"
 	"image/color"
@@ -15,9 +11,14 @@ import (
 	"sync"
 	"time"
 
+	"flagged-it/internal/data"
+	"flagged-it/internal/data/models"
+	"flagged-it/internal/ui/components"
+	"flagged-it/internal/utils"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/lang"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
@@ -83,8 +84,8 @@ func (g *Game) setupUI() {
 func (g *Game) setupSelectionView() {
 	availableRegions := g.getAvailableRegions()
 	regionSelector := components.NewRegionSelector(
-		"Select Region",
-		"Choose a region and guess all country shapes!",
+		lang.X("game.shape.select_region", "Select Region"),
+		lang.X("game.shape.choose_region", "Choose a region and guess all country shapes!"),
 		availableRegions,
 		g.startRegionGame,
 	)
@@ -120,14 +121,14 @@ func (g *Game) getAvailableRegions() []string {
 }
 
 func (g *Game) setupGameView() {
-	g.scoreLabel = widget.NewLabel("Score: 0/0")
+	g.scoreLabel = widget.NewLabel(fmt.Sprintf(lang.X("game.shape.score", "Score: %d/%d"), 0, 0))
 	g.progressLabel = widget.NewLabel("")
 
 	g.guessEntry = widget.NewEntry()
-	g.guessEntry.SetPlaceHolder("Enter country name...")
+	g.guessEntry.SetPlaceHolder(lang.X("game.shape.enter_country", "Enter country name..."))
 	g.guessEntry.OnSubmitted = g.checkGuess
 
-	guessBtn := widget.NewButton("Guess", func() { g.checkGuess(g.guessEntry.Text) })
+	guessBtn := widget.NewButton(lang.X("game.shape.guess", "Guess"), func() { g.checkGuess(g.guessEntry.Text) })
 	g.resultLabel = widget.NewLabel("")
 	guessContainer := container.NewBorder(
 		nil, nil,
@@ -336,7 +337,7 @@ func (g *Game) nextCountry() {
 	if g.total > 0 {
 		g.scoreManager.SetTotal("shape", g.total)
 		g.scoreManager.UpdateScore("shape", g.score)
-		g.resultLabel.SetText(fmt.Sprintf("Game Complete! Final Score: %d/%d (%.1f%%)", g.score, g.total, float64(g.score)/float64(g.total)*100))
+		g.resultLabel.SetText(fmt.Sprintf(lang.X("game.shape.complete", "Game Complete! Final Score: %d/%d (%.1f%%)"), g.score, g.total, float64(g.score)/float64(g.total)*100))
 	}
 }
 
@@ -446,9 +447,9 @@ func (g *Game) checkGuess(guess string) {
 
 	if utils.MatchCountry(guess, g.currentCountry, utils.MatchAll) {
 		g.score++
-		g.resultLabel.SetText("Correct! It's " + g.currentCountry.Name.Common)
+		g.resultLabel.SetText(fmt.Sprintf(lang.X("game.shape.correct", "Correct! It's %s"), g.currentCountry.Name.Common))
 	} else {
-		g.resultLabel.SetText("Wrong! It's " + g.currentCountry.Name.Common)
+		g.resultLabel.SetText(fmt.Sprintf(lang.X("game.shape.wrong", "Wrong! It's %s"), g.currentCountry.Name.Common))
 	}
 
 	g.guessEntry.Disable()
@@ -466,8 +467,8 @@ func (g *Game) GetContent() *fyne.Container {
 }
 
 func (g *Game) updateProgress() {
-	g.scoreLabel.SetText(fmt.Sprintf("Score: %d/%d", g.score, g.total))
-	g.progressLabel.SetText(fmt.Sprintf("%s: Country %d/%d", g.selectedRegion, g.currentIndex, g.total))
+	g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.shape.score", "Score: %d/%d"), g.score, g.total))
+	g.progressLabel.SetText(fmt.Sprintf(lang.X("game.shape.progress", "%s: Country %d/%d"), g.selectedRegion, g.currentIndex, g.total))
 }
 
 func (g *Game) showSelection() {

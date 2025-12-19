@@ -75,5 +75,13 @@
   "game.higher_lower.next_round": "Prossimo Round",
   "game.higher_lower.start": "Inizia Gioco",
   "game.higher_lower.population": "Popolazione: %d",
-  "game.higher_lower.population_unknown": "Popolazione: ?"
+  "game.higher_lower.population_unknown": "Popolazione: ?",
+  "game.facts.guess_number": "Indovinello %d: %s",
+  "region.world": "Mondo",
+  "region.africa": "Africa",
+  "region.asia": "Asia",
+  "region.europe": "Europa",
+  "region.americas": "Americhe",
+  "region.oceania": "Oceania",
+  "region.antarctica": "Antartide"
 }

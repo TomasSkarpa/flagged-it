@@ -57,6 +57,7 @@
   "game.facts.wrong_no_more": "Wrong! No more facts available.",
   "game.facts.previous_guesses": "Previous Guesses:",
   "game.facts.fact_label": "Fact: %s",
+  "game.facts.guess_number": "Guess %d: %s",
   "game.guessing.make_guess": "Make a guess!",
   "game.guessing.enter_country": "Enter country name...",
   "game.guessing.guess": "Guess",
@@ -75,5 +76,16 @@
   "game.higher_lower.next_round": "Next Round",
   "game.higher_lower.start": "Start Game",
   "game.higher_lower.population": "Population: %d",
-  "game.higher_lower.population_unknown": "Population: ?"
+  "game.higher_lower.population_unknown": "Population: ?",
+  "region.world": "World",
+  "region.africa": "Africa",
+  "region.asia": "Asia",
+  "region.europe": "Europe",
+  "region.americas": "Americas",
+  "region.oceania": "Oceania",
+  "region.antarctica": "Antarctica",
+  "html.loading": "Shifting tectonic plates to form countries...",
+  "html.loading_app": "Loading application...",
+  "html.error_title": "⚠️ Error Loading Application",
+  "html.error_message": "Failed to load the application. Please refresh the page and try again."
 }

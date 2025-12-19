@@ -75,5 +75,13 @@
   "game.higher_lower.next_round": "Susunod na Round",
   "game.higher_lower.start": "Simulan ang Laro",
   "game.higher_lower.population": "Populasyon: %d",
-  "game.higher_lower.population_unknown": "Populasyon: ?"
+  "game.higher_lower.population_unknown": "Populasyon: ?",
+  "game.facts.guess_number": "Hula %d: %s",
+  "region.world": "Mundo",
+  "region.africa": "Aprika",
+  "region.asia": "Asya",
+  "region.europe": "Europa",
+  "region.americas": "Amerika",
+  "region.oceania": "Oceania",
+  "region.antarctica": "Antartika"
 }

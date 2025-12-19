@@ -75,5 +75,13 @@
   "game.higher_lower.next_round": "Neste Runde",
   "game.higher_lower.start": "Start Spill",
   "game.higher_lower.population": "Befolkning: %d",
-  "game.higher_lower.population_unknown": "Befolkning: ?"
+  "game.higher_lower.population_unknown": "Befolkning: ?",
+  "game.facts.guess_number": "Gjetning %d: %s",
+  "region.world": "Verden",
+  "region.africa": "Afrika",
+  "region.asia": "Asia",
+  "region.europe": "Europa",
+  "region.americas": "Amerika",
+  "region.oceania": "Oseania",
+  "region.antarctica": "Antarktis"
 }

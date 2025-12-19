@@ -75,5 +75,13 @@
   "game.higher_lower.next_round": "Sonraki Tur",
   "game.higher_lower.start": "Oyunu Başlat",
   "game.higher_lower.population": "Nüfus: %d",
-  "game.higher_lower.population_unknown": "Nüfus: ?"
+  "game.higher_lower.population_unknown": "Nüfus: ?",
+  "game.facts.guess_number": "Tahmin %d: %s",
+  "region.world": "Dünya",
+  "region.africa": "Afrika",
+  "region.asia": "Asya",
+  "region.europe": "Avrupa",
+  "region.americas": "Amerika",
+  "region.oceania": "Okyanusya",
+  "region.antarctica": "Antarktika"
 }

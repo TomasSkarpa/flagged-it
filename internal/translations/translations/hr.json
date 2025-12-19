@@ -75,5 +75,13 @@
   "game.higher_lower.next_round": "Sljedeća Runda",
   "game.higher_lower.start": "Pokreni Igru",
   "game.higher_lower.population": "Stanovništvo: %d",
-  "game.higher_lower.population_unknown": "Stanovništvo: ?"
+  "game.higher_lower.population_unknown": "Stanovništvo: ?",
+  "game.facts.guess_number": "Pogodak %d: %s",
+  "region.world": "Svijet",
+  "region.africa": "Afrika",
+  "region.asia": "Azija",
+  "region.europe": "Europa",
+  "region.americas": "Amerika",
+  "region.oceania": "Oceanija",
+  "region.antarctica": "Antarktika"
 }

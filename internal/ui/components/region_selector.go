@@ -1,6 +1,7 @@
 package components
 
 import (
+	"flagged-it/internal/utils"
 	"sort"
 
 	"fyne.io/fyne/v2"
@@ -33,7 +34,8 @@ func NewRegionSelector(title, description string, regions []string, onRegionSele
 	buttonGrid := container.NewGridWithColumns(2)
 	for _, region := range regions {
 		region := region
-		buttonGrid.Add(widget.NewButton(region, func() {
+		translatedRegion := utils.TranslateRegion(region)
+		buttonGrid.Add(widget.NewButton(translatedRegion, func() {
 			onRegionSelected(region)
 		}))
 	}

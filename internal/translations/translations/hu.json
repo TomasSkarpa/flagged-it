@@ -75,5 +75,13 @@
   "game.higher_lower.next_round": "Következő Kör",
   "game.higher_lower.start": "Játék Indítása",
   "game.higher_lower.population": "Népesség: %d",
-  "game.higher_lower.population_unknown": "Népesség: ?"
+  "game.higher_lower.population_unknown": "Népesség: ?",
+  "game.facts.guess_number": "Tipp %d: %s",
+  "region.world": "Világ",
+  "region.africa": "Afrika",
+  "region.asia": "Ázsia",
+  "region.europe": "Európa",
+  "region.americas": "Amerika",
+  "region.oceania": "Óceánia",
+  "region.antarctica": "Antarktisz"
 }

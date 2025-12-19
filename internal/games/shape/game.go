@@ -15,6 +15,7 @@ import (
 	"flagged-it/internal/data/models"
 	"flagged-it/internal/ui/components"
 	"flagged-it/internal/utils"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
@@ -468,7 +469,8 @@ func (g *Game) GetContent() *fyne.Container {
 
 func (g *Game) updateProgress() {
 	g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.shape.score", "Score: %d/%d"), g.score, g.total))
-	g.progressLabel.SetText(fmt.Sprintf(lang.X("game.shape.progress", "%s: Country %d/%d"), g.selectedRegion, g.currentIndex, g.total))
+	translatedRegion := utils.TranslateRegion(g.selectedRegion)
+	g.progressLabel.SetText(fmt.Sprintf(lang.X("game.shape.progress", "%s: Country %d/%d"), translatedRegion, g.currentIndex, g.total))
 }
 
 func (g *Game) showSelection() {

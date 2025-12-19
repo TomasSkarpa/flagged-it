@@ -75,5 +75,13 @@
   "game.higher_lower.next_round": "Următoarea Rundă",
   "game.higher_lower.start": "Începe Jocul",
   "game.higher_lower.population": "Populație: %d",
-  "game.higher_lower.population_unknown": "Populație: ?"
+  "game.higher_lower.population_unknown": "Populație: ?",
+  "game.facts.guess_number": "Încercare %d: %s",
+  "region.world": "Lume",
+  "region.africa": "Africa",
+  "region.asia": "Asia",
+  "region.europe": "Europa",
+  "region.americas": "America",
+  "region.oceania": "Oceania",
+  "region.antarctica": "Antarctica"
 }

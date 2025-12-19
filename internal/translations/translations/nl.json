@@ -75,5 +75,13 @@
   "game.higher_lower.next_round": "Volgende Ronde",
   "game.higher_lower.start": "Start Spel",
   "game.higher_lower.population": "Bevolking: %d",
-  "game.higher_lower.population_unknown": "Bevolking: ?"
+  "game.higher_lower.population_unknown": "Bevolking: ?",
+  "game.facts.guess_number": "Gok %d: %s",
+  "region.world": "Wereld",
+  "region.africa": "Afrika",
+  "region.asia": "Azië",
+  "region.europe": "Europa",
+  "region.americas": "Amerika",
+  "region.oceania": "Oceanië",
+  "region.antarctica": "Antarctica"
 }

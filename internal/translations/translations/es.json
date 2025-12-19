@@ -57,6 +57,7 @@
   "game.facts.wrong_no_more": "¡Incorrecto! No hay más datos disponibles.",
   "game.facts.previous_guesses": "Intentos Anteriores:",
   "game.facts.fact_label": "Dato: %s",
+  "game.facts.guess_number": "Intento %d: %s",
   "game.guessing.make_guess": "¡Haz una suposición!",
   "game.guessing.enter_country": "Ingresa el nombre del país...",
   "game.guessing.guess": "Adivinar",
@@ -75,5 +76,12 @@
   "game.higher_lower.next_round": "Siguiente Ronda",
   "game.higher_lower.start": "Iniciar Juego",
   "game.higher_lower.population": "Población: %d",
-  "game.higher_lower.population_unknown": "Población: ?"
+  "game.higher_lower.population_unknown": "Población: ?",
+  "region.world": "Mundo",
+  "region.africa": "África",
+  "region.asia": "Asia",
+  "region.europe": "Europa",
+  "region.americas": "Américas",
+  "region.oceania": "Oceanía",
+  "region.antarctica": "Antártida"
 }

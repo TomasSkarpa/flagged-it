@@ -57,6 +57,7 @@
   "game.facts.wrong_no_more": "Faux! Plus de faits disponibles.",
   "game.facts.previous_guesses": "Tentatives Précédentes:",
   "game.facts.fact_label": "Fait: %s",
+  "game.facts.guess_number": "Tentative %d: %s",
   "game.guessing.make_guess": "Faites une supposition!",
   "game.guessing.enter_country": "Entrez le nom du pays...",
   "game.guessing.guess": "Deviner",
@@ -75,5 +76,12 @@
   "game.higher_lower.next_round": "Prochain Tour",
   "game.higher_lower.start": "Démarrer le Jeu",
   "game.higher_lower.population": "Population: %d",
-  "game.higher_lower.population_unknown": "Population: ?"
+  "game.higher_lower.population_unknown": "Population: ?",
+  "region.world": "Monde",
+  "region.africa": "Afrique",
+  "region.asia": "Asie",
+  "region.europe": "Europe",
+  "region.americas": "Amériques",
+  "region.oceania": "Océanie",
+  "region.antarctica": "Antarctique"
 }

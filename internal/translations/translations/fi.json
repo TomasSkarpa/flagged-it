@@ -75,5 +75,13 @@
   "game.higher_lower.next_round": "Seuraava Kierros",
   "game.higher_lower.start": "Aloita Peli",
   "game.higher_lower.population": "Väestö: %d",
-  "game.higher_lower.population_unknown": "Väestö: ?"
+  "game.higher_lower.population_unknown": "Väestö: ?",
+  "game.facts.guess_number": "Arvaus %d: %s",
+  "region.world": "Maailma",
+  "region.africa": "Afrikka",
+  "region.asia": "Aasia",
+  "region.europe": "Eurooppa",
+  "region.americas": "Amerikka",
+  "region.oceania": "Oseania",
+  "region.antarctica": "Antarktis"
 }

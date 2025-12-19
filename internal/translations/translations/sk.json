@@ -75,5 +75,13 @@
   "game.higher_lower.next_round": "Ďalšie Kolo",
   "game.higher_lower.start": "Spustiť Hru",
   "game.higher_lower.population": "Populácia: %d",
-  "game.higher_lower.population_unknown": "Populácia: ?"
+  "game.higher_lower.population_unknown": "Populácia: ?",
+  "game.facts.guess_number": "Hádanie %d: %s",
+  "region.world": "Svet",
+  "region.africa": "Afrika",
+  "region.asia": "Ázia",
+  "region.europe": "Európa",
+  "region.americas": "Amerika",
+  "region.oceania": "Oceánia",
+  "region.antarctica": "Antarktída"
 }

@@ -77,12 +77,17 @@
   "game.higher_lower.start": "Spiel Starten",
   "game.higher_lower.population": "Bevölkerung: %d",
   "game.higher_lower.population_unknown": "Bevölkerung: ?",
-  "game.facts.guess_number": "Versuch %d: %s",
   "region.world": "Welt",
   "region.africa": "Afrika",
   "region.asia": "Asien",
   "region.europe": "Europa",
   "region.americas": "Amerika",
   "region.oceania": "Ozeanien",
-  "region.antarctica": "Antarktis"
+  "region.antarctica": "Antarktis",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Verschieben tektonischer Platten zur Bildung von Ländern...",
+  "html.loading_app": "Anwendung wird geladen...",
+  "html.error_title": "⚠️ Fehler beim Laden der Anwendung",
+  "html.error_message": "Die Anwendung konnte nicht geladen werden. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut."
 }

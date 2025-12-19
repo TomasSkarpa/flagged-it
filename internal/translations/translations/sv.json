@@ -83,5 +83,11 @@
   "region.europe": "Europa",
   "region.americas": "Amerika",
   "region.oceania": "Oceanien",
-  "region.antarctica": "Antarktis"
+  "region.antarctica": "Antarktis",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Förskjuter tektoniska plattor för att bilda länder...",
+  "html.loading_app": "Laddar applikation...",
+  "html.error_title": "⚠️ Fel vid Laddning av Applikation",
+  "html.error_message": "Kunde inte ladda applikationen. Uppdatera sidan och försök igen."
 }

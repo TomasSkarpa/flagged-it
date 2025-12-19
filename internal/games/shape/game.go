@@ -64,7 +64,7 @@ func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
 }
 
 func (g *Game) setupUI() {
-	topBar := components.NewTopBar("Country Shape Game", g.backFunc, g.Reset)
+	topBar := components.NewTopBar(lang.X("game.shape.title", "Guess by Shape"), g.backFunc, g.Reset)
 
 	g.setupSelectionView()
 	g.setupGameView()

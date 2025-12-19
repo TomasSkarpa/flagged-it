@@ -83,5 +83,11 @@
   "region.europe": "Europa",
   "region.americas": "Amerika",
   "region.oceania": "Oceanien",
-  "region.antarctica": "Antarktis"
+  "region.antarctica": "Antarktis",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Forskubber tektoniske plader for at danne lande...",
+  "html.loading_app": "Indlæser applikation...",
+  "html.error_title": "⚠️ Fejl ved Indlæsning af Applikation",
+  "html.error_message": "Kunne ikke indlæse applikationen. Opdater venligst siden og prøv igen."
 }

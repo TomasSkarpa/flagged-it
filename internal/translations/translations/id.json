@@ -83,5 +83,11 @@
   "region.europe": "Eropa",
   "region.americas": "Amerika",
   "region.oceania": "Oseania",
-  "region.antarctica": "Antartika"
+  "region.antarctica": "Antartika",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Menggeser lempeng tektonik untuk membentuk negara...",
+  "html.loading_app": "Memuat aplikasi...",
+  "html.error_title": "⚠️ Kesalahan Memuat Aplikasi",
+  "html.error_message": "Gagal memuat aplikasi. Silakan muat ulang halaman dan coba lagi."
 }

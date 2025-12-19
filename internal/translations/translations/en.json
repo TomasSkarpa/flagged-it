@@ -19,6 +19,8 @@
   "game.list.choose_region": "Choose a region and try to name all countries in it!",
   "game.list.enter_country": "Enter country name...",
   "game.list.guess": "Guess",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
   "game.list.start_guessing": "Start guessing countries!",
   "game.list.completion": "Completion: %.0f%%",
   "game.list.correct_added": "Correct! %s added to the list.",

@@ -83,5 +83,11 @@
   "region.europe": "Europa",
   "region.americas": "America",
   "region.oceania": "Oceania",
-  "region.antarctica": "Antarctica"
+  "region.antarctica": "Antarctica",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Deplasarea plăcilor tectonice pentru a forma țări...",
+  "html.loading_app": "Se încarcă aplicația...",
+  "html.error_title": "⚠️ Eroare la Încărcarea Aplicației",
+  "html.error_message": "Nu s-a putut încărca aplicația. Vă rugăm să actualizați pagina și să încercați din nou."
 }

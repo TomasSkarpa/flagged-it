@@ -83,5 +83,11 @@
   "region.europe": "Europa",
   "region.americas": "Amerika",
   "region.oceania": "Oseania",
-  "region.antarctica": "Antarktis"
+  "region.antarctica": "Antarktis",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Forskyver tektoniske plater for å danne land...",
+  "html.loading_app": "Laster applikasjon...",
+  "html.error_title": "⚠️ Feil ved Lasting av Applikasjon",
+  "html.error_message": "Kunne ikke laste applikasjonen. Vennligst oppdater siden og prøv igjen."
 }

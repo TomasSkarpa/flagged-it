@@ -211,7 +211,8 @@ func (g *Game) makeGuess() {
 }
 
 func (g *Game) updateProgress() {
-	g.progressLabel.SetText(fmt.Sprintf(lang.X("game.list.progress", "%s: %d/%d countries found"), g.selectedContinent, len(g.guessedCountries), len(g.allCountries)))
+	translatedRegion := utils.TranslateRegion(g.selectedContinent)
+	g.progressLabel.SetText(fmt.Sprintf(lang.X("game.list.progress", "%s: %d/%d countries found"), translatedRegion, len(g.guessedCountries), len(g.allCountries)))
 }
 
 func (g *Game) showSelection() {

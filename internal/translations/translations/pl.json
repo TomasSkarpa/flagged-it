@@ -75,5 +75,13 @@
   "game.higher_lower.next_round": "Następna Runda",
   "game.higher_lower.start": "Rozpocznij Grę",
   "game.higher_lower.population": "Populacja: %d",
-  "game.higher_lower.population_unknown": "Populacja: ?"
+  "game.higher_lower.population_unknown": "Populacja: ?",
+  "game.facts.guess_number": "Zgadnięcie %d: %s",
+  "region.world": "Świat",
+  "region.africa": "Afryka",
+  "region.asia": "Azja",
+  "region.europe": "Europa",
+  "region.americas": "Ameryka",
+  "region.oceania": "Oceania",
+  "region.antarctica": "Antarktyda"
 }

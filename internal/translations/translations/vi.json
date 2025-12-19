@@ -75,5 +75,13 @@
   "game.higher_lower.next_round": "Vòng tiếp theo",
   "game.higher_lower.start": "Bắt đầu trò chơi",
   "game.higher_lower.population": "Dân số: %d",
-  "game.higher_lower.population_unknown": "Dân số: ?"
+  "game.higher_lower.population_unknown": "Dân số: ?",
+  "game.facts.guess_number": "Đoán %d: %s",
+  "region.world": "Thế giới",
+  "region.africa": "Châu Phi",
+  "region.asia": "Châu Á",
+  "region.europe": "Châu Âu",
+  "region.americas": "Châu Mỹ",
+  "region.oceania": "Châu Đại Dương",
+  "region.antarctica": "Nam Cực"
 }

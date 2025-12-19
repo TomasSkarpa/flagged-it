@@ -75,5 +75,13 @@
   "game.higher_lower.next_round": "Pusingan Seterusnya",
   "game.higher_lower.start": "Mula Permainan",
   "game.higher_lower.population": "Populasi: %d",
-  "game.higher_lower.population_unknown": "Populasi: ?"
+  "game.higher_lower.population_unknown": "Populasi: ?",
+  "game.facts.guess_number": "Teka-teki %d: %s",
+  "region.world": "Dunia",
+  "region.africa": "Afrika",
+  "region.asia": "Asia",
+  "region.europe": "Eropah",
+  "region.americas": "Amerika",
+  "region.oceania": "Oceania",
+  "region.antarctica": "Antartika"
 }

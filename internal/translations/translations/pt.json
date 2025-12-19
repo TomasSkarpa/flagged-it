@@ -75,5 +75,13 @@
   "game.higher_lower.next_round": "Próxima Rodada",
   "game.higher_lower.start": "Iniciar Jogo",
   "game.higher_lower.population": "População: %d",
-  "game.higher_lower.population_unknown": "População: ?"
+  "game.higher_lower.population_unknown": "População: ?",
+  "game.facts.guess_number": "Tentativa %d: %s",
+  "region.world": "Mundo",
+  "region.africa": "África",
+  "region.asia": "Ásia",
+  "region.europe": "Europa",
+  "region.americas": "Américas",
+  "region.oceania": "Oceânia",
+  "region.antarctica": "Antártida"
 }

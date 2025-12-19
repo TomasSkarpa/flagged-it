@@ -75,5 +75,13 @@
   "game.higher_lower.next_round": "Raundi Inayofuata",
   "game.higher_lower.start": "Anza Mchezo",
   "game.higher_lower.population": "Idadi ya Watu: %d",
-  "game.higher_lower.population_unknown": "Idadi ya Watu: ?"
+  "game.higher_lower.population_unknown": "Idadi ya Watu: ?",
+  "game.facts.guess_number": "Kisio %d: %s",
+  "region.world": "Dunia",
+  "region.africa": "Afrika",
+  "region.asia": "Asia",
+  "region.europe": "Ulaya",
+  "region.americas": "Amerika",
+  "region.oceania": "Oceania",
+  "region.antarctica": "Antaktika"
 }

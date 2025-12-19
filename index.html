@@ -111,24 +111,43 @@
         document.documentElement.lang = userLang;
 
         const translations = {
-            en: { loading: 'Shifting tectonic plates to form countries...' },
-            es: { loading: 'Desplazando placas tectónicas para formar países...' },
-            fr: { loading: 'Déplacement des plaques tectoniques pour former des pays...' },
-            de: { loading: 'Verschieben tektonischer Platten zur Bildung von Ländern...' },
-            cs: { loading: 'Posouváme tektonické desky a formujeme státy...' },
-            sk: { loading: 'Posúvame tektonické dosky a formujeme štáty...' },
-            pl: { loading: 'Przesuwamy płyty tektoniczne, aby uformować państwa...' },
-            it: { loading: 'Spostando le placche tettoniche per formare i paesi...' }
+            en: { loading: 'Shifting tectonic plates to form countries...', loadingApp: 'Loading application...', errorTitle: '⚠️ Error Loading Application', errorMessage: 'Failed to load the application. Please refresh the page and try again.' },
+            es: { loading: 'Desplazando placas tectónicas para formar países...', loadingApp: 'Cargando aplicación...', errorTitle: '⚠️ Error al Cargar la Aplicación', errorMessage: 'No se pudo cargar la aplicación. Por favor, actualiza la página e inténtalo de nuevo.' },
+            fr: { loading: 'Déplacement des plaques tectoniques pour former des pays...', loadingApp: 'Chargement de l\'application...', errorTitle: '⚠️ Erreur de Chargement de l\'Application', errorMessage: 'Échec du chargement de l\'application. Veuillez actualiser la page et réessayer.' },
+            de: { loading: 'Verschieben tektonischer Platten zur Bildung von Ländern...', loadingApp: 'Anwendung wird geladen...', errorTitle: '⚠️ Fehler beim Laden der Anwendung', errorMessage: 'Die Anwendung konnte nicht geladen werden. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut.' },
+            nl: { loading: 'Tektonische platen verschuiven om landen te vormen...', loadingApp: 'Applicatie laden...', errorTitle: '⚠️ Fout bij Laden van Applicatie', errorMessage: 'Kan de applicatie niet laden. Ververs de pagina en probeer het opnieuw.' },
+            nb: { loading: 'Forskyver tektoniske plater for å danne land...', loadingApp: 'Laster applikasjon...', errorTitle: '⚠️ Feil ved Lasting av Applikasjon', errorMessage: 'Kunne ikke laste applikasjonen. Vennligst oppdater siden og prøv igjen.' },
+            da: { loading: 'Forskubber tektoniske plader for at danne lande...', loadingApp: 'Indlæser applikation...', errorTitle: '⚠️ Fejl ved Indlæsning af Applikation', errorMessage: 'Kunne ikke indlæse applikationen. Opdater venligst siden og prøv igen.' },
+            sv: { loading: 'Förskjuter tektoniska plattor för att bilda länder...', loadingApp: 'Laddar applikation...', errorTitle: '⚠️ Fel vid Laddning av Applikation', errorMessage: 'Kunde inte ladda applikationen. Uppdatera sidan och försök igen.' },
+            fi: { loading: 'Siirretään tektonisia laattoja muodostaakseen maita...', loadingApp: 'Ladataan sovellusta...', errorTitle: '⚠️ Virhe Sovelluksen Latauksessa', errorMessage: 'Sovellusta ei voitu ladata. Päivitä sivu ja yritä uudelleen.' },
+            pt: { loading: 'Deslocando placas tectónicas para formar países...', loadingApp: 'Carregando aplicação...', errorTitle: '⚠️ Erro ao Carregar a Aplicação', errorMessage: 'Falha ao carregar a aplicação. Por favor, atualize a página e tente novamente.' },
+            tr: { loading: 'Ülkeler oluşturmak için tektonik plakalar kaydırılıyor...', loadingApp: 'Uygulama yükleniyor...', errorTitle: '⚠️ Uygulama Yükleme Hatası', errorMessage: 'Uygulama yüklenemedi. Lütfen sayfayı yenileyin ve tekrar deneyin.' },
+            ro: { loading: 'Deplasarea plăcilor tectonice pentru a forma țări...', loadingApp: 'Se încarcă aplicația...', errorTitle: '⚠️ Eroare la Încărcarea Aplicației', errorMessage: 'Nu s-a putut încărca aplicația. Vă rugăm să actualizați pagina și să încercați din nou.' },
+            hu: { loading: 'Tektonikus lemezek eltolása országok kialakításához...', loadingApp: 'Alkalmazás betöltése...', errorTitle: '⚠️ Hiba az Alkalmazás Betöltésekor', errorMessage: 'Az alkalmazás betöltése sikertelen. Kérjük, frissítse az oldalt és próbálja újra.' },
+            hr: { loading: 'Pomicanje tektonskih ploča za formiranje zemalja...', loadingApp: 'Učitavanje aplikacije...', errorTitle: '⚠️ Greška pri Učitavanju Aplikacije', errorMessage: 'Neuspjelo učitavanje aplikacije. Osvježite stranicu i pokušajte ponovno.' },
+            cs: { loading: 'Posouváme tektonické desky a formujeme státy...', loadingApp: 'Načítání aplikace...', errorTitle: '⚠️ Chyba při Načítání Aplikace', errorMessage: 'Nepodařilo se načíst aplikaci. Obnovte prosím stránku a zkuste to znovu.' },
+            sk: { loading: 'Posúvame tektonické dosky a formujeme štáty...', loadingApp: 'Načítanie aplikácie...', errorTitle: '⚠️ Chyba pri Načítaní Aplikácie', errorMessage: 'Nepodarilo sa načítať aplikáciu. Obnovte prosím stránku a skúste to znova.' },
+            pl: { loading: 'Przesuwamy płyty tektoniczne, aby uformować państwa...', loadingApp: 'Ładowanie aplikacji...', errorTitle: '⚠️ Błąd Ładowania Aplikacji', errorMessage: 'Nie udało się załadować aplikacji. Odśwież stronę i spróbuj ponownie.' },
+            it: { loading: 'Spostando le placche tettoniche per formare i paesi...', loadingApp: 'Caricamento applicazione...', errorTitle: '⚠️ Errore nel Caricamento dell\'Applicazione', errorMessage: 'Impossibile caricare l\'applicazione. Aggiorna la pagina e riprova.' },
+            id: { loading: 'Menggeser lempeng tektonik untuk membentuk negara...', loadingApp: 'Memuat aplikasi...', errorTitle: '⚠️ Kesalahan Memuat Aplikasi', errorMessage: 'Gagal memuat aplikasi. Silakan muat ulang halaman dan coba lagi.' },
+            ms: { loading: 'Mengalihkan plat tektonik untuk membentuk negara...', loadingApp: 'Memuatkan aplikasi...', errorTitle: '⚠️ Ralat Memuatkan Aplikasi', errorMessage: 'Gagal memuatkan aplikasi. Sila muat semula halaman dan cuba lagi.' },
+            fil: { loading: 'Inililipat ang mga tectonic plate upang mabuo ang mga bansa...', loadingApp: 'Naglo-load ng aplikasyon...', errorTitle: '⚠️ Error sa Pag-load ng Aplikasyon', errorMessage: 'Nabigo ang pag-load ng aplikasyon. Pakirefresh ang pahina at subukan muli.' },
+            sw: { loading: 'Kusogeza mabao ya tektoniki ili kuunda nchi...', loadingApp: 'Inapakia programu...', errorTitle: '⚠️ Kosa la Kupakia Programu', errorMessage: 'Imeshindwa kupakia programu. Tafadhali onyesha upya ukurasa na ujaribu tena.' },
+            vi: { loading: 'Dịch chuyển các mảng kiến tạo để tạo thành các quốc gia...', loadingApp: 'Đang tải ứng dụng...', errorTitle: '⚠️ Lỗi Tải Ứng Dụng', errorMessage: 'Không thể tải ứng dụng. Vui lòng làm mới trang và thử lại.' }
         };
 
         const t = translations[userLang] || translations.en;
-        document.querySelector('#loading p').textContent = t.loading;
+        const loadingP = document.querySelector('#loading p');
+        if (loadingP) {
+            loadingP.textContent = t.loadingApp;
+        }
 
         function showError(msg) {
             document.getElementById('loading').style.display = 'none';
             const errorDiv = document.getElementById('error');
             errorDiv.style.display = 'block';
-            errorDiv.innerHTML = '<h1>⚠️ Error Loading Application</h1><p>Failed to load the application. Please refresh the page and try again.</p><p style="font-size: 12px; color: #999;">' + msg + '</p>';
+            const t = translations[userLang] || translations.en;
+            errorDiv.innerHTML = '<h1>' + t.errorTitle + '</h1><p>' + t.errorMessage + '</p><p style="font-size: 12px; color: #999;">' + msg + '</p>';
         }
 
         if (typeof Go === 'undefined') {

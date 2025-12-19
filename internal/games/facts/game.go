@@ -251,7 +251,7 @@ func (g *Game) updateHistoryUI() {
 		if !strings.Contains(guessText, "✅") {
 			guessText = fmt.Sprintf("%s ❌", guessText)
 		}
-		guessHeader := widget.NewLabel(fmt.Sprintf("Guess %d: %s", i+1, guessText))
+		guessHeader := widget.NewLabel(fmt.Sprintf(lang.X("game.facts.guess_number", "Guess %d: %s"), i+1, guessText))
 		guessHeader.TextStyle.Bold = true
 
 		// Create fact text (remove "Fact X:" prefix for cleaner display)

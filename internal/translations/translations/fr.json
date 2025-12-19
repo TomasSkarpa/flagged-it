@@ -12,7 +12,7 @@
   "game.flag.question": "À quel pays appartient ce drapeau?",
   "game.correct": "Correct! C'est {{.Country}}!",
   "game.wrong": "Faux! C'était {{.Country}}",
-  "game.score": "Skóre: {{.Score}}/10",
+  "game.score": "Score: {{.Score}}/10",
   "game.complete": "Jeu Terminé! Score Final: {{.Score}}/10 ({{.Percent}}%)",
   "error.loading_countries": "Erreur de chargement des données des pays",
   "game.list.select_region": "Sélectionner une Région",
@@ -83,5 +83,11 @@
   "region.europe": "Europe",
   "region.americas": "Amériques",
   "region.oceania": "Océanie",
-  "region.antarctica": "Antarctique"
+  "region.antarctica": "Antarctique",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Déplacement des plaques tectoniques pour former des pays...",
+  "html.loading_app": "Chargement de l'application...",
+  "html.error_title": "⚠️ Erreur de Chargement de l'Application",
+  "html.error_message": "Échec du chargement de l'application. Veuillez actualiser la page et réessayer."
 }

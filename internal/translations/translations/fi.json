@@ -83,5 +83,11 @@
   "region.europe": "Eurooppa",
   "region.americas": "Amerikka",
   "region.oceania": "Oseania",
-  "region.antarctica": "Antarktis"
+  "region.antarctica": "Antarktis",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Siirretään tektonisia laattoja muodostaakseen maita...",
+  "html.loading_app": "Ladataan sovellusta...",
+  "html.error_title": "⚠️ Virhe Sovelluksen Latauksessa",
+  "html.error_message": "Sovellusta ei voitu ladata. Päivitä sivu ja yritä uudelleen."
 }

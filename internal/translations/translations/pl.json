@@ -12,7 +12,7 @@
   "game.flag.question": "Do którego kraju należy ta flaga?",
   "game.correct": "Poprawnie! To jest {{.Country}}!",
   "game.wrong": "Źle! To było {{.Country}}",
-  "game.score": "Skóre: {{.Score}}/10",
+  "game.score": "Wynik: {{.Score}}/10",
   "game.complete": "Gra Zakończona! Końcowy Wynik: {{.Score}}/10 ({{.Percent}}%)",
   "error.loading_countries": "Błąd ładowania danych krajów",
   "game.list.select_region": "Wybierz Region",
@@ -83,5 +83,11 @@
   "region.europe": "Europa",
   "region.americas": "Ameryka",
   "region.oceania": "Oceania",
-  "region.antarctica": "Antarktyda"
+  "region.antarctica": "Antarktyda",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Przesuwamy płyty tektoniczne, aby uformować państwa...",
+  "html.loading_app": "Ładowanie aplikacji...",
+  "html.error_title": "⚠️ Błąd Ładowania Aplikacji",
+  "html.error_message": "Nie udało się załadować aplikacji. Odśwież stronę i spróbuj ponownie."
 }

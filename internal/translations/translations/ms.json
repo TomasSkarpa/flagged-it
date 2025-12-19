@@ -83,5 +83,11 @@
   "region.europe": "Eropah",
   "region.americas": "Amerika",
   "region.oceania": "Oceania",
-  "region.antarctica": "Antartika"
+  "region.antarctica": "Antartika",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Mengalihkan plat tektonik untuk membentuk negara...",
+  "html.loading_app": "Memuatkan aplikasi...",
+  "html.error_title": "⚠️ Ralat Memuatkan Aplikasi",
+  "html.error_message": "Gagal memuatkan aplikasi. Sila muat semula halaman dan cuba lagi."
 }

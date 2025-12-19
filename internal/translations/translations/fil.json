@@ -83,5 +83,11 @@
   "region.europe": "Europa",
   "region.americas": "Amerika",
   "region.oceania": "Oceania",
-  "region.antarctica": "Antartika"
+  "region.antarctica": "Antartika",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Inililipat ang mga tectonic plate upang mabuo ang mga bansa...",
+  "html.loading_app": "Naglo-load ng aplikasyon...",
+  "html.error_title": "⚠️ Error sa Pag-load ng Aplikasyon",
+  "html.error_message": "Nabigo ang pag-load ng aplikasyon. Pakirefresh ang pahina at subukan muli."
 }

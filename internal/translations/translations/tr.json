@@ -83,5 +83,11 @@
   "region.europe": "Avrupa",
   "region.americas": "Amerika",
   "region.oceania": "Okyanusya",
-  "region.antarctica": "Antarktika"
+  "region.antarctica": "Antarktika",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Ülkeler oluşturmak için tektonik plakalar kaydırılıyor...",
+  "html.loading_app": "Uygulama yükleniyor...",
+  "html.error_title": "⚠️ Uygulama Yükleme Hatası",
+  "html.error_message": "Uygulama yüklenemedi. Lütfen sayfayı yenileyin ve tekrar deneyin."
 }

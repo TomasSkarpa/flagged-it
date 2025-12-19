@@ -195,10 +195,11 @@ func (g *Game) addGuessRow(country *models.Country) {
 	flagTile := g.createFlagTile(country)
 	countryTile := g.createTile(country.Name.Common, nil, color.RGBA{100, 100, 100, 255})
 
+	translatedRegion := utils.TranslateRegion(country.Region)
 	row := container.NewGridWithColumns(5,
 		flagTile,
 		countryTile,
-		g.createTile(country.Region, nil, continentColor),
+		g.createTile(translatedRegion, nil, continentColor),
 		g.createTile(fmt.Sprintf("%d", country.Population), popIcon, popColor),
 		g.createTile(fmt.Sprintf("%.0f", country.Area), areaIcon, areaColor),
 	)

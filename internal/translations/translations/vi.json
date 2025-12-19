@@ -83,5 +83,11 @@
   "region.europe": "Châu Âu",
   "region.americas": "Châu Mỹ",
   "region.oceania": "Châu Đại Dương",
-  "region.antarctica": "Nam Cực"
+  "region.antarctica": "Nam Cực",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Dịch chuyển các mảng kiến tạo để tạo thành các quốc gia...",
+  "html.loading_app": "Đang tải ứng dụng...",
+  "html.error_title": "⚠️ Lỗi Tải Ứng Dụng",
+  "html.error_message": "Không thể tải ứng dụng. Vui lòng làm mới trang và thử lại."
 }

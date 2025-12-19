@@ -83,5 +83,11 @@
   "region.europe": "Európa",
   "region.americas": "Amerika",
   "region.oceania": "Óceánia",
-  "region.antarctica": "Antarktisz"
+  "region.antarctica": "Antarktisz",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Tektonikus lemezek eltolása országok kialakításához...",
+  "html.loading_app": "Alkalmazás betöltése...",
+  "html.error_title": "⚠️ Hiba az Alkalmazás Betöltésekor",
+  "html.error_message": "Az alkalmazás betöltése sikertelen. Kérjük, frissítse az oldalt és próbálja újra."
 }

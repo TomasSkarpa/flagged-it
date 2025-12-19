@@ -83,5 +83,11 @@
   "region.europe": "Evropa",
   "region.americas": "Amerika",
   "region.oceania": "Oceánie",
-  "region.antarctica": "Antarktida"
+  "region.antarctica": "Antarktida",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Posouváme tektonické desky a formujeme státy...",
+  "html.loading_app": "Načítání aplikace...",
+  "html.error_title": "⚠️ Chyba při Načítání Aplikace",
+  "html.error_message": "Nepodařilo se načíst aplikaci. Obnovte prosím stránku a zkuste to znovu."
 }

@@ -121,9 +121,9 @@ func (g *Game) setupGameView() {
 			label := obj.(*widget.Label)
 			country := g.allCountries[id]
 			if g.guessedCountries[strings.ToLower(country.Name.Common)] {
-				label.SetText(fmt.Sprintf("%d. %s", id+1, country.Name.Common))
+				label.SetText(fmt.Sprintf(lang.X("game.list.country_item", "%d. %s"), id+1, country.Name.Common))
 			} else {
-				label.SetText(fmt.Sprintf("%d. ?", id+1))
+				label.SetText(fmt.Sprintf(lang.X("game.list.country_unknown", "%d. ?"), id+1))
 			}
 		},
 	)

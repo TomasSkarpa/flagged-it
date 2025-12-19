@@ -83,5 +83,11 @@
   "region.europe": "Europa",
   "region.americas": "Américas",
   "region.oceania": "Oceânia",
-  "region.antarctica": "Antártida"
+  "region.antarctica": "Antártida",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Deslocando placas tectónicas para formar países...",
+  "html.loading_app": "Carregando aplicação...",
+  "html.error_title": "⚠️ Erro ao Carregar a Aplicação",
+  "html.error_message": "Falha ao carregar a aplicação. Por favor, atualize a página e tente novamente."
 }

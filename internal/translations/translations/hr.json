@@ -83,5 +83,11 @@
   "region.europe": "Europa",
   "region.americas": "Amerika",
   "region.oceania": "Oceanija",
-  "region.antarctica": "Antarktika"
+  "region.antarctica": "Antarktika",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Pomicanje tektonskih ploča za formiranje zemalja...",
+  "html.loading_app": "Učitavanje aplikacije...",
+  "html.error_title": "⚠️ Greška pri Učitavanju Aplikacije",
+  "html.error_message": "Neuspjelo učitavanje aplikacije. Osvježite stranicu i pokušajte ponovno."
 }

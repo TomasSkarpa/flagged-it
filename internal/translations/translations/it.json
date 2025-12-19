@@ -12,7 +12,7 @@
   "game.flag.question": "A quale paese appartiene questa bandiera?",
   "game.correct": "Corretto! È {{.Country}}!",
   "game.wrong": "Sbagliato! Era {{.Country}}",
-  "game.score": "Skóre: {{.Score}}/10",
+  "game.score": "Punteggio: {{.Score}}/10",
   "game.complete": "Gioco Completato! Punteggio Finale: {{.Score}}/10 ({{.Percent}}%)",
   "error.loading_countries": "Errore nel caricamento dei dati dei paesi",
   "game.list.select_region": "Seleziona Regione",
@@ -83,5 +83,11 @@
   "region.europe": "Europa",
   "region.americas": "Americhe",
   "region.oceania": "Oceania",
-  "region.antarctica": "Antartide"
+  "region.antarctica": "Antartide",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Spostando le placche tettoniche per formare i paesi...",
+  "html.loading_app": "Caricamento applicazione...",
+  "html.error_title": "⚠️ Errore nel Caricamento dell'Applicazione",
+  "html.error_message": "Impossibile caricare l'applicazione. Aggiorna la pagina e riprova."
 }

@@ -83,5 +83,11 @@
   "region.europe": "Ulaya",
   "region.americas": "Amerika",
   "region.oceania": "Oceania",
-  "region.antarctica": "Antaktika"
+  "region.antarctica": "Antaktika",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "html.loading": "Kusogeza mabao ya tektoniki ili kuunda nchi...",
+  "html.loading_app": "Inapakia programu...",
+  "html.error_title": "⚠️ Kosa la Kupakia Programu",
+  "html.error_message": "Imeshindwa kupakia programu. Tafadhali onyesha upya ukurasa na ujaribu tena."
 }

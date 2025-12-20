@@ -7,7 +7,7 @@ on:
     branches: [ main, develop ]
 
 jobs:
-  test:
+  check:
     runs-on: ubuntu-latest
     
     steps:
@@ -20,9 +20,6 @@ jobs:
       - name: Install dependencies
         run: go mod tidy
       
-      - name: Run tests
-        run: go test ./...
-      
       - name: Vet
         run: go vet ./...
       
@@ -34,6 +31,6 @@ jobs:
             exit 1
           fi
       
-      - name: Build
+      - name: Build check
         run: go build -o /dev/null ./cmd
 

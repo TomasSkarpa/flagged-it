@@ -76,7 +76,12 @@ func (g *Game) setupUI() {
 
 	g.flagImage = canvas.NewImageFromResource(nil)
 	g.flagImage.FillMode = canvas.ImageFillContain
-	g.flagImage.SetMinSize(fyne.NewSize(400, 250))
+	// Smaller flag on mobile, larger on desktop
+	if utils.IsMobile() {
+		g.flagImage.SetMinSize(fyne.NewSize(300, 180))
+	} else {
+		g.flagImage.SetMinSize(fyne.NewSize(600, 360))
+	}
 	g.statusLabel = widget.NewLabel(lang.X("game.flag.question", "Which country does this flag belong to?"))
 	g.statusLabel.Wrapping = fyne.TextWrapWord
 	g.scoreLabel = widget.NewLabel(lang.L("game.score", map[string]any{"Score": 0}))

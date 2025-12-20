@@ -22,8 +22,17 @@ Make Targets
 - `make web` - Run local web application
 - `make debug` - Run with verbose output (and possibility to edit the json data)
 - `make build` - Builds binary based on your system
+- `make build-all` - Build binaries for all platforms (Windows, macOS, Linux)
+- `make build-release` - Build with version information
+- `make version` - Show current version
 - `make check` - Format and analyze code
 - `make clean` - Remove build artifacts
+
+## Releases
+
+This project uses automatic semantic versioning. See [RELEASING.md](RELEASING.md) for detailed release instructions.
+
+**Quick release**: Go to Actions → "Auto Version Bump" → Run workflow, select bump type (patch/minor/major).
 
 ## Versioning Conventions & Contribution
 

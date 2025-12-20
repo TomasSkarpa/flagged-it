@@ -6,7 +6,7 @@
 # Designed with portability and CI/CD pipelines in mind.
 # -------------------------------------------------------------------
 
-.PHONY: setup run debug clean build check web
+.PHONY: setup run debug clean build check web build-all build-release version
 
 # -------------------------------------------------------------------
 # Configurable variables and cross-platform ready commands
@@ -98,3 +98,35 @@ build:
 check:
 	go vet ./...
 	go fmt ./...
+
+# Build for all platforms
+build-all:
+	@echo "Building for all platforms..."
+	@$(MKDIR)
+	@for platform in $(PLATFORMS); do \
+		os=$${platform%%/*}; \
+		arch=$${platform##*/}; \
+		ext=$$(if [ "$$os" = "windows" ]; then echo .exe; fi); \
+		GOOS=$$os GOARCH=$$arch go build -ldflags="-s -w" -o $(BUILD_DIR)/$(BINARY)-$$os-$$arch$$ext $(MAIN); \
+		echo "Built $(BINARY)-$$os-$$arch$$ext"; \
+	done
+	@echo "All binaries built in $(BUILD_DIR)/"
+
+# Build with version info
+VERSION ?= $(shell if [ -f VERSION ]; then cat VERSION; else git describe --tags --always --dirty 2>/dev/null || echo "dev"; fi)
+BUILD_TIME := $(shell date -u '+%Y-%m-%d_%H:%M:%S')
+LDFLAGS = -ldflags="-s -w -X main.Version=$(VERSION) -X main.BuildTime=$(BUILD_TIME)"
+
+build-release:
+	@$(MKDIR)
+	@echo "Building $(OUT) with version $(VERSION)..."
+	@$(GO_BUILD) $(LDFLAGS)
+	@echo "Built $(OUT)"
+
+# Show current version
+version:
+	@if [ -f VERSION ]; then \
+		echo "Current version: $$(cat VERSION)"; \
+	else \
+		echo "No VERSION file found. Current: dev"; \
+	fi

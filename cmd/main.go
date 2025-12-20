@@ -10,6 +10,11 @@ import (
 	"fyne.io/fyne/v2/theme"
 )
 
+var (
+	Version   = "dev"
+	BuildTime = "unknown"
+)
+
 func main() {
 	utils.LoadTranslation(utils.GetCurrentLocale())
 	myApp := fyneApp.New()

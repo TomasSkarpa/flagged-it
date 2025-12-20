@@ -1,0 +1,102 @@
+name: Auto Version Bump
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'VERSION'
+  workflow_dispatch:
+    inputs:
+      bump_type:
+        description: 'Version bump type'
+        required: true
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+
+permissions:
+  contents: write
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[bump]'))
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Get current version
+        id: current_version
+        run: |
+          if [ -f VERSION ]; then
+            CURRENT_VERSION=$(cat VERSION)
+            # Remove 'v' prefix if present
+            CURRENT_VERSION=${CURRENT_VERSION#v}
+          else
+            CURRENT_VERSION="0.0.0"
+            echo "$CURRENT_VERSION" > VERSION
+          fi
+          echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          echo "Current version: $CURRENT_VERSION"
+      
+      - name: Bump version
+        id: bump
+        run: |
+          CURRENT="${{ steps.current_version.outputs.CURRENT_VERSION }}"
+          BUMP_TYPE="${{ github.event.inputs.bump_type }}"
+          
+          # If triggered by commit message, detect bump type
+          if [ -z "$BUMP_TYPE" ]; then
+            if echo "${{ github.event.head_commit.message }}" | grep -qiE '\[bump major\]|\[major\]'; then
+              BUMP_TYPE="major"
+            elif echo "${{ github.event.head_commit.message }}" | grep -qiE '\[bump minor\]|\[minor\]'; then
+              BUMP_TYPE="minor"
+            else
+              BUMP_TYPE="patch"
+            fi
+          fi
+          
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT"
+          
+          case "$BUMP_TYPE" in
+            major)
+              MAJOR=$((MAJOR + 1))
+              MINOR=0
+              PATCH=0
+              ;;
+            minor)
+              MINOR=$((MINOR + 1))
+              PATCH=0
+              ;;
+            patch)
+              PATCH=$((PATCH + 1))
+              ;;
+          esac
+          
+          NEW_VERSION="v${MAJOR}.${MINOR}.${PATCH}"
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "Bumping $BUMP_TYPE: $CURRENT -> $NEW_VERSION"
+      
+      - name: Update VERSION file
+        run: |
+          echo "${{ steps.bump.outputs.NEW_VERSION }}" > VERSION
+          cat VERSION
+      
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add VERSION
+          git commit -m "chore: bump version to ${{ steps.bump.outputs.NEW_VERSION }}" || exit 0
+          git push || exit 0
+      
+      - name: Create tag
+        run: |
+          git tag ${{ steps.bump.outputs.NEW_VERSION }}
+          git push origin ${{ steps.bump.outputs.NEW_VERSION }}
+

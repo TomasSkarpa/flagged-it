@@ -1,0 +1,228 @@
+name: Build and Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., v1.0.0). Leave empty to use bump_type instead.'
+        required: false
+        type: string
+      bump_type:
+        description: 'Auto-bump version from VERSION file. Use if version field is empty.'
+        required: false
+        type: choice
+        options:
+          - none
+          - patch
+          - minor
+          - major
+        default: 'patch'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - goos: windows
+            goarch: amd64
+            ext: .exe
+          - goos: windows
+            goarch: 386
+            ext: .exe
+          - goos: darwin
+            goarch: amd64
+            ext: ""
+          - goos: darwin
+            goarch: arm64
+            ext: ""
+          - goos: linux
+            goarch: amd64
+            ext: ""
+          - goos: linux
+            goarch: arm64
+            ext: ""
+
+    runs-on: ${{ matrix.goos == 'windows' && 'windows-latest' || matrix.goos == 'darwin' && 'macos-latest' || 'ubuntu-latest' }}
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+      
+      - name: Get or bump version
+        id: version
+        run: |
+          if [[ "${{ github.event.inputs.version }}" != "" ]]; then
+            # Use provided version
+            VERSION="${{ github.event.inputs.version }}"
+            # Ensure it starts with 'v'
+            if [[ ! "$VERSION" =~ ^v ]]; then
+              VERSION="v$VERSION"
+            fi
+            # Update VERSION file
+            echo "$VERSION" > VERSION
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add VERSION
+            git commit -m "chore: set version to $VERSION" || true
+            git push || true
+          elif [[ "${{ github.event.inputs.bump_type }}" != "none" && "${{ github.event.inputs.bump_type }}" != "" ]]; then
+            # Auto-bump from VERSION file
+            if [ -f VERSION ]; then
+              CURRENT=$(cat VERSION | sed 's/^v//')
+            else
+              CURRENT="0.0.0"
+            fi
+            IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT"
+            case "${{ github.event.inputs.bump_type }}" in
+              major)
+                MAJOR=$((MAJOR + 1))
+                MINOR=0
+                PATCH=0
+                ;;
+              minor)
+                MINOR=$((MINOR + 1))
+                PATCH=0
+                ;;
+              patch)
+                PATCH=$((PATCH + 1))
+                ;;
+            esac
+            VERSION="v${MAJOR}.${MINOR}.${PATCH}"
+            echo "$VERSION" > VERSION
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add VERSION
+            git commit -m "chore: bump version to $VERSION" || true
+            git push || true
+          elif [ -f VERSION ]; then
+            # Use VERSION file as-is
+            VERSION=$(cat VERSION)
+            echo "Using existing version from VERSION file: $VERSION"
+          else
+            echo "Error: No version specified, no bump_type selected, and VERSION file not found"
+            echo "Please either:"
+            echo "  1. Specify a version in the 'version' input field, OR"
+            echo "  2. Select a 'bump_type' (patch/minor/major), OR"
+            echo "  3. Create a VERSION file with the version (e.g., v1.0.0)"
+            exit 1
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "Using version: $VERSION"
+      
+      - name: Build binary
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+          VERSION: ${{ steps.version.outputs.VERSION }}
+          BUILD_TIME: ${{ github.event.head_commit.timestamp || github.run_started_at }}
+        run: |
+          mkdir -p build
+          go build -ldflags="-s -w -X main.Version=${{ env.VERSION }} -X main.BuildTime=${{ env.BUILD_TIME }}" \
+            -o build/flagged-it-${{ matrix.goos }}-${{ matrix.goarch }}${{ matrix.ext }} cmd/main.go
+      
+      - name: Create archive
+        shell: bash
+        run: |
+          cd build
+          if [ "${{ matrix.goos }}" = "windows" ]; then
+            if command -v 7z &> /dev/null; then
+              7z a flagged-it-${{ matrix.goos }}-${{ matrix.goarch }}.zip flagged-it-${{ matrix.goos }}-${{ matrix.goarch }}${{ matrix.ext }}
+            else
+              powershell Compress-Archive -Path flagged-it-${{ matrix.goos }}-${{ matrix.goarch }}${{ matrix.ext }} -DestinationPath flagged-it-${{ matrix.goos }}-${{ matrix.goarch }}.zip -Force
+            fi
+          else
+            tar czf flagged-it-${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz flagged-it-${{ matrix.goos }}-${{ matrix.goarch }}${{ matrix.ext }}
+          fi
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: flagged-it-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: build/flagged-it-${{ matrix.goos }}-${{ matrix.goarch }}.*
+          retention-days: 30
+
+  create-release:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Get version
+        id: version
+        run: |
+          if [ -f VERSION ]; then
+            VERSION=$(cat VERSION)
+          else
+            echo "Error: VERSION file not found"
+            exit 1
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "Release version: $VERSION"
+      
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      
+      - name: Generate changelog
+        id: changelog
+        run: |
+          # Get the last tag if it exists
+          PREV_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$PREV_TAG" ]; then
+            # No previous tag, show last 20 commits
+            CHANGELOG=$(git log --pretty=format:"- %s (%h)" -20)
+          else
+            # Show commits since last tag
+            CHANGELOG=$(git log --pretty=format:"- %s (%h)" ${PREV_TAG}..HEAD)
+            if [ -z "$CHANGELOG" ]; then
+              CHANGELOG="No changes since last release"
+            fi
+          fi
+          echo "CHANGELOG<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      
+      - name: Create git tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a ${{ steps.version.outputs.VERSION }} -m "Release ${{ steps.version.outputs.VERSION }}" || true
+          git push origin ${{ steps.version.outputs.VERSION }} || true
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.version.outputs.VERSION }}
+          name: Release ${{ steps.version.outputs.VERSION }}
+          body: |
+            ## Changes
+            
+            ${{ steps.changelog.outputs.CHANGELOG }}
+            
+            ## Downloads
+            
+            Download the appropriate file for your platform:
+            - **Windows (64-bit)**: `flagged-it-windows-amd64.zip`
+            - **Windows (32-bit)**: `flagged-it-windows-386.zip`
+            - **macOS (Intel)**: `flagged-it-darwin-amd64.tar.gz`
+            - **macOS (Apple Silicon)**: `flagged-it-darwin-arm64.tar.gz`
+            - **Linux (64-bit)**: `flagged-it-linux-amd64.tar.gz`
+            - **Linux (ARM64)**: `flagged-it-linux-arm64.tar.gz`
+          files: artifacts/**/*
+          draft: false
+          prerelease: ${{ contains(steps.version.outputs.VERSION, '-') || contains(steps.version.outputs.VERSION, 'dev') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

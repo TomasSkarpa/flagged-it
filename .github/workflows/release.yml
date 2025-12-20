@@ -117,6 +117,7 @@ jobs:
         run: |
           mkdir -p build
           fyne-cross ${{ matrix.goos }} -arch ${{ matrix.goarch }} \
+            --app-id com.flaggedit.app \
             -ldflags "-s -w -X main.Version=${{ env.VERSION }} -X main.BuildTime=${{ env.BUILD_TIME }}" \
             ./cmd
           

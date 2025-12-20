@@ -4,6 +4,8 @@ import (
 	"image/color"
 	"runtime"
 
+	"flagged-it/pkg/assets"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
@@ -55,7 +57,7 @@ func NewPromoCard(config PromoCardConfig) *PromoCard {
 		if runtime.GOOS == "js" {
 			iconResource, err = fyne.LoadResourceFromURLString(config.IconPath)
 		} else {
-			iconResource, err = fyne.LoadResourceFromPath(config.IconPath)
+			iconResource, err = assets.LoadResourceFromPath(config.IconPath)
 		}
 		if err == nil {
 			card.icon = canvas.NewImageFromResource(iconResource)
@@ -269,4 +271,3 @@ func GetBadgeColor(badgeType string) color.Color {
 		return color.RGBA{59, 130, 246, 255} // Blue
 	}
 }
-

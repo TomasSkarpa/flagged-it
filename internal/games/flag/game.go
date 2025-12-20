@@ -11,6 +11,7 @@ import (
 	"flagged-it/internal/data/models"
 	"flagged-it/internal/ui/components"
 	"flagged-it/internal/utils"
+	"flagged-it/pkg/assets"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
@@ -189,7 +190,7 @@ func (g *Game) displayFlag() {
 		flagResource, err = fyne.LoadResourceFromURLString(flagURL)
 	} else {
 		flagPath := fmt.Sprintf("assets/twemoji_flags_cca2/%s.svg", g.currentCountry.CCA2)
-		flagResource, err = fyne.LoadResourceFromPath(flagPath)
+		flagResource, err = assets.LoadResourceFromPath(flagPath)
 	}
 	if err == nil {
 		g.flagImage.Resource = flagResource

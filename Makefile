@@ -53,9 +53,15 @@ OUT := $(BUILD_DIR)/$(BINARY)-$(GOOS)-$(GOARCH)$(EXE_EXT)
 # -------------------------------------------------------------------
 
 setup:
+	@# Copy assets for embedding (temporary, not tracked in git)
+	@# This must happen BEFORE go mod tidy so embed can find the files
+	@if [ ! -d internal/assetsembed/assets ] || [ assets -nt internal/assetsembed/assets ]; then \
+		rm -rf internal/assetsembed/assets; \
+		cp -r assets internal/assetsembed/assets; \
+	fi
 	go mod tidy
 
-run:
+run: setup
 	go run $(MAIN)
 
 # Run the app in debug mode
@@ -63,7 +69,7 @@ debug:
 	go run $(MAIN) -v
 
 # Run the app in web mode
-web:
+web: setup
 	@$(MKDIR)
 	@GOOS=js GOARCH=wasm go build -o $(BUILD_DIR)/flagged-it.wasm $(MAIN)
 	@if [ -f "$$(go env GOROOT)/lib/wasm/wasm_exec.js" ]; then \
@@ -89,7 +95,7 @@ clean:
 	@$(RM_RF)
 	@echo "Cleaned build artifacts"
 
-build:
+build: setup
 	@$(MKDIR)
 	@$(GO_BUILD)
 	@echo "Built $(OUT)"

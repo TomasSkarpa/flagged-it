@@ -165,6 +165,11 @@ jobs:
         with:
           go-version: '1.21'
       
+      - name: Install fyne tools
+        run: |
+          go install fyne.io/tools/cmd/fyne@latest
+          echo "$HOME/go/bin" >> $GITHUB_PATH
+      
       - name: Get or bump version
         id: version
         shell: bash
@@ -211,7 +216,7 @@ jobs:
           fi
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
       
-      - name: Build binary (native macOS)
+      - name: Build macOS app bundle
         shell: bash
         env:
           GOARCH: ${{ matrix.goarch }}
@@ -221,14 +226,32 @@ jobs:
         run: |
           mkdir -p build
           export SDKROOT=$(xcrun --show-sdk-path)
+          
+          # Build with version info
           go build -ldflags="-s -w -X main.Version=${{ env.VERSION }} -X main.BuildTime=${{ env.BUILD_TIME }}" \
-            -o build/flagged-it-darwin-${{ matrix.goarch }} cmd/main.go
+            -o flagged-it cmd/main.go
+          
+          # Package as macOS app bundle (this bundles assets and hides terminal)
+          fyne package -os darwin -name flagged-it \
+            --app-id com.flaggedit.app \
+            --icon assets/favicon/favicon.svg \
+            -sourceDir . \
+            -executable flagged-it
+          
+          # Move the .app bundle to build directory
+          mv flagged-it.app build/flagged-it-darwin-${{ matrix.goarch }}.app
+          
+          # Also create a standalone binary for those who prefer it
+          mv flagged-it build/flagged-it-darwin-${{ matrix.goarch }}
       
       - name: Create archive
         shell: bash
         run: |
           cd build
-          tar czf flagged-it-darwin-${{ matrix.goarch }}.tar.gz flagged-it-darwin-${{ matrix.goarch }}
+          # Archive the app bundle (recommended for macOS)
+          tar czf flagged-it-darwin-${{ matrix.goarch }}.tar.gz flagged-it-darwin-${{ matrix.goarch }}.app
+          # Also create a binary-only archive
+          tar czf flagged-it-darwin-${{ matrix.goarch }}-binary.tar.gz flagged-it-darwin-${{ matrix.goarch }}
       
       - name: Upload artifact
         uses: actions/upload-artifact@v4

@@ -110,7 +110,7 @@ func (g *Game) setupGameView() {
 	g.guessEntry.SetPlaceHolder(lang.X("game.list.enter_country", "Enter country name..."))
 	g.guessEntry.OnSubmitted = func(text string) { g.makeGuess() }
 
-	guessBtn := widget.NewButton(lang.X("game.list.guess", "Guess"), g.makeGuess)
+	guessBtn := components.NewButton(lang.X("game.list.guess", "Guess"), g.makeGuess)
 
 	g.countryList = widget.NewList(
 		func() int { return len(g.allCountries) },

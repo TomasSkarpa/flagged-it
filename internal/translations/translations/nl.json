@@ -89,5 +89,13 @@
   "html.loading": "Tektonische platen verschuiven om landen te vormen...",
   "html.loading_app": "Applicatie laden...",
   "html.error_title": "⚠️ Fout bij Laden van Applicatie",
-  "html.error_message": "Kan de applicatie niet laden. Ververs de pagina en probeer het opnieuw."
+  "html.error_message": "Kan de applicatie niet laden. Ververs de pagina en probeer het opnieuw.",
+  "promo.europe_flags.title": "Europese Vlaggen",
+  "promo.europe_flags.desc": "Beheers de vlaggen van Europa",
+  "promo.asia_shapes.title": "Aziatische Vormen",
+  "promo.asia_shapes.desc": "Raad landen op vorm",
+  "promo.hangman.desc": "Klassiek woordraadspel",
+  "promo.higher_lower.desc": "Vergelijk landenstatistieken",
+  "promo.badge.popular": "Populair",
+  "promo.badge.new": "Nieuw"
 }

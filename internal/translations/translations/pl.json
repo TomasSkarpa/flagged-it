@@ -89,5 +89,13 @@
   "html.loading": "Przesuwamy płyty tektoniczne, aby uformować państwa...",
   "html.loading_app": "Ładowanie aplikacji...",
   "html.error_title": "⚠️ Błąd Ładowania Aplikacji",
-  "html.error_message": "Nie udało się załadować aplikacji. Odśwież stronę i spróbuj ponownie."
+  "html.error_message": "Nie udało się załadować aplikacji. Odśwież stronę i spróbuj ponownie.",
+  "promo.europe_flags.title": "Flagi Europejskie",
+  "promo.europe_flags.desc": "Opanuj flagi Europy",
+  "promo.asia_shapes.title": "Kształty Azjatyckie",
+  "promo.asia_shapes.desc": "Zgadnij kraje po kształcie",
+  "promo.hangman.desc": "Klasyczna gra w zgadywanie słów",
+  "promo.higher_lower.desc": "Porównaj statystyki krajów",
+  "promo.badge.popular": "Popularne",
+  "promo.badge.new": "Nowe"
 }

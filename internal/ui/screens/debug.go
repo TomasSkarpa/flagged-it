@@ -8,6 +8,8 @@ import (
 	"sort"
 	"strings"
 
+	"flagged-it/internal/ui/components"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/dialog"
@@ -64,10 +66,10 @@ func (d *DebugScreen) setupUI() {
 
 	d.editorContainer = container.NewVBox()
 
-	saveBtn := widget.NewButton("Save Changes", d.saveFile)
-	addBtn := widget.NewButton("Add Element", d.addElement)
-	removeBtn := widget.NewButton("Remove Element", d.removeElement)
-	backBtn := widget.NewButton("Back to Dashboard", d.backFunc)
+	saveBtn := components.NewButton("Save Changes", d.saveFile)
+	addBtn := components.NewButton("Add Element", d.addElement)
+	removeBtn := components.NewButton("Remove Element", d.removeElement)
+	backBtn := components.NewButton("Back to Dashboard", d.backFunc)
 
 	header := container.NewVBox(
 		title,
@@ -211,7 +213,7 @@ func (d *DebugScreen) showElementEditor(index int) {
 
 	d.editorContainer.RemoveAll()
 
-	addParamBtn := widget.NewButton("+ Add Parameter", func() {
+	addParamBtn := components.NewButton("+ Add Parameter", func() {
 		d.addParameter(index)
 	})
 	d.editorContainer.Add(addParamBtn)
@@ -234,7 +236,7 @@ func (d *DebugScreen) showElementEditor(index int) {
 			}
 		}
 
-		removeBtn := widget.NewButton("Remove", func() {
+		removeBtn := components.NewButton("Remove", func() {
 			d.removeParameter(capturedIndex, capturedKey)
 		})
 

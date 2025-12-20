@@ -15,8 +15,8 @@ func NewTopBar(gameTitle string, backFunc func(), resetFunc func()) *TopBar {
 	title := widget.NewLabel(gameTitle)
 	title.TextStyle.Bold = true
 
-	backBtn := widget.NewButton(lang.X("button.dashboard", "Dashboard"), backFunc)
-	resetBtn := widget.NewButton(lang.X("button.new_game", "New Game"), resetFunc)
+	backBtn := NewButton(lang.X("button.dashboard", "Dashboard"), backFunc)
+	resetBtn := NewButton(lang.X("button.new_game", "New Game"), resetFunc)
 
 	topBar := container.NewBorder(
 		nil, nil,

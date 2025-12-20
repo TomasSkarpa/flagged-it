@@ -48,7 +48,7 @@ type Game struct {
 	currentCountry *models.Country
 	guessEntry     *widget.Entry
 	statusLabel    *widget.Label
-	guessBtn       *widget.Button
+	guessBtn       *components.Button
 	headerGrid     *fyne.Container
 	bodyGrid       *fyne.Container
 	bodyScroll     *container.Scroll
@@ -79,7 +79,7 @@ func (g *Game) setupUI() {
 	g.guessEntry.SetPlaceHolder(lang.X("game.guessing.enter_country", "Enter country name..."))
 	g.guessEntry.OnSubmitted = func(text string) { g.makeGuess() }
 
-	g.guessBtn = widget.NewButton(lang.X("game.guessing.guess", "Guess"), g.makeGuess)
+	g.guessBtn = components.NewButton(lang.X("game.guessing.guess", "Guess"), g.makeGuess)
 
 	guessContainer := container.NewGridWithColumns(2, g.guessEntry, g.guessBtn)
 

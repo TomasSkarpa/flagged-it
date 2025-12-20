@@ -89,5 +89,13 @@
   "html.loading": "Spostando le placche tettoniche per formare i paesi...",
   "html.loading_app": "Caricamento applicazione...",
   "html.error_title": "⚠️ Errore nel Caricamento dell'Applicazione",
-  "html.error_message": "Impossibile caricare l'applicazione. Aggiorna la pagina e riprova."
+  "html.error_message": "Impossibile caricare l'applicazione. Aggiorna la pagina e riprova.",
+  "promo.europe_flags.title": "Bandiere Europee",
+  "promo.europe_flags.desc": "Padroneggia le bandiere d'Europa",
+  "promo.asia_shapes.title": "Forme Asiatiche",
+  "promo.asia_shapes.desc": "Indovina i paesi dalla forma",
+  "promo.hangman.desc": "Classico gioco di indovinare parole",
+  "promo.higher_lower.desc": "Confronta le statistiche dei paesi",
+  "promo.badge.popular": "Popolare",
+  "promo.badge.new": "Nuovo"
 }

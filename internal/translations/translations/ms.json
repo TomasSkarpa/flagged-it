@@ -89,5 +89,13 @@
   "html.loading": "Mengalihkan plat tektonik untuk membentuk negara...",
   "html.loading_app": "Memuatkan aplikasi...",
   "html.error_title": "⚠️ Ralat Memuatkan Aplikasi",
-  "html.error_message": "Gagal memuatkan aplikasi. Sila muat semula halaman dan cuba lagi."
+  "html.error_message": "Gagal memuatkan aplikasi. Sila muat semula halaman dan cuba lagi.",
+  "promo.europe_flags.title": "Bendera Eropah",
+  "promo.europe_flags.desc": "Kuasai bendera-bendera Eropah",
+  "promo.asia_shapes.title": "Bentuk Asia",
+  "promo.asia_shapes.desc": "Teka negara mengikut bentuk",
+  "promo.hangman.desc": "Permainan teka kata klasik",
+  "promo.higher_lower.desc": "Bandingkan statistik negara",
+  "promo.badge.popular": "Popular",
+  "promo.badge.new": "Baharu"
 }

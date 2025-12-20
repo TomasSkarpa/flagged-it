@@ -89,5 +89,13 @@
   "html.loading": "Kusogeza mabao ya tektoniki ili kuunda nchi...",
   "html.loading_app": "Inapakia programu...",
   "html.error_title": "⚠️ Kosa la Kupakia Programu",
-  "html.error_message": "Imeshindwa kupakia programu. Tafadhali onyesha upya ukurasa na ujaribu tena."
+  "html.error_message": "Imeshindwa kupakia programu. Tafadhali onyesha upya ukurasa na ujaribu tena.",
+  "promo.europe_flags.title": "Bendera za Ulaya",
+  "promo.europe_flags.desc": "Jifunze bendera za Ulaya",
+  "promo.asia_shapes.title": "Maumbo ya Asia",
+  "promo.asia_shapes.desc": "Buni nchi kwa umbo",
+  "promo.hangman.desc": "Mchezo wa kawaida wa kubuni maneno",
+  "promo.higher_lower.desc": "Linganisha takwimu za nchi",
+  "promo.badge.popular": "Maarufu",
+  "promo.badge.new": "Mpya"
 }

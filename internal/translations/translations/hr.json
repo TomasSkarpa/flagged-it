@@ -89,5 +89,13 @@
   "html.loading": "Pomicanje tektonskih ploča za formiranje zemalja...",
   "html.loading_app": "Učitavanje aplikacije...",
   "html.error_title": "⚠️ Greška pri Učitavanju Aplikacije",
-  "html.error_message": "Neuspjelo učitavanje aplikacije. Osvježite stranicu i pokušajte ponovno."
+  "html.error_message": "Neuspjelo učitavanje aplikacije. Osvježite stranicu i pokušajte ponovno.",
+  "promo.europe_flags.title": "Europske Zastave",
+  "promo.europe_flags.desc": "Savladajte zastave Europe",
+  "promo.asia_shapes.title": "Azijski Oblici",
+  "promo.asia_shapes.desc": "Pogodi zemlje po obliku",
+  "promo.hangman.desc": "Klasična igra pogađanja riječi",
+  "promo.higher_lower.desc": "Usporedi statistike zemalja",
+  "promo.badge.popular": "Popularno",
+  "promo.badge.new": "Novo"
 }

@@ -89,5 +89,13 @@
   "html.loading": "Siirretään tektonisia laattoja muodostaakseen maita...",
   "html.loading_app": "Ladataan sovellusta...",
   "html.error_title": "⚠️ Virhe Sovelluksen Latauksessa",
-  "html.error_message": "Sovellusta ei voitu ladata. Päivitä sivu ja yritä uudelleen."
+  "html.error_message": "Sovellusta ei voitu ladata. Päivitä sivu ja yritä uudelleen.",
+  "promo.europe_flags.title": "Euroopan Liput",
+  "promo.europe_flags.desc": "Hallitse Euroopan liput",
+  "promo.asia_shapes.title": "Aasian Muodot",
+  "promo.asia_shapes.desc": "Arvaa maat muodon perusteella",
+  "promo.hangman.desc": "Klassinen sana-arvauspeli",
+  "promo.higher_lower.desc": "Vertaa maiden tilastoja",
+  "promo.badge.popular": "Suosittu",
+  "promo.badge.new": "Uusi"
 }

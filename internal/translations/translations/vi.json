@@ -89,5 +89,13 @@
   "html.loading": "Dịch chuyển các mảng kiến tạo để tạo thành các quốc gia...",
   "html.loading_app": "Đang tải ứng dụng...",
   "html.error_title": "⚠️ Lỗi Tải Ứng Dụng",
-  "html.error_message": "Không thể tải ứng dụng. Vui lòng làm mới trang và thử lại."
+  "html.error_message": "Không thể tải ứng dụng. Vui lòng làm mới trang và thử lại.",
+  "promo.europe_flags.title": "Cờ Châu Âu",
+  "promo.europe_flags.desc": "Thành thạo cờ các nước Châu Âu",
+  "promo.asia_shapes.title": "Hình Dạng Châu Á",
+  "promo.asia_shapes.desc": "Đoán quốc gia theo hình dạng",
+  "promo.hangman.desc": "Trò chơi đoán từ cổ điển",
+  "promo.higher_lower.desc": "So sánh thống kê các quốc gia",
+  "promo.badge.popular": "Phổ biến",
+  "promo.badge.new": "Mới"
 }

@@ -37,8 +37,8 @@ type Game struct {
 	guessEntry       *widget.Entry
 	statusLabel      *widget.Label
 	triesLabel       *widget.Label
-	guessBtn         *widget.Button
-	newGameBtn       *widget.Button
+	guessBtn         *components.Button
+	newGameBtn       *components.Button
 	historyContainer *fyne.Container
 	score            int
 	total            int
@@ -72,7 +72,7 @@ func (g *Game) setupUI() {
 	g.guessEntry.SetPlaceHolder(lang.X("game.facts.enter_country", "Enter country name..."))
 	g.guessEntry.OnSubmitted = func(text string) { g.makeGuess() }
 
-	g.guessBtn = widget.NewButton(lang.X("game.facts.guess", "Guess"), g.makeGuess)
+	g.guessBtn = components.NewButton(lang.X("game.facts.guess", "Guess"), g.makeGuess)
 	g.statusLabel = widget.NewLabel("")
 	g.triesLabel = widget.NewLabel("")
 	g.scoreLabel = widget.NewLabel(fmt.Sprintf(lang.X("game.facts.score", "Score: %d/5"), 0))

@@ -78,7 +78,7 @@ func ShowLanguageSelector(window fyne.Window, onLanguageChanged func()) {
 	const rowHeight = float32(48)
 
 	// Language buttons container (will be rebuilt on page change)
-	var langButtons []*widget.Button
+	var langButtons []*Button
 	langButtonsContainer := container.NewVBox()
 
 	// Page label
@@ -86,14 +86,14 @@ func ShowLanguageSelector(window fyne.Window, onLanguageChanged func()) {
 	pageLabel.Alignment = fyne.TextAlignCenter
 
 	// Navigation buttons
-	prevBtn := widget.NewButton("◀ Prev", nil)
-	nextBtn := widget.NewButton("Next ▶", nil)
+	prevBtn := NewButton("◀ Prev", nil)
+	nextBtn := NewButton("Next ▶", nil)
 
 	// Action buttons
-	selectBtn := widget.NewButton("  Confirm  ", nil)
+	selectBtn := NewButton("  Confirm  ", nil)
 	selectBtn.Importance = widget.HighImportance
 
-	closeBtn := widget.NewButton("  Close  ", nil)
+	closeBtn := NewButton("  Close  ", nil)
 
 	// Update page function
 	updatePage := func() {
@@ -112,7 +112,7 @@ func ShowLanguageSelector(window fyne.Window, onLanguageChanged func()) {
 			flag := GetLanguageFlag(tr.Name)
 			btnText := fmt.Sprintf("%s  %s", flag, tr.DisplayName)
 
-			btn := widget.NewButton(btnText, func() {
+			btn := NewButton(btnText, func() {
 				selectedLangCode = tr.Name
 				// Update all buttons to reflect selection
 				for j, b := range langButtons {
@@ -241,11 +241,11 @@ func ShowLanguageSelector(window fyne.Window, onLanguageChanged func()) {
 }
 
 // NewLanguageSelectorButton creates a button that opens the language selector
-func NewLanguageSelectorButton(window fyne.Window, onLanguageChanged func()) *widget.Button {
+func NewLanguageSelectorButton(window fyne.Window, onLanguageChanged func()) *Button {
 	currentLocale := utils.GetCurrentLocale()
 	buttonText := GetLanguageButtonText(currentLocale)
 
-	btn := widget.NewButton(buttonText, func() {
+	btn := NewButton(buttonText, func() {
 		ShowLanguageSelector(window, onLanguageChanged)
 	})
 

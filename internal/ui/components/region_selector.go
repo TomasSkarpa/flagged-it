@@ -40,7 +40,7 @@ func NewRegionSelector(title, description string, regions []string, onRegionSele
 	for _, region := range regions {
 		region := region
 		translatedRegion := utils.TranslateRegion(region)
-		buttonGrid.Add(widget.NewButton(translatedRegion, func() {
+		buttonGrid.Add(NewButton(translatedRegion, func() {
 			onRegionSelected(region)
 		}))
 	}

@@ -89,5 +89,13 @@
   "html.loading": "Inililipat ang mga tectonic plate upang mabuo ang mga bansa...",
   "html.loading_app": "Naglo-load ng aplikasyon...",
   "html.error_title": "⚠️ Error sa Pag-load ng Aplikasyon",
-  "html.error_message": "Nabigo ang pag-load ng aplikasyon. Pakirefresh ang pahina at subukan muli."
+  "html.error_message": "Nabigo ang pag-load ng aplikasyon. Pakirefresh ang pahina at subukan muli.",
+  "promo.europe_flags.title": "Mga Watawat ng Europa",
+  "promo.europe_flags.desc": "Kabisaduhin ang mga watawat ng Europa",
+  "promo.asia_shapes.title": "Mga Hugis ng Asya",
+  "promo.asia_shapes.desc": "Hulaan ang mga bansa sa hugis",
+  "promo.hangman.desc": "Klasikong laro ng paghula ng salita",
+  "promo.higher_lower.desc": "Ihambing ang mga estadistika ng bansa",
+  "promo.badge.popular": "Sikat",
+  "promo.badge.new": "Bago"
 }

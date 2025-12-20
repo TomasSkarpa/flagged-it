@@ -70,9 +70,11 @@ jobs:
             echo "$VERSION" > VERSION
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
+            git fetch origin || true
             git add VERSION
-            git commit -m "chore: set version to $VERSION" || true
-            git push || true
+            git diff --staged --quiet || git commit -m "chore: set version to $VERSION" || true
+            git pull --rebase origin main || git pull --rebase origin HEAD || true
+            git push origin HEAD:main || true
           elif [[ "${{ github.event.inputs.bump_type }}" != "none" && "${{ github.event.inputs.bump_type }}" != "" ]]; then
             # Auto-bump from VERSION file
             if [ -f VERSION ]; then
@@ -99,9 +101,11 @@ jobs:
             echo "$VERSION" > VERSION
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
+            git fetch origin || true
             git add VERSION
-            git commit -m "chore: bump version to $VERSION" || true
-            git push || true
+            git diff --staged --quiet || git commit -m "chore: bump version to $VERSION" || true
+            git pull --rebase origin main || git pull --rebase origin HEAD || true
+            git push origin HEAD:main || true
           elif [ -f VERSION ]; then
             # Use VERSION file as-is
             VERSION=$(cat VERSION)
@@ -117,14 +121,25 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
           echo "Using version: $VERSION"
       
+      - name: Install system dependencies (Linux)
+        if: matrix.goos == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgl1-mesa-dev xorg-dev libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev libglfw3-dev libx11-dev
+      
       - name: Build binary
         env:
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
+          CGO_ENABLED: 1
           VERSION: ${{ steps.version.outputs.VERSION }}
           BUILD_TIME: ${{ github.event.head_commit.timestamp || github.run_started_at }}
         run: |
           mkdir -p build
+          # For macOS, ensure we're using the native SDK
+          if [ "${{ matrix.goos }}" = "darwin" ]; then
+            export SDKROOT=$(xcrun --show-sdk-path)
+          fi
           go build -ldflags="-s -w -X main.Version=${{ env.VERSION }} -X main.BuildTime=${{ env.BUILD_TIME }}" \
             -o build/flagged-it-${{ matrix.goos }}-${{ matrix.goarch }}${{ matrix.ext }} cmd/main.go
       

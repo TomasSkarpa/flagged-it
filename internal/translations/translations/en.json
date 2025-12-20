@@ -89,5 +89,13 @@
   "html.loading": "Shifting tectonic plates to form countries...",
   "html.loading_app": "Loading application...",
   "html.error_title": "⚠️ Error Loading Application",
-  "html.error_message": "Failed to load the application. Please refresh the page and try again."
+  "html.error_message": "Failed to load the application. Please refresh the page and try again.",
+  "promo.europe_flags.title": "European Flags",
+  "promo.europe_flags.desc": "Master the flags of Europe",
+  "promo.asia_shapes.title": "Asian Shapes",
+  "promo.asia_shapes.desc": "Guess countries by shape",
+  "promo.hangman.desc": "Classic word guessing game",
+  "promo.higher_lower.desc": "Compare country stats",
+  "promo.badge.popular": "Popular",
+  "promo.badge.new": "New"
 }

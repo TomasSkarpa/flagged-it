@@ -89,5 +89,13 @@
   "html.loading": "Förskjuter tektoniska plattor för att bilda länder...",
   "html.loading_app": "Laddar applikation...",
   "html.error_title": "⚠️ Fel vid Laddning av Applikation",
-  "html.error_message": "Kunde inte ladda applikationen. Uppdatera sidan och försök igen."
+  "html.error_message": "Kunde inte ladda applikationen. Uppdatera sidan och försök igen.",
+  "promo.europe_flags.title": "Europeiska Flaggor",
+  "promo.europe_flags.desc": "Bemästra Europas flaggor",
+  "promo.asia_shapes.title": "Asiatiska Former",
+  "promo.asia_shapes.desc": "Gissa länder efter form",
+  "promo.hangman.desc": "Klassiskt ordgissningsspel",
+  "promo.higher_lower.desc": "Jämför landsstatistik",
+  "promo.badge.popular": "Populär",
+  "promo.badge.new": "Ny"
 }

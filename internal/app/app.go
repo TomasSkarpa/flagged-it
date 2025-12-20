@@ -10,6 +10,7 @@ import (
 	"flagged-it/internal/games/shape"
 	"flagged-it/internal/ui/screens"
 	"flagged-it/internal/utils"
+
 	"fyne.io/fyne/v2"
 )
 
@@ -36,6 +37,10 @@ func (a *App) navigateToGame(gameType string) {
 	case "shape":
 		game := shape.NewGame(a.backToDashboard, a.scoreManager)
 		a.window.SetContent(game.GetContent())
+	case "shape_asia":
+		game := shape.NewGame(a.backToDashboard, a.scoreManager)
+		a.window.SetContent(game.GetContent())
+		game.StartWithRegion("Asia")
 	case "list":
 		game := list.NewGame(a.backToDashboard, a.scoreManager)
 		a.window.SetContent(game.GetContent())
@@ -51,6 +56,10 @@ func (a *App) navigateToGame(gameType string) {
 		a.window.SetContent(game.GetContent())
 	case "flag":
 		game := flag.NewGame(a.backToDashboard, a.scoreManager)
+		a.window.SetContent(game.GetContent())
+	case "flag_europe":
+		game := flag.NewGame(a.backToDashboard, a.scoreManager)
+		game.SetRegion("Europe")
 		a.window.SetContent(game.GetContent())
 	case "guessing":
 		game := guessing.NewGame(a.backToDashboard)

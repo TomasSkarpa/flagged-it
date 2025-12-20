@@ -89,5 +89,13 @@
   "html.loading": "Posouváme tektonické desky a formujeme státy...",
   "html.loading_app": "Načítání aplikace...",
   "html.error_title": "⚠️ Chyba při Načítání Aplikace",
-  "html.error_message": "Nepodařilo se načíst aplikaci. Obnovte prosím stránku a zkuste to znovu."
+  "html.error_message": "Nepodařilo se načíst aplikaci. Obnovte prosím stránku a zkuste to znovu.",
+  "promo.europe_flags.title": "Evropské Vlajky",
+  "promo.europe_flags.desc": "Ovládněte vlajky Evropy",
+  "promo.asia_shapes.title": "Asijské Tvary",
+  "promo.asia_shapes.desc": "Hádejte země podle tvaru",
+  "promo.hangman.desc": "Klasická slovní hra",
+  "promo.higher_lower.desc": "Porovnejte statistiky zemí",
+  "promo.badge.popular": "Oblíbené",
+  "promo.badge.new": "Nové"
 }

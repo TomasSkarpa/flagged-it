@@ -89,5 +89,13 @@
   "html.loading": "Forskubber tektoniske plader for at danne lande...",
   "html.loading_app": "Indlæser applikation...",
   "html.error_title": "⚠️ Fejl ved Indlæsning af Applikation",
-  "html.error_message": "Kunne ikke indlæse applikationen. Opdater venligst siden og prøv igen."
+  "html.error_message": "Kunne ikke indlæse applikationen. Opdater venligst siden og prøv igen.",
+  "promo.europe_flags.title": "Europæiske Flag",
+  "promo.europe_flags.desc": "Mestre Europas flag",
+  "promo.asia_shapes.title": "Asiatiske Former",
+  "promo.asia_shapes.desc": "Gæt lande efter form",
+  "promo.hangman.desc": "Klassisk ordgættespil",
+  "promo.higher_lower.desc": "Sammenlign landestatistikker",
+  "promo.badge.popular": "Populær",
+  "promo.badge.new": "Ny"
 }

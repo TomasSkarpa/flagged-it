@@ -10,6 +10,7 @@ import (
 	"flagged-it/internal/data/models"
 	"flagged-it/internal/ui/components"
 	"flagged-it/internal/utils"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/lang"
@@ -31,7 +32,7 @@ type Game struct {
 	statusLabel    *widget.Label
 	newGameBtn     *widget.Button
 	keyboard       *fyne.Container
-	letterButtons  map[rune]*widget.Button
+	letterButtons  map[rune]*components.Button
 	score          int
 	total          int
 	scoreLabel     *widget.Label
@@ -43,7 +44,7 @@ func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
 		backFunc:       backFunc,
 		maxWrongs:      6,
 		guessedLetters: make(map[rune]bool),
-		letterButtons:  make(map[rune]*widget.Button),
+		letterButtons:  make(map[rune]*components.Button),
 		scoreManager:   scoreManager,
 	}
 	g.loadCountries()
@@ -129,7 +130,7 @@ func (g *Game) setupKeyboard() {
 		buttons := make([]fyne.CanvasObject, len(row))
 		for j, letter := range row {
 			letter := letter
-			btn := widget.NewButton(string(letter), func() {
+			btn := components.NewButton(string(letter), func() {
 				g.makeGuess(letter)
 			})
 			g.letterButtons[letter] = btn

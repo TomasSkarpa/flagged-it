@@ -89,5 +89,13 @@
   "html.loading": "Verschieben tektonischer Platten zur Bildung von Ländern...",
   "html.loading_app": "Anwendung wird geladen...",
   "html.error_title": "⚠️ Fehler beim Laden der Anwendung",
-  "html.error_message": "Die Anwendung konnte nicht geladen werden. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut."
+  "html.error_message": "Die Anwendung konnte nicht geladen werden. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut.",
+  "promo.europe_flags.title": "Europäische Flaggen",
+  "promo.europe_flags.desc": "Meistere die Flaggen Europas",
+  "promo.asia_shapes.title": "Asiatische Formen",
+  "promo.asia_shapes.desc": "Erkenne Länder an ihrer Form",
+  "promo.hangman.desc": "Klassisches Wortratespiel",
+  "promo.higher_lower.desc": "Vergleiche Länderstatistiken",
+  "promo.badge.popular": "Beliebt",
+  "promo.badge.new": "Neu"
 }

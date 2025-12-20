@@ -89,5 +89,13 @@
   "html.loading": "Tektonikus lemezek eltolása országok kialakításához...",
   "html.loading_app": "Alkalmazás betöltése...",
   "html.error_title": "⚠️ Hiba az Alkalmazás Betöltésekor",
-  "html.error_message": "Az alkalmazás betöltése sikertelen. Kérjük, frissítse az oldalt és próbálja újra."
+  "html.error_message": "Az alkalmazás betöltése sikertelen. Kérjük, frissítse az oldalt és próbálja újra.",
+  "promo.europe_flags.title": "Európai Zászlók",
+  "promo.europe_flags.desc": "Ismerd meg Európa zászlóit",
+  "promo.asia_shapes.title": "Ázsiai Alakzatok",
+  "promo.asia_shapes.desc": "Találd ki az országokat alakjuk alapján",
+  "promo.hangman.desc": "Klasszikus szókitaláló játék",
+  "promo.higher_lower.desc": "Hasonlítsd össze az országstatisztikákat",
+  "promo.badge.popular": "Népszerű",
+  "promo.badge.new": "Új"
 }

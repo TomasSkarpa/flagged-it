@@ -1,0 +1,31 @@
+<svg
+  width="200"
+  height="250"
+  viewBox="0 0 200 250"
+  xmlns="http://www.w3.org/2000/svg"
+  stroke="black"
+  stroke-width="4"
+  fill="none"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <!-- Gallows -->
+  <line x1="20" y1="230" x2="180" y2="230" />   <!-- base -->
+  <line x1="50" y1="230" x2="50" y2="20" />    <!-- pole -->
+  <line x1="50" y1="20" x2="130" y2="20" />    <!-- top beam -->
+  <line x1="130" y1="20" x2="130" y2="50" />   <!-- rope -->
+
+  <!-- Head -->
+  <circle cx="130" cy="70" r="20" />
+
+  <!-- Body -->
+  <line x1="130" y1="90" x2="130" y2="150" />
+
+  <!-- Arms -->
+  <line x1="130" y1="110" x2="100" y2="130" />
+  <line x1="130" y1="110" x2="160" y2="130" />
+
+  <!-- Legs -->
+  <line x1="130" y1="150" x2="105" y2="190" />
+  <line x1="130" y1="150" x2="155" y2="190" />
+</svg>

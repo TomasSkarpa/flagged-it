@@ -5,6 +5,7 @@ import (
 	"flagged-it/internal/utils"
 	"fmt"
 	"image/color"
+	"runtime"
 	"sort"
 
 	"fyne.io/fyne/v2"
@@ -50,7 +51,7 @@ func (d *Dashboard) setupUI() {
 	// Header with language selector, title and optional settings button
 	var header *fyne.Container
 	if d.debugManager.IsDebugEnabled() {
-		settingsBtn := widget.NewButtonWithIcon("", theme.SettingsIcon(), d.debugFunc)
+		settingsBtn := components.NewButtonWithIcon("", theme.SettingsIcon(), d.debugFunc)
 		header = container.NewBorder(
 			nil, nil,
 			langBtn,
@@ -67,26 +68,26 @@ func (d *Dashboard) setupUI() {
 	}
 
 	// Game buttons
-	flagBtn := widget.NewButtonWithIcon(lang.X("game.flag.title", "Guess by Flag"), theme.MailForwardIcon(), func() {
+	flagBtn := components.NewButtonWithIcon(lang.X("game.flag.title", "Guess by Flag"), theme.MailForwardIcon(), func() {
 		d.navigateFunc("flag")
 	})
-	countryListBtn := widget.NewButtonWithIcon(lang.X("game.list.title", "List All Countries"), theme.ListIcon(), func() {
+	countryListBtn := components.NewButtonWithIcon(lang.X("game.list.title", "List All Countries"), theme.ListIcon(), func() {
 		d.navigateFunc("list")
 	})
-	countryGuessBtn := widget.NewButtonWithIcon(lang.X("game.shape.title", "Guess by Shape"), theme.MediaRecordIcon(), func() {
+	countryGuessBtn := components.NewButtonWithIcon(lang.X("game.shape.title", "Guess by Shape"), theme.MediaRecordIcon(), func() {
 		d.navigateFunc("shape")
 	})
-	hangmanBtn := widget.NewButtonWithIcon(lang.X("game.hangman.title", "Hangman"), theme.AccountIcon(), func() {
+	hangmanBtn := components.NewButtonWithIcon(lang.X("game.hangman.title", "Hangman"), theme.AccountIcon(), func() {
 		d.navigateFunc("hangman")
 	})
-	factGuessBtn := widget.NewButtonWithIcon(lang.X("game.facts.title", "Guess by Facts"), theme.InfoIcon(), func() {
+	factGuessBtn := components.NewButtonWithIcon(lang.X("game.facts.title", "Guess by Facts"), theme.InfoIcon(), func() {
 		d.navigateFunc("facts")
 	})
-	higher_lowerBtn := widget.NewButtonWithIcon(lang.X("game.higher_lower.title", "Higher or Lower"), theme.UploadIcon(), func() {
+	higher_lowerBtn := components.NewButtonWithIcon(lang.X("game.higher_lower.title", "Higher or Lower"), theme.UploadIcon(), func() {
 		d.navigateFunc("higher_lower")
 	})
 
-	guessingBtn := widget.NewButtonWithIcon(lang.X("game.guessing.title", "What Country is This"), theme.GridIcon(), func() {
+	guessingBtn := components.NewButtonWithIcon(lang.X("game.guessing.title", "What Country is This"), theme.GridIcon(), func() {
 		d.navigateFunc("guessing")
 	})
 
@@ -108,13 +109,97 @@ func (d *Dashboard) setupUI() {
 	// Score boxes
 	d.scoresGrid = d.createScoresBox()
 
-	d.content = container.NewVBox(
+	// Promotional cards section
+	promoCards := d.createPromoCards()
+
+	// Main content (header, game buttons, scores)
+	mainContent := container.NewVBox(
 		header,
 		widget.NewSeparator(),
 		gameButtons,
 		widget.NewSeparator(),
 		d.scoresGrid,
 	)
+
+	// Use Border layout to pin promo cards at bottom
+	d.content = container.NewBorder(
+		nil,                              // top
+		promoCards,                       // bottom - promo cards pinned here
+		nil,                              // left
+		nil,                              // right
+		container.NewScroll(mainContent), // center - scrollable main content
+	)
+}
+
+func (d *Dashboard) createPromoCards() *fyne.Container {
+	// Define asset paths based on runtime
+	var europeFlagsPath, asiaMapPath, hangmanPath, higherLowerPath string
+	if runtime.GOOS == "js" {
+		europeFlagsPath = "assets/world_map_silhouette.svg"
+		asiaMapPath = "assets/world_map_silhouette.svg"
+		hangmanPath = "assets/hangman.svg"
+		higherLowerPath = "assets/higher_lower.svg"
+	} else {
+		europeFlagsPath = "assets/world_map_silhouette.svg"
+		asiaMapPath = "assets/world_map_silhouette.svg"
+		hangmanPath = "assets/hangman.svg"
+		higherLowerPath = "assets/higher_lower.svg"
+	}
+
+	isMobile := utils.IsMobile()
+
+	// Card 1: Flags - Europe
+	card1 := components.NewPromoCard(components.PromoCardConfig{
+		Title:       lang.X("promo.europe_flags.title", "European Flags"),
+		Description: lang.X("promo.europe_flags.desc", "Master the flags of Europe"),
+		IconPath:    europeFlagsPath,
+		Badge:       lang.X("promo.badge.popular", "Popular"),
+		BadgeColor:  components.GetBadgeColor("Popular"),
+		IsMobile:    isMobile,
+		OnTap: func() {
+			d.navigateFunc("flag_europe")
+		},
+	})
+
+	// Card 2: Shapes - Asia
+	card2 := components.NewPromoCard(components.PromoCardConfig{
+		Title:       lang.X("promo.asia_shapes.title", "Asian Shapes"),
+		Description: lang.X("promo.asia_shapes.desc", "Guess countries by shape"),
+		IconPath:    asiaMapPath,
+		Badge:       lang.X("promo.badge.new", "New"),
+		BadgeColor:  components.GetBadgeColor("New"),
+		IsMobile:    isMobile,
+		OnTap: func() {
+			d.navigateFunc("shape_asia")
+		},
+	})
+
+	// Card 3: Hangman
+	card3 := components.NewPromoCard(components.PromoCardConfig{
+		Title:       lang.X("game.hangman.title", "Hangman"),
+		Description: lang.X("promo.hangman.desc", "Classic word guessing game"),
+		IconPath:    hangmanPath,
+		IsMobile:    isMobile,
+		OnTap: func() {
+			d.navigateFunc("hangman")
+		},
+	})
+
+	// Card 4: Higher or Lower
+	card4 := components.NewPromoCard(components.PromoCardConfig{
+		Title:       lang.X("game.higher_lower.title", "Higher or Lower"),
+		Description: lang.X("promo.higher_lower.desc", "Compare country stats"),
+		IconPath:    higherLowerPath,
+		Badge:       lang.X("promo.badge.popular", "Popular"),
+		BadgeColor:  components.GetBadgeColor("Popular"),
+		IsMobile:    isMobile,
+		OnTap: func() {
+			d.navigateFunc("higher_lower")
+		},
+	})
+
+	cards := []*components.PromoCard{card1, card2, card3, card4}
+	return components.CreatePromoCardsGrid(cards, isMobile)
 }
 
 func (d *Dashboard) getScoreColor(score, total int) color.Color {

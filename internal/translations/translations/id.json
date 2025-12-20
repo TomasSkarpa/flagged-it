@@ -89,5 +89,13 @@
   "html.loading": "Menggeser lempeng tektonik untuk membentuk negara...",
   "html.loading_app": "Memuat aplikasi...",
   "html.error_title": "⚠️ Kesalahan Memuat Aplikasi",
-  "html.error_message": "Gagal memuat aplikasi. Silakan muat ulang halaman dan coba lagi."
+  "html.error_message": "Gagal memuat aplikasi. Silakan muat ulang halaman dan coba lagi.",
+  "promo.europe_flags.title": "Bendera Eropa",
+  "promo.europe_flags.desc": "Kuasai bendera-bendera Eropa",
+  "promo.asia_shapes.title": "Bentuk Asia",
+  "promo.asia_shapes.desc": "Tebak negara dari bentuknya",
+  "promo.hangman.desc": "Permainan tebak kata klasik",
+  "promo.higher_lower.desc": "Bandingkan statistik negara",
+  "promo.badge.popular": "Populer",
+  "promo.badge.new": "Baru"
 }

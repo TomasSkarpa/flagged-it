@@ -129,7 +129,7 @@ func (g *Game) setupGameView() {
 	g.guessEntry.SetPlaceHolder(lang.X("game.shape.enter_country", "Enter country name..."))
 	g.guessEntry.OnSubmitted = g.checkGuess
 
-	guessBtn := widget.NewButton(lang.X("game.shape.guess", "Guess"), func() { g.checkGuess(g.guessEntry.Text) })
+	guessBtn := components.NewButton(lang.X("game.shape.guess", "Guess"), func() { g.checkGuess(g.guessEntry.Text) })
 	g.resultLabel = widget.NewLabel("")
 	guessContainer := container.NewBorder(
 		nil, nil,
@@ -485,4 +485,9 @@ func (g *Game) Start() {
 
 func (g *Game) Reset() {
 	g.showSelection()
+}
+
+// StartWithRegion starts the game directly with a specific region
+func (g *Game) StartWithRegion(region string) {
+	g.startRegionGame(region)
 }

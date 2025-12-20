@@ -26,9 +26,9 @@ type Game struct {
 	countryOnePopLabel  *widget.Label
 	countryTwoPopLabel  *widget.Label
 	scoreLabel          *widget.Label
-	nextBtn             *widget.Button
-	higherBtn           *widget.Button
-	lowerBtn            *widget.Button
+	nextBtn             *components.Button
+	higherBtn           *components.Button
+	lowerBtn            *components.Button
 	scoreManager        *utils.ScoreManager
 }
 
@@ -50,15 +50,15 @@ func (g *Game) setupUI() {
 
 	g.scoreLabel = widget.NewLabel(fmt.Sprintf(lang.X("game.higher_lower.score", "Score: %d"), 0))
 
-	var startBtn *widget.Button
+	var startBtn *components.Button
 
-	g.higherBtn = widget.NewButton(lang.X("game.higher_lower.higher", "Higher"), func() {
+	g.higherBtn = components.NewButton(lang.X("game.higher_lower.higher", "Higher"), func() {
 		g.makeGuess(true)
 	})
-	g.lowerBtn = widget.NewButton(lang.X("game.higher_lower.lower", "Lower"), func() {
+	g.lowerBtn = components.NewButton(lang.X("game.higher_lower.lower", "Lower"), func() {
 		g.makeGuess(false)
 	})
-	g.nextBtn = widget.NewButton(lang.X("game.higher_lower.next_round", "Next Round"), func() {
+	g.nextBtn = components.NewButton(lang.X("game.higher_lower.next_round", "Next Round"), func() {
 		g.nextRound()
 	})
 
@@ -66,7 +66,7 @@ func (g *Game) setupUI() {
 	g.lowerBtn.Hide()
 	g.nextBtn.Hide()
 
-	startBtn = widget.NewButton(lang.X("game.higher_lower.start", "Start Game"), func() {
+	startBtn = components.NewButton(lang.X("game.higher_lower.start", "Start Game"), func() {
 		g.Start()
 		startBtn.Hide()
 		g.higherBtn.Show()

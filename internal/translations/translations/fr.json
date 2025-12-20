@@ -89,5 +89,13 @@
   "html.loading": "Déplacement des plaques tectoniques pour former des pays...",
   "html.loading_app": "Chargement de l'application...",
   "html.error_title": "⚠️ Erreur de Chargement de l'Application",
-  "html.error_message": "Échec du chargement de l'application. Veuillez actualiser la page et réessayer."
+  "html.error_message": "Échec du chargement de l'application. Veuillez actualiser la page et réessayer.",
+  "promo.europe_flags.title": "Drapeaux Européens",
+  "promo.europe_flags.desc": "Maîtrisez les drapeaux d'Europe",
+  "promo.asia_shapes.title": "Formes Asiatiques",
+  "promo.asia_shapes.desc": "Devinez les pays par leur forme",
+  "promo.hangman.desc": "Jeu classique de devinettes",
+  "promo.higher_lower.desc": "Comparez les statistiques des pays",
+  "promo.badge.popular": "Populaire",
+  "promo.badge.new": "Nouveau"
 }

@@ -89,5 +89,13 @@
   "html.loading": "Deslocando placas tectónicas para formar países...",
   "html.loading_app": "Carregando aplicação...",
   "html.error_title": "⚠️ Erro ao Carregar a Aplicação",
-  "html.error_message": "Falha ao carregar a aplicação. Por favor, atualize a página e tente novamente."
+  "html.error_message": "Falha ao carregar a aplicação. Por favor, atualize a página e tente novamente.",
+  "promo.europe_flags.title": "Bandeiras Europeias",
+  "promo.europe_flags.desc": "Domine as bandeiras da Europa",
+  "promo.asia_shapes.title": "Formas Asiáticas",
+  "promo.asia_shapes.desc": "Adivinhe países pela forma",
+  "promo.hangman.desc": "Jogo clássico de adivinhar palavras",
+  "promo.higher_lower.desc": "Compare estatísticas de países",
+  "promo.badge.popular": "Popular",
+  "promo.badge.new": "Novo"
 }

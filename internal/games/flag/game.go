@@ -15,6 +15,7 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/driver/desktop"
 	"fyne.io/fyne/v2/lang"
 	"fyne.io/fyne/v2/widget"
 )
@@ -37,10 +38,19 @@ func (c *coloredButton) SetBgColor(col color.Color) {
 	c.Refresh()
 }
 
+func (c *coloredButton) Cursor() desktop.Cursor {
+	return desktop.PointerCursor
+}
+
+func (c *coloredButton) Tapped(e *fyne.PointEvent) {
+	c.button.Tapped(e)
+}
+
 type Game struct {
 	content        *fyne.Container
 	backFunc       func()
 	countries      []models.Country
+	allCountries   []models.Country // Keep all countries for options
 	currentCountry *models.Country
 	usedCountries  map[string]bool
 	options        []models.Country
@@ -53,6 +63,7 @@ type Game struct {
 	total          int
 	scoreLabel     *widget.Label
 	scoreManager   *utils.ScoreManager
+	selectedRegion string
 }
 
 func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
@@ -68,7 +79,24 @@ func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
 }
 
 func (g *Game) loadCountries() {
-	g.countries = data.LoadCountries()
+	g.allCountries = data.LoadCountries()
+	g.countries = g.allCountries
+}
+
+// SetRegion filters countries by region
+func (g *Game) SetRegion(region string) {
+	g.selectedRegion = region
+	if region == "" || region == "World" {
+		g.countries = g.allCountries
+	} else {
+		g.countries = []models.Country{}
+		for _, country := range g.allCountries {
+			if country.Region == region {
+				g.countries = append(g.countries, country)
+			}
+		}
+	}
+	g.Reset()
 }
 
 func (g *Game) setupUI() {

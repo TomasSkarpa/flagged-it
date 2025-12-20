@@ -117,17 +117,53 @@ jobs:
           mkdir -p internal/assetsembed
           cp -r assets internal/assetsembed/assets
       
+      - name: Convert icon to PNG (if needed)
+        run: |
+          # fyne-cross requires PNG icons, not SVG
+          # Check if we have a PNG, if not convert SVG to PNG
+          if [ ! -f assets/favicon/favicon-512x512.png ]; then
+            # Try to use ImageMagick or another tool to convert
+            # For now, use the largest PNG available or skip icon
+            if [ -f assets/favicon/web-app-manifest-512x512.png ]; then
+              cp assets/favicon/web-app-manifest-512x512.png assets/favicon/favicon-512x512.png
+            elif [ -f assets/favicon/web-app-manifest-192x192.png ]; then
+              cp assets/favicon/web-app-manifest-192x192.png assets/favicon/favicon-512x512.png
+            elif [ -f assets/favicon/favicon-96x96.png ]; then
+              cp assets/favicon/favicon-96x96.png assets/favicon/favicon-512x512.png
+            else
+              echo "Warning: No PNG icon found, fyne-cross may fail or use default icon"
+            fi
+          fi
+      
       - name: Build with fyne-cross
         env:
           VERSION: ${{ steps.version.outputs.VERSION }}
           BUILD_TIME: ${{ github.event.head_commit.timestamp || github.run_started_at }}
         run: |
           mkdir -p build
-          fyne-cross ${{ matrix.goos }} -arch ${{ matrix.goarch }} \
-            --app-id com.flaggedit.app \
-            --icon assets/favicon/favicon.svg \
-            -ldflags "-s -w -X main.Version=${{ env.VERSION }} -X main.BuildTime=${{ env.BUILD_TIME }}" \
-            ./cmd
+          # Use PNG icon if available, otherwise skip icon flag
+          ICON_FLAG=""
+          if [ -f assets/favicon/favicon-512x512.png ]; then
+            ICON_FLAG="--icon assets/favicon/favicon-512x512.png"
+          elif [ -f assets/favicon/web-app-manifest-512x512.png ]; then
+            ICON_FLAG="--icon assets/favicon/web-app-manifest-512x512.png"
+          elif [ -f assets/favicon/web-app-manifest-192x192.png ]; then
+            ICON_FLAG="--icon assets/favicon/web-app-manifest-192x192.png"
+          fi
+          
+          if [ -n "$ICON_FLAG" ]; then
+            fyne-cross ${{ matrix.goos }} -arch ${{ matrix.goarch }} \
+              --app-id com.flaggedit.app \
+              $ICON_FLAG \
+              -ldflags "-s -w -X main.Version=${{ env.VERSION }} -X main.BuildTime=${{ env.BUILD_TIME }}" \
+              ./cmd
+          else
+            # Build without icon if no PNG available
+            fyne-cross ${{ matrix.goos }} -arch ${{ matrix.goarch }} \
+              --app-id com.flaggedit.app \
+              -ldflags "-s -w -X main.Version=${{ env.VERSION }} -X main.BuildTime=${{ env.BUILD_TIME }}" \
+              ./cmd
+          fi
           
           # Copy output from fyne-cross to build directory
           if [ -d "fyne-cross/dist/${{ matrix.goos }}-${{ matrix.goarch }}" ]; then

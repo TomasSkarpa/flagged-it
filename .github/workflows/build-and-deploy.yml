@@ -25,6 +25,11 @@ jobs:
       - name: Install dependencies
         run: go mod tidy
 
+      - name: Copy assets for embedding
+        run: |
+          mkdir -p internal/assetsembed
+          cp -r assets internal/assetsembed/assets
+
       - name: Copy wasm_exec.js
         run: cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" .
 

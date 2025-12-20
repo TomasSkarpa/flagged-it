@@ -110,6 +110,11 @@ jobs:
           go install github.com/fyne-io/fyne-cross@latest
           echo "$HOME/go/bin" >> $GITHUB_PATH
       
+      - name: Copy assets for embedding
+        run: |
+          mkdir -p internal/assetsembed
+          cp -r assets internal/assetsembed/assets
+      
       - name: Build with fyne-cross
         env:
           VERSION: ${{ steps.version.outputs.VERSION }}
@@ -169,6 +174,11 @@ jobs:
         run: |
           go install fyne.io/tools/cmd/fyne@latest
           echo "$HOME/go/bin" >> $GITHUB_PATH
+      
+      - name: Copy assets for embedding
+        run: |
+          mkdir -p internal/assetsembed
+          cp -r assets internal/assetsembed/assets
       
       - name: Get or bump version
         id: version

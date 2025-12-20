@@ -1,6 +1,9 @@
 # flagged-it
 Learn about countries playing different game modes – native Windows, macOS, Linux and web application in Go.
 
+<img width="1728" height="1079" alt="image" src="https://github.com/user-attachments/assets/58269e5a-c93c-4f99-8792-4b1b79325267" />
+
+
 ## Setup Instructions
 
 Install Go 1.21 or later:

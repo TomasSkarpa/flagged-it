@@ -100,8 +100,10 @@ jobs:
           elif [ -f VERSION ]; then
             VERSION=$(cat VERSION)
           else
-            echo "Error: No version specified"
-            exit 1
+            # Default to patch bump from 0.0.0 if nothing specified
+            echo "Warning: No version specified and VERSION file not found, defaulting to v0.0.1"
+            VERSION="v0.0.1"
+            echo "$VERSION" > VERSION
           fi
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
       
@@ -221,8 +223,10 @@ jobs:
           elif [ -f VERSION ]; then
             VERSION=$(cat VERSION)
           else
-            echo "Error: No version specified"
-            exit 1
+            # Default to patch bump from 0.0.0 if nothing specified
+            echo "Warning: No version specified and VERSION file not found, defaulting to v0.0.1"
+            VERSION="v0.0.1"
+            echo "$VERSION" > VERSION
           fi
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
       
@@ -237,22 +241,53 @@ jobs:
           mkdir -p build
           export SDKROOT=$(xcrun --show-sdk-path)
           
+          # Debug: confirm tool and assets
+          which fyne || echo "fyne not found"
+          fyne --version || true
+          ls -l assets/favicon || true
+          echo "VERSION=${{ env.VERSION }}"
+          
           # Build with version info
           go build -ldflags="-s -w -X main.Version=${{ env.VERSION }} -X main.BuildTime=${{ env.BUILD_TIME }}" \
             -o flagged-it cmd/main.go
           
+          # Convert SVG to ICNS for macOS (if needed)
+          # For now, use SVG directly - fyne should handle it
+          ICON_PATH="assets/favicon/favicon.svg"
+          if [ ! -f "$ICON_PATH" ]; then
+            echo "Warning: Icon not found at $ICON_PATH, using default"
+            ICON_PATH=""
+          fi
+          
           # Package as macOS app bundle (this bundles assets and hides terminal)
-          fyne package -os darwin -name flagged-it \
-            --app-id com.flaggedit.app \
-            --icon assets/favicon/favicon.svg \
-            -sourceDir . \
-            -executable flagged-it
+          # Use long-form flags and --release for proper app bundle
+          if [ -n "$ICON_PATH" ]; then
+            fyne package --os darwin --name flagged-it \
+              --app-id com.flaggedit.app \
+              --icon "$ICON_PATH" \
+              --sourceDir . \
+              --executable flagged-it \
+              --release
+          else
+            fyne package --os darwin --name flagged-it \
+              --app-id com.flaggedit.app \
+              --sourceDir . \
+              --executable flagged-it \
+              --release
+          fi
           
           # Move the .app bundle to build directory
-          mv flagged-it.app build/flagged-it-darwin-${{ matrix.goarch }}.app
+          if [ -d "flagged-it.app" ]; then
+            mv flagged-it.app build/flagged-it-darwin-${{ matrix.goarch }}.app
+          else
+            echo "Error: flagged-it.app not created"
+            exit 1
+          fi
           
           # Also create a standalone binary for those who prefer it
-          mv flagged-it build/flagged-it-darwin-${{ matrix.goarch }}
+          if [ -f "flagged-it" ]; then
+            mv flagged-it build/flagged-it-darwin-${{ matrix.goarch }}
+          fi
       
       - name: Create archive
         shell: bash

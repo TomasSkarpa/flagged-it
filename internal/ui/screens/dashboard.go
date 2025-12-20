@@ -1,7 +1,7 @@
 package screens
 
 import (
-	"flagged-it/internal/translations"
+	"flagged-it/internal/ui/components"
 	"flagged-it/internal/utils"
 	"fmt"
 	"image/color"
@@ -41,26 +41,11 @@ func (d *Dashboard) setupUI() {
 	title := widget.NewLabel(lang.X("dashboard.title", "Choose Your Game Mode"))
 	title.TextStyle = fyne.TextStyle{Bold: true}
 
-	// Language selector
-	languageList := make([]string, len(translations.TranslationsInfo))
-	var langSelIndex int
-	currentLocale := utils.GetCurrentLocale()
-	for i, tr := range translations.TranslationsInfo {
-		languageList[i] = tr.DisplayName
-		if tr.Name == currentLocale {
-			langSelIndex = i
-		}
-	}
-
-	langSelect := widget.NewSelect(languageList, nil)
-	langSelect.SetSelectedIndex(langSelIndex)
-	langSelect.OnChanged = func(_ string) {
-		if i := langSelect.SelectedIndex(); i >= 0 {
-			utils.SetCurrentLocale(translations.TranslationsInfo[i].Name)
-			utils.LoadTranslation(translations.TranslationsInfo[i].Name)
-			d.window.SetContent(NewDashboard(d.navigateFunc, d.debugFunc, d.window, d.scoreManager).GetContent())
-		}
-	}
+	// Language selector button - shows "🇬🇧 EN" format
+	langBtn := components.NewLanguageSelectorButton(d.window, func() {
+		// Refresh dashboard when language changes
+		d.window.SetContent(NewDashboard(d.navigateFunc, d.debugFunc, d.window, d.scoreManager).GetContent())
+	})
 
 	// Header with language selector, title and optional settings button
 	var header *fyne.Container
@@ -68,16 +53,16 @@ func (d *Dashboard) setupUI() {
 		settingsBtn := widget.NewButtonWithIcon("", theme.SettingsIcon(), d.debugFunc)
 		header = container.NewBorder(
 			nil, nil,
-			langSelect,
+			langBtn,
 			settingsBtn,
-			container.NewHBox(widget.NewLabel(""), title),
+			container.NewCenter(title),
 		)
 	} else {
 		header = container.NewBorder(
 			nil, nil,
-			langSelect,
+			langBtn,
 			nil,
-			container.NewHBox(widget.NewLabel(""), title),
+			container.NewCenter(title),
 		)
 	}
 

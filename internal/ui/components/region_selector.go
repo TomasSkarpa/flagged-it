@@ -31,7 +31,12 @@ func NewRegionSelector(title, description string, regions []string, onRegionSele
 		return regions[i] < regions[j]
 	})
 
-	buttonGrid := container.NewGridWithColumns(2)
+	// 1 column on mobile, 2 on desktop
+	columns := 2
+	if utils.IsMobile() {
+		columns = 1
+	}
+	buttonGrid := container.NewGridWithColumns(columns)
 	for _, region := range regions {
 		region := region
 		translatedRegion := utils.TranslateRegion(region)

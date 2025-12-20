@@ -81,17 +81,33 @@ func (g *Game) setupUI() {
 	g.statusLabel.Wrapping = fyne.TextWrapWord
 	g.scoreLabel = widget.NewLabel(lang.L("game.score", map[string]any{"Score": 0}))
 
-	// Create responsive button grid
-	g.buttonGrid = container.NewGridWithColumns(2)
+	// Create responsive button grid - 1 column on mobile, 2 on desktop
+	columns := 2
+	if utils.IsMobile() {
+		columns = 1
+	}
+	g.buttonGrid = container.NewGridWithColumns(columns)
 
-	g.content = container.NewVBox(
+	// Header section (fixed at top)
+	headerSection := container.NewVBox(
 		topBar.GetContainer(),
 		widget.NewSeparator(),
 		g.scoreLabel,
 		g.statusLabel,
-		container.NewCenter(g.flagImage),
+	)
+
+	// Footer section (fixed at bottom)
+	footerSection := container.NewVBox(
 		widget.NewSeparator(),
 		g.buttonGrid,
+	)
+
+	// Use Border layout to properly constrain content
+	g.content = container.NewBorder(
+		headerSection, // top
+		footerSection, // bottom
+		nil, nil,
+		container.NewCenter(g.flagImage), // center - will flex
 	)
 }
 
@@ -199,7 +215,7 @@ func (g *Game) makeGuess(guessed models.Country) {
 		g.scoreManager.UpdateScore("flag", g.score)
 		time.AfterFunc(1500*time.Millisecond, func() {
 			fyne.Do(func() {
-				g.statusLabel.SetText(lang.L("game.complete", map[string]any{"Score": g.score, "Percent": int(float64(g.score)/10*100)}))
+				g.statusLabel.SetText(lang.L("game.complete", map[string]any{"Score": g.score, "Percent": int(float64(g.score) / 10 * 100)}))
 			})
 		})
 	} else {

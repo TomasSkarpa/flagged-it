@@ -8,12 +8,15 @@
   "game.hangman.title": "Hangman",
   "game.facts.title": "Guess by Facts",
   "game.higher_lower.title": "Higher or Lower",
+  "game.higher_lower.current_streak_label": "Current Streak",
+  "game.higher_lower.highest_streak_label": "Highest Streak",
   "game.guessing.title": "What Country is This",
   "game.flag.question": "Which country does this flag belong to?",
   "game.correct": "Correct! It's {{.Country}}!",
   "game.wrong": "Wrong! It was {{.Country}}",
   "game.score": "Score: {{.Score}}/10",
   "game.complete": "Game Complete! Final Score: {{.Score}}/10 ({{.Percent}}%)",
+  "game.round_progress": "Round %d/%d",
   "error.loading_countries": "Error loading countries data",
   "game.list.select_region": "Select Region",
   "game.list.choose_region": "Choose a region and try to name all countries in it!",
@@ -97,5 +100,10 @@
   "promo.hangman.desc": "Classic word guessing game",
   "promo.higher_lower.desc": "Compare country stats",
   "promo.badge.popular": "Popular",
-  "promo.badge.new": "New"
+  "promo.badge.new": "New",
+  "scoreboard.title": "My Best Scores",
+  "scoreboard.empty": "No scores yet! Play some games to see your progress here.",
+  "scoreboard.score": "Score",
+  "scoreboard.percent": "Percent",
+  "scoreboard.date": "Date"
 }

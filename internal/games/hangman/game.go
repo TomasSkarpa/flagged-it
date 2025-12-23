@@ -2,7 +2,6 @@ package hangman
 
 import (
 	"fmt"
-	"image/color"
 	"math/rand"
 	"strings"
 	"time"
@@ -10,7 +9,6 @@ import (
 	"flagged-it/internal/data"
 	"flagged-it/internal/data/models"
 	"flagged-it/internal/ui/components"
-	"flagged-it/internal/utils"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
@@ -34,19 +32,17 @@ type Game struct {
 	newGameBtn     *widget.Button
 	keyboard       *fyne.Container
 	letterButtons  map[rune]*components.Button
-	score          int
-	total          int
-	scoreLabel     *widget.Label
-	scoreManager   *utils.ScoreManager
+	score        int
+	total        int
+	gameProgress *components.GameProgress
 }
 
-func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
+func NewGame(backFunc func()) *Game {
 	g := &Game{
 		backFunc:       backFunc,
 		maxWrongs:      6,
 		guessedLetters: make(map[rune]bool),
 		letterButtons:  make(map[rune]*components.Button),
-		scoreManager:   scoreManager,
 	}
 	g.loadCountries()
 	g.setupUI()
@@ -67,20 +63,34 @@ func (g *Game) setupUI() {
 	g.hintLabel = widget.NewLabel("")
 	g.wrongLabel = widget.NewLabel("")
 	g.statusLabel = widget.NewLabel(lang.X("game.hangman.guess_country", "Guess the country name!"))
-	g.scoreLabel = widget.NewLabel(fmt.Sprintf(lang.X("game.hangman.score", "Score: %d/5"), 0))
 
 	g.setupKeyboard()
 
-	g.content = container.NewVBox(
+	// Game progress component
+	g.gameProgress = components.NewGameProgress(components.GameProgressConfig{
+		ShowRounds:      true,
+		ShowPercentage:  true,
+		ShowProgressBar: true,
+	})
+
+	// Header section with natural spacing
+	headerSection := container.NewVBox(
 		topBar.GetContainer(),
-		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
-		g.scoreLabel,
+		g.gameProgress.GetContainer(),
 		g.statusLabel,
+	)
+
+	// Game content
+	gameContent := container.NewVBox(
 		g.wordLabel,
 		g.hintLabel,
 		g.wrongLabel,
-		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		g.keyboard,
+	)
+
+	g.content = container.NewVBox(
+		headerSection,
+		gameContent,
 	)
 
 }
@@ -92,8 +102,6 @@ func (g *Game) newGame() {
 	}
 
 	if g.total >= 5 {
-		g.scoreManager.SetTotal("hangman", 5)
-		g.scoreManager.UpdateScore("hangman", g.score)
 		g.statusLabel.SetText(fmt.Sprintf(lang.X("game.complete", "Game Complete! Final Score: %d/10 (%.0f%%)"), g.score, float64(g.score)/5*100))
 		for _, btn := range g.letterButtons {
 			btn.Disable()
@@ -211,7 +219,7 @@ func (g *Game) checkGameEnd() {
 			btn.Disable()
 		}
 		g.total++
-		g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.hangman.score", "Score: %d/5"), g.score))
+		g.gameProgress.UpdateProgress(g.total, 5, g.score)
 		time.AfterFunc(1500*time.Millisecond, func() {
 			fyne.Do(func() {
 				g.newGame()
@@ -227,7 +235,7 @@ func (g *Game) checkGameEnd() {
 		}
 		g.total++
 		g.score++
-		g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.hangman.score", "Score: %d/5"), g.score))
+		g.gameProgress.UpdateProgress(g.total, 5, g.score)
 		time.AfterFunc(1500*time.Millisecond, func() {
 			fyne.Do(func() {
 				g.newGame()
@@ -247,7 +255,7 @@ func (g *Game) Start() {
 func (g *Game) Reset() {
 	g.score = 0
 	g.total = 0
-	g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.hangman.score", "Score: %d/5"), 0))
+	g.gameProgress.Reset()
 	g.newGame()
 }
 

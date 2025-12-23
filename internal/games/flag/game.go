@@ -63,14 +63,13 @@ type Game struct {
 	score          int
 	total          int
 	scoreLabel     *widget.Label
-	scoreManager   *utils.ScoreManager
 	selectedRegion string
+	gameProgress   *components.GameProgress
 }
 
-func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
+func NewGame(backFunc func()) *Game {
 	g := &Game{
 		backFunc:      backFunc,
-		scoreManager:  scoreManager,
 		usedCountries: make(map[string]bool),
 	}
 	g.loadCountries()
@@ -113,7 +112,6 @@ func (g *Game) setupUI() {
 	}
 	g.statusLabel = widget.NewLabel(lang.X("game.flag.question", "Which country does this flag belong to?"))
 	g.statusLabel.Wrapping = fyne.TextWrapWord
-	g.scoreLabel = widget.NewLabel(lang.L("game.score", map[string]any{"Score": 0}))
 
 	// Create responsive button grid - 1 column on mobile, 2 on desktop
 	columns := 2
@@ -122,17 +120,22 @@ func (g *Game) setupUI() {
 	}
 	g.buttonGrid = container.NewGridWithColumns(columns)
 
+	// Game progress component with round counter, progress bar, and percentage
+	g.gameProgress = components.NewGameProgress(components.GameProgressConfig{
+		ShowRounds:      true,
+		ShowPercentage:  true,
+		ShowProgressBar: true,
+	})
+
 	// Header section (fixed at top)
 	headerSection := container.NewVBox(
 		topBar.GetContainer(),
-		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
-		g.scoreLabel,
+		g.gameProgress.GetContainer(),
 		g.statusLabel,
 	)
 
 	// Footer section (fixed at bottom)
 	footerSection := container.NewVBox(
-		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		g.buttonGrid,
 	)
 
@@ -231,7 +234,8 @@ func (g *Game) makeGuess(guessed models.Country) {
 		g.statusLabel.SetText(lang.L("game.wrong", map[string]any{"Country": g.currentCountry.Name.Common}))
 	}
 
-	g.scoreLabel.SetText(lang.L("game.score", map[string]any{"Score": g.score}))
+	// Update progress display
+	g.gameProgress.UpdateProgress(g.total, 10, g.score)
 
 	for i, btn := range g.buttons {
 		var bgColor color.Color
@@ -245,8 +249,6 @@ func (g *Game) makeGuess(guessed models.Country) {
 	}
 
 	if g.total >= 10 {
-		g.scoreManager.SetTotal("flag", 10)
-		g.scoreManager.UpdateScore("flag", g.score)
 		time.AfterFunc(1500*time.Millisecond, func() {
 			fyne.Do(func() {
 				g.statusLabel.SetText(lang.L("game.complete", map[string]any{"Score": g.score, "Percent": int(float64(g.score) / 10 * 100)}))
@@ -273,6 +275,6 @@ func (g *Game) Reset() {
 	g.score = 0
 	g.total = 0
 	g.usedCountries = make(map[string]bool)
-	g.scoreLabel.SetText(lang.L("game.score", map[string]any{"Score": 0}))
+	g.gameProgress.Reset()
 	g.newGame()
 }

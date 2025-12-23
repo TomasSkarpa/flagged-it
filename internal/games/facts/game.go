@@ -2,7 +2,6 @@ package facts
 
 import (
 	"fmt"
-	"image/color"
 	"math/rand"
 	"strings"
 	"time"
@@ -43,14 +42,12 @@ type Game struct {
 	historyContainer *fyne.Container
 	score            int
 	total            int
-	scoreLabel       *widget.Label
-	scoreManager     *utils.ScoreManager
+	gameProgress     *components.GameProgress
 }
 
-func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
+func NewGame(backFunc func()) *Game {
 	g := &Game{
-		backFunc:     backFunc,
-		scoreManager: scoreManager,
+		backFunc: backFunc,
 	}
 	g.loadCountries()
 	g.setupUI()
@@ -76,7 +73,6 @@ func (g *Game) setupUI() {
 	g.guessBtn = components.NewButton(lang.X("game.facts.guess", "Guess"), g.makeGuess)
 	g.statusLabel = widget.NewLabel("")
 	g.triesLabel = widget.NewLabel("")
-	g.scoreLabel = widget.NewLabel(fmt.Sprintf(lang.X("game.facts.score", "Score: %d/5"), 0))
 
 	guessContainer := container.NewBorder(
 		nil, nil,
@@ -85,17 +81,31 @@ func (g *Game) setupUI() {
 	)
 	g.historyContainer = container.NewVBox()
 
-	g.content = container.NewVBox(
+	// Game progress component
+	g.gameProgress = components.NewGameProgress(components.GameProgressConfig{
+		ShowRounds:      true,
+		ShowPercentage:  true,
+		ShowProgressBar: true,
+	})
+
+	// Header section with natural spacing
+	headerSection := container.NewVBox(
 		topBar.GetContainer(),
-		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
-		g.scoreLabel,
+		g.gameProgress.GetContainer(),
 		g.statusLabel,
 		g.triesLabel,
-		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
+	)
+
+	// Game content
+	gameContent := container.NewVBox(
 		g.factLabel,
-		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		guessContainer,
 		g.historyContainer,
+	)
+
+	g.content = container.NewVBox(
+		headerSection,
+		gameContent,
 	)
 }
 
@@ -106,8 +116,6 @@ func (g *Game) newGame() {
 	}
 
 	if g.total >= 5 {
-		g.scoreManager.SetTotal("facts", 5)
-		g.scoreManager.UpdateScore("facts", g.score)
 		g.statusLabel.SetText(fmt.Sprintf(lang.X("game.facts.complete", "Game Complete! Final Score: %d/5 (%.0f%%)"), g.score, float64(g.score)/5*100))
 		g.guessEntry.Disable()
 		g.guessBtn.Disable()
@@ -179,7 +187,7 @@ func (g *Game) makeGuess() {
 
 		g.total++
 		g.score++
-		g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.facts.score", "Score: %d/5"), g.score))
+		g.gameProgress.UpdateProgress(g.total, 5, g.score)
 		g.statusLabel.SetText(fmt.Sprintf(lang.X("game.facts.correct", "Correct! It was %s!"), g.currentCountry.Name.Common))
 		g.guessEntry.Disable()
 		g.guessBtn.Disable()
@@ -205,7 +213,7 @@ func (g *Game) makeGuess() {
 		flagEmoji := countryCodeToFlag(g.currentCountry.CCA2)
 		g.statusLabel.SetText(fmt.Sprintf(lang.X("game.facts.game_over", "Game Over! It was %s %s"), g.currentCountry.Name.Common, flagEmoji))
 		g.total++
-		g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.facts.score", "Score: %d/5"), g.score))
+		g.gameProgress.UpdateProgress(g.total, 5, g.score)
 		g.guessEntry.Disable()
 		g.guessBtn.Disable()
 		time.AfterFunc(1500*time.Millisecond, func() {
@@ -284,7 +292,7 @@ func (g *Game) updateHistoryUI() {
 func (g *Game) Reset() {
 	g.score = 0
 	g.total = 0
-	g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.facts.score", "Score: %d/5"), 0))
+	g.gameProgress.Reset()
 	g.newGame()
 }
 

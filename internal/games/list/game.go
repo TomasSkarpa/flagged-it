@@ -6,7 +6,6 @@ import (
 	"flagged-it/internal/ui/components"
 	"flagged-it/internal/utils"
 	"fmt"
-	"image/color"
 	"sort"
 	"strings"
 
@@ -25,18 +24,16 @@ type Game struct {
 	selectedContinent string
 	allCountries      []models.Country
 	guessedCountries  map[string]bool
-	guessEntry        *widget.Entry
-	progressLabel     *widget.Label
-	countryList       *widget.List
-	statusLabel       *widget.Label
-	scoreLabel        *widget.Label
-	scoreManager      *utils.ScoreManager
+	guessEntry    *widget.Entry
+	progressLabel *widget.Label
+	countryList   *widget.List
+	statusLabel   *widget.Label
+	gameProgress  *components.GameProgress
 }
 
-func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
+func NewGame(backFunc func()) *Game {
 	g := &Game{
-		backFunc:     backFunc,
-		scoreManager: scoreManager,
+		backFunc: backFunc,
 	}
 	g.setupUI()
 	return g
@@ -48,15 +45,10 @@ func (g *Game) setupUI() {
 	g.setupSelectionView()
 	g.setupGameView()
 
-	headerSection := container.NewVBox(
-		topBar.GetContainer(),
-		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
-	)
-
 	g.mainContent = container.NewMax(g.selectionView)
 
 	g.content = container.NewBorder(
-		headerSection, nil, nil, nil,
+		topBar.GetContainer(), nil, nil, nil,
 		g.mainContent,
 	)
 }
@@ -105,7 +97,6 @@ func (g *Game) getAvailableRegions() []string {
 func (g *Game) setupGameView() {
 	g.progressLabel = widget.NewLabel("")
 	g.statusLabel = widget.NewLabel("")
-	g.scoreLabel = widget.NewLabel("")
 
 	g.guessEntry = widget.NewEntry()
 	g.guessEntry.SetPlaceHolder(lang.X("game.list.enter_country", "Enter country name..."))
@@ -135,16 +126,22 @@ func (g *Game) setupGameView() {
 		g.guessEntry,
 	)
 
-	topSection := container.NewVBox(
-		g.scoreLabel,
+	// Game progress component (completion-based, no rounds)
+	g.gameProgress = components.NewGameProgress(components.GameProgressConfig{
+		ShowRounds:      false,
+		ShowPercentage:  true,
+		ShowProgressBar: true,
+	})
+
+	gameHeader := container.NewVBox(
+		g.gameProgress.GetContainer(),
 		g.progressLabel,
 		g.statusLabel,
-		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		guessContainer,
 	)
 
 	g.gameView = container.NewBorder(
-		topSection, nil, nil, nil,
+		gameHeader, nil, nil, nil,
 		g.countryList,
 	)
 }
@@ -167,7 +164,7 @@ func (g *Game) startGame(continent string) {
 
 	g.updateProgress()
 	g.statusLabel.SetText(lang.X("game.list.start_guessing", "Start guessing countries!"))
-	g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.list.completion", "Completion: %.0f%%"), 0.0))
+	g.gameProgress.UpdateProgress(0, len(g.allCountries), 0)
 	g.guessEntry.SetText("")
 
 	g.mainContent.RemoveAll()
@@ -197,8 +194,7 @@ func (g *Game) makeGuess() {
 	if found {
 		g.statusLabel.SetText(fmt.Sprintf(lang.X("game.list.correct_added", "Correct! %s added to the list."), matchedCountry.Name.Common))
 		g.updateProgress()
-		percent := float64(len(g.guessedCountries)) / float64(len(g.allCountries)) * 100
-		g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.list.completion", "Completion: %.0f%%"), percent))
+		g.gameProgress.UpdateProgress(len(g.guessedCountries), len(g.allCountries), len(g.guessedCountries))
 		if len(g.guessedCountries) == len(g.allCountries) {
 			g.statusLabel.SetText(lang.X("game.list.congratulations", "Congratulations! You've listed all countries!"))
 		}

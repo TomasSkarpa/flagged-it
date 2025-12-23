@@ -2,6 +2,7 @@ package hangman
 
 import (
 	"fmt"
+	"image/color"
 	"math/rand"
 	"strings"
 	"time"
@@ -72,13 +73,13 @@ func (g *Game) setupUI() {
 
 	g.content = container.NewVBox(
 		topBar.GetContainer(),
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		g.scoreLabel,
 		g.statusLabel,
 		g.wordLabel,
 		g.hintLabel,
 		g.wrongLabel,
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		g.keyboard,
 	)
 

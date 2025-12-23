@@ -3,6 +3,7 @@ package screens
 import (
 	"encoding/json"
 	"fmt"
+	"image/color"
 	"os"
 	"path/filepath"
 	"sort"
@@ -73,17 +74,17 @@ func (d *DebugScreen) setupUI() {
 
 	header := container.NewVBox(
 		title,
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		widget.NewLabel("1. Select Data File:"),
 		container.NewGridWithColumns(2, d.fileSelect, widget.NewLabel("")),
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		widget.NewLabel("2. Select Element:"),
 		container.NewGridWithColumns(2, container.NewVBox(d.elementSelect, container.NewHBox(addBtn, removeBtn)), widget.NewLabel("")),
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 	)
 
 	footer := container.NewVBox(
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		container.NewHBox(saveBtn, backBtn),
 	)
 

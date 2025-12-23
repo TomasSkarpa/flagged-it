@@ -91,11 +91,11 @@ func (g *Game) setupUI() {
 	g.bodyScroll = container.NewVScroll(g.bodyGrid)
 
 	topSection := container.NewVBox(
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		g.statusLabel,
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		guessContainer,
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		widget.NewLabel(lang.X("game.guessing.history", "Guess History:")),
 		g.headerGrid,
 	)

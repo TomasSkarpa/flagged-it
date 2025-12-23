@@ -125,14 +125,14 @@ func (g *Game) setupUI() {
 	// Header section (fixed at top)
 	headerSection := container.NewVBox(
 		topBar.GetContainer(),
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		g.scoreLabel,
 		g.statusLabel,
 	)
 
 	// Footer section (fixed at bottom)
 	footerSection := container.NewVBox(
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		g.buttonGrid,
 	)
 

@@ -115,9 +115,8 @@ func (d *Dashboard) setupUI() {
 	// Main content (header, game buttons, scores)
 	mainContent := container.NewVBox(
 		header,
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5), // Dashed separator 3px
 		gameButtons,
-		widget.NewSeparator(),
 		d.scoresGrid,
 	)
 
@@ -135,15 +134,15 @@ func (d *Dashboard) createPromoCards() *fyne.Container {
 	// Define asset paths based on runtime
 	var europeFlagsPath, asiaMapPath, hangmanPath, higherLowerPath string
 	if runtime.GOOS == "js" {
-		europeFlagsPath = "assets/world_map_silhouette.svg"
-		asiaMapPath = "assets/world_map_silhouette.svg"
-		hangmanPath = "assets/hangman.svg"
-		higherLowerPath = "assets/higher_lower.svg"
+		europeFlagsPath = "assets/twemoji_flags_cca2/EU.svg"
+		asiaMapPath = "assets/iconography/asia_map.png"
+		hangmanPath = "assets/iconography/hangman.png"
+		higherLowerPath = "assets/iconography/higher_lower.png"
 	} else {
-		europeFlagsPath = "assets/world_map_silhouette.svg"
-		asiaMapPath = "assets/world_map_silhouette.svg"
-		hangmanPath = "assets/hangman.svg"
-		higherLowerPath = "assets/higher_lower.svg"
+		europeFlagsPath = "assets/twemoji_flags_cca2/EU.svg"
+		asiaMapPath = "assets/iconography/asia_map.png"
+		hangmanPath = "assets/iconography/hangman.png"
+		higherLowerPath = "assets/iconography/higher_lower.png"
 	}
 
 	isMobile := utils.IsMobile()

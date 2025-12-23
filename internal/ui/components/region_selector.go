@@ -49,7 +49,6 @@ func NewRegionSelector(title, description string, regions []string, onRegionSele
 		container: container.NewVBox(
 			titleLabel,
 			descLabel,
-			widget.NewSeparator(),
 			buttonGrid,
 		),
 	}

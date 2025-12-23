@@ -6,6 +6,7 @@ import (
 	"flagged-it/internal/ui/components"
 	"flagged-it/internal/utils"
 	"fmt"
+	"image/color"
 	"sort"
 	"strings"
 
@@ -49,7 +50,7 @@ func (g *Game) setupUI() {
 
 	headerSection := container.NewVBox(
 		topBar.GetContainer(),
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 	)
 
 	g.mainContent = container.NewMax(g.selectionView)
@@ -138,9 +139,8 @@ func (g *Game) setupGameView() {
 		g.scoreLabel,
 		g.progressLabel,
 		g.statusLabel,
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		guessContainer,
-		widget.NewSeparator(),
 	)
 
 	g.gameView = container.NewBorder(

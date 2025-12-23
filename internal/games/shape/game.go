@@ -71,7 +71,7 @@ func (g *Game) setupUI() {
 
 	headerSection := container.NewVBox(
 		topBar.GetContainer(),
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 	)
 
 	g.mainContent = container.NewMax(g.selectionView)
@@ -145,7 +145,7 @@ func (g *Game) setupGameView() {
 		g.progressLabel,
 		guessContainer,
 		g.resultLabel,
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 	)
 
 	g.gameView = container.NewBorder(

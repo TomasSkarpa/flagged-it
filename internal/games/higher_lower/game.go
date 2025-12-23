@@ -5,6 +5,7 @@ import (
 	"flagged-it/internal/ui/components"
 	"flagged-it/internal/utils"
 	"fmt"
+	"image/color"
 	"math/rand"
 
 	"fyne.io/fyne/v2"
@@ -78,14 +79,14 @@ func (g *Game) setupUI() {
 
 	g.content = container.NewVBox(
 		topBar.GetContainer(),
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		gameDescription,
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		g.scoreLabel,
 		startBtn,
 		container.NewCenter(g.countryOneNameLabel),
 		container.NewCenter(g.countryOnePopLabel),
-		widget.NewSeparator(),
+		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		container.NewCenter(g.countryTwoNameLabel),
 		container.NewCenter(g.countryTwoPopLabel),
 		buttonGrid,

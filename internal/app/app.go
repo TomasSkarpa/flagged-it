@@ -15,17 +15,19 @@ import (
 
 type App struct {
 	window    fyne.Window
+	app       fyne.App
 	dashboard *screens.Dashboard
 }
 
-func NewApp(window fyne.Window) *App {
+func NewApp(window fyne.Window, app fyne.App) *App {
 	return &App{
 		window: window,
+		app:    app,
 	}
 }
 
 func (a *App) GetDashboard() *fyne.Container {
-	a.dashboard = screens.NewDashboard(a.navigateToGame, a.navigateToDebug, a.window)
+	a.dashboard = screens.NewDashboard(a.navigateToGame, a.navigateToDebug, a.window, a.app)
 	return a.dashboard.GetContent()
 }
 

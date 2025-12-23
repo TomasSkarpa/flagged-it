@@ -34,7 +34,7 @@ jobs:
         run: cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" .
 
       - name: Build Go WASM
-        run: GOOS=js GOARCH=wasm go build -o flagged-it.wasm cmd/main.go
+        run: GOOS=js GOARCH=wasm go build -o flagged-it.wasm ./cmd
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

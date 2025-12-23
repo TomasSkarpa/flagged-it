@@ -28,9 +28,22 @@ func main() {
 	if utils.IsMobile() {
 		scale = 1.0
 	}
-	myApp.Settings().SetTheme(&scaledTheme{scale: scale})
+	
+	// Get theme from localStorage
+	effectiveTheme := utils.GetEffectiveTheme()
+	var variant fyne.ThemeVariant
+	if effectiveTheme == "light" {
+		variant = theme.VariantLight
+	} else {
+		variant = theme.VariantDark
+	}
+	
+	myApp.Settings().SetTheme(&scaledTheme{
+		scale:   scale,
+		variant: variant,
+	})
 
-	appController := app.NewApp(myWindow)
+	appController := app.NewApp(myWindow, myApp)
 	myWindow.SetContent(appController.GetDashboard())
 
 	// Handle tab visibility changes to prevent freezing
@@ -40,11 +53,17 @@ func main() {
 }
 
 type scaledTheme struct {
-	scale float32
+	scale   float32
+	variant fyne.ThemeVariant
+}
+
+func (s *scaledTheme) SetVariant(variant fyne.ThemeVariant) {
+	s.variant = variant
 }
 
 func (s *scaledTheme) Color(name fyne.ThemeColorName, variant fyne.ThemeVariant) color.Color {
-	return theme.DefaultTheme().Color(name, variant)
+	// Use the theme's variant instead of the passed one
+	return theme.DefaultTheme().Color(name, s.variant)
 }
 
 func (s *scaledTheme) Icon(name fyne.ThemeIconName) fyne.Resource {

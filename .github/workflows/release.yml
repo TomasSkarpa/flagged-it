@@ -285,7 +285,7 @@ jobs:
           
           # Build with version info
           go build -ldflags="-s -w -X main.Version=${{ env.VERSION }} -X main.BuildTime=${{ env.BUILD_TIME }}" \
-            -o flagged-it cmd/main.go
+            -o flagged-it ./cmd
           
           # Convert SVG to ICNS for macOS (if needed)
           # For now, use SVG directly - fyne should handle it

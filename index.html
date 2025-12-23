@@ -154,6 +154,15 @@
             showError('Go runtime not available');
         } else {
             const go = new Go();
+            
+            // Allow browser shortcuts (Cmd/Ctrl + number) to work
+            document.addEventListener('keydown', function(e) {
+                if (e.metaKey || e.ctrlKey) {
+                    // Don't let the canvas handle browser shortcuts
+                    e.stopPropagation();
+                }
+            }, true);
+            
             WebAssembly.instantiateStreaming(fetch("flagged-it.wasm"), go.importObject).then((result) => {
                 document.getElementById('loading').style.display = 'none';
                 go.run(result.instance);

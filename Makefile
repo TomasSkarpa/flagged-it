@@ -13,7 +13,7 @@
 # -------------------------------------------------------------------
 
 BINARY    := flagged-it
-MAIN      := cmd/main.go
+MAIN      := ./cmd
 BUILD_DIR := build
 
 # Default target OS/arch

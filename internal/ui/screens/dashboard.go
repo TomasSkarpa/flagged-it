@@ -18,14 +18,16 @@ type Dashboard struct {
 	navigateFunc func(string)
 	debugFunc    func()
 	window       fyne.Window
+	app          fyne.App
 	debugManager *utils.DebugManager
 }
 
-func NewDashboard(navigateFunc func(string), debugFunc func(), window fyne.Window) *Dashboard {
+func NewDashboard(navigateFunc func(string), debugFunc func(), window fyne.Window, app fyne.App) *Dashboard {
 	d := &Dashboard{
 		navigateFunc: navigateFunc,
 		debugFunc:    debugFunc,
 		window:       window,
+		app:          app,
 		debugManager: utils.NewDebugManager(),
 	}
 	d.setupUI()
@@ -39,23 +41,28 @@ func (d *Dashboard) setupUI() {
 	// Language selector button - shows "🇬🇧 EN" format
 	langBtn := components.NewLanguageSelectorButton(d.window, func() {
 		// Refresh dashboard when language changes
-		d.window.SetContent(NewDashboard(d.navigateFunc, d.debugFunc, d.window).GetContent())
+		d.window.SetContent(NewDashboard(d.navigateFunc, d.debugFunc, d.window, d.app).GetContent())
 	})
+	
+	// Theme selector button - shows "💻 System", "🌙 Dark", or "☀️ Light"
+	themeBtn := components.NewThemeSelectorButton(d.window, d.app)
 
-	// Header with language selector, title and optional settings button
+	// Header with language selector, theme selector, title and optional settings button
 	var header *fyne.Container
+	leftButtons := container.NewHBox(langBtn, themeBtn)
+	
 	if d.debugManager.IsDebugEnabled() {
 		settingsBtn := components.NewButtonWithIcon("", theme.SettingsIcon(), d.debugFunc)
 		header = container.NewBorder(
 			nil, nil,
-			langBtn,
+			leftButtons,
 			settingsBtn,
 			container.NewCenter(title),
 		)
 	} else {
 		header = container.NewBorder(
 			nil, nil,
-			langBtn,
+			leftButtons,
 			nil,
 			container.NewCenter(title),
 		)

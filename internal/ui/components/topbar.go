@@ -14,16 +14,26 @@ type TopBar struct {
 func NewTopBar(gameTitle string, backFunc func(), resetFunc func()) *TopBar {
 	title := widget.NewLabel(gameTitle)
 	title.TextStyle.Bold = true
+	title.Alignment = fyne.TextAlignCenter
 
 	backBtn := NewButton(lang.X("button.dashboard", "Dashboard"), backFunc)
-	resetBtn := NewButton(lang.X("button.new_game", "New Game"), resetFunc)
-
-	topBar := container.NewBorder(
-		nil, nil,
-		backBtn,
-		container.NewHBox(resetBtn),
-		container.NewCenter(title),
-	)
+	
+	// Use Stack to truly center the title
+	centeredTitle := container.NewCenter(title)
+	
+	var topBar *fyne.Container
+	if resetFunc != nil {
+		resetBtn := NewButton(lang.X("button.new_game", "New Game"), resetFunc)
+		topBar = container.NewStack(
+			centeredTitle,
+			container.NewBorder(nil, nil, backBtn, container.NewHBox(resetBtn)),
+		)
+	} else {
+		topBar = container.NewStack(
+			centeredTitle,
+			container.NewBorder(nil, nil, backBtn, nil),
+		)
+	}
 
 	return &TopBar{
 		container: topBar,

@@ -33,6 +33,9 @@ func (a *App) GetDashboard() *fyne.Container {
 
 func (a *App) navigateToGame(gameType string) {
 	switch gameType {
+	case "scoreboard":
+		scoreboard := screens.NewScoreboard(a.backToDashboard, a.window)
+		a.window.SetContent(scoreboard.GetContent())
 	case "shape":
 		game := shape.NewGame(a.backToDashboard)
 		a.window.SetContent(game.GetContent())

@@ -47,25 +47,33 @@ func (d *Dashboard) setupUI() {
 	// Theme selector button - shows "💻 System", "🌙 Dark", or "☀️ Light"
 	themeBtn := components.NewThemeSelectorButton(d.window, d.app)
 
+	// Scoreboard button
+	scoreboardBtn := components.NewButton("📊", func() {
+		d.navigateFunc("scoreboard")
+	})
+	scoreboardBtn.Importance = widget.LowImportance
+
 	// Header with language selector, theme selector, title and optional settings button
 	// Use Max container to truly center the title, then overlay buttons on top
 	title.Alignment = fyne.TextAlignCenter
 	centeredTitle := container.NewCenter(title)
-
+	
 	leftButtons := container.NewHBox(langBtn, themeBtn)
-
+	
 	var header *fyne.Container
 	if d.debugManager.IsDebugEnabled() {
 		settingsBtn := components.NewButtonWithIcon("", theme.SettingsIcon(), d.debugFunc)
+		rightButtons := container.NewHBox(scoreboardBtn, settingsBtn)
 		// Stack: centered title at bottom, buttons on top
 		header = container.NewStack(
 			centeredTitle,
-			container.NewBorder(nil, nil, leftButtons, settingsBtn),
+			container.NewBorder(nil, nil, leftButtons, rightButtons),
 		)
 	} else {
+		// Stack: centered title at bottom, buttons on top
 		header = container.NewStack(
 			centeredTitle,
-			container.NewBorder(nil, nil, leftButtons, nil),
+			container.NewBorder(nil, nil, leftButtons, scoreboardBtn),
 		)
 	}
 

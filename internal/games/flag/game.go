@@ -249,9 +249,20 @@ func (g *Game) makeGuess(guessed models.Country) {
 	}
 
 	if g.total >= 10 {
+		finalPercent := float64(g.score) / 10 * 100
+		
+		// Save score to scoreboard
+		utils.SaveScore(utils.ScoreEntry{
+			GameMode: "flag",
+			Score:    g.score,
+			Total:    10,
+			Percent:  finalPercent,
+			Region:   g.selectedRegion,
+		})
+		
 		time.AfterFunc(1500*time.Millisecond, func() {
 			fyne.Do(func() {
-				g.statusLabel.SetText(lang.L("game.complete", map[string]any{"Score": g.score, "Percent": int(float64(g.score) / 10 * 100)}))
+				g.statusLabel.SetText(lang.L("game.complete", map[string]any{"Score": g.score, "Percent": int(finalPercent)}))
 			})
 		})
 	} else {

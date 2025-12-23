@@ -90,23 +90,26 @@ func (g *Game) setupUI() {
 	g.bodyGrid = container.NewVBox()
 	g.bodyScroll = container.NewVScroll(g.bodyGrid)
 
-	topSection := container.NewVBox(
-		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
+	// Header section with natural spacing
+	headerSection := container.NewVBox(
+		topBar.GetContainer(),
 		g.statusLabel,
-		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		guessContainer,
-		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
+	)
+
+	// History section
+	historySection := container.NewVBox(
 		widget.NewLabel(lang.X("game.guessing.history", "Guess History:")),
 		g.headerGrid,
 	)
 
 	g.content = container.NewBorder(
-		topBar.GetContainer(),
+		headerSection,
 		nil,
 		nil,
 		nil,
 		container.NewBorder(
-			topSection,
+			historySection,
 			nil,
 			nil,
 			nil,
@@ -150,11 +153,41 @@ func (g *Game) getCompareIcon(guessVal, targetVal float64) fyne.Resource {
 	return nil
 }
 
-func (g *Game) getCompareColor(guessVal, targetVal float64) color.Color {
+// getProximityColor returns a color based on how close the guess is to the target
+// Uses percentage difference to determine proximity
+func (g *Game) getProximityColor(guessVal, targetVal float64) color.Color {
+	// Exact match
 	if guessVal == targetVal {
-		return color.RGBA{0, 180, 0, 255}
+		return color.RGBA{0, 200, 0, 255} // Bright green - Perfect!
 	}
-	return color.RGBA{180, 0, 0, 255}
+	
+	// Calculate percentage difference
+	var percentDiff float64
+	if targetVal != 0 {
+		percentDiff = (abs(guessVal - targetVal) / targetVal) * 100
+	} else {
+		// If target is 0, use absolute difference
+		percentDiff = abs(guessVal - targetVal)
+	}
+	
+	// Color thresholds based on percentage difference with high contrast
+	if percentDiff <= 10 {
+		return color.RGBA{0, 200, 0, 255} // Bright green - Very close (within 10%)
+	} else if percentDiff <= 25 {
+		return color.RGBA{255, 200, 0, 255} // Bright yellow - Close (within 25%)
+	} else if percentDiff <= 50 {
+		return color.RGBA{255, 140, 0, 255} // Bright orange - Somewhat close (within 50%)
+	} else {
+		return color.RGBA{220, 0, 0, 255} // Bright red - Far (>50%)
+	}
+}
+
+// abs returns the absolute value of a float64
+func abs(x float64) float64 {
+	if x < 0 {
+		return -x
+	}
+	return x
 }
 
 func (g *Game) createFlagTile(country *models.Country) fyne.CanvasObject {
@@ -180,19 +213,22 @@ func (g *Game) getCountryFlag(country *models.Country) fyne.Resource {
 }
 
 func (g *Game) addGuessRow(country *models.Country) {
+	// Check if continent matches
 	isCorrectContinent := country.Region == g.currentCountry.Region
-
-	continentColor := color.RGBA{0, 180, 0, 255}
+	continentColor := color.RGBA{0, 200, 0, 255} // Bright green
 	if !isCorrectContinent {
-		continentColor = color.RGBA{180, 0, 0, 255}
+		continentColor = color.RGBA{220, 0, 0, 255} // Bright red
 	}
 
+	// Get comparison icons (arrows)
 	popIcon := g.getCompareIcon(float64(country.Population), float64(g.currentCountry.Population))
-	popColor := g.getCompareColor(float64(country.Population), float64(g.currentCountry.Population))
-
 	areaIcon := g.getCompareIcon(country.Area, g.currentCountry.Area)
-	areaColor := g.getCompareColor(country.Area, g.currentCountry.Area)
 
+	// Get proximity-based colors
+	popColor := g.getProximityColor(float64(country.Population), float64(g.currentCountry.Population))
+	areaColor := g.getProximityColor(country.Area, g.currentCountry.Area)
+
+	// Create tiles
 	flagTile := g.createFlagTile(country)
 	countryTile := g.createTile(country.Name.Common, nil, color.RGBA{100, 100, 100, 255})
 

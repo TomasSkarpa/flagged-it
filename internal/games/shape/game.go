@@ -42,7 +42,6 @@ type Game struct {
 	shapeCanvas     *fyne.Container
 	guessEntry      *widget.Entry
 	resultLabel     *widget.Label
-	scoreLabel      *widget.Label
 	progressLabel   *widget.Label
 	score           int
 	total           int
@@ -50,14 +49,13 @@ type Game struct {
 	currentCoords   [][][][]float64
 	coordCache      map[int][][][][]float64
 	cacheMutex      sync.RWMutex
-	scoreManager    *utils.ScoreManager
+	gameProgress    *components.GameProgress
 }
 
-func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
+func NewGame(backFunc func()) *Game {
 	g := &Game{
-		backFunc:     backFunc,
-		scoreManager: scoreManager,
-		countries:    data.LoadCountries(),
+		backFunc:  backFunc,
+		countries: data.LoadCountries(),
 	}
 	g.setupUI()
 	return g
@@ -69,15 +67,10 @@ func (g *Game) setupUI() {
 	g.setupSelectionView()
 	g.setupGameView()
 
-	headerSection := container.NewVBox(
-		topBar.GetContainer(),
-		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
-	)
-
 	g.mainContent = container.NewMax(g.selectionView)
 
 	g.content = container.NewBorder(
-		headerSection, nil, nil, nil,
+		topBar.GetContainer(), nil, nil, nil,
 		g.mainContent,
 	)
 }
@@ -122,7 +115,6 @@ func (g *Game) getAvailableRegions() []string {
 }
 
 func (g *Game) setupGameView() {
-	g.scoreLabel = widget.NewLabel(fmt.Sprintf(lang.X("game.shape.score", "Score: %d/%d"), 0, 0))
 	g.progressLabel = widget.NewLabel("")
 
 	g.guessEntry = widget.NewEntry()
@@ -140,12 +132,18 @@ func (g *Game) setupGameView() {
 	g.shapeCanvas = container.NewWithoutLayout()
 	shapeWindow := container.NewMax(g.shapeCanvas)
 
+	// Game progress component (will be updated dynamically based on region)
+	g.gameProgress = components.NewGameProgress(components.GameProgressConfig{
+		ShowRounds:      false, // Will show as "Country X/Y" in progressLabel
+		ShowPercentage:  true,
+		ShowProgressBar: true,
+	})
+
 	topSection := container.NewVBox(
-		g.scoreLabel,
+		g.gameProgress.GetContainer(),
 		g.progressLabel,
 		guessContainer,
 		g.resultLabel,
-		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 	)
 
 	g.gameView = container.NewBorder(
@@ -302,44 +300,40 @@ func (g *Game) fillPolygon(img *image.RGBA, ring [][]float64, minX, minY, scale,
 }
 
 func (g *Game) nextCountry() {
-	for g.currentIndex < len(g.regionCountries) {
-		idx := g.currentIndex
-		g.currentCountry = g.regionCountries[idx]
-		g.currentIndex++
-
-		if g.currentCountry.CCA3 == "" {
-			continue
+	// Check if we've gone through all countries
+	if g.currentIndex >= len(g.regionCountries) {
+		// Game complete
+		if g.total > 0 {
+			g.resultLabel.SetText(fmt.Sprintf(lang.X("game.shape.complete", "Game Complete! Final Score: %d/%d (%.1f%%)"), g.score, g.total, float64(g.score)/float64(g.total)*100))
 		}
-
-		g.cacheMutex.RLock()
-		coords, exists := g.coordCache[idx]
-		g.cacheMutex.RUnlock()
-
-		if !exists {
-			geoData, err := data.LoadGeoData(g.currentCountry.CCA3)
-			if err == nil && len(geoData.Features) > 0 {
-				coords = g.parseCoordinates(geoData.Features[0].Geometry)
-			}
-			g.cacheMutex.Lock()
-			g.coordCache[idx] = coords
-			g.cacheMutex.Unlock()
-		}
-
-		if len(coords) > 0 {
-			g.total++
-			g.drawShape(coords)
-			g.guessEntry.SetText("")
-			g.resultLabel.SetText("")
-			g.updateProgress()
-			return
-		}
+		return
 	}
 
-	if g.total > 0 {
-		g.scoreManager.SetTotal("shape", g.total)
-		g.scoreManager.UpdateScore("shape", g.score)
-		g.resultLabel.SetText(fmt.Sprintf(lang.X("game.shape.complete", "Game Complete! Final Score: %d/%d (%.1f%%)"), g.score, g.total, float64(g.score)/float64(g.total)*100))
+	// Get the next country (all countries are pre-validated to have geo data)
+	idx := g.currentIndex
+	g.currentCountry = g.regionCountries[idx]
+	g.currentIndex++
+
+	// Get coordinates from cache or load them
+	g.cacheMutex.RLock()
+	coords, exists := g.coordCache[idx]
+	g.cacheMutex.RUnlock()
+
+	if !exists {
+		geoData, err := data.LoadGeoData(g.currentCountry.CCA3)
+		if err == nil && len(geoData.Features) > 0 {
+			coords = g.parseCoordinates(geoData.Features[0].Geometry)
+		}
+		g.cacheMutex.Lock()
+		g.coordCache[idx] = coords
+		g.cacheMutex.Unlock()
 	}
+
+	// Display the shape
+	g.drawShape(coords)
+	g.guessEntry.SetText("")
+	g.resultLabel.SetText("")
+	g.updateProgress()
 }
 
 func (g *Game) parseCoordinates(geom models.Geometry) [][][][]float64 {
@@ -400,19 +394,37 @@ func (g *Game) startRegionGame(region string) {
 	g.regionCountries = []models.Country{}
 	g.coordCache = make(map[int][][][][]float64)
 
+	// Filter countries by region
 	for _, country := range g.countries {
 		if region == "World" || country.Region == region {
 			g.regionCountries = append(g.regionCountries, country)
 		}
 	}
 
+	// Pre-filter to only include countries with valid geo data
+	validCountries := []models.Country{}
+	for _, country := range g.regionCountries {
+		if country.CCA3 != "" {
+			geoData, err := data.LoadGeoData(country.CCA3)
+			if err == nil && len(geoData.Features) > 0 {
+				coords := g.parseCoordinates(geoData.Features[0].Geometry)
+				if len(coords) > 0 {
+					validCountries = append(validCountries, country)
+				}
+			}
+		}
+	}
+	g.regionCountries = validCountries
+
+	// Shuffle the valid countries
 	rand.Shuffle(len(g.regionCountries), func(i, j int) {
 		g.regionCountries[i], g.regionCountries[j] = g.regionCountries[j], g.regionCountries[i]
 	})
 
 	g.score = 0
-	g.total = 0
+	g.total = len(g.regionCountries) // Now we know the exact total upfront
 	g.currentIndex = 0
+	g.coordCache = make(map[int][][][][]float64)
 
 	g.mainContent.RemoveAll()
 	g.mainContent.Add(g.gameView)
@@ -468,7 +480,10 @@ func (g *Game) GetContent() *fyne.Container {
 }
 
 func (g *Game) updateProgress() {
-	g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.shape.score", "Score: %d/%d"), g.score, g.total))
+	// Update game progress component with current position, total, and score
+	g.gameProgress.UpdateProgress(g.currentIndex, g.total, g.score)
+	
+	// Update region-specific progress label
 	translatedRegion := utils.TranslateRegion(g.selectedRegion)
 	g.progressLabel.SetText(fmt.Sprintf(lang.X("game.shape.progress", "%s: Country %d/%d"), translatedRegion, g.currentIndex, g.total))
 }

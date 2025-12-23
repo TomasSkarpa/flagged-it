@@ -3,9 +3,7 @@ package higher_lower
 import (
 	"flagged-it/internal/data"
 	"flagged-it/internal/ui/components"
-	"flagged-it/internal/utils"
 	"fmt"
-	"image/color"
 	"math/rand"
 
 	"fyne.io/fyne/v2"
@@ -21,20 +19,21 @@ type Game struct {
 	firstCountry  int
 	secondCountry int
 	score         int
+	highestStreak int
 
 	countryOneNameLabel *widget.Label
 	countryTwoNameLabel *widget.Label
 	countryOnePopLabel  *widget.Label
 	countryTwoPopLabel  *widget.Label
-	scoreLabel          *widget.Label
 	nextBtn             *components.Button
 	higherBtn           *components.Button
 	lowerBtn            *components.Button
-	scoreManager        *utils.ScoreManager
+	currentStreakLabel  *widget.Label
+	highestStreakLabel  *widget.Label
 }
 
-func NewGame(backFunc func(), scoreManager *utils.ScoreManager) *Game {
-	g := &Game{backFunc: backFunc, scoreManager: scoreManager}
+func NewGame(backFunc func()) *Game {
+	g := &Game{backFunc: backFunc}
 	g.setupUI()
 	return g
 }
@@ -49,7 +48,13 @@ func (g *Game) setupUI() {
 	g.countryTwoNameLabel = widget.NewLabel("")
 	g.countryTwoPopLabel = widget.NewLabel("")
 
-	g.scoreLabel = widget.NewLabel(fmt.Sprintf(lang.X("game.higher_lower.score", "Score: %d"), 0))
+	// Current streak label
+	g.currentStreakLabel = widget.NewLabel("0")
+	g.currentStreakLabel.Alignment = fyne.TextAlignTrailing
+
+	// Highest streak label
+	g.highestStreakLabel = widget.NewLabel("0")
+	g.highestStreakLabel.Alignment = fyne.TextAlignTrailing
 
 	var startBtn *components.Button
 
@@ -77,20 +82,35 @@ func (g *Game) setupUI() {
 	// Create responsive button grid
 	buttonGrid := container.NewGridWithColumns(2, g.higherBtn, g.lowerBtn)
 
-	g.content = container.NewVBox(
+	// Streak displays with labels on left, values on right
+	currentStreakTextLabel := widget.NewLabel(lang.X("game.higher_lower.current_streak_label", "Current Streak:"))
+	currentStreakContainer := container.NewBorder(nil, nil, currentStreakTextLabel, g.currentStreakLabel, container.NewMax())
+
+	highestStreakTextLabel := widget.NewLabel(lang.X("game.higher_lower.highest_streak_label", "Highest Streak:"))
+	highestStreakContainer := container.NewBorder(nil, nil, highestStreakTextLabel, g.highestStreakLabel, container.NewMax())
+
+	// Header section with natural spacing
+	headerSection := container.NewVBox(
 		topBar.GetContainer(),
-		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		gameDescription,
-		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
-		g.scoreLabel,
+		currentStreakContainer,
+		highestStreakContainer,
+	)
+
+	// Game content
+	gameContent := container.NewVBox(
 		startBtn,
 		container.NewCenter(g.countryOneNameLabel),
 		container.NewCenter(g.countryOnePopLabel),
-		components.NewDashedSeparator(color.RGBA{200, 200, 200, 255}, 5),
 		container.NewCenter(g.countryTwoNameLabel),
 		container.NewCenter(g.countryTwoPopLabel),
 		buttonGrid,
 		g.nextBtn,
+	)
+
+	g.content = container.NewVBox(
+		headerSection,
+		gameContent,
 	)
 }
 
@@ -98,12 +118,15 @@ func (g *Game) makeGuess(isHigher bool) {
 	correct := (isHigher && g.secondCountry > g.firstCountry) || (!isHigher && g.secondCountry < g.firstCountry)
 	if correct {
 		g.score++
+		// Update highest streak if current is higher
+		if g.score > g.highestStreak {
+			g.highestStreak = g.score
+			g.highestStreakLabel.SetText(fmt.Sprintf("%d", g.highestStreak))
+		}
 	} else {
-		g.scoreManager.SetTotal("higher_lower", g.score)
-		g.scoreManager.UpdateScore("higher_lower", g.score)
 		g.score = 0
 	}
-	g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.higher_lower.score", "Score: %d"), g.score))
+	g.currentStreakLabel.SetText(fmt.Sprintf("%d", g.score))
 	g.countryTwoPopLabel.SetText(fmt.Sprintf(lang.X("game.higher_lower.population", "Population: %d"), g.secondCountry))
 	g.higherBtn.Hide()
 	g.lowerBtn.Hide()
@@ -156,6 +179,8 @@ func (g *Game) Start() {
 
 func (g *Game) Reset() {
 	g.score = 0
-	g.scoreLabel.SetText(fmt.Sprintf(lang.X("game.higher_lower.score", "Score: %d"), 0))
+	g.highestStreak = 0
+	g.currentStreakLabel.SetText("0")
+	g.highestStreakLabel.SetText("0")
 	g.Start()
 }

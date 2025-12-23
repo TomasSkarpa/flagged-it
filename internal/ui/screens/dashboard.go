@@ -43,28 +43,29 @@ func (d *Dashboard) setupUI() {
 		// Refresh dashboard when language changes
 		d.window.SetContent(NewDashboard(d.navigateFunc, d.debugFunc, d.window, d.app).GetContent())
 	})
-	
+
 	// Theme selector button - shows "💻 System", "🌙 Dark", or "☀️ Light"
 	themeBtn := components.NewThemeSelectorButton(d.window, d.app)
 
 	// Header with language selector, theme selector, title and optional settings button
-	var header *fyne.Container
+	// Use Max container to truly center the title, then overlay buttons on top
+	title.Alignment = fyne.TextAlignCenter
+	centeredTitle := container.NewCenter(title)
+
 	leftButtons := container.NewHBox(langBtn, themeBtn)
-	
+
+	var header *fyne.Container
 	if d.debugManager.IsDebugEnabled() {
 		settingsBtn := components.NewButtonWithIcon("", theme.SettingsIcon(), d.debugFunc)
-		header = container.NewBorder(
-			nil, nil,
-			leftButtons,
-			settingsBtn,
-			container.NewCenter(title),
+		// Stack: centered title at bottom, buttons on top
+		header = container.NewStack(
+			centeredTitle,
+			container.NewBorder(nil, nil, leftButtons, settingsBtn),
 		)
 	} else {
-		header = container.NewBorder(
-			nil, nil,
-			leftButtons,
-			nil,
-			container.NewCenter(title),
+		header = container.NewStack(
+			centeredTitle,
+			container.NewBorder(nil, nil, leftButtons, nil),
 		)
 	}
 

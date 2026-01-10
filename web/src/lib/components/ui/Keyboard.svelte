@@ -233,8 +233,8 @@
 	.keyboard {
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
-		padding: 1rem;
+		gap: 0.375rem;
+		padding: 0.5rem;
 		background: var(--color-surface);
 		border-radius: 0.75rem;
 		user-select: none;
@@ -248,7 +248,7 @@
 	.keyboard-row {
 		display: flex;
 		justify-content: center;
-		gap: 0.375rem;
+		gap: 0.25rem;
 		flex-wrap: wrap;
 	}
 
@@ -267,14 +267,14 @@
 	}
 
 	.key {
-		min-width: 2.5rem;
-		height: 2.75rem;
-		padding: 0.5rem 0.75rem;
+		min-width: 2.25rem;
+		height: 2.5rem;
+		padding: 0.375rem 0.5rem;
 		border: 2px solid rgba(255, 255, 255, 0.1);
 		border-radius: 0.5rem;
 		background: var(--color-surface-light);
 		color: var(--color-text-light);
-		font-size: 0.875rem;
+		font-size: 0.8125rem;
 		font-weight: 600;
 		cursor: pointer;
 		transition: all 0.2s ease;
@@ -287,8 +287,8 @@
 	/* Special font sizing for non-Latin scripts */
 	.keyboard[dir="rtl"] .key,
 	.keyboard-large-keys .key {
-		font-size: 1rem;
-		min-width: 2.75rem;
+		font-size: 0.9375rem;
+		min-width: 2.5rem;
 	}
 
 	.key:hover:not(:disabled) {
@@ -331,10 +331,10 @@
 	/* Responsive adjustments */
 	@media (max-width: 640px) {
 		.key {
-			min-width: 2rem;
-			height: 2.5rem;
-			padding: 0.375rem 0.5rem;
-			font-size: 0.75rem;
+			min-width: 1.875rem;
+			height: 2.25rem;
+			padding: 0.25rem 0.375rem;
+			font-size: 0.6875rem;
 		}
 
 		.keyboard-row {

@@ -6,20 +6,22 @@
 	export let showFeedback: boolean = false;
 	export let isCorrect: boolean = false;
 	export let correctAnswer: string = '';
+	export let customMessage: string = ''; // Custom message that replaces the default correct/wrong text
 	export let error: string | null = null;
 
 	$: currentLocale = $locale;
 	$: correctText = t('game.correct_short', undefined, currentLocale);
 	$: wrongText = t('game.wrong_short', undefined, currentLocale);
+	$: displayMessage = customMessage || (isCorrect ? correctText : wrongText);
 </script>
 
 <div class="card-game relative overflow-hidden">
-	<h2 class="text-2xl md:text-3xl font-bold text-sandy-light text-center mb-8">
+	<h2 class="text-xl md:text-2xl font-bold text-sandy-light text-center mb-3">
 		{question}
 	</h2>
 	
 	<!-- Main content slot (flag, shape, etc.) -->
-	<div class="mb-10 flex justify-center">
+	<div class="mb-3 flex justify-center">
 		<slot name="content" />
 	</div>
 	
@@ -40,8 +42,8 @@
 		>
 			<div class="text-center">
 				<div class="text-6xl mb-4">{isCorrect ? '✓' : '✗'}</div>
-				<p class="text-3xl font-bold text-white">{isCorrect ? correctText : wrongText}</p>
-				{#if !isCorrect && correctAnswer}
+				<p class="text-3xl font-bold text-white">{displayMessage}</p>
+				{#if !isCorrect && correctAnswer && !customMessage}
 					<p class="text-xl text-white/90 mt-2">{correctAnswer}</p>
 				{/if}
 			</div>

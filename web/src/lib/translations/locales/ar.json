@@ -1,6 +1,6 @@
 {
   "dashboard.title": "اختر وضع اللعبة",
-  "home.hero.title": "اختبر معرفتك الجغرافية",
+  "home.hero.title": "Flagged It",
   "home.hero.subtitle": "العب ألعابًا ممتعة وتعلم عن دول العالم!",
   "home.hero.description": "استكشف مجموعة متنوعة من ألعاب الجغرافيا المصممة لمساعدتك على تعلم البلدان والأعلام والعواصم والمزيد",
   "home.game.flag.description": "اختبر معرفتك بأعلام العالم! خمن البلد من علمه.",
@@ -186,7 +186,7 @@
   "promo.europe_flags.desc": "Master the flags of Europe",
   "promo.asia_shapes.title": "Asian Shapes",
   "promo.asia_shapes.desc": "Guess countries by shape",
-  "promo.hangman.desc": "Classic word guessing game",
+  "promo.hangman.desc": "لعبة تخمين الكلمات الكلاسيكية",
   "promo.higher_lower.desc": "Compare country stats",
   "promo.badge.popular": "Popular",
   "promo.badge.new": "New",

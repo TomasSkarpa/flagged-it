@@ -5,6 +5,7 @@ import (
 	"flagged-it/internal/api"
 	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -16,7 +17,21 @@ func main() {
 	api.SetupRoutes()
 
 	// Serve assets directory (flags, icons, etc.)
-	assetsPath := "../../assets"
+	// Use environment variable if set, otherwise try relative paths
+	assetsPath := os.Getenv("ASSETS_PATH")
+	if assetsPath == "" {
+		// Try production path first (when running from /opt/flagged-it)
+		if _, err := os.Stat("/opt/flagged-it/assets"); err == nil {
+			assetsPath = "/opt/flagged-it/assets"
+		} else if _, err := os.Stat("../../assets"); err == nil {
+			assetsPath = "../../assets" // Development path
+		} else if _, err := os.Stat("./assets"); err == nil {
+			assetsPath = "./assets"
+		} else {
+			log.Println("Warning: Assets directory not found. Using ../../assets as fallback")
+			assetsPath = "../../assets"
+		}
+	}
 	fs := http.FileServer(http.Dir(assetsPath))
 	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 

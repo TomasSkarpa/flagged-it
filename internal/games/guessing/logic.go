@@ -1,6 +1,7 @@
 package guessing
 
 import (
+	"math"
 	"math/rand"
 
 	"flagged-it/internal/data/models"
@@ -16,11 +17,12 @@ type State struct {
 
 // GuessEntry represents a single guess with feedback
 type GuessEntry struct {
-	Country     models.Country
-	IsCorrect   bool
-	Continent   string // "correct" or country's continent
-	Population  ComparisonResult
-	Area        ComparisonResult
+	Country          models.Country
+	IsCorrect        bool
+	Continent        string // The guessed country's continent/region
+	ContinentCorrect bool   // Whether the continent matches the target
+	Population       ComparisonResult
+	Area             ComparisonResult
 }
 
 // ComparisonResult indicates if guess is higher/lower/correct
@@ -86,11 +88,15 @@ func (l *Logic) MakeGuess(guessCountryName string) (*GuessResult, error) {
 	// Server-side validation: check if correct
 	isCorrect := guessedCountry.CCA2 == l.state.CurrentCountry.CCA2
 
+	// Compare continent (correct if same region)
+	continentCorrect := guessedCountry.Region == l.state.CurrentCountry.Region
+	
 	// Create comparison feedback (server calculates all hints)
 	guessEntry := GuessEntry{
 		Country:   *guessedCountry,
 		IsCorrect: isCorrect,
 		Continent: guessedCountry.Region,
+		ContinentCorrect: continentCorrect,
 		Population: l.compareValue(
 			float64(guessedCountry.Population),
 			float64(l.state.CurrentCountry.Population),
@@ -152,9 +158,9 @@ func (l *Logic) calculateProximity(guess, target float64) string {
 
 	var percentDiff float64
 	if target != 0 {
-		percentDiff = abs(guess-target) / target * 100
+		percentDiff = math.Abs(guess-target) / target * 100
 	} else {
-		percentDiff = abs(guess - target)
+		percentDiff = math.Abs(guess - target)
 	}
 
 	if percentDiff <= 10 {
@@ -167,12 +173,6 @@ func (l *Logic) calculateProximity(guess, target float64) string {
 	return "far"
 }
 
-func abs(x float64) float64 {
-	if x < 0 {
-		return -x
-	}
-	return x
-}
 
 // findCountry finds a country by name (server-side lookup)
 func (l *Logic) findCountry(name string) *models.Country {

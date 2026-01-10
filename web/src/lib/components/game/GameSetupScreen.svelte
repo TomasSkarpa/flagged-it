@@ -36,12 +36,22 @@
 	$: selectRegionLabel = t('game.setup.select_region', undefined, currentLocale);
 
 	const dispatch = createEventDispatcher<{
-		start: { region: string };
+		start: { region?: string; category?: string; [key: string]: any };
 		regionChange: { region: string };
 	}>();
 
+	export let customStartData: Record<string, any> = {};
+
 	function handleStart() {
-		dispatch('start', { region: selectedRegion });
+		const startData: any = {};
+		if (showRegionSelector) {
+			startData.region = selectedRegion;
+		}
+		// Merge any custom data passed as prop (make a copy to avoid mutation)
+		if (customStartData && Object.keys(customStartData).length > 0) {
+			Object.assign(startData, { ...customStartData });
+		}
+		dispatch('start', startData);
 	}
 
 	function handleRegionChange(region: string) {

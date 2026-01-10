@@ -305,6 +305,324 @@
 				width: '128%',
 				maxWidth: '2350px'
 			}
+		},
+		// Nature / Organic
+		{
+			name: 'Forest Mist',
+			description: 'Dense fog over forest silhouette with soft green gradient overlay',
+			overlay: 'radial-gradient(ellipse 90% 90% at 50% 50%, transparent 0%, rgba(16, 185, 129, 0.06) 35%, rgba(5, 150, 105, 0.1) 60%, transparent 90%, rgba(10, 14, 39, 0.4) 100%)',
+			svgStyle: {
+				opacity: '0.05',
+				mixBlendMode: 'soft-light',
+				filter: 'blur(4px) brightness(1.4) contrast(1.3) saturate(1.2) hue-rotate(120deg)',
+				transform: 'translate(-50%, -50%) scale(1.2)',
+				width: '110%',
+				maxWidth: '2000px'
+			}
+		},
+		{
+			name: 'Mountain Sunset',
+			description: 'Mountains with warm gradient glow and subtle lens blur',
+			overlay: 'radial-gradient(ellipse 85% 85% at 50% 50%, transparent 0%, rgba(245, 158, 11, 0.08) 30%, rgba(217, 119, 6, 0.06) 55%, rgba(10, 14, 39, 0.3) 80%, rgba(10, 14, 39, 0.7) 100%)',
+			svgStyle: {
+				opacity: '0.055',
+				mixBlendMode: 'overlay',
+				filter: 'blur(3px) brightness(1.6) contrast(1.4) saturate(1.3)',
+				transform: 'translate(-50%, -50%) scale(1.25)',
+				width: '115%',
+				maxWidth: '2100px'
+			}
+		},
+		{
+			name: 'Ocean Waves',
+			description: 'Rolling waves with soft blue ripple overlay and slight motion blur',
+			overlay: 'radial-gradient(ellipse 95% 95% at 50% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 30%, rgba(59, 130, 246, 0.08) 60%, transparent 85%, rgba(10, 14, 39, 0.35) 100%)',
+			svgStyle: {
+				opacity: '0.06',
+				mixBlendMode: 'screen',
+				filter: 'blur(3.5px) brightness(2) contrast(1.2) saturate(1.5) hue-rotate(180deg)',
+				transform: 'translate(-50%, -50%) scale(1.22)',
+				width: '108%',
+				maxWidth: '1950px'
+			}
+		},
+		{
+			name: 'Desert Dunes',
+			description: 'Sand dunes with warm orange overlay and subtle grain texture',
+			overlay: 'radial-gradient(ellipse 88% 88% at 50% 50%, transparent 0%, rgba(249, 115, 22, 0.07) 40%, rgba(217, 119, 6, 0.05) 65%, rgba(10, 14, 39, 0.4) 90%, rgba(10, 14, 39, 0.75) 100%), repeating-conic-gradient(from 0deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.01) 1%, transparent 3%)',
+			svgStyle: {
+				opacity: '0.065',
+				mixBlendMode: 'multiply',
+				filter: 'blur(2.5px) brightness(1.3) contrast(1.5) saturate(1.4)',
+				transform: 'translate(-50%, -50%) scale(1.28)',
+				width: '112%',
+				maxWidth: '2050px'
+			}
+		},
+		// Space / Sci-Fi
+		{
+			name: 'Galaxy Nebula',
+			description: 'Colorful star clouds with faint glows and star sparkle overlay',
+			overlay: 'radial-gradient(ellipse 92% 92% at 50% 50%, rgba(139, 92, 246, 0.04) 0%, rgba(99, 102, 241, 0.06) 25%, rgba(236, 72, 153, 0.05) 50%, rgba(6, 182, 212, 0.04) 75%, transparent 100%), repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(255, 255, 255, 0.015) 10deg, transparent 20deg)',
+			svgStyle: {
+				opacity: '0.05',
+				mixBlendMode: 'color-dodge',
+				filter: 'blur(3px) brightness(3.5) contrast(1.6) saturate(2)',
+				transform: 'translate(-50%, -50%) scale(1.24)',
+				width: '114%',
+				maxWidth: '2080px'
+			}
+		},
+		{
+			name: 'Planet Rings',
+			description: 'Planet with rings silhouette and radial glow around it',
+			overlay: 'radial-gradient(ellipse 75% 75% at 50% 50%, transparent 0%, rgba(6, 182, 212, 0.06) 35%, rgba(99, 102, 241, 0.05) 55%, transparent 75%, rgba(10, 14, 39, 0.3) 95%, rgba(10, 14, 39, 0.7) 100%)',
+			svgStyle: {
+				opacity: '0.06',
+				mixBlendMode: 'screen',
+				filter: 'blur(4px) brightness(2.5) contrast(1.4) saturate(1.8)',
+				transform: 'translate(-50%, -50%) scale(1.3)',
+				width: '116%',
+				maxWidth: '2120px'
+			}
+		},
+		{
+			name: 'Cyber Grid',
+			description: 'Futuristic cityscape with neon gridlines and digital glitch overlay',
+			overlay: 'radial-gradient(ellipse 90% 90% at 50% 50%, transparent 0%, rgba(10, 14, 39, 0.25) 50%, rgba(10, 14, 39, 0.6) 80%, rgba(10, 14, 39, 0.9) 100%), repeating-linear-gradient(0deg, transparent 0px, transparent 19px, rgba(99, 102, 241, 0.02) 19px, rgba(99, 102, 241, 0.02) 20px), repeating-linear-gradient(90deg, transparent 0px, transparent 19px, rgba(139, 92, 246, 0.02) 19px, rgba(139, 92, 246, 0.02) 20px)',
+			svgStyle: {
+				opacity: '0.07',
+				mixBlendMode: 'screen',
+				filter: 'blur(1px) brightness(2.2) contrast(1.8) saturate(1.6) hue-rotate(250deg)',
+				transform: 'translate(-50%, -50%) scale(1.26) rotate(0.5deg)',
+				width: '118%',
+				maxWidth: '2150px'
+			}
+		},
+		{
+			name: 'Black Hole',
+			description: 'Swirling dark center with light warp distortions',
+			overlay: 'radial-gradient(ellipse 60% 60% at 50% 50%, rgba(10, 14, 39, 0.4) 0%, rgba(10, 14, 39, 0.25) 20%, transparent 40%, rgba(99, 102, 241, 0.05) 60%, rgba(236, 72, 153, 0.04) 80%, transparent 100%)',
+			svgStyle: {
+				opacity: '0.055',
+				mixBlendMode: 'exclusion',
+				filter: 'blur(5px) brightness(0.8) contrast(2.2) saturate(1.7)',
+				transform: 'translate(-50%, -50%) scale(1.35) rotate(-1deg)',
+				width: '120%',
+				maxWidth: '2200px'
+			}
+		},
+		// Retro / Digital
+		{
+			name: 'CRT Monitor',
+			description: 'Horizontal scanlines with slight flicker and green/amber glow',
+			overlay: 'radial-gradient(ellipse 88% 88% at 50% 50%, transparent 0%, rgba(10, 14, 39, 0.2) 50%, rgba(10, 14, 39, 0.6) 80%, rgba(10, 14, 39, 0.9) 100%), repeating-linear-gradient(0deg, transparent 0px, transparent 1px, rgba(0, 255, 0, 0.04) 1px, rgba(0, 255, 0, 0.04) 2px, transparent 2px, transparent 3px)',
+			svgStyle: {
+				opacity: '0.065',
+				mixBlendMode: 'screen',
+				filter: 'blur(2px) brightness(2.2) contrast(1.9) saturate(1.3) hue-rotate(90deg)',
+				transform: 'translate(-50%, -50%) scale(1.25)',
+				width: '110%',
+				maxWidth: '2000px'
+			}
+		},
+		{
+			name: 'Pixel Art',
+			description: 'Pixelated background with blocky shapes and low-res aesthetic',
+			overlay: 'radial-gradient(ellipse 85% 85% at 50% 50%, transparent 0%, rgba(10, 14, 39, 0.22) 48%, rgba(10, 14, 39, 0.65) 78%, rgba(10, 14, 39, 0.92) 100%), repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(255, 255, 255, 0.01) 5deg, transparent 10deg)',
+			svgStyle: {
+				opacity: '0.08',
+				mixBlendMode: 'hard-light',
+				filter: 'contrast(2.5) brightness(1.4) saturate(1.2) blur(0.5px)',
+				transform: 'translate(-50%, -50%) scale(1.22)',
+				width: '102%',
+				maxWidth: '1850px'
+			}
+		},
+		{
+			name: 'Glitch Effect',
+			description: 'Digital distortion with chromatic aberration and RGB shifts',
+			overlay: 'radial-gradient(ellipse 92% 92% at 50% 50%, transparent 0%, rgba(10, 14, 39, 0.2) 52%, rgba(10, 14, 39, 0.6) 78%, rgba(10, 14, 39, 0.88) 100%)',
+			svgStyle: {
+				opacity: '0.07',
+				mixBlendMode: 'difference',
+				filter: 'blur(1.5px) brightness(1.9) contrast(2.8) saturate(1.7) hue-rotate(120deg)',
+				transform: 'translate(-50%, -50%) scale(1.28) translateX(1px)',
+				width: '107%',
+				maxWidth: '1950px'
+			}
+		},
+		{
+			name: 'Halftone Print',
+			description: 'Dot pattern with faded ink look and old newspaper feel',
+			overlay: 'radial-gradient(ellipse 82% 82% at 50% 50%, transparent 0%, rgba(10, 14, 39, 0.18) 42%, rgba(10, 14, 39, 0.58) 72%, rgba(10, 14, 39, 0.85) 100%), repeating-radial-gradient(circle at 50% 50%, transparent 0px, transparent 3px, rgba(255, 255, 255, 0.02) 3px, rgba(255, 255, 255, 0.02) 4px, transparent 4px, transparent 8px)',
+			svgStyle: {
+				opacity: '0.075',
+				mixBlendMode: 'multiply',
+				filter: 'blur(2px) brightness(0.7) contrast(2.3) saturate(0.6)',
+				transform: 'translate(-50%, -50%) scale(1.3)',
+				width: '113%',
+				maxWidth: '2060px'
+			}
+		},
+		// Artistic / Abstract
+		{
+			name: 'Watercolor Wash',
+			description: 'Organic bleeding colors with soft gradients and painterly edges',
+			overlay: 'radial-gradient(ellipse 78% 78% at 50% 50%, rgba(6, 182, 212, 0.06) 0%, rgba(99, 102, 241, 0.08) 25%, transparent 45%, rgba(236, 72, 153, 0.07) 65%, transparent 85%, rgba(139, 92, 246, 0.09) 100%)',
+			svgStyle: {
+				opacity: '0.055',
+				mixBlendMode: 'soft-light',
+				filter: 'blur(5px) brightness(1.7) contrast(1.5) saturate(2)',
+				transform: 'translate(-50%, -50%) scale(1.32) rotate(0.3deg)',
+				width: '117%',
+				maxWidth: '2130px'
+			}
+		},
+		{
+			name: 'Oil Brush Texture',
+			description: 'Brush strokes layered with subtle highlights and shadows',
+			overlay: 'radial-gradient(ellipse 80% 80% at 50% 50%, transparent 0%, rgba(10, 14, 39, 0.12) 40%, rgba(10, 14, 39, 0.52) 70%, rgba(10, 14, 39, 0.86) 100%)',
+			svgStyle: {
+				opacity: '0.068',
+				mixBlendMode: 'soft-light',
+				filter: 'blur(6px) brightness(1.5) contrast(1.7) saturate(1.8)',
+				transform: 'translate(-50%, -50%) scale(1.3) rotate(-0.4deg)',
+				width: '115%',
+				maxWidth: '2100px'
+			}
+		},
+		{
+			name: 'Psychedelic Swirl',
+			description: 'Colorful vortex with high saturation and animated rotation possible',
+			overlay: 'radial-gradient(ellipse 70% 70% at 50% 50%, rgba(139, 92, 246, 0.07) 0%, rgba(236, 72, 153, 0.06) 20%, rgba(245, 158, 11, 0.05) 40%, rgba(6, 182, 212, 0.07) 60%, rgba(99, 102, 241, 0.06) 80%, transparent 100%)',
+			svgStyle: {
+				opacity: '0.06',
+				mixBlendMode: 'color-dodge',
+				filter: 'blur(3px) brightness(3) contrast(1.9) saturate(3) hue-rotate(45deg)',
+				transform: 'translate(-50%, -50%) scale(1.33) rotate(2deg)',
+				width: '119%',
+				maxWidth: '2170px'
+			}
+		},
+		{
+			name: 'Geometric Shapes',
+			description: 'Abstract triangles/circles with layered semi-transparent overlays',
+			overlay: 'radial-gradient(ellipse 90% 90% at 50% 50%, transparent 0%, rgba(99, 102, 241, 0.04) 35%, rgba(139, 92, 246, 0.05) 55%, rgba(6, 182, 212, 0.04) 75%, transparent 100%), repeating-conic-gradient(from 30deg at 50% 50%, transparent 0deg, rgba(255, 255, 255, 0.01) 15deg, transparent 30deg, rgba(99, 102, 241, 0.01) 45deg, transparent 60deg)',
+			svgStyle: {
+				opacity: '0.05',
+				mixBlendMode: 'exclusion',
+				filter: 'blur(2.5px) brightness(2) contrast(1.6) saturate(1.4)',
+				transform: 'translate(-50%, -50%) scale(1.24) rotate(-0.5deg)',
+				width: '111%',
+				maxWidth: '2020px'
+			}
+		},
+		// Urban / Modern
+		{
+			name: 'Graffiti Wall',
+			description: 'Urban wall textures with spray paint overlay and vibrant colors',
+			overlay: 'radial-gradient(ellipse 75% 75% at 50% 50%, transparent 0%, rgba(10, 14, 39, 0.2) 38%, rgba(10, 14, 39, 0.62) 68%, rgba(10, 14, 39, 0.95) 100%)',
+			svgStyle: {
+				opacity: '0.085',
+				mixBlendMode: 'multiply',
+				filter: 'blur(1px) brightness(0.5) contrast(2.6) saturate(1.5)',
+				transform: 'translate(-50%, -50%) scale(1.38) rotate(-0.6deg)',
+				width: '123%',
+				maxWidth: '2240px'
+			}
+		},
+		{
+			name: 'Neon City',
+			description: 'Night cityscape with neon reflections and screen blend glow',
+			overlay: 'radial-gradient(ellipse 88% 88% at 50% 50%, transparent 0%, rgba(99, 102, 241, 0.08) 30%, rgba(139, 92, 246, 0.06) 50%, rgba(236, 72, 153, 0.07) 70%, transparent 90%, rgba(10, 14, 39, 0.35) 100%)',
+			svgStyle: {
+				opacity: '0.07',
+				mixBlendMode: 'screen',
+				filter: 'blur(2px) brightness(2.8) contrast(1.9) saturate(2.2) hue-rotate(250deg)',
+				transform: 'translate(-50%, -50%) scale(1.26)',
+				width: '116%',
+				maxWidth: '2110px'
+			}
+		},
+		{
+			name: 'Concrete Texture',
+			description: 'Rough concrete background with subtle burn or multiply effect',
+			overlay: 'radial-gradient(ellipse 85% 85% at 50% 50%, transparent 0%, rgba(10, 14, 39, 0.18) 45%, rgba(10, 14, 39, 0.6) 75%, rgba(10, 14, 39, 0.88) 100%)',
+			svgStyle: {
+				opacity: '0.072',
+				mixBlendMode: 'multiply',
+				filter: 'blur(2.5px) brightness(0.7) contrast(2.2) saturate(0.9)',
+				transform: 'translate(-50%, -50%) scale(1.3)',
+				width: '114%',
+				maxWidth: '2080px'
+			}
+		},
+		{
+			name: 'Subway Map',
+			description: 'Schematic lines over dark textured background with glowing paths',
+			overlay: 'radial-gradient(ellipse 90% 90% at 50% 50%, transparent 0%, rgba(10, 14, 39, 0.25) 50%, rgba(10, 14, 39, 0.65) 80%, rgba(10, 14, 39, 0.92) 100%), repeating-linear-gradient(45deg, transparent 0px, transparent 29px, rgba(6, 182, 212, 0.03) 29px, rgba(6, 182, 212, 0.03) 30px), repeating-linear-gradient(-45deg, transparent 0px, transparent 29px, rgba(99, 102, 241, 0.03) 29px, rgba(99, 102, 241, 0.03) 30px)',
+			svgStyle: {
+				opacity: '0.066',
+				mixBlendMode: 'screen',
+				filter: 'blur(1.5px) brightness(2.4) contrast(2) saturate(1.6)',
+				transform: 'translate(-50%, -50%) scale(1.27)',
+				width: '112%',
+				maxWidth: '2040px'
+			}
+		},
+		// Seasonal / Mood
+		{
+			name: 'Winter Snow',
+			description: 'Snowy landscape with falling flakes overlay and soft light',
+			overlay: 'radial-gradient(ellipse 95% 95% at 50% 50%, rgba(236, 254, 255, 0.04) 0%, transparent 30%, rgba(226, 232, 240, 0.06) 60%, transparent 85%, rgba(10, 14, 39, 0.3) 100%), repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(255, 255, 255, 0.02) 5deg, transparent 10deg)',
+			svgStyle: {
+				opacity: '0.055',
+				mixBlendMode: 'screen',
+				filter: 'blur(4px) brightness(2.2) contrast(1.3) saturate(0.8)',
+				transform: 'translate(-50%, -50%) scale(1.23)',
+				width: '109%',
+				maxWidth: '1980px'
+			}
+		},
+		{
+			name: 'Autumn Leaves',
+			description: 'Moving leaves with warm orange/brown overlay',
+			overlay: 'radial-gradient(ellipse 88% 88% at 50% 50%, transparent 0%, rgba(245, 158, 11, 0.06) 35%, rgba(217, 119, 6, 0.05) 55%, rgba(180, 83, 9, 0.07) 75%, transparent 90%, rgba(10, 14, 39, 0.4) 100%)',
+			svgStyle: {
+				opacity: '0.06',
+				mixBlendMode: 'overlay',
+				filter: 'blur(3px) brightness(1.5) contrast(1.5) saturate(1.4)',
+				transform: 'translate(-50%, -50%) scale(1.28) rotate(0.2deg)',
+				width: '113%',
+				maxWidth: '2060px'
+			}
+		},
+		{
+			name: 'Rainy Night',
+			description: 'Raindrops with wet asphalt reflections and cool bluish overlay',
+			overlay: 'radial-gradient(ellipse 92% 92% at 50% 50%, rgba(59, 130, 246, 0.05) 0%, rgba(37, 99, 235, 0.06) 25%, transparent 50%, rgba(30, 64, 175, 0.07) 75%, transparent 90%, rgba(10, 14, 39, 0.35) 100%), repeating-linear-gradient(90deg, transparent 0px, transparent 4px, rgba(59, 130, 246, 0.02) 4px, rgba(59, 130, 246, 0.02) 5px)',
+			svgStyle: {
+				opacity: '0.058',
+				mixBlendMode: 'screen',
+				filter: 'blur(3.5px) brightness(2) contrast(1.4) saturate(1.3) hue-rotate(200deg)',
+				transform: 'translate(-50%, -50%) scale(1.25)',
+				width: '111%',
+				maxWidth: '2020px'
+			}
+		},
+		{
+			name: 'Spring Bloom',
+			description: 'Pastel flowers in soft blur with gentle light bloom',
+			overlay: 'radial-gradient(ellipse 85% 85% at 50% 50%, rgba(236, 72, 153, 0.04) 0%, rgba(249, 168, 212, 0.05) 20%, rgba(167, 139, 250, 0.04) 40%, rgba(196, 181, 253, 0.06) 60%, transparent 80%, rgba(10, 14, 39, 0.3) 100%)',
+			svgStyle: {
+				opacity: '0.052',
+				mixBlendMode: 'soft-light',
+				filter: 'blur(5px) brightness(2) contrast(1.2) saturate(1.6)',
+				transform: 'translate(-50%, -50%) scale(1.3)',
+				width: '115%',
+				maxWidth: '2100px'
+			}
 		}
 	];
 

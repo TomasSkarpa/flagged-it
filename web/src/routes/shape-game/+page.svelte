@@ -11,6 +11,11 @@
 	import { startShapeGame, getShapeQuestion, submitShapeAnswer } from '$lib/api/shapeGame';
 	import type { Country } from '$lib/types';
 	import { t } from '$lib/translations';
+	import { locale } from '$lib/stores/locale';
+	import { getCountryName } from '$lib/utils/countryNames';
+
+	// Reactive translations
+	$: currentLocale = $locale;
 
 	let sessionId: string | null = null;
 	let currentQuestion: any = null;
@@ -61,7 +66,9 @@
 		try {
 			const result = await submitShapeAnswer(sessionId, currentQuestion.questionId, country.cca2);
 			isCorrect = result.correct;
-			correctAnswer = result.correctName;
+			// Translate the correct answer - find the country in options by CCA2 and translate it
+			const correctCountry = currentQuestion.options.find(c => c.cca2 === result.correctCca2);
+			correctAnswer = correctCountry ? getCountryName(correctCountry, currentLocale) : result.correctName;
 			score = result.score;
 			total = result.total;
 			showFeedback = true;

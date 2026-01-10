@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import LoadingSpinner from '$lib/components/ui/LoadingSpinner.svelte';
 	import { 
 		GameSetupScreen, 
@@ -10,15 +11,9 @@
 	import type { CapitalQuestion } from '$lib/api/capitalGame';
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
-
-	// Reactive translations
-	$: currentLocale = $locale;
-	$: gameTitle = t('game.capital.title', undefined, currentLocale);
-	$: gameDescription = t('game.capital.description', undefined, currentLocale);
-	$: questionText = t('game.capital.question', { Country: currentQuestion?.countryName || '' }, currentLocale);
-	$: excellentMessage = t('game.over.excellent', undefined, currentLocale);
-	$: loadingCountriesText = t('library.loading', undefined, currentLocale);
-	$: failedToStartGameError = t('common.error', undefined, currentLocale);
+	import { getAllCountries } from '$lib/api/debug';
+	import { getCountryName } from '$lib/utils/countryNames';
+	import type { Country } from '$lib/types';
 
 	let sessionId: string | null = null;
 	let currentQuestion: CapitalQuestion | null = null;
@@ -34,6 +29,40 @@
 	let gameStarted = false;
 	let gameFinished = false;
 	const totalRounds = 10;
+	
+	// Store all countries for translation lookup
+	let allCountries: Country[] = [];
+	let countriesLoaded = false;
+
+	// Load countries on mount for translation
+	onMount(async () => {
+		if (!countriesLoaded) {
+			try {
+				const result = await getAllCountries();
+				allCountries = result.countries;
+				countriesLoaded = true;
+			} catch (err) {
+				console.error('Failed to load countries for translation:', err);
+				// Continue without translations - will use English names
+			}
+		}
+	});
+
+	// Reactive translations
+	$: currentLocale = $locale;
+	$: gameTitle = t('game.capital.title', undefined, currentLocale);
+	$: gameDescription = t('game.capital.description', undefined, currentLocale);
+	// Translate country name in question text
+	$: translatedCountryName = currentQuestion && allCountries.length > 0
+		? (() => {
+			const country = allCountries.find(c => c.cca2 === currentQuestion!.countryCca2);
+			return country ? getCountryName(country, currentLocale) : currentQuestion!.countryName;
+		})()
+		: (currentQuestion?.countryName || '');
+	$: questionText = t('game.capital.question', { Country: translatedCountryName }, currentLocale);
+	$: excellentMessage = t('game.over.excellent', undefined, currentLocale);
+	$: loadingCountriesText = t('library.loading', undefined, currentLocale);
+	$: failedToStartGameError = t('common.error', undefined, currentLocale);
 
 	async function handleStartGame(event: CustomEvent<{ region: string }>) {
 		isLoading = true;

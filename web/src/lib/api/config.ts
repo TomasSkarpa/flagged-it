@@ -16,6 +16,11 @@ function isLocalNetwork(hostname: string): boolean {
 }
 
 function getApiBaseUrl(): string {
+	// Check environment variable first (for Vercel or custom builds)
+	if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_URL) {
+		return import.meta.env.VITE_API_URL;
+	}
+	
 	// Check if we're in development (localhost or local network)
 	if (typeof window !== 'undefined') {
 		const hostname = window.location.hostname;
@@ -25,9 +30,20 @@ function getApiBaseUrl(): string {
 			return `http://${hostname}:8080`;
 		}
 		
-		// Production: use your server IP
-		// Change this to your production backend URL
-		return 'http://91.109.38.74:8080';
+		// Production (Vercel): use your backend server
+		// Update this to match your server's public IP or domain
+		// For now using HTTP - switch to HTTPS after SSL setup
+		const backendHost = '91.109.38.74'; // Your server's public IP or domain
+		const useHttps = false; // Set to true after SSL certificate setup
+		const protocol = useHttps ? 'https' : 'http';
+		const backendPort = useHttps ? '443' : '8080'; // 443 for HTTPS via nginx, 8080 for HTTP
+		
+		// If using HTTPS on standard port, omit port number
+		if (useHttps && backendPort === '443') {
+			return `${protocol}://${backendHost}`;
+		}
+		
+		return `${protocol}://${backendHost}:${backendPort}`;
 	}
 	
 	// Fallback for SSR
@@ -60,6 +76,16 @@ export const API_ENDPOINTS = {
 	HIGHER_LOWER_ANSWER: '/api/game/higherlower/answer',
 	HIGHER_LOWER_SCORE: '/api/game/higherlower/score',
 	
+	// Worldle game endpoints
+	WORLDLE_START: '/api/game/worldle/start',
+	WORLDLE_GUESS: '/api/game/worldle/guess',
+	WORLDLE_STATE: '/api/game/worldle/state',
+	
+	// Facts game endpoints
+	FACTS_START: '/api/game/facts/start',
+	FACTS_GUESS: '/api/game/facts/guess',
+	FACTS_NEXT: '/api/game/facts/next',
+	
 	// Debug/Browse endpoints
 	DEBUG_COUNTRIES: '/api/debug/countries',
 	DEBUG_GEOJSON: '/api/debug/geojson',
@@ -70,5 +96,30 @@ export const API_ENDPOINTS = {
 } as const;
 
 export function getApiUrl(endpoint: string): string {
-	return `${API_BASE_URL}${endpoint}`;
+	// Check environment variable first
+	if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_URL) {
+		return `${import.meta.env.VITE_API_URL}${endpoint}`;
+	}
+	
+	// Always compute dynamically to handle SSR and client-side correctly
+	if (typeof window !== 'undefined') {
+		const hostname = window.location.hostname;
+		if (isLocalNetwork(hostname)) {
+			return `http://${hostname}:8080${endpoint}`;
+		}
+		
+		// Production: use your backend server
+		const backendHost = '91.109.38.74'; // Your server's public IP or domain
+		const useHttps = false; // Set to true after SSL certificate setup
+		const protocol = useHttps ? 'https' : 'http';
+		const backendPort = useHttps ? '443' : '8080'; // 443 for HTTPS via nginx, 8080 for HTTP
+		
+		if (useHttps && backendPort === '443') {
+			return `${protocol}://${backendHost}${endpoint}`;
+		}
+		
+		return `${protocol}://${backendHost}:${backendPort}${endpoint}`;
+	}
+	// Fallback for SSR
+	return `http://localhost:8080${endpoint}`;
 }

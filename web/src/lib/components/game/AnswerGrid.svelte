@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import type { Country } from '$lib/types';
+	import { getCountryName } from '$lib/utils/countryNames';
+	import { locale } from '$lib/stores/locale';
 
 	export let options: Country[] | string[];
 	export let selectedAnswer: string | null = null;
@@ -9,6 +11,9 @@
 	export let isCorrect: boolean = false;
 	export let disabled: boolean = false;
 	export let columns: 1 | 2 = 2;
+
+	// Reactive locale for translations
+	$: currentLocale = $locale;
 
 	const dispatch = createEventDispatcher<{
 		select: { country?: Country; answer?: string };
@@ -26,7 +31,7 @@
 
 	function getButtonClass(option: Country | string): string {
 		const optionValue = typeof option === 'string' ? option : option.cca2;
-		const optionName = typeof option === 'string' ? option : option.name.common;
+		const optionName = typeof option === 'string' ? option : getOptionLabel(option);
 
 		const isSelected = selectedAnswer === optionValue;
 		const isCorrectOption = showFeedback && optionName === correctAnswer;
@@ -55,7 +60,8 @@
 		if (typeof option === 'string') {
 			return option;
 		}
-		return option.name.common;
+		// Use translated country name
+		return getCountryName(option, currentLocale);
 	}
 </script>
 

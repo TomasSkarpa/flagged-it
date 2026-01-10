@@ -41,17 +41,19 @@
 
 <div class="region-dropdown" bind:this={dropdownRef}>
 	{#if label}
-		<label class="block text-sm font-semibold text-sandy-light mb-2">
+		<span id="region-label" class="block text-sm font-semibold text-sandy-light mb-2">
 			{label}
-		</label>
+		</span>
 	{/if}
 	
 	<button 
 		class="region-btn"
 		on:click|stopPropagation={toggleDropdown}
-		aria-label="Select region"
+		aria-labelledby={label ? "region-label" : undefined}
+		aria-label={label ? undefined : "Select region"}
 		aria-expanded={isOpen}
 		type="button"
+		id="region-selector"
 	>
 		<span class="region-label">{selectedLabel}</span>
 		<svg 

@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 )
 
 func SetupRoutes() {
@@ -12,7 +13,13 @@ func SetupRoutes() {
 	shapeHandler := &ShapeGameHandler{}
 	capitalHandler := &CapitalGameHandler{}
 	higherLowerHandler := &HigherLowerHandler{}
+	worldleHandler := &WorldleGameHandler{}
+	factsHandler := &FactsGameHandler{}
 	debugHandler := &DebugHandler{}
+
+	// Rate limiter: 100 requests per minute, burst of 20
+	rateLimiter := NewRateLimiter(600*time.Millisecond, 20) // ~100 requests per minute
+	rateLimitMiddleware := RateLimitMiddleware(rateLimiter)
 
 	// CORS middleware
 	corsMiddleware := func(next http.HandlerFunc) http.HandlerFunc {
@@ -46,6 +53,7 @@ func SetupRoutes() {
 				"http://localhost:5173",
 				"http://localhost:3000",
 				"https://flaggedit.vercel.app",
+				"http://flaggedit.vercel.app", // Fallback for HTTP
 			}
 
 			allowed := false
@@ -78,35 +86,50 @@ func SetupRoutes() {
 		}
 	}
 
+	// Combine rate limiting and CORS middleware
+	combinedMiddleware := func(next http.HandlerFunc) http.HandlerFunc {
+		return rateLimitMiddleware(corsMiddleware(next))
+	}
+
 	// Flag game routes
-	http.HandleFunc("/api/game/flag/start", corsMiddleware(flagHandler.StartGame))
-	http.HandleFunc("/api/game/flag/question", corsMiddleware(flagHandler.GetQuestion))
-	http.HandleFunc("/api/game/flag/answer", corsMiddleware(flagHandler.SubmitAnswer))
-	http.HandleFunc("/api/game/flag/score", corsMiddleware(flagHandler.GetScore))
+	http.HandleFunc("/api/game/flag/start", combinedMiddleware(flagHandler.StartGame))
+	http.HandleFunc("/api/game/flag/question", combinedMiddleware(flagHandler.GetQuestion))
+	http.HandleFunc("/api/game/flag/answer", combinedMiddleware(flagHandler.SubmitAnswer))
+	http.HandleFunc("/api/game/flag/score", combinedMiddleware(flagHandler.GetScore))
 
 	// Shape game routes
-	http.HandleFunc("/api/game/shape/start", corsMiddleware(shapeHandler.StartGame))
-	http.HandleFunc("/api/game/shape/question", corsMiddleware(shapeHandler.GetQuestion))
-	http.HandleFunc("/api/game/shape/answer", corsMiddleware(shapeHandler.SubmitAnswer))
-	http.HandleFunc("/api/game/shape/score", corsMiddleware(shapeHandler.GetScore))
+	http.HandleFunc("/api/game/shape/start", combinedMiddleware(shapeHandler.StartGame))
+	http.HandleFunc("/api/game/shape/question", combinedMiddleware(shapeHandler.GetQuestion))
+	http.HandleFunc("/api/game/shape/answer", combinedMiddleware(shapeHandler.SubmitAnswer))
+	http.HandleFunc("/api/game/shape/score", combinedMiddleware(shapeHandler.GetScore))
 
 	// Capital game routes
-	http.HandleFunc("/api/game/capital/start", corsMiddleware(capitalHandler.StartGame))
-	http.HandleFunc("/api/game/capital/question", corsMiddleware(capitalHandler.GetQuestion))
-	http.HandleFunc("/api/game/capital/answer", corsMiddleware(capitalHandler.SubmitAnswer))
-	http.HandleFunc("/api/game/capital/score", corsMiddleware(capitalHandler.GetScore))
+	http.HandleFunc("/api/game/capital/start", combinedMiddleware(capitalHandler.StartGame))
+	http.HandleFunc("/api/game/capital/question", combinedMiddleware(capitalHandler.GetQuestion))
+	http.HandleFunc("/api/game/capital/answer", combinedMiddleware(capitalHandler.SubmitAnswer))
+	http.HandleFunc("/api/game/capital/score", combinedMiddleware(capitalHandler.GetScore))
 
 	// Higher/Lower game routes
-	http.HandleFunc("/api/game/higherlower/start", corsMiddleware(higherLowerHandler.StartGame))
-	http.HandleFunc("/api/game/higherlower/answer", corsMiddleware(higherLowerHandler.SubmitAnswer))
-	http.HandleFunc("/api/game/higherlower/score", corsMiddleware(higherLowerHandler.GetScore))
+	http.HandleFunc("/api/game/higherlower/start", combinedMiddleware(higherLowerHandler.StartGame))
+	http.HandleFunc("/api/game/higherlower/answer", combinedMiddleware(higherLowerHandler.SubmitAnswer))
+	http.HandleFunc("/api/game/higherlower/score", combinedMiddleware(higherLowerHandler.GetScore))
+
+	// Worldle game routes
+	http.HandleFunc("/api/game/worldle/start", combinedMiddleware(worldleHandler.StartGame))
+	http.HandleFunc("/api/game/worldle/guess", combinedMiddleware(worldleHandler.SubmitGuess))
+	http.HandleFunc("/api/game/worldle/state", combinedMiddleware(worldleHandler.GetState))
+
+	// Facts game routes
+	http.HandleFunc("/api/game/facts/start", combinedMiddleware(factsHandler.StartGame))
+	http.HandleFunc("/api/game/facts/guess", combinedMiddleware(factsHandler.SubmitGuess))
+	http.HandleFunc("/api/game/facts/next", combinedMiddleware(factsHandler.NextRound))
 
 	// Debug/Browse routes
-	http.HandleFunc("/api/debug/countries", corsMiddleware(debugHandler.GetAllCountries))
-	http.HandleFunc("/api/debug/geojson", corsMiddleware(debugHandler.GetCountryGeoJSON))
-	http.HandleFunc("/api/debug/geojson/all", corsMiddleware(debugHandler.GetAllGeoJSON))
+	http.HandleFunc("/api/debug/countries", combinedMiddleware(debugHandler.GetAllCountries))
+	http.HandleFunc("/api/debug/geojson", combinedMiddleware(debugHandler.GetCountryGeoJSON))
+	http.HandleFunc("/api/debug/geojson/all", combinedMiddleware(debugHandler.GetAllGeoJSON))
 
-	// Health check
+	// Health check (no rate limiting for monitoring)
 	http.HandleFunc("/api/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.Write([]byte(`{"status":"ok"}`))

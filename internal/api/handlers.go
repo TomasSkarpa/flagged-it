@@ -2,8 +2,11 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 	"flagged-it/internal/data"
 	"flagged-it/internal/data/models"
+	"flagged-it/internal/games/facts"
+	"flagged-it/internal/games/guessing"
 	"math/rand"
 	"net/http"
 	"time"
@@ -35,9 +38,11 @@ type GameSession struct {
 
 var sessions = make(map[string]*GameSession)
 var countries = []models.Country{}
+var factsData = make(map[string]models.CountryFacts)
 
 func init() {
 	countries = data.LoadCountries()
+	factsData = data.LoadCountryFacts()
 	rand.Seed(time.Now().UnixNano())
 }
 
@@ -1134,4 +1139,396 @@ func generateContinentPair(session *HigherLowerSession) (HigherLowerItem, Higher
 	}
 
 	return leftItem, rightItem
+}
+
+// Worldle game handler
+type WorldleGameHandler struct{}
+
+type WorldleSession struct {
+	SessionID string
+	Logic     *guessing.Logic
+}
+
+var worldleSessions = make(map[string]*WorldleSession)
+
+func (h *WorldleGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	// Filter countries (all countries available for worldle)
+	filteredCountries := countries
+
+	if len(filteredCountries) == 0 {
+		http.Error(w, "No countries available", http.StatusBadRequest)
+		return
+	}
+
+	// Create game logic instance
+	gameLogic := guessing.NewLogic(filteredCountries)
+	if err := gameLogic.NewGame(); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Create session
+	sessionID := generateSessionID()
+	session := &WorldleSession{
+		SessionID: sessionID,
+		Logic:     gameLogic,
+	}
+	worldleSessions[sessionID] = session
+
+	state := gameLogic.GetState()
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"sessionId":   sessionID,
+		"guessCount":  len(state.Guesses),
+		"isComplete":  state.IsComplete,
+	})
+}
+
+func (h *WorldleGameHandler) SubmitGuess(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var req struct {
+		SessionID    string `json:"sessionId"`
+		CountryName  string `json:"countryName"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Invalid request", http.StatusBadRequest)
+		return
+	}
+
+	session, exists := worldleSessions[req.SessionID]
+	if !exists {
+		http.Error(w, "Session not found", http.StatusNotFound)
+		return
+	}
+
+	// Make guess using game logic
+	result, err := session.Logic.MakeGuess(req.CountryName)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	if !result.IsValidGuess {
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(map[string]interface{}{
+			"isValidGuess": false,
+			"error":        result.Error,
+		})
+		return
+	}
+
+	// Build response with guess entry details
+	response := map[string]interface{}{
+		"isValidGuess":   result.IsValidGuess,
+		"isCorrect":      result.IsCorrect,
+		"guessCount":     result.GuessCount,
+		"isComplete":     result.IsCorrect,
+		"guessEntry": map[string]interface{}{
+			"country": map[string]interface{}{
+				"cca2":      result.GuessEntry.Country.CCA2,
+				"name":      result.GuessEntry.Country.Name.Common,
+				"flagUrl":   "/assets/twemoji_flags_cca2/" + result.GuessEntry.Country.CCA2 + ".svg",
+				"continent": result.GuessEntry.Continent,
+				"population": result.GuessEntry.Country.Population,
+				"area":       result.GuessEntry.Country.Area,
+			},
+			"isCorrect":       result.GuessEntry.IsCorrect,
+			"continent":       result.GuessEntry.Continent,
+			"continentCorrect": result.GuessEntry.ContinentCorrect,
+			"population": map[string]interface{}{
+				"value":     result.GuessEntry.Population.Value,
+				"direction": result.GuessEntry.Population.Direction,
+				"proximity": result.GuessEntry.Population.Proximity,
+			},
+			"area": map[string]interface{}{
+				"value":     result.GuessEntry.Area.Value,
+				"direction": result.GuessEntry.Area.Direction,
+				"proximity": result.GuessEntry.Area.Proximity,
+			},
+		},
+	}
+
+	// Only reveal correct country if guess is correct
+	if result.IsCorrect && result.CorrectCountry != nil {
+		response["correctCountry"] = map[string]interface{}{
+			"cca2":    result.CorrectCountry.CCA2,
+			"name":    result.CorrectCountry.Name.Common,
+			"flagUrl": "/assets/twemoji_flags_cca2/" + result.CorrectCountry.CCA2 + ".svg",
+		}
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
+}
+
+func (h *WorldleGameHandler) GetState(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	sessionID := r.URL.Query().Get("sessionId")
+	if sessionID == "" {
+		http.Error(w, "Session ID required", http.StatusBadRequest)
+		return
+	}
+
+	session, exists := worldleSessions[sessionID]
+	if !exists {
+		http.Error(w, "Session not found", http.StatusNotFound)
+		return
+	}
+
+	state := session.Logic.GetState()
+
+	// Build guesses array for response
+	guesses := []map[string]interface{}{}
+	for _, guessEntry := range state.Guesses {
+		guesses = append(guesses, map[string]interface{}{
+			"country": map[string]interface{}{
+				"cca2":      guessEntry.Country.CCA2,
+				"name":      guessEntry.Country.Name.Common,
+				"flagUrl":   "/assets/twemoji_flags_cca2/" + guessEntry.Country.CCA2 + ".svg",
+				"continent": guessEntry.Continent,
+				"population": guessEntry.Country.Population,
+				"area":       guessEntry.Country.Area,
+			},
+			"isCorrect":        guessEntry.IsCorrect,
+			"continent":        guessEntry.Continent,
+			"continentCorrect": guessEntry.ContinentCorrect,
+			"population": map[string]interface{}{
+				"value":     guessEntry.Population.Value,
+				"direction": guessEntry.Population.Direction,
+				"proximity": guessEntry.Population.Proximity,
+			},
+			"area": map[string]interface{}{
+				"value":     guessEntry.Area.Value,
+				"direction": guessEntry.Area.Direction,
+				"proximity": guessEntry.Area.Proximity,
+			},
+		})
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"sessionId":  sessionID,
+		"guesses":    guesses,
+		"guessCount": len(state.Guesses),
+		"isComplete": state.IsComplete,
+	})
+}
+
+// Facts game handler
+type FactsGameHandler struct{}
+
+type FactsGameSession struct {
+	SessionID string
+	Logic     *facts.Logic
+}
+
+var factsGameSessions = make(map[string]*FactsGameSession)
+
+func (h *FactsGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	// Create game logic instance
+	gameLogic := facts.NewLogic(countries, factsData)
+	if err := gameLogic.NewRound(); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Get first fact
+	currentFact, err := gameLogic.GetCurrentFact()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Create session
+	sessionID := generateSessionID()
+	session := &FactsGameSession{
+		SessionID: sessionID,
+		Logic:     gameLogic,
+	}
+	factsGameSessions[sessionID] = session
+
+	state := gameLogic.GetState()
+
+	// Format fact with number prefix
+	formattedFact := fmt.Sprintf("Fact %d: %s", state.CurrentFact, currentFact)
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"sessionId":   sessionID,
+		"currentFact": formattedFact,
+		"factNumber":  state.CurrentFact,
+		"triesLeft":   state.TriesLeft,
+		"score":       state.Score,
+		"total":       state.Total,
+		"isComplete":  state.IsComplete,
+	})
+}
+
+func (h *FactsGameHandler) SubmitGuess(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var req struct {
+		SessionID   string `json:"sessionId"`
+		CountryName string `json:"countryName"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Invalid request", http.StatusBadRequest)
+		return
+	}
+
+	session, exists := factsGameSessions[req.SessionID]
+	if !exists {
+		http.Error(w, "Session not found", http.StatusNotFound)
+		return
+	}
+
+	// Make guess using game logic
+	result, err := session.Logic.MakeGuess(req.CountryName)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Build guess history with formatted facts
+	// Each entry corresponds to a guess, and each guess reveals a new fact
+	// Entry 0 = guess 1 (fact 1), entry 1 = guess 2 (fact 2), etc.
+	guessHistory := []map[string]interface{}{}
+	for i, entry := range result.GuessHistory {
+		// Format fact with number prefix
+		var factText string
+		if entry.Fact != "" {
+			factNum := i + 1
+			factText = fmt.Sprintf("Fact %d: %s", factNum, entry.Fact)
+		}
+		
+		// Determine if this guess was correct
+		// The last entry is correct if result.IsCorrect is true
+		// Previous entries are all wrong (they didn't match)
+		isEntryCorrect := result.IsCorrect && i == len(result.GuessHistory)-1
+		
+		guessHistory = append(guessHistory, map[string]interface{}{
+			"guess":     entry.Guess,
+			"fact":      factText,
+			"isCorrect": isEntryCorrect,
+		})
+	}
+
+	// Get next fact if wrong guess and tries left
+	var nextFact string
+	var nextFactNumber int
+	if !result.IsCorrect && result.TriesLeft > 0 {
+		fact, err := session.Logic.GetCurrentFact()
+		if err == nil {
+			state := session.Logic.GetState()
+			nextFactNumber = state.CurrentFact
+			// Format fact with number prefix
+			nextFact = fmt.Sprintf("Fact %d: %s", nextFactNumber, fact)
+		}
+	}
+
+	// Build response
+	response := map[string]interface{}{
+		"isCorrect":    result.IsCorrect,
+		"triesLeft":    result.TriesLeft,
+		"score":        result.Score,
+		"total":        result.Total,
+		"isComplete":   result.IsComplete,
+		"guessHistory": guessHistory,
+		"nextFact":     nextFact,
+		"factNumber":   nextFactNumber,
+	}
+
+	// Only reveal correct country if correct or game over
+	if result.IsCorrect && result.CorrectCountry != nil {
+		response["correctCountry"] = map[string]interface{}{
+			"cca2":    result.CorrectCountry.CCA2,
+			"name":    result.CorrectCountry.Name.Common,
+			"flagUrl": "/assets/twemoji_flags_cca2/" + result.CorrectCountry.CCA2 + ".svg",
+		}
+	} else if result.TriesLeft == 0 && result.CorrectCountry != nil {
+		// Game over - reveal answer
+		response["correctCountry"] = map[string]interface{}{
+			"cca2":    result.CorrectCountry.CCA2,
+			"name":    result.CorrectCountry.Name.Common,
+			"flagUrl": "/assets/twemoji_flags_cca2/" + result.CorrectCountry.CCA2 + ".svg",
+		}
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
+}
+
+func (h *FactsGameHandler) NextRound(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var req struct {
+		SessionID string `json:"sessionId"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Invalid request", http.StatusBadRequest)
+		return
+	}
+
+	session, exists := factsGameSessions[req.SessionID]
+	if !exists {
+		http.Error(w, "Session not found", http.StatusNotFound)
+		return
+	}
+
+	// Start new round
+	if err := session.Logic.NewRound(); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Get first fact of new round
+	currentFact, err := session.Logic.GetCurrentFact()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	state := session.Logic.GetState()
+
+	// Format fact with number prefix
+	formattedFact := fmt.Sprintf("Fact %d: %s", state.CurrentFact, currentFact)
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"sessionId":   req.SessionID,
+		"currentFact": formattedFact,
+		"factNumber":  state.CurrentFact,
+		"triesLeft":   state.TriesLeft,
+		"score":       state.Score,
+		"total":       state.Total,
+		"isComplete":  state.IsComplete,
+	})
 }

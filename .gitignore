@@ -53,3 +53,7 @@ web/package/
 # Progress documentation (local development notes)
 progress/
 .playwright-mcp/
+
+# Local deployment configuration (contains credentials)
+scripts/deploy-config.sh
+scripts/*-local.sh

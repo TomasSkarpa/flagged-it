@@ -15,10 +15,10 @@
 	$: roundText = t('game.round.progress', [currentRound, totalRounds], currentLocale);
 </script>
 
-<div class="mb-6">
-	<div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-4">
+<div class="mb-2">
+	<div class="flex flex-col md:flex-row items-center justify-between gap-2 mb-2">
 		<ScoreDisplay {score} {total} showPercentage={false} showProgress={false} />
-		<div class="text-lg text-text-light font-semibold stat-number">
+		<div class="text-base text-text-light font-semibold stat-number">
 			{roundText}
 		</div>
 	</div>

@@ -1,6 +1,6 @@
 {
   "dashboard.title": "अपना गेम मोड चुनें",
-  "home.hero.title": "अपने भूगोल ज्ञान का परीक्षण करें",
+  "home.hero.title": "Flagged It",
   "home.hero.subtitle": "मजेदार गेम खेलें और दुनिया के देशों के बारे में जानें!",
   "home.hero.description": "विविध भूगोल गेम के संग्रह का अन्वेषण करें जो आपको देशों, झंडों, राजधानियों और अधिक के बारे में सीखने में मदद करने के लिए डिज़ाइन किए गए हैं",
   "home.game.flag.description": "विश्व झंडों के अपने ज्ञान का परीक्षण करें! उसके झंडे से देश का अनुमान लगाएं।",
@@ -186,7 +186,7 @@
   "promo.europe_flags.desc": "Master the flags of Europe",
   "promo.asia_shapes.title": "Asian Shapes",
   "promo.asia_shapes.desc": "Guess countries by shape",
-  "promo.hangman.desc": "Classic word guessing game",
+  "promo.hangman.desc": "क्लासिक शब्द अनुमान लगाने वाला गेम",
   "promo.higher_lower.desc": "Compare country stats",
   "promo.badge.popular": "Popular",
   "promo.badge.new": "New",

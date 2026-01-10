@@ -6,10 +6,9 @@
 	import { getMetaDescription } from '$lib/translations/meta';
 	import { Navigation } from '$lib/components/nav';
 	import { onMount } from 'svelte';
-	// svelte-ignore unused-export-let
-	export let data: any = {};
-	// svelte-ignore unused-export-let
-	export let params: Record<string, string> = {};
+	// These props are provided by SvelteKit but not used in this layout
+	export const data: any = {};
+	export const params: Record<string, string> = {};
 	
 	let currentLocale = 'en';
 	

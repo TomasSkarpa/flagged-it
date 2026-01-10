@@ -38,6 +38,30 @@
 			icon: '↕️',
 			route: '/higher-lower',
 			available: true
+		},
+		{
+			id: 'hangman',
+			title: t('game.hangman.title', undefined, currentLocale),
+			description: t('promo.hangman.desc', undefined, currentLocale) || t('game.hangman.title', undefined, currentLocale),
+			icon: '🎯',
+			route: '/hangman-game',
+			available: true
+		},
+		{
+			id: 'worldle',
+			title: t('game.guessing.title', undefined, currentLocale),
+			description: t('game.worldle.description', undefined, currentLocale) || t('game.guessing.make_guess', undefined, currentLocale),
+			icon: '🌍',
+			route: '/worldle-game',
+			available: true
+		},
+		{
+			id: 'facts',
+			title: t('game.facts.title', undefined, currentLocale),
+			description: t('home.game.facts.description', undefined, currentLocale) || t('game.facts.description', undefined, currentLocale),
+			icon: '📚',
+			route: '/facts-game',
+			available: true
 		}
 	];
 	

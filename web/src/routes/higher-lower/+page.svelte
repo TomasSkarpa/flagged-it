@@ -10,6 +10,10 @@
 		type HigherLowerComparison,
 		type HigherLowerItem
 	} from '$lib/api/higherLowerGame';
+	import { 
+		GameSetupScreen, 
+		GameOverScreen 
+	} from '$lib/components/game';
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
 
@@ -50,8 +54,13 @@
 		{ value: 'area' as HigherLowerCategory, label: t('game.higher_lower.category.area', undefined, currentLocale), icon: '📐', description: t('game.higher_lower.category.area.desc', undefined, currentLocale) },
 		{ value: 'continents' as HigherLowerCategory, label: t('game.higher_lower.category.continents', undefined, currentLocale), icon: '🌍', description: t('game.higher_lower.category.continents.desc', undefined, currentLocale) }
 	];
+	
+	// Custom start data that will be passed with the start event (reactive)
+	$: customStartData = { category: selectedCategory };
 
-	async function handleStartGame() {
+	async function handleStartGame(event: CustomEvent<{ category?: string; region?: string; [key: string]: any }>) {
+		// Get category from event or fallback to selectedCategory
+		const category = (event.detail.category || selectedCategory) as HigherLowerCategory;
 		isLoading = true;
 		error = null;
 		gameOver = false;
@@ -59,7 +68,7 @@
 		isCorrect = null;
 		
 		try {
-			const result = await startHigherLowerGame(selectedCategory);
+			const result = await startHigherLowerGame(category);
 			sessionId = result.sessionId;
 			comparison = result.comparison;
 			score = result.score;
@@ -139,72 +148,73 @@
 	<title>Higher or Lower - Flagged It</title>
 </svelte:head>
 
-<div class="higher-lower-container">
-	{#if !gameStarted}
-		<!-- Category Selection Screen -->
-		<div class="setup-screen">
-			<div class="setup-content">
-				<h1 class="text-4xl md:text-5xl font-bold mb-4">
-					<span class="mr-3">⬆️⬇️</span>
-					<span class="gradient-text">{higherLowerTitle}</span>
-				</h1>
-				<p class="text-xl text-text-muted mb-8">
-					{setupDescription}
-				</p>
-				
-				<div class="category-grid">
-					{#each categories as cat}
-						<button
-							class="category-card"
-							class:selected={selectedCategory === cat.value}
-							on:click={() => selectedCategory = cat.value}
-						>
-							<span class="category-icon">{cat.icon}</span>
-							<span class="category-label">{cat.label}</span>
-							<span class="category-desc">{cat.description}</span>
-						</button>
-					{/each}
-				</div>
-				
-				<button
-					class="btn-primary text-lg px-8 py-4 mt-8"
-					on:click={handleStartGame}
-					disabled={isLoading}
-				>
-					{isLoading ? loadingText : startText}
-				</button>
-				
-				{#if error}
-					<p class="text-error mt-4">{error}</p>
-				{/if}
-			</div>
-		</div>
-	{:else if gameOver}
-		<!-- Game Over Screen -->
-		<div class="game-over-screen">
-			<div class="game-over-content">
-				<h1 class="text-5xl md:text-6xl font-bold mb-4">{gameOverText}</h1>
-				<div class="score-display">
-					<div class="final-score">
-						<span class="score-label">{finalScoreText}</span>
-						<span class="score-value">{score}</span>
-					</div>
-					<div class="high-score">
-						<span class="score-label">{highScoreText}</span>
-						<span class="score-value">{highScore}</span>
+{#if !gameStarted && !gameOver}
+	<div class="min-h-screen p-4 md:p-8">
+		<div class="max-w-4xl mx-auto">
+			<GameSetupScreen
+				title={higherLowerTitle}
+				emoji="↕️"
+				description={setupDescription}
+				{isLoading}
+				{error}
+				showRegionSelector={false}
+				startButtonText={startText}
+				loadingText={loadingText}
+				{customStartData}
+				on:start={handleStartGame}
+			>
+				<div slot="options" class="mb-8">
+					<div class="category-grid max-w-2xl mx-auto">
+						{#each categories as cat}
+							<button
+								class="category-card"
+								class:selected={selectedCategory === cat.value}
+								on:click={() => {
+									selectedCategory = cat.value;
+								}}
+								type="button"
+							>
+								<span class="category-icon">{cat.icon}</span>
+								<span class="category-label">{cat.label}</span>
+								<span class="category-desc">{cat.description}</span>
+							</button>
+						{/each}
 					</div>
 				</div>
-				<button
-					class="btn-primary text-lg px-8 py-4 mt-8"
-					on:click={handlePlayAgain}
-				>
-					{playAgainText}
-				</button>
+			</GameSetupScreen>
+		</div>
+	</div>
+{:else if gameOver}
+	<div class="min-h-screen p-4 md:p-8">
+		<div class="max-w-4xl mx-auto">
+			<!-- Game Over Screen - Custom for Higher/Lower -->
+			<div class="text-center">
+				<div class="card-game max-w-2xl mx-auto">
+					<div class="text-6xl mb-6">🎯</div>
+					<h2 class="text-4xl font-bold text-sandy-light mb-4">{gameOverText}</h2>
+					<div class="score-display mb-8">
+						<div class="final-score">
+							<span class="score-label">{finalScoreText}</span>
+							<span class="score-value">{score}</span>
+						</div>
+						<div class="high-score">
+							<span class="score-label">{highScoreText}</span>
+							<span class="score-value">{highScore}</span>
+						</div>
+					</div>
+					<button
+						class="btn-primary px-12 py-4 text-xl font-bold"
+						on:click={handlePlayAgain}
+					>
+						{playAgainText}
+					</button>
+				</div>
 			</div>
 		</div>
-	{:else if comparison}
-		<!-- Game Screen - Split View -->
-		<div class="game-screen" class:slide-left={slideDirection === 'left'}>
+	</div>
+{:else if comparison}
+	<!-- Game Screen - Split View (full screen) -->
+	<div class="game-screen" class:slide-left={slideDirection === 'left'}>
 			<!-- Left Panel -->
 			<div 
 				class="panel panel-left"
@@ -289,35 +299,14 @@
 				<span>{scoreLabelText}</span>
 			</div>
 		</div>
-	{/if}
-</div>
+{/if}
 
 <style>
-	.higher-lower-container {
-		min-height: calc(100vh - 4rem);
-		width: 100%;
-		overflow: hidden;
-	}
-	
-	/* Setup Screen */
-	.setup-screen {
-		min-height: calc(100vh - 4rem);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 2rem;
-	}
-	
-	.setup-content {
-		text-align: center;
-		max-width: 600px;
-	}
-	
+	/* Category Grid (used in GameSetupScreen options slot) */
 	.category-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 		gap: 1rem;
-		margin-top: 2rem;
 	}
 	
 	.category-card {
@@ -359,25 +348,11 @@
 		text-align: center;
 	}
 	
-	/* Game Over Screen */
-	.game-over-screen {
-		min-height: calc(100vh - 4rem);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 2rem;
-		background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-dark) 100%);
-	}
-	
-	.game-over-content {
-		text-align: center;
-	}
-	
+	/* Score Display (for Game Over) */
 	.score-display {
 		display: flex;
 		gap: 3rem;
 		justify-content: center;
-		margin-top: 2rem;
 	}
 	
 	.final-score, .high-score {
@@ -400,12 +375,14 @@
 		font-family: 'Roboto Mono', monospace;
 	}
 	
-	/* Game Screen */
+	/* Game Screen - Full height split view */
 	.game-screen {
 		display: flex;
 		min-height: calc(100vh - 4rem);
+		width: 100%;
 		position: relative;
 		transition: transform 0.5s ease-in-out;
+		overflow: hidden;
 	}
 	
 	.game-screen.slide-left {

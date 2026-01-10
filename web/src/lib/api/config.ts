@@ -30,20 +30,10 @@ function getApiBaseUrl(): string {
 			return `http://${hostname}:8080`;
 		}
 		
-		// Production (Vercel): use your backend server
-		// Update this to match your server's public IP or domain
-		// For now using HTTP - switch to HTTPS after SSL setup
-		const backendHost = '91.109.38.74'; // Your server's public IP or domain
-		const useHttps = false; // Set to true after SSL certificate setup
-		const protocol = useHttps ? 'https' : 'http';
-		const backendPort = useHttps ? '443' : '8080'; // 443 for HTTPS via nginx, 8080 for HTTP
-		
-		// If using HTTPS on standard port, omit port number
-		if (useHttps && backendPort === '443') {
-			return `${protocol}://${backendHost}`;
-		}
-		
-		return `${protocol}://${backendHost}:${backendPort}`;
+		// Production (Vercel): use relative path which will be proxied by vercel.json
+		// Vercel will proxy /api/* requests to your backend server at 91.109.38.74:8080
+		// This avoids mixed content issues (HTTPS frontend -> HTTP backend)
+		return '/api';
 	}
 	
 	// Fallback for SSR
@@ -104,21 +94,15 @@ export function getApiUrl(endpoint: string): string {
 	// Always compute dynamically to handle SSR and client-side correctly
 	if (typeof window !== 'undefined') {
 		const hostname = window.location.hostname;
+		
 		if (isLocalNetwork(hostname)) {
 			return `http://${hostname}:8080${endpoint}`;
 		}
 		
-		// Production: use your backend server
-		const backendHost = '91.109.38.74'; // Your server's public IP or domain
-		const useHttps = false; // Set to true after SSL certificate setup
-		const protocol = useHttps ? 'https' : 'http';
-		const backendPort = useHttps ? '443' : '8080'; // 443 for HTTPS via nginx, 8080 for HTTP
-		
-		if (useHttps && backendPort === '443') {
-			return `${protocol}://${backendHost}${endpoint}`;
-		}
-		
-		return `${protocol}://${backendHost}:${backendPort}${endpoint}`;
+		// Production (Vercel): use relative path which will be proxied by vercel.json
+		// Vercel will proxy /api/* requests to your backend server at 91.109.38.74:8080
+		// This avoids mixed content issues (HTTPS frontend -> HTTP backend)
+		return `/api${endpoint}`;
 	}
 	// Fallback for SSR
 	return `http://localhost:8080${endpoint}`;

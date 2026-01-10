@@ -32,10 +32,8 @@ jobs:
 
       - name: Build Go binary
         run: |
-          GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o flagged-it-server ./cmd/web
+          GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -ldflags="-s -w" -o flagged-it-server ./cmd/web
           chmod +x flagged-it-server
-        env:
-          CGO_ENABLED: 0
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
@@ -46,54 +44,32 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          ssh-keyscan -H ${{ secrets.DEPLOY_SERVER_HOST }} >> ~/.ssh/known_hosts || {
-            echo "Warning: ssh-keyscan failed, but continuing..."
-            echo "Server host: ${{ secrets.DEPLOY_SERVER_HOST }}"
-          }
+          ssh-keyscan -H ${{ secrets.DEPLOY_SERVER_HOST }} >> ~/.ssh/known_hosts || true
           chmod 600 ~/.ssh/known_hosts
 
-      - name: Create deployment directory on server
+      - name: Deploy to server
         run: |
           ssh -o StrictHostKeyChecking=accept-new ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
+            set -e
             mkdir -p /opt/flagged-it/bin
             mkdir -p /opt/flagged-it/assets
             mkdir -p /opt/flagged-it/logs
           EOF
-
-      - name: Upload binary to server
-        run: |
+          
           scp -o StrictHostKeyChecking=accept-new flagged-it-server ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/flagged-it/bin/flagged-it-server
-
-      - name: Upload assets to server
-        run: |
+          
           scp -r -o StrictHostKeyChecking=accept-new assets ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/flagged-it/
-
-      - name: Upload systemd service file
-        run: |
-          scp -o StrictHostKeyChecking=accept-new .github/deploy/flagged-it.service ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/tmp/flagged-it.service
-
-      - name: Setup systemd service and restart
-        run: |
+          
           ssh -o StrictHostKeyChecking=accept-new ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
-            # Move service file to systemd directory
-            sudo mv /tmp/flagged-it.service /etc/systemd/system/flagged-it.service
-            
-            # Reload systemd and enable service
-            sudo systemctl daemon-reload
-            sudo systemctl enable flagged-it.service
-            
-            # Restart service
             sudo systemctl restart flagged-it.service
-            
-            # Check status
-            sudo systemctl status flagged-it.service --no-pager
+            sleep 2
+            sudo systemctl status flagged-it.service --no-pager -l || true
           EOF
 
       - name: Verify deployment
         run: |
           sleep 3
           ssh -o StrictHostKeyChecking=accept-new ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
-            # Test health endpoint
             curl -f http://localhost:8080/api/health || exit 1
             echo "✓ Backend is running and healthy"
           EOF

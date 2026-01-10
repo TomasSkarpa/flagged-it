@@ -48,12 +48,14 @@ func SetupRoutes() {
 				}
 			}
 
-			// Allow localhost for dev, local network IPs, and vercel for production
+			// Allow localhost for dev, local network IPs, and production domains
 			allowedOrigins := []string{
 				"http://localhost:5173",
 				"http://localhost:3000",
 				"https://flaggedit.vercel.app",
 				"http://flaggedit.vercel.app", // Fallback for HTTP
+				"https://flaggedit.app",       // Production domain
+				"http://flaggedit.app",        // Fallback for HTTP redirects
 			}
 
 			allowed := false
@@ -129,11 +131,11 @@ func SetupRoutes() {
 	http.HandleFunc("/api/debug/geojson", combinedMiddleware(debugHandler.GetCountryGeoJSON))
 	http.HandleFunc("/api/debug/geojson/all", combinedMiddleware(debugHandler.GetAllGeoJSON))
 
-	// Health check (no rate limiting for monitoring)
-	http.HandleFunc("/api/health", func(w http.ResponseWriter, r *http.Request) {
+	// Health check (no rate limiting for monitoring, but include CORS)
+	http.HandleFunc("/api/health", corsMiddleware(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.Write([]byte(`{"status":"ok"}`))
-	})
+	}))
 
 	log.Println("API routes configured")
 }

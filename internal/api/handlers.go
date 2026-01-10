@@ -1532,3 +1532,73 @@ func (h *FactsGameHandler) NextRound(w http.ResponseWriter, r *http.Request) {
 		"isComplete":  state.IsComplete,
 	})
 }
+
+func (h *FactsGameHandler) Skip(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var req struct {
+		SessionID string `json:"sessionId"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Invalid request", http.StatusBadRequest)
+		return
+	}
+
+	session, exists := factsGameSessions[req.SessionID]
+	if !exists {
+		http.Error(w, "Session not found", http.StatusNotFound)
+		return
+	}
+
+	// Skip current round
+	result, err := session.Logic.Skip()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Build guess history with formatted facts
+	guessHistory := []map[string]interface{}{}
+	for i, entry := range result.GuessHistory {
+		var factText string
+		if entry.Fact != "" {
+			factNum := i + 1
+			factText = fmt.Sprintf("Fact %d: %s", factNum, entry.Fact)
+		}
+		
+		// Skip entries are not correct
+		isEntryCorrect := false
+		
+		guessHistory = append(guessHistory, map[string]interface{}{
+			"guess":     entry.Guess,
+			"fact":      factText,
+			"isCorrect": isEntryCorrect,
+		})
+	}
+
+	// Build response - same format as SubmitGuess when triesLeft = 0
+	response := map[string]interface{}{
+		"isCorrect":    false,
+		"triesLeft":    0,
+		"score":        result.Score,
+		"total":        result.Total,
+		"isComplete":   result.IsComplete,
+		"guessHistory": guessHistory,
+	}
+
+	// Reveal correct country
+	if result.CorrectCountry != nil {
+		response["correctCountry"] = map[string]interface{}{
+			"cca2":    result.CorrectCountry.CCA2,
+			"name":    result.CorrectCountry.Name.Common,
+			"flagUrl": "/assets/twemoji_flags_cca2/" + result.CorrectCountry.CCA2 + ".svg",
+		}
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
+}

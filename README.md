@@ -37,12 +37,6 @@ The application will be available at:
 - `make clean` - Remove build artifacts
 - `make version` - Show current version
 
-## Releases
-
-This project uses automatic semantic versioning. See [RELEASING.md](RELEASING.md) for detailed release instructions.
-
-**Quick release**: Go to Actions → "Auto Version Bump" → Run workflow, select bump type (patch/minor/major).
-
 ## Versioning Conventions & Contribution
 
 ### How to Contribute
@@ -58,7 +52,9 @@ Use lowercase prefixes:
 ```
 feat: add country guessing game
 fix: resolve navigation bug
-ref: refactor dashboard component
+refactor: refactor dashboard component
+enhance: github action workflow new logic
+chore: update from node v20 to node v24 on svelte ap
 docs: update setup instructions
 ```
 

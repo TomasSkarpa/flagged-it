@@ -4,7 +4,7 @@
 # Quick start: make setup && make dev
 # -------------------------------------------------------------------
 
-.PHONY: setup dev clean check version wails wails-setup wails-dev wails-build
+.PHONY: setup dev clean check wails wails-setup wails-dev wails-build
 
 # -------------------------------------------------------------------
 # Setup - Install all dependencies
@@ -57,6 +57,8 @@ clean:
 
 check:
 	@echo "Running Go checks..."
+	@mkdir -p cmd/desktop/frontend/build
+	@echo '<!DOCTYPE html><html><head><title>Flagged It</title></head><body><h1>Flagged It</h1></body></html>' > cmd/desktop/frontend/build/index.html
 	@go vet ./...
 	@go fmt ./...
 	@echo "Done"
@@ -104,14 +106,3 @@ wails-build:
 	@echo "Build complete! Check cmd/desktop/build/"
 
 wails: wails-build
-
-# -------------------------------------------------------------------
-# Show current version
-# -------------------------------------------------------------------
-
-version:
-	@if [ -f VERSION ]; then \
-		echo "Current version: $$(cat VERSION)"; \
-	else \
-		echo "Current version: dev"; \
-	fi

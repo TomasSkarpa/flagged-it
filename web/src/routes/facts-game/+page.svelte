@@ -4,9 +4,10 @@
 	import { 
 		GameSetupScreen, 
 		GameHeader, 
-		GameOverScreen 
+		GameOverScreen,
+		FactsGuessHistory
 	} from '$lib/components/game';
-	import { startFactsGame, submitGuess, nextRound, type GuessHistoryEntry } from '$lib/api/factsGame';
+	import { startFactsGame, submitGuess, skipRound, nextRound, type GuessHistoryEntry } from '$lib/api/factsGame';
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
 	import { getCountryName } from '$lib/utils/countryNames';
@@ -49,6 +50,15 @@
 	$: wrongNoMoreText = t('game.facts.wrong_no_more', undefined, currentLocale);
 	$: excellentMessage = t('game.over.excellent', undefined, currentLocale);
 	$: playAgainText = t('game.over.play_again', undefined, currentLocale);
+	
+	// Reactive formatted fact - ensure it updates when currentFact changes
+	$: formattedFact = currentFact && currentFact.trim() !== '' ? formatFact(currentFact) : '';
+	$: hasFact = currentFact && currentFact.trim() !== '' && formattedFact && formattedFact.trim() !== '';
+	
+	// Debug: Log when currentFact changes
+	$: if (browser) {
+		console.log('currentFact reactive:', currentFact?.substring(0, 50), 'formatted:', formattedFact?.substring(0, 50), 'hasFact:', hasFact);
+	}
 
 	onMount(async () => {
 		// Only load countries in browser, not during SSR
@@ -85,20 +95,41 @@
 		statusMessage = '';
 		showFeedback = false;
 		guessInput = '';
+		currentFact = ''; // Reset current fact
 		
 		try {
+			console.log('Starting facts game...');
 			const result = await startFactsGame();
-			sessionId = result.sessionId;
-			currentFact = result.currentFact;
-			factNumber = result.factNumber;
-			triesLeft = result.triesLeft;
-			score = result.score;
-			total = result.total;
+			console.log('Facts game started:', result);
+			
+			// Set gameStarted first to ensure proper state
 			gameStarted = true;
 			gameFinished = false;
+			
+			sessionId = result.sessionId;
+			
+			// Ensure currentFact is properly set - check multiple possible fields
+			const factValue = result.currentFact || result.fact || '';
+			currentFact = factValue;
+			factNumber = result.factNumber || 1;
+			triesLeft = result.triesLeft || 3;
+			score = result.score || 0;
+			total = result.total || 0;
+			
+			console.log('currentFact set to:', currentFact);
+			console.log('factNumber set to:', factNumber);
+			console.log('gameStarted:', gameStarted);
+			console.log('Will display fact?', currentFact && currentFact.trim() !== '');
+			
+			if (!currentFact || currentFact.trim() === '') {
+				error = 'No fact was returned from the server. Please try again.';
+				console.error('No currentFact in response. Result:', result);
+				gameStarted = false;
+			}
 		} catch (err) {
 			error = err instanceof Error ? err.message : 'Failed to start game';
 			console.error('Start game error:', err);
+			gameStarted = false;
 		} finally {
 			isLoading = false;
 		}
@@ -163,16 +194,33 @@
 				}, 2000);
 			} else {
 				// Wrong guess, but tries left - show next fact
-				if (result.nextFact) {
+				if (result.nextFact && result.nextFact.trim() !== '') {
 					currentFact = result.nextFact;
-					factNumber = result.factNumber || factNumber + 1;
+					factNumber = result.factNumber !== undefined ? result.factNumber : factNumber + 1;
 					statusMessage = wrongNextText;
+					console.log('Updated currentFact with nextFact:', currentFact);
+					console.log('Updated factNumber:', factNumber);
+				} else if (result.currentFact && result.currentFact.trim() !== '') {
+					// Fallback: use currentFact if nextFact is not provided
+					currentFact = result.currentFact;
+					factNumber = result.factNumber !== undefined ? result.factNumber : factNumber + 1;
+					statusMessage = wrongNextText;
+					console.log('Updated currentFact from currentFact field:', currentFact);
 				} else {
 					statusMessage = wrongNoMoreText;
+					console.warn('No nextFact in response, keeping current fact:', currentFact);
 				}
 				showFeedback = true;
 				isCorrect = false;
 				guessInput = '';
+				
+				// Clear feedback after 1.5 seconds to allow next guess
+				setTimeout(() => {
+					if (triesLeft > 0) {
+						showFeedback = false;
+						statusMessage = '';
+					}
+				}, 1500);
 			}
 		} catch (err) {
 			error = err instanceof Error ? err.message : 'Failed to submit guess';
@@ -214,6 +262,52 @@
 		}
 	}
 
+	async function handleSkip() {
+		if (!sessionId || isLoading || showFeedback || gameFinished) return;
+
+		isLoading = true;
+		error = null;
+		showFeedback = false;
+
+		try {
+			console.log('Skipping round...');
+			const result = await skipRound(sessionId);
+			console.log('Skip result:', result);
+			
+			isCorrect = false;
+			triesLeft = result.triesLeft;
+			score = result.score;
+			total = result.total;
+			guessHistory = result.guessHistory;
+
+			// Show skipped message with correct answer
+			if (result.correctCountry) {
+				const country = allCountries.find(c => c.cca2 === result.correctCountry!.cca2);
+				correctCountryName = country ? getCountryName(country, currentLocale) : result.correctCountry.name;
+				correctCountryCca2 = result.correctCountry.cca2;
+				statusMessage = `Skipped! The answer was ${correctCountryName}`;
+			} else {
+				statusMessage = 'Skipped!';
+			}
+			showFeedback = true;
+
+			// Wait 2 seconds, then start next round or finish game
+			setTimeout(async () => {
+				if (result.isComplete) {
+					gameFinished = true;
+					gameStarted = false;
+				} else {
+					await handleNextRound();
+				}
+			}, 2000);
+		} catch (err) {
+			error = err instanceof Error ? err.message : 'Failed to skip round';
+			console.error('Skip error:', err);
+		} finally {
+			isLoading = false;
+		}
+	}
+
 	function handleKeyPress(event: KeyboardEvent) {
 		if (event.key === 'Enter' && !isLoading && guessInput.trim()) {
 			handleSubmitGuess();
@@ -234,22 +328,14 @@
 	}
 
 	function formatFact(fact: string): string {
-		// Convert markdown-style bold **text** to HTML <strong>text</strong>
-		return fact.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-	}
-
-	function getGuessDisplayText(entry: GuessHistoryEntry): string {
-		// Remove checkmark if present, clean the guess text
-		return entry.guess.replace('✅', '').trim();
-	}
-
-	function isGuessCorrect(entry: GuessHistoryEntry, index: number): boolean {
-		// Use isCorrect field from API if available
-		if (entry.isCorrect !== undefined) {
-			return entry.isCorrect;
+		if (!fact || typeof fact !== 'string' || fact.trim() === '') {
+			return '';
 		}
-		// Fallback: check if it's the last entry and the result was correct
-		return index === guessHistory.length - 1 && isCorrect === true;
+		// Remove "Fact X: " prefix if present (backend includes it)
+		const cleanedFact = fact.replace(/^Fact \d+:\s*/i, '');
+		// Convert markdown-style bold **text** to HTML <strong>text</strong> with styling
+		const formatted = cleanedFact.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-white">$1</strong>');
+		return formatted || cleanedFact || fact;
 	}
 </script>
 
@@ -278,7 +364,7 @@
 				excellentMessage={excellentMessage}
 				on:playAgain={handlePlayAgain}
 			/>
-		{:else}
+		{:else if gameStarted && !gameFinished}
 			<div class="space-y-6">
 				<GameHeader
 					{score}
@@ -287,86 +373,119 @@
 					{totalRounds}
 				/>
 
-				<!-- Current Fact Display -->
-				{#if currentFact}
-					<div class="card-game">
-						<p class="text-lg text-text-light mb-4 prose prose-invert max-w-none" innerHTML={formatFact(currentFact)}></p>
+				<!-- Current Fact Display - Always show when game is started -->
+				<div class="card-game relative">
+					<div class="flex items-center justify-between mb-4">
+						<div class="flex items-center gap-3">
+							<span class="text-3xl">📚</span>
+							<div>
+								<h3 class="text-lg font-semibold text-sandy-light">Fact #{factNumber || 1}</h3>
+								<p class="text-xs text-text-muted uppercase tracking-wide">Guess the Country</p>
+							</div>
+						</div>
+						{#if triesLeft !== undefined && triesLeft > 0 && !showFeedback}
+							<div class="px-3 py-1 bg-primary/20 rounded-full border border-primary/30">
+								<span class="text-sm font-semibold text-primary">{triesLeft} {triesLeft === 1 ? 'try' : 'tries'} left</span>
+							</div>
+						{/if}
 					</div>
-				{/if}
+					
+					<div class="p-6 bg-white/5 rounded-lg border border-white/10 min-h-[120px] flex items-center justify-center">
+						{#if hasFact}
+							<div class="w-full">
+								<div class="text-xl md:text-2xl text-sandy-light font-medium leading-relaxed text-center whitespace-normal break-words">
+									{@html formattedFact}
+								</div>
+							</div>
+						{:else}
+							<div class="text-center py-4 w-full">
+								<p class="text-text-muted mb-2">{currentFact ? 'Formatting fact...' : 'Loading fact...'}</p>
+								{#if error}
+									<p class="text-error text-sm mt-2">{error}</p>
+								{/if}
+								{#if browser && currentFact}
+									<p class="text-xs text-text-muted mt-2">Debug: fact length={currentFact.length}, formatted length={formattedFact?.length || 0}</p>
+								{/if}
+							</div>
+						{/if}
+					</div>
+				</div>
 
-				<!-- Status Message and Feedback -->
-				{#if statusMessage}
-					<div class="card-game {isCorrect === true ? 'bg-success/20 border-success' : isCorrect === false ? 'bg-error/20 border-error' : 'bg-primary/20 border-primary'}">
-						<p class="text-center font-semibold {isCorrect === true ? 'text-success' : isCorrect === false ? 'text-error' : 'text-primary'}">
-							{statusMessage}
-						</p>
-						{#if triesLeft !== undefined && triesLeft > 0 && !isCorrect}
-							<p class="text-center mt-2 text-text-muted">
-								{triesLeftText.replace('%d', triesLeft.toString())}
+				<!-- Feedback Message -->
+				{#if showFeedback && statusMessage}
+					{@const isSkip = statusMessage.toLowerCase().includes('skipped')}
+					<div class={`card-game ${isCorrect === true ? 'bg-success/20 border-success' : isCorrect === false && !isSkip ? 'bg-error/20 border-error' : isSkip ? 'bg-white/10 border-white/30' : ''}`}>
+						<div class="flex items-center justify-center gap-3 mb-2">
+							{#if isCorrect === true}
+								<span class="text-3xl">✓</span>
+							{:else if isSkip}
+								<span class="text-3xl">⏭️</span>
+							{:else if isCorrect === false}
+								<span class="text-3xl">✗</span>
+							{/if}
+							<p class="text-center font-semibold text-lg {isCorrect === true ? 'text-success' : isCorrect === false && !isSkip ? 'text-error' : isSkip ? 'text-text-light' : 'text-sandy-light'}">
+								{statusMessage}
 							</p>
+						</div>
+						{#if correctCountryName && (isCorrect || triesLeft === 0 || isSkip)}
+							<div class="flex items-center justify-center gap-2 mt-3 pt-3 border-t border-white/10">
+								{#if correctCountryCca2}
+									<img 
+										src="/assets/twemoji_flags_cca2/{correctCountryCca2}.svg" 
+										alt="{correctCountryName} flag"
+										class="w-6 h-4 object-cover rounded"
+									/>
+								{/if}
+								<span class="text-text-light font-medium">{correctCountryName}</span>
+							</div>
 						{/if}
 					</div>
 				{/if}
 
-				<!-- Guess Input -->
-				{#if !showFeedback || (triesLeft > 0 && !isCorrect)}
+				<!-- Guess Input Section -->
+				{#if triesLeft > 0 && (!isCorrect || !showFeedback)}
 					<div class="card-game">
-						<p class="text-lg text-text-muted mb-4 text-center">{makeGuessText}</p>
+						<p class="text-center text-lg font-medium text-sandy-light mb-4">{makeGuessText}</p>
 						{#if triesLeft > 0 && !showFeedback}
-							<p class="text-sm text-text-muted mb-2 text-center">{triesLeftText.replace('%d', triesLeft.toString())}</p>
+							<p class="text-center text-sm text-text-muted mb-3">{triesLeftText.replace('%d', triesLeft.toString())}</p>
 						{/if}
-						<div class="flex gap-4">
+						<div class="flex flex-col sm:flex-row gap-3">
 							<input
 								type="text"
 								bind:value={guessInput}
 								on:keypress={handleKeyPress}
 								placeholder={enterCountryText}
 								disabled={isLoading || showFeedback || gameFinished}
-								class="flex-1 px-4 py-3 rounded-lg border-2 border-white/20 bg-white/5 text-sandy-light placeholder:text-text-muted focus:outline-none focus:border-primary disabled:opacity-50"
+								class="flex-1 px-4 py-3 rounded-lg border-2 border-white/20 bg-white/5 text-sandy-light placeholder:text-text-muted focus:outline-none focus:border-primary transition-all disabled:opacity-50"
+								autocomplete="off"
 							/>
 							<button
 								on:click={handleSubmitGuess}
 								disabled={isLoading || !guessInput.trim() || showFeedback || gameFinished}
-								class="btn-primary px-8 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+								class="btn-primary px-8 py-3 font-semibold disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
 							>
 								{guessText}
 							</button>
 						</div>
+						<div class="flex justify-center mt-4 pt-4 border-t border-white/10">
+							<button
+								on:click={handleSkip}
+								disabled={isLoading || showFeedback || gameFinished}
+								class="flex items-center gap-2 px-4 py-2 text-sm text-text-muted hover:text-sandy-light border border-white/20 hover:border-white/40 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+							>
+								<span>⏭️</span>
+								<span>I don't know / Skip</span>
+							</button>
+						</div>
 						{#if error && !showFeedback}
-							<p class="text-error mt-4 text-center">{error}</p>
+							<p class="text-error text-sm text-center mt-3">{error}</p>
 						{/if}
 					</div>
 				{/if}
 
 				<!-- Previous Guesses History -->
 				{#if guessHistory.length > 0}
-					<div class="card-game">
-						<h2 class="text-2xl font-bold mb-4">{previousGuessesText}</h2>
-						<div class="space-y-4">
-							{#each guessHistory.slice().reverse() as entry, reverseIndex (entry.guess + entry.fact + String(reverseIndex))}
-								{@const originalIndex = guessHistory.length - reverseIndex - 1}
-								<div class="border-b border-white/10 pb-4 last:border-b-0 last:pb-0">
-									<div class="flex items-start gap-3 mb-2">
-										<span class="text-xl font-bold mt-1">
-											{#if entry.isCorrect !== undefined && entry.isCorrect}
-												<span class="text-success">✓</span>
-											{:else}
-												<span class="text-error">✗</span>
-											{/if}
-										</span>
-										<div class="flex-1">
-											<p class="font-semibold text-lg mb-1">
-												{t('game.facts.guess_number', [originalIndex + 1, getGuessDisplayText(entry)], currentLocale)}
-											</p>
-											{#if entry.fact}
-												<p class="text-text-muted prose prose-invert max-w-none" innerHTML={formatFact(entry.fact)}></p>
-											{/if}
-										</div>
-									</div>
-								</div>
-							{/each}
-						</div>
-					</div>
+					<FactsGuessHistory guesses={guessHistory} />
 				{/if}
 			</div>
 		{/if}

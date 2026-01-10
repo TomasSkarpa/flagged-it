@@ -132,6 +132,12 @@ func getIP(r *http.Request) string {
 func RateLimitMiddleware(limiter *RateLimiter) func(http.HandlerFunc) http.HandlerFunc {
 	return func(next http.HandlerFunc) http.HandlerFunc {
 		return func(w http.ResponseWriter, r *http.Request) {
+			// Skip rate limiting for OPTIONS requests (CORS preflight)
+			if r.Method == http.MethodOptions {
+				next(w, r)
+				return
+			}
+
 			ip := getIP(r)
 
 			if !limiter.Allow(ip) {

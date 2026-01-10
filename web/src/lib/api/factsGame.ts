@@ -69,6 +69,24 @@ export async function submitGuess(
 	return response.json();
 }
 
+export async function skipRound(sessionId: string): Promise<GuessResponse> {
+	const response = await fetch(getApiUrl(API_ENDPOINTS.FACTS_SKIP), {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			sessionId,
+		}),
+	});
+
+	if (!response.ok) {
+		throw new Error(`Failed to skip round: ${response.statusText}`);
+	}
+
+	return response.json();
+}
+
 export async function nextRound(sessionId: string): Promise<FactsGameSession> {
 	const response = await fetch(getApiUrl(API_ENDPOINTS.FACTS_NEXT), {
 		method: 'POST',

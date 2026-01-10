@@ -3,7 +3,6 @@ module flagged-it
 go 1.22.0
 
 require (
-	fyne.io/fyne/v2 v2.7.1
 	github.com/wailsapp/wails/v2 v2.11.0
 )
 

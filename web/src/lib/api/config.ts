@@ -71,10 +71,11 @@ export const API_ENDPOINTS = {
 	WORLDLE_GUESS: '/game/worldle/guess',
 	WORLDLE_STATE: '/game/worldle/state',
 	
-	// Facts game endpoints
-	FACTS_START: '/game/facts/start',
-	FACTS_GUESS: '/game/facts/guess',
-	FACTS_NEXT: '/game/facts/next',
+		// Facts game endpoints
+		FACTS_START: '/game/facts/start',
+		FACTS_GUESS: '/game/facts/guess',
+		FACTS_SKIP: '/game/facts/skip',
+		FACTS_NEXT: '/game/facts/next',
 	
 	// Debug/Browse endpoints
 	DEBUG_COUNTRIES: '/debug/countries',

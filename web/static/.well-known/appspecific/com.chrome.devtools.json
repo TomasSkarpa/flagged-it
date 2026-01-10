@@ -1,0 +1,14 @@
+{
+	"name": "Flagged It",
+	"projectUrl": "https://flaggedit.app",
+	"includeFolders": [
+		"web/src"
+	],
+	"includeGlobs": [],
+	"excludeGlobs": [
+		"**/node_modules/**",
+		"**/.svelte-kit/**",
+		"**/build/**",
+		"**/dist/**"
+	]
+}

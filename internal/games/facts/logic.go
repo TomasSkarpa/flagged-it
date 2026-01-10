@@ -11,15 +11,16 @@ import (
 
 // State represents the current state of the facts guessing game
 type State struct {
-	CurrentCountry *models.Country
-	CurrentFacts   []string
-	CurrentFact    int
-	TriesLeft      int
-	UsedFacts      map[int]bool
-	GuessHistory   []GuessHistoryEntry
-	Score          int
-	Total          int
-	IsComplete     bool
+	CurrentCountry   *models.Country
+	CurrentFacts     []string
+	CurrentFact      int
+	CurrentFactText  string // Track the currently displayed fact text
+	TriesLeft        int
+	UsedFacts        map[int]bool
+	GuessHistory     []GuessHistoryEntry
+	Score            int
+	Total            int
+	IsComplete       bool
 }
 
 // GuessHistoryEntry represents a single guess in the history
@@ -76,6 +77,7 @@ func (l *Logic) NewRound() error {
 	l.state.CurrentCountry = &availableCountries[rand.Intn(len(availableCountries))]
 	l.state.CurrentFacts = l.factsData[l.state.CurrentCountry.CCA2].Facts
 	l.state.CurrentFact = 0
+	l.state.CurrentFactText = ""
 	l.state.TriesLeft = 3
 	l.state.UsedFacts = make(map[int]bool)
 	l.state.GuessHistory = []GuessHistoryEntry{}
@@ -99,6 +101,7 @@ func (l *Logic) GetCurrentFact() (string, error) {
 	l.state.UsedFacts[factIndex] = true
 	fact := l.state.CurrentFacts[factIndex]
 	l.state.CurrentFact++
+	l.state.CurrentFactText = fact // Store the current fact text
 
 	return fact, nil
 }
@@ -109,17 +112,8 @@ func (l *Logic) MakeGuess(guess string) (*GuessResult, error) {
 		return nil, ErrGameComplete
 	}
 
-	// Get current fact text for history
-	currentFactText := ""
-	if len(l.state.UsedFacts) > 0 {
-		// Find the last used fact
-		for i := len(l.state.CurrentFacts) - 1; i >= 0; i-- {
-			if l.state.UsedFacts[i] {
-				currentFactText = l.state.CurrentFacts[i]
-				break
-			}
-		}
-	}
+	// Get current fact text for history - use the stored current fact text
+	currentFactText := l.state.CurrentFactText
 
 	guess = strings.TrimSpace(guess)
 	if guess == "" {
@@ -173,10 +167,48 @@ func (l *Logic) MakeGuess(guess string) (*GuessResult, error) {
 	return result, nil
 }
 
+// Skip skips the current round without guessing
+func (l *Logic) Skip() (*GuessResult, error) {
+	if l.state.IsComplete {
+		return nil, ErrGameComplete
+	}
+
+	// Get current fact text for history - use the stored current fact text
+	currentFactText := l.state.CurrentFactText
+
+	// Add skip entry to history
+	l.state.GuessHistory = append(l.state.GuessHistory, GuessHistoryEntry{
+		Guess: "Skip",
+		Fact:  currentFactText,
+	})
+
+	// Mark round as complete (like running out of tries)
+	l.state.TriesLeft = 0
+	l.state.Total++
+
+	result := &GuessResult{
+		IsCorrect:      false,
+		CorrectCountry: l.state.CurrentCountry,
+		TriesLeft:      0,
+		Score:          l.state.Score,
+		Total:          l.state.Total,
+		IsComplete:     l.state.Total >= l.maxRounds,
+		GuessHistory:   l.state.GuessHistory,
+	}
+
+	if result.IsComplete {
+		l.state.IsComplete = true
+	}
+
+	return result, nil
+}
+
 // Reset resets the game state
 func (l *Logic) Reset() {
 	l.state.Score = 0
 	l.state.Total = 0
+	l.state.CurrentFact = 0
+	l.state.CurrentFactText = ""
 	l.state.UsedFacts = make(map[int]bool)
 	l.state.GuessHistory = []GuessHistoryEntry{}
 	l.state.IsComplete = false

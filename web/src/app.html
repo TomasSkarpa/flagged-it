@@ -1,7 +1,38 @@
 <!DOCTYPE html>
-<html lang="%sveltekit.lang%">
+<html lang="en">
 	<head>
 		<meta charset="utf-8" />
+		<script>
+			// Set lang attribute IMMEDIATELY based on user's browser language preference
+			// This runs synchronously before any content renders - critical for SEO
+			// Language is based on user's browser preference, not geographic location
+			(function() {
+				try {
+					// Get user's preferred language from localStorage (if previously saved) or browser
+					const storedLocale = localStorage.getItem('locale');
+					const browserLocale = (navigator.language || navigator.userLanguage || 'en').split('-')[0];
+					const locale = storedLocale || browserLocale || 'en';
+					
+					// Set html lang attribute immediately for SEO crawlers
+					// This matches the actual content language based on user preference
+					const htmlElement = document.documentElement || document.getElementsByTagName('html')[0];
+					if (htmlElement) {
+						htmlElement.setAttribute('lang', locale);
+						
+						// Set text direction for RTL languages
+						const rtlLanguages = ['ar', 'he'];
+						if (rtlLanguages.includes(locale)) {
+							htmlElement.setAttribute('dir', 'rtl');
+						} else {
+							htmlElement.setAttribute('dir', 'ltr');
+						}
+					}
+				} catch (e) {
+					// Fallback: keep default lang="en" if script fails
+				}
+			})();
+		</script>
+		<title>Flagged It - Learn Countries Through Fun Guessing Games</title>
 		<link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" />
 		<link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
 		<link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
@@ -12,11 +43,18 @@
 		<meta name="mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		<meta name="apple-mobile-web-app-title" content="Flagged It" />
+		<meta http-equiv="content-language" id="meta-content-language" content="en" />
 		<meta name="description" id="meta-description" content="Learn about countries playing different game modes - guessing games, flag recognition, and shape identification." />
 		<script>
-			// Set meta description based on user's preferred language
+			// Update content-language meta tag and description based on user's preferred language
 			(function() {
 				const locale = localStorage.getItem('locale') || (navigator.language || navigator.userLanguage || 'en').split('-')[0];
+				
+				// Update content-language meta tag
+				const contentLangMeta = document.getElementById('meta-content-language');
+				if (contentLangMeta) {
+					contentLangMeta.setAttribute('content', locale);
+				}
 				const descriptions = {
 					en: 'Learn about countries playing different game modes - guessing games, flag recognition, and shape identification.',
 					es: 'Aprende sobre países jugando diferentes modos de juego: juegos de adivinanza, reconocimiento de banderas e identificación de formas.',

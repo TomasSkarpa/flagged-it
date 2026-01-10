@@ -12,6 +12,11 @@
 	
 	let currentLocale = 'en';
 	
+	function getStoredLocale(): string {
+		if (typeof window === 'undefined') return 'en';
+		return localStorage.getItem('locale') || (navigator.language || 'en').split('-')[0];
+	}
+	
 	// Subscribe to locale changes and update meta description
 	onMount(() => {
 		// Initialize theme on mount
@@ -23,12 +28,25 @@
 		// RTL languages
 		const rtlLanguages = ['ar', 'he'];
 		
+		// Set initial locale and lang attribute
+		if (typeof document !== 'undefined') {
+			const initialLocale = getStoredLocale();
+			currentLocale = initialLocale;
+			document.documentElement.lang = initialLocale;
+			if (rtlLanguages.includes(initialLocale)) {
+				document.documentElement.dir = 'rtl';
+			} else {
+				document.documentElement.dir = 'ltr';
+			}
+		}
+		
 		const unsubscribe = locale.subscribe(value => {
 			currentLocale = value;
 			updateMetaDescription();
 			
-			// Set text direction for RTL languages
+			// Set lang attribute and text direction for RTL languages
 			if (typeof document !== 'undefined') {
+				document.documentElement.lang = value;
 				if (rtlLanguages.includes(value)) {
 					document.documentElement.dir = 'rtl';
 				} else {
@@ -36,15 +54,6 @@
 				}
 			}
 		});
-		
-		// Set initial direction
-		if (typeof document !== 'undefined') {
-			if (rtlLanguages.includes(currentLocale)) {
-				document.documentElement.dir = 'rtl';
-			} else {
-				document.documentElement.dir = 'ltr';
-			}
-		}
 		
 		updateMetaDescription();
 		return unsubscribe;

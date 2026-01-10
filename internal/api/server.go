@@ -21,21 +21,33 @@ func SetupRoutes() {
 	rateLimiter := NewRateLimiter(600*time.Millisecond, 20) // ~100 requests per minute
 	rateLimitMiddleware := RateLimitMiddleware(rateLimiter)
 
-	// CORS middleware
+	// CORS middleware - handles preflight and actual requests
 	corsMiddleware := func(next http.HandlerFunc) http.HandlerFunc {
 		return func(w http.ResponseWriter, r *http.Request) {
 			origin := r.Header.Get("Origin")
 
-			// Check if origin is from localhost or local network
-			isLocal := false
+			// Check if origin should be allowed
+			shouldAllow := false
+
 			if origin != "" {
-				// Allow localhost variants
-				if strings.HasPrefix(origin, "http://localhost:") ||
-					strings.HasPrefix(origin, "http://127.0.0.1:") {
-					isLocal = true
+				// Explicitly allow localhost:5173 (Svelte dev server default)
+				if origin == "http://localhost:5173" {
+					shouldAllow = true
+				}
+				// Allow localhost with any port
+				if strings.HasPrefix(origin, "http://localhost:") {
+					shouldAllow = true
+				}
+				// Allow 127.0.0.1 with any port
+				if strings.HasPrefix(origin, "http://127.0.0.1:") {
+					shouldAllow = true
+				}
+				// Allow bare localhost or 127.0.0.1
+				if origin == "http://localhost" || origin == "http://127.0.0.1" {
+					shouldAllow = true
 				}
 
-				// Allow local network IPs (192.168.x.x, 10.x.x.x, 172.16-31.x.x)
+				// Allow local network IPs
 				if strings.HasPrefix(origin, "http://192.168.") ||
 					strings.HasPrefix(origin, "http://10.") ||
 					strings.HasPrefix(origin, "http://172.16.") ||
@@ -44,53 +56,50 @@ func SetupRoutes() {
 					strings.HasPrefix(origin, "http://172.19.") ||
 					strings.HasPrefix(origin, "http://172.2") ||
 					strings.HasPrefix(origin, "http://172.3") {
-					isLocal = true
+					shouldAllow = true
+				}
+
+				// Allow production domains
+				if origin == "https://flaggedit.vercel.app" ||
+					origin == "http://flaggedit.vercel.app" ||
+					origin == "https://flaggedit.app" ||
+					origin == "http://flaggedit.app" {
+					shouldAllow = true
 				}
 			}
 
-			// Allow localhost for dev, local network IPs, and production domains
-			allowedOrigins := []string{
-				"http://localhost:5173",
-				"http://localhost:3000",
-				"https://flaggedit.vercel.app",
-				"http://flaggedit.vercel.app", // Fallback for HTTP
-				"https://flaggedit.app",       // Production domain
-				"http://flaggedit.app",        // Fallback for HTTP redirects
-			}
-
-			allowed := false
-			for _, allowedOrigin := range allowedOrigins {
-				if origin == allowedOrigin {
-					allowed = true
-					break
-				}
-			}
-
-			// Also allow if it's a local network request
-			if isLocal {
-				allowed = true
-			}
-
-			if allowed {
-				w.Header().Set("Access-Control-Allow-Origin", origin)
-			}
-
-			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-			w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-			w.Header().Set("Access-Control-Max-Age", "3600")
-
+			// Handle preflight OPTIONS request FIRST - before anything else
 			if r.Method == http.MethodOptions {
+				// Set CORS headers for preflight - browser requires these
+				// Only set Allow-Origin if the origin is allowed
+				if shouldAllow && origin != "" {
+					w.Header().Set("Access-Control-Allow-Origin", origin)
+				}
+				// Always set these headers for OPTIONS (even if origin is not allowed)
+				w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+				w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+				w.Header().Set("Access-Control-Max-Age", "3600")
 				w.WriteHeader(http.StatusNoContent)
 				return
 			}
+
+			// Set CORS headers for actual requests
+			if shouldAllow && origin != "" {
+				w.Header().Set("Access-Control-Allow-Origin", origin)
+			}
+			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+			w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+			w.Header().Set("Access-Control-Max-Age", "3600")
 
 			next(w, r)
 		}
 	}
 
 	// Combine rate limiting and CORS middleware
+	// IMPORTANT: CORS must run first to handle OPTIONS preflight requests
+	// Rate limiting should skip OPTIONS requests
 	combinedMiddleware := func(next http.HandlerFunc) http.HandlerFunc {
-		return rateLimitMiddleware(corsMiddleware(next))
+		return corsMiddleware(rateLimitMiddleware(next))
 	}
 
 	// Flag game routes
@@ -124,6 +133,7 @@ func SetupRoutes() {
 	// Facts game routes
 	http.HandleFunc("/api/game/facts/start", combinedMiddleware(factsHandler.StartGame))
 	http.HandleFunc("/api/game/facts/guess", combinedMiddleware(factsHandler.SubmitGuess))
+	http.HandleFunc("/api/game/facts/skip", combinedMiddleware(factsHandler.Skip))
 	http.HandleFunc("/api/game/facts/next", combinedMiddleware(factsHandler.NextRound))
 
 	// Debug/Browse routes

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
 	
@@ -65,24 +64,20 @@
 		}
 	];
 	
-	$: heroTitle = t('home.hero.title', undefined, currentLocale);
+	// Initialize with fallbacks to ensure content is always present for SEO
+	$: heroTitle = t('home.hero.title', undefined, currentLocale) || 'Flagged It';
 	$: heroSubtitle = t('home.hero.subtitle', undefined, currentLocale);
 	$: heroDescription = t('home.hero.description', undefined, currentLocale);
-	$: featuresTitle = t('home.features.title', undefined, currentLocale);
-	$: multipleModesTitle = t('home.features.multiple_modes.title', undefined, currentLocale);
-	$: multipleModesDescription = t('home.features.multiple_modes.description', undefined, currentLocale);
-	$: regionalFocusTitle = t('home.features.regional.title', undefined, currentLocale);
-	$: regionalFocusDescription = t('home.features.regional.description', undefined, currentLocale);
-	$: trackProgressTitle = t('home.features.progress.title', undefined, currentLocale);
-	$: trackProgressDescription = t('home.features.progress.description', undefined, currentLocale);
-	$: playNow = t('home.game.play_now', undefined, currentLocale);
-	$: comingSoon = t('home.game.coming_soon', undefined, currentLocale);
+	$: featuresTitle = t('home.features.title', undefined, currentLocale) || 'Features';
+	$: multipleModesTitle = t('home.features.multiple_modes.title', undefined, currentLocale) || 'Multiple Game Modes';
+	$: multipleModesDescription = t('home.features.multiple_modes.description', undefined, currentLocale) || 'Enjoy various game modes including flag guessing, shape identification, capitals, and more.';
+	$: regionalFocusTitle = t('home.features.regional.title', undefined, currentLocale) || 'Regional Focus';
+	$: regionalFocusDescription = t('home.features.regional.description', undefined, currentLocale) || 'Choose specific regions to focus your learning on different parts of the world.';
+	$: trackProgressTitle = t('home.features.progress.title', undefined, currentLocale) || 'Track Progress';
+	$: trackProgressDescription = t('home.features.progress.description', undefined, currentLocale) || 'Monitor your learning progress and improve your knowledge of world geography.';
+	$: playNow = t('home.game.play_now', undefined, currentLocale) || 'Play Now';
+	$: comingSoon = t('home.game.coming_soon', undefined, currentLocale) || 'Coming Soon';
 	
-	function navigateToGame(route: string, available: boolean) {
-		if (available) {
-			goto(route);
-		}
-	}
 </script>
 
 <svelte:head>
@@ -103,78 +98,97 @@
 	
 	<div class="max-w-6xl mx-auto relative z-10">
 		<!-- Hero Section -->
-		<div class="text-center mb-16">
+		<header class="text-center mb-16">
 			<h1 class="text-5xl md:text-7xl font-bold mb-4">
-				<span class="mr-2 emoji-blue">🌍</span><span class="gradient-text">{heroTitle}</span>
+				<span class="mr-2 emoji-blue" aria-hidden="true">🌍</span>
+				<span class="gradient-text">{heroTitle || 'Flagged It'}</span>
 			</h1>
-			<p class="text-xl md:text-2xl text-text-muted mb-2">
-				{heroSubtitle}
-			</p>
-			<p class="text-lg text-text-dark">
-				{heroDescription}
-			</p>
-		</div>
+			{#if heroSubtitle}
+				<p class="text-xl md:text-2xl text-text-muted mb-2">
+					{heroSubtitle}
+				</p>
+			{/if}
+			{#if heroDescription}
+				<p class="text-lg text-text-dark">
+					{heroDescription}
+				</p>
+			{/if}
+		</header>
 		
 		<!-- Games Grid -->
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
 			{#each games as game}
-				<button
-					on:click={() => navigateToGame(game.route, game.available)}
-					disabled={!game.available}
-					class="card-game text-left transition-all duration-300 hover:shadow-glow hover:-translate-y-2 
-						{game.available ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'}"
-				>
-					<div class="flex items-start gap-4">
-						<div class="text-5xl leading-none">{game.icon}</div>
-						<div class="flex-1">
-							<h2 class="text-2xl font-bold text-sandy-light mb-2 leading-none mt-0">
-								{game.title}
-							</h2>
-							<p class="text-text-muted mb-4">
-								{game.description}
-							</p>
-							{#if game.available}
+				{#if game.available}
+					<a
+						href={game.route}
+						class="card-game text-left transition-all duration-300 hover:shadow-glow hover:-translate-y-2 cursor-pointer block no-underline"
+					>
+						<div class="flex items-start gap-4">
+							<div class="text-5xl leading-none">{game.icon}</div>
+							<div class="flex-1">
+								<h2 class="text-2xl font-bold text-sandy-light mb-2 leading-none mt-0">
+									{game.title}
+								</h2>
+								<p class="text-text-muted mb-4">
+									{game.description}
+								</p>
 								<span class="inline-block px-4 py-2 bg-primary/20 border border-primary rounded-lg text-primary font-semibold">
 									{playNow}
 								</span>
-							{:else}
+							</div>
+						</div>
+					</a>
+				{:else}
+					<div
+						class="card-game text-left opacity-50 cursor-not-allowed"
+						aria-disabled="true"
+					>
+						<div class="flex items-start gap-4">
+							<div class="text-5xl leading-none">{game.icon}</div>
+							<div class="flex-1">
+								<h2 class="text-2xl font-bold text-sandy-light mb-2 leading-none mt-0">
+									{game.title}
+								</h2>
+								<p class="text-text-muted mb-4">
+									{game.description}
+								</p>
 								<span class="inline-block px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-text-dark font-semibold">
 									{comingSoon}
 								</span>
-							{/if}
+							</div>
 						</div>
 					</div>
-				</button>
+				{/if}
 			{/each}
 		</div>
 		
 		<!-- Features Section -->
-		<div class="card-game text-center">
-			<h2 class="text-3xl font-bold text-sandy-light mb-6">{featuresTitle}</h2>
+		<section class="card-game text-center mb-12">
+			<h2 class="text-3xl font-bold text-sandy-light mb-6">{featuresTitle || 'Features'}</h2>
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-				<div class="p-4">
-					<div class="text-4xl mb-3">🎯</div>
-					<h3 class="text-xl font-semibold text-sandy-light mb-2">{multipleModesTitle}</h3>
+				<article class="p-4">
+					<div class="text-4xl mb-3" aria-hidden="true">🎯</div>
+					<h3 class="text-xl font-semibold text-sandy-light mb-2">{multipleModesTitle || 'Multiple Game Modes'}</h3>
 					<p class="text-text-muted">
-						{multipleModesDescription}
+						{multipleModesDescription || 'Enjoy various game modes including flag guessing, shape identification, capitals, and more.'}
 					</p>
-				</div>
-				<div class="p-4">
-					<div class="text-4xl mb-3">🌏</div>
-					<h3 class="text-xl font-semibold text-sandy-light mb-2">{regionalFocusTitle}</h3>
+				</article>
+				<article class="p-4">
+					<div class="text-4xl mb-3" aria-hidden="true">🌏</div>
+					<h3 class="text-xl font-semibold text-sandy-light mb-2">{regionalFocusTitle || 'Regional Focus'}</h3>
 					<p class="text-text-muted">
-						{regionalFocusDescription}
+						{regionalFocusDescription || 'Choose specific regions to focus your learning on different parts of the world.'}
 					</p>
-				</div>
-				<div class="p-4">
-					<div class="text-4xl mb-3">📊</div>
-					<h3 class="text-xl font-semibold text-sandy-light mb-2">{trackProgressTitle}</h3>
+				</article>
+				<article class="p-4">
+					<div class="text-4xl mb-3" aria-hidden="true">📊</div>
+					<h3 class="text-xl font-semibold text-sandy-light mb-2">{trackProgressTitle || 'Track Progress'}</h3>
 					<p class="text-text-muted">
-						{trackProgressDescription}
+						{trackProgressDescription || 'Monitor your learning progress and improve your knowledge of world geography.'}
 					</p>
-				</div>
+				</article>
 			</div>
-		</div>
+		</section>
 	</div>
 </div>
 

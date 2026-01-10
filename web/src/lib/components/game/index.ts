@@ -7,3 +7,4 @@ export { default as GameContainer } from './GameContainer.svelte';
 export { default as AnswerGrid } from './AnswerGrid.svelte';
 export { default as FeedbackOverlay } from './FeedbackOverlay.svelte';
 export { default as GameOverScreen } from './GameOverScreen.svelte';
+export { default as FactsGuessHistory } from './FactsGuessHistory.svelte';

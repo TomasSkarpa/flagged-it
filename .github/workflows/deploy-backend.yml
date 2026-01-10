@@ -45,11 +45,16 @@ jobs:
       - name: Add server to known hosts
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -H ${{ secrets.DEPLOY_SERVER_HOST }} >> ~/.ssh/known_hosts
+          chmod 700 ~/.ssh
+          ssh-keyscan -H ${{ secrets.DEPLOY_SERVER_HOST }} >> ~/.ssh/known_hosts || {
+            echo "Warning: ssh-keyscan failed, but continuing..."
+            echo "Server host: ${{ secrets.DEPLOY_SERVER_HOST }}"
+          }
+          chmod 600 ~/.ssh/known_hosts
 
       - name: Create deployment directory on server
         run: |
-          ssh ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
+          ssh -o StrictHostKeyChecking=accept-new ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
             mkdir -p /opt/flagged-it/bin
             mkdir -p /opt/flagged-it/assets
             mkdir -p /opt/flagged-it/logs
@@ -57,19 +62,19 @@ jobs:
 
       - name: Upload binary to server
         run: |
-          scp flagged-it-server ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/flagged-it/bin/flagged-it-server
+          scp -o StrictHostKeyChecking=accept-new flagged-it-server ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/flagged-it/bin/flagged-it-server
 
       - name: Upload assets to server
         run: |
-          scp -r assets ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/flagged-it/
+          scp -r -o StrictHostKeyChecking=accept-new assets ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/flagged-it/
 
       - name: Upload systemd service file
         run: |
-          scp .github/deploy/flagged-it.service ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/tmp/flagged-it.service
+          scp -o StrictHostKeyChecking=accept-new .github/deploy/flagged-it.service ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/tmp/flagged-it.service
 
       - name: Setup systemd service and restart
         run: |
-          ssh ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
+          ssh -o StrictHostKeyChecking=accept-new ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
             # Move service file to systemd directory
             sudo mv /tmp/flagged-it.service /etc/systemd/system/flagged-it.service
             
@@ -87,7 +92,7 @@ jobs:
       - name: Verify deployment
         run: |
           sleep 3
-          ssh ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
+          ssh -o StrictHostKeyChecking=accept-new ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
             # Test health endpoint
             curl -f http://localhost:8080/api/health || exit 1
             echo "✓ Backend is running and healthy"

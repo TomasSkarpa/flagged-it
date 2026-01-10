@@ -44,6 +44,9 @@ jobs:
           sudo mkdir -p /opt/flagged-it/assets
           sudo mkdir -p /opt/flagged-it/logs
           
+          # Stop service before updating binary (to avoid "Text file busy" error)
+          sudo systemctl stop flagged-it.service || true
+          
           # Copy binary and assets
           sudo cp flagged-it-server /opt/flagged-it/bin/flagged-it-server
           sudo chmod +x /opt/flagged-it/bin/flagged-it-server
@@ -57,8 +60,8 @@ jobs:
             sudo systemctl daemon-reload
           fi
           
-          # Restart service
-          sudo systemctl restart flagged-it.service
+          # Start service
+          sudo systemctl start flagged-it.service
           sleep 2
           sudo systemctl status flagged-it.service --no-pager -l || true
 

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="%sveltekit.lang%">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" />
+		<link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
+		<link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
+		<link rel="manifest" href="/assets/favicon/site.webmanifest" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#0A0E27" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="apple-mobile-web-app-title" content="Flagged It" />
+		<meta name="description" id="meta-description" content="Learn about countries playing different game modes - guessing games, flag recognition, and shape identification." />
+		<script>
+			// Set meta description based on user's preferred language
+			(function() {
+				const locale = localStorage.getItem('locale') || (navigator.language || navigator.userLanguage || 'en').split('-')[0];
+				const descriptions = {
+					en: 'Learn about countries playing different game modes - guessing games, flag recognition, and shape identification.',
+					es: 'Aprende sobre países jugando diferentes modos de juego: juegos de adivinanza, reconocimiento de banderas e identificación de formas.',
+					fr: 'Apprenez-en sur les pays en jouant à différents modes de jeu - jeux de devinettes, reconnaissance de drapeaux et identification de formes.',
+					de: 'Lernen Sie Länder kennen, indem Sie verschiedene Spielmodi spielen - Ratespiele, Flaggenerkennung und Formidentifikation.',
+					nl: 'Leer over landen door verschillende spelmodi te spelen - raadspelletjes, vlagherkenning en vormidentificatie.',
+					nb: 'Lær om land ved å spille forskjellige spillmoduser - gjettespill, flaggkjennskap og formidentifikasjon.',
+					da: 'Lær om lande ved at spille forskellige spiltilstande - gættespil, flaggenkendelse og formidentifikation.',
+					sv: 'Lär dig om länder genom att spela olika spellägen - gissningsspel, flaggkännedom och formidentifiering.',
+					fi: 'Opi maista pelaamalla erilaisia pelimuotoja - arvauspelejä, lipuntunnistusta ja muotojen tunnistamista.',
+					pt: 'Aprenda sobre países jogando diferentes modos de jogo - jogos de adivinhação, reconhecimento de bandeiras e identificação de formas.',
+					tr: 'Farklı oyun modlarını oynayarak ülkeler hakkında bilgi edinin - tahmin oyunları, bayrak tanıma ve şekil tanımlama.',
+					ro: 'Află despre țări jucând diferite moduri de joc - jocuri de ghicit, recunoaștere steaguri și identificare forme.',
+					hu: 'Ismerjen meg országokat különböző játékmódok játszásával - tippelős játékok, zászlófelismerés és alakzatazonosítás.',
+					hr: 'Saznajte više o zemljama igrajući različite načine igre - igre pogađanja, prepoznavanje zastava i identifikacija oblika.',
+					cs: 'Poznejte země hraním různých herních režimů - hádací hry, rozpoznávání vlajek a identifikace tvarů.',
+					sk: 'Zistite viac o krajinách hraním rôznych herných režimov - hádacie hry, rozpoznávanie vlajok a identifikácia tvarov.',
+					pl: 'Poznaj kraje, grając w różne tryby gry - gry zgadywanki, rozpoznawanie flag i identyfikacja kształtów.',
+					it: 'Scopri i paesi giocando diverse modalità di gioco - giochi di indovinelli, riconoscimento bandiere e identificazione forme.',
+					id: 'Pelajari negara dengan memainkan berbagai mode permainan - permainan tebak-tebakan, pengenalan bendera dan identifikasi bentuk.',
+					ms: 'Pelajari negara dengan memainkan pelbagai mod permainan - permainan tekaan, pengenalan bendera dan pengenalan bentuk.',
+					fil: 'Matuto tungkol sa mga bansa sa pamamagitan ng paglalaro ng iba\'t ibang mga mode ng laro - mga laro ng paghula, pagkilala ng watawat at pagkilala ng hugis.',
+					sw: 'Jifunze kuhusu nchi kwa kucheza njia tofauti za mchezo - michezo ya kukisia, utambuzi wa bendera na utambuzi wa umbo.',
+					vi: 'Tìm hiểu về các quốc gia bằng cách chơi các chế độ trò chơi khác nhau - trò chơi đoán, nhận dạng cờ và nhận dạng hình dạng.'
+				};
+				const description = descriptions[locale] || descriptions.en;
+				const metaDesc = document.getElementById('meta-description');
+				if (metaDesc) {
+					metaDesc.setAttribute('content', description);
+				}
+			})();
+		</script>
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>
+

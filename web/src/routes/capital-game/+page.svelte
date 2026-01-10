@@ -1,0 +1,239 @@
+<script lang="ts">
+	import LoadingSpinner from '$lib/components/ui/LoadingSpinner.svelte';
+	import { 
+		GameSetupScreen, 
+		GameHeader, 
+		AnswerGrid,
+		GameOverScreen 
+	} from '$lib/components/game';
+	import { startCapitalGame, getCapitalQuestion, submitCapitalAnswer } from '$lib/api/capitalGame';
+	import type { CapitalQuestion } from '$lib/api/capitalGame';
+	import { t } from '$lib/translations';
+	import { locale } from '$lib/stores/locale';
+
+	// Reactive translations
+	$: currentLocale = $locale;
+	$: gameTitle = t('game.capital.title', undefined, currentLocale);
+	$: gameDescription = t('game.capital.description', undefined, currentLocale);
+	$: questionText = t('game.capital.question', { Country: currentQuestion?.countryName || '' }, currentLocale);
+	$: excellentMessage = t('game.over.excellent', undefined, currentLocale);
+	$: loadingCountriesText = t('library.loading', undefined, currentLocale);
+	$: failedToStartGameError = t('common.error', undefined, currentLocale);
+
+	let sessionId: string | null = null;
+	let currentQuestion: CapitalQuestion | null = null;
+	let selectedAnswer: string | null = null;
+	let correctCapital: string = '';
+	let score = 0;
+	let total = 0;
+	let isLoading = false;
+	let error: string | null = null;
+	let showFeedback = false;
+	let isCorrect = false;
+	let selectedRegion = '';
+	let gameStarted = false;
+	let gameFinished = false;
+	const totalRounds = 10;
+
+	async function handleStartGame(event: CustomEvent<{ region: string }>) {
+		isLoading = true;
+		error = null;
+		gameFinished = false;
+		score = 0;
+		total = 0;
+		selectedRegion = event.detail.region;
+		
+		try {
+			const result = await startCapitalGame(selectedRegion || '');
+			sessionId = result.sessionId;
+			currentQuestion = result.question;
+			gameStarted = true;
+			selectedAnswer = null;
+			showFeedback = false;
+		} catch (err) {
+			error = err instanceof Error ? err.message : failedToStartGameError;
+			console.error('Start game error:', err);
+		} finally {
+			isLoading = false;
+		}
+	}
+
+	async function handleSelectAnswer(event: CustomEvent<{ answer?: string; country?: any }>) {
+		if (showFeedback || !sessionId || !currentQuestion) return;
+		
+		const answer = event.detail.answer || event.detail.country?.name?.common;
+		if (!answer) return;
+		
+		selectedAnswer = answer;
+		isLoading = true;
+		error = null;
+		
+		try {
+			const result = await submitCapitalAnswer(sessionId, currentQuestion.questionId, answer);
+			isCorrect = result.correct;
+			correctCapital = result.correctCapital;
+			score = result.score;
+			total = result.total;
+			showFeedback = true;
+			
+			setTimeout(async () => {
+				showFeedback = false;
+				if (total >= totalRounds) {
+					gameFinished = true;
+					gameStarted = false;
+				} else {
+					await loadNextQuestion();
+				}
+			}, 2000);
+		} catch (err) {
+			error = err instanceof Error ? err.message : failedToStartGameError;
+			console.error('Submit answer error:', err);
+		} finally {
+			isLoading = false;
+		}
+	}
+
+	async function loadNextQuestion() {
+		if (!sessionId) return;
+		
+		isLoading = true;
+		error = null;
+		selectedAnswer = null;
+		
+		try {
+			const question = await getCapitalQuestion(sessionId);
+			currentQuestion = question;
+		} catch (err) {
+			error = err instanceof Error ? err.message : failedToStartGameError;
+			console.error('Load question error:', err);
+		} finally {
+			isLoading = false;
+		}
+	}
+
+	function handlePlayAgain() {
+		gameStarted = false;
+		gameFinished = false;
+		currentQuestion = null;
+		sessionId = null;
+		score = 0;
+		total = 0;
+		selectedAnswer = null;
+		showFeedback = false;
+	}
+
+</script>
+
+<svelte:head>
+	<title>{gameTitle} - Flagged It</title>
+</svelte:head>
+
+<div class="min-h-screen p-4 md:p-8">
+	<div class="max-w-4xl mx-auto">
+		{#if !gameStarted && !gameFinished}
+			<GameSetupScreen
+				title={gameTitle}
+				emoji="🏛️"
+				description={gameDescription}
+				{isLoading}
+				{error}
+				bind:selectedRegion
+				on:start={handleStartGame}
+			/>
+		{:else if gameFinished}
+			<GameOverScreen
+				{score}
+				{totalRounds}
+				excellentMessage={excellentMessage}
+				on:playAgain={handlePlayAgain}
+			/>
+		{:else if currentQuestion}
+			<GameHeader
+				{score}
+				{total}
+				currentRound={total + 1}
+				{totalRounds}
+			/>
+			
+			<div 
+				class="card-game relative overflow-hidden flag-background-container"
+				style="background-image: url('/assets/twemoji_flags_cca2/{currentQuestion.countryCca2}.svg');"
+			>
+				<div class="flag-overlay"></div>
+				
+				<div class="relative z-10">
+					<h2 class="text-2xl md:text-3xl font-bold text-sandy-light text-center mb-8">
+						{questionText}
+					</h2>
+					
+					<div class="mb-10"></div>
+					
+					<AnswerGrid
+						options={currentQuestion.options}
+						{selectedAnswer}
+						correctAnswer={correctCapital}
+						{showFeedback}
+						{isCorrect}
+						disabled={isLoading}
+						on:select={handleSelectAnswer}
+						columns={1}
+					/>
+					
+					{#if error}
+						<div class="mt-6 p-4 bg-error/20 border border-error rounded-lg">
+							<p class="text-error font-semibold text-center">{error}</p>
+						</div>
+					{/if}
+				</div>
+				
+				<!-- Feedback Overlay -->
+				{#if showFeedback}
+					<div 
+						class="absolute inset-0 flex items-center justify-center rounded-card animate-fade-in z-20
+							{isCorrect ? 'bg-success/50' : 'bg-error/50'}"
+					>
+						<div class="text-center">
+							<div class="text-6xl mb-4">{isCorrect ? '✓' : '✗'}</div>
+							<p class="text-3xl font-bold text-white">{isCorrect ? t('game.correct_short', undefined, currentLocale) : t('game.wrong_short', undefined, currentLocale)}</p>
+							{#if !isCorrect && correctCapital}
+								<p class="text-xl text-white/90 mt-2">{correctCapital}</p>
+							{/if}
+						</div>
+					</div>
+				{/if}
+			</div>
+		{:else if isLoading}
+			<div class="flex flex-col items-center justify-center py-20">
+				<LoadingSpinner />
+				<p class="mt-4 text-text-muted">{t('common.loading', undefined, currentLocale)}</p>
+			</div>
+		{/if}
+	</div>
+</div>
+
+<style>
+	.flag-background-container {
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		min-height: 500px;
+	}
+	
+	.flag-overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			to bottom,
+			rgba(10, 14, 39, 0.85) 0%,
+			rgba(10, 14, 39, 0.75) 50%,
+			rgba(10, 14, 39, 0.9) 100%
+		);
+		z-index: 1;
+	}
+	
+	@media (min-width: 768px) {
+		.flag-background-container {
+			min-height: 600px;
+		}
+	}
+</style>

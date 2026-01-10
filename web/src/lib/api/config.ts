@@ -43,52 +43,59 @@ function getApiBaseUrl(): string {
 export const API_BASE_URL = getApiBaseUrl();
 
 export const API_ENDPOINTS = {
-	// Flag game endpoints
-	FLAG_START: '/api/game/flag/start',
-	FLAG_QUESTION: '/api/game/flag/question',
-	FLAG_ANSWER: '/api/game/flag/answer',
-	FLAG_SCORE: '/api/game/flag/score',
+	// Flag game endpoints (without /api prefix - getApiUrl adds it)
+	FLAG_START: '/game/flag/start',
+	FLAG_QUESTION: '/game/flag/question',
+	FLAG_ANSWER: '/game/flag/answer',
+	FLAG_SCORE: '/game/flag/score',
 	
 	// Shape game endpoints
-	SHAPE_START: '/api/game/shape/start',
-	SHAPE_QUESTION: '/api/game/shape/question',
-	SHAPE_ANSWER: '/api/game/shape/answer',
-	SHAPE_SCORE: '/api/game/shape/score',
+	SHAPE_START: '/game/shape/start',
+	SHAPE_QUESTION: '/game/shape/question',
+	SHAPE_ANSWER: '/game/shape/answer',
+	SHAPE_SCORE: '/game/shape/score',
 	
 	// Capital game endpoints
-	CAPITAL_START: '/api/game/capital/start',
-	CAPITAL_QUESTION: '/api/game/capital/question',
-	CAPITAL_ANSWER: '/api/game/capital/answer',
-	CAPITAL_SCORE: '/api/game/capital/score',
+	CAPITAL_START: '/game/capital/start',
+	CAPITAL_QUESTION: '/game/capital/question',
+	CAPITAL_ANSWER: '/game/capital/answer',
+	CAPITAL_SCORE: '/game/capital/score',
 	
 	// Higher/Lower game endpoints
-	HIGHER_LOWER_START: '/api/game/higherlower/start',
-	HIGHER_LOWER_ANSWER: '/api/game/higherlower/answer',
-	HIGHER_LOWER_SCORE: '/api/game/higherlower/score',
+	HIGHER_LOWER_START: '/game/higherlower/start',
+	HIGHER_LOWER_ANSWER: '/game/higherlower/answer',
+	HIGHER_LOWER_SCORE: '/game/higherlower/score',
 	
 	// Worldle game endpoints
-	WORLDLE_START: '/api/game/worldle/start',
-	WORLDLE_GUESS: '/api/game/worldle/guess',
-	WORLDLE_STATE: '/api/game/worldle/state',
+	WORLDLE_START: '/game/worldle/start',
+	WORLDLE_GUESS: '/game/worldle/guess',
+	WORLDLE_STATE: '/game/worldle/state',
 	
 	// Facts game endpoints
-	FACTS_START: '/api/game/facts/start',
-	FACTS_GUESS: '/api/game/facts/guess',
-	FACTS_NEXT: '/api/game/facts/next',
+	FACTS_START: '/game/facts/start',
+	FACTS_GUESS: '/game/facts/guess',
+	FACTS_NEXT: '/game/facts/next',
 	
 	// Debug/Browse endpoints
-	DEBUG_COUNTRIES: '/api/debug/countries',
-	DEBUG_GEOJSON: '/api/debug/geojson',
-	DEBUG_GEOJSON_ALL: '/api/debug/geojson/all',
+	DEBUG_COUNTRIES: '/debug/countries',
+	DEBUG_GEOJSON: '/debug/geojson',
+	DEBUG_GEOJSON_ALL: '/debug/geojson/all',
 	
 	// Health check
-	HEALTH: '/api/health',
+	HEALTH: '/health',
 } as const;
 
 export function getApiUrl(endpoint: string): string {
 	// Check environment variable first
 	if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_URL) {
-		return `${import.meta.env.VITE_API_URL}${endpoint}`;
+		const baseUrl = import.meta.env.VITE_API_URL;
+		// If VITE_API_URL is a relative path (starts with /), use it directly with endpoint
+		// If it's an absolute URL, append /api and endpoint
+		if (baseUrl.startsWith('/')) {
+			return `${baseUrl}${endpoint}`;
+		} else {
+			return `${baseUrl}/api${endpoint}`;
+		}
 	}
 	
 	// Always compute dynamically to handle SSR and client-side correctly
@@ -96,14 +103,14 @@ export function getApiUrl(endpoint: string): string {
 		const hostname = window.location.hostname;
 		
 		if (isLocalNetwork(hostname)) {
-			return `http://${hostname}:8080${endpoint}`;
+			// Development: endpoints need /api prefix since we're calling localhost directly
+			return `http://${hostname}:8080/api${endpoint}`;
 		}
 		
-		// Production (Vercel): use relative path which will be proxied by vercel.json
-		// Vercel will proxy /api/* requests to your backend server at 91.109.38.74:8080
-		// This avoids mixed content issues (HTTPS frontend -> HTTP backend)
-		return `/api${endpoint}`;
+		// Production (Vercel): use api subdomain with SSL
+		// api.flaggedit.app points to the backend server with HTTPS
+		return `https://api.flaggedit.app/api${endpoint}`;
 	}
 	// Fallback for SSR
-	return `http://localhost:8080${endpoint}`;
+	return `http://localhost:8080/api${endpoint}`;
 }

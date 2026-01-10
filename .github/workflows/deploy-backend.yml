@@ -47,20 +47,39 @@ jobs:
           ssh-keyscan -H ${{ secrets.DEPLOY_SERVER_HOST }} >> ~/.ssh/known_hosts || true
           chmod 600 ~/.ssh/known_hosts
 
+      - name: Test SSH connection
+        run: |
+          echo "Testing SSH connection to server..."
+          echo "Server: ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}"
+          echo "Testing with verbose output..."
+          ssh -v -o ConnectTimeout=15 -o StrictHostKeyChecking=accept-new ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} echo "SSH connection successful" || {
+            echo "❌ SSH connection failed after 15 seconds."
+            echo "This suggests:"
+            echo "  1. Router may block connections from GitHub Actions IP ranges"
+            echo "  2. Router firewall may block external SSH despite port forwarding"
+            echo "  3. ISP may block incoming SSH connections"
+            echo ""
+            echo "Possible solutions:"
+            echo "  - Check router Security/Firewall settings"
+            echo "  - Try different SSH port (e.g., 2222)"
+            echo "  - Use self-hosted GitHub Actions runner on your server"
+            exit 1
+          }
+
       - name: Deploy to server
         run: |
-          ssh -o StrictHostKeyChecking=accept-new ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
+          ssh -o ConnectTimeout=30 -o StrictHostKeyChecking=accept-new ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
             set -e
             mkdir -p /opt/flagged-it/bin
             mkdir -p /opt/flagged-it/assets
             mkdir -p /opt/flagged-it/logs
           EOF
           
-          scp -o StrictHostKeyChecking=accept-new flagged-it-server ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/flagged-it/bin/flagged-it-server
+          scp -o ConnectTimeout=30 -o StrictHostKeyChecking=accept-new flagged-it-server ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/flagged-it/bin/flagged-it-server
           
-          scp -r -o StrictHostKeyChecking=accept-new assets ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/flagged-it/
+          scp -r -o ConnectTimeout=30 -o StrictHostKeyChecking=accept-new assets ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/flagged-it/
           
-          ssh -o StrictHostKeyChecking=accept-new ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
+          ssh -o ConnectTimeout=30 -o StrictHostKeyChecking=accept-new ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
             sudo systemctl restart flagged-it.service
             sleep 2
             sudo systemctl status flagged-it.service --no-pager -l || true

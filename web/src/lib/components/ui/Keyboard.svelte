@@ -5,7 +5,7 @@
 
 	// Type definitions
 	type KeyboardLayout = 
-		| 'english' | 'korean' | 'japanese' | 'russian'
+		| 'english' | 'korean' | 'japanese' | 'russian' | 'ukrainian'
 		| 'arabic' | 'turkish' | 'thai' | 'greek' | 'hebrew' 
 		| 'vietnamese' | 'spanish' | 'polish' | 'czech' | 'indonesian';
 	type KeyState = 'default' | 'correct' | 'incorrect' | 'disabled';
@@ -76,11 +76,12 @@
 			offset: true
 		},
 		polish: {
-			// Polish QWERTZ layout
+			// Polish QWERTZ layout with all diacritics
+			// Includes: Ą, Ć, Ę, Ł, Ń, Ó, Ś, Ź, Ż
 			rows: [
-				['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
-				['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ł'],
-				['Z', 'X', 'C', 'V', 'B', 'N', 'M']
+				['Q', 'W', 'E', 'Ę', 'R', 'T', 'Y', 'U', 'Ó', 'I', 'O', 'P'],
+				['A', 'Ą', 'S', 'Ś', 'D', 'Ć', 'F', 'G', 'H', 'J', 'K', 'L', 'Ł'],
+				['Z', 'Ź', 'Ż', 'X', 'C', 'V', 'B', 'N', 'Ń', 'M']
 			],
 			offset: true
 		},
@@ -125,6 +126,15 @@
 			],
 			offset: false
 		},
+		ukrainian: {
+			// Ukrainian ЙЦУКЕН (JCUKEN) layout - includes Ukrainian-specific letters (ґ, є, і, ї)
+			rows: [
+				['Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ї'],
+				['Ф', 'І', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Є'],
+				['Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', 'Ґ']
+			],
+			offset: false
+		},
 		arabic: {
 			// Arabic keyboard layout (QWERTY-based Arabic)
 			rows: [
@@ -135,11 +145,14 @@
 			offset: false
 		},
 		thai: {
-			// Thai Kedmanee layout
+			// Thai Kedmanee layout - includes all 44 consonants and 14 vowels
+			// Consonants: ก ข ฃ ค ฅ ฆ ง จ ฉ ช ซ ฌ ญ ฎ ฏ ฐ ฑ ฒ ณ ด ต ถ ท ธ น บ ป ผ ฝ พ ฟ ภ ม ย ร ฤ ล ฦ ว ศ ษ ส ห ฬ อ ฮ
+			// Vowels: ะ ั า ำ ิ ี ึ ื ุ ู เ แ โ ใ ไ
 			rows: [
 				['ๆ', 'ไ', 'ำ', 'พ', 'ะ', 'ร', 'น', 'ย', 'บ', 'ล', 'ฃ', 'ฟ'],
 				['ห', 'ก', 'ด', 'เ', '้', '่', 'า', 'ส', 'ว', 'ง', 'ผ', 'ป'],
-				['แ', 'อ', 'ิ', 'ื', 'ท', 'ม', 'ใ', 'ฝ', 'ฅ', 'ถ', 'ค', 'ต', 'จ']
+				['แ', 'อ', 'ิ', 'ื', 'ท', 'ม', 'ใ', 'ฝ', 'ฅ', 'ถ', 'ค', 'ต', 'จ'],
+				['ข', 'ฆ', 'ฉ', 'ช', 'ซ', 'ฌ', 'ญ', 'ฎ', 'ฏ', 'ฐ', 'ฑ', 'ฒ', 'ณ', 'ธ', 'ภ', 'ฤ', 'ฦ', 'ศ', 'ษ', 'ฬ', 'ฮ', 'ั', 'ี', 'ึ', 'ุ', 'ู', 'โ']
 			],
 			offset: false
 		},

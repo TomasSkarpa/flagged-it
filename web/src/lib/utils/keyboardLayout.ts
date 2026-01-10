@@ -39,7 +39,7 @@ export function getKeyboardLayoutForLocale(loc: string): KeyboardLayout {
 		'ar': 'arabic',
 		'hi': 'english', // Hindi uses QWERTY with Devanagari input method
 		'th': 'thai',
-		'uk': 'russian', // Ukrainian uses Cyrillic keyboard similar to Russian
+		'uk': 'ukrainian', // Ukrainian keyboard layout with Ukrainian-specific letters (ґ, є, і, ї)
 		'he': 'hebrew',
 		'el': 'greek' // Greek keyboard layout
 	};

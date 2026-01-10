@@ -39,7 +39,8 @@
 		'hi': '🇮🇳',
 		'th': '🇹🇭',
 		'uk': '🇺🇦',
-		'he': '🇮🇱'
+		'he': '🇮🇱',
+		'el': '🇬🇷'
 	};
 	
 	function toggleDropdown() {

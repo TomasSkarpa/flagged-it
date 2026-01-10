@@ -33,7 +33,6 @@ const LOCALES_WITH_SPEAKERS = [
 	{ code: 'cs', name: 'Čeština', speakers: 10 },        // ~10M (Czech)
 	{ code: 'sv', name: 'Svenska', speakers: 10 },        // ~10M (Swedish)
 	{ code: 'he', name: 'עברית', speakers: 9 },            // ~9M (Hebrew, RTL)
-	{ code: 'el', name: 'Ελληνικά', speakers: 13 },       // ~13M (Greek)
 	{ code: 'da', name: 'Dansk', speakers: 6 },           // ~6M (Danish)
 	{ code: 'hr', name: 'Hrvatski', speakers: 6 },        // ~6M (Croatian)
 	{ code: 'sk', name: 'Slovenčina', speakers: 5 },      // ~5M (Slovak)

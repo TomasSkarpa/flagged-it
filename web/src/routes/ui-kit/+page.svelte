@@ -325,7 +325,7 @@
 						<h3 class="text-lg font-semibold text-text-light mb-4">Flag Selection</h3>
 						<FlagGrid flags={sampleFlags} bind:selected={selectedFlags} />
 					</GameCard>
-					<GameCard class="lg:col-span-2">
+					<GameCard class="col-span-1 lg:col-span-2">
 						<h3 class="text-lg font-semibold text-text-light mb-4">Keyboard Component</h3>
 						<div class="space-y-6">
 							<div class="p-3 bg-surface-light/50 rounded-lg border border-primary/20">
@@ -411,6 +411,13 @@
 												Russian
 											</Button>
 											<Button 
+												variant={keyboardLayout === 'ukrainian' ? 'primary' : 'secondary'} 
+												size="sm"
+												on:click={() => { keyboardLayout = 'ukrainian'; keyboardKeyStates = {}; }}
+											>
+												Ukrainian
+											</Button>
+											<Button 
 												variant={keyboardLayout === 'korean' ? 'primary' : 'secondary'} 
 												size="sm"
 												on:click={() => { keyboardLayout = 'korean'; keyboardKeyStates = {}; }}
@@ -486,25 +493,6 @@
 									>
 										{keyboardDisabled ? 'Enable' : 'Disable'} Keyboard
 									</Button>
-								</div>
-							</div>
-							<div>
-								<p class="text-sm text-text-muted mb-3">Example: Hangman Game States</p>
-								<div class="space-y-3">
-									<div>
-										<p class="text-xs text-text-muted mb-2">Some correct (green), some incorrect (red)</p>
-										<Keyboard 
-											layout="english"
-											keyStates={{
-												'A': 'correct',
-												'E': 'correct',
-												'I': 'correct',
-												'Q': 'incorrect',
-												'X': 'incorrect',
-												'Z': 'incorrect'
-											}}
-										/>
-									</div>
 								</div>
 							</div>
 						</div>

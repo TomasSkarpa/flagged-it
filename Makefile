@@ -1,138 +1,117 @@
 # -------------------------------------------------------------------
 # Project Makefile for "flagged-it"
 #
-# This Makefile standardizes building, testing, packaging, and cleaning
-# across multiple platforms.
-# Designed with portability and CI/CD pipelines in mind.
+# Quick start: make setup && make dev
 # -------------------------------------------------------------------
 
-.PHONY: setup run debug clean build check web build-all build-release version
+.PHONY: setup dev clean check version wails wails-setup wails-dev wails-build
 
 # -------------------------------------------------------------------
-# Configurable variables and cross-platform ready commands
-# -------------------------------------------------------------------
-
-BINARY    := flagged-it
-MAIN      := ./cmd
-BUILD_DIR := build
-
-# Default target OS/arch
-GOOS   ?= $(shell go env GOOS)
-GOARCH ?= $(shell go env GOARCH)
-
-# Windows binaries need ".exe" extension
-ifeq ($(GOOS),windows)
-  EXT := .exe
-else
-  EXT :=
-endif
-
-# Final output path for current build
-OUT := $(BUILD_DIR)/$(BINARY)-$(GOOS)-$(GOARCH)$(EXT)
-
-PLATFORMS = darwin/amd64 darwin/arm64 linux/amd64 linux/arm64 windows/amd64 windows/386
-
-# Detect Windows for cross-platform commands
-ifeq ($(OS),Windows_NT)
-  MKDIR := if not exist $(BUILD_DIR) mkdir $(BUILD_DIR)
-  EXE_EXT := .exe
-  # Windows-compatible env for Go build
-  GO_BUILD = set GOOS=$(GOOS)&& set GOARCH=$(GOARCH)&& go build -o $(OUT) $(MAIN)
-  RM_RF := if exist $(BUILD_DIR) rmdir /s /q $(BUILD_DIR)
-else
-  MKDIR := mkdir -p $(BUILD_DIR)
-  EXE_EXT :=
-  GO_BUILD = GOOS=$(GOOS) GOARCH=$(GOARCH) go build -o $(OUT) $(MAIN)
-  RM_RF := rm -rf $(BUILD_DIR)
-endif
-
-OUT := $(BUILD_DIR)/$(BINARY)-$(GOOS)-$(GOARCH)$(EXE_EXT)
-
-# -------------------------------------------------------------------
-# Setup and development targets
+# Setup - Install all dependencies
 # -------------------------------------------------------------------
 
 setup:
-	@# Copy assets for embedding (temporary, not tracked in git)
-	@# This must happen BEFORE go mod tidy so embed can find the files
-	@if [ ! -d internal/assetsembed/assets ] || [ assets -nt internal/assetsembed/assets ]; then \
-		rm -rf internal/assetsembed/assets; \
-		cp -r assets internal/assetsembed/assets; \
-	fi
-	go mod tidy
+	@echo "Installing Go dependencies..."
+	@go mod tidy
+	@echo ""
+	@echo "Installing Node.js dependencies..."
+	@cd web && npm install
+	@echo ""
+	@echo "Setup complete! Run 'make dev' to start."
 
-run: setup
-	go run $(MAIN)
+# -------------------------------------------------------------------
+# Development - Start both API and web servers
+# -------------------------------------------------------------------
 
-# Run the app in debug mode
-debug:
-	go run $(MAIN) -v
+dev:
+	@echo "Starting development servers..."
+	@echo ""
+	@echo "Starting API server in background..."
+	@cd cmd/web && go run main.go -dev > /tmp/flagged-it-api.log 2>&1 & echo $$! > /tmp/flagged-it-api.pid
+	@sleep 2
+	@echo "API server started on http://localhost:8080"
+	@echo "(logs: /tmp/flagged-it-api.log)"
+	@echo ""
+	@echo "Starting Svelte dev server..."
+	@cd web && npm run dev -- --host
 
-# Run the app in web mode
-web: setup
-	@$(MKDIR)
-	@GOOS=js GOARCH=wasm go build -o $(BUILD_DIR)/flagged-it.wasm $(MAIN)
-	@if [ -f "$$(go env GOROOT)/lib/wasm/wasm_exec.js" ]; then \
-		cp "$$(go env GOROOT)/lib/wasm/wasm_exec.js" $(BUILD_DIR)/; \
-	elif [ -f "$$(go env GOROOT)/misc/wasm/wasm_exec.js" ]; then \
-		cp "$$(go env GOROOT)/misc/wasm/wasm_exec.js" $(BUILD_DIR)/; \
-	else \
-		curl -s https://raw.githubusercontent.com/golang/go/master/misc/wasm/wasm_exec.js -o $(BUILD_DIR)/wasm_exec.js; \
-	fi
-	@cp index.html $(BUILD_DIR)/
-	@cp -r assets $(BUILD_DIR)/
-	@echo "Built WebAssembly to /$(BUILD_DIR)"
-ifeq ($(shell uname -s),Darwin)
-	@echo "Access from other devices: http://$$(ifconfig | grep "inet " | grep -v 127.0.0.1 | head -1 | awk '{print $$2}'):8080"
-else
-	@echo "Access from other devices: http://$$(hostname -I | awk '{print $$1}'):8080"
-endif
-	@cd $(BUILD_DIR) && python3 -m http.server 8080 --bind 0.0.0.0
+# -------------------------------------------------------------------
+# Clean build artifacts and temp files
+# -------------------------------------------------------------------
 
-# Remove build artifacts (safe for both Linux/macOS and Windows)
 clean:
-	go clean
-	@$(RM_RF)
-	@echo "Cleaned build artifacts"
+	@echo "Cleaning build artifacts..."
+	@go clean
+	@rm -rf build
+	@rm -rf web/.svelte-kit
+	@rm -rf web/build
+	@rm -rf cmd/desktop/build
+	@rm -rf cmd/desktop/frontend
+	@rm -f /tmp/flagged-it-api.log
+	@rm -f /tmp/flagged-it-api.pid
+	@echo "Done"
 
-build: setup
-	@$(MKDIR)
-	@$(GO_BUILD)
-	@echo "Built $(OUT)"
+# -------------------------------------------------------------------
+# Code quality checks
+# -------------------------------------------------------------------
 
-# Static analysis and formatting
 check:
-	go vet ./...
-	go fmt ./...
+	@echo "Running Go checks..."
+	@go vet ./...
+	@go fmt ./...
+	@echo "Done"
 
-# Build for all platforms
-build-all:
-	@echo "Building for all platforms..."
-	@$(MKDIR)
-	@for platform in $(PLATFORMS); do \
-		os=$${platform%%/*}; \
-		arch=$${platform##*/}; \
-		ext=$$(if [ "$$os" = "windows" ]; then echo .exe; fi); \
-		GOOS=$$os GOARCH=$$arch go build -ldflags="-s -w" -o $(BUILD_DIR)/$(BINARY)-$$os-$$arch$$ext $(MAIN); \
-		echo "Built $(BINARY)-$$os-$$arch$$ext"; \
-	done
-	@echo "All binaries built in $(BUILD_DIR)/"
+# -------------------------------------------------------------------
+# Wails Desktop App
+# -------------------------------------------------------------------
 
-# Build with version info
-VERSION ?= $(shell if [ -f VERSION ]; then cat VERSION; else git describe --tags --always --dirty 2>/dev/null || echo "dev"; fi)
-BUILD_TIME := $(shell date -u '+%Y-%m-%d_%H:%M:%S')
-LDFLAGS = -ldflags="-s -w -X main.Version=$(VERSION) -X main.BuildTime=$(BUILD_TIME)"
+wails-setup:
+	@echo "Installing Wails CLI..."
+	@go install github.com/wailsapp/wails/v2/cmd/wails@latest
+	@echo ""
+	@echo "Checking Wails installation..."
+	@wails doctor
+	@echo ""
+	@echo "Wails setup complete!"
 
-build-release:
-	@$(MKDIR)
-	@echo "Building $(OUT) with version $(VERSION)..."
-	@$(GO_BUILD) $(LDFLAGS)
-	@echo "Built $(OUT)"
+wails-dev:
+	@echo "Starting Wails development mode..."
+	@echo "Building frontend for desktop..."
+	@cd web && BUILD_TARGET=desktop npm run build
+	@echo ""
+	@echo "Copying frontend build to desktop..."
+	@rm -rf cmd/desktop/frontend
+	@mkdir -p cmd/desktop/frontend
+	@cp -r web/build cmd/desktop/frontend/
+	@echo ""
+	@echo "Starting Wails dev..."
+	@cd cmd/desktop && wails dev
 
+wails-build:
+	@echo "Building Wails desktop app..."
+	@echo ""
+	@echo "Building frontend for desktop..."
+	@cd web && BUILD_TARGET=desktop npm run build
+	@echo ""
+	@echo "Copying frontend build to desktop..."
+	@rm -rf cmd/desktop/frontend
+	@mkdir -p cmd/desktop/frontend
+	@cp -r web/build cmd/desktop/frontend/
+	@echo ""
+	@echo "Building desktop app..."
+	@cd cmd/desktop && wails build
+	@echo ""
+	@echo "Build complete! Check cmd/desktop/build/"
+
+wails: wails-build
+
+# -------------------------------------------------------------------
 # Show current version
+# -------------------------------------------------------------------
+
 version:
 	@if [ -f VERSION ]; then \
 		echo "Current version: $$(cat VERSION)"; \
 	else \
-		echo "No VERSION file found. Current: dev"; \
+		echo "Current version: dev"; \
 	fi

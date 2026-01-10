@@ -1,3 +1,6 @@
+//go:build desktop
+// +build desktop
+
 package guessing
 
 import (

@@ -1,0 +1,26 @@
+[Unit]
+Description=Flagged It Backend API Server
+After=network.target
+
+[Service]
+Type=simple
+User=home
+Group=home
+WorkingDirectory=/opt/flagged-it
+ExecStart=/opt/flagged-it/bin/flagged-it-server -port=8080
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=flagged-it
+
+# Environment variables
+Environment="PORT=8080"
+Environment="ASSETS_PATH=/opt/flagged-it/assets"
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

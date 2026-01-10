@@ -1,32 +1,41 @@
 # flagged-it
-Learn about countries playing different game modes – native Windows, macOS, Linux and web application in Go.
-
-<img width="1728" height="1079" alt="image" src="https://github.com/user-attachments/assets/58269e5a-c93c-4f99-8792-4b1b79325267" />
-
+Learn about countries playing different game modes – web application built with Go backend and Svelte frontend.
 
 ## Setup Instructions
 
-Install Go 1.21 or later:
-- **macOS**: `brew install go`
-- **Windows**: Download from https://golang.org/dl/
-- **Linux**: `sudo apt install golang-go` (Ubuntu/Debian) or `sudo yum install golang` (CentOS/RHEL)
+## Quick Start
 
-Install Make:
-- **macOS**: `brew install make`
-- **Windows**: Download from https://gnuwin32.sourceforge.net/packages/make.htm or `winget install ezwinports.make`
-- **Linux**: `sudo apt install make`
+### Prerequisites
 
-Make Targets
-- `make setup` - Install dependencies
-- `make run` - Run application
-- `make web` - Run local web application
-- `make debug` - Run with verbose output (and possibility to edit the json data)
-- `make build` - Builds binary based on your system
-- `make build-all` - Build binaries for all platforms (Windows, macOS, Linux)
-- `make build-release` - Build with version information
-- `make version` - Show current version
-- `make check` - Format and analyze code
+Install the following tools:
+
+**Go 1.21+**: [golang.org/dl](https://golang.org/dl/) or `brew install go` (macOS)
+
+**Node.js 18+**: [nodejs.org](https://nodejs.org/) or `brew install node` (macOS)
+
+**Make**: Usually pre-installed on macOS/Linux, or `winget install ezwinports.make` (Windows)
+
+### Setup & Run
+
+```bash
+# 1. Install all dependencies (Go + Node.js)
+make setup
+
+# 2. Start both API and web servers
+make dev
+```
+
+The application will be available at:
+- **Frontend**: http://localhost:5173
+- **API**: http://localhost:8080
+
+### Available Commands
+
+- `make setup` - Install Go and Node.js dependencies
+- `make dev` - Start both API and web development servers
+- `make check` - Run code quality checks
 - `make clean` - Remove build artifacts
+- `make version` - Show current version
 
 ## Releases
 
@@ -57,7 +66,6 @@ docs: update setup instructions
 
 This project uses the following open source libraries and assets:
 
-- **[Fyne](https://fyne.io/)** - Cross-platform GUI toolkit for Go (BSD 3-Clause License)
 - **[Twemoji](https://twemoji.twitter.com/)** - Flag graphics by Twitter (MIT License)
 
 See the `licenses/` directory for full license texts.

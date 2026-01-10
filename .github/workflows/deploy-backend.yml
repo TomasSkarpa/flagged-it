@@ -1,0 +1,94 @@
+name: Deploy Backend to Server
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'cmd/web/**'
+      - 'internal/**'
+      - 'assets/**'
+      - 'go.mod'
+      - 'go.sum'
+      - '.github/workflows/deploy-backend.yml'
+      - '.github/deploy/flagged-it.service'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.22'
+
+      - name: Install dependencies
+        run: go mod download
+
+      - name: Build Go binary
+        run: |
+          GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o flagged-it-server ./cmd/web
+          chmod +x flagged-it-server
+        env:
+          CGO_ENABLED: 0
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
+
+      - name: Add server to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.DEPLOY_SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Create deployment directory on server
+        run: |
+          ssh ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
+            mkdir -p /opt/flagged-it/bin
+            mkdir -p /opt/flagged-it/assets
+            mkdir -p /opt/flagged-it/logs
+          EOF
+
+      - name: Upload binary to server
+        run: |
+          scp flagged-it-server ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/flagged-it/bin/flagged-it-server
+
+      - name: Upload assets to server
+        run: |
+          scp -r assets ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/flagged-it/
+
+      - name: Upload systemd service file
+        run: |
+          scp .github/deploy/flagged-it.service ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/tmp/flagged-it.service
+
+      - name: Setup systemd service and restart
+        run: |
+          ssh ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
+            # Move service file to systemd directory
+            sudo mv /tmp/flagged-it.service /etc/systemd/system/flagged-it.service
+            
+            # Reload systemd and enable service
+            sudo systemctl daemon-reload
+            sudo systemctl enable flagged-it.service
+            
+            # Restart service
+            sudo systemctl restart flagged-it.service
+            
+            # Check status
+            sudo systemctl status flagged-it.service --no-pager
+          EOF
+
+      - name: Verify deployment
+        run: |
+          sleep 3
+          ssh ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
+            # Test health endpoint
+            curl -f http://localhost:8080/api/health || exit 1
+            echo "✓ Backend is running and healthy"
+          EOF

@@ -1,3 +1,6 @@
+//go:build desktop
+// +build desktop
+
 package facts
 
 import (

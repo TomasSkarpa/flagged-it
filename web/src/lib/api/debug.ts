@@ -1,0 +1,31 @@
+import { getApiUrl, API_ENDPOINTS } from './config';
+import type { Country } from '../types';
+
+export interface CountriesResponse {
+	countries: Country[];
+	total: number;
+}
+
+export async function getAllCountries(): Promise<CountriesResponse> {
+	const response = await fetch(getApiUrl(API_ENDPOINTS.DEBUG_COUNTRIES));
+	if (!response.ok) {
+		throw new Error('Failed to fetch countries');
+	}
+	return response.json();
+}
+
+export async function getCountryGeoJSON(cca3: string): Promise<any> {
+	const response = await fetch(`${getApiUrl(API_ENDPOINTS.DEBUG_GEOJSON)}?cca3=${cca3}`);
+	if (!response.ok) {
+		throw new Error(`Failed to fetch GeoJSON for ${cca3}`);
+	}
+	return response.json();
+}
+
+export async function getAllCountriesWithGeo(): Promise<CountriesResponse> {
+	const response = await fetch(getApiUrl(API_ENDPOINTS.DEBUG_GEOJSON_ALL));
+	if (!response.ok) {
+		throw new Error('Failed to fetch countries with GeoJSON');
+	}
+	return response.json();
+}

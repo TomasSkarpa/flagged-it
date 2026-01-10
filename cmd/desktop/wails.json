@@ -1,0 +1,10 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "flagged-it",
+  "outputfilename": "Flagged It",
+  "frontend:dir": "frontend/build",
+  "author": {
+    "name": "Flagged It",
+    "email": ""
+  }
+}

@@ -11,7 +11,7 @@ Install the following tools:
 
 **Go 1.21+**: [golang.org/dl](https://golang.org/dl/) or `brew install go` (macOS)
 
-**Node.js 18+**: [nodejs.org](https://nodejs.org/) or `brew install node` (macOS)
+**Node.js 24+**: [nodejs.org](https://nodejs.org/) or `brew install node` (macOS)
 
 **Make**: Usually pre-installed on macOS/Linux, or `winget install ezwinports.make` (Windows)
 

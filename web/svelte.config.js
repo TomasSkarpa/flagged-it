@@ -24,7 +24,7 @@ const config = {
 			})
 			: isVercel
 				? adapterVercel({
-					runtime: 'nodejs20.x'
+					runtime: 'nodejs24.x'
 				})
 				: adapterAuto()
 	}

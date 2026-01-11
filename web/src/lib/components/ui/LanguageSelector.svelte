@@ -116,13 +116,25 @@
 		border-radius: 4px;
 	}
 	
+	:global(:root.light .max-h-64::-webkit-scrollbar-track) {
+		background: rgba(0, 0, 0, 0.05);
+	}
+	
 	:global(.max-h-64::-webkit-scrollbar-thumb) {
 		background: rgba(255, 255, 255, 0.2);
 		border-radius: 4px;
 	}
 	
+	:global(:root.light .max-h-64::-webkit-scrollbar-thumb) {
+		background: rgba(0, 0, 0, 0.2);
+	}
+	
 	:global(.max-h-64::-webkit-scrollbar-thumb:hover) {
 		background: rgba(255, 255, 255, 0.3);
+	}
+	
+	:global(:root.light .max-h-64::-webkit-scrollbar-thumb:hover) {
+		background: rgba(0, 0, 0, 0.3);
 	}
 </style>
 

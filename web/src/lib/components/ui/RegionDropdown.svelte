@@ -123,6 +123,16 @@
 		border-color: rgba(255, 255, 255, 0.2);
 	}
 	
+	:global(:root.light) .region-btn {
+		border-color: rgba(0, 0, 0, 0.15);
+		background: rgba(0, 0, 0, 0.04);
+	}
+	
+	:global(:root.light) .region-btn:hover {
+		background: rgba(0, 0, 0, 0.08);
+		border-color: rgba(0, 0, 0, 0.25);
+	}
+	
 	.region-label {
 		flex: 1;
 		text-align: left;
@@ -204,6 +214,10 @@
 	
 	.dropdown-item:hover {
 		background: rgba(255, 255, 255, 0.08);
+	}
+	
+	:global(:root.light) .dropdown-item:hover {
+		background: rgba(0, 0, 0, 0.06);
 	}
 	
 	.dropdown-item.selected {

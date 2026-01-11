@@ -307,6 +307,10 @@
 		opacity: 0.5;
 	}
 
+	:global(:root.light) .key {
+		border-color: rgba(0, 0, 0, 0.15);
+	}
+
 	.key-correct {
 		background: var(--color-success) !important;
 		border-color: var(--color-success) !important;
@@ -326,6 +330,10 @@
 		border-color: rgba(255, 255, 255, 0.05) !important;
 		color: var(--color-text-muted) !important;
 		opacity: 0.4;
+	}
+
+	:global(:root.light) .key-disabled {
+		border-color: rgba(0, 0, 0, 0.08) !important;
 	}
 
 	/* Responsive adjustments */

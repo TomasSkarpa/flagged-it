@@ -164,12 +164,213 @@
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
 	}
 
+	:root.light .text-sandy {
+		color: var(--color-text-light);
+	}
+
 	:root.light .text-sandy-light {
 		color: var(--color-text-light);
 	}
 
 	:root.light .text-text-muted {
 		color: var(--color-text-muted);
+	}
+
+	/* Light mode button borders and backgrounds */
+	:root.light .border-white\/20 {
+		border-color: rgba(0, 0, 0, 0.15);
+	}
+
+	:root.light .border-white\/40 {
+		border-color: rgba(0, 0, 0, 0.25);
+	}
+
+	:root.light .bg-white\/10 {
+		background-color: rgba(0, 0, 0, 0.04);
+	}
+
+	:root.light .bg-white\/20 {
+		background-color: rgba(0, 0, 0, 0.08);
+	}
+
+	/* Light mode hover states for buttons */
+	:root.light button:hover.border-white\/20,
+	:root.light .hover\:border-white\/40:hover {
+		border-color: rgba(0, 0, 0, 0.3);
+	}
+
+	/* General light mode overrides for common UI patterns */
+	:root.light [style*="rgba(255, 255, 255, 0.1)"],
+	:root.light [style*="border: 1px solid rgba(255, 255, 255, 0.1)"] {
+		border-color: rgba(0, 0, 0, 0.15) !important;
+	}
+
+	:root.light [style*="rgba(255, 255, 255, 0.05)"],
+	:root.light [style*="background: rgba(255, 255, 255, 0.05)"] {
+		background-color: rgba(0, 0, 0, 0.04) !important;
+	}
+
+	:root.light [style*="rgba(255, 255, 255, 0.08)"],
+	:root.light [style*="background: rgba(255, 255, 255, 0.08)"] {
+		background-color: rgba(0, 0, 0, 0.06) !important;
+	}
+
+	:root.light [style*="rgba(255, 255, 255, 0.1)"],
+	:root.light [style*="background: rgba(255, 255, 255, 0.1)"] {
+		background-color: rgba(0, 0, 0, 0.08) !important;
+	}
+
+	:root.light [style*="rgba(255, 255, 255, 0.2)"],
+	:root.light [style*="background: rgba(255, 255, 255, 0.2)"] {
+		background-color: rgba(0, 0, 0, 0.12) !important;
+	}
+
+	/* Light mode for .btn-icon and other common button patterns */
+	:root.light .btn-icon {
+		background-color: rgba(0, 0, 0, 0.04) !important;
+		border-color: rgba(0, 0, 0, 0.15) !important;
+	}
+
+	:root.light .btn-icon:hover {
+		background-color: rgba(0, 0, 0, 0.08) !important;
+		border-color: var(--color-accent) !important;
+	}
+
+	/* Light mode for cards with white borders */
+	:root.light .card-game,
+	:root.light .card-country,
+	:root.light .card-stats {
+		border-color: rgba(0, 0, 0, 0.15) !important;
+	}
+
+	:root.light .card-country:hover {
+		border-color: var(--color-accent) !important;
+	}
+
+	/* Light mode for dropdown borders */
+	:root.light .dropdown {
+		border-color: rgba(0, 0, 0, 0.15) !important;
+	}
+
+	/* Light mode for button borders - ensure all buttons have visible borders */
+	:root.light button:not(.btn-primary):not(.btn-danger):not(.btn-icon) {
+		border-color: rgba(0, 0, 0, 0.15);
+	}
+
+	:root.light button:not(.btn-primary):not(.btn-danger):not(.btn-icon):hover {
+		border-color: rgba(0, 0, 0, 0.25);
+	}
+
+	/* Light mode for btn-secondary specifically */
+	:root.light .btn-secondary {
+		border-color: var(--color-secondary) !important;
+	}
+
+	:root.light .btn-secondary:hover {
+		border-color: var(--color-secondary-light) !important;
+		background-color: rgba(124, 58, 237, 0.1) !important;
+	}
+
+	/* Light mode for progress bars and other bg-white/10 elements */
+	:root.light .bg-white\/10,
+	:root.light [class*="bg-white/10"] {
+		background-color: rgba(0, 0, 0, 0.06) !important;
+	}
+
+	:root.light .bg-white\/5,
+	:root.light [class*="bg-white/5"] {
+		background-color: rgba(0, 0, 0, 0.03) !important;
+	}
+
+	/* Light mode for box shadows - make them lighter */
+	:root.light .shadow-card,
+	:root.light [class*="shadow-card"] {
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+	}
+
+	:root.light .shadow-card-hover,
+	:root.light [class*="shadow-card-hover"] {
+		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
+	}
+
+	:root.light .shadow-glow,
+	:root.light [class*="shadow-glow"] {
+		box-shadow: 0 0 24px rgba(99, 102, 241, 0.3) !important;
+	}
+
+	/* Light mode for navigation */
+	:root.light .nav-link:hover {
+		background: rgba(0, 0, 0, 0.06) !important;
+	}
+
+	:root.light .mobile-nav-link:hover {
+		background: rgba(0, 0, 0, 0.06) !important;
+	}
+
+	/* Light mode for map components */
+	:root.light .border-white\/20,
+	:root.light [class*="border-white/20"] {
+		border-color: rgba(0, 0, 0, 0.15) !important;
+	}
+
+	/* Light mode for scrollbars */
+	:root.light ::-webkit-scrollbar-thumb {
+		background: rgba(0, 0, 0, 0.2) !important;
+	}
+
+	:root.light ::-webkit-scrollbar-track {
+		background: rgba(0, 0, 0, 0.05) !important;
+	}
+
+	/* Light mode for backdrop blur backgrounds */
+	:root.light [class*="backdrop-blur"] {
+		background-color: rgba(255, 255, 255, 0.8) !important;
+	}
+
+	/* Light mode for additional white opacity patterns */
+	:root.light .bg-white\/15,
+	:root.light [class*="bg-white/15"] {
+		background-color: rgba(0, 0, 0, 0.08) !important;
+	}
+
+	:root.light .hover\:bg-white\/15:hover,
+	:root.light [class*="hover:bg-white/15"]:hover {
+		background-color: rgba(0, 0, 0, 0.12) !important;
+	}
+
+	/* Light mode for border patterns */
+	:root.light .border-white\/15,
+	:root.light [class*="border-white/15"] {
+		border-color: rgba(0, 0, 0, 0.12) !important;
+	}
+
+	/* Light mode for hover border patterns */
+	:root.light .hover\:border-white\/40:hover,
+	:root.light [class*="hover:border-white/40"]:hover {
+		border-color: rgba(0, 0, 0, 0.3) !important;
+	}
+
+	/* Light mode for selected/active states with white backgrounds */
+	:root.light .bg-sky\/20,
+	:root.light [class*="bg-sky/20"] {
+		background-color: rgba(6, 182, 212, 0.15) !important;
+	}
+
+	/* Light mode for toast and notification components */
+	:root.light .border-white\/20[class*="Toast"],
+	:root.light [class*="Toast"] .border-white\/20 {
+		border-color: rgba(0, 0, 0, 0.15) !important;
+	}
+
+	/* Light mode for toggle switches */
+	:root.light .border-white\/20[class*="Toggle"],
+	:root.light [class*="Toggle"] .border-white\/20 {
+		border-color: rgba(0, 0, 0, 0.15) !important;
+	}
+
+	:root.light .bg-white\/15[class*="Toggle"],
+	:root.light [class*="Toggle"] .bg-white\/15 {
+		background-color: rgba(0, 0, 0, 0.08) !important;
 	}
 
 	:root.light .gradient-text {

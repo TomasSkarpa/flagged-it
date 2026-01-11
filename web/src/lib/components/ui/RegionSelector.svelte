@@ -40,17 +40,43 @@
 <div class="flex flex-wrap gap-3">
 	<button
 		on:click={() => handleSelect('')}
-		class="px-6 py-3 rounded-lg border-2 transition-all font-medium text-base {selected === '' ? 'bg-terracotta border-terracotta text-white' : 'bg-transparent border-white/20 text-sandy hover:border-white/40'}"
+		class="region-filter-btn px-6 py-3 rounded-lg border-2 transition-all font-medium text-base {selected === '' ? 'bg-primary/20 border-primary text-primary' : 'bg-transparent border-white/20 text-sandy hover:border-white/40'}"
 	>
 		{worldLabel}
 	</button>
 	{#each normalizedRegions as region}
 		<button
 			on:click={() => handleSelect(region.value)}
-			class="px-6 py-3 rounded-lg border-2 transition-all font-medium text-base {selected === region.value ? 'bg-terracotta border-terracotta text-white' : 'bg-transparent border-white/20 text-sandy hover:border-white/40'}"
+			class="region-filter-btn px-6 py-3 rounded-lg border-2 transition-all font-medium text-base {selected === region.value ? 'bg-primary/20 border-primary text-primary' : 'bg-transparent border-white/20 text-sandy hover:border-white/40'}"
 		>
 			{region.label}
 		</button>
 	{/each}
 </div>
 
+<style>
+	:global(:root.light) .region-filter-btn {
+		color: var(--color-text) !important;
+		border-color: rgba(0, 0, 0, 0.2) !important;
+	}
+
+	:global(:root.light) .region-filter-btn.text-sandy {
+		color: var(--color-text) !important;
+	}
+
+	:global(:root.light) .region-filter-btn:hover {
+		border-color: rgba(0, 0, 0, 0.3) !important;
+		background: rgba(0, 0, 0, 0.05) !important;
+	}
+
+	:global(:root.light) .region-filter-btn:hover.text-sandy {
+		color: var(--color-text) !important;
+	}
+
+	/* Selected state - match view mode toggle style */
+	:global(:root.light) .region-filter-btn.bg-primary\/20 {
+		background-color: rgba(99, 102, 241, 0.15) !important; /* primary with opacity */
+		color: var(--color-primary) !important;
+		border-color: var(--color-primary) !important;
+	}
+</style>

@@ -169,6 +169,10 @@
 		background: rgba(255, 255, 255, 0.05);
 	}
 	
+	:global(:root.light) .nav-link:hover {
+		background: rgba(0, 0, 0, 0.06);
+	}
+	
 	.nav-link.active {
 		color: var(--color-primary-light);
 		background: rgba(99, 102, 241, 0.1);
@@ -206,6 +210,16 @@
 	.mobile-menu-btn:hover {
 		color: var(--color-text-light);
 		background: rgba(255, 255, 255, 0.05);
+	}
+	
+	:global(:root.light) .mobile-menu-btn {
+		border-color: rgba(0, 0, 0, 0.15);
+		background: rgba(0, 0, 0, 0.04);
+	}
+	
+	:global(:root.light) .mobile-menu-btn:hover {
+		background: rgba(0, 0, 0, 0.08);
+		border-color: rgba(0, 0, 0, 0.25);
 	}
 	
 	@media (min-width: 768px) {
@@ -256,8 +270,16 @@
 		background: rgba(255, 255, 255, 0.05);
 	}
 	
+	:global(:root.light) .mobile-nav-link:hover {
+		background: rgba(0, 0, 0, 0.06);
+	}
+	
 	.mobile-nav-link.active {
 		color: var(--color-primary-light);
 		background: rgba(99, 102, 241, 0.1);
+	}
+	
+	:global(:root.light) .mobile-menu {
+		border-top-color: rgba(0, 0, 0, 0.1);
 	}
 </style>

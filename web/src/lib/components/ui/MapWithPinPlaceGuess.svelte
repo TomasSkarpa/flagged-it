@@ -161,10 +161,18 @@
 		overflow: hidden;
 	}
 	
+	:global(:root.light .map-container .leaflet-control-zoom) {
+		border-color: rgba(0, 0, 0, 0.2);
+	}
+	
 	:global(.map-container .leaflet-control-zoom a) {
 		background-color: var(--color-surface);
 		color: var(--color-text);
 		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	}
+	
+	:global(:root.light .map-container .leaflet-control-zoom a) {
+		border-bottom-color: rgba(0, 0, 0, 0.1);
 	}
 	
 	:global(.map-container .leaflet-control-zoom a:hover) {

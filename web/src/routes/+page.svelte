@@ -88,6 +88,7 @@
 <div class="home-page min-h-screen p-4 md:p-8 relative overflow-hidden">
 	<!-- World Map Background -->
 	<div class="world-map-background">
+		<div class="world-map-overlay"></div>
 		<img 
 			src="/assets/world_map_silhouette.svg" 
 			alt="" 
@@ -207,27 +208,29 @@
 		z-index: 0;
 		overflow: hidden;
 	}
+
+	.world-map-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+		background: radial-gradient(ellipse 85% 85% at 50% 50%, rgba(236, 72, 153, 0.04) 0%, rgba(249, 168, 212, 0.05) 20%, rgba(167, 139, 250, 0.04) 40%, rgba(196, 181, 253, 0.06) 60%, transparent 80%, rgba(10, 14, 39, 0.3) 100%);
+	}
 	
 	.world-map-svg {
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		transform: translate(-50%, -50%);
-		width: 120%;
-		max-width: 1400px;
+		transform: translate(-50%, -50%) scale(1.3);
+		width: 115%;
+		max-width: 2100px;
 		height: auto;
-		opacity: 0.15;
-		mix-blend-mode: overlay;
-		filter: blur(1px);
-		transition: opacity 0.3s ease;
-	}
-	
-	/* Adjust blend mode on different backgrounds */
-	@media (prefers-color-scheme: dark) {
-		.world-map-svg {
-			mix-blend-mode: soft-light;
-			opacity: 0.12;
-		}
+		opacity: 0.052;
+		mix-blend-mode: soft-light;
+		filter: blur(5px) brightness(2) contrast(1.2) saturate(1.6);
+		transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
 	}
 	
 	/* Ensure content is above background */
@@ -239,7 +242,24 @@
 	/* Subtle animation on hover for interactivity */
 	@media (hover: hover) {
 		.home-page:hover .world-map-svg {
-			opacity: 0.18;
+			opacity: 0.065;
+		}
+	}
+
+	/* Light mode adjustments for better visibility */
+	:global(:root.light) .world-map-svg {
+		opacity: 0.18;
+		mix-blend-mode: multiply;
+		filter: blur(4px) brightness(0.6) contrast(1.4) saturate(1.2);
+	}
+
+	:global(:root.light) .world-map-overlay {
+		background: radial-gradient(ellipse 85% 85% at 50% 50%, rgba(236, 72, 153, 0.02) 0%, rgba(249, 168, 212, 0.03) 20%, rgba(167, 139, 250, 0.02) 40%, rgba(196, 181, 253, 0.03) 60%, transparent 80%, rgba(255, 255, 255, 0.1) 100%);
+	}
+
+	@media (hover: hover) {
+		:global(:root.light) .home-page:hover .world-map-svg {
+			opacity: 0.22;
 		}
 	}
 </style>

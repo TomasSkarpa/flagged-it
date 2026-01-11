@@ -107,6 +107,16 @@
 		color: var(--color-text-light);
 	}
 	
+	:global(:root.light) .theme-btn {
+		border-color: rgba(0, 0, 0, 0.15);
+		background: rgba(0, 0, 0, 0.04);
+	}
+	
+	:global(:root.light) .theme-btn:hover {
+		background: rgba(0, 0, 0, 0.08);
+		border-color: rgba(0, 0, 0, 0.25);
+	}
+	
 	.theme-icon {
 		font-size: 1.125rem;
 	}
@@ -132,6 +142,11 @@
 		animation: dropdownIn 0.2s ease-out;
 		padding: 0.25rem;
 		z-index: 100;
+	}
+	
+	:global(:root.light) .dropdown {
+		border-color: rgba(0, 0, 0, 0.15);
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
 	}
 	
 	@keyframes dropdownIn {
@@ -163,6 +178,10 @@
 	
 	.dropdown-item:hover {
 		background: rgba(255, 255, 255, 0.08);
+	}
+	
+	:global(:root.light) .dropdown-item:hover {
+		background: rgba(0, 0, 0, 0.06);
 	}
 	
 	.dropdown-item.selected {

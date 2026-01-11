@@ -146,6 +146,16 @@
 		color: var(--color-text-light);
 	}
 	
+	:global(:root.light) .language-btn {
+		border-color: rgba(0, 0, 0, 0.15);
+		background: rgba(0, 0, 0, 0.04);
+	}
+	
+	:global(:root.light) .language-btn:hover {
+		background: rgba(0, 0, 0, 0.08);
+		border-color: rgba(0, 0, 0, 0.25);
+	}
+	
 	.flag {
 		font-size: 1rem;
 	}
@@ -187,6 +197,11 @@
 		z-index: 100;
 	}
 	
+	:global(:root.light) .dropdown {
+		border-color: rgba(0, 0, 0, 0.15);
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+	}
+	
 	@keyframes dropdownIn {
 		from {
 			opacity: 0;
@@ -208,6 +223,10 @@
 		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 	}
 	
+	:global(:root.light) .dropdown-header {
+		border-bottom-color: rgba(0, 0, 0, 0.1);
+	}
+	
 	.dropdown-list {
 		max-height: 260px;
 		overflow-y: auto;
@@ -225,6 +244,10 @@
 	.dropdown-list::-webkit-scrollbar-thumb {
 		background: rgba(255, 255, 255, 0.2);
 		border-radius: 3px;
+	}
+	
+	:global(:root.light) .dropdown-list::-webkit-scrollbar-thumb {
+		background: rgba(0, 0, 0, 0.2);
 	}
 	
 	.dropdown-item {
@@ -245,6 +268,10 @@
 	
 	.dropdown-item:hover {
 		background: rgba(255, 255, 255, 0.08);
+	}
+	
+	:global(:root.light) .dropdown-item:hover {
+		background: rgba(0, 0, 0, 0.06);
 	}
 	
 	.dropdown-item.selected {

@@ -41,6 +41,10 @@
 		align-items: center;
 		justify-content: center;
 	}
+
+	:global(:root.light) .flag-container {
+		background: rgba(0, 0, 0, 0.06);
+	}
 	
 	.flag-image {
 		width: 100%;

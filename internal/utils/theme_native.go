@@ -73,4 +73,3 @@ func GetEffectiveTheme() string {
 func ReloadPage() {
 	// No-op for native - theme changes would need app restart
 }
-

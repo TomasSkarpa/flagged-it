@@ -9,12 +9,12 @@ import (
 
 // State represents the current state of the list game
 type State struct {
-	Countries   []models.Country // Countries to order
-	UserOrder   []string         // User's ordered list of CCA2 codes
-	Score       int
-	Total       int
-	IsComplete  bool
-	SortBy      string // "population", "area", "name"
+	Countries  []models.Country // Countries to order
+	UserOrder  []string         // User's ordered list of CCA2 codes
+	Score      int
+	Total      int
+	IsComplete bool
+	SortBy     string // "population", "area", "name"
 }
 
 // Logic handles the game logic for list ordering
@@ -93,7 +93,7 @@ func (l *Logic) SubmitOrder(userOrder []string) (*OrderResult, error) {
 	if len(userOrder) != len(l.state.Countries) {
 		return &OrderResult{
 			IsValid: false,
-			Error:    "Order length doesn't match country count",
+			Error:   "Order length doesn't match country count",
 		}, nil
 	}
 
@@ -196,5 +196,3 @@ type GameError struct {
 func (e *GameError) Error() string {
 	return e.Message
 }
-
-

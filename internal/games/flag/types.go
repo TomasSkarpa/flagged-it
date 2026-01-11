@@ -21,5 +21,3 @@ type RegionInfo struct {
 	Name      string
 	Countries []models.Country
 }
-
-

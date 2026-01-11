@@ -20,10 +20,10 @@ type State struct {
 
 // Logic handles the game logic for flag guessing
 type Logic struct {
-	allCountries  []models.Country
-	countries     []models.Country
-	state         *State
-	maxRounds     int
+	allCountries []models.Country
+	countries    []models.Country
+	state        *State
+	maxRounds    int
 }
 
 // NewLogic creates a new flag game logic instance
@@ -32,7 +32,7 @@ func NewLogic(allCountries []models.Country) *Logic {
 		allCountries: allCountries,
 		countries:    allCountries,
 		state: &State{
-			UsedCountries: make(map[string]bool),
+			UsedCountries:  make(map[string]bool),
 			SelectedRegion: "",
 		},
 		maxRounds: 10,
@@ -110,7 +110,7 @@ func (l *Logic) MakeGuess(guessedCountry *models.Country) (*GuessResult, error) 
 
 	l.state.Total++
 	isCorrect := guessedCountry.CCA2 == l.state.CurrentCountry.CCA2
-	
+
 	result := &GuessResult{
 		IsCorrect:      isCorrect,
 		CorrectCountry: l.state.CurrentCountry,
@@ -161,5 +161,3 @@ type GameError struct {
 func (e *GameError) Error() string {
 	return e.Message
 }
-
-

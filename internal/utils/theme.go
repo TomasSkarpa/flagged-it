@@ -56,4 +56,3 @@ func ReloadPage() {
 		location.Call("reload")
 	}
 }
-

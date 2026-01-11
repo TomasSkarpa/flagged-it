@@ -1,4 +1,12 @@
 import { getApiUrl, API_ENDPOINTS } from './config';
+import { get } from 'svelte/store';
+import { locale } from '../stores/locale';
+
+// Helper to get current locale
+function getCurrentLocale(): string {
+	if (typeof window === 'undefined') return 'en';
+	return get(locale) || 'en';
+}
 
 export interface GuessEntry {
 	country: {
@@ -52,11 +60,13 @@ export interface GameState {
 }
 
 export async function startWorldleGame(): Promise<WorldleGameSession> {
+	const currentLocale = getCurrentLocale();
 	const response = await fetch(getApiUrl(API_ENDPOINTS.WORLDLE_START), {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
+		body: JSON.stringify({ locale: currentLocale }),
 	});
 
 	if (!response.ok) {
@@ -70,6 +80,7 @@ export async function submitGuess(
 	sessionId: string,
 	countryName: string
 ): Promise<GuessResponse> {
+	const currentLocale = getCurrentLocale();
 	const response = await fetch(getApiUrl(API_ENDPOINTS.WORLDLE_GUESS), {
 		method: 'POST',
 		headers: {
@@ -78,6 +89,7 @@ export async function submitGuess(
 		body: JSON.stringify({
 			sessionId,
 			countryName,
+			locale: currentLocale,
 		}),
 	});
 
@@ -89,7 +101,8 @@ export async function submitGuess(
 }
 
 export async function getGameState(sessionId: string): Promise<GameState> {
-	const url = `${getApiUrl(API_ENDPOINTS.WORLDLE_STATE)}?sessionId=${sessionId}`;
+	const currentLocale = getCurrentLocale();
+	const url = `${getApiUrl(API_ENDPOINTS.WORLDLE_STATE)}?sessionId=${sessionId}&locale=${currentLocale}`;
 	const response = await fetch(url);
 
 	if (!response.ok) {

@@ -24,6 +24,15 @@ setup:
 # -------------------------------------------------------------------
 
 dev:
+	@echo "Stopping any existing servers..."
+	@if [ -f /tmp/flagged-it-api.pid ]; then \
+		kill $$(cat /tmp/flagged-it-api.pid) 2>/dev/null || true; \
+		rm -f /tmp/flagged-it-api.pid; \
+	fi
+	@lsof -ti:8080 | xargs kill -9 2>/dev/null || true
+	@lsof -ti:5173 | xargs kill -9 2>/dev/null || true
+	@sleep 1
+	@echo ""
 	@echo "Starting development servers..."
 	@echo ""
 	@echo "Starting API server in background..."

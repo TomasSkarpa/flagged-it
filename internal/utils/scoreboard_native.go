@@ -148,4 +148,3 @@ func ClearScoreboard() {
 	}
 	os.Remove(path)
 }
-

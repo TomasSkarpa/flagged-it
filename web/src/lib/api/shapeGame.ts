@@ -1,5 +1,13 @@
 import { getApiUrl, API_ENDPOINTS } from './config';
 import type { Country } from '../types';
+import { get } from 'svelte/store';
+import { locale } from '../stores/locale';
+
+// Helper to get current locale
+function getCurrentLocale(): string {
+	if (typeof window === 'undefined') return 'en';
+	return get(locale) || 'en';
+}
 
 export interface GeoJSONGeometry {
 	type: string;
@@ -41,12 +49,13 @@ export interface ShapeGameSession {
 }
 
 export async function startShapeGame(region: string = ''): Promise<ShapeGameSession> {
+	const currentLocale = getCurrentLocale();
 	const response = await fetch(getApiUrl(API_ENDPOINTS.SHAPE_START), {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ region }),
+		body: JSON.stringify({ region, locale: currentLocale }),
 	});
 
 	if (!response.ok) {
@@ -57,7 +66,8 @@ export async function startShapeGame(region: string = ''): Promise<ShapeGameSess
 }
 
 export async function getShapeQuestion(sessionId: string): Promise<ShapeQuestion> {
-	const url = `${getApiUrl(API_ENDPOINTS.SHAPE_QUESTION)}?sessionId=${sessionId}`;
+	const currentLocale = getCurrentLocale();
+	const url = `${getApiUrl(API_ENDPOINTS.SHAPE_QUESTION)}?sessionId=${sessionId}&locale=${currentLocale}`;
 	const response = await fetch(url);
 
 	if (!response.ok) {
@@ -72,6 +82,7 @@ export async function submitShapeAnswer(
 	questionId: string,
 	answerCca2: string
 ): Promise<ShapeAnswer> {
+	const currentLocale = getCurrentLocale();
 	const response = await fetch(getApiUrl(API_ENDPOINTS.SHAPE_ANSWER), {
 		method: 'POST',
 		headers: {
@@ -81,6 +92,7 @@ export async function submitShapeAnswer(
 			sessionId: sessionId,
 			questionId: questionId,
 			answerCca2: answerCca2,
+			locale: currentLocale,
 		}),
 	});
 

@@ -62,7 +62,7 @@ func (l *Logic) NewRound() error {
 		// First round
 		l.state.CurrentCountry = &l.countries[rand.Intn(len(l.countries))]
 	}
-	
+
 	l.state.NextCountry = &l.countries[rand.Intn(len(l.countries))]
 	// Ensure next country is different
 	for l.state.NextCountry.CCA2 == l.state.CurrentCountry.CCA2 {
@@ -166,5 +166,3 @@ type GameError struct {
 func (e *GameError) Error() string {
 	return e.Message
 }
-
-

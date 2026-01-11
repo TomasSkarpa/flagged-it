@@ -162,5 +162,3 @@ type GameError struct {
 func (e *GameError) Error() string {
 	return e.Message
 }
-
-

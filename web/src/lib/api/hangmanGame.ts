@@ -1,6 +1,6 @@
 import { getApiUrl, API_ENDPOINTS } from './config';
 import type { Country } from '../types';
-import { getCountryName as getTranslatedCountryName } from '$lib/utils/countryNames';
+import { getCountryNameForLocale } from '$lib/utils/countryNames';
 
 export interface HangmanGameState {
 	currentWord: string; // Country name in user's language
@@ -54,8 +54,10 @@ export class HangmanGame {
 	}
 
 	// Get country name in user's language
+	// Note: If countries come from backend API, they're already translated
+	// This method exists for compatibility with client-side country data
 	private getCountryName(country: Country, locale: string): string {
-		return getTranslatedCountryName(country, locale);
+		return getCountryNameForLocale(country);
 	}
 
 	// Start a new round

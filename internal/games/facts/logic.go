@@ -11,16 +11,16 @@ import (
 
 // State represents the current state of the facts guessing game
 type State struct {
-	CurrentCountry   *models.Country
-	CurrentFacts     []string
-	CurrentFact      int
-	CurrentFactText  string // Track the currently displayed fact text
-	TriesLeft        int
-	UsedFacts        map[int]bool
-	GuessHistory     []GuessHistoryEntry
-	Score            int
-	Total            int
-	IsComplete       bool
+	CurrentCountry  *models.Country
+	CurrentFacts    []string
+	CurrentFact     int
+	CurrentFactText string // Track the currently displayed fact text
+	TriesLeft       int
+	UsedFacts       map[int]bool
+	GuessHistory    []GuessHistoryEntry
+	Score           int
+	Total           int
+	IsComplete      bool
 }
 
 // GuessHistoryEntry represents a single guess in the history
@@ -225,7 +225,6 @@ type GuessResult struct {
 	GuessHistory   []GuessHistoryEntry
 }
 
-
 // Errors
 var (
 	ErrNoCountriesAvailable = &GameError{Message: "no countries available"}
@@ -241,4 +240,3 @@ type GameError struct {
 func (e *GameError) Error() string {
 	return e.Message
 }
-

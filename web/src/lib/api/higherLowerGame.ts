@@ -1,4 +1,12 @@
 import { getApiUrl, API_ENDPOINTS } from './config';
+import { get } from 'svelte/store';
+import { locale } from '../stores/locale';
+
+// Helper to get current locale
+function getCurrentLocale(): string {
+	if (typeof window === 'undefined') return 'en';
+	return get(locale) || 'en';
+}
 
 export type HigherLowerCategory = 'population' | 'area' | 'continents';
 
@@ -34,10 +42,11 @@ export interface HigherLowerAnswerResponse {
 }
 
 export async function startHigherLowerGame(category: HigherLowerCategory = 'population'): Promise<HigherLowerStartResponse> {
+	const currentLocale = getCurrentLocale();
 	const response = await fetch(getApiUrl(API_ENDPOINTS.HIGHER_LOWER_START), {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ category }),
+		body: JSON.stringify({ category, locale: currentLocale }),
 	});
 	if (!response.ok) {
 		throw new Error('Failed to start game');
@@ -49,10 +58,11 @@ export async function submitHigherLowerAnswer(
 	sessionId: string,
 	answer: 'higher' | 'lower'
 ): Promise<HigherLowerAnswerResponse> {
+	const currentLocale = getCurrentLocale();
 	const response = await fetch(getApiUrl(API_ENDPOINTS.HIGHER_LOWER_ANSWER), {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ sessionId, answer }),
+		body: JSON.stringify({ sessionId, answer, locale: currentLocale }),
 	});
 	if (!response.ok) {
 		throw new Error('Failed to submit answer');

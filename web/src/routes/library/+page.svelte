@@ -18,6 +18,7 @@
 	let selectedCountry: Country | null = null;
 	let showModal = false;
 	let viewMode: 'grid' | 'list' = 'grid';
+	let previousLocale: string | null = null;
 
 	// Reactive translations
 	$: currentLocale = $locale;
@@ -132,8 +133,10 @@
 		unlockScroll();
 	});
 
-	onMount(async () => {
+	async function loadCountries() {
 		try {
+			isLoading = true;
+			error = null;
 			const response = await getAllCountries();
 			countries = response.countries || [];
 			filteredCountries = countries;
@@ -143,7 +146,18 @@
 		} finally {
 			isLoading = false;
 		}
+	}
+
+	onMount(async () => {
+		previousLocale = currentLocale;
+		await loadCountries();
 	});
+
+	// Reload countries when locale changes (but not on initial mount)
+	$: if (currentLocale && previousLocale !== null && previousLocale !== currentLocale) {
+		previousLocale = currentLocale;
+		loadCountries();
+	}
 
 	$: {
 		filteredCountries = countries.filter(country => {

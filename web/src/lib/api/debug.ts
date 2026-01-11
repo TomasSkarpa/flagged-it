@@ -1,5 +1,7 @@
 import { getApiUrl, API_ENDPOINTS } from './config';
 import type { Country } from '../types';
+import { locale } from '../stores/locale';
+import { get } from 'svelte/store';
 
 export interface CountriesResponse {
 	countries: Country[];
@@ -7,7 +9,9 @@ export interface CountriesResponse {
 }
 
 export async function getAllCountries(): Promise<CountriesResponse> {
-	const response = await fetch(getApiUrl(API_ENDPOINTS.DEBUG_COUNTRIES));
+	const currentLocale = get(locale);
+	const url = `${getApiUrl(API_ENDPOINTS.DEBUG_COUNTRIES)}?locale=${currentLocale}`;
+	const response = await fetch(url);
 	if (!response.ok) {
 		throw new Error('Failed to fetch countries');
 	}

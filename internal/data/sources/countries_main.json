@@ -56,7 +56,18 @@
         "uk": "Литва",
         "ur": "لتھووینیا",
         "vi": "Litva",
-        "zh": "立陶宛"
+        "zh": "立陶宛",
+        "ms": "Lituania",
+        "sw": "Lithuania",
+        "fil": "Lituania",
+        "th": "Lithuania",
+        "ro": "Lituania",
+        "cs": "Litwa",
+        "da": "Litauen",
+        "hr": "Lithuania",
+        "sk": "Litwa",
+        "nb": "Litauen",
+        "fi": "Litauen"
       }
     },
     "population": 2894886,
@@ -122,7 +133,18 @@
         "uk": "Чилі",
         "ur": "چلی",
         "vi": "Chile",
-        "zh": "智利"
+        "zh": "智利",
+        "ms": "Chili",
+        "sw": "Chile",
+        "fil": "Chili",
+        "th": "Chile",
+        "ro": "Cile",
+        "cs": "Chile",
+        "da": "Chile",
+        "hr": "Chile",
+        "sk": "Chile",
+        "nb": "Chile",
+        "fi": "Chile"
       }
     },
     "population": 20206953,
@@ -188,7 +210,18 @@
         "uk": "Бенін",
         "ur": "بینن",
         "vi": "Bénin",
-        "zh": "貝南"
+        "zh": "貝南",
+        "ms": "Benin",
+        "sw": "Benin",
+        "fil": "Benin",
+        "th": "Benin",
+        "ro": "Benin",
+        "cs": "Benin",
+        "da": "Benin",
+        "hr": "Benin",
+        "sk": "Benin",
+        "nb": "Benin",
+        "fi": "Benin"
       }
     },
     "population": 13224860,
@@ -254,7 +287,18 @@
         "uk": "Грузія",
         "ur": "جارجیا",
         "vi": "Gruzia",
-        "zh": "喬治亞"
+        "zh": "喬治亞",
+        "ms": "Georgia",
+        "sw": "Georgia",
+        "fil": "Georgia",
+        "th": "Georgia",
+        "ro": "Georgia",
+        "cs": "Gruzja",
+        "da": "Georgien",
+        "hr": "Georgia",
+        "sk": "Gruzja",
+        "nb": "Georgien",
+        "fi": "Georgien"
       }
     },
     "population": 4000921,
@@ -325,7 +369,18 @@
         "uk": "Кіпр",
         "ur": "قبرص",
         "vi": "Cộng hòa Síp",
-        "zh": "賽普勒斯"
+        "zh": "賽普勒斯",
+        "ms": "Siprus",
+        "sw": "Cyprus",
+        "fil": "Siprus",
+        "th": "Cyprus",
+        "ro": "Cipro",
+        "cs": "Cypr",
+        "da": "Cypern",
+        "hr": "Cyprus",
+        "sk": "Cypr",
+        "nb": "Cypern",
+        "fi": "Cypern"
       }
     },
     "population": 1442614,
@@ -391,7 +446,18 @@
         "uk": "Гана",
         "ur": "گھانا",
         "vi": "Ghana",
-        "zh": "迦納"
+        "zh": "迦納",
+        "ms": "Ghana",
+        "sw": "Ghana",
+        "fil": "Ghana",
+        "th": "Ghana",
+        "ro": "Ghana",
+        "cs": "Ghana",
+        "da": "Ghana",
+        "hr": "Ghana",
+        "sk": "Ghana",
+        "nb": "Ghana",
+        "fi": "Ghana"
       }
     },
     "population": 33742380,
@@ -467,7 +533,18 @@
         "uk": "Бельгія",
         "ur": "بلجئیم",
         "vi": "Bỉ",
-        "zh": "比利時"
+        "zh": "比利時",
+        "ms": "Belgia",
+        "sw": "Belgium",
+        "fil": "Belgia",
+        "th": "Belgium",
+        "ro": "Belgio",
+        "cs": "Belgia",
+        "da": "Belgien",
+        "hr": "Belgium",
+        "sk": "Belgia",
+        "nb": "Belgien",
+        "fi": "Belgien"
       }
     },
     "population": 11825551,
@@ -537,7 +614,18 @@
         "uk": "Куба",
         "ur": "کیوبا",
         "vi": "Cuba",
-        "zh": "古巴"
+        "zh": "古巴",
+        "ms": "Kuba",
+        "sw": "Cuba",
+        "fil": "Kuba",
+        "th": "Cuba",
+        "ro": "Cuba",
+        "cs": "Kuba",
+        "da": "Kuba",
+        "hr": "Cuba",
+        "sk": "Kuba",
+        "nb": "Kuba",
+        "fi": "Kuba"
       }
     },
     "population": 9748007,
@@ -603,7 +691,18 @@
         "uk": "Андорра",
         "ur": "انڈورا",
         "vi": "Andorra",
-        "zh": "安道爾"
+        "zh": "安道爾",
+        "ms": "Andorra",
+        "sw": "Andorra",
+        "fil": "Andorra",
+        "th": "Andorra",
+        "ro": "Andorra",
+        "cs": "Andora",
+        "da": "Andorra",
+        "hr": "Andorra",
+        "sk": "Andora",
+        "nb": "Andorra",
+        "fi": "Andorra"
       }
     },
     "population": 88406,
@@ -674,7 +773,18 @@
         "uk": "Аргентина",
         "ur": "ارجنٹائن",
         "vi": "Argentina",
-        "zh": "阿根廷"
+        "zh": "阿根廷",
+        "ms": "Argentina",
+        "sw": "Argentina",
+        "fil": "Argentina",
+        "th": "Argentina",
+        "ro": "Argentina",
+        "cs": "Argentyna",
+        "da": "Argentina",
+        "hr": "Argentina",
+        "sk": "Argentyna",
+        "nb": "Argentina",
+        "fi": "Argentina"
       }
     },
     "population": 46735004,
@@ -740,7 +850,18 @@
         "uk": "Сальвадор",
         "ur": "ایل سیلواڈور",
         "vi": "El Salvador",
-        "zh": "薩爾瓦多"
+        "zh": "薩爾瓦多",
+        "ms": "El Salvador",
+        "sw": "El Salvador",
+        "fil": "El Salvador",
+        "th": "El Salvador",
+        "ro": "El Salvador",
+        "cs": "Salwador",
+        "da": "El Salvador",
+        "hr": "El Salvador",
+        "sk": "Salwador",
+        "nb": "El Salvador",
+        "fi": "El Salvador"
       }
     },
     "population": 6029976,
@@ -811,7 +932,18 @@
         "uk": "Узбекистан",
         "ur": "ازبکستان",
         "vi": "Uzbekistan",
-        "zh": "烏茲別克"
+        "zh": "烏茲別克",
+        "ms": "Uzbekistan",
+        "sw": "Uzbekistan",
+        "fil": "Uzbekistan",
+        "th": "Uzbekistan",
+        "ro": "Uzbekistan",
+        "cs": "Uzbekistan",
+        "da": "Uzbekistan",
+        "hr": "Uzbekistan",
+        "sk": "Uzbekistan",
+        "nb": "Uzbekistan",
+        "fi": "Uzbekistan"
       }
     },
     "population": 37859698,
@@ -887,7 +1019,18 @@
         "uk": "Беліз",
         "ur": "بیلیز",
         "vi": "Belize",
-        "zh": "貝里斯"
+        "zh": "貝里斯",
+        "ms": "Belize",
+        "sw": "Belize",
+        "fil": "Belize",
+        "th": "Belize",
+        "ro": "Belize",
+        "cs": "Belize",
+        "da": "Belize",
+        "hr": "Belize",
+        "sk": "Belize",
+        "nb": "Belize",
+        "fi": "Belize"
       }
     },
     "population": 417634,
@@ -953,7 +1096,18 @@
         "uk": "Латвія",
         "ur": "لٹویا",
         "vi": "Latvia",
-        "zh": "拉脫維亞"
+        "zh": "拉脫維亞",
+        "ms": "Latvia",
+        "sw": "Latvia",
+        "fil": "Latvia",
+        "th": "Latvia",
+        "ro": "Lettonia",
+        "cs": "Łotwa",
+        "da": "Lettland",
+        "hr": "Latvia",
+        "sk": "Łotwa",
+        "nb": "Lettland",
+        "fi": "Lettland"
       }
     },
     "population": 1829000,
@@ -1019,7 +1173,18 @@
         "uk": "Кот-д'Івуар",
         "ur": "کوت داوواغ",
         "vi": "Bờ Biển Ngà",
-        "zh": "象牙海岸"
+        "zh": "象牙海岸",
+        "ms": "Pantai Gading",
+        "sw": "Ivory Coast",
+        "fil": "Pantai Gading",
+        "th": "Ivory Coast",
+        "ro": "Costa d'Avorio",
+        "cs": "Wybrzeże Kości Słoniowej",
+        "da": "Elfenbenskusten",
+        "hr": "Ivory Coast",
+        "sk": "Wybrzeże Kości Słoniowej",
+        "nb": "Elfenbenskusten",
+        "fi": "Elfenbenskusten"
       }
     },
     "population": 31719275,
@@ -1085,7 +1250,18 @@
         "uk": "Франція",
         "ur": "فرانس",
         "vi": "Pháp",
-        "zh": "法国"
+        "zh": "法国",
+        "ms": "Prancis",
+        "sw": "France",
+        "fil": "Prancis",
+        "th": "France",
+        "ro": "Francia",
+        "cs": "Francja",
+        "da": "Frankrike",
+        "hr": "France",
+        "sk": "Francja",
+        "nb": "Frankrike",
+        "fi": "Frankrike"
       }
     },
     "population": 66351959,
@@ -1161,7 +1337,18 @@
         "uk": "Республіка Конго",
         "ur": "جمہوریہ کانگو",
         "vi": "Cộng hòa Congo",
-        "zh": "剛果共和國"
+        "zh": "剛果共和國",
+        "ms": "Republik Kongo",
+        "sw": "Republic of the Congo",
+        "fil": "Republik Kongo",
+        "th": "Republic of the Congo",
+        "ro": "Repubblica del Congo",
+        "cs": "Kongo",
+        "da": "Kongo-Brazzaville",
+        "hr": "Republic of the Congo",
+        "sk": "Kongo",
+        "nb": "Kongo-Brazzaville",
+        "fi": "Kongo-Brazzaville"
       }
     },
     "population": 6142180,
@@ -1227,7 +1414,18 @@
         "uk": "Бангладеш",
         "ur": "بنگلہ دیش",
         "vi": "Bangladesh",
-        "zh": "孟加拉"
+        "zh": "孟加拉",
+        "ms": "Bangladesh",
+        "sw": "Bangladesh",
+        "fil": "Bangladesh",
+        "th": "Bangladesh",
+        "ro": "Bangladesh",
+        "cs": "Bangladesz",
+        "da": "Bangladesh",
+        "hr": "Bangladesh",
+        "sk": "Bangladesz",
+        "nb": "Bangladesh",
+        "fi": "Bangladesh"
       }
     },
     "population": 169828911,
@@ -1298,7 +1496,18 @@
         "uk": "Республіка Палау",
         "ur": "پلاؤ",
         "vi": "Palau",
-        "zh": "帛琉"
+        "zh": "帛琉",
+        "ms": "Palau",
+        "sw": "Palau",
+        "fil": "Palau",
+        "th": "Palau",
+        "ro": "Palau",
+        "cs": "Palau",
+        "da": "Palau",
+        "hr": "Palau",
+        "sk": "Palau",
+        "nb": "Palau",
+        "fi": "Palau"
       }
     },
     "population": 16733,
@@ -1374,7 +1583,18 @@
         "uk": "Афганістан",
         "ur": "افغانستان",
         "vi": "Afghanistan",
-        "zh": "阿富汗"
+        "zh": "阿富汗",
+        "ms": "Afganistan",
+        "sw": "Afghanistan",
+        "fil": "Afganistan",
+        "th": "Afghanistan",
+        "ro": "Afghanistan",
+        "cs": "Afganistan",
+        "da": "Afghanistan",
+        "hr": "Afghanistan",
+        "sk": "Afganistan",
+        "nb": "Afghanistan",
+        "fi": "Afghanistan"
       }
     },
     "population": 43844000,
@@ -1440,7 +1660,18 @@
         "uk": "Ефіопія",
         "ur": "ایتھوپیا",
         "vi": "Ethiopia",
-        "zh": "衣索比亞"
+        "zh": "衣索比亞",
+        "ms": "Ethiopia",
+        "sw": "Ethiopia",
+        "fil": "Ethiopia",
+        "th": "Ethiopia",
+        "ro": "Etiopia",
+        "cs": "Etiopia",
+        "da": "Etiopien",
+        "hr": "Ethiopia",
+        "sk": "Etiopia",
+        "nb": "Etiopien",
+        "fi": "Etiopien"
       }
     },
     "population": 111652998,
@@ -1511,7 +1742,18 @@
         "uk": "Туркменістан",
         "ur": "ترکمانستان",
         "vi": "Turkmenistan",
-        "zh": "土庫曼"
+        "zh": "土庫曼",
+        "ms": "Turkmenistan",
+        "sw": "Turkmenistan",
+        "fil": "Turkmenistan",
+        "th": "Turkmenistan",
+        "ro": "Turkmenistan",
+        "cs": "Turkmenistan",
+        "da": "Turkmenistan",
+        "hr": "Turkmenistan",
+        "sk": "Turkmenistan",
+        "nb": "Turkmenistan",
+        "fi": "Turkmenistan"
       }
     },
     "population": 7057841,
@@ -1577,7 +1819,18 @@
         "uk": "Йорданія",
         "ur": "اردن",
         "vi": "Jordan",
-        "zh": "約旦"
+        "zh": "約旦",
+        "ms": "Yordania",
+        "sw": "Jordan",
+        "fil": "Yordania",
+        "th": "Jordan",
+        "ro": "Giordania",
+        "cs": "Jordania",
+        "da": "Jordanien",
+        "hr": "Jordan",
+        "sk": "Jordania",
+        "nb": "Jordanien",
+        "fi": "Jordanien"
       }
     },
     "population": 11734000,
@@ -1643,7 +1896,18 @@
         "uk": "Болгарія",
         "ur": "بلغاریہ",
         "vi": "Bulgaria",
-        "zh": "保加利亞"
+        "zh": "保加利亞",
+        "ms": "Bulgaria",
+        "sw": "Bulgaria",
+        "fil": "Bulgaria",
+        "th": "Bulgaria",
+        "ro": "Bulgaria",
+        "cs": "Bułgaria",
+        "da": "Bulgarien",
+        "hr": "Bulgaria",
+        "sk": "Bułgaria",
+        "nb": "Bulgarien",
+        "fi": "Bulgarien"
       }
     },
     "population": 6437360,
@@ -1709,7 +1973,18 @@
         "uk": "Сент-Люсія",
         "ur": "سینٹ لوسیا",
         "vi": "Saint Lucia",
-        "zh": "聖露西亞"
+        "zh": "聖露西亞",
+        "ms": "Saint Lucia",
+        "sw": "Saint Lucia",
+        "fil": "Saint Lucia",
+        "th": "Saint Lucia",
+        "ro": "Saint Lucia",
+        "cs": "Saint Lucia",
+        "da": "Saint Lucia",
+        "hr": "Saint Lucia",
+        "sk": "Saint Lucia",
+        "nb": "Saint Lucia",
+        "fi": "Saint Lucia"
       }
     },
     "population": 184100,
@@ -1775,7 +2050,18 @@
         "uk": "Сенегал",
         "ur": "سینیگال",
         "vi": "Sénégal",
-        "zh": "塞內加爾"
+        "zh": "塞內加爾",
+        "ms": "Senegal",
+        "sw": "Senegal",
+        "fil": "Senegal",
+        "th": "Senegal",
+        "ro": "Senegal",
+        "cs": "Senegal",
+        "da": "Senegal",
+        "hr": "Senegal",
+        "sk": "Senegal",
+        "nb": "Senegal",
+        "fi": "Senegal"
       }
     },
     "population": 18593258,
@@ -1841,7 +2127,18 @@
         "uk": "Уругвай",
         "ur": "یوراگوئے",
         "vi": "Uruguay",
-        "zh": "烏拉圭"
+        "zh": "烏拉圭",
+        "ms": "Uruguay",
+        "sw": "Uruguay",
+        "fil": "Uruguay",
+        "th": "Uruguay",
+        "ro": "Uruguay",
+        "cs": "Urugwaj",
+        "da": "Uruguay",
+        "hr": "Uruguay",
+        "sk": "Urugwaj",
+        "nb": "Uruguay",
+        "fi": "Uruguay"
       }
     },
     "population": 3499451,
@@ -1912,7 +2209,18 @@
         "uk": "Гвінея-Бісау",
         "ur": "گنی بساؤ",
         "vi": "Guiné-Bissau",
-        "zh": "幾內亞比索"
+        "zh": "幾內亞比索",
+        "ms": "Guinea-Bissau",
+        "sw": "Guinea-Bissau",
+        "fil": "Guinea-Bissau",
+        "th": "Guinea-Bissau",
+        "ro": "Guinea-Bissau",
+        "cs": "Gwinea Bissau",
+        "da": "Guinea-Bissau",
+        "hr": "Guinea-Bissau",
+        "sk": "Gwinea Bissau",
+        "nb": "Guinea-Bissau",
+        "fi": "Guinea-Bissau"
       }
     },
     "population": 1781308,
@@ -1983,7 +2291,18 @@
         "uk": "Філіппіни",
         "ur": "فلپائن",
         "vi": "Philippines",
-        "zh": "菲律賓"
+        "zh": "菲律賓",
+        "ms": "Filipina",
+        "sw": "Philippines",
+        "fil": "Filipina",
+        "th": "Philippines",
+        "ro": "Filippine",
+        "cs": "Filipiny",
+        "da": "Filippinerna",
+        "hr": "Philippines",
+        "sk": "Filipiny",
+        "nb": "Filippinerna",
+        "fi": "Filippinerna"
       }
     },
     "population": 114123600,
@@ -2054,7 +2373,18 @@
         "uk": "Танзанія",
         "ur": "تنزانیہ",
         "vi": "Tanzania",
-        "zh": "坦尚尼亞"
+        "zh": "坦尚尼亞",
+        "ms": "Tanzania",
+        "sw": "Tanzania",
+        "fil": "Tanzania",
+        "th": "Tanzania",
+        "ro": "Tanzania",
+        "cs": "Tanzania",
+        "da": "Tanzania",
+        "hr": "Tanzania",
+        "sk": "Tanzania",
+        "nb": "Tanzania",
+        "fi": "Tanzania"
       }
     },
     "population": 68153004,
@@ -2125,7 +2455,18 @@
         "uk": "Судан",
         "ur": "سوڈان",
         "vi": "Sudan",
-        "zh": "蘇丹"
+        "zh": "蘇丹",
+        "ms": "Sudan",
+        "sw": "Sudan",
+        "fil": "Sudan",
+        "th": "Sudan",
+        "ro": "Sudan",
+        "cs": "Sudan",
+        "da": "Sudan",
+        "hr": "Sudan",
+        "sk": "Sudan",
+        "nb": "Sudan",
+        "fi": "Sudan"
       }
     },
     "population": 51662000,
@@ -2191,7 +2532,18 @@
         "uk": "Сьєрра-Леоне",
         "ur": "سیرالیون",
         "vi": "Sierra Leone",
-        "zh": "獅子山"
+        "zh": "獅子山",
+        "ms": "Sierra Leone",
+        "sw": "Sierra Leone",
+        "fil": "Sierra Leone",
+        "th": "Sierra Leone",
+        "ro": "Sierra Leone",
+        "cs": "Sierra Leone",
+        "da": "Sierra Leone",
+        "hr": "Sierra Leone",
+        "sk": "Sierra Leone",
+        "nb": "Sierra Leone",
+        "fi": "Sierra Leone"
       }
     },
     "population": 9077691,
@@ -2262,7 +2614,18 @@
         "uk": "Чад",
         "ur": "چاڈ",
         "vi": "Tchad",
-        "zh": "查德"
+        "zh": "查德",
+        "ms": "Chad",
+        "sw": "Chad",
+        "fil": "Chad",
+        "th": "Chad",
+        "ro": "Ciad",
+        "cs": "Czad",
+        "da": "Tchad",
+        "hr": "Chad",
+        "sk": "Czad",
+        "nb": "Tchad",
+        "fi": "Tchad"
       }
     },
     "population": 19340757,
@@ -2338,7 +2701,18 @@
         "uk": "Вануату",
         "ur": "وانواتو",
         "vi": "Vanuatu",
-        "zh": "萬那杜"
+        "zh": "萬那杜",
+        "ms": "Vanuatu",
+        "sw": "Vanuatu",
+        "fil": "Vanuatu",
+        "th": "Vanuatu",
+        "ro": "Vanuatu",
+        "cs": "Vanuatu",
+        "da": "Vanuatu",
+        "hr": "Vanuatu",
+        "sk": "Vanuatu",
+        "nb": "Vanuatu",
+        "fi": "Vanuatu"
       }
     },
     "population": 321409,
@@ -2414,7 +2788,18 @@
         "uk": "Руанда",
         "ur": "روانڈا",
         "vi": "Rwanda",
-        "zh": "盧旺達"
+        "zh": "盧旺達",
+        "ms": "Rwanda",
+        "sw": "Rwanda",
+        "fil": "Rwanda",
+        "th": "Rwanda",
+        "ro": "Ruanda",
+        "cs": "Rwanda",
+        "da": "Rwanda",
+        "hr": "Rwanda",
+        "sk": "Rwanda",
+        "nb": "Rwanda",
+        "fi": "Rwanda"
       }
     },
     "population": 14104969,
@@ -2480,7 +2865,18 @@
         "uk": "Того",
         "ur": "ٹوگو",
         "vi": "Togo",
-        "zh": "多哥"
+        "zh": "多哥",
+        "ms": "Togo",
+        "sw": "Togo",
+        "fil": "Togo",
+        "th": "Togo",
+        "ro": "Togo",
+        "cs": "Togo",
+        "da": "Togo",
+        "hr": "Togo",
+        "sk": "Togo",
+        "nb": "Togo",
+        "fi": "Togo"
       }
     },
     "population": 8095498,
@@ -2546,7 +2942,18 @@
         "uk": "Об'єднані Арабські Емірати",
         "ur": "متحدہ عرب امارات",
         "vi": "Các Tiểu vương quốc Ả Rập Thống nhất",
-        "zh": "阿拉伯聯合大公國"
+        "zh": "阿拉伯聯合大公國",
+        "ms": "Uni Emirat Arab",
+        "sw": "United Arab Emirates",
+        "fil": "Uni Emirat Arab",
+        "th": "United Arab Emirates",
+        "ro": "Emirati Arabi Uniti",
+        "cs": "Zjednoczone Emiraty Arabskie",
+        "da": "Förenade Arabemiraten",
+        "hr": "United Arab Emirates",
+        "sk": "Zjednoczone Emiraty Arabskie",
+        "nb": "Förenade Arabemiraten",
+        "fi": "Förenade Arabemiraten"
       }
     },
     "population": 11294243,
@@ -2622,7 +3029,18 @@
         "uk": "Коморські Острови",
         "ur": "اتحاد القمری",
         "vi": "Comoros",
-        "zh": "葛摩"
+        "zh": "葛摩",
+        "ms": "Komoro",
+        "sw": "Comoros",
+        "fil": "Komoro",
+        "th": "Comoros",
+        "ro": "Comore",
+        "cs": "Komory",
+        "da": "Komorerna",
+        "hr": "Comoros",
+        "sk": "Komory",
+        "nb": "Komorerna",
+        "fi": "Komorerna"
       }
     },
     "population": 919901,
@@ -2693,7 +3111,18 @@
         "uk": "Косово",
         "ur": "کوسوو",
         "vi": "Kosovo",
-        "zh": "科索沃"
+        "zh": "科索沃",
+        "ms": "Kosovo",
+        "sw": "Kosovo",
+        "fil": "Kosovo",
+        "th": "Kosovo",
+        "ro": "Kosovo",
+        "cs": "Kosowo",
+        "da": "Kosovo",
+        "hr": "Kosovo",
+        "sk": "Kosowo",
+        "nb": "Kosovo",
+        "fi": "Kosovo"
       }
     },
     "population": 1585566,
@@ -2759,7 +3188,18 @@
         "uk": "Молдова",
         "ur": "مالدووا",
         "vi": "Moldova",
-        "zh": "摩爾多瓦"
+        "zh": "摩爾多瓦",
+        "ms": "Moldova",
+        "sw": "Moldova",
+        "fil": "Moldova",
+        "th": "Moldova",
+        "ro": "Moldavia",
+        "cs": "Mołdawia",
+        "da": "Moldavien",
+        "hr": "Moldova",
+        "sk": "Mołdawia",
+        "nb": "Moldavien",
+        "fi": "Moldavien"
       }
     },
     "population": 2749076,
@@ -2830,7 +3270,18 @@
         "uk": "Киргизстан",
         "ur": "کرغیزستان",
         "vi": "Kyrgyzstan",
-        "zh": "吉爾吉斯"
+        "zh": "吉爾吉斯",
+        "ms": "Kirgizstan",
+        "sw": "Kyrgyzstan",
+        "fil": "Kirgizstan",
+        "th": "Kyrgyzstan",
+        "ro": "Kirghizistan",
+        "cs": "Kirgistan",
+        "da": "Kirgizistan",
+        "hr": "Kyrgyzstan",
+        "sk": "Kirgistan",
+        "nb": "Kirgizistan",
+        "fi": "Kirgizistan"
       }
     },
     "population": 7281800,
@@ -2896,7 +3347,18 @@
         "uk": "Кабо-Верде",
         "ur": "کیپ ورڈی",
         "vi": "Cabo Verde",
-        "zh": "維德角"
+        "zh": "維德角",
+        "ms": "Tanjung Verde",
+        "sw": "Cape Verde",
+        "fil": "Tanjung Verde",
+        "th": "Cape Verde",
+        "ro": "Capo Verde",
+        "cs": "Republika Zielonego Przylądka",
+        "da": "Kap Verde",
+        "hr": "Cape Verde",
+        "sk": "Republika Zielonego Przylądka",
+        "nb": "Kap Verde",
+        "fi": "Kap Verde"
       }
     },
     "population": 491233,
@@ -2962,7 +3424,18 @@
         "uk": "Сполучені Штати Америки",
         "ur": "ریاستہائے متحدہ امریکا",
         "vi": "Hoa Kỳ",
-        "zh": "美國"
+        "zh": "美國",
+        "ms": "Amerika Serikat",
+        "sw": "United States",
+        "fil": "Amerika Serikat",
+        "th": "United States",
+        "ro": "Stati Uniti d'America",
+        "cs": "Stany Zjednoczone",
+        "da": "USA",
+        "hr": "United States",
+        "sk": "Stany Zjednoczone",
+        "nb": "USA",
+        "fi": "USA"
       }
     },
     "population": 340110988,
@@ -3028,7 +3501,18 @@
         "uk": "Венесуела",
         "ur": "وینیزویلا",
         "vi": "Venezuela",
-        "zh": "委內瑞拉"
+        "zh": "委內瑞拉",
+        "ms": "Venezuela",
+        "sw": "Venezuela",
+        "fil": "Venezuela",
+        "th": "Venezuela",
+        "ro": "Venezuela",
+        "cs": "Wenezuela",
+        "da": "Venezuela",
+        "hr": "Venezuela",
+        "sk": "Wenezuela",
+        "nb": "Venezuela",
+        "fi": "Venezuela"
       }
     },
     "population": 28517000,
@@ -3094,7 +3578,18 @@
         "uk": "Соломонові Острови",
         "ur": "جزائر سلیمان",
         "vi": "Quần đảo Solomon",
-        "zh": "索羅門群島"
+        "zh": "索羅門群島",
+        "ms": "Kepulauan Solomon",
+        "sw": "Solomon Islands",
+        "fil": "Kepulauan Solomon",
+        "th": "Solomon Islands",
+        "ro": "Isole Salomone",
+        "cs": "Wyspy Salomona",
+        "da": "Salomonöarna",
+        "hr": "Solomon Islands",
+        "sk": "Wyspy Salomona",
+        "nb": "Salomonöarna",
+        "fi": "Salomonöarna"
       }
     },
     "population": 750325,
@@ -3160,7 +3655,18 @@
         "uk": "Еквадор",
         "ur": "ایکواڈور",
         "vi": "Ecuador",
-        "zh": "厄瓜多爾"
+        "zh": "厄瓜多爾",
+        "ms": "Ekuador",
+        "sw": "Ecuador",
+        "fil": "Ekuador",
+        "th": "Ecuador",
+        "ro": "Ecuador",
+        "cs": "Ekwador",
+        "da": "Ecuador",
+        "hr": "Ecuador",
+        "sk": "Ekwador",
+        "nb": "Ecuador",
+        "fi": "Ecuador"
       }
     },
     "population": 18103660,
@@ -3231,7 +3737,18 @@
         "uk": "Мальта",
         "ur": "مالٹا",
         "vi": "Malta",
-        "zh": "馬耳他"
+        "zh": "馬耳他",
+        "ms": "Malta",
+        "sw": "Malta",
+        "fil": "Malta",
+        "th": "Malta",
+        "ro": "Malta",
+        "cs": "Malta",
+        "da": "Malta",
+        "hr": "Malta",
+        "sk": "Malta",
+        "nb": "Malta",
+        "fi": "Malta"
       }
     },
     "population": 574250,
@@ -3302,7 +3819,18 @@
         "uk": "Центральноафриканська Республіка",
         "ur": "وسطی افریقی جمہوریہ",
         "vi": "Cộng hòa Trung Phi",
-        "zh": "中非共和國"
+        "zh": "中非共和國",
+        "ms": "Republik Afrika Tengah",
+        "sw": "Central African Republic",
+        "fil": "Republik Afrika Tengah",
+        "th": "Central African Republic",
+        "ro": "Repubblica Centrafricana",
+        "cs": "Republika Środkowoafrykańska",
+        "da": "Centralafrikanska republiken",
+        "hr": "Central African Republic",
+        "sk": "Republika Środkowoafrykańska",
+        "nb": "Centralafrikanska republiken",
+        "fi": "Centralafrikanska republiken"
       }
     },
     "population": 6470307,
@@ -3373,7 +3901,18 @@
         "uk": "Тонга",
         "ur": "ٹونگا",
         "vi": "Tonga",
-        "zh": "東加"
+        "zh": "東加",
+        "ms": "Tonga",
+        "sw": "Tonga",
+        "fil": "Tonga",
+        "th": "Tonga",
+        "ro": "Tonga",
+        "cs": "Tonga",
+        "da": "Tonga",
+        "hr": "Tonga",
+        "sk": "Tonga",
+        "nb": "Tonga",
+        "fi": "Tonga"
       }
     },
     "population": 100179,
@@ -3439,7 +3978,18 @@
         "uk": "Греція",
         "ur": "یونان",
         "vi": "Hy Lạp",
-        "zh": "希臘"
+        "zh": "希臘",
+        "ms": "Yunani",
+        "sw": "Greece",
+        "fil": "Yunani",
+        "th": "Greece",
+        "ro": "Grecia",
+        "cs": "Grecja",
+        "da": "Grekland",
+        "hr": "Greece",
+        "sk": "Grecja",
+        "nb": "Grekland",
+        "fi": "Grekland"
       }
     },
     "population": 10400720,
@@ -3505,7 +4055,18 @@
         "uk": "Австрія",
         "ur": "آسٹریا",
         "vi": "Áo",
-        "zh": "奧地利"
+        "zh": "奧地利",
+        "ms": "Austria",
+        "sw": "Austria",
+        "fil": "Austria",
+        "th": "Austria",
+        "ro": "Austria",
+        "cs": "Austria",
+        "da": "Österrike",
+        "hr": "Austria",
+        "sk": "Austria",
+        "nb": "Österrike",
+        "fi": "Österrike"
       }
     },
     "population": 9200931,
@@ -3571,7 +4132,18 @@
         "uk": "Сент-Кіттс і Невіс",
         "ur": "سینٹ کیٹز و ناویس",
         "vi": "Saint Kitts và Nevis",
-        "zh": "聖克里斯多福與尼維斯"
+        "zh": "聖克里斯多福與尼維斯",
+        "ms": "Saint Kitts dan Nevis",
+        "sw": "Saint Kitts and Nevis",
+        "fil": "Saint Kitts dan Nevis",
+        "th": "Saint Kitts and Nevis",
+        "ro": "Saint Kitts e Nevis",
+        "cs": "Saint Kitts i Nevis",
+        "da": "Saint Kitts och Nevis",
+        "hr": "Saint Kitts and Nevis",
+        "sk": "Saint Kitts i Nevis",
+        "nb": "Saint Kitts och Nevis",
+        "fi": "Saint Kitts och Nevis"
       }
     },
     "population": 51320,
@@ -3637,7 +4209,18 @@
         "uk": "Нігерія",
         "ur": "نائجیریا",
         "vi": "Nigeria",
-        "zh": "奈及利亞"
+        "zh": "奈及利亞",
+        "ms": "Nigeria",
+        "sw": "Nigeria",
+        "fil": "Nigeria",
+        "th": "Nigeria",
+        "ro": "Nigeria",
+        "cs": "Nigeria",
+        "da": "Nigeria",
+        "hr": "Nigeria",
+        "sk": "Nigeria",
+        "nb": "Nigeria",
+        "fi": "Nigeria"
       }
     },
     "population": 223800000,
@@ -3708,7 +4291,18 @@
         "uk": "Чехія",
         "ur": "چیک جمہوریہ",
         "vi": "Cộng hòa Séc",
-        "zh": "捷克共和國"
+        "zh": "捷克共和國",
+        "ms": "Republik Ceko",
+        "sw": "Czechia",
+        "fil": "Republik Ceko",
+        "th": "Czechia",
+        "ro": "Repubblica Ceca",
+        "cs": "Czechy",
+        "da": "Tjeckien",
+        "hr": "Czechia",
+        "sk": "Czechy",
+        "nb": "Tjeckien",
+        "fi": "Tjeckien"
       }
     },
     "population": 10882341,
@@ -3774,7 +4368,18 @@
         "uk": "Сан-Марино",
         "ur": "سان مارینو",
         "vi": "San Marino",
-        "zh": "聖馬力諾"
+        "zh": "聖馬力諾",
+        "ms": "San Marino",
+        "sw": "San Marino",
+        "fil": "San Marino",
+        "th": "San Marino",
+        "ro": "San Marino",
+        "cs": "San Marino",
+        "da": "San Marino",
+        "hr": "San Marino",
+        "sk": "San Marino",
+        "nb": "San Marino",
+        "fi": "San Marino"
       }
     },
     "population": 34132,
@@ -3840,7 +4445,18 @@
         "uk": "Катар",
         "ur": "قطر",
         "vi": "Qatar",
-        "zh": "卡達"
+        "zh": "卡達",
+        "ms": "Qatar",
+        "sw": "Qatar",
+        "fil": "Qatar",
+        "th": "Qatar",
+        "ro": "Qatar",
+        "cs": "Katar",
+        "da": "Qatar",
+        "hr": "Qatar",
+        "sk": "Katar",
+        "nb": "Qatar",
+        "fi": "Qatar"
       }
     },
     "population": 3173024,
@@ -3906,7 +4522,18 @@
         "uk": "Гватемала",
         "ur": "گواتیمالا",
         "vi": "Guatemala",
-        "zh": "瓜地馬拉"
+        "zh": "瓜地馬拉",
+        "ms": "Guatemala",
+        "sw": "Guatemala",
+        "fil": "Guatemala",
+        "th": "Guatemala",
+        "ro": "Guatemala",
+        "cs": "Gwatemala",
+        "da": "Guatemala",
+        "hr": "Guatemala",
+        "sk": "Gwatemala",
+        "nb": "Guatemala",
+        "fi": "Guatemala"
       }
     },
     "population": 18079810,
@@ -3972,7 +4599,18 @@
         "uk": "Туніс",
         "ur": "تونس",
         "vi": "Tuy-ni-di",
-        "zh": "突尼西亞"
+        "zh": "突尼西亞",
+        "ms": "Tunisia",
+        "sw": "Tunisia",
+        "fil": "Tunisia",
+        "th": "Tunisia",
+        "ro": "Tunisia",
+        "cs": "Tunezja",
+        "da": "Tunisien",
+        "hr": "Tunisia",
+        "sk": "Tunezja",
+        "nb": "Tunisien",
+        "fi": "Tunisien"
       }
     },
     "population": 11972169,
@@ -4042,7 +4680,18 @@
         "uk": "Бутан",
         "ur": "بھوٹان",
         "vi": "Bhutan",
-        "zh": "不丹"
+        "zh": "不丹",
+        "ms": "Bhutan",
+        "sw": "Bhutan",
+        "fil": "Bhutan",
+        "th": "Bhutan",
+        "ro": "Bhutan",
+        "cs": "Bhutan",
+        "da": "Bhutan",
+        "hr": "Bhutan",
+        "sk": "Bhutan",
+        "nb": "Bhutan",
+        "fi": "Bhutan"
       }
     },
     "population": 784043,
@@ -4113,7 +4762,18 @@
         "uk": "Самоа",
         "ur": "سامووا",
         "vi": "Samoa",
-        "zh": "薩摩亞"
+        "zh": "薩摩亞",
+        "ms": "Samoa",
+        "sw": "Samoa",
+        "fil": "Samoa",
+        "th": "Samoa",
+        "ro": "Samoa",
+        "cs": "Samoa",
+        "da": "Samoa",
+        "hr": "Samoa",
+        "sk": "Samoa",
+        "nb": "Samoa",
+        "fi": "Samoa"
       }
     },
     "population": 205557,
@@ -4184,7 +4844,18 @@
         "uk": "Таджикистан",
         "ur": "تاجکستان",
         "vi": "Tajikistan",
-        "zh": "塔吉克"
+        "zh": "塔吉克",
+        "ms": "Tajikistan",
+        "sw": "Tajikistan",
+        "fil": "Tajikistan",
+        "th": "Tajikistan",
+        "ro": "Tagikistan",
+        "cs": "Tadżykistan",
+        "da": "Tadzjikistan",
+        "hr": "Tajikistan",
+        "sk": "Tadżykistan",
+        "nb": "Tadzjikistan",
+        "fi": "Tadzjikistan"
       }
     },
     "population": 10499000,
@@ -4255,7 +4926,18 @@
         "uk": "Ізраїль",
         "ur": "اسرائیل",
         "vi": "Israel",
-        "zh": "以色列"
+        "zh": "以色列",
+        "ms": "Israel",
+        "sw": "Israel",
+        "fil": "Israel",
+        "th": "Israel",
+        "ro": "Israele",
+        "cs": "Izrael",
+        "da": "Israel",
+        "hr": "Israel",
+        "sk": "Izrael",
+        "nb": "Israel",
+        "fi": "Israel"
       }
     },
     "population": 10134800,
@@ -4326,7 +5008,18 @@
         "uk": "Сомалі",
         "ur": "صومالیہ",
         "vi": "Somalia",
-        "zh": "索馬利亞"
+        "zh": "索馬利亞",
+        "ms": "Somalia",
+        "sw": "Somalia",
+        "fil": "Somalia",
+        "th": "Somalia",
+        "ro": "Somalia",
+        "cs": "Somalia",
+        "da": "Somalia",
+        "hr": "Somalia",
+        "sk": "Somalia",
+        "nb": "Somalia",
+        "fi": "Somalia"
       }
     },
     "population": 19655000,
@@ -4397,7 +5090,18 @@
         "uk": "Фінляндія",
         "ur": "فن لینڈ",
         "vi": "Phần Lan",
-        "zh": "芬蘭"
+        "zh": "芬蘭",
+        "ms": "Finlandia",
+        "sw": "Finland",
+        "fil": "Finlandia",
+        "th": "Finland",
+        "ro": "Finlandia",
+        "cs": "Finlandia",
+        "da": "Finland",
+        "hr": "Finland",
+        "sk": "Finlandia",
+        "nb": "Finland",
+        "fi": "Finland"
       }
     },
     "population": 5650325,
@@ -4472,7 +5176,18 @@
         "uk": "Лесото",
         "ur": "لیسوتھو",
         "vi": "Lesotho",
-        "zh": "賴索托"
+        "zh": "賴索托",
+        "ms": "Lesotho",
+        "sw": "Lesotho",
+        "fil": "Lesotho",
+        "th": "Lesotho",
+        "ro": "Lesotho",
+        "cs": "Lesotho",
+        "da": "Lesotho",
+        "hr": "Lesotho",
+        "sk": "Lesotho",
+        "nb": "Lesotho",
+        "fi": "Lesotho"
       }
     },
     "population": 2116427,
@@ -4538,7 +5253,18 @@
         "uk": "Росія",
         "ur": "روس",
         "vi": "Nga",
-        "zh": "俄羅斯"
+        "zh": "俄羅斯",
+        "ms": "Rusia",
+        "sw": "Russia",
+        "fil": "Rusia",
+        "th": "Russia",
+        "ro": "Russia",
+        "cs": "Rosja",
+        "da": "Ryssland",
+        "hr": "Russia",
+        "sk": "Rosja",
+        "nb": "Ryssland",
+        "fi": "Ryssland"
       }
     },
     "population": 146028325,
@@ -4609,7 +5335,18 @@
         "uk": "Ірландія",
         "ur": "جمہوریہ آئرلینڈ",
         "vi": "Cộng hòa Ireland",
-        "zh": "愛爾蘭"
+        "zh": "愛爾蘭",
+        "ms": "Republik Irlandia",
+        "sw": "Ireland",
+        "fil": "Republik Irlandia",
+        "th": "Ireland",
+        "ro": "Irlanda",
+        "cs": "Irlandia",
+        "da": "Irland",
+        "hr": "Ireland",
+        "sk": "Irlandia",
+        "nb": "Irland",
+        "fi": "Irland"
       }
     },
     "population": 5458600,
@@ -4675,7 +5412,18 @@
         "uk": "Азербайджан",
         "ur": "آذربائیجان",
         "vi": "Azerbaijan",
-        "zh": "亞塞拜然"
+        "zh": "亞塞拜然",
+        "ms": "Azerbaijan",
+        "sw": "Azerbaijan",
+        "fil": "Azerbaijan",
+        "th": "Azerbaijan",
+        "ro": "Azerbaigian",
+        "cs": "Azerbejdżan",
+        "da": "Azerbajdzjan",
+        "hr": "Azerbaijan",
+        "sk": "Azerbejdżan",
+        "nb": "Azerbajdzjan",
+        "fi": "Azerbajdzjan"
       }
     },
     "population": 10241722,
@@ -4746,7 +5494,18 @@
         "uk": "Ямайка",
         "ur": "جمیکا",
         "vi": "Jamaica",
-        "zh": "牙買加"
+        "zh": "牙買加",
+        "ms": "Jamaika",
+        "sw": "Jamaica",
+        "fil": "Jamaika",
+        "th": "Jamaica",
+        "ro": "Giamaica",
+        "cs": "Jamajka",
+        "da": "Jamaica",
+        "hr": "Jamaica",
+        "sk": "Jamajka",
+        "nb": "Jamaica",
+        "fi": "Jamaica"
       }
     },
     "population": 2825544,
@@ -4821,7 +5580,18 @@
         "uk": "Есватіні",
         "ur": "اسواتینی",
         "vi": "Eswatini",
-        "zh": "史瓦帝尼"
+        "zh": "史瓦帝尼",
+        "ms": "Eswatini",
+        "sw": "Eswatini",
+        "fil": "Eswatini",
+        "th": "Eswatini",
+        "ro": "eSwatini",
+        "cs": "Eswatini",
+        "da": "Swaziland",
+        "hr": "Eswatini",
+        "sk": "Eswatini",
+        "nb": "Swaziland",
+        "fi": "Swaziland"
       }
     },
     "population": 1235549,
@@ -4887,7 +5657,18 @@
         "uk": "Габон",
         "ur": "گیبون",
         "vi": "Gabon",
-        "zh": "加彭"
+        "zh": "加彭",
+        "ms": "Gabon",
+        "sw": "Gabon",
+        "fil": "Gabon",
+        "th": "Gabon",
+        "ro": "Gabon",
+        "cs": "Gabon",
+        "da": "Gabon",
+        "hr": "Gabon",
+        "sk": "Gabon",
+        "nb": "Gabon",
+        "fi": "Gabon"
       }
     },
     "population": 2469296,
@@ -4957,7 +5738,18 @@
         "uk": "Камбоджа",
         "ur": "کمبوڈیا",
         "vi": "Campuchia",
-        "zh": "柬埔寨"
+        "zh": "柬埔寨",
+        "ms": "Kamboja",
+        "sw": "Cambodia",
+        "fil": "Kamboja",
+        "th": "Cambodia",
+        "ro": "Cambogia",
+        "cs": "Kambodża",
+        "da": "Kambodja",
+        "hr": "Cambodia",
+        "sk": "Kambodża",
+        "nb": "Kambodja",
+        "fi": "Kambodja"
       }
     },
     "population": 17577760,
@@ -5023,7 +5815,18 @@
         "uk": "Саудівська Аравія",
         "ur": "سعودی عرب",
         "vi": "Ả Rập Saudi",
-        "zh": "沙烏地阿拉伯"
+        "zh": "沙烏地阿拉伯",
+        "ms": "Arab Saudi",
+        "sw": "Saudi Arabia",
+        "fil": "Arab Saudi",
+        "th": "Saudi Arabia",
+        "ro": "Arabia Saudita",
+        "cs": "Arabia Saudyjska",
+        "da": "Saudiarabien",
+        "hr": "Saudi Arabia",
+        "sk": "Arabia Saudyjska",
+        "nb": "Saudiarabien",
+        "fi": "Saudiarabien"
       }
     },
     "population": 35300280,
@@ -5089,7 +5892,18 @@
         "uk": "Мікронезія",
         "ur": "مائیکرونیشیا",
         "vi": "Micronesia",
-        "zh": "密克羅尼西亞聯邦"
+        "zh": "密克羅尼西亞聯邦",
+        "ms": "Mikronesia",
+        "sw": "Micronesia",
+        "fil": "Mikronesia",
+        "th": "Micronesia",
+        "ro": "Stati Federati di Micronesia",
+        "cs": "Mikronezja",
+        "da": "Mikronesiska federationen",
+        "hr": "Micronesia",
+        "sk": "Mikronezja",
+        "nb": "Mikronesiska federationen",
+        "fi": "Mikronesiska federationen"
       }
     },
     "population": 105564,
@@ -5155,7 +5969,18 @@
         "uk": "Корейська Народно-Демократична Республіка",
         "ur": "شمالی کوریا",
         "vi": "Cộng hòa Dân chủ Nhân dân Triều Tiên",
-        "zh": "朝鮮民主主義人民共和國"
+        "zh": "朝鮮民主主義人民共和國",
+        "ms": "Korea Utara",
+        "sw": "North Korea",
+        "fil": "Korea Utara",
+        "th": "North Korea",
+        "ro": "Corea del Nord",
+        "cs": "Korea Północna",
+        "da": "Nordkorea",
+        "hr": "North Korea",
+        "sk": "Korea Północna",
+        "nb": "Nordkorea",
+        "fi": "Nordkorea"
       }
     },
     "population": 25950000,
@@ -5231,7 +6056,18 @@
         "uk": "Екваторіальна Гвінея",
         "ur": "استوائی گنی",
         "vi": "Guinea Xích Đạo",
-        "zh": "赤道幾內亞"
+        "zh": "赤道幾內亞",
+        "ms": "Guinea Khatulistiwa",
+        "sw": "Equatorial Guinea",
+        "fil": "Guinea Khatulistiwa",
+        "th": "Equatorial Guinea",
+        "ro": "Guinea Equatoriale",
+        "cs": "Gwinea Równikowa",
+        "da": "Ekvatorialguinea",
+        "hr": "Equatorial Guinea",
+        "sk": "Gwinea Równikowa",
+        "nb": "Ekvatorialguinea",
+        "fi": "Ekvatorialguinea"
       }
     },
     "population": 1668768,
@@ -5297,7 +6133,18 @@
         "uk": "Мексика",
         "ur": "میکسیکو",
         "vi": "México",
-        "zh": "墨西哥"
+        "zh": "墨西哥",
+        "ms": "Meksiko",
+        "sw": "Mexico",
+        "fil": "Meksiko",
+        "th": "Mexico",
+        "ro": "Messico",
+        "cs": "Meksyk",
+        "da": "Mexiko",
+        "hr": "Mexico",
+        "sk": "Meksyk",
+        "nb": "Mexiko",
+        "fi": "Mexiko"
       }
     },
     "population": 130575786,
@@ -5363,7 +6210,18 @@
         "uk": "Бразилія",
         "ur": "برازیل",
         "vi": "Brasil",
-        "zh": "巴西"
+        "zh": "巴西",
+        "ms": "Brasil",
+        "sw": "Brazil",
+        "fil": "Brasil",
+        "th": "Brazil",
+        "ro": "Brasile",
+        "cs": "Brazylia",
+        "da": "Brasilien",
+        "hr": "Brazil",
+        "sk": "Brazylia",
+        "nb": "Brasilien",
+        "fi": "Brasilien"
       }
     },
     "population": 213421037,
@@ -5434,7 +6292,18 @@
         "uk": "Науру",
         "ur": "ناورو",
         "vi": "Nauru",
-        "zh": "諾魯"
+        "zh": "諾魯",
+        "ms": "Nauru",
+        "sw": "Nauru",
+        "fil": "Nauru",
+        "th": "Nauru",
+        "ro": "Nauru",
+        "cs": "Nauru",
+        "da": "Nauru",
+        "hr": "Nauru",
+        "sk": "Nauru",
+        "nb": "Nauru",
+        "fi": "Nauru"
       }
     },
     "population": 11680,
@@ -5500,7 +6369,18 @@
         "uk": "Іран",
         "ur": "ایران",
         "vi": "Iran",
-        "zh": "伊朗"
+        "zh": "伊朗",
+        "ms": "Iran",
+        "sw": "Iran",
+        "fil": "Iran",
+        "th": "Iran",
+        "ro": "Iran",
+        "cs": "Iran",
+        "da": "Iran",
+        "hr": "Iran",
+        "sk": "Iran",
+        "nb": "Iran",
+        "fi": "Iran"
       }
     },
     "population": 85961000,
@@ -5566,7 +6446,18 @@
         "uk": "Ангола",
         "ur": "انگولا",
         "vi": "Angola",
-        "zh": "安哥拉"
+        "zh": "安哥拉",
+        "ms": "Angola",
+        "sw": "Angola",
+        "fil": "Angola",
+        "th": "Angola",
+        "ro": "Angola",
+        "cs": "Angola",
+        "da": "Angola",
+        "hr": "Angola",
+        "sk": "Angola",
+        "nb": "Angola",
+        "fi": "Angola"
       }
     },
     "population": 36170961,
@@ -5632,7 +6523,18 @@
         "uk": "М'янма",
         "ur": "میانمار",
         "vi": "Myanma",
-        "zh": "緬甸"
+        "zh": "緬甸",
+        "ms": "Myanmar",
+        "sw": "Myanmar",
+        "fil": "Myanmar",
+        "th": "Myanmar",
+        "ro": "Birmania",
+        "cs": "Mjanma",
+        "da": "Myanmar",
+        "hr": "Myanmar",
+        "sk": "Mjanma",
+        "nb": "Myanmar",
+        "fi": "Myanmar"
       }
     },
     "population": 51316756,
@@ -5698,7 +6600,18 @@
         "uk": "Єгипет",
         "ur": "مصر",
         "vi": "Ai Cập",
-        "zh": "埃及"
+        "zh": "埃及",
+        "ms": "Mesir",
+        "sw": "Egypt",
+        "fil": "Mesir",
+        "th": "Egypt",
+        "ro": "Egitto",
+        "cs": "Egipt",
+        "da": "Egypten",
+        "hr": "Egypt",
+        "sk": "Egipt",
+        "nb": "Egypten",
+        "fi": "Egypten"
       }
     },
     "population": 107271260,
@@ -5765,7 +6678,18 @@
         "uk": "Італія",
         "ur": "اطالیہ",
         "vi": "Ý",
-        "zh": "義大利"
+        "zh": "義大利",
+        "ms": "Italia",
+        "sw": "Italy",
+        "fil": "Italia",
+        "th": "Italy",
+        "ro": "Italia",
+        "cs": "Włochy",
+        "da": "Italien",
+        "hr": "Italy",
+        "sk": "Włochy",
+        "nb": "Italien",
+        "fi": "Italien"
       }
     },
     "population": 58927633,
@@ -5831,7 +6755,18 @@
         "uk": "Австралія",
         "ur": "آسٹریلیا",
         "vi": "Úc",
-        "zh": "澳大利亞"
+        "zh": "澳大利亞",
+        "ms": "Australia",
+        "sw": "Australia",
+        "fil": "Australia",
+        "th": "Australia",
+        "ro": "Australia",
+        "cs": "Australia",
+        "da": "Australien",
+        "hr": "Australia",
+        "sk": "Australia",
+        "nb": "Australien",
+        "fi": "Australien"
       }
     },
     "population": 27536874,
@@ -5902,7 +6837,18 @@
         "uk": "Ботсвана",
         "ur": "بوٹسوانا",
         "vi": "Botswana",
-        "zh": "波札那"
+        "zh": "波札那",
+        "ms": "Botswana",
+        "sw": "Botswana",
+        "fil": "Botswana",
+        "th": "Botswana",
+        "ro": "Botswana",
+        "cs": "Botswana",
+        "da": "Botswana",
+        "hr": "Botswana",
+        "sk": "Botswana",
+        "nb": "Botswana",
+        "fi": "Botswana"
       }
     },
     "population": 2359609,
@@ -5973,7 +6919,18 @@
         "uk": "Ватикан",
         "ur": "ویٹیکن سٹی",
         "vi": "Thành Vatican",
-        "zh": "梵蒂岡"
+        "zh": "梵蒂岡",
+        "ms": "Vatikan",
+        "sw": "Vatican City",
+        "fil": "Vatikan",
+        "th": "Vatican City",
+        "ro": "Città del Vaticano",
+        "cs": "Watykan",
+        "da": "Vatikanstaten",
+        "hr": "Vatican City",
+        "sk": "Watykan",
+        "nb": "Vatikanstaten",
+        "fi": "Vatikanstaten"
       }
     },
     "population": 882,
@@ -6039,7 +6996,18 @@
         "uk": "Ліберія",
         "ur": "لائبیریا",
         "vi": "Liberia",
-        "zh": "賴比瑞亞"
+        "zh": "賴比瑞亞",
+        "ms": "Liberia",
+        "sw": "Liberia",
+        "fil": "Liberia",
+        "th": "Liberia",
+        "ro": "Liberia",
+        "cs": "Liberia",
+        "da": "Liberia",
+        "hr": "Liberia",
+        "sk": "Liberia",
+        "nb": "Liberia",
+        "fi": "Liberia"
       }
     },
     "population": 5248621,
@@ -6105,7 +7073,18 @@
         "uk": "Португалія",
         "ur": "پرتگال",
         "vi": "Bồ Đào Nha",
-        "zh": "葡萄牙"
+        "zh": "葡萄牙",
+        "ms": "Portugal",
+        "sw": "Portugal",
+        "fil": "Portugal",
+        "th": "Portugal",
+        "ro": "Portogallo",
+        "cs": "Portugalia",
+        "da": "Portugal",
+        "hr": "Portugal",
+        "sk": "Portugalia",
+        "nb": "Portugal",
+        "fi": "Portugal"
       }
     },
     "population": 10749635,
@@ -6171,7 +7150,18 @@
         "uk": "Сирія",
         "ur": "سوریہ",
         "vi": "Syria",
-        "zh": "敘利亞"
+        "zh": "敘利亞",
+        "ms": "Suriah",
+        "sw": "Syria",
+        "fil": "Suriah",
+        "th": "Syria",
+        "ro": "Siria",
+        "cs": "Syria",
+        "da": "Syrien",
+        "hr": "Syria",
+        "sk": "Syria",
+        "nb": "Syrien",
+        "fi": "Syrien"
       }
     },
     "population": 25620000,
@@ -6237,7 +7227,18 @@
         "uk": "Данія",
         "ur": "ڈنمارک",
         "vi": "Đan Mạch",
-        "zh": "丹麥"
+        "zh": "丹麥",
+        "ms": "Denmark",
+        "sw": "Denmark",
+        "fil": "Denmark",
+        "th": "Denmark",
+        "ro": "Danimarca",
+        "cs": "Dania",
+        "da": "Danmark",
+        "hr": "Denmark",
+        "sk": "Dania",
+        "nb": "Danmark",
+        "fi": "Danmark"
       }
     },
     "population": 6011488,
@@ -6303,7 +7304,18 @@
         "uk": "Албанія",
         "ur": "البانیا",
         "vi": "Albania",
-        "zh": "阿爾巴尼亞"
+        "zh": "阿爾巴尼亞",
+        "ms": "Albania",
+        "sw": "Albania",
+        "fil": "Albania",
+        "th": "Albania",
+        "ro": "Albania",
+        "cs": "Albania",
+        "da": "Albanien",
+        "hr": "Albania",
+        "sk": "Albania",
+        "nb": "Albanien",
+        "fi": "Albanien"
       }
     },
     "population": 2363314,
@@ -6369,7 +7381,18 @@
         "uk": "Словаччина",
         "ur": "سلوواکیہ",
         "vi": "Slovakia",
-        "zh": "斯洛伐克"
+        "zh": "斯洛伐克",
+        "ms": "Slowakia",
+        "sw": "Slovakia",
+        "fil": "Slowakia",
+        "th": "Slovakia",
+        "ro": "Slovacchia",
+        "cs": "Słowacja",
+        "da": "Slovakien",
+        "hr": "Slovakia",
+        "sk": "Słowacja",
+        "nb": "Slovakien",
+        "fi": "Slovakien"
       }
     },
     "population": 5413813,
@@ -6435,7 +7458,18 @@
         "uk": "Замбія",
         "ur": "زیمبیا",
         "vi": "Zambia",
-        "zh": "尚比亞"
+        "zh": "尚比亞",
+        "ms": "Zambia",
+        "sw": "Zambia",
+        "fil": "Zambia",
+        "th": "Zambia",
+        "ro": "Zambia",
+        "cs": "Zambia",
+        "da": "Zambia",
+        "hr": "Zambia",
+        "sk": "Zambia",
+        "nb": "Zambia",
+        "fi": "Zambia"
       }
     },
     "population": 19693423,
@@ -6501,7 +7535,18 @@
         "uk": "Сан-Томе і Принсіпі",
         "ur": "ساؤ ٹومے و پرنسپے",
         "vi": "São Tomé và Príncipe",
-        "zh": "聖多美普林西比"
+        "zh": "聖多美普林西比",
+        "ms": "Sao Tome dan Principe",
+        "sw": "São Tomé and Príncipe",
+        "fil": "Sao Tome dan Principe",
+        "th": "São Tomé and Príncipe",
+        "ro": "São Tomé e Príncipe",
+        "cs": "Wyspy Świętego Tomasza i Książęca",
+        "da": "São Tomé och Príncipe",
+        "hr": "São Tomé and Príncipe",
+        "sk": "Wyspy Świętego Tomasza i Książęca",
+        "nb": "São Tomé och Príncipe",
+        "fi": "São Tomé och Príncipe"
       }
     },
     "population": 209607,
@@ -6571,7 +7616,18 @@
         "uk": "Багамські Острови",
         "ur": "بہاماس",
         "vi": "Bahamas",
-        "zh": "巴哈馬"
+        "zh": "巴哈馬",
+        "ms": "Bahama",
+        "sw": "Bahamas",
+        "fil": "Bahama",
+        "th": "Bahamas",
+        "ro": "Bahamas",
+        "cs": "Bahamy",
+        "da": "Bahamas",
+        "hr": "Bahamas",
+        "sk": "Bahamy",
+        "nb": "Bahamas",
+        "fi": "Bahamas"
       }
     },
     "population": 398165,
@@ -6637,7 +7693,18 @@
         "uk": "Нідерланди",
         "ur": "نیدرلینڈز",
         "vi": "Hà Lan",
-        "zh": "荷蘭"
+        "zh": "荷蘭",
+        "ms": "Belanda",
+        "sw": "Netherlands",
+        "fil": "Belanda",
+        "th": "Netherlands",
+        "ro": "Paesi Bassi",
+        "cs": "Holandia",
+        "da": "Nederländerna",
+        "hr": "Netherlands",
+        "sk": "Holandia",
+        "nb": "Nederländerna",
+        "fi": "Nederländerna"
       }
     },
     "population": 18100436,
@@ -6718,7 +7785,18 @@
         "uk": "Болівія",
         "ur": "بولیویا",
         "vi": "Bolivia",
-        "zh": "玻利維亞"
+        "zh": "玻利維亞",
+        "ms": "Bolivia",
+        "sw": "Bolivia",
+        "fil": "Bolivia",
+        "th": "Bolivia",
+        "ro": "Bolivia",
+        "cs": "Boliwia",
+        "da": "Bolivia",
+        "hr": "Bolivia",
+        "sk": "Boliwia",
+        "nb": "Bolivia",
+        "fi": "Bolivia"
       }
     },
     "population": 11365333,
@@ -6784,7 +7862,18 @@
         "uk": "Німеччина",
         "ur": "جرمنی",
         "vi": "Đức",
-        "zh": "德國"
+        "zh": "德國",
+        "ms": "Jerman",
+        "sw": "Germany",
+        "fil": "Jerman",
+        "th": "Germany",
+        "ro": "Germania",
+        "cs": "Niemcy",
+        "da": "Tyskland",
+        "hr": "Germany",
+        "sk": "Niemcy",
+        "nb": "Tyskland",
+        "fi": "Tyskland"
       }
     },
     "population": 83491249,
@@ -6860,7 +7949,18 @@
         "uk": "Еритрея",
         "ur": "اریتریا",
         "vi": "Eritrea",
-        "zh": "厄利垂亞"
+        "zh": "厄利垂亞",
+        "ms": "Eritrea",
+        "sw": "Eritrea",
+        "fil": "Eritrea",
+        "th": "Eritrea",
+        "ro": "Eritrea",
+        "cs": "Erytrea",
+        "da": "Eritrea",
+        "hr": "Eritrea",
+        "sk": "Erytrea",
+        "nb": "Eritrea",
+        "fi": "Eritrea"
       }
     },
     "population": 3607000,
@@ -6926,7 +8026,18 @@
         "uk": "Естонія",
         "ur": "استونیا",
         "vi": "Estonia",
-        "zh": "愛沙尼亞"
+        "zh": "愛沙尼亞",
+        "ms": "Estonia",
+        "sw": "Estonia",
+        "fil": "Estonia",
+        "th": "Estonia",
+        "ro": "Estonia",
+        "cs": "Estonia",
+        "da": "Estland",
+        "hr": "Estonia",
+        "sk": "Estonia",
+        "nb": "Estland",
+        "fi": "Estland"
       }
     },
     "population": 1369995,
@@ -6992,7 +8103,18 @@
         "uk": "Малі",
         "ur": "مالی",
         "vi": "Mali",
-        "zh": "馬利共和國"
+        "zh": "馬利共和國",
+        "ms": "Mali",
+        "sw": "Mali",
+        "fil": "Mali",
+        "th": "Mali",
+        "ro": "Mali",
+        "cs": "Mali",
+        "da": "Mali",
+        "hr": "Mali",
+        "sk": "Mali",
+        "nb": "Mali",
+        "fi": "Mali"
       }
     },
     "population": 22395489,
@@ -7058,7 +8180,18 @@
         "uk": "Кувейт",
         "ur": "کویت",
         "vi": "Kuwait",
-        "zh": "科威特"
+        "zh": "科威特",
+        "ms": "Kuwait",
+        "sw": "Kuwait",
+        "fil": "Kuwait",
+        "th": "Kuwait",
+        "ro": "Kuwait",
+        "cs": "Kuwejt",
+        "da": "Kuwait",
+        "hr": "Kuwait",
+        "sk": "Kuwejt",
+        "nb": "Kuwait",
+        "fi": "Kuwait"
       }
     },
     "population": 4881254,
@@ -7144,7 +8277,18 @@
         "uk": "Демократична Республіка Конго",
         "ur": "جمہوری جمہوریہ کانگو",
         "vi": "Cộng hòa Dân chủ Congo",
-        "zh": "剛果民主共和國"
+        "zh": "剛果民主共和國",
+        "ms": "Republik Demokratik Kongo",
+        "sw": "DR Congo",
+        "fil": "Republik Demokratik Kongo",
+        "th": "DR Congo",
+        "ro": "Repubblica Democratica del Congo",
+        "cs": "Demokratyczna Republika Konga",
+        "da": "Kongo-Kinshasa",
+        "hr": "DR Congo",
+        "sk": "Demokratyczna Republika Konga",
+        "nb": "Kongo-Kinshasa",
+        "fi": "Kongo-Kinshasa"
       }
     },
     "population": 112832000,
@@ -7210,7 +8354,18 @@
         "uk": "Угорщина",
         "ur": "ہنگری",
         "vi": "Hungary",
-        "zh": "匈牙利"
+        "zh": "匈牙利",
+        "ms": "Hongaria",
+        "sw": "Hungary",
+        "fil": "Hongaria",
+        "th": "Hungary",
+        "ro": "Ungheria",
+        "cs": "Węgry",
+        "da": "Ungern",
+        "hr": "Hungary",
+        "sk": "Węgry",
+        "nb": "Ungern",
+        "fi": "Ungern"
       }
     },
     "population": 9539502,
@@ -7276,7 +8431,18 @@
         "uk": "Лівія",
         "ur": "لیبیا",
         "vi": "Libya",
-        "zh": "利比亞"
+        "zh": "利比亞",
+        "ms": "Libya",
+        "sw": "Libya",
+        "fil": "Libya",
+        "th": "Libya",
+        "ro": "Libia",
+        "cs": "Libia",
+        "da": "Libyen",
+        "hr": "Libya",
+        "sk": "Libia",
+        "nb": "Libyen",
+        "fi": "Libyen"
       }
     },
     "population": 7459000,
@@ -7340,7 +8506,18 @@
         "uk": "Чорногорія",
         "ur": "مونٹینیگرو",
         "vi": "Montenegro",
-        "zh": "蒙特內哥羅"
+        "zh": "蒙特內哥羅",
+        "ms": "Montenegro",
+        "sw": "Montenegro",
+        "fil": "Montenegro",
+        "th": "Montenegro",
+        "ro": "Montenegro",
+        "cs": "Czarnogóra",
+        "da": "Montenegro",
+        "hr": "Montenegro",
+        "sk": "Czarnogóra",
+        "nb": "Montenegro",
+        "fi": "Montenegro"
       }
     },
     "population": 623327,
@@ -7410,7 +8587,18 @@
         "uk": "Парагвай",
         "ur": "پیراگوئے",
         "vi": "Paraguay",
-        "zh": "巴拉圭"
+        "zh": "巴拉圭",
+        "ms": "Paraguay",
+        "sw": "Paraguay",
+        "fil": "Paraguay",
+        "th": "Paraguay",
+        "ro": "Paraguay",
+        "cs": "Paragwaj",
+        "da": "Paraguay",
+        "hr": "Paraguay",
+        "sk": "Paragwaj",
+        "nb": "Paraguay",
+        "fi": "Paraguay"
       }
     },
     "population": 6109644,
@@ -7486,7 +8674,18 @@
         "uk": "Перу",
         "ur": "پیرو",
         "vi": "Peru",
-        "zh": "秘魯"
+        "zh": "秘魯",
+        "ms": "Peru",
+        "sw": "Peru",
+        "fil": "Peru",
+        "th": "Peru",
+        "ro": "Perù",
+        "cs": "Peru",
+        "da": "Peru",
+        "hr": "Peru",
+        "sk": "Peru",
+        "nb": "Peru",
+        "fi": "Peru"
       }
     },
     "population": 34350244,
@@ -7557,7 +8756,18 @@
         "uk": "Бурунді",
         "ur": "برونڈی",
         "vi": "Burundi",
-        "zh": "蒲隆地"
+        "zh": "蒲隆地",
+        "ms": "Burundi",
+        "sw": "Burundi",
+        "fil": "Burundi",
+        "th": "Burundi",
+        "ro": "Burundi",
+        "cs": "Burundi",
+        "da": "Burundi",
+        "hr": "Burundi",
+        "sk": "Burundi",
+        "nb": "Burundi",
+        "fi": "Burundi"
       }
     },
     "population": 12332788,
@@ -7623,7 +8833,18 @@
         "uk": "Лаос",
         "ur": "لاؤس",
         "vi": "Lào",
-        "zh": "寮國"
+        "zh": "寮國",
+        "ms": "Laos",
+        "sw": "Laos",
+        "fil": "Laos",
+        "th": "Laos",
+        "ro": "Laos",
+        "cs": "Laos",
+        "da": "Laos",
+        "hr": "Laos",
+        "sk": "Laos",
+        "nb": "Laos",
+        "fi": "Laos"
       }
     },
     "population": 7647000,
@@ -7689,7 +8910,18 @@
         "uk": "Південний Судан",
         "ur": "جنوبی سوڈان",
         "vi": "Nam Sudan",
-        "zh": "南蘇丹"
+        "zh": "南蘇丹",
+        "ms": "Sudan Selatan",
+        "sw": "South Sudan",
+        "fil": "Sudan Selatan",
+        "th": "South Sudan",
+        "ro": "Sudan del Sud",
+        "cs": "Sudan Południowy",
+        "da": "Sydsudan",
+        "hr": "South Sudan",
+        "sk": "Sudan Południowy",
+        "nb": "Sydsudan",
+        "fi": "Sydsudan"
       }
     },
     "population": 15786898,
@@ -7755,7 +8987,18 @@
         "uk": "Північна Македонія",
         "ur": "شمالی مقدونیہ",
         "vi": "Bắc Macedonia",
-        "zh": "北馬其頓"
+        "zh": "北馬其頓",
+        "ms": "Republik Makedonia Utara",
+        "sw": "North Macedonia",
+        "fil": "Republik Makedonia Utara",
+        "th": "North Macedonia",
+        "ro": "Macedonia del Nord",
+        "cs": "Macedonia Północna",
+        "da": "Nordmakedonien",
+        "hr": "North Macedonia",
+        "sk": "Macedonia Północna",
+        "nb": "Nordmakedonien",
+        "fi": "Nordmakedonien"
       }
     },
     "population": 1822612,
@@ -7826,7 +9069,18 @@
         "uk": "Марокко",
         "ur": "مراکش",
         "vi": "Maroc",
-        "zh": "摩洛哥"
+        "zh": "摩洛哥",
+        "ms": "Maroko",
+        "sw": "Morocco",
+        "fil": "Maroko",
+        "th": "Morocco",
+        "ro": "Marocco",
+        "cs": "Maroko",
+        "da": "Marocko",
+        "hr": "Morocco",
+        "sk": "Maroko",
+        "nb": "Marocko",
+        "fi": "Marocko"
       }
     },
     "population": 36828330,
@@ -7897,7 +9151,18 @@
         "uk": "Ліван",
         "ur": "لبنان",
         "vi": "Liban",
-        "zh": "黎巴嫩"
+        "zh": "黎巴嫩",
+        "ms": "Lebanon",
+        "sw": "Lebanon",
+        "fil": "Lebanon",
+        "th": "Lebanon",
+        "ro": "Libano",
+        "cs": "Liban",
+        "da": "Libanon",
+        "hr": "Lebanon",
+        "sk": "Liban",
+        "nb": "Libanon",
+        "fi": "Libanon"
       }
     },
     "population": 5490000,
@@ -7963,7 +9228,18 @@
         "uk": "Гвінея",
         "ur": "جمہوریہ گنی",
         "vi": "Guinée",
-        "zh": "幾內亞"
+        "zh": "幾內亞",
+        "ms": "Guinea",
+        "sw": "Guinea",
+        "fil": "Guinea",
+        "th": "Guinea",
+        "ro": "Guinea",
+        "cs": "Gwinea",
+        "da": "Guinea",
+        "hr": "Guinea",
+        "sk": "Gwinea",
+        "nb": "Guinea",
+        "fi": "Guinea"
       }
     },
     "population": 14363931,
@@ -8029,7 +9305,18 @@
         "uk": "Нікарагуа",
         "ur": "نکاراگوا",
         "vi": "Nicaragua",
-        "zh": "尼加拉瓜"
+        "zh": "尼加拉瓜",
+        "ms": "Nikaragua",
+        "sw": "Nicaragua",
+        "fil": "Nikaragua",
+        "th": "Nicaragua",
+        "ro": "Nicaragua",
+        "cs": "Nikaragua",
+        "da": "Nicaragua",
+        "hr": "Nicaragua",
+        "sk": "Nikaragua",
+        "nb": "Nicaragua",
+        "fi": "Nicaragua"
       }
     },
     "population": 6803886,
@@ -8100,7 +9387,18 @@
         "uk": "Шрі-Ланка",
         "ur": "سری لنکا",
         "vi": "Sri Lanka",
-        "zh": "斯里蘭卡"
+        "zh": "斯里蘭卡",
+        "ms": "Sri Lanka",
+        "sw": "Sri Lanka",
+        "fil": "Sri Lanka",
+        "th": "Sri Lanka",
+        "ro": "Sri Lanka",
+        "cs": "Sri Lanka",
+        "da": "Sri Lanka",
+        "hr": "Sri Lanka",
+        "sk": "Sri Lanka",
+        "nb": "Sri Lanka",
+        "fi": "Sri Lanka"
       }
     },
     "population": 21763170,
@@ -8166,7 +9464,18 @@
         "uk": "Китайська Народна Республіка",
         "ur": "عوامی جمہوریہ چین",
         "vi": "Trung Quốc",
-        "zh": "中華人民共和國"
+        "zh": "中華人民共和國",
+        "ms": "Republik Rakyat Tiongkok",
+        "sw": "China",
+        "fil": "Republik Rakyat Tiongkok",
+        "th": "China",
+        "ro": "Cina",
+        "cs": "Chińska Republika Ludowa",
+        "da": "Kina",
+        "hr": "China",
+        "sk": "Chińska Republika Ludowa",
+        "nb": "Kina",
+        "fi": "Kina"
       }
     },
     "population": 1408280000,
@@ -8232,7 +9541,18 @@
         "uk": "Бахрейн",
         "ur": "بحرین",
         "vi": "Bahrain",
-        "zh": "巴林"
+        "zh": "巴林",
+        "ms": "Bahrain",
+        "sw": "Bahrain",
+        "fil": "Bahrain",
+        "th": "Bahrain",
+        "ro": "Bahrein",
+        "cs": "Bahrajn",
+        "da": "Bahrain",
+        "hr": "Bahrain",
+        "sk": "Bahrajn",
+        "nb": "Bahrain",
+        "fi": "Bahrain"
       }
     },
     "population": 1594654,
@@ -8303,7 +9623,18 @@
         "uk": "Маршаллові Острови",
         "ur": "جزائر مارشل",
         "vi": "Quần đảo Marshall",
-        "zh": "馬紹爾群島"
+        "zh": "馬紹爾群島",
+        "ms": "Kepulauan Marshall",
+        "sw": "Marshall Islands",
+        "fil": "Kepulauan Marshall",
+        "th": "Marshall Islands",
+        "ro": "Isole Marshall",
+        "cs": "Wyspy Marshalla",
+        "da": "Marshallöarna",
+        "hr": "Marshall Islands",
+        "sk": "Wyspy Marshalla",
+        "nb": "Marshallöarna",
+        "fi": "Marshallöarna"
       }
     },
     "population": 42418,
@@ -8369,7 +9700,18 @@
         "uk": "Україна",
         "ur": "یوکرین",
         "vi": "Ukraina",
-        "zh": "烏克蘭"
+        "zh": "烏克蘭",
+        "ms": "Ukraina",
+        "sw": "Ukraine",
+        "fil": "Ukraina",
+        "th": "Ukraine",
+        "ro": "Ucraina",
+        "cs": "Ukraina",
+        "da": "Ukraina",
+        "hr": "Ukraine",
+        "sk": "Ukraina",
+        "nb": "Ukraina",
+        "fi": "Ukraina"
       }
     },
     "population": 32862000,
@@ -8487,7 +9829,18 @@
         "uk": "Південно-Африканська Республіка",
         "ur": "جنوبی افریقا",
         "vi": "Cộng hòa Nam Phi",
-        "zh": "南非"
+        "zh": "南非",
+        "ms": "Afrika Selatan",
+        "sw": "South Africa",
+        "fil": "Afrika Selatan",
+        "th": "South Africa",
+        "ro": "Sudafrica",
+        "cs": "Południowa Afryka",
+        "da": "Sydafrika",
+        "hr": "South Africa",
+        "sk": "Południowa Afryka",
+        "nb": "Sydafrika",
+        "fi": "Sydafrika"
       }
     },
     "population": 63100945,
@@ -8553,7 +9906,18 @@
         "uk": "Сент-Вінсент і Гренадини",
         "ur": "سینٹ وینسینٹ و گریناڈائنز",
         "vi": "Saint Vincent và Grenadines",
-        "zh": "聖文森及格瑞那丁"
+        "zh": "聖文森及格瑞那丁",
+        "ms": "Saint Vincent dan Grenadine",
+        "sw": "Saint Vincent and the Grenadines",
+        "fil": "Saint Vincent dan Grenadine",
+        "th": "Saint Vincent and the Grenadines",
+        "ro": "Saint Vincent e Grenadine",
+        "cs": "Saint Vincent i Grenadyny",
+        "da": "Saint Vincent och Grenadinerna",
+        "hr": "Saint Vincent and the Grenadines",
+        "sk": "Saint Vincent i Grenadyny",
+        "nb": "Saint Vincent och Grenadinerna",
+        "fi": "Saint Vincent och Grenadinerna"
       }
     },
     "population": 110872,
@@ -8629,7 +9993,18 @@
         "uk": "Сейшельські Острови",
         "ur": "سیشیلز",
         "vi": "Seychelles",
-        "zh": "塞席爾"
+        "zh": "塞席爾",
+        "ms": "Seychelles",
+        "sw": "Seychelles",
+        "fil": "Seychelles",
+        "th": "Seychelles",
+        "ro": "Seychelles",
+        "cs": "Seszele",
+        "da": "Seychellerna",
+        "hr": "Seychelles",
+        "sk": "Seszele",
+        "nb": "Seychellerna",
+        "fi": "Seychellerna"
       }
     },
     "population": 122729,
@@ -8695,7 +10070,18 @@
         "uk": "Домініканська Республіка",
         "ur": "جمہوریہ ڈومینیکن",
         "vi": "Cộng hòa Dominica",
-        "zh": "多明尼加"
+        "zh": "多明尼加",
+        "ms": "Republik Dominika",
+        "sw": "Dominican Republic",
+        "fil": "Republik Dominika",
+        "th": "Dominican Republic",
+        "ro": "Repubblica Dominicana",
+        "cs": "Dominikana",
+        "da": "Dominikanska republiken",
+        "hr": "Dominican Republic",
+        "sk": "Dominikana",
+        "nb": "Dominikanska republiken",
+        "fi": "Dominikanska republiken"
       }
     },
     "population": 10771504,
@@ -8761,7 +10147,18 @@
         "uk": "Індонезія",
         "ur": "انڈونیشیا",
         "vi": "Indonesia",
-        "zh": "印度尼西亞"
+        "zh": "印度尼西亞",
+        "ms": "Indonesia",
+        "sw": "Indonesia",
+        "fil": "Indonesia",
+        "th": "Indonesia",
+        "ro": "Indonesia",
+        "cs": "Indonezja",
+        "da": "Indonesien",
+        "hr": "Indonesia",
+        "sk": "Indonezja",
+        "nb": "Indonesien",
+        "fi": "Indonesien"
       }
     },
     "population": 284438782,
@@ -8832,7 +10229,18 @@
         "uk": "Малаві",
         "ur": "ملاوی",
         "vi": "Malawi",
-        "zh": "馬拉威"
+        "zh": "馬拉威",
+        "ms": "Malawi",
+        "sw": "Malawi",
+        "fil": "Malawi",
+        "th": "Malawi",
+        "ro": "Malawi",
+        "cs": "Malawi",
+        "da": "Malawi",
+        "hr": "Malawi",
+        "sk": "Malawi",
+        "nb": "Malawi",
+        "fi": "Malawi"
       }
     },
     "population": 20734262,
@@ -8903,7 +10311,18 @@
         "uk": "Камерун",
         "ur": "کیمرون",
         "vi": "Cameroon",
-        "zh": "喀麥隆"
+        "zh": "喀麥隆",
+        "ms": "Kamerun",
+        "sw": "Cameroon",
+        "fil": "Kamerun",
+        "th": "Cameroon",
+        "ro": "Camerun",
+        "cs": "Kamerun",
+        "da": "Kamerun",
+        "hr": "Cameroon",
+        "sk": "Kamerun",
+        "nb": "Kamerun",
+        "fi": "Kamerun"
       }
     },
     "population": 29442327,
@@ -8974,7 +10393,18 @@
         "uk": "Мадагаскар",
         "ur": "مڈغاسکر",
         "vi": "Madagascar",
-        "zh": "馬達加斯加"
+        "zh": "馬達加斯加",
+        "ms": "Madagaskar",
+        "sw": "Madagascar",
+        "fil": "Madagaskar",
+        "th": "Madagascar",
+        "ro": "Madagascar",
+        "cs": "Madagaskar",
+        "da": "Madagaskar",
+        "hr": "Madagascar",
+        "sk": "Madagaskar",
+        "nb": "Madagaskar",
+        "fi": "Madagaskar"
       }
     },
     "population": 31727042,
@@ -9049,7 +10479,18 @@
         "uk": "Кірибаті",
         "ur": "کیریباتی",
         "vi": "Kiribati",
-        "zh": "吉里巴斯"
+        "zh": "吉里巴斯",
+        "ms": "Kiribati",
+        "sw": "Kiribati",
+        "fil": "Kiribati",
+        "th": "Kiribati",
+        "ro": "Kiribati",
+        "cs": "Kiribati",
+        "da": "Kiribati",
+        "hr": "Kiribati",
+        "sk": "Kiribati",
+        "nb": "Kiribati",
+        "fi": "Kiribati"
       }
     },
     "population": 120740,
@@ -9125,7 +10566,18 @@
         "uk": "Фіджі",
         "ur": "فجی",
         "vi": "Fiji",
-        "zh": "斐濟"
+        "zh": "斐濟",
+        "ms": "Fiji",
+        "sw": "Fiji",
+        "fil": "Fiji",
+        "th": "Fiji",
+        "ro": "Figi",
+        "cs": "Fidżi",
+        "da": "Fiji",
+        "hr": "Fiji",
+        "sk": "Fidżi",
+        "nb": "Fiji",
+        "fi": "Fiji"
       }
     },
     "population": 900869,
@@ -9196,7 +10648,18 @@
         "uk": "Пакистан",
         "ur": "پاکستان",
         "vi": "Pakistan",
-        "zh": "巴基斯坦"
+        "zh": "巴基斯坦",
+        "ms": "Pakistan",
+        "sw": "Pakistan",
+        "fil": "Pakistan",
+        "th": "Pakistan",
+        "ro": "Pakistan",
+        "cs": "Pakistan",
+        "da": "Pakistan",
+        "hr": "Pakistan",
+        "sk": "Pakistan",
+        "nb": "Pakistan",
+        "fi": "Pakistan"
       }
     },
     "population": 241499431,
@@ -9262,7 +10725,18 @@
         "uk": "Суринам",
         "ur": "سرینام",
         "vi": "Suriname",
-        "zh": "蘇利南"
+        "zh": "蘇利南",
+        "ms": "Suriname",
+        "sw": "Suriname",
+        "fil": "Suriname",
+        "th": "Suriname",
+        "ro": "Suriname",
+        "cs": "Surinam",
+        "da": "Surinam",
+        "hr": "Suriname",
+        "sk": "Surinam",
+        "nb": "Surinam",
+        "fi": "Surinam"
       }
     },
     "population": 616500,
@@ -9333,7 +10807,18 @@
         "uk": "Джибуті",
         "ur": "جبوتی",
         "vi": "Djibouti",
-        "zh": "吉布地"
+        "zh": "吉布地",
+        "ms": "Djibouti",
+        "sw": "Djibouti",
+        "fil": "Djibouti",
+        "th": "Djibouti",
+        "ro": "Gibuti",
+        "cs": "Dżibuti",
+        "da": "Djibouti",
+        "hr": "Djibouti",
+        "sk": "Dżibuti",
+        "nb": "Djibouti",
+        "fi": "Djibouti"
       }
     },
     "population": 1066809,
@@ -9399,7 +10884,18 @@
         "uk": "Гамбія",
         "ur": "گیمبیا",
         "vi": "Gambia",
-        "zh": "甘比亞"
+        "zh": "甘比亞",
+        "ms": "Gambia",
+        "sw": "Gambia",
+        "fil": "Gambia",
+        "th": "Gambia",
+        "ro": "Gambia",
+        "cs": "Gambia",
+        "da": "Gambia",
+        "hr": "Gambia",
+        "sk": "Gambia",
+        "nb": "Gambia",
+        "fi": "Gambia"
       }
     },
     "population": 2422712,
@@ -9465,7 +10961,18 @@
         "uk": "Монголія",
         "ur": "منگولیا",
         "vi": "Mông Cổ",
-        "zh": "蒙古國"
+        "zh": "蒙古國",
+        "ms": "Mongolia",
+        "sw": "Mongolia",
+        "fil": "Mongolia",
+        "th": "Mongolia",
+        "ro": "Mongolia",
+        "cs": "Mongolia",
+        "da": "Mongoliet",
+        "hr": "Mongolia",
+        "sk": "Mongolia",
+        "nb": "Mongoliet",
+        "fi": "Mongoliet"
       }
     },
     "population": 3544835,
@@ -9601,7 +11108,18 @@
         "uk": "Зімбабве",
         "ur": "زمبابوے",
         "vi": "Zimbabwe",
-        "zh": "辛巴威"
+        "zh": "辛巴威",
+        "ms": "Zimbabwe",
+        "sw": "Zimbabwe",
+        "fil": "Zimbabwe",
+        "th": "Zimbabwe",
+        "ro": "Zimbabwe",
+        "cs": "Zimbabwe",
+        "da": "Zimbabwe",
+        "hr": "Zimbabwe",
+        "sk": "Zimbabwe",
+        "nb": "Zimbabwe",
+        "fi": "Zimbabwe"
       }
     },
     "population": 17073087,
@@ -9667,7 +11185,18 @@
         "uk": "Ісландія",
         "ur": "آئس لینڈ",
         "vi": "Iceland",
-        "zh": "冰島"
+        "zh": "冰島",
+        "ms": "Islandia",
+        "sw": "Iceland",
+        "fil": "Islandia",
+        "th": "Iceland",
+        "ro": "Islanda",
+        "cs": "Islandia",
+        "da": "Island",
+        "hr": "Iceland",
+        "sk": "Islandia",
+        "nb": "Island",
+        "fi": "Island"
       }
     },
     "population": 391810,
@@ -9738,7 +11267,18 @@
         "uk": "Гаїті",
         "ur": "ہیٹی",
         "vi": "Haiti",
-        "zh": "海地"
+        "zh": "海地",
+        "ms": "Haiti",
+        "sw": "Haiti",
+        "fil": "Haiti",
+        "th": "Haiti",
+        "ro": "Haiti",
+        "cs": "Haiti",
+        "da": "Haiti",
+        "hr": "Haiti",
+        "sk": "Haiti",
+        "nb": "Haiti",
+        "fi": "Haiti"
       }
     },
     "population": 11867032,
@@ -9804,7 +11344,18 @@
         "uk": "Румунія",
         "ur": "رومانیہ",
         "vi": "Romania",
-        "zh": "羅馬尼亞"
+        "zh": "羅馬尼亞",
+        "ms": "Rumania",
+        "sw": "Romania",
+        "fil": "Rumania",
+        "th": "Romania",
+        "ro": "Romania",
+        "cs": "Rumunia",
+        "da": "Rumänien",
+        "hr": "Romania",
+        "sk": "Rumunia",
+        "nb": "Rumänien",
+        "fi": "Rumänien"
       }
     },
     "population": 19036031,
@@ -9870,7 +11421,18 @@
         "uk": "Коста-Рика",
         "ur": "کوسٹاریکا",
         "vi": "Costa Rica",
-        "zh": "哥斯大黎加"
+        "zh": "哥斯大黎加",
+        "ms": "Kosta Rika",
+        "sw": "Costa Rica",
+        "fil": "Kosta Rika",
+        "th": "Costa Rica",
+        "ro": "Costa Rica",
+        "cs": "Kostaryka",
+        "da": "Costa Rica",
+        "hr": "Costa Rica",
+        "sk": "Kostaryka",
+        "nb": "Costa Rica",
+        "fi": "Costa Rica"
       }
     },
     "population": 5309625,
@@ -9936,7 +11498,18 @@
         "uk": "Хорватія",
         "ur": "کروشیا",
         "vi": "Croatia",
-        "zh": "克羅地亞"
+        "zh": "克羅地亞",
+        "ms": "Kroasia",
+        "sw": "Croatia",
+        "fil": "Kroasia",
+        "th": "Croatia",
+        "ro": "Croazia",
+        "cs": "Chorwacja",
+        "da": "Kroatien",
+        "hr": "Croatia",
+        "sk": "Chorwacja",
+        "nb": "Kroatien",
+        "fi": "Kroatien"
       }
     },
     "population": 3866233,
@@ -10002,7 +11575,18 @@
         "uk": "В'єтнам",
         "ur": "ویتنام",
         "vi": "Việt Nam",
-        "zh": "越南"
+        "zh": "越南",
+        "ms": "Vietnam",
+        "sw": "Vietnam",
+        "fil": "Vietnam",
+        "th": "Vietnam",
+        "ro": "Vietnam",
+        "cs": "Wietnam",
+        "da": "Vietnam",
+        "hr": "Vietnam",
+        "sk": "Wietnam",
+        "nb": "Vietnam",
+        "fi": "Vietnam"
       }
     },
     "population": 101343800,
@@ -10068,7 +11652,18 @@
         "uk": "Південна Корея",
         "ur": "جنوبی کوریا",
         "vi": "Hàn Quốc",
-        "zh": "大韓民國"
+        "zh": "大韓民國",
+        "ms": "Korea Selatan",
+        "sw": "South Korea",
+        "fil": "Korea Selatan",
+        "th": "South Korea",
+        "ro": "Corea del Sud",
+        "cs": "Korea Południowa",
+        "da": "Sydkorea",
+        "hr": "South Korea",
+        "sk": "Korea Południowa",
+        "nb": "Sydkorea",
+        "fi": "Sydkorea"
       }
     },
     "population": 51159889,
@@ -10139,7 +11734,18 @@
         "uk": "Канада",
         "ur": "کینیڈا",
         "vi": "Canada",
-        "zh": "加拿大"
+        "zh": "加拿大",
+        "ms": "Kanada",
+        "sw": "Canada",
+        "fil": "Kanada",
+        "th": "Canada",
+        "ro": "Canada",
+        "cs": "Kanada",
+        "da": "Kanada",
+        "hr": "Canada",
+        "sk": "Kanada",
+        "nb": "Kanada",
+        "fi": "Kanada"
       }
     },
     "population": 41651653,
@@ -10205,7 +11811,18 @@
         "uk": "Ліхтенштейн",
         "ur": "لیختینستائن",
         "vi": "Liechtenstein",
-        "zh": "列支敦斯登"
+        "zh": "列支敦斯登",
+        "ms": "Liechtenstein",
+        "sw": "Liechtenstein",
+        "fil": "Liechtenstein",
+        "th": "Liechtenstein",
+        "ro": "Liechtenstein",
+        "cs": "Liechtenstein",
+        "da": "Liechtenstein",
+        "hr": "Liechtenstein",
+        "sk": "Liechtenstein",
+        "nb": "Liechtenstein",
+        "fi": "Liechtenstein"
       }
     },
     "population": 40900,
@@ -10271,7 +11888,18 @@
         "uk": "Монако",
         "ur": "موناکو",
         "vi": "Monaco",
-        "zh": "摩納哥"
+        "zh": "摩納哥",
+        "ms": "Monako",
+        "sw": "Monaco",
+        "fil": "Monako",
+        "th": "Monaco",
+        "ro": "Principato di Monaco",
+        "cs": "Monako",
+        "da": "Monaco",
+        "hr": "Monaco",
+        "sk": "Monako",
+        "nb": "Monaco",
+        "fi": "Monaco"
       }
     },
     "population": 38423,
@@ -10346,7 +11974,18 @@
         "uk": "Тувалу",
         "ur": "تووالو",
         "vi": "Tuvalu",
-        "zh": "吐瓦魯"
+        "zh": "吐瓦魯",
+        "ms": "Tuvalu",
+        "sw": "Tuvalu",
+        "fil": "Tuvalu",
+        "th": "Tuvalu",
+        "ro": "Tuvalu",
+        "cs": "Tuvalu",
+        "da": "Tuvalu",
+        "hr": "Tuvalu",
+        "sk": "Tuvalu",
+        "nb": "Tuvalu",
+        "fi": "Tuvalu"
       }
     },
     "population": 10643,
@@ -10422,7 +12061,18 @@
         "uk": "Маврикій",
         "ur": "ماریشس",
         "vi": "Mauritius",
-        "zh": "毛里求斯"
+        "zh": "毛里求斯",
+        "ms": "Mauritius",
+        "sw": "Mauritius",
+        "fil": "Mauritius",
+        "th": "Mauritius",
+        "ro": "Mauritius",
+        "cs": "Mauritius",
+        "da": "Mauritius",
+        "hr": "Mauritius",
+        "sk": "Mauritius",
+        "nb": "Mauritius",
+        "fi": "Mauritius"
       }
     },
     "population": 1243741,
@@ -10498,7 +12148,18 @@
         "uk": "Папуа Нова Гвінея",
         "ur": "پاپوا نیو گنی",
         "vi": "Papua New Guinea",
-        "zh": "巴布亞紐幾內亞"
+        "zh": "巴布亞紐幾內亞",
+        "ms": "Papua Nugini",
+        "sw": "Papua New Guinea",
+        "fil": "Papua Nugini",
+        "th": "Papua New Guinea",
+        "ro": "Papua Nuova Guinea",
+        "cs": "Papua-Nowa Gwinea",
+        "da": "Papua Nya Guinea",
+        "hr": "Papua New Guinea",
+        "sk": "Papua-Nowa Gwinea",
+        "nb": "Papua Nya Guinea",
+        "fi": "Papua Nya Guinea"
       }
     },
     "population": 11781559,
@@ -10569,7 +12230,18 @@
         "uk": "Казахстан",
         "ur": "قازقستان",
         "vi": "Kazakhstan",
-        "zh": "哈薩克"
+        "zh": "哈薩克",
+        "ms": "Kazakhstan",
+        "sw": "Kazakhstan",
+        "fil": "Kazakhstan",
+        "th": "Kazakhstan",
+        "ro": "Kazakistan",
+        "cs": "Kazachstan",
+        "da": "Kazakstan",
+        "hr": "Kazakhstan",
+        "sk": "Kazachstan",
+        "nb": "Kazakstan",
+        "fi": "Kazakstan"
       }
     },
     "population": 20426568,
@@ -10640,7 +12312,18 @@
         "uk": "Малайзія",
         "ur": "ملائیشیا",
         "vi": "Malaysia",
-        "zh": "馬來西亞"
+        "zh": "馬來西亞",
+        "ms": "Malaysia",
+        "sw": "Malaysia",
+        "fil": "Malaysia",
+        "th": "Malaysia",
+        "ro": "Malaysia",
+        "cs": "Malezja",
+        "da": "Malaysia",
+        "hr": "Malaysia",
+        "sk": "Malezja",
+        "nb": "Malaysia",
+        "fi": "Malaysia"
       }
     },
     "population": 34231700,
@@ -10711,7 +12394,18 @@
         "uk": "Уганда",
         "ur": "یوگنڈا",
         "vi": "Uganda",
-        "zh": "烏干達"
+        "zh": "烏干達",
+        "ms": "Uganda",
+        "sw": "Uganda",
+        "fil": "Uganda",
+        "th": "Uganda",
+        "ro": "Uganda",
+        "cs": "Uganda",
+        "da": "Uganda",
+        "hr": "Uganda",
+        "sk": "Uganda",
+        "nb": "Uganda",
+        "fi": "Uganda"
       }
     },
     "population": 45905417,
@@ -10777,7 +12471,18 @@
         "uk": "Буркіна-Фасо",
         "ur": "برکینا فاسو",
         "vi": "Burkina Faso",
-        "zh": "布基納法索"
+        "zh": "布基納法索",
+        "ms": "Burkina Faso",
+        "sw": "Burkina Faso",
+        "fil": "Burkina Faso",
+        "th": "Burkina Faso",
+        "ro": "Burkina Faso",
+        "cs": "Burkina Faso",
+        "da": "Burkina Faso",
+        "hr": "Burkina Faso",
+        "sk": "Burkina Faso",
+        "nb": "Burkina Faso",
+        "fi": "Burkina Faso"
       }
     },
     "population": 24070553,
@@ -10843,7 +12548,18 @@
         "uk": "Гренада",
         "ur": "گریناڈا",
         "vi": "Grenada",
-        "zh": "格瑞那達"
+        "zh": "格瑞那達",
+        "ms": "Grenada",
+        "sw": "Grenada",
+        "fil": "Grenada",
+        "th": "Grenada",
+        "ro": "Grenada",
+        "cs": "Grenada",
+        "da": "Grenada",
+        "hr": "Grenada",
+        "sk": "Grenada",
+        "nb": "Grenada",
+        "fi": "Grenada"
       }
     },
     "population": 109021,
@@ -10924,7 +12640,18 @@
         "uk": "Сінгапур",
         "ur": "سنگاپور",
         "vi": "Singapore",
-        "zh": "新加坡"
+        "zh": "新加坡",
+        "ms": "Singapura",
+        "sw": "Singapore",
+        "fil": "Singapura",
+        "th": "Singapore",
+        "ro": "Singapore",
+        "cs": "Singapur",
+        "da": "Singapore",
+        "hr": "Singapore",
+        "sk": "Singapur",
+        "nb": "Singapore",
+        "fi": "Singapore"
       }
     },
     "population": 6110200,
@@ -10990,7 +12717,18 @@
         "uk": "Мальдіви",
         "ur": "مالدیپ",
         "vi": "Maldives",
-        "zh": "马尔代夫"
+        "zh": "马尔代夫",
+        "ms": "Maladewa",
+        "sw": "Maldives",
+        "fil": "Maladewa",
+        "th": "Maldives",
+        "ro": "Maldive",
+        "cs": "Malediwy",
+        "da": "Maldiverna",
+        "hr": "Maldives",
+        "sk": "Malediwy",
+        "nb": "Maldiverna",
+        "fi": "Maldiverna"
       }
     },
     "population": 515132,
@@ -11056,7 +12794,18 @@
         "uk": "Ємен",
         "ur": "یمن",
         "vi": "Yemen",
-        "zh": "葉門"
+        "zh": "葉門",
+        "ms": "Yaman",
+        "sw": "Yemen",
+        "fil": "Yaman",
+        "th": "Yemen",
+        "ro": "Yemen",
+        "cs": "Jemen",
+        "da": "Jemen",
+        "hr": "Yemen",
+        "sk": "Jemen",
+        "nb": "Jemen",
+        "fi": "Jemen"
       }
     },
     "population": 32684503,
@@ -11122,7 +12871,18 @@
         "uk": "Антигуа і Барбуда",
         "ur": "اینٹیگوا و باربوڈا",
         "vi": "Antigua và Barbuda",
-        "zh": "安地卡及巴布達"
+        "zh": "安地卡及巴布達",
+        "ms": "Antigua dan Barbuda",
+        "sw": "Antigua and Barbuda",
+        "fil": "Antigua dan Barbuda",
+        "th": "Antigua and Barbuda",
+        "ro": "Antigua e Barbuda",
+        "cs": "Antigua i Barbuda",
+        "da": "Antigua och Barbuda",
+        "hr": "Antigua and Barbuda",
+        "sk": "Antigua i Barbuda",
+        "nb": "Antigua och Barbuda",
+        "fi": "Antigua och Barbuda"
       }
     },
     "population": 103603,
@@ -11192,7 +12952,18 @@
         "uk": "Панама",
         "ur": "پاناما",
         "vi": "Panama",
-        "zh": "巴拿馬"
+        "zh": "巴拿馬",
+        "ms": "Panama",
+        "sw": "Panama",
+        "fil": "Panama",
+        "th": "Panama",
+        "ro": "Panama",
+        "cs": "Panama",
+        "da": "Panama",
+        "hr": "Panama",
+        "sk": "Panama",
+        "nb": "Panama",
+        "fi": "Panama"
       }
     },
     "population": 4064780,
@@ -11258,7 +13029,18 @@
         "uk": "Таїланд",
         "ur": "تھائی لینڈ",
         "vi": "Thái Lan",
-        "zh": "泰國"
+        "zh": "泰國",
+        "ms": "Thailand",
+        "sw": "Thailand",
+        "fil": "Thailand",
+        "th": "Thailand",
+        "ro": "Thailandia",
+        "cs": "Tajlandia",
+        "da": "Thailand",
+        "hr": "Thailand",
+        "sk": "Tajlandia",
+        "nb": "Thailand",
+        "fi": "Thailand"
       }
     },
     "population": 65859640,
@@ -11324,7 +13106,18 @@
         "uk": "Швеція",
         "ur": "سویڈن",
         "vi": "Thụy Điển",
-        "zh": "瑞典"
+        "zh": "瑞典",
+        "ms": "Swedia",
+        "sw": "Sweden",
+        "fil": "Swedia",
+        "th": "Sweden",
+        "ro": "Svezia",
+        "cs": "Szwecja",
+        "da": "Sverige",
+        "hr": "Sweden",
+        "sk": "Szwecja",
+        "nb": "Sverige",
+        "fi": "Sverige"
       }
     },
     "population": 10605098,
@@ -11390,7 +13183,18 @@
         "uk": "Алжир",
         "ur": "الجزائر",
         "vi": "Algérie",
-        "zh": "阿爾及利亞"
+        "zh": "阿爾及利亞",
+        "ms": "Aljazair",
+        "sw": "Algeria",
+        "fil": "Aljazair",
+        "th": "Algeria",
+        "ro": "Algeria",
+        "cs": "Algieria",
+        "da": "Algeriet",
+        "hr": "Algeria",
+        "sk": "Algieria",
+        "nb": "Algeriet",
+        "fi": "Algeriet"
       }
     },
     "population": 47400000,
@@ -11456,7 +13260,18 @@
         "uk": "Мозамбік",
         "ur": "موزمبیق",
         "vi": "Mozambique",
-        "zh": "莫三比克"
+        "zh": "莫三比克",
+        "ms": "Mozambik",
+        "sw": "Mozambique",
+        "fil": "Mozambik",
+        "th": "Mozambique",
+        "ro": "Mozambico",
+        "cs": "Mozambik",
+        "da": "Moçambique",
+        "hr": "Mozambique",
+        "sk": "Mozambik",
+        "nb": "Moçambique",
+        "fi": "Moçambique"
       }
     },
     "population": 34090466,
@@ -11566,7 +13381,18 @@
         "uk": "Намібія",
         "ur": "نمیبیا",
         "vi": "Namibia",
-        "zh": "納米比亞"
+        "zh": "納米比亞",
+        "ms": "Namibia",
+        "sw": "Namibia",
+        "fil": "Namibia",
+        "th": "Namibia",
+        "ro": "Namibia",
+        "cs": "Namibia",
+        "da": "Namibia",
+        "hr": "Namibia",
+        "sk": "Namibia",
+        "nb": "Namibia",
+        "fi": "Namibia"
       }
     },
     "population": 3022401,
@@ -11632,7 +13458,18 @@
         "uk": "Барбадос",
         "ur": "بارباڈوس",
         "vi": "Barbados",
-        "zh": "巴貝多"
+        "zh": "巴貝多",
+        "ms": "Barbados",
+        "sw": "Barbados",
+        "fil": "Barbados",
+        "th": "Barbados",
+        "ro": "Barbados",
+        "cs": "Barbados",
+        "da": "Barbados",
+        "hr": "Barbados",
+        "sk": "Barbados",
+        "nb": "Barbados",
+        "fi": "Barbados"
       }
     },
     "population": 267800,
@@ -11698,7 +13535,18 @@
         "uk": "Гондурас",
         "ur": "ہونڈوراس",
         "vi": "Honduras",
-        "zh": "宏都拉斯"
+        "zh": "宏都拉斯",
+        "ms": "Honduras",
+        "sw": "Honduras",
+        "fil": "Honduras",
+        "th": "Honduras",
+        "ro": "Honduras",
+        "cs": "Honduras",
+        "da": "Honduras",
+        "hr": "Honduras",
+        "sk": "Honduras",
+        "nb": "Honduras",
+        "fi": "Honduras"
       }
     },
     "population": 9892632,
@@ -11764,7 +13612,18 @@
         "uk": "Японія",
         "ur": "جاپان",
         "vi": "Nhật Bản",
-        "zh": "日本"
+        "zh": "日本",
+        "ms": "Jepang",
+        "sw": "Japan",
+        "fil": "Jepang",
+        "th": "Japan",
+        "ro": "Giappone",
+        "cs": "Japonia",
+        "da": "Japan",
+        "hr": "Japan",
+        "sk": "Japonia",
+        "nb": "Japan",
+        "fi": "Japan"
       }
     },
     "population": 123210000,
@@ -11835,7 +13694,18 @@
         "uk": "Білорусь",
         "ur": "بیلاروس",
         "vi": "Belarus",
-        "zh": "白俄羅斯"
+        "zh": "白俄羅斯",
+        "ms": "Belarus",
+        "sw": "Belarus",
+        "fil": "Belarus",
+        "th": "Belarus",
+        "ro": "Bielorussia",
+        "cs": "Białoruś",
+        "da": "Belarus",
+        "hr": "Belarus",
+        "sk": "Białoruś",
+        "nb": "Belarus",
+        "fi": "Belarus"
       }
     },
     "population": 9109280,
@@ -11911,7 +13781,18 @@
         "uk": "Боснія і Герцеговина",
         "ur": "بوسنیا و ہرزیگووینا",
         "vi": "Bosna và Hercegovina",
-        "zh": "波士尼亞與赫塞哥維納"
+        "zh": "波士尼亞與赫塞哥維納",
+        "ms": "Bosnia dan Herzegovina",
+        "sw": "Bosnia and Herzegovina",
+        "fil": "Bosnia dan Herzegovina",
+        "th": "Bosnia and Herzegovina",
+        "ro": "Bosnia ed Erzegovina",
+        "cs": "Bośnia i Hercegowina",
+        "da": "Bosnien och Hercegovina",
+        "hr": "Bosnia and Herzegovina",
+        "sk": "Bośnia i Hercegowina",
+        "nb": "Bosnien och Hercegovina",
+        "fi": "Bosnien och Hercegovina"
       }
     },
     "population": 3422000,
@@ -11982,7 +13863,18 @@
         "uk": "Кенія",
         "ur": "کینیا",
         "vi": "Kenya",
-        "zh": "肯亞"
+        "zh": "肯亞",
+        "ms": "Kenya",
+        "sw": "Kenya",
+        "fil": "Kenya",
+        "th": "Kenya",
+        "ro": "Kenya",
+        "cs": "Kenia",
+        "da": "Kenya",
+        "hr": "Kenya",
+        "sk": "Kenia",
+        "nb": "Kenya",
+        "fi": "Kenya"
       }
     },
     "population": 53330978,
@@ -12058,7 +13950,18 @@
         "uk": "Нова Зеландія",
         "ur": "نیوزی لینڈ",
         "vi": "New Zealand",
-        "zh": "新西蘭"
+        "zh": "新西蘭",
+        "ms": "Selandia Baru",
+        "sw": "New Zealand",
+        "fil": "Selandia Baru",
+        "th": "New Zealand",
+        "ro": "Nuova Zelanda",
+        "cs": "Nowa Zelandia",
+        "da": "Nya Zeeland",
+        "hr": "New Zealand",
+        "sk": "Nowa Zelandia",
+        "nb": "Nya Zeeland",
+        "fi": "Nya Zeeland"
       }
     },
     "population": 5324700,
@@ -12124,7 +14027,18 @@
         "uk": "Гаяна",
         "ur": "گیانا",
         "vi": "Guyana",
-        "zh": "圭亞那"
+        "zh": "圭亞那",
+        "ms": "Guyana",
+        "sw": "Guyana",
+        "fil": "Guyana",
+        "th": "Guyana",
+        "ro": "Guyana",
+        "cs": "Gujana",
+        "da": "Guyana",
+        "hr": "Guyana",
+        "sk": "Gujana",
+        "nb": "Guyana",
+        "fi": "Guyana"
       }
     },
     "population": 772975,
@@ -12190,7 +14104,18 @@
         "uk": "Непал",
         "ur": "نیپال",
         "vi": "Nepal",
-        "zh": "尼泊爾"
+        "zh": "尼泊爾",
+        "ms": "Nepal",
+        "sw": "Nepal",
+        "fil": "Nepal",
+        "th": "Nepal",
+        "ro": "Nepal",
+        "cs": "Nepal",
+        "da": "Nepal",
+        "hr": "Nepal",
+        "sk": "Nepal",
+        "nb": "Nepal",
+        "fi": "Nepal"
       }
     },
     "population": 29911840,
@@ -12266,7 +14191,18 @@
         "uk": "Індія",
         "ur": "بھارت",
         "vi": "Ấn Độ",
-        "zh": "印度"
+        "zh": "印度",
+        "ms": "India",
+        "sw": "India",
+        "fil": "India",
+        "th": "India",
+        "ro": "India",
+        "cs": "Indie",
+        "da": "Indien",
+        "hr": "India",
+        "sk": "Indie",
+        "nb": "Indien",
+        "fi": "Indien"
       }
     },
     "population": 1417492000,
@@ -12332,7 +14268,18 @@
         "uk": "Тринідад і Тобаго",
         "ur": "ٹرینیڈاڈ و ٹوباگو",
         "vi": "Trinidad và Tobago",
-        "zh": "千里達及托巴哥"
+        "zh": "千里達及托巴哥",
+        "ms": "Trinidad dan Tobago",
+        "sw": "Trinidad and Tobago",
+        "fil": "Trinidad dan Tobago",
+        "th": "Trinidad and Tobago",
+        "ro": "Trinidad e Tobago",
+        "cs": "Trynidad i Tobago",
+        "da": "Trinidad och Tobago",
+        "hr": "Trinidad and Tobago",
+        "sk": "Trynidad i Tobago",
+        "nb": "Trinidad och Tobago",
+        "fi": "Trinidad och Tobago"
       }
     },
     "population": 1367764,
@@ -12408,7 +14355,18 @@
         "uk": "Люксембург",
         "ur": "لکسمبرگ",
         "vi": "Luxembourg",
-        "zh": "盧森堡"
+        "zh": "盧森堡",
+        "ms": "Luksemburg",
+        "sw": "Luxembourg",
+        "fil": "Luksemburg",
+        "th": "Luxembourg",
+        "ro": "Lussemburgo",
+        "cs": "Luksemburg",
+        "da": "Luxemburg",
+        "hr": "Luxembourg",
+        "sk": "Luksemburg",
+        "nb": "Luxemburg",
+        "fi": "Luxemburg"
       }
     },
     "population": 681973,
@@ -12489,7 +14447,18 @@
         "uk": "Швейцарія",
         "ur": "سویٹزرلینڈ",
         "vi": "Thụy Sĩ",
-        "zh": "瑞士"
+        "zh": "瑞士",
+        "ms": "Swiss",
+        "sw": "Switzerland",
+        "fil": "Swiss",
+        "th": "Switzerland",
+        "ro": "Svizzera",
+        "cs": "Szwajcaria",
+        "da": "Schweiz",
+        "hr": "Switzerland",
+        "sk": "Szwajcaria",
+        "nb": "Schweiz",
+        "fi": "Schweiz"
       }
     },
     "population": 9082848,
@@ -12555,7 +14524,18 @@
         "uk": "Республіка Китай",
         "ur": "تائیوان",
         "vi": "Đài Loan",
-        "zh": "中華民國"
+        "zh": "中華民國",
+        "ms": "Taiwan",
+        "sw": "Taiwan",
+        "fil": "Taiwan",
+        "th": "Taiwan",
+        "ro": "Taiwan",
+        "cs": "Republika Chińska",
+        "da": "Taiwan",
+        "hr": "Taiwan",
+        "sk": "Republika Chińska",
+        "nb": "Taiwan",
+        "fi": "Taiwan"
       }
     },
     "population": 23317031,
@@ -12631,7 +14611,18 @@
         "uk": "Ірак",
         "ur": "عراق",
         "vi": "Iraq",
-        "zh": "伊拉克"
+        "zh": "伊拉克",
+        "ms": "Irak",
+        "sw": "Iraq",
+        "fil": "Irak",
+        "th": "Iraq",
+        "ro": "Iraq",
+        "cs": "Irak",
+        "da": "Irak",
+        "hr": "Iraq",
+        "sk": "Irak",
+        "nb": "Irak",
+        "fi": "Irak"
       }
     },
     "population": 46118793,
@@ -12707,7 +14698,18 @@
         "uk": "Норвегія",
         "ur": "ناروے",
         "vi": "Na Uy",
-        "zh": "挪威"
+        "zh": "挪威",
+        "ms": "Norwegia",
+        "sw": "Norway",
+        "fil": "Norwegia",
+        "th": "Norway",
+        "ro": "Norvegia",
+        "cs": "Norwegia",
+        "da": "Norge",
+        "hr": "Norway",
+        "sk": "Norwegia",
+        "nb": "Norge",
+        "fi": "Norge"
       }
     },
     "population": 5606944,
@@ -12773,7 +14775,18 @@
         "uk": "Оман",
         "ur": "عمان",
         "vi": "Oman",
-        "zh": "阿曼"
+        "zh": "阿曼",
+        "ms": "Oman",
+        "sw": "Oman",
+        "fil": "Oman",
+        "th": "Oman",
+        "ro": "Oman",
+        "cs": "Oman",
+        "da": "Oman",
+        "hr": "Oman",
+        "sk": "Oman",
+        "nb": "Oman",
+        "fi": "Oman"
       }
     },
     "population": 5343630,
@@ -12839,7 +14852,18 @@
         "uk": "Велика Британія",
         "ur": "مملکت متحدہ",
         "vi": "Vương quốc Liên hiệp Anh và Bắc Ireland",
-        "zh": "英國"
+        "zh": "英國",
+        "ms": "Britania Raya",
+        "sw": "United Kingdom",
+        "fil": "Britania Raya",
+        "th": "United Kingdom",
+        "ro": "Regno Unito",
+        "cs": "Wielka Brytania",
+        "da": "Storbritannien",
+        "hr": "United Kingdom",
+        "sk": "Wielka Brytania",
+        "nb": "Storbritannien",
+        "fi": "Storbritannien"
       }
     },
     "population": 69281437,
@@ -12905,7 +14929,18 @@
         "uk": "Домініка",
         "ur": "ڈومینیکا",
         "vi": "Dominica",
-        "zh": "多米尼克"
+        "zh": "多米尼克",
+        "ms": "Dominika",
+        "sw": "Dominica",
+        "fil": "Dominika",
+        "th": "Dominica",
+        "ro": "Dominica",
+        "cs": "Dominika",
+        "da": "Dominica",
+        "hr": "Dominica",
+        "sk": "Dominika",
+        "nb": "Dominica",
+        "fi": "Dominica"
       }
     },
     "population": 67408,
@@ -12974,7 +15009,18 @@
         "uk": "Іспанія",
         "ur": "ہسپانیہ",
         "vi": "Tây Ban Nha",
-        "zh": "西班牙"
+        "zh": "西班牙",
+        "ms": "Spanyol",
+        "sw": "Spain",
+        "fil": "Spanyol",
+        "th": "Spain",
+        "ro": "Spagna",
+        "cs": "Hiszpania",
+        "da": "Spanien",
+        "hr": "Spain",
+        "sk": "Hiszpania",
+        "nb": "Spanien",
+        "fi": "Spanien"
       }
     },
     "population": 49315949,
@@ -13040,7 +15086,18 @@
         "uk": "Сербія",
         "ur": "سربیا",
         "vi": "Serbia",
-        "zh": "塞爾維亞"
+        "zh": "塞爾維亞",
+        "ms": "Serbia",
+        "sw": "Serbia",
+        "fil": "Serbia",
+        "th": "Serbia",
+        "ro": "Serbia",
+        "cs": "Serbia",
+        "da": "Serbien",
+        "hr": "Serbia",
+        "sk": "Serbia",
+        "nb": "Serbien",
+        "fi": "Serbien"
       }
     },
     "population": 6567783,
@@ -13106,7 +15163,18 @@
         "uk": "Словенія",
         "ur": "سلووینیا",
         "vi": "Slovenia",
-        "zh": "斯洛維尼亞"
+        "zh": "斯洛維尼亞",
+        "ms": "Slovenia",
+        "sw": "Slovenia",
+        "fil": "Slovenia",
+        "th": "Slovenia",
+        "ro": "Slovenia",
+        "cs": "Słowenia",
+        "da": "Slovenien",
+        "hr": "Slovenia",
+        "sk": "Słowenia",
+        "nb": "Slovenien",
+        "fi": "Slovenien"
       }
     },
     "population": 2130638,
@@ -13172,7 +15240,18 @@
         "uk": "Вірменія",
         "ur": "آرمینیا",
         "vi": "Armenia",
-        "zh": "亞美尼亞"
+        "zh": "亞美尼亞",
+        "ms": "Armenia",
+        "sw": "Armenia",
+        "fil": "Armenia",
+        "th": "Armenia",
+        "ro": "Armenia",
+        "cs": "Armenia",
+        "da": "Armenien",
+        "hr": "Armenia",
+        "sk": "Armenia",
+        "nb": "Armenien",
+        "fi": "Armenien"
       }
     },
     "population": 3076200,
@@ -13238,7 +15317,18 @@
         "uk": "Нігер",
         "ur": "نائجر",
         "vi": "Niger",
-        "zh": "尼日"
+        "zh": "尼日",
+        "ms": "Niger",
+        "sw": "Niger",
+        "fil": "Niger",
+        "th": "Niger",
+        "ro": "Niger",
+        "cs": "Niger",
+        "da": "Niger",
+        "hr": "Niger",
+        "sk": "Niger",
+        "nb": "Niger",
+        "fi": "Niger"
       }
     },
     "population": 26312034,
@@ -13304,7 +15394,18 @@
         "uk": "Колумбія",
         "ur": "کولمبیا",
         "vi": "Colombia",
-        "zh": "哥倫比亞"
+        "zh": "哥倫比亞",
+        "ms": "Kolombia",
+        "sw": "Colombia",
+        "fil": "Kolombia",
+        "th": "Colombia",
+        "ro": "Colombia",
+        "cs": "Kolumbia",
+        "da": "Colombia",
+        "hr": "Colombia",
+        "sk": "Kolumbia",
+        "nb": "Colombia",
+        "fi": "Colombia"
       }
     },
     "population": 53057212,
@@ -13370,7 +15471,18 @@
         "uk": "Польща",
         "ur": "پولینڈ",
         "vi": "Ba Lan",
-        "zh": "波蘭"
+        "zh": "波蘭",
+        "ms": "Polandia",
+        "sw": "Poland",
+        "fil": "Polandia",
+        "th": "Poland",
+        "ro": "Polonia",
+        "cs": "Polska",
+        "da": "Polen",
+        "hr": "Poland",
+        "sk": "Polska",
+        "nb": "Polen",
+        "fi": "Polen"
       }
     },
     "population": 37392000,
@@ -13436,7 +15548,18 @@
         "uk": "Туреччина",
         "ur": "ترکی",
         "vi": "Thổ Nhĩ Kỳ",
-        "zh": "土耳其"
+        "zh": "土耳其",
+        "ms": "Turki",
+        "sw": "Turkey",
+        "fil": "Turki",
+        "th": "Turkey",
+        "ro": "Turchia",
+        "cs": "Turcja",
+        "da": "Turkiet",
+        "hr": "Turkey",
+        "sk": "Turcja",
+        "nb": "Turkiet",
+        "fi": "Turkiet"
       }
     },
     "population": 85664944,
@@ -13506,7 +15629,18 @@
         "uk": "Бруней",
         "ur": "برونائی دار السلام",
         "vi": "Brunei",
-        "zh": "汶萊"
+        "zh": "汶萊",
+        "ms": "Brunei Darussalam",
+        "sw": "Brunei",
+        "fil": "Brunei Darussalam",
+        "th": "Brunei",
+        "ro": "Brunei",
+        "cs": "Brunei",
+        "da": "Brunei",
+        "hr": "Brunei",
+        "sk": "Brunei",
+        "nb": "Brunei",
+        "fi": "Brunei"
       }
     },
     "population": 455500,
@@ -13572,7 +15706,18 @@
         "uk": "Мавританія",
         "ur": "موریتانیہ",
         "vi": "Mauritanie",
-        "zh": "茅利塔尼亞"
+        "zh": "茅利塔尼亞",
+        "ms": "Mauritania",
+        "sw": "Mauritania",
+        "fil": "Mauritania",
+        "th": "Mauritania",
+        "ro": "Mauritania",
+        "cs": "Mauretania",
+        "da": "Mauretanien",
+        "hr": "Mauritania",
+        "sk": "Mauretania",
+        "nb": "Mauretanien",
+        "fi": "Mauretanien"
       }
     },
     "population": 4927532,

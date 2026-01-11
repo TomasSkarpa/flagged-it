@@ -90,12 +90,12 @@ func (l *Logic) MakeGuess(guessCountryName string) (*GuessResult, error) {
 
 	// Compare continent (correct if same region)
 	continentCorrect := guessedCountry.Region == l.state.CurrentCountry.Region
-	
+
 	// Create comparison feedback (server calculates all hints)
 	guessEntry := GuessEntry{
-		Country:   *guessedCountry,
-		IsCorrect: isCorrect,
-		Continent: guessedCountry.Region,
+		Country:          *guessedCountry,
+		IsCorrect:        isCorrect,
+		Continent:        guessedCountry.Region,
 		ContinentCorrect: continentCorrect,
 		Population: l.compareValue(
 			float64(guessedCountry.Population),
@@ -110,10 +110,10 @@ func (l *Logic) MakeGuess(guessCountryName string) (*GuessResult, error) {
 	l.state.Guesses = append(l.state.Guesses, guessEntry)
 
 	result := &GuessResult{
-		IsValidGuess: true,
-		IsCorrect:    isCorrect,
-		GuessEntry:   guessEntry,
-		GuessCount:   len(l.state.Guesses),
+		IsValidGuess:   true,
+		IsCorrect:      isCorrect,
+		GuessEntry:     guessEntry,
+		GuessCount:     len(l.state.Guesses),
 		CorrectCountry: l.state.CurrentCountry, // Only revealed if correct or game ends
 	}
 
@@ -173,7 +173,6 @@ func (l *Logic) calculateProximity(guess, target float64) string {
 	return "far"
 }
 
-
 // findCountry finds a country by name (server-side lookup)
 func (l *Logic) findCountry(name string) *models.Country {
 	for _, country := range l.countries {
@@ -208,5 +207,3 @@ type GameError struct {
 func (e *GameError) Error() string {
 	return e.Message
 }
-
-

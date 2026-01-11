@@ -1,8 +1,9 @@
 package models
 
 type CountryName struct {
-	Common   string `json:"common"`
-	Official string `json:"official"`
+	Common       string            `json:"common"`
+	Official     string            `json:"official"`
+	Translations map[string]string `json:"translations,omitempty"`
 }
 
 type Country struct {
@@ -16,6 +17,22 @@ type Country struct {
 	Latlng     []float64         `json:"latlng"`
 	Population int               `json:"population"`
 	Area       float64           `json:"area"`
+}
+
+// GetTranslatedName returns the country name in the specified locale
+// Falls back to English (common) name if translation is not available
+func (c *Country) GetTranslatedName(locale string) string {
+	if c.Name.Translations == nil {
+		return c.Name.Common
+	}
+
+	// If translation exists for the locale, return it
+	if translated, ok := c.Name.Translations[locale]; ok && translated != "" {
+		return translated
+	}
+
+	// Fallback to English
+	return c.Name.Common
 }
 
 type CountryFacts struct {

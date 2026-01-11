@@ -6,7 +6,6 @@ import (
 	"unicode"
 
 	"flagged-it/internal/data/models"
-	"flagged-it/internal/utils"
 )
 
 // State represents the current state of the hangman game
@@ -34,7 +33,7 @@ func NewLogic(countries []models.Country) *Logic {
 	return &Logic{
 		countries: countries,
 		state: &State{
-			GuessedLetters: make(map[rune]bool),
+			GuessedLetters:  make(map[rune]bool),
 			MaxWrongGuesses: 6,
 		},
 		maxRounds: 5,
@@ -60,7 +59,7 @@ func (l *Logic) NewRound() error {
 	// Server selects random country
 	country := l.countries[rand.Intn(len(l.countries))]
 	l.state.CurrentWord = strings.ToUpper(country.Name.Common)
-	
+
 	// Initialize guessed word with underscores
 	l.state.GuessedWord = make([]string, len(l.state.CurrentWord))
 	for i := range l.state.GuessedWord {
@@ -108,7 +107,7 @@ func (l *Logic) MakeGuess(letter rune) (*GuessResult, error) {
 
 		// Check if word is complete (server-side check)
 		isWon := !strings.Contains(strings.Join(l.state.GuessedWord, ""), "_")
-		
+
 		result := &GuessResult{
 			IsValidGuess: true,
 			IsInWord:     true,
@@ -195,5 +194,3 @@ type GameError struct {
 func (e *GameError) Error() string {
 	return e.Message
 }
-
-

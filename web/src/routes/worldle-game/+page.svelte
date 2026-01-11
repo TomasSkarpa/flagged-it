@@ -8,7 +8,7 @@
 	import { startWorldleGame, submitGuess, formatNumber, type GuessEntry } from '$lib/api/worldleGame';
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
-	import { getCountryName } from '$lib/utils/countryNames';
+	import { getCountryNameForLocale } from '$lib/utils/countryNames';
 	import { getAllCountries } from '$lib/api/debug';
 	import type { Country } from '$lib/types';
 
@@ -169,7 +169,7 @@
 
 	function getCountryNameForGuess(guess: GuessEntry): string {
 		const country = allCountries.find(c => c.cca2 === guess.country.cca2);
-		return country ? getCountryName(country, currentLocale) : guess.country.name;
+		return country ? getCountryNameForLocale(country) : guess.country.name;
 	}
 </script>
 

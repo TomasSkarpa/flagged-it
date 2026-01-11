@@ -12,7 +12,7 @@
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
 	import { getAllCountries } from '$lib/api/debug';
-	import { getCountryName } from '$lib/utils/countryNames';
+	import { getCountryNameForLocale } from '$lib/utils/countryNames';
 	import type { Country } from '$lib/types';
 
 	let sessionId: string | null = null;
@@ -56,7 +56,7 @@
 	$: translatedCountryName = currentQuestion && allCountries.length > 0
 		? (() => {
 			const country = allCountries.find(c => c.cca2 === currentQuestion!.countryCca2);
-			return country ? getCountryName(country, currentLocale) : currentQuestion!.countryName;
+			return country ? getCountryNameForLocale(country) : currentQuestion!.countryName;
 		})()
 		: (currentQuestion?.countryName || '');
 	$: questionText = t('game.capital.question', { Country: translatedCountryName }, currentLocale);

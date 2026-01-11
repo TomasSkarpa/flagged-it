@@ -10,7 +10,7 @@
 	import { startFactsGame, submitGuess, skipRound, nextRound, type GuessHistoryEntry } from '$lib/api/factsGame';
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
-	import { getCountryName } from '$lib/utils/countryNames';
+	import { getCountryNameForLocale } from '$lib/utils/countryNames';
 	import { getAllCountries } from '$lib/api/debug';
 	import type { Country } from '$lib/types';
 
@@ -156,7 +156,7 @@
 				// Correct guess - show success message
 				if (result.correctCountry) {
 					const country = allCountries.find(c => c.cca2 === result.correctCountry!.cca2);
-					correctCountryName = country ? getCountryName(country, currentLocale) : result.correctCountry.name;
+					correctCountryName = country ? getCountryNameForLocale(country) : result.correctCountry.name;
 					correctCountryCca2 = result.correctCountry.cca2;
 					statusMessage = correctText.replace('%s', correctCountryName);
 				}
@@ -176,7 +176,7 @@
 				// No tries left - show game over
 				if (result.correctCountry) {
 					const country = allCountries.find(c => c.cca2 === result.correctCountry!.cca2);
-					correctCountryName = country ? getCountryName(country, currentLocale) : result.correctCountry.name;
+					correctCountryName = country ? getCountryNameForLocale(country) : result.correctCountry.name;
 					correctCountryCca2 = result.correctCountry.cca2;
 					statusMessage = gameOverText.replace('%s', correctCountryName).replace(' %s', '');
 				}

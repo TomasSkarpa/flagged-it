@@ -2,11 +2,12 @@ package api
 
 import (
 	"encoding/json"
-	"fmt"
 	"flagged-it/internal/data"
 	"flagged-it/internal/data/models"
 	"flagged-it/internal/games/facts"
 	"flagged-it/internal/games/guessing"
+	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
 	"time"
@@ -15,25 +16,26 @@ import (
 type FlagGameHandler struct{}
 
 type GameQuestion struct {
-	FlagURL    string            `json:"flagUrl"`
-	Options    []models.Country  `json:"options"`
-	QuestionID string            `json:"questionId"`
+	FlagURL    string           `json:"flagUrl"`
+	Options    []models.Country `json:"options"`
+	QuestionID string           `json:"questionId"`
 }
 
 type GameAnswer struct {
-	Correct    bool   `json:"correct"`
+	Correct     bool   `json:"correct"`
 	CorrectCCA2 string `json:"correctCca2"`
 	CorrectName string `json:"correctName"`
 }
 
 type GameSession struct {
-	SessionID         string            `json:"sessionId"`
-	Score             int               `json:"score"`
-	Total             int               `json:"total"`
-	Region            string            `json:"region"`
-	UsedCountries     map[string]bool   `json:"-"`
-	CurrentCorrectCCA2 string           `json:"-"`
-	CurrentCorrectName string           `json:"-"`
+	SessionID          string          `json:"sessionId"`
+	Score              int             `json:"score"`
+	Total              int             `json:"total"`
+	Region             string          `json:"region"`
+	Locale             string          `json:"-"` // User's locale for translations
+	UsedCountries      map[string]bool `json:"-"`
+	CurrentCorrectCCA2 string          `json:"-"`
+	CurrentCorrectName string          `json:"-"`
 }
 
 var sessions = make(map[string]*GameSession)
@@ -46,6 +48,39 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
+// getTranslatedCountry creates a copy of the country with translated name in Common field
+func getTranslatedCountry(country models.Country, locale string) models.Country {
+	// Get the translated name first - use pointer to ensure method works correctly
+	translatedName := (&country).GetTranslatedName(locale)
+
+	// Log warning only if translation failed for non-English locales
+	if locale != "en" && translatedName == country.Name.Common {
+		log.Printf("WARNING: Translation failed for locale '%s', country '%s' (CCA2: %s). Translations map is nil: %v",
+			locale, country.Name.Common, country.CCA2, country.Name.Translations == nil)
+		if country.Name.Translations != nil {
+			log.Printf("Available translations for %s: %v", country.CCA2, country.Name.Translations)
+		}
+	}
+
+	// Create a new country struct with translated name
+	translated := country
+	// Set the common field to the translated name
+	translated.Name.Common = translatedName
+	// Clear the translations map to avoid confusion - the common field is already translated
+	// This ensures the frontend uses the translated common field
+	translated.Name.Translations = nil
+	return translated
+}
+
+// getTranslatedCountries translates an array of countries
+func getTranslatedCountries(countries []models.Country, locale string) []models.Country {
+	result := make([]models.Country, len(countries))
+	for i, country := range countries {
+		result[i] = getTranslatedCountry(country, locale)
+	}
+	return result
+}
+
 func (h *FlagGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
@@ -54,11 +89,18 @@ func (h *FlagGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 
 	var req struct {
 		Region string `json:"region"`
+		Locale string `json:"locale"`
 	}
-	
+
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, "Invalid request", http.StatusBadRequest)
 		return
+	}
+
+	// Default to English if locale not provided
+	locale := req.Locale
+	if locale == "" {
+		locale = "en"
 	}
 
 	// Filter countries by region if specified
@@ -84,12 +126,13 @@ func (h *FlagGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 		Score:         0,
 		Total:         0,
 		Region:        req.Region,
+		Locale:        locale,
 		UsedCountries: make(map[string]bool),
 	}
 	sessions[sessionID] = session
 
 	// Generate first question
-	question := generateQuestion(filteredCountries, session)
+	question := generateQuestion(filteredCountries, session, locale)
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]interface{}{
@@ -110,11 +153,26 @@ func (h *FlagGameHandler) GetQuestion(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Get locale from query parameter, fallback to session locale or English
+	locale := r.URL.Query().Get("locale")
+	if locale == "" {
+		locale = "en"
+	}
+
 	session, exists := sessions[sessionID]
 	if !exists {
 		http.Error(w, "Session not found", http.StatusNotFound)
 		return
 	}
+
+	// Update session locale if provided
+	if locale != "" {
+		session.Locale = locale
+	} else if session.Locale == "" {
+		session.Locale = "en"
+	}
+
+	locale = session.Locale
 
 	// Get filtered countries
 	filteredCountries := countries
@@ -127,7 +185,7 @@ func (h *FlagGameHandler) GetQuestion(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	question := generateQuestion(filteredCountries, session)
+	question := generateQuestion(filteredCountries, session, locale)
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(question)
@@ -140,9 +198,10 @@ func (h *FlagGameHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		SessionID string `json:"sessionId"`
+		SessionID  string `json:"sessionId"`
 		QuestionID string `json:"questionId"`
 		AnswerCCA2 string `json:"answerCca2"`
+		Locale     string `json:"locale"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -156,10 +215,20 @@ func (h *FlagGameHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Update locale if provided, otherwise use session locale
+	locale := req.Locale
+	if locale == "" {
+		locale = session.Locale
+	}
+	if locale == "" {
+		locale = "en"
+	}
+	session.Locale = locale
+
 	// Find correct answer from question (we need to store it in session)
 	// For now, we'll look it up from the question ID
 	// In a real implementation, you'd store the correct answer in the session
-	
+
 	// This is a simplified version - in production, store question->answer mapping
 	correct := false
 	correctCCA2 := ""
@@ -170,7 +239,16 @@ func (h *FlagGameHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request) {
 	if session.CurrentCorrectCCA2 != "" {
 		correct = req.AnswerCCA2 == session.CurrentCorrectCCA2
 		correctCCA2 = session.CurrentCorrectCCA2
-		correctName = session.CurrentCorrectName
+		// Get translated name
+		for _, country := range countries {
+			if country.CCA2 == correctCCA2 {
+				correctName = country.GetTranslatedName(locale)
+				break
+			}
+		}
+		if correctName == "" {
+			correctName = session.CurrentCorrectName
+		}
 	}
 
 	session.Total++
@@ -216,7 +294,7 @@ func (h *FlagGameHandler) GetScore(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func generateQuestion(availableCountries []models.Country, session *GameSession) GameQuestion {
+func generateQuestion(availableCountries []models.Country, session *GameSession, locale string) GameQuestion {
 	// Find a country that hasn't been used
 	var country models.Country
 	for {
@@ -231,11 +309,11 @@ func generateQuestion(availableCountries []models.Country, session *GameSession)
 	}
 	session.UsedCountries[country.CCA2] = true
 
-	// Store correct answer in session
+	// Store correct answer in session (store English name as fallback)
 	session.CurrentCorrectCCA2 = country.CCA2
 	session.CurrentCorrectName = country.Name.Common
 
-	// Generate options
+	// Generate options with translated names
 	options := []models.Country{country}
 	usedOptions := make(map[string]bool)
 	usedOptions[country.CCA2] = true
@@ -256,9 +334,12 @@ func generateQuestion(availableCountries []models.Country, session *GameSession)
 	flagURL := "/assets/twemoji_flags_cca2/" + country.CCA2 + ".svg"
 	questionID := generateQuestionID()
 
+	// Translate country names in options
+	translatedOptions := getTranslatedCountries(options, locale)
+
 	return GameQuestion{
 		FlagURL:    flagURL,
-		Options:    options,
+		Options:    translatedOptions,
 		QuestionID: questionID,
 	}
 }
@@ -284,10 +365,19 @@ func (h *DebugHandler) GetAllCountries(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Get locale from query parameter or default to "en"
+	locale := r.URL.Query().Get("locale")
+	if locale == "" {
+		locale = "en"
+	}
+
+	// Translate country names based on locale
+	translatedCountries := getTranslatedCountries(countries, locale)
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]interface{}{
-		"countries": countries,
-		"total":     len(countries),
+		"countries": translatedCountries,
+		"total":     len(translatedCountries),
 	})
 }
 
@@ -348,6 +438,7 @@ type ShapeGameSession struct {
 	Score              int             `json:"score"`
 	Total              int             `json:"total"`
 	Region             string          `json:"region"`
+	Locale             string          `json:"-"` // User's locale for translations
 	UsedCountries      map[string]bool `json:"-"`
 	CurrentCorrectCCA2 string          `json:"-"`
 	CurrentCorrectCCA3 string          `json:"-"`
@@ -388,11 +479,18 @@ func (h *ShapeGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 
 	var req struct {
 		Region string `json:"region"`
+		Locale string `json:"locale"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, "Invalid request", http.StatusBadRequest)
 		return
+	}
+
+	// Default to English if locale not provided
+	locale := req.Locale
+	if locale == "" {
+		locale = "en"
 	}
 
 	// Filter countries with geo data
@@ -410,12 +508,13 @@ func (h *ShapeGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 		Score:         0,
 		Total:         0,
 		Region:        req.Region,
+		Locale:        locale,
 		UsedCountries: make(map[string]bool),
 	}
 	shapeSessions[sessionID] = session
 
 	// Generate first question
-	question := generateShapeQuestion(filteredCountries, session)
+	question := generateShapeQuestion(filteredCountries, session, locale)
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]interface{}{
@@ -436,14 +535,28 @@ func (h *ShapeGameHandler) GetQuestion(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Get locale from query parameter
+	locale := r.URL.Query().Get("locale")
+	if locale == "" {
+		locale = "en"
+	}
+
 	session, exists := shapeSessions[sessionID]
 	if !exists {
 		http.Error(w, "Session not found", http.StatusNotFound)
 		return
 	}
 
+	// Update session locale if provided
+	if locale != "" {
+		session.Locale = locale
+	} else if session.Locale == "" {
+		session.Locale = "en"
+	}
+	locale = session.Locale
+
 	filteredCountries := countriesWithGeo(session.Region)
-	question := generateShapeQuestion(filteredCountries, session)
+	question := generateShapeQuestion(filteredCountries, session, locale)
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(question)
@@ -459,6 +572,7 @@ func (h *ShapeGameHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request) 
 		SessionID  string `json:"sessionId"`
 		QuestionID string `json:"questionId"`
 		AnswerCCA2 string `json:"answerCca2"`
+		Locale     string `json:"locale"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -472,6 +586,16 @@ func (h *ShapeGameHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
+	// Update locale if provided
+	locale := req.Locale
+	if locale == "" {
+		locale = session.Locale
+	}
+	if locale == "" {
+		locale = "en"
+	}
+	session.Locale = locale
+
 	correct := false
 	correctCCA2 := ""
 	correctName := ""
@@ -479,7 +603,16 @@ func (h *ShapeGameHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request) 
 	if session.CurrentCorrectCCA2 != "" {
 		correct = req.AnswerCCA2 == session.CurrentCorrectCCA2
 		correctCCA2 = session.CurrentCorrectCCA2
-		correctName = session.CurrentCorrectName
+		// Get translated name
+		for _, country := range countries {
+			if country.CCA2 == correctCCA2 {
+				correctName = country.GetTranslatedName(locale)
+				break
+			}
+		}
+		if correctName == "" {
+			correctName = session.CurrentCorrectName
+		}
 	}
 
 	session.Total++
@@ -525,7 +658,7 @@ func (h *ShapeGameHandler) GetScore(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func generateShapeQuestion(availableCountries []models.Country, session *ShapeGameSession) ShapeQuestion {
+func generateShapeQuestion(availableCountries []models.Country, session *ShapeGameSession, locale string) ShapeQuestion {
 	// Find a country that hasn't been used and has geo data
 	var country models.Country
 	var geoData models.GeoJSON
@@ -569,11 +702,14 @@ func generateShapeQuestion(availableCountries []models.Country, session *ShapeGa
 		options[i], options[j] = options[j], options[i]
 	})
 
+	// Translate country names in options
+	translatedOptions := getTranslatedCountries(options, locale)
+
 	questionID := generateQuestionID()
 
 	return ShapeQuestion{
 		GeoJSON:    geoData,
-		Options:    options,
+		Options:    translatedOptions,
 		QuestionID: questionID,
 	}
 }
@@ -585,14 +721,15 @@ func generateShapeQuestion(availableCountries []models.Country, session *ShapeGa
 type CapitalGameHandler struct{}
 
 type CapitalGameSession struct {
-	SessionID           string          `json:"sessionId"`
-	Score               int             `json:"score"`
-	Total               int             `json:"total"`
-	Region              string          `json:"region"`
-	UsedCountries       map[string]bool `json:"-"`
-	CurrentCorrectCCA2  string          `json:"-"`
-	CurrentCorrectName  string          `json:"-"`
-	CurrentCorrectCapital string        `json:"-"`
+	SessionID             string          `json:"sessionId"`
+	Score                 int             `json:"score"`
+	Total                 int             `json:"total"`
+	Region                string          `json:"region"`
+	Locale                string          `json:"-"` // User's locale for translations
+	UsedCountries         map[string]bool `json:"-"`
+	CurrentCorrectCCA2    string          `json:"-"`
+	CurrentCorrectName    string          `json:"-"`
+	CurrentCorrectCapital string          `json:"-"`
 }
 
 type CapitalQuestion struct {
@@ -612,11 +749,18 @@ func (h *CapitalGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 
 	var req struct {
 		Region string `json:"region"`
+		Locale string `json:"locale"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, "Invalid request", http.StatusBadRequest)
 		return
+	}
+
+	// Default to English if locale not provided
+	locale := req.Locale
+	if locale == "" {
+		locale = "en"
 	}
 
 	// Filter countries by region and ensure they have capitals
@@ -640,11 +784,12 @@ func (h *CapitalGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 		Score:         0,
 		Total:         0,
 		Region:        req.Region,
+		Locale:        locale,
 		UsedCountries: make(map[string]bool),
 	}
 	capitalSessions[sessionID] = session
 
-	question := generateCapitalQuestion(filteredCountries, session)
+	question := generateCapitalQuestion(filteredCountries, session, locale)
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]interface{}{
@@ -665,11 +810,25 @@ func (h *CapitalGameHandler) GetQuestion(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
+	// Get locale from query parameter
+	locale := r.URL.Query().Get("locale")
+	if locale == "" {
+		locale = "en"
+	}
+
 	session, exists := capitalSessions[sessionID]
 	if !exists {
 		http.Error(w, "Session not found", http.StatusNotFound)
 		return
 	}
+
+	// Update session locale if provided
+	if locale != "" {
+		session.Locale = locale
+	} else if session.Locale == "" {
+		session.Locale = "en"
+	}
+	locale = session.Locale
 
 	// Filter countries
 	filteredCountries := []models.Country{}
@@ -681,7 +840,7 @@ func (h *CapitalGameHandler) GetQuestion(w http.ResponseWriter, r *http.Request)
 		}
 	}
 
-	question := generateCapitalQuestion(filteredCountries, session)
+	question := generateCapitalQuestion(filteredCountries, session, locale)
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(question)
@@ -697,6 +856,7 @@ func (h *CapitalGameHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request
 		SessionID  string `json:"sessionId"`
 		QuestionID string `json:"questionId"`
 		Answer     string `json:"answer"`
+		Locale     string `json:"locale"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -710,6 +870,27 @@ func (h *CapitalGameHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request
 		return
 	}
 
+	// Update locale if provided
+	locale := req.Locale
+	if locale == "" {
+		locale = session.Locale
+	}
+	if locale == "" {
+		locale = "en"
+	}
+	session.Locale = locale
+
+	// Get translated country name
+	correctCountryName := session.CurrentCorrectName
+	if session.CurrentCorrectCCA2 != "" {
+		for _, country := range countries {
+			if country.CCA2 == session.CurrentCorrectCCA2 {
+				correctCountryName = country.GetTranslatedName(locale)
+				break
+			}
+		}
+	}
+
 	correct := req.Answer == session.CurrentCorrectCapital
 	if correct {
 		session.Score++
@@ -720,7 +901,7 @@ func (h *CapitalGameHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request
 	json.NewEncoder(w).Encode(map[string]interface{}{
 		"correct":        correct,
 		"correctCapital": session.CurrentCorrectCapital,
-		"correctCountry": session.CurrentCorrectName,
+		"correctCountry": correctCountryName,
 		"score":          session.Score,
 		"total":          session.Total,
 	})
@@ -751,7 +932,7 @@ func (h *CapitalGameHandler) GetScore(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func generateCapitalQuestion(availableCountries []models.Country, session *CapitalGameSession) CapitalQuestion {
+func generateCapitalQuestion(availableCountries []models.Country, session *CapitalGameSession, locale string) CapitalQuestion {
 	// Find a country that hasn't been used
 	var country models.Country
 	for {
@@ -788,8 +969,11 @@ func generateCapitalQuestion(availableCountries []models.Country, session *Capit
 		options[i], options[j] = options[j], options[i]
 	})
 
+	// Get translated country name
+	translatedCountryName := country.GetTranslatedName(locale)
+
 	return CapitalQuestion{
-		CountryName: country.Name.Common,
+		CountryName: translatedCountryName,
 		CountryCCA2: country.CCA2,
 		Options:     options,
 		QuestionID:  generateQuestionID(),
@@ -825,14 +1009,15 @@ type HigherLowerComparison struct {
 }
 
 type HigherLowerSession struct {
-	SessionID      string              `json:"sessionId"`
-	Score          int                 `json:"score"`
-	HighScore      int                 `json:"highScore"`
-	Category       HigherLowerCategory `json:"category"`
-	CurrentLeft    HigherLowerItem     `json:"-"`
-	CurrentRight   HigherLowerItem     `json:"-"`
-	UsedPairs      map[string]bool     `json:"-"`
-	GameOver       bool                `json:"gameOver"`
+	SessionID    string              `json:"sessionId"`
+	Score        int                 `json:"score"`
+	HighScore    int                 `json:"highScore"`
+	Category     HigherLowerCategory `json:"category"`
+	Locale       string              `json:"-"` // User's locale for translations
+	CurrentLeft  HigherLowerItem     `json:"-"`
+	CurrentRight HigherLowerItem     `json:"-"`
+	UsedPairs    map[string]bool     `json:"-"`
+	GameOver     bool                `json:"gameOver"`
 }
 
 var higherLowerSessions = make(map[string]*HigherLowerSession)
@@ -866,6 +1051,7 @@ func (h *HigherLowerHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 
 	var req struct {
 		Category string `json:"category"`
+		Locale   string `json:"locale"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -877,18 +1063,25 @@ func (h *HigherLowerHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 		category = CategoryPopulation
 	}
 
+	// Default to English if locale not provided
+	locale := req.Locale
+	if locale == "" {
+		locale = "en"
+	}
+
 	sessionID := generateSessionID()
 	session := &HigherLowerSession{
 		SessionID: sessionID,
 		Score:     0,
 		HighScore: 0,
 		Category:  category,
+		Locale:    locale,
 		UsedPairs: make(map[string]bool),
 		GameOver:  false,
 	}
 	higherLowerSessions[sessionID] = session
 
-	comparison := generateHigherLowerComparison(session)
+	comparison := generateHigherLowerComparison(session, locale)
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]interface{}{
@@ -908,6 +1101,7 @@ func (h *HigherLowerHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request
 	var req struct {
 		SessionID string `json:"sessionId"`
 		Answer    string `json:"answer"` // "higher" or "lower"
+		Locale    string `json:"locale"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -921,6 +1115,16 @@ func (h *HigherLowerHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request
 		return
 	}
 
+	// Update locale if provided
+	locale := req.Locale
+	if locale == "" {
+		locale = session.Locale
+	}
+	if locale == "" {
+		locale = "en"
+	}
+	session.Locale = locale
+
 	if session.GameOver {
 		http.Error(w, "Game is over", http.StatusBadRequest)
 		return
@@ -929,7 +1133,7 @@ func (h *HigherLowerHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request
 	// Determine if answer is correct
 	leftValue := session.CurrentLeft.Value
 	rightValue := session.CurrentRight.Value
-	
+
 	var correct bool
 	if req.Answer == "higher" {
 		correct = rightValue >= leftValue
@@ -945,18 +1149,18 @@ func (h *HigherLowerHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request
 		}
 		// Move right to left and generate new right
 		session.CurrentLeft = session.CurrentRight
-		nextComparison = generateHigherLowerComparison(session)
+		nextComparison = generateHigherLowerComparison(session, locale)
 	} else {
 		session.GameOver = true
 	}
 
 	response := map[string]interface{}{
-		"correct":      correct,
-		"leftValue":    leftValue,
-		"rightValue":   rightValue,
-		"score":        session.Score,
-		"highScore":    session.HighScore,
-		"gameOver":     session.GameOver,
+		"correct":    correct,
+		"leftValue":  leftValue,
+		"rightValue": rightValue,
+		"score":      session.Score,
+		"highScore":  session.HighScore,
+		"gameOver":   session.GameOver,
 	}
 
 	if nextComparison != nil {
@@ -993,19 +1197,19 @@ func (h *HigherLowerHandler) GetScore(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func generateHigherLowerComparison(session *HigherLowerSession) *HigherLowerComparison {
+func generateHigherLowerComparison(session *HigherLowerSession, locale string) *HigherLowerComparison {
 	var left, right HigherLowerItem
 	var valueLabel string
 
 	switch session.Category {
 	case CategoryPopulation:
 		valueLabel = "population"
-		left, right = generateCountryPair(session, func(c models.Country) float64 {
+		left, right = generateCountryPair(session, locale, func(c models.Country) float64 {
 			return float64(c.Population)
 		})
 	case CategoryArea:
 		valueLabel = "km² area"
-		left, right = generateCountryPair(session, func(c models.Country) float64 {
+		left, right = generateCountryPair(session, locale, func(c models.Country) float64 {
 			return c.Area
 		})
 	case CategoryContinents:
@@ -1013,7 +1217,7 @@ func generateHigherLowerComparison(session *HigherLowerSession) *HigherLowerComp
 		left, right = generateContinentPair(session)
 	default:
 		valueLabel = "population"
-		left, right = generateCountryPair(session, func(c models.Country) float64 {
+		left, right = generateCountryPair(session, locale, func(c models.Country) float64 {
 			return float64(c.Population)
 		})
 	}
@@ -1035,7 +1239,7 @@ func generateHigherLowerComparison(session *HigherLowerSession) *HigherLowerComp
 	}
 }
 
-func generateCountryPair(session *HigherLowerSession, getValue func(models.Country) float64) (HigherLowerItem, HigherLowerItem) {
+func generateCountryPair(session *HigherLowerSession, locale string, getValue func(models.Country) float64) (HigherLowerItem, HigherLowerItem) {
 	// Filter countries with valid data
 	validCountries := []models.Country{}
 	for _, c := range countries {
@@ -1067,22 +1271,24 @@ func generateCountryPair(session *HigherLowerSession, getValue func(models.Count
 	}
 
 	leftItem := HigherLowerItem{
-		Name:     left.Name.Common,
+		Name:     left.GetTranslatedName(locale),
 		Value:    getValue(left),
 		CCA2:     left.CCA2,
 		ImageURL: "/assets/twemoji_flags_cca2/" + left.CCA2 + ".svg",
 	}
 
 	rightItem := HigherLowerItem{
-		Name:     right.Name.Common,
+		Name:     right.GetTranslatedName(locale),
 		Value:    getValue(right),
 		CCA2:     right.CCA2,
 		ImageURL: "/assets/twemoji_flags_cca2/" + right.CCA2 + ".svg",
 	}
 
-	// If left was already set, use it
+	// If left was already set, use it (but update name if locale changed)
 	if session.CurrentLeft.Name != "" {
 		leftItem = session.CurrentLeft
+		// Update name if locale changed
+		leftItem.Name = left.GetTranslatedName(locale)
 	}
 
 	return leftItem, rightItem
@@ -1146,6 +1352,7 @@ type WorldleGameHandler struct{}
 
 type WorldleSession struct {
 	SessionID string
+	Locale    string // User's locale for translations
 	Logic     *guessing.Logic
 }
 
@@ -1155,6 +1362,21 @@ func (h *WorldleGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
+	}
+
+	var req struct {
+		Locale string `json:"locale"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		// If no body, use default locale
+		req.Locale = "en"
+	}
+
+	// Default to English if locale not provided
+	locale := req.Locale
+	if locale == "" {
+		locale = "en"
 	}
 
 	// Filter countries (all countries available for worldle)
@@ -1176,6 +1398,7 @@ func (h *WorldleGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	sessionID := generateSessionID()
 	session := &WorldleSession{
 		SessionID: sessionID,
+		Locale:    locale,
 		Logic:     gameLogic,
 	}
 	worldleSessions[sessionID] = session
@@ -1184,9 +1407,9 @@ func (h *WorldleGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]interface{}{
-		"sessionId":   sessionID,
-		"guessCount":  len(state.Guesses),
-		"isComplete":  state.IsComplete,
+		"sessionId":  sessionID,
+		"guessCount": len(state.Guesses),
+		"isComplete": state.IsComplete,
 	})
 }
 
@@ -1197,8 +1420,9 @@ func (h *WorldleGameHandler) SubmitGuess(w http.ResponseWriter, r *http.Request)
 	}
 
 	var req struct {
-		SessionID    string `json:"sessionId"`
-		CountryName  string `json:"countryName"`
+		SessionID   string `json:"sessionId"`
+		CountryName string `json:"countryName"`
+		Locale      string `json:"locale"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -1211,6 +1435,16 @@ func (h *WorldleGameHandler) SubmitGuess(w http.ResponseWriter, r *http.Request)
 		http.Error(w, "Session not found", http.StatusNotFound)
 		return
 	}
+
+	// Update locale if provided
+	locale := req.Locale
+	if locale == "" {
+		locale = session.Locale
+	}
+	if locale == "" {
+		locale = "en"
+	}
+	session.Locale = locale
 
 	// Make guess using game logic
 	result, err := session.Logic.MakeGuess(req.CountryName)
@@ -1230,21 +1464,21 @@ func (h *WorldleGameHandler) SubmitGuess(w http.ResponseWriter, r *http.Request)
 
 	// Build response with guess entry details
 	response := map[string]interface{}{
-		"isValidGuess":   result.IsValidGuess,
-		"isCorrect":      result.IsCorrect,
-		"guessCount":     result.GuessCount,
-		"isComplete":     result.IsCorrect,
+		"isValidGuess": result.IsValidGuess,
+		"isCorrect":    result.IsCorrect,
+		"guessCount":   result.GuessCount,
+		"isComplete":   result.IsCorrect,
 		"guessEntry": map[string]interface{}{
 			"country": map[string]interface{}{
-				"cca2":      result.GuessEntry.Country.CCA2,
-				"name":      result.GuessEntry.Country.Name.Common,
-				"flagUrl":   "/assets/twemoji_flags_cca2/" + result.GuessEntry.Country.CCA2 + ".svg",
-				"continent": result.GuessEntry.Continent,
+				"cca2":       result.GuessEntry.Country.CCA2,
+				"name":       result.GuessEntry.Country.GetTranslatedName(locale),
+				"flagUrl":    "/assets/twemoji_flags_cca2/" + result.GuessEntry.Country.CCA2 + ".svg",
+				"continent":  result.GuessEntry.Continent,
 				"population": result.GuessEntry.Country.Population,
 				"area":       result.GuessEntry.Country.Area,
 			},
-			"isCorrect":       result.GuessEntry.IsCorrect,
-			"continent":       result.GuessEntry.Continent,
+			"isCorrect":        result.GuessEntry.IsCorrect,
+			"continent":        result.GuessEntry.Continent,
 			"continentCorrect": result.GuessEntry.ContinentCorrect,
 			"population": map[string]interface{}{
 				"value":     result.GuessEntry.Population.Value,
@@ -1263,7 +1497,7 @@ func (h *WorldleGameHandler) SubmitGuess(w http.ResponseWriter, r *http.Request)
 	if result.IsCorrect && result.CorrectCountry != nil {
 		response["correctCountry"] = map[string]interface{}{
 			"cca2":    result.CorrectCountry.CCA2,
-			"name":    result.CorrectCountry.Name.Common,
+			"name":    result.CorrectCountry.GetTranslatedName(locale),
 			"flagUrl": "/assets/twemoji_flags_cca2/" + result.CorrectCountry.CCA2 + ".svg",
 		}
 	}
@@ -1290,6 +1524,16 @@ func (h *WorldleGameHandler) GetState(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Get locale from query parameter
+	locale := r.URL.Query().Get("locale")
+	if locale == "" {
+		locale = session.Locale
+	}
+	if locale == "" {
+		locale = "en"
+	}
+	session.Locale = locale
+
 	state := session.Logic.GetState()
 
 	// Build guesses array for response
@@ -1297,10 +1541,10 @@ func (h *WorldleGameHandler) GetState(w http.ResponseWriter, r *http.Request) {
 	for _, guessEntry := range state.Guesses {
 		guesses = append(guesses, map[string]interface{}{
 			"country": map[string]interface{}{
-				"cca2":      guessEntry.Country.CCA2,
-				"name":      guessEntry.Country.Name.Common,
-				"flagUrl":   "/assets/twemoji_flags_cca2/" + guessEntry.Country.CCA2 + ".svg",
-				"continent": guessEntry.Continent,
+				"cca2":       guessEntry.Country.CCA2,
+				"name":       guessEntry.Country.GetTranslatedName(locale),
+				"flagUrl":    "/assets/twemoji_flags_cca2/" + guessEntry.Country.CCA2 + ".svg",
+				"continent":  guessEntry.Continent,
 				"population": guessEntry.Country.Population,
 				"area":       guessEntry.Country.Area,
 			},
@@ -1334,6 +1578,7 @@ type FactsGameHandler struct{}
 
 type FactsGameSession struct {
 	SessionID string
+	Locale    string // User's locale for translations
 	Logic     *facts.Logic
 }
 
@@ -1343,6 +1588,21 @@ func (h *FactsGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
+	}
+
+	var req struct {
+		Locale string `json:"locale"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		// If no body, use default locale
+		req.Locale = "en"
+	}
+
+	// Default to English if locale not provided
+	locale := req.Locale
+	if locale == "" {
+		locale = "en"
 	}
 
 	// Create game logic instance
@@ -1363,6 +1623,7 @@ func (h *FactsGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	sessionID := generateSessionID()
 	session := &FactsGameSession{
 		SessionID: sessionID,
+		Locale:    locale,
 		Logic:     gameLogic,
 	}
 	factsGameSessions[sessionID] = session
@@ -1393,6 +1654,7 @@ func (h *FactsGameHandler) SubmitGuess(w http.ResponseWriter, r *http.Request) {
 	var req struct {
 		SessionID   string `json:"sessionId"`
 		CountryName string `json:"countryName"`
+		Locale      string `json:"locale"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -1405,6 +1667,16 @@ func (h *FactsGameHandler) SubmitGuess(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Session not found", http.StatusNotFound)
 		return
 	}
+
+	// Update locale if provided
+	locale := req.Locale
+	if locale == "" {
+		locale = session.Locale
+	}
+	if locale == "" {
+		locale = "en"
+	}
+	session.Locale = locale
 
 	// Make guess using game logic
 	result, err := session.Logic.MakeGuess(req.CountryName)
@@ -1424,12 +1696,12 @@ func (h *FactsGameHandler) SubmitGuess(w http.ResponseWriter, r *http.Request) {
 			factNum := i + 1
 			factText = fmt.Sprintf("Fact %d: %s", factNum, entry.Fact)
 		}
-		
+
 		// Determine if this guess was correct
 		// The last entry is correct if result.IsCorrect is true
 		// Previous entries are all wrong (they didn't match)
 		isEntryCorrect := result.IsCorrect && i == len(result.GuessHistory)-1
-		
+
 		guessHistory = append(guessHistory, map[string]interface{}{
 			"guess":     entry.Guess,
 			"fact":      factText,
@@ -1466,14 +1738,14 @@ func (h *FactsGameHandler) SubmitGuess(w http.ResponseWriter, r *http.Request) {
 	if result.IsCorrect && result.CorrectCountry != nil {
 		response["correctCountry"] = map[string]interface{}{
 			"cca2":    result.CorrectCountry.CCA2,
-			"name":    result.CorrectCountry.Name.Common,
+			"name":    result.CorrectCountry.GetTranslatedName(locale),
 			"flagUrl": "/assets/twemoji_flags_cca2/" + result.CorrectCountry.CCA2 + ".svg",
 		}
 	} else if result.TriesLeft == 0 && result.CorrectCountry != nil {
 		// Game over - reveal answer
 		response["correctCountry"] = map[string]interface{}{
 			"cca2":    result.CorrectCountry.CCA2,
-			"name":    result.CorrectCountry.Name.Common,
+			"name":    result.CorrectCountry.GetTranslatedName(locale),
 			"flagUrl": "/assets/twemoji_flags_cca2/" + result.CorrectCountry.CCA2 + ".svg",
 		}
 	}
@@ -1541,6 +1813,7 @@ func (h *FactsGameHandler) Skip(w http.ResponseWriter, r *http.Request) {
 
 	var req struct {
 		SessionID string `json:"sessionId"`
+		Locale    string `json:"locale"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -1553,6 +1826,16 @@ func (h *FactsGameHandler) Skip(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Session not found", http.StatusNotFound)
 		return
 	}
+
+	// Update locale if provided
+	locale := req.Locale
+	if locale == "" {
+		locale = session.Locale
+	}
+	if locale == "" {
+		locale = "en"
+	}
+	session.Locale = locale
 
 	// Skip current round
 	result, err := session.Logic.Skip()
@@ -1569,10 +1852,10 @@ func (h *FactsGameHandler) Skip(w http.ResponseWriter, r *http.Request) {
 			factNum := i + 1
 			factText = fmt.Sprintf("Fact %d: %s", factNum, entry.Fact)
 		}
-		
+
 		// Skip entries are not correct
 		isEntryCorrect := false
-		
+
 		guessHistory = append(guessHistory, map[string]interface{}{
 			"guess":     entry.Guess,
 			"fact":      factText,
@@ -1594,7 +1877,7 @@ func (h *FactsGameHandler) Skip(w http.ResponseWriter, r *http.Request) {
 	if result.CorrectCountry != nil {
 		response["correctCountry"] = map[string]interface{}{
 			"cca2":    result.CorrectCountry.CCA2,
-			"name":    result.CorrectCountry.Name.Common,
+			"name":    result.CorrectCountry.GetTranslatedName(locale),
 			"flagUrl": "/assets/twemoji_flags_cca2/" + result.CorrectCountry.CCA2 + ".svg",
 		}
 	}

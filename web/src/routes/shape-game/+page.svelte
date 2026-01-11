@@ -12,7 +12,7 @@
 	import type { Country } from '$lib/types';
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
-	import { getCountryName } from '$lib/utils/countryNames';
+	import { getCountryNameForLocale } from '$lib/utils/countryNames';
 
 	// Reactive translations
 	$: currentLocale = $locale;
@@ -68,7 +68,7 @@
 			isCorrect = result.correct;
 			// Translate the correct answer - find the country in options by CCA2 and translate it
 			const correctCountry = currentQuestion.options.find(c => c.cca2 === result.correctCca2);
-			correctAnswer = correctCountry ? getCountryName(correctCountry, currentLocale) : result.correctName;
+			correctAnswer = correctCountry ? getCountryNameForLocale(correctCountry) : result.correctName;
 			score = result.score;
 			total = result.total;
 			showFeedback = true;

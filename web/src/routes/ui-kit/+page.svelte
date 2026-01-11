@@ -782,6 +782,136 @@
 							]}
 						/>
 					</GameCard>
+
+					<!-- Worldle Game Mock -->
+					<GameCard>
+						<h3 class="text-lg font-semibold text-text-light mb-4">Worldle Game - Guess History Mock</h3>
+						<p class="text-sm text-text-muted mb-4">Mock of the Worldle game guess history table for styling reference</p>
+						<div class="card-game overflow-x-auto">
+							<h2 class="text-2xl font-bold mb-4">Guess History:</h2>
+							<table class="w-full border-collapse">
+								<thead>
+									<tr class="border-b-2 border-white/20">
+										<th class="px-4 py-3 text-left font-semibold">Flag</th>
+										<th class="px-4 py-3 text-left font-semibold">Country</th>
+										<th class="px-4 py-3 text-left font-semibold">Continent</th>
+										<th class="px-4 py-3 text-left font-semibold">Population</th>
+										<th class="px-4 py-3 text-left font-semibold">Area</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="border-b border-white/10 hover:bg-white/5">
+										<td class="px-4 py-3">
+											<img 
+												src="/assets/twemoji_flags_cca2/AU.svg" 
+												alt="Australia flag"
+												class="w-12 h-8 object-cover rounded"
+											/>
+										</td>
+										<td class="px-4 py-3 font-semibold">Australia</td>
+										<td class="px-4 py-3">
+											<span class="px-3 py-1 rounded border-2 bg-error/30 text-error border-error">
+												Oceania
+											</span>
+										</td>
+										<td class="px-4 py-3">
+											<span class="px-3 py-1 rounded border-2 flex items-center gap-2 bg-yellow-500/30 text-yellow-300 border-yellow-500">
+												<span>▲</span>
+												<span>27.5M</span>
+											</span>
+										</td>
+										<td class="px-4 py-3">
+											<span class="px-3 py-1 rounded border-2 flex items-center gap-2 bg-error/30 text-error border-error">
+												<span>▼</span>
+												<span>7.7M km²</span>
+											</span>
+										</td>
+									</tr>
+									<tr class="border-b border-white/10 hover:bg-white/5">
+										<td class="px-4 py-3">
+											<img 
+												src="/assets/twemoji_flags_cca2/JP.svg" 
+												alt="Japan flag"
+												class="w-12 h-8 object-cover rounded"
+											/>
+										</td>
+										<td class="px-4 py-3 font-semibold">Japan</td>
+										<td class="px-4 py-3">
+											<span class="px-3 py-1 rounded border-2 bg-error/30 text-error border-error">
+												Asia
+											</span>
+										</td>
+										<td class="px-4 py-3">
+											<span class="px-3 py-1 rounded border-2 flex items-center gap-2 bg-error/30 text-error border-error">
+												<span>▼</span>
+												<span>123.2M</span>
+											</span>
+										</td>
+										<td class="px-4 py-3">
+											<span class="px-3 py-1 rounded border-2 flex items-center gap-2 bg-error/30 text-error border-error">
+												<span>▲</span>
+												<span>377.9K km²</span>
+											</span>
+										</td>
+									</tr>
+									<tr class="border-b border-white/10 hover:bg-white/5">
+										<td class="px-4 py-3">
+											<img 
+												src="/assets/twemoji_flags_cca2/KE.svg" 
+												alt="Kenya flag"
+												class="w-12 h-8 object-cover rounded"
+											/>
+										</td>
+										<td class="px-4 py-3 font-semibold">Kenya</td>
+										<td class="px-4 py-3">
+											<span class="px-3 py-1 rounded border-2 bg-error/30 text-error border-error">
+												Africa
+											</span>
+										</td>
+										<td class="px-4 py-3">
+											<span class="px-3 py-1 rounded border-2 flex items-center gap-2 bg-error/30 text-error border-error">
+												<span>▼</span>
+												<span>53.3M</span>
+											</span>
+										</td>
+										<td class="px-4 py-3">
+											<span class="px-3 py-1 rounded border-2 flex items-center gap-2 bg-error/30 text-error border-error">
+												<span>▲</span>
+												<span>580.4K km²</span>
+											</span>
+										</td>
+									</tr>
+									<tr class="border-b border-white/10 hover:bg-white/5">
+										<td class="px-4 py-3">
+											<img 
+												src="/assets/twemoji_flags_cca2/FR.svg" 
+												alt="France flag"
+												class="w-12 h-8 object-cover rounded"
+											/>
+										</td>
+										<td class="px-4 py-3 font-semibold">France</td>
+										<td class="px-4 py-3">
+											<span class="px-3 py-1 rounded border-2 bg-error/30 text-error border-error">
+												Europe
+											</span>
+										</td>
+										<td class="px-4 py-3">
+											<span class="px-3 py-1 rounded border-2 flex items-center gap-2 bg-error/30 text-error border-error">
+												<span>▼</span>
+												<span>66.4M</span>
+											</span>
+										</td>
+										<td class="px-4 py-3">
+											<span class="px-3 py-1 rounded border-2 flex items-center gap-2 bg-error/30 text-error border-error">
+												<span>▲</span>
+												<span>543.9K km²</span>
+											</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</GameCard>
 				</div>
 			</section>
 

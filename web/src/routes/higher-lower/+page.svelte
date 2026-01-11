@@ -423,8 +423,6 @@
 		width: 120px;
 		height: auto;
 		margin: 0 auto 1.5rem;
-		border-radius: 0.5rem;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 	}
 	
 	.panel-emoji {
@@ -635,5 +633,129 @@
 			font-size: 0.75rem;
 			padding: 0.375rem 0.75rem;
 		}
+	}
+
+	/* Light Mode Styles */
+	:global(:root.light) .category-card {
+		background: rgba(255, 255, 255, 0.9);
+		border-color: rgba(15, 23, 42, 0.2);
+	}
+
+	:global(:root.light) .category-card:hover {
+		border-color: var(--color-primary);
+		background: rgba(255, 255, 255, 1);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	}
+
+	:global(:root.light) .category-card.selected {
+		border-color: var(--color-primary);
+		background: rgba(99, 102, 241, 0.15);
+	}
+
+	:global(:root.light) .category-label {
+		color: #0F172A;
+	}
+
+	:global(:root.light) .category-desc {
+		color: #64748B;
+	}
+
+	:global(:root.light) .score-label {
+		color: #64748B;
+	}
+
+	:global(:root.light) .score-value {
+		color: var(--color-primary-dark);
+	}
+
+	/* Light mode: lighter panel overlay for better visibility */
+	:global(:root.light) .panel::before {
+		background: rgba(0, 0, 0, 0.15);
+	}
+
+	/* Light mode: ensure text is visible on lighter backgrounds */
+	/* Keep white text with strong shadows for visibility on gradient backgrounds */
+	:global(:root.light) .panel-content {
+		color: white;
+		text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 4px rgba(0, 0, 0, 0.5);
+	}
+
+	/* Light mode: panel title - ensure visibility */
+	:global(:root.light) .panel-title {
+		color: white;
+		text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9), 0 0 6px rgba(0, 0, 0, 0.6);
+	}
+
+	/* Light mode: panel subtitle */
+	:global(:root.light) .panel-subtitle {
+		color: rgba(255, 255, 255, 0.95);
+		text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8), 0 0 3px rgba(0, 0, 0, 0.5);
+	}
+
+	/* Light mode: panel label */
+	:global(:root.light) .panel-label {
+		color: rgba(255, 255, 255, 0.9);
+		text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8), 0 0 2px rgba(0, 0, 0, 0.5);
+	}
+
+	/* Light mode: VS circle */
+	:global(:root.light) .vs-circle {
+		background: white;
+		color: #1a1a1a;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+	}
+
+	/* Light mode: answer buttons - more visible */
+	:global(:root.light) .answer-btn {
+		background: rgba(255, 255, 255, 0.25);
+		border-color: rgba(255, 255, 255, 0.5);
+		color: white;
+		text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 0 0 3px rgba(0, 0, 0, 0.3);
+		font-weight: 700;
+	}
+
+	:global(:root.light) .answer-btn:hover:not(:disabled) {
+		background: rgba(255, 255, 255, 0.35);
+		border-color: rgba(255, 255, 255, 0.7);
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+		text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 4px rgba(0, 0, 0, 0.4);
+	}
+
+	/* Light mode: score overlays - more visible */
+	:global(:root.light) .score-overlay {
+		background: rgba(0, 0, 0, 0.7);
+		color: white;
+		backdrop-filter: blur(4px);
+		font-weight: 700;
+		text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+	}
+
+	/* Light mode: game over screen text */
+	:global(:root.light) .card-game h2 {
+		color: #0F172A;
+	}
+
+	/* Light mode: panel value - ensure gold color is visible */
+	:global(:root.light) .panel-value {
+		color: #FFD700;
+		text-shadow: 0 3px 12px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 0, 0, 0.6);
+		font-weight: 700;
+	}
+
+	:global(:root.light) .panel-value.correct {
+		color: #10B981;
+		text-shadow: 0 3px 12px rgba(16, 185, 129, 0.7), 0 0 8px rgba(16, 185, 129, 0.4);
+	}
+
+	:global(:root.light) .panel-value.wrong {
+		color: #EF4444;
+		text-shadow: 0 3px 12px rgba(239, 68, 68, 0.7), 0 0 8px rgba(239, 68, 68, 0.4);
+	}
+
+	/* Light mode: compare text */
+	:global(:root.light) .compare-text {
+		color: rgba(255, 255, 255, 0.95);
+		text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8), 0 0 3px rgba(0, 0, 0, 0.5);
+		opacity: 1;
 	}
 </style>

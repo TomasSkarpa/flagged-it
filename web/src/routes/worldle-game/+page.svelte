@@ -22,6 +22,7 @@
 	let guessInput = '';
 	let allCountries: Country[] = [];
 	let countriesLoaded = false;
+	let guessInputElement: HTMLInputElement | null = null;
 
 	// Reactive translations
 	$: currentLocale = $locale;
@@ -101,6 +102,10 @@
 			if (!result.isValidGuess) {
 				error = result.error || notFoundText;
 				isLoading = false;
+				// Focus input so user can correct their guess
+				setTimeout(() => {
+					guessInputElement?.focus();
+				}, 0);
 				return;
 			}
 
@@ -115,6 +120,14 @@
 			}
 
 			guessInput = '';
+			
+			// Focus input after successful guess (if game is still active)
+			if (!result.isCorrect && !gameComplete && guessInputElement) {
+				// Use setTimeout to ensure DOM has updated
+				setTimeout(() => {
+					guessInputElement?.focus();
+				}, 0);
+			}
 		} catch (err) {
 			error = err instanceof Error ? err.message : 'Failed to submit guess';
 			console.error('Submit guess error:', err);
@@ -159,12 +172,16 @@
 
 	function getPopulationArrow(guess: GuessEntry): string {
 		if (guess.population.direction === 'correct') return '✓';
-		return guess.population.direction === 'higher' ? '▲' : '▼';
+		// If guess is higher than target, target is lower → show ▼
+		// If guess is lower than target, target is higher → show ▲
+		return guess.population.direction === 'higher' ? '▼' : '▲';
 	}
 
 	function getAreaArrow(guess: GuessEntry): string {
 		if (guess.area.direction === 'correct') return '✓';
-		return guess.area.direction === 'higher' ? '▲' : '▼';
+		// If guess is higher than target, target is lower → show ▼
+		// If guess is lower than target, target is higher → show ▲
+		return guess.area.direction === 'higher' ? '▼' : '▲';
 	}
 
 	function getCountryNameForGuess(guess: GuessEntry): string {
@@ -212,6 +229,7 @@
 					<div class="flex gap-4">
 						<input
 							type="text"
+							bind:this={guessInputElement}
 							bind:value={guessInput}
 							on:keypress={handleKeyPress}
 							placeholder={enterCountryText}
@@ -283,3 +301,73 @@
 		{/if}
 	</div>
 </div>
+
+<style>
+	/* Light mode: table headers and borders */
+	:global(:root.light) .card-game table thead tr {
+		border-bottom-color: rgba(15, 23, 42, 0.2) !important;
+	}
+
+	:global(:root.light) .card-game table thead th {
+		color: #0F172A !important;
+	}
+
+	:global(:root.light) .card-game table tbody tr {
+		border-bottom-color: rgba(15, 23, 42, 0.1) !important;
+	}
+
+	:global(:root.light) .card-game table tbody tr:hover {
+		background-color: rgba(15, 23, 42, 0.05) !important;
+	}
+
+	:global(:root.light) .card-game table tbody td {
+		color: #0F172A !important;
+	}
+
+	/* Light mode: continent badges */
+	:global(:root.light) .card-game .bg-success\/30 {
+		background-color: rgba(16, 185, 129, 0.15) !important;
+		color: #059669 !important;
+		border-color: #10B981 !important;
+	}
+
+	:global(:root.light) .card-game .bg-error\/30 {
+		background-color: rgba(239, 68, 68, 0.15) !important;
+		color: #DC2626 !important;
+		border-color: #EF4444 !important;
+	}
+
+	/* Light mode: population/area badges */
+	:global(:root.light) .card-game .bg-yellow-500\/30 {
+		background-color: rgba(234, 179, 8, 0.2) !important;
+		color: #A16207 !important;
+		border-color: #EAB308 !important;
+	}
+
+	:global(:root.light) .card-game .text-yellow-300 {
+		color: #A16207 !important;
+	}
+
+	:global(:root.light) .card-game .bg-orange-500\/30 {
+		background-color: rgba(249, 115, 22, 0.2) !important;
+		color: #C2410C !important;
+		border-color: #F97316 !important;
+	}
+
+	:global(:root.light) .card-game .text-orange-300 {
+		color: #C2410C !important;
+	}
+
+	:global(:root.light) .card-game .text-error {
+		color: #DC2626 !important;
+	}
+
+	:global(:root.light) .card-game .text-success {
+		color: #059669 !important;
+	}
+
+	/* Light mode: table heading */
+	:global(:root.light) .card-game h2 {
+		color: #0F172A !important;
+	}
+</style>

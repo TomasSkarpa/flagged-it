@@ -75,13 +75,13 @@
 			
 			setTimeout(async () => {
 				showFeedback = false;
-				if (result.finished) {
+				if (result.finished || total >= totalRounds) {
 					gameFinished = true;
 					gameStarted = false;
 				} else {
 					await loadNextQuestion();
 				}
-			}, 2000);
+			}, 1200);
 		} catch (err) {
 			error = err instanceof Error ? err.message : 'Failed to submit answer';
 			console.error('Submit answer error:', err);

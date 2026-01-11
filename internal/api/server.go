@@ -95,11 +95,12 @@ func SetupRoutes() {
 		}
 	}
 
-	// Combine rate limiting and CORS middleware
+	// Combine logging, rate limiting and CORS middleware
 	// IMPORTANT: CORS must run first to handle OPTIONS preflight requests
 	// Rate limiting should skip OPTIONS requests
+	// Logging tracks all requests
 	combinedMiddleware := func(next http.HandlerFunc) http.HandlerFunc {
-		return corsMiddleware(rateLimitMiddleware(next))
+		return LoggingMiddleware(corsMiddleware(rateLimitMiddleware(next)))
 	}
 
 	// Flag game routes
@@ -141,11 +142,14 @@ func SetupRoutes() {
 	http.HandleFunc("/api/debug/geojson", combinedMiddleware(debugHandler.GetCountryGeoJSON))
 	http.HandleFunc("/api/debug/geojson/all", combinedMiddleware(debugHandler.GetAllGeoJSON))
 
-	// Health check (no rate limiting for monitoring, but include CORS)
-	http.HandleFunc("/api/health", corsMiddleware(func(w http.ResponseWriter, r *http.Request) {
+	// Health check (no rate limiting for monitoring, but include CORS and logging)
+	http.HandleFunc("/api/health", LoggingMiddleware(corsMiddleware(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.Write([]byte(`{"status":"ok"}`))
-	}))
+	})))
+
+	// Stats/metrics endpoint (no rate limiting for monitoring, but include CORS and logging)
+	http.HandleFunc("/api/stats", LoggingMiddleware(corsMiddleware(GetStatsHandler)))
 
 	log.Println("API routes configured")
 }

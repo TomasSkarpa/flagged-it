@@ -21,6 +21,7 @@ export interface CapitalAnswer {
 	correctCountry: string;
 	score: number;
 	total: number;
+	finished?: boolean;
 }
 
 export interface CapitalGameSession {

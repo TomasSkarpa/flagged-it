@@ -94,8 +94,8 @@
 		// Add padding
 		const padding = 20;
 		
-		// Use geoIdentity with fitExtent to automatically fit and flip Y axis
-		// fitExtent automatically scales and translates to fit the shape
+		// Use geoIdentity with fitExtent to fit the shape within the padded area
+		// fitExtent takes a bounding box [[x0, y0], [x1, y1]] and fits the geometry to it
 		const projection = geoIdentity()
 			.reflectY(true) // Flip Y because SVG Y increases downward, but geo lat increases upward
 			.fitExtent(

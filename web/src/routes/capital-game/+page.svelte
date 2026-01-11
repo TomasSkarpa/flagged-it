@@ -107,13 +107,13 @@
 			
 			setTimeout(async () => {
 				showFeedback = false;
-				if (total >= totalRounds) {
+				if (total >= totalRounds || result.finished) {
 					gameFinished = true;
 					gameStarted = false;
 				} else {
 					await loadNextQuestion();
 				}
-			}, 2000);
+			}, 1200);
 		} catch (err) {
 			error = err instanceof Error ? err.message : failedToStartGameError;
 			console.error('Submit answer error:', err);
@@ -187,11 +187,12 @@
 			<div 
 				class="card-game relative overflow-hidden flag-background-container"
 				style="background-image: url('/assets/twemoji_flags_cca2/{currentQuestion.countryCca2}.svg');"
+				data-flag-background="true"
 			>
 				<div class="flag-overlay"></div>
 				
 				<div class="relative z-10">
-					<h2 class="text-2xl md:text-3xl font-bold text-sandy-light text-center mb-8">
+					<h2 class="text-2xl md:text-3xl font-bold text-white dark:text-white text-slate-900 text-center mb-8 drop-shadow-lg capital-question">
 						{questionText}
 					</h2>
 					
@@ -257,12 +258,69 @@
 			rgba(10, 14, 39, 0.75) 50%,
 			rgba(10, 14, 39, 0.9) 100%
 		);
+		border-radius: 1.5rem; /* Match rounded-card from Tailwind config */
 		z-index: 1;
+	}
+
+	/* Light mode: white overlay to create light background for dark text */
+	:global(:root.light) .flag-overlay {
+		background: linear-gradient(
+			to bottom,
+			rgba(255, 255, 255, 0.7) 0%,
+			rgba(255, 255, 255, 0.6) 50%,
+			rgba(255, 255, 255, 0.75) 100%
+		);
 	}
 	
 	@media (min-width: 768px) {
 		.flag-background-container {
 			min-height: 600px;
 		}
+	}
+
+	/* Light mode: dark text for question on flag background */
+	:global(:root.light) .capital-question {
+		color: #0F172A !important; /* Dark slate - very visible */
+		text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+	}
+
+	/* Light mode: button styles for flag background */
+	/* Use data attribute for more reliable targeting */
+	:global(:root.light) [data-flag-background="true"] :global(button) {
+		text-shadow: none !important;
+		transition: all 0.2s ease !important;
+	}
+
+	/* Regular buttons - must override Tailwind classes */
+	:global(:root.light) [data-flag-background="true"] :global(button:not(.bg-success):not(.bg-error):not(.bg-primary\/30)) {
+		background-color: rgba(255, 255, 255, 0.95) !important;
+		border-color: rgba(15, 23, 42, 0.3) !important;
+		color: #0F172A !important;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+	}
+
+	/* Hover state - must override Tailwind hover:border-accent hover:bg-accent/10 */
+	:global(:root.light) [data-flag-background="true"] :global(button:not(.bg-success):not(.bg-error):not(.bg-primary\/30)):hover:not(:disabled) {
+		background-color: rgba(6, 182, 212, 0.25) !important;
+		border-color: rgba(6, 182, 212, 0.7) !important;
+		color: #0F172A !important;
+		box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3) !important;
+		transform: translateY(-2px) !important;
+	}
+
+	/* Selected button (primary) */
+	:global(:root.light) [data-flag-background="true"] :global(button.bg-primary\/30) {
+		background-color: rgba(79, 70, 229, 0.15) !important;
+		border-color: rgba(79, 70, 229, 0.4) !important;
+		color: #0F172A !important;
+	}
+
+	/* Selected button hover */
+	:global(:root.light) [data-flag-background="true"] :global(button.bg-primary\/30):hover:not(:disabled) {
+		background-color: rgba(79, 70, 229, 0.35) !important;
+		border-color: rgba(79, 70, 229, 0.8) !important;
+		color: #0F172A !important;
+		box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4) !important;
+		transform: translateY(-2px) !important;
 	}
 </style>

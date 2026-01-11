@@ -10,6 +10,7 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"sync"
 	"time"
 )
 
@@ -38,9 +39,12 @@ type GameSession struct {
 	CurrentCorrectName string          `json:"-"`
 }
 
-var sessions = make(map[string]*GameSession)
-var countries = []models.Country{}
-var factsData = make(map[string]models.CountryFacts)
+var (
+	sessions      = make(map[string]*GameSession)
+	sessionsMutex sync.RWMutex
+	countries     = []models.Country{}
+	factsData     = make(map[string]models.CountryFacts)
+)
 
 func init() {
 	countries = data.LoadCountries()
@@ -128,7 +132,9 @@ func (h *FlagGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 		Locale:        locale,
 		UsedCountries: make(map[string]bool),
 	}
+	sessionsMutex.Lock()
 	sessions[sessionID] = session
+	sessionsMutex.Unlock()
 
 	// Generate first question
 	question := generateQuestion(filteredCountries, session, locale)
@@ -158,7 +164,9 @@ func (h *FlagGameHandler) GetQuestion(w http.ResponseWriter, r *http.Request) {
 		locale = "en"
 	}
 
+	sessionsMutex.RLock()
 	session, exists := sessions[sessionID]
+	sessionsMutex.RUnlock()
 	if !exists {
 		http.Error(w, "Session not found", http.StatusNotFound)
 		return
@@ -208,7 +216,9 @@ func (h *FlagGameHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	sessionsMutex.RLock()
 	session, exists := sessions[req.SessionID]
+	sessionsMutex.RUnlock()
 	if !exists {
 		http.Error(w, "Session not found", http.StatusNotFound)
 		return
@@ -250,9 +260,13 @@ func (h *FlagGameHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	session.Total++
-	if correct {
-		session.Score++
+	// Check if game is already finished before incrementing
+	alreadyFinished := session.Total >= 10
+	if !alreadyFinished {
+		session.Total++
+		if correct {
+			session.Score++
+		}
 	}
 
 	response := map[string]interface{}{
@@ -280,7 +294,9 @@ func (h *FlagGameHandler) GetScore(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	sessionsMutex.RLock()
 	session, exists := sessions[sessionID]
+	sessionsMutex.RUnlock()
 	if !exists {
 		http.Error(w, "Session not found", http.StatusNotFound)
 		return
@@ -296,14 +312,23 @@ func (h *FlagGameHandler) GetScore(w http.ResponseWriter, r *http.Request) {
 func generateQuestion(availableCountries []models.Country, session *GameSession, locale string) GameQuestion {
 	// Find a country that hasn't been used
 	var country models.Country
+	maxAttempts := len(availableCountries) * 2 // Safety limit
+	attempts := 0
 	for {
 		country = availableCountries[rand.Intn(len(availableCountries))]
 		if !session.UsedCountries[country.CCA2] {
 			break
 		}
+		attempts++
 		// If all countries used, reset
 		if len(session.UsedCountries) >= len(availableCountries) {
 			session.UsedCountries = make(map[string]bool)
+			break
+		}
+		// Safety: prevent infinite loop
+		if attempts >= maxAttempts {
+			session.UsedCountries = make(map[string]bool)
+			break
 		}
 	}
 	session.UsedCountries[country.CCA2] = true
@@ -450,23 +475,64 @@ type ShapeQuestion struct {
 	QuestionID string           `json:"questionId"`
 }
 
-var shapeSessions = make(map[string]*ShapeGameSession)
+var (
+	shapeSessions      = make(map[string]*ShapeGameSession)
+	shapeSessionsMutex sync.RWMutex
+)
 
-// countriesWithGeo returns countries that have geo data available
+// countriesWithGeoCache caches the list of countries with geo data per region
+var (
+	countriesWithGeoCache      = make(map[string][]models.Country)
+	countriesWithGeoCacheMutex sync.RWMutex
+	geoAvailableSet            = make(map[string]bool) // Set of CCA3 codes with geo data
+	geoAvailableOnce           sync.Once
+)
+
+// countriesWithGeo returns countries that have geo data available (cached)
 func countriesWithGeo(region string) []models.Country {
+	// Pre-populate list of countries with geo data (once, lazy load on first use)
+	geoAvailableOnce.Do(func() {
+		// Build set by trying to load geo for each country
+		// This will populate the cache as we check
+		for _, country := range countries {
+			if country.CCA3 != "" {
+				_, err := data.LoadGeoData(country.CCA3)
+				if err == nil {
+					geoAvailableSet[country.CCA3] = true
+				}
+			}
+		}
+	})
+
+	// Check cache first
+	cacheKey := region
+	if cacheKey == "" {
+		cacheKey = "World"
+	}
+
+	countriesWithGeoCacheMutex.RLock()
+	if cached, exists := countriesWithGeoCache[cacheKey]; exists {
+		countriesWithGeoCacheMutex.RUnlock()
+		return cached
+	}
+	countriesWithGeoCacheMutex.RUnlock()
+
+	// Build result
 	var result []models.Country
 	for _, country := range countries {
 		if region != "" && region != "World" && country.Region != region {
 			continue
 		}
-		// Check if geo data exists
-		if country.CCA3 != "" {
-			_, err := data.LoadGeoData(country.CCA3)
-			if err == nil {
-				result = append(result, country)
-			}
+		if country.CCA3 != "" && geoAvailableSet[country.CCA3] {
+			result = append(result, country)
 		}
 	}
+
+	// Cache the result
+	countriesWithGeoCacheMutex.Lock()
+	countriesWithGeoCache[cacheKey] = result
+	countriesWithGeoCacheMutex.Unlock()
+
 	return result
 }
 
@@ -614,9 +680,13 @@ func (h *ShapeGameHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request) 
 		}
 	}
 
-	session.Total++
-	if correct {
-		session.Score++
+	// Check if game is already finished before incrementing
+	alreadyFinished := session.Total >= 10
+	if !alreadyFinished {
+		session.Total++
+		if correct {
+			session.Score++
+		}
 	}
 
 	response := map[string]interface{}{
@@ -663,6 +733,8 @@ func generateShapeQuestion(availableCountries []models.Country, session *ShapeGa
 	var geoData models.GeoJSON
 	var err error
 
+	maxAttempts := len(availableCountries) * 2 // Safety limit
+	attempts := 0
 	for {
 		country = availableCountries[rand.Intn(len(availableCountries))]
 		if !session.UsedCountries[country.CCA2] {
@@ -671,9 +743,23 @@ func generateShapeQuestion(availableCountries []models.Country, session *ShapeGa
 				break
 			}
 		}
+		attempts++
 		// If all countries used, reset
 		if len(session.UsedCountries) >= len(availableCountries) {
 			session.UsedCountries = make(map[string]bool)
+			break
+		}
+		// Safety: prevent infinite loop
+		if attempts >= maxAttempts {
+			session.UsedCountries = make(map[string]bool)
+			// Get any country that has geo data
+			for _, c := range availableCountries {
+				if geoData, err = data.LoadGeoData(c.CCA3); err == nil {
+					country = c
+					break
+				}
+			}
+			break
 		}
 	}
 	session.UsedCountries[country.CCA2] = true
@@ -738,7 +824,10 @@ type CapitalQuestion struct {
 	QuestionID  string   `json:"questionId"`
 }
 
-var capitalSessions = make(map[string]*CapitalGameSession)
+var (
+	capitalSessions      = make(map[string]*CapitalGameSession)
+	capitalSessionsMutex sync.RWMutex
+)
 
 func (h *CapitalGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
@@ -890,11 +979,18 @@ func (h *CapitalGameHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request
 		}
 	}
 
-	correct := req.Answer == session.CurrentCorrectCapital
-	if correct {
-		session.Score++
+	// Check if game is already finished before incrementing
+	alreadyFinished := session.Total >= 10
+	var correct bool
+	if !alreadyFinished {
+		session.Total++
+		correct = req.Answer == session.CurrentCorrectCapital
+		if correct {
+			session.Score++
+		}
+	} else {
+		correct = false
 	}
-	session.Total++
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]interface{}{
@@ -1019,7 +1115,10 @@ type HigherLowerSession struct {
 	GameOver     bool                `json:"gameOver"`
 }
 
-var higherLowerSessions = make(map[string]*HigherLowerSession)
+var (
+	higherLowerSessions      = make(map[string]*HigherLowerSession)
+	higherLowerSessionsMutex sync.RWMutex
+)
 
 // ContinentData holds continent comparison data
 type ContinentData struct {
@@ -1355,7 +1454,10 @@ type WorldleSession struct {
 	Logic     *guessing.Logic
 }
 
-var worldleSessions = make(map[string]*WorldleSession)
+var (
+	worldleSessions      = make(map[string]*WorldleSession)
+	worldleSessionsMutex sync.RWMutex
+)
 
 func (h *WorldleGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
@@ -1581,7 +1683,10 @@ type FactsGameSession struct {
 	Logic     *facts.Logic
 }
 
-var factsGameSessions = make(map[string]*FactsGameSession)
+var (
+	factsGameSessions      = make(map[string]*FactsGameSession)
+	factsGameSessionsMutex sync.RWMutex
+)
 
 func (h *FactsGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {

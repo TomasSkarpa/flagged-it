@@ -18,7 +18,7 @@
 <div class="mb-2">
 	<div class="flex flex-col md:flex-row items-center justify-between gap-2 mb-2">
 		<ScoreDisplay {score} {total} showPercentage={false} showProgress={false} />
-		<div class="text-base text-text-light font-semibold stat-number">
+		<div class="text-base text-text-light font-semibold stat-number round-counter">
 			{roundText}
 		</div>
 	</div>
@@ -26,3 +26,10 @@
 		<ProgressBar current={total} total={totalRounds} showLabel={false} />
 	{/if}
 </div>
+
+<style>
+	/* Light mode: round counter text should be dark */
+	:global(:root.light) .round-counter {
+		color: #0F172A !important;
+	}
+</style>

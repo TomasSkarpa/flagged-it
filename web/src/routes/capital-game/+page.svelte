@@ -13,6 +13,7 @@
 	import { locale } from '$lib/stores/locale';
 	import { getAllCountries } from '$lib/api/debug';
 	import { getCountryNameForLocale } from '$lib/utils/countryNames';
+	import { calculateCurrentRound } from '$lib/utils/gameUtils';
 	import type { Country } from '$lib/types';
 
 	let sessionId: string | null = null;
@@ -180,7 +181,7 @@
 			<GameHeader
 				{score}
 				{total}
-				currentRound={total + 1}
+				currentRound={calculateCurrentRound(total, totalRounds)}
 				{totalRounds}
 			/>
 			

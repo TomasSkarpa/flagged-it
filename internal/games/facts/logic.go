@@ -120,8 +120,17 @@ func (l *Logic) MakeGuess(guess string) (*GuessResult, error) {
 		return nil, ErrEmptyGuess
 	}
 
-	// Check if guess matches
-	isCorrect := utils.MatchCountry(guess, *l.state.CurrentCountry, utils.MatchAll)
+	// Validate that the guessed country exists
+	guessedCountry := l.findCountry(guess)
+	if guessedCountry == nil {
+		return &GuessResult{
+			IsValidGuess: false,
+			Error:        "Country not found",
+		}, nil
+	}
+
+	// Check if guess matches the correct country
+	isCorrect := guessedCountry.CCA2 == l.state.CurrentCountry.CCA2
 
 	l.state.GuessHistory = append(l.state.GuessHistory, GuessHistoryEntry{
 		Guess: guess,
@@ -129,7 +138,8 @@ func (l *Logic) MakeGuess(guess string) (*GuessResult, error) {
 	})
 
 	result := &GuessResult{
-		IsCorrect:      isCorrect,
+		IsValidGuess:    true,
+		IsCorrect:       isCorrect,
 		CorrectCountry: l.state.CurrentCountry,
 		TriesLeft:      l.state.TriesLeft,
 		Score:          l.state.Score,
@@ -214,9 +224,21 @@ func (l *Logic) Reset() {
 	l.state.IsComplete = false
 }
 
+// findCountry finds a country by name (server-side lookup)
+func (l *Logic) findCountry(name string) *models.Country {
+	for _, country := range l.countries {
+		if utils.MatchCountry(name, country, utils.MatchAll) {
+			return &country
+		}
+	}
+	return nil
+}
+
 // GuessResult represents the result of a guess
 type GuessResult struct {
+	IsValidGuess   bool
 	IsCorrect      bool
+	Error          string
 	CorrectCountry *models.Country
 	TriesLeft      int
 	Score          int

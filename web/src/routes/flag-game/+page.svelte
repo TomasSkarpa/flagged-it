@@ -12,6 +12,7 @@
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
 	import { getCountryNameForLocale } from '$lib/utils/countryNames';
+	import { calculateCurrentRound } from '$lib/utils/gameUtils';
 
 	let sessionId: string | null = null;
 	let currentQuestion: any = null;
@@ -150,7 +151,7 @@
 			<GameHeader
 				{score}
 				{total}
-				currentRound={total + 1}
+				currentRound={calculateCurrentRound(total, totalRounds)}
 				{totalRounds}
 			/>
 			

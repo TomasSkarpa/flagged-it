@@ -15,6 +15,7 @@
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
 	import { getKeyboardLayoutForLocale } from '$lib/utils/keyboardLayout';
+	import { calculateCurrentRound } from '$lib/utils/gameUtils';
 
 	let countries: Country[] = [];
 	let game: HangmanGame | null = null;
@@ -274,7 +275,8 @@
 				title={hangmanTitle}
 				score={score}
 				total={5}
-				currentRound={total + 1}
+				currentRound={calculateCurrentRound(total, 5)}
+				totalRounds={5}
 			/>
 
 			<GameContainer

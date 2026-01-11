@@ -53,30 +53,3 @@
 		</button>
 	{/each}
 </div>
-
-<style>
-	:global(:root.light) .region-filter-btn {
-		color: var(--color-text) !important;
-		border-color: rgba(0, 0, 0, 0.2) !important;
-	}
-
-	:global(:root.light) .region-filter-btn.text-sandy {
-		color: var(--color-text) !important;
-	}
-
-	:global(:root.light) .region-filter-btn:hover {
-		border-color: rgba(0, 0, 0, 0.3) !important;
-		background: rgba(0, 0, 0, 0.05) !important;
-	}
-
-	:global(:root.light) .region-filter-btn:hover.text-sandy {
-		color: var(--color-text) !important;
-	}
-
-	/* Selected state - match view mode toggle style */
-	:global(:root.light) .region-filter-btn.bg-primary\/20 {
-		background-color: rgba(99, 102, 241, 0.15) !important; /* primary with opacity */
-		color: var(--color-primary) !important;
-		border-color: var(--color-primary) !important;
-	}
-</style>

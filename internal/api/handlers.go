@@ -6,10 +6,12 @@ import (
 	"flagged-it/internal/data/models"
 	"flagged-it/internal/games/facts"
 	"flagged-it/internal/games/guessing"
+	"flagged-it/internal/utils"
 	"fmt"
 	"log"
 	"math/rand"
 	"net/http"
+	"strings"
 	"sync"
 	"time"
 )
@@ -1789,9 +1791,20 @@ func (h *FactsGameHandler) SubmitGuess(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// If guess is invalid (country not found), return error immediately
+	if !result.IsValidGuess {
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(map[string]interface{}{
+			"isValidGuess": false,
+			"error":        result.Error,
+		})
+		return
+	}
+
 	// Build guess history with formatted facts
 	// Each entry corresponds to a guess, and each guess reveals a new fact
 	// Entry 0 = guess 1 (fact 1), entry 1 = guess 2 (fact 2), etc.
+	countries := data.LoadCountries()
 	guessHistory := []map[string]interface{}{}
 	for i, entry := range result.GuessHistory {
 		// Format fact with number prefix
@@ -1806,11 +1819,31 @@ func (h *FactsGameHandler) SubmitGuess(w http.ResponseWriter, r *http.Request) {
 		// Previous entries are all wrong (they didn't match)
 		isEntryCorrect := result.IsCorrect && i == len(result.GuessHistory)-1
 
-		guessHistory = append(guessHistory, map[string]interface{}{
+		// Find country from guess string (skip if guess is "Skip")
+		var countryInfo map[string]interface{}
+		if strings.ToLower(strings.TrimSpace(entry.Guess)) != "skip" {
+			for _, country := range countries {
+				if utils.MatchCountry(entry.Guess, country, utils.MatchAll) {
+					countryInfo = map[string]interface{}{
+						"cca2":    country.CCA2,
+						"name":    country.GetTranslatedName(locale),
+						"flagUrl": "/assets/twemoji_flags_cca2/" + country.CCA2 + ".svg",
+					}
+					break
+				}
+			}
+		}
+
+		entryMap := map[string]interface{}{
 			"guess":     entry.Guess,
 			"fact":      factText,
 			"isCorrect": isEntryCorrect,
-		})
+		}
+		if countryInfo != nil {
+			entryMap["country"] = countryInfo
+		}
+
+		guessHistory = append(guessHistory, entryMap)
 	}
 
 	// Get next fact if wrong guess and tries left
@@ -1949,6 +1982,7 @@ func (h *FactsGameHandler) Skip(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Build guess history with formatted facts
+	countries := data.LoadCountries()
 	guessHistory := []map[string]interface{}{}
 	for i, entry := range result.GuessHistory {
 		var factText string
@@ -1960,11 +1994,31 @@ func (h *FactsGameHandler) Skip(w http.ResponseWriter, r *http.Request) {
 		// Skip entries are not correct
 		isEntryCorrect := false
 
-		guessHistory = append(guessHistory, map[string]interface{}{
+		// Find country from guess string (skip if guess is "Skip")
+		var countryInfo map[string]interface{}
+		if strings.ToLower(strings.TrimSpace(entry.Guess)) != "skip" {
+			for _, country := range countries {
+				if utils.MatchCountry(entry.Guess, country, utils.MatchAll) {
+					countryInfo = map[string]interface{}{
+						"cca2":    country.CCA2,
+						"name":    country.GetTranslatedName(locale),
+						"flagUrl": "/assets/twemoji_flags_cca2/" + country.CCA2 + ".svg",
+					}
+					break
+				}
+			}
+		}
+
+		entryMap := map[string]interface{}{
 			"guess":     entry.Guess,
 			"fact":      factText,
 			"isCorrect": isEntryCorrect,
-		})
+		}
+		if countryInfo != nil {
+			entryMap["country"] = countryInfo
+		}
+
+		guessHistory = append(guessHistory, entryMap)
 	}
 
 	// Build response - same format as SubmitGuess when triesLeft = 0

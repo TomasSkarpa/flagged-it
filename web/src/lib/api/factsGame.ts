@@ -12,6 +12,11 @@ export interface GuessHistoryEntry {
 	guess: string;
 	fact: string;
 	isCorrect?: boolean;
+	country?: {
+		cca2: string;
+		name: string;
+		flagUrl: string;
+	};
 }
 
 export interface FactsGameSession {
@@ -25,7 +30,9 @@ export interface FactsGameSession {
 }
 
 export interface GuessResponse {
+	isValidGuess?: boolean;
 	isCorrect: boolean;
+	error?: string;
 	triesLeft: number;
 	score: number;
 	total: number;

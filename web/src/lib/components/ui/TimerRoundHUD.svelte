@@ -12,9 +12,19 @@
 		<Timer {time} {maxTime} />
 		<div class="flex flex-col">
 			<p class="text-xs text-sandy uppercase tracking-wide font-semibold">Round</p>
-			<p class="text-xl font-bold stat-number text-sandy-light">{currentRound} / {totalRounds}</p>
+			<p class="text-xl font-bold stat-number text-sandy-light round-counter-hud">{currentRound} / {totalRounds}</p>
 		</div>
 	</div>
 </div>
+
+<style>
+	/* Light mode: round counter text should be dark */
+	:global(:root.light) .round-counter-hud {
+		color: #0F172A !important;
+	}
+	:global(:root.light) .text-xs.text-sandy {
+		color: #64748B !important;
+	}
+</style>
 
 

@@ -11,6 +11,7 @@
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
 	import { getCountryNameForLocale } from '$lib/utils/countryNames';
+	import { calculateCurrentRound } from '$lib/utils/gameUtils';
 	import { getAllCountries } from '$lib/api/debug';
 	import type { Country } from '$lib/types';
 
@@ -34,6 +35,7 @@
 	let allCountries: Country[] = [];
 	let countriesLoaded = false;
 	const totalRounds = 5;
+	let guessInputElement: HTMLInputElement | null = null;
 
 	// Reactive translations
 	$: currentLocale = $locale;
@@ -145,6 +147,17 @@
 
 		try {
 			const result = await submitGuess(sessionId, countryName);
+			
+			// Check if guess is valid (country exists)
+			if (result.isValidGuess === false) {
+				error = result.error || 'Country not found';
+				isLoading = false;
+				// Focus input so user can correct their guess
+				setTimeout(() => {
+					guessInputElement?.focus();
+				}, 0);
+				return;
+			}
 			
 			isCorrect = result.isCorrect;
 			triesLeft = result.triesLeft;
@@ -268,6 +281,7 @@
 		isLoading = true;
 		error = null;
 		showFeedback = false;
+		guessInput = ''; // Clear input
 
 		try {
 			console.log('Skipping round...');
@@ -275,35 +289,42 @@
 			console.log('Skip result:', result);
 			
 			isCorrect = false;
-			triesLeft = result.triesLeft;
-			score = result.score;
-			total = result.total;
-			guessHistory = result.guessHistory;
+			triesLeft = result.triesLeft || 0;
+			score = result.score || 0;
+			total = result.total || 0;
+			guessHistory = result.guessHistory || [];
 
 			// Show skipped message with correct answer
 			if (result.correctCountry) {
 				const country = allCountries.find(c => c.cca2 === result.correctCountry!.cca2);
-				correctCountryName = country ? getCountryName(country, currentLocale) : result.correctCountry.name;
+				correctCountryName = country ? getCountryNameForLocale(country) : result.correctCountry.name;
 				correctCountryCca2 = result.correctCountry.cca2;
 				statusMessage = `Skipped! The answer was ${correctCountryName}`;
 			} else {
 				statusMessage = 'Skipped!';
+				correctCountryName = '';
+				correctCountryCca2 = '';
 			}
 			showFeedback = true;
 
 			// Wait 2 seconds, then start next round or finish game
 			setTimeout(async () => {
+				showFeedback = false;
+				statusMessage = '';
 				if (result.isComplete) {
 					gameFinished = true;
 					gameStarted = false;
+					isLoading = false;
 				} else {
+					// Clear current fact before loading next round
+					currentFact = '';
+					factNumber = 0;
 					await handleNextRound();
 				}
 			}, 2000);
 		} catch (err) {
 			error = err instanceof Error ? err.message : 'Failed to skip round';
 			console.error('Skip error:', err);
-		} finally {
 			isLoading = false;
 		}
 	}
@@ -370,7 +391,7 @@
 				<GameHeader
 					{score}
 					{total}
-					currentRound={total + 1}
+					currentRound={calculateCurrentRound(total, totalRounds)}
 					{totalRounds}
 				/>
 
@@ -424,7 +445,7 @@
 							{:else if isCorrect === false}
 								<span class="text-3xl">✗</span>
 							{/if}
-							<p class="text-center font-semibold text-lg {isCorrect === true ? 'text-success' : isCorrect === false && !isSkip ? 'text-error' : isSkip ? 'text-text-light' : 'text-sandy-light'}">
+							<p class="text-center font-semibold text-lg status-message {isCorrect === true ? 'text-success' : isCorrect === false && !isSkip ? 'text-error' : isSkip ? 'text-text-light' : 'text-sandy-light'}">
 								{statusMessage}
 							</p>
 						</div>
@@ -437,7 +458,7 @@
 										class="w-6 h-4 object-cover rounded"
 									/>
 								{/if}
-								<span class="text-text-light font-medium">{correctCountryName}</span>
+								<span class="text-text-light font-medium correct-country-name">{correctCountryName}</span>
 							</div>
 						{/if}
 					</div>
@@ -453,6 +474,7 @@
 						<div class="flex flex-col sm:flex-row gap-3">
 							<input
 								type="text"
+								bind:this={guessInputElement}
 								bind:value={guessInput}
 								on:keypress={handleKeyPress}
 								placeholder={enterCountryText}
@@ -501,5 +523,15 @@
 
 	:global(:root.light) .fact-bold {
 		color: var(--color-text) !important;
+	}
+
+	/* Light mode: correct country name should be black */
+	:global(:root.light) .correct-country-name {
+		color: #0F172A !important;
+	}
+
+	/* Light mode: status message should be black (but preserve success/error colors) */
+	:global(:root.light) .status-message:not(.text-success):not(.text-error) {
+		color: #0F172A !important;
 	}
 </style>

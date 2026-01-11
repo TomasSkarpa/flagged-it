@@ -35,6 +35,7 @@ import hi from './locales/hi.json';
 import th from './locales/th.json';
 import uk from './locales/uk.json';
 import he from './locales/he.json';
+import el from './locales/el.json';
 
 // Translation dictionary
 const translations: Record<string, Record<string, string>> = {
@@ -69,7 +70,8 @@ const translations: Record<string, Record<string, string>> = {
 	hi,
 	th,
 	uk,
-	he
+	he,
+	el
 };
 
 // Fallback to English if translation is missing

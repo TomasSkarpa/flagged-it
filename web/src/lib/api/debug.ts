@@ -8,14 +8,17 @@ export interface CountriesResponse {
 	total: number;
 }
 
-export async function getAllCountries(): Promise<CountriesResponse> {
-	const currentLocale = get(locale);
+export async function getAllCountries(localeOverride?: string): Promise<CountriesResponse> {
+	const currentLocale = localeOverride || get(locale);
 	const url = `${getApiUrl(API_ENDPOINTS.DEBUG_COUNTRIES)}?locale=${currentLocale}`;
 	const response = await fetch(url);
 	if (!response.ok) {
-		throw new Error('Failed to fetch countries');
+		const errorText = await response.text();
+		console.error('API Error:', errorText);
+		throw new Error(`Failed to fetch countries: ${response.status} ${response.statusText}`);
 	}
-	return response.json();
+	const data = await response.json();
+	return data;
 }
 
 export async function getCountryGeoJSON(cca3: string): Promise<any> {

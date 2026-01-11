@@ -105,14 +105,14 @@
 				<span class="gradient-text">{heroTitle || 'Flagged It'}</span>
 			</h1>
 			{#if heroSubtitle}
-				<p class="text-xl md:text-2xl text-text-muted mb-2">
-					{heroSubtitle}
-				</p>
+			<p class="text-xl md:text-2xl text-text-muted mb-2">
+				{heroSubtitle}
+			</p>
 			{/if}
 			{#if heroDescription}
-				<p class="text-lg text-text-dark">
-					{heroDescription}
-				</p>
+			<p class="text-lg text-text-dark">
+				{heroDescription}
+			</p>
 			{/if}
 		</header>
 		
@@ -123,23 +123,23 @@
 					<a
 						href={game.route}
 						class="card-game text-left transition-all duration-300 hover:shadow-glow hover:-translate-y-2 cursor-pointer block no-underline"
-					>
-						<div class="flex items-start gap-4">
-							<div class="text-5xl leading-none">{game.icon}</div>
-							<div class="flex-1">
-								<h2 class="text-2xl font-bold text-sandy-light mb-2 leading-none mt-0">
-									{game.title}
-								</h2>
-								<p class="text-text-muted mb-4">
-									{game.description}
-								</p>
+				>
+					<div class="flex items-start gap-4">
+						<div class="text-5xl leading-none">{game.icon}</div>
+						<div class="flex-1">
+							<h2 class="text-2xl font-bold text-sandy-light mb-2 leading-none mt-0">
+								{game.title}
+							</h2>
+							<p class="text-text-muted mb-4">
+								{game.description}
+							</p>
 								<span class="inline-block px-4 py-2 bg-primary/20 border border-primary rounded-lg text-primary font-semibold">
 									{playNow}
 								</span>
 							</div>
 						</div>
 					</a>
-				{:else}
+							{:else}
 					<div
 						class="card-game text-left opacity-50 cursor-not-allowed"
 						aria-disabled="true"
@@ -228,7 +228,7 @@
 		max-width: 2100px;
 		height: auto;
 		opacity: 0.052;
-		mix-blend-mode: soft-light;
+			mix-blend-mode: soft-light;
 		filter: blur(5px) brightness(2) contrast(1.2) saturate(1.6);
 		transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
 	}
@@ -248,7 +248,7 @@
 
 	/* Light mode adjustments for better visibility */
 	:global(:root.light) .world-map-svg {
-		opacity: 0.18;
+			opacity: 0.18;
 		mix-blend-mode: multiply;
 		filter: blur(4px) brightness(0.6) contrast(1.4) saturate(1.2);
 	}

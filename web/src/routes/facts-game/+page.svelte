@@ -334,7 +334,8 @@
 		// Remove "Fact X: " prefix if present (backend includes it)
 		const cleanedFact = fact.replace(/^Fact \d+:\s*/i, '');
 		// Convert markdown-style bold **text** to HTML <strong>text</strong> with styling
-		const formatted = cleanedFact.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-white">$1</strong>');
+		// Use fact-bold class that adapts to light/dark mode
+		const formatted = cleanedFact.replace(/\*\*(.*?)\*\*/g, '<strong class="fact-bold font-bold">$1</strong>');
 		return formatted || cleanedFact || fact;
 	}
 </script>
@@ -491,3 +492,14 @@
 		{/if}
 	</div>
 </div>
+
+<style>
+	/* Bold text in facts - visible in both light and dark mode */
+	:global(.fact-bold) {
+		color: var(--color-text-light);
+	}
+
+	:global(:root.light) .fact-bold {
+		color: var(--color-text) !important;
+	}
+</style>

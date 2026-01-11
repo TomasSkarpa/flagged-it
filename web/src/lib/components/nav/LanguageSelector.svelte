@@ -147,13 +147,17 @@
 	}
 	
 	:global(:root.light) .language-btn {
-		border-color: rgba(0, 0, 0, 0.15);
-		background: rgba(0, 0, 0, 0.04);
+		border-color: rgba(0, 0, 0, 0.25);
+		border-width: 1.5px;
+		background: rgba(0, 0, 0, 0.06);
+		color: var(--color-text);
 	}
 	
 	:global(:root.light) .language-btn:hover {
-		background: rgba(0, 0, 0, 0.08);
-		border-color: rgba(0, 0, 0, 0.25);
+		background: rgba(0, 0, 0, 0.12);
+		border-color: rgba(0, 0, 0, 0.4);
+		border-width: 1.5px;
+		color: var(--color-text-light);
 	}
 	
 	.flag {
@@ -198,8 +202,10 @@
 	}
 	
 	:global(:root.light) .dropdown {
-		border-color: rgba(0, 0, 0, 0.15);
-		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+		border-color: rgba(0, 0, 0, 0.25);
+		border-width: 1.5px;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+		background: var(--color-surface);
 	}
 	
 	@keyframes dropdownIn {
@@ -224,7 +230,9 @@
 	}
 	
 	:global(:root.light) .dropdown-header {
-		border-bottom-color: rgba(0, 0, 0, 0.1);
+		border-bottom-color: rgba(0, 0, 0, 0.2);
+		border-bottom-width: 1.5px;
+		color: var(--color-text);
 	}
 	
 	.dropdown-list {
@@ -266,17 +274,26 @@
 		transition: all 0.15s;
 	}
 	
+	:global(:root.light) .dropdown-item {
+		color: var(--color-text);
+	}
+	
 	.dropdown-item:hover {
 		background: rgba(255, 255, 255, 0.08);
 	}
 	
 	:global(:root.light) .dropdown-item:hover {
-		background: rgba(0, 0, 0, 0.06);
+		background: rgba(0, 0, 0, 0.12);
 	}
 	
 	.dropdown-item.selected {
 		background: rgba(99, 102, 241, 0.15);
 		color: var(--color-primary-light);
+	}
+	
+	:global(:root.light) .dropdown-item.selected {
+		background: rgba(99, 102, 241, 0.2);
+		color: var(--color-primary-dark);
 	}
 	
 	.lang-name {

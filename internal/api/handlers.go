@@ -53,12 +53,11 @@ func getTranslatedCountry(country models.Country, locale string) models.Country 
 	// Get the translated name first - use pointer to ensure method works correctly
 	translatedName := (&country).GetTranslatedName(locale)
 
-	// Log warning only if translation failed for non-English locales
-	if locale != "en" && translatedName == country.Name.Common {
-		log.Printf("WARNING: Translation failed for locale '%s', country '%s' (CCA2: %s). Translations map is nil: %v",
-			locale, country.Name.Common, country.CCA2, country.Name.Translations == nil)
-		if country.Name.Translations != nil {
-			log.Printf("Available translations for %s: %v", country.CCA2, country.Name.Translations)
+	// Log warning only if translation actually failed (translation doesn't exist in map)
+	if locale != "en" && country.Name.Translations != nil {
+		if _, exists := country.Name.Translations[locale]; !exists && translatedName == country.Name.Common {
+			log.Printf("WARNING: Translation missing for locale '%s', country '%s' (CCA2: %s)",
+				locale, country.Name.Common, country.CCA2)
 		}
 	}
 

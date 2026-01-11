@@ -24,15 +24,17 @@
 		await loadCountries();
 	});
 
-	async function loadCountries() {
+	async function loadCountries(localeOverride?: string) {
 		if (isLoading) {
 			return; // Prevent concurrent loads
 		}
 		isLoading = true;
 		error = null;
 		try {
+			// Use the provided locale or fall back to currentLocale
+			const localeToUse = localeOverride || currentLocale;
 			// Fetch countries with the selected locale
-			const result = await getAllCountries(currentLocale);
+			const result = await getAllCountries(localeToUse);
 			
 			if (!result || !result.countries || result.countries.length === 0) {
 				countries = [];
@@ -43,7 +45,7 @@
 			countries = result.countries.sort((a, b) => {
 				const nameA = getCountryNameForLocale(a);
 				const nameB = getCountryNameForLocale(b);
-				return nameA.localeCompare(nameB, currentLocale);
+				return nameA.localeCompare(nameB, localeToUse);
 			});
 		} catch (err) {
 			error = err instanceof Error ? err.message : 'Failed to load countries';
@@ -57,21 +59,24 @@
 	async function nextLanguage() {
 		if (currentLanguageIndex < languages.length - 1) {
 			currentLanguageIndex++;
-			await loadCountries();
+			const nextLanguage = languages[currentLanguageIndex];
+			await loadCountries(nextLanguage?.code);
 		}
 	}
 
 	async function prevLanguage() {
 		if (currentLanguageIndex > 0) {
 			currentLanguageIndex--;
-			await loadCountries();
+			const prevLanguage = languages[currentLanguageIndex];
+			await loadCountries(prevLanguage?.code);
 		}
 	}
 
 	async function goToLanguage(index: number) {
 		if (index >= 0 && index < languages.length) {
 			currentLanguageIndex = index;
-			await loadCountries();
+			const selectedLanguage = languages[index];
+			await loadCountries(selectedLanguage?.code);
 		}
 	}
 </script>

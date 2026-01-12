@@ -133,11 +133,23 @@
 		try {
 			const question = await getCapitalQuestion(sessionId);
 			currentQuestion = question;
+			// Reset selectedAnswer when new question loads
+			selectedAnswer = null;
 		} catch (err) {
 			error = err instanceof Error ? err.message : failedToStartGameError;
 			console.error('Load question error:', err);
 		} finally {
 			isLoading = false;
+		}
+	}
+
+	// Track previous question ID to reset selectedAnswer when question changes
+	let previousQuestionId: string | null = null;
+	$: if (currentQuestion?.questionId && currentQuestion.questionId !== previousQuestionId) {
+		previousQuestionId = currentQuestion.questionId;
+		// Reset selectedAnswer when question changes (but not during feedback)
+		if (!showFeedback) {
+			selectedAnswer = null;
 		}
 	}
 
@@ -200,6 +212,7 @@
 					<div class="mb-10"></div>
 					
 					<AnswerGrid
+						key={currentQuestion.questionId}
 						options={currentQuestion.options}
 						{selectedAnswer}
 						correctAnswer={correctCapital}

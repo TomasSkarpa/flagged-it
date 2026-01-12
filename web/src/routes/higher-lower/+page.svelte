@@ -49,6 +49,24 @@
 	$: lowerText = t('game.higher_lower.lower', undefined, currentLocale);
 	$: scoreLabelText = t('game.higher_lower.score', [score], currentLocale);
 
+	// Re-fetch current comparison when locale changes (to update country names)
+	let previousLocale: string = currentLocale;
+	$: if (gameStarted && sessionId && comparison && currentLocale !== previousLocale && !isLoading && !gameOver && !isAnimating) {
+		previousLocale = currentLocale;
+		// Re-start the game with the same category to get translated country names
+		// Note: This will reset the score, but it's the only way to get translated names
+		// Alternatively, we could submit a dummy answer to get nextComparison, but that's not ideal
+		// For now, we'll just restart the game with the same category
+		startHigherLowerGame(selectedCategory).then(result => {
+			sessionId = result.sessionId;
+			comparison = result.comparison;
+			score = result.score; // Reset score as we're restarting
+			highScore = result.highScore;
+		}).catch(err => {
+			console.error('Failed to reload comparison with new locale:', err);
+		});
+	}
+
 	$: categories = [
 		{ value: 'population' as HigherLowerCategory, label: t('game.higher_lower.category.population', undefined, currentLocale), icon: '👥', description: t('game.higher_lower.category.population.desc', undefined, currentLocale) },
 		{ value: 'area' as HigherLowerCategory, label: t('game.higher_lower.category.area', undefined, currentLocale), icon: '📐', description: t('game.higher_lower.category.area.desc', undefined, currentLocale) },

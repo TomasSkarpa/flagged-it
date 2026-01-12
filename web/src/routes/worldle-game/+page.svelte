@@ -5,7 +5,7 @@
 		GameOverScreen 
 	} from '$lib/components/game';
 	import { browser } from '$app/environment';
-	import { startWorldleGame, submitGuess, formatNumber, type GuessEntry } from '$lib/api/worldleGame';
+	import { startWorldleGame, submitGuess, formatNumber, getGameState, type GuessEntry } from '$lib/api/worldleGame';
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
 	import { getCountryNameForLocale } from '$lib/utils/countryNames';
@@ -41,6 +41,20 @@
 	$: correctText = t('game.guessing.correct', undefined, currentLocale);
 	$: playAgainText = t('game.over.play_again', undefined, currentLocale);
 	$: excellentMessage = t('game.over.excellent', undefined, currentLocale);
+
+	// Re-fetch game state when locale changes (to update country names in guesses)
+	let previousLocale: string = currentLocale;
+	$: if (gameStarted && sessionId && currentLocale !== previousLocale && !isLoading && !gameComplete) {
+		previousLocale = currentLocale;
+		// Re-fetch the game state with new locale to get translated country names
+		getGameState(sessionId).then(state => {
+			guesses = state.guesses || guesses;
+			guessCount = state.guessCount || guessCount;
+			guessInput = '';
+		}).catch(err => {
+			console.error('Failed to reload game state with new locale:', err);
+		});
+	}
 
 	onMount(async () => {
 		// Only load countries in browser, not during SSR

@@ -52,6 +52,24 @@
 	$: wrongNoMoreText = t('game.facts.wrong_no_more', undefined, currentLocale);
 	$: excellentMessage = t('game.over.excellent', undefined, currentLocale);
 	$: playAgainText = t('game.over.play_again', undefined, currentLocale);
+
+	// Re-fetch current fact when locale changes (to update country names)
+	let previousLocale: string = currentLocale;
+	$: if (gameStarted && sessionId && currentLocale !== previousLocale && !showFeedback && !isLoading && !gameFinished) {
+		previousLocale = currentLocale;
+		// Re-fetch the current fact with new locale to get translated country names
+		nextRound(sessionId).then(result => {
+			currentFact = result.currentFact || '';
+			factNumber = result.factNumber || factNumber;
+			triesLeft = result.triesLeft || triesLeft;
+			score = result.score || score;
+			total = result.total || total;
+			guessInput = '';
+			correctCountryName = '';
+		}).catch(err => {
+			console.error('Failed to reload fact with new locale:', err);
+		});
+	}
 	
 	// Reactive formatted fact - ensure it updates when currentFact changes
 	$: formattedFact = currentFact && currentFact.trim() !== '' ? formatFact(currentFact) : '';

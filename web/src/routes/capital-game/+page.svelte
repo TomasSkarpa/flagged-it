@@ -153,6 +153,23 @@
 		}
 	}
 
+	// Re-fetch current question when locale changes (to update country and capital names)
+	let previousLocale: string = currentLocale;
+	$: if (gameStarted && currentQuestion && currentLocale !== previousLocale && !showFeedback && !isLoading) {
+		previousLocale = currentLocale;
+		// Re-fetch the current question with new locale to get translated names
+		if (sessionId && currentQuestion) {
+			getCapitalQuestion(sessionId).then(question => {
+				currentQuestion = question;
+				selectedAnswer = null;
+				// Clear correctCapital - it will be set again when user submits next answer
+				correctCapital = '';
+			}).catch(err => {
+				console.error('Failed to reload question with new locale:', err);
+			});
+		}
+	}
+
 	function handlePlayAgain() {
 		gameStarted = false;
 		gameFinished = false;

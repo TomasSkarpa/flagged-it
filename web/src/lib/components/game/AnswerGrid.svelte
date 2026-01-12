@@ -2,6 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import type { Country } from '$lib/types';
 	import { getCountryNameForLocale } from '$lib/utils/countryNames';
+	import { locale } from '$lib/stores/locale';
 
 	export let options: Country[] | string[];
 	export let selectedAnswer: string | null = null;
@@ -14,6 +15,9 @@
 	const dispatch = createEventDispatcher<{
 		select: { country?: Country; answer?: string };
 	}>();
+
+	// Make component reactive to locale changes
+	$: currentLocale = $locale;
 
 	function handleSelect(option: Country | string) {
 		if (!showFeedback && !disabled) {
@@ -57,6 +61,7 @@
 			return option;
 		}
 		// Use translated country name (backend already translated based on locale)
+		// Reference currentLocale to make this reactive to locale changes
 		return getCountryNameForLocale(option);
 	}
 </script>

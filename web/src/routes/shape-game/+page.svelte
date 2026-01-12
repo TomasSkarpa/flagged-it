@@ -121,6 +121,23 @@
 		}
 	}
 
+	// Re-fetch current question when locale changes (to update country names)
+	let previousLocale: string = currentLocale;
+	$: if (gameStarted && currentQuestion && currentLocale !== previousLocale && !showFeedback && !isLoading) {
+		previousLocale = currentLocale;
+		// Re-fetch the current question with new locale to get translated country names
+		if (sessionId && currentQuestion) {
+			getShapeQuestion(sessionId).then(question => {
+				currentQuestion = question;
+				selectedAnswer = null;
+				// Clear correctAnswer - it will be set again when user submits next answer
+				correctAnswer = '';
+			}).catch(err => {
+				console.error('Failed to reload question with new locale:', err);
+			});
+		}
+	}
+
 	function handlePlayAgain() {
 		gameStarted = false;
 		gameFinished = false;

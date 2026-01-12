@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { theme, type Theme } from '$lib/stores/theme';
+	import { activeDropdown, toggleDropdown as toggleDropdownStore, closeDropdown } from '$lib/stores/dropdown';
 	
-	let isOpen = false;
 	let dropdownRef: HTMLDivElement;
 	
 	const themes: { value: Theme; label: string; icon: string }[] = [
@@ -11,17 +11,17 @@
 	];
 	
 	function toggleDropdown() {
-		isOpen = !isOpen;
+		toggleDropdownStore('theme');
 	}
 	
 	function selectTheme(value: Theme) {
 		theme.set(value);
-		isOpen = false;
+		closeDropdown();
 	}
 	
 	function handleClickOutside(event: MouseEvent) {
 		if (dropdownRef && !dropdownRef.contains(event.target as Node)) {
-			isOpen = false;
+			closeDropdown();
 		}
 	}
 	
@@ -29,6 +29,8 @@
 		const current = themes.find(t => t.value === $theme);
 		return current?.icon || '🌙';
 	}
+	
+	$: isOpen = $activeDropdown === 'theme';
 </script>
 
 <svelte:window on:click={handleClickOutside} />

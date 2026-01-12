@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { locale } from '$lib/stores/locale';
+	import { activeDropdown, toggleDropdown as toggleDropdownStore, closeDropdown } from '$lib/stores/dropdown';
 	
-	let isOpen = false;
 	let dropdownRef: HTMLDivElement;
 	
 	const languages = locale.getSupportedLocales();
@@ -44,17 +44,17 @@
 	};
 	
 	function toggleDropdown() {
-		isOpen = !isOpen;
+		toggleDropdownStore('language');
 	}
 	
 	function selectLanguage(code: string) {
 		locale.set(code);
-		isOpen = false;
+		closeDropdown();
 	}
 	
 	function handleClickOutside(event: MouseEvent) {
 		if (dropdownRef && !dropdownRef.contains(event.target as Node)) {
-			isOpen = false;
+			closeDropdown();
 		}
 	}
 	
@@ -63,6 +63,7 @@
 	}
 	
 	$: currentLang = getCurrentLanguage();
+	$: isOpen = $activeDropdown === 'language';
 </script>
 
 <svelte:window on:click={handleClickOutside} />

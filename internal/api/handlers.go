@@ -31,14 +31,16 @@ type GameAnswer struct {
 }
 
 type GameSession struct {
-	SessionID          string          `json:"sessionId"`
-	Score              int             `json:"score"`
-	Total              int             `json:"total"`
-	Region             string          `json:"region"`
-	Locale             string          `json:"-"` // User's locale for translations
-	UsedCountries      map[string]bool `json:"-"`
-	CurrentCorrectCCA2 string          `json:"-"`
-	CurrentCorrectName string          `json:"-"`
+	SessionID              string          `json:"sessionId"`
+	Score                  int             `json:"score"`
+	Total                  int             `json:"total"`
+	Region                 string          `json:"region"`
+	Locale                 string          `json:"-"` // User's locale for translations
+	UsedCountries          map[string]bool `json:"-"`
+	CurrentCorrectCCA2     string          `json:"-"`
+	CurrentCorrectName     string          `json:"-"`
+	CurrentQuestionID      string          `json:"-"` // Track current question ID to prevent regeneration
+	CurrentQuestionCountry string          `json:"-"` // Track current question's country CCA2
 }
 
 var (
@@ -194,7 +196,17 @@ func (h *FlagGameHandler) GetQuestion(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	question := generateQuestion(filteredCountries, session, locale)
+	// Only generate a new question if one hasn't been generated yet for this round
+	var question GameQuestion
+	if session.CurrentQuestionID != "" && session.CurrentQuestionCountry != "" {
+		// Return the same question (regenerate with same country to ensure translations are up to date)
+		question = regenerateQuestionWithCountry(filteredCountries, session, locale, session.CurrentQuestionCountry)
+	} else {
+		// Generate a new question
+		question = generateQuestion(filteredCountries, session, locale)
+		session.CurrentQuestionID = question.QuestionID
+		session.CurrentQuestionCountry = session.CurrentCorrectCCA2
+	}
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(question)
@@ -269,6 +281,9 @@ func (h *FlagGameHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request) {
 		if correct {
 			session.Score++
 		}
+		// Clear current question so next GetQuestion call will generate a new one
+		session.CurrentQuestionID = ""
+		session.CurrentQuestionCountry = ""
 	}
 
 	response := map[string]interface{}{
@@ -359,6 +374,63 @@ func generateQuestion(availableCountries []models.Country, session *GameSession,
 
 	flagURL := "/assets/twemoji_flags_cca2/" + country.CCA2 + ".svg"
 	questionID := generateQuestionID()
+
+	// Translate country names in options
+	translatedOptions := getTranslatedCountries(options, locale)
+
+	return GameQuestion{
+		FlagURL:    flagURL,
+		Options:    translatedOptions,
+		QuestionID: questionID,
+	}
+}
+
+// regenerateQuestionWithCountry regenerates a question with the same country (for locale updates)
+func regenerateQuestionWithCountry(availableCountries []models.Country, session *GameSession, locale string, countryCCA2 string) GameQuestion {
+	// Find the country
+	var country models.Country
+	for _, c := range availableCountries {
+		if c.CCA2 == countryCCA2 {
+			country = c
+			break
+		}
+	}
+
+	// If country not found, generate a new question instead
+	if country.CCA2 == "" {
+		return generateQuestion(availableCountries, session, locale)
+	}
+
+	// Store correct answer in session
+	session.CurrentCorrectCCA2 = country.CCA2
+	session.CurrentCorrectName = country.Name.Common
+
+	// Generate options with translated names (same country, but options may vary)
+	options := []models.Country{country}
+	usedOptions := make(map[string]bool)
+	usedOptions[country.CCA2] = true
+
+	for len(options) < 4 {
+		option := availableCountries[rand.Intn(len(availableCountries))]
+		if !usedOptions[option.CCA2] {
+			options = append(options, option)
+			usedOptions[option.CCA2] = true
+		}
+	}
+
+	// Shuffle options
+	rand.Shuffle(len(options), func(i, j int) {
+		options[i], options[j] = options[j], options[i]
+	})
+
+	flagURL := "/assets/twemoji_flags_cca2/" + country.CCA2 + ".svg"
+	// Keep the same question ID to maintain consistency
+	questionID := session.CurrentQuestionID
+	if questionID == "" {
+		// If no question ID exists, generate one (shouldn't happen, but safety check)
+		questionID = generateQuestionID()
+		session.CurrentQuestionID = questionID
+	}
 
 	// Translate country names in options
 	translatedOptions := getTranslatedCountries(options, locale)

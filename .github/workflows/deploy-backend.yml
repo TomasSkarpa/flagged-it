@@ -79,18 +79,6 @@ jobs:
             sudo nginx -t && sudo systemctl reload nginx
           fi
 
-          # Update Fail2Ban configuration if installed
-          if [ -d /etc/fail2ban ]; then
-            # Remove old filter file if it exists
-            sudo rm -f /etc/fail2ban/filter.d/nginx-strict-bots.conf
-            
-            # Copy new jail config (which now includes the filter regex inline)
-            if [ -f .github/deploy/fail2ban-jail.conf ]; then
-              sudo cp .github/deploy/fail2ban-jail.conf /etc/fail2ban/jail.d/flagged-it.conf
-            fi
-            sudo systemctl restart fail2ban || true
-          fi
-          
           # Start service
           sudo systemctl start flagged-it.service
           sleep 2

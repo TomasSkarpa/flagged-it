@@ -67,7 +67,7 @@ func (l *Logic) NewGame() error {
 }
 
 // MakeGuess processes a guess and returns feedback (server-side validation)
-func (l *Logic) MakeGuess(guessCountryName string) (*GuessResult, error) {
+func (l *Logic) MakeGuess(guessCountryName string, locale string) (*GuessResult, error) {
 	if l.state.IsComplete {
 		return nil, ErrGameComplete
 	}
@@ -77,7 +77,7 @@ func (l *Logic) MakeGuess(guessCountryName string) (*GuessResult, error) {
 	}
 
 	// Find the guessed country (server validates it exists)
-	guessedCountry := l.findCountry(guessCountryName)
+	guessedCountry := l.findCountry(guessCountryName, locale)
 	if guessedCountry == nil {
 		return &GuessResult{
 			IsValidGuess: false,
@@ -174,9 +174,9 @@ func (l *Logic) calculateProximity(guess, target float64) string {
 }
 
 // findCountry finds a country by name (server-side lookup)
-func (l *Logic) findCountry(name string) *models.Country {
+func (l *Logic) findCountry(name string, locale string) *models.Country {
 	for _, country := range l.countries {
-		if utils.MatchCountry(name, country, utils.MatchAll) {
+		if utils.MatchesCountry(name, country, locale) {
 			return &country
 		}
 	}

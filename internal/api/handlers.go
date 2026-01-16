@@ -1622,7 +1622,7 @@ func (h *WorldleGameHandler) SubmitGuess(w http.ResponseWriter, r *http.Request)
 	session.Locale = locale
 
 	// Make guess using game logic
-	result, err := session.Logic.MakeGuess(req.CountryName)
+	result, err := session.Logic.MakeGuess(req.CountryName, locale)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return

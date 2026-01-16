@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func MatchesCountry(guess string, country models.Country) bool {
+func MatchesCountry(guess string, country models.Country, locale string) bool {
 	guess = strings.ToLower(strings.TrimSpace(guess))
 	if guess == "" {
 		return false
@@ -19,6 +19,15 @@ func MatchesCountry(guess string, country models.Country) bool {
 	// Check official name
 	if strings.EqualFold(guess, country.Name.Official) {
 		return true
+	}
+
+	// Check translations if locale is provided
+	if locale != "" && country.Name.Translations != nil {
+		if translatedName, ok := country.Name.Translations[locale]; ok {
+			if strings.EqualFold(guess, translatedName) {
+				return true
+			}
+		}
 	}
 
 	// Check country codes (CCA2 like US, and CCA3 like USA)

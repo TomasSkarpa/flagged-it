@@ -5,6 +5,7 @@
 	import { theme } from '$lib/stores/theme';
 	import { getMetaDescription } from '$lib/translations/meta';
 	import { Navigation } from '$lib/components/nav';
+	import { hasAppleEmoji } from '$lib/utils/platform';
 	import { onMount } from 'svelte';
 	// These props are provided by SvelteKit but not used in this layout
 	export const data: any = {};
@@ -23,6 +24,11 @@
 		const storedTheme = localStorage.getItem('theme');
 		if (storedTheme === 'light' || storedTheme === 'dark' || storedTheme === 'system') {
 			theme.set(storedTheme);
+		}
+		
+		// Apply Twemoji font if device doesn't have Apple emoji
+		if (typeof document !== 'undefined' && !hasAppleEmoji()) {
+			document.documentElement.classList.add('use-twemoji');
 		}
 		
 		// RTL languages

@@ -1,5 +1,12 @@
 @import 'leaflet/dist/leaflet.css';
 
+@font-face {
+	font-family: 'Twemoji';
+	src: url('/assets/fonts/twemoji.ttf') format('truetype');
+	unicode-range: U+1F300-1F9FF, U+2600-26FF, U+2700-27BF, U+1F1E0-1F1FF, U+1F600-1F64F, U+1F680-1F6FF, U+1F700-1F77F, U+1F780-1F7FF, U+1F800-1F8FF, U+1F900-1F9FF, U+1FA00-1FA6F, U+1FA70-1FAFF, U+200D, U+20E3, U+FE0F, U+FE00-FE0F;
+	font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -99,6 +106,13 @@
 		min-height: 100vh;
 		background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-dark) 50%, var(--color-bg-light) 100%);
 		background-attachment: fixed;
+	}
+
+	/* Apply Twemoji font for emoji when device doesn't have Apple emoji */
+	/* The unicode-range in @font-face ensures Twemoji only applies to emoji characters */
+	html.use-twemoji,
+	html.use-twemoji * {
+		font-family: 'Twemoji', 'Inter', 'Open Sans', system-ui, sans-serif;
 	}
 
 	/* Light Theme */

@@ -24,7 +24,6 @@
   "game.wrong_short": "Wrong!",
   "game.score": "Score: {{.Score}}/10",
   "game.complete": "Game Complete! Final Score: {{.Score}}/10 ({{.Percent}}%)",
-  "game.round_progress": "Round %d/%d",
   "error.loading_countries": "Error loading countries data",
   "game.list.select_region": "Select Region",
   "game.list.choose_region": "Choose a region and try to name all countries in it!",

@@ -16,6 +16,7 @@
 	import { locale } from '$lib/stores/locale';
 	import { getKeyboardLayoutForLocale } from '$lib/utils/keyboardLayout';
 	import { calculateCurrentRound } from '$lib/utils/gameUtils';
+	import { triggerConfetti } from '$lib/utils/confetti';
 
 	let countries: Country[] = [];
 	let game: HangmanGame | null = null;
@@ -167,6 +168,15 @@
 			correctAnswer = '';
 			customMessage = '';
 			showFeedback = true;
+			
+			// Trigger confetti for win
+			triggerConfetti({
+				particleCount: 50,
+				spread: 60,
+				origin: { x: 0.5, y: 0.4 },
+				duration: 2500
+			});
+			
 			setTimeout(() => {
 				showFeedback = false;
 				if (result.isComplete) {

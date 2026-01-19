@@ -1,8 +1,13 @@
 <script lang="ts">
 	import { theme, type Theme } from '$lib/stores/theme';
 	import { activeDropdown, toggleDropdown as toggleDropdownStore, closeDropdown } from '$lib/stores/dropdown';
+	import { onMount, onDestroy } from 'svelte';
 	
 	let dropdownRef: HTMLDivElement;
+	let isHovered = false;
+	let cycleTimeout: ReturnType<typeof setTimeout> | null = null;
+	let displayedIconIndex = 0;
+	let isAnimating = false;
 	
 	const themes: { value: Theme; label: string; icon: string }[] = [
 		{ value: 'light', label: 'Light', icon: '☀️' },
@@ -17,6 +22,11 @@
 	function selectTheme(value: Theme) {
 		theme.set(value);
 		closeDropdown();
+		// Reset to show current theme icon after selection
+		const currentIndex = themes.findIndex(t => t.value === value);
+		if (currentIndex !== -1) {
+			displayedIconIndex = currentIndex;
+		}
 	}
 	
 	function handleClickOutside(event: MouseEvent) {
@@ -30,7 +40,159 @@
 		return current?.icon || '🌙';
 	}
 	
+	function getDisplayedIcon() {
+		return themes[displayedIconIndex]?.icon || getCurrentIcon();
+	}
+	
+	function getRandomDelay(): number {
+		// Random delay between 7-30 seconds (7000-30000ms)
+		return Math.floor(Math.random() * 23000) + 7000;
+	}
+	
+	function showAllThemes() {
+		if (isOpen || isHovered) return;
+		
+		const currentThemeIndex = themes.findIndex(t => t.value === $theme);
+		let currentCycleIndex = 0;
+		
+		// Function to show next theme in the cycle
+		const showNext = () => {
+			if (isOpen || isHovered) {
+				// Reset to current theme if interrupted
+				if (currentThemeIndex !== -1) {
+					displayedIconIndex = currentThemeIndex;
+				}
+				return;
+			}
+			
+			isAnimating = true;
+			displayedIconIndex = currentCycleIndex;
+			
+			currentCycleIndex++;
+			
+			if (currentCycleIndex < themes.length) {
+				// Continue cycling through all themes
+				setTimeout(() => {
+					isAnimating = false;
+					setTimeout(showNext, 100); // Delay between transitions
+				}, 800);
+			} else {
+				// After showing all, return to current theme
+				setTimeout(() => {
+					isAnimating = false;
+					if (currentThemeIndex !== -1) {
+						displayedIconIndex = currentThemeIndex;
+					}
+					// Schedule next showcase with random delay
+					scheduleNextShowcase();
+				}, 800);
+			}
+		};
+		
+		// Start the quick showcase
+		showNext();
+	}
+	
+	function scheduleNextShowcase() {
+		if (cycleTimeout) clearTimeout(cycleTimeout);
+		if (isOpen || isHovered) return;
+		
+		const delay = getRandomDelay();
+		cycleTimeout = setTimeout(() => {
+			if (!isOpen && !isHovered) {
+				showAllThemes();
+			}
+		}, delay);
+	}
+	
+	function startCycling() {
+		// Don't start if already cycling or if conditions aren't met
+		if (cycleTimeout || isOpen || isHovered) return;
+		
+		// Find current theme index to start from
+		const currentIndex = themes.findIndex(t => t.value === $theme);
+		if (currentIndex !== -1) {
+			displayedIconIndex = currentIndex;
+		}
+		
+		// Start cycling after initial delay (4 seconds)
+		setTimeout(() => {
+			if (isOpen || isHovered) return; // Double check conditions
+			isCyclingActive = true;
+			scheduleNextShowcase();
+		}, 4000);
+	}
+	
+	// Track if we're actively cycling to prevent reactive updates
+	let isCyclingActive = false;
+	
+	function stopCycling() {
+		isCyclingActive = false;
+		if (cycleTimeout) {
+			clearTimeout(cycleTimeout);
+			cycleTimeout = null;
+		}
+		// Reset to current theme icon
+		const currentIndex = themes.findIndex(t => t.value === $theme);
+		if (currentIndex !== -1) {
+			displayedIconIndex = currentIndex;
+		}
+	}
+	
+	function handleMouseEnter() {
+		isHovered = true;
+		stopCycling();
+	}
+	
+	function handleMouseLeave() {
+		isHovered = false;
+		// Restart cycling after a delay when mouse leaves
+		setTimeout(() => {
+			if (!isOpen && !isHovered) {
+				startCycling();
+			}
+		}, 1000);
+	}
+	
 	$: isOpen = $activeDropdown === 'theme';
+	
+	// Update displayed icon when theme changes (only if not cycling)
+	$: {
+		if (!isCyclingActive && !cycleTimeout && !isAnimating && !isHovered) {
+			const currentIndex = themes.findIndex(t => t.value === $theme);
+			if (currentIndex !== -1 && displayedIconIndex !== currentIndex) {
+				displayedIconIndex = currentIndex;
+			}
+		}
+	}
+	
+	// Pause cycling when dropdown opens
+	let restartTimeout: ReturnType<typeof setTimeout> | null = null;
+	$: if (isOpen) {
+		stopCycling();
+		if (restartTimeout) clearTimeout(restartTimeout);
+	} else {
+		// Restart cycling when dropdown closes (if not hovered)
+		if (restartTimeout) clearTimeout(restartTimeout);
+		restartTimeout = setTimeout(() => {
+			if (!isOpen && !isHovered) {
+				startCycling();
+			}
+		}, 500);
+	}
+	
+	onMount(() => {
+		const currentIndex = themes.findIndex(t => t.value === $theme);
+		if (currentIndex !== -1) {
+			displayedIconIndex = currentIndex;
+		}
+		startCycling();
+	});
+	
+	onDestroy(() => {
+		stopCycling();
+		if (restartTimeout) clearTimeout(restartTimeout);
+	});
 </script>
 
 <svelte:window on:click={handleClickOutside} />
@@ -39,10 +201,22 @@
 	<button 
 		class="theme-btn"
 		on:click|stopPropagation={toggleDropdown}
+		on:mouseenter={handleMouseEnter}
+		on:mouseleave={handleMouseLeave}
 		aria-label="Select theme"
 		aria-expanded={isOpen}
 	>
-		<span class="theme-icon">{getCurrentIcon()}</span>
+		<span class="theme-icon-wrapper">
+			{#each themes as themeOption, index}
+				<span 
+					class="theme-icon" 
+					class:active={displayedIconIndex === index}
+					class:animating={isAnimating && displayedIconIndex === index}
+				>
+					{themeOption.icon}
+				</span>
+			{/each}
+		</span>
 		<svg 
 			class="chevron" 
 			class:rotated={isOpen}
@@ -123,8 +297,49 @@
 		color: var(--color-text-light);
 	}
 	
+	.theme-icon-wrapper {
+		position: relative;
+		display: inline-block;
+		width: 1.125rem;
+		height: 1.125rem;
+		overflow: hidden;
+	}
+	
 	.theme-icon {
 		font-size: 1.125rem;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		transform: translateX(100%);
+		transition: opacity 0.7s ease, transform 0.7s ease;
+		pointer-events: none;
+	}
+	
+	.theme-icon.active {
+		opacity: 1;
+		transform: translateX(0);
+		pointer-events: auto;
+	}
+	
+	.theme-icon.animating {
+		animation: iconSlide 0.7s ease;
+	}
+	
+	@keyframes iconSlide {
+		0% {
+			transform: translateX(-100%);
+			opacity: 0;
+		}
+		100% {
+			transform: translateX(0);
+			opacity: 1;
+		}
 	}
 	
 	.chevron {

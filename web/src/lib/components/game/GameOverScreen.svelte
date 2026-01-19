@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+	import { onMount } from 'svelte';
 	import ScoreDisplay from '$lib/components/ui/ScoreDisplay.svelte';
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
+	import { triggerConfetti } from '$lib/utils/confetti';
 
 	export let score: number;
 	export let totalRounds: number;
@@ -34,6 +36,21 @@
 		: percentage >= goodThreshold 
 			? finalGoodMessage 
 			: finalEncourageMessage;
+
+	// Trigger confetti for perfect scores (10/10) or excellent scores (80%+)
+	onMount(() => {
+		if (percentage >= excellentThreshold) {
+			// Small delay to ensure component is mounted
+			setTimeout(() => {
+				triggerConfetti({
+					particleCount: percentage === 1 ? 100 : 70,
+					spread: 70,
+					origin: { x: 0.5, y: 0.3 },
+					duration: percentage === 1 ? 4000 : 3000
+				});
+			}, 100);
+		}
+	});
 </script>
 
 <div class="text-center">

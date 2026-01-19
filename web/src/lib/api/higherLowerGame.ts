@@ -8,7 +8,7 @@ function getCurrentLocale(): string {
 	return get(locale) || 'en';
 }
 
-export type HigherLowerCategory = 'population' | 'area' | 'continents';
+export type HigherLowerCategory = 'population' | 'area';
 
 export interface HigherLowerItem {
 	name: string;

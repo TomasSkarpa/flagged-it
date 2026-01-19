@@ -5,14 +5,21 @@
 		GameHeader, 
 		GameContainer, 
 		AnswerGrid, 
-		GameOverScreen 
+		GameOverScreen,
+		DifficultySelector
 	} from '$lib/components/game';
+	import type { DifficultyOption } from '$lib/components/game/DifficultySelector.svelte';
 	import { startGame, getQuestion, submitAnswer } from '$lib/api/flagGame';
 	import type { Country } from '$lib/types';
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
-	import { getCountryNameForLocale } from '$lib/utils/countryNames';
+	import { getCountryNameForLocale, findCountryByName } from '$lib/utils/countryNames';
 	import { calculateCurrentRound } from '$lib/utils/gameUtils';
+	import { getAllCountries } from '$lib/api/debug';
+	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
+
+	type DifficultyMode = 'regular' | 'expert';
 
 	let sessionId: string | null = null;
 	let currentQuestion: any = null;
@@ -29,6 +36,15 @@
 	let gameFinished = false;
 	const totalRounds = 10;
 
+	// Difficulty mode state
+	let difficultyMode: DifficultyMode = 'regular';
+
+	// Text input for expert mode
+	let guessInput = '';
+	let guessInputElement: HTMLInputElement | null = null;
+	let allCountries: Country[] = [];
+	let countriesLoaded = false;
+
 	// Reactive translations - will update when locale changes
 	$: currentLocale = $locale;
 	$: flagGameTitle = t('game.flag.setup.title', undefined, currentLocale);
@@ -36,13 +52,44 @@
 	$: flagQuestionText = t('game.flag.question', undefined, currentLocale);
 	$: excellentMessage = t('game.flag.over.excellent', undefined, currentLocale);
 
-	async function handleStartGame(event: CustomEvent<{ region: string }>) {
+	// Reactive difficulty modes with translations
+	let difficultyModes: DifficultyOption[] = [];
+	$: difficultyModes = [
+		{ 
+			value: 'regular', 
+			label: t('game.flag.difficulty.regular', undefined, currentLocale), 
+			description: t('game.flag.difficulty.regular.desc', undefined, currentLocale) 
+		},
+		{ 
+			value: 'expert', 
+			label: t('game.flag.difficulty.expert', undefined, currentLocale), 
+			description: t('game.flag.difficulty.expert.desc', undefined, currentLocale) 
+		}
+	];
+
+	// Helper to check if mode uses text input
+	function usesTextInput(mode: DifficultyMode): boolean {
+		return mode === 'expert';
+	}
+
+	onMount(async () => {
+		if (!browser) return;
+		try {
+			const result = await getAllCountries();
+			allCountries = result.countries;
+			countriesLoaded = true;
+		} catch (err) {
+			console.warn('Failed to load countries for translation:', err);
+		}
+	});
+
+	async function handleStartGame(event: CustomEvent<{ region?: string }>) {
 		isLoading = true;
 		error = null;
 		gameFinished = false;
 		score = 0;
 		total = 0;
-		selectedRegion = event.detail.region;
+		selectedRegion = event.detail.region || '';
 		
 		try {
 			const result = await startGame(selectedRegion || '');
@@ -59,8 +106,8 @@
 		}
 	}
 
-	async function handleSelectAnswer(event: CustomEvent<{ country: Country }>) {
-		if (showFeedback || !sessionId || !currentQuestion) return;
+	async function handleSelectAnswer(event: CustomEvent<{ country?: Country }>) {
+		if (showFeedback || !sessionId || !currentQuestion || !event.detail.country) return;
 		
 		const country = event.detail.country;
 		selectedAnswer = country.cca2;
@@ -100,12 +147,19 @@
 		isLoading = true;
 		error = null;
 		selectedAnswer = null;
+		guessInput = '';
 		
 		try {
 			const question = await getQuestion(sessionId);
 			currentQuestion = question;
 			// Reset selectedAnswer when new question loads
 			selectedAnswer = null;
+			// Focus input if using text input mode
+			if (usesTextInput(difficultyMode) && guessInputElement) {
+				setTimeout(() => {
+					guessInputElement?.focus();
+				}, 0);
+			}
 		} catch (err) {
 			error = err instanceof Error ? err.message : 'Failed to load question';
 			console.error('Load question error:', err);
@@ -141,6 +195,62 @@
 		}
 	}
 
+	async function handleSubmitTextGuess() {
+		if (showFeedback || !sessionId || !currentQuestion || !guessInput.trim() || isLoading) return;
+
+		const countryName = guessInput.trim();
+		isLoading = true;
+		error = null;
+
+		try {
+			// Find country by name using reusable utility
+			const matchedCountry = findCountryByName(allCountries, countryName, currentLocale);
+
+			if (!matchedCountry) {
+				error = t('game.guessing.not_found', undefined, currentLocale) || 'Country not found';
+				isLoading = false;
+				setTimeout(() => {
+					guessInputElement?.focus();
+				}, 0);
+				return;
+			}
+
+			const result = await submitAnswer(sessionId, currentQuestion.questionId, matchedCountry.cca2);
+			isCorrect = result.correct;
+			const correctCountry = allCountries.find(c => c.cca2 === result.correctCca2);
+			correctAnswer = correctCountry ? getCountryNameForLocale(correctCountry) : result.correctName;
+			score = result.score;
+			total = result.total;
+			showFeedback = true;
+			guessInput = '';
+
+			setTimeout(async () => {
+				showFeedback = false;
+				if (result.finished) {
+					gameFinished = true;
+					gameStarted = false;
+				} else {
+					await loadNextQuestion();
+				}
+			}, 2000);
+		} catch (err) {
+			error = err instanceof Error ? err.message : 'Failed to submit answer';
+			console.error('Submit answer error:', err);
+		} finally {
+			isLoading = false;
+		}
+	}
+
+	function handleKeyPress(event: KeyboardEvent) {
+		if (event.key === 'Enter' && !isLoading) {
+			handleSubmitTextGuess();
+		}
+	}
+
+	function handleDifficultySelect(event: CustomEvent<{ value: string }>) {
+		difficultyMode = event.detail.value as DifficultyMode;
+	}
+
 	function handlePlayAgain() {
 		gameStarted = false;
 		gameFinished = false;
@@ -150,6 +260,8 @@
 		total = 0;
 		selectedAnswer = null;
 		showFeedback = false;
+		guessInput = '';
+		difficultyMode = 'regular'; // Reset to default
 	}
 </script>
 
@@ -168,7 +280,17 @@
 				{error}
 				bind:selectedRegion
 				on:start={handleStartGame}
-			/>
+			>
+				<div slot="options" class="mb-8">
+					<div class="max-w-2xl mx-auto">
+						<DifficultySelector
+							options={difficultyModes}
+							selected={difficultyMode}
+							on:select={handleDifficultySelect}
+						/>
+					</div>
+				</div>
+			</GameSetupScreen>
 		{:else if gameFinished}
 			<GameOverScreen
 				{score}
@@ -198,17 +320,43 @@
 					class="w-80 h-auto"
 				/>
 				
-				<AnswerGrid
-					slot="answers"
-					key={currentQuestion.questionId}
-					options={currentQuestion.options}
-					{selectedAnswer}
-					{correctAnswer}
-					{showFeedback}
-					{isCorrect}
-					disabled={isLoading}
-					on:select={handleSelectAnswer}
-				/>
+				<div slot="answers">
+					{#if usesTextInput(difficultyMode)}
+						<!-- Text input for expert mode -->
+						<div class="w-full">
+							<div class="flex flex-col sm:flex-row gap-3">
+								<input
+									type="text"
+									bind:this={guessInputElement}
+									bind:value={guessInput}
+									on:keypress={handleKeyPress}
+									placeholder={t('game.guessing.enter_country', undefined, currentLocale)}
+									disabled={isLoading || showFeedback || gameFinished}
+									class="flex-1 px-4 py-3 rounded-lg border-2 border-white/20 bg-white/5 text-sandy-light placeholder:text-text-muted focus:outline-none focus:border-primary transition-all disabled:opacity-50"
+									autocomplete="off"
+								/>
+								<button
+									on:click={handleSubmitTextGuess}
+									disabled={isLoading || !guessInput.trim() || showFeedback || gameFinished}
+									class="btn-primary px-8 py-3 font-semibold disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+								>
+									{t('game.guessing.guess', undefined, currentLocale)}
+								</button>
+							</div>
+						</div>
+					{:else}
+						<!-- Multiple choice for regular mode -->
+						<AnswerGrid
+							options={currentQuestion.options}
+							{selectedAnswer}
+							{correctAnswer}
+							{showFeedback}
+							{isCorrect}
+							disabled={isLoading}
+							on:select={handleSelectAnswer}
+						/>
+					{/if}
+				</div>
 			</GameContainer>
 		{:else if isLoading}
 			<div class="flex flex-col items-center justify-center py-20">

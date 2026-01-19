@@ -69,8 +69,7 @@
 
 	$: categories = [
 		{ value: 'population' as HigherLowerCategory, label: t('game.higher_lower.category.population', undefined, currentLocale), icon: '👥', description: t('game.higher_lower.category.population.desc', undefined, currentLocale) },
-		{ value: 'area' as HigherLowerCategory, label: t('game.higher_lower.category.area', undefined, currentLocale), icon: '📐', description: t('game.higher_lower.category.area.desc', undefined, currentLocale) },
-		{ value: 'continents' as HigherLowerCategory, label: t('game.higher_lower.category.continents', undefined, currentLocale), icon: '🌍', description: t('game.higher_lower.category.continents.desc', undefined, currentLocale) }
+		{ value: 'area' as HigherLowerCategory, label: t('game.higher_lower.category.area', undefined, currentLocale), icon: '📐', description: t('game.higher_lower.category.area.desc', undefined, currentLocale) }
 	];
 	
 	// Custom start data that will be passed with the start event (reactive)

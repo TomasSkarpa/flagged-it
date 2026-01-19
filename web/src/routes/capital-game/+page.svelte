@@ -1,12 +1,15 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
 	import LoadingSpinner from '$lib/components/ui/LoadingSpinner.svelte';
 	import { 
 		GameSetupScreen, 
 		GameHeader, 
 		AnswerGrid,
-		GameOverScreen 
+		GameOverScreen,
+		DifficultySelector
 	} from '$lib/components/game';
+	import type { DifficultyOption } from '$lib/components/game/DifficultySelector.svelte';
 	import { startCapitalGame, getCapitalQuestion, submitCapitalAnswer } from '$lib/api/capitalGame';
 	import type { CapitalQuestion } from '$lib/api/capitalGame';
 	import { t } from '$lib/translations';
@@ -15,6 +18,8 @@
 	import { getCountryNameForLocale } from '$lib/utils/countryNames';
 	import { calculateCurrentRound } from '$lib/utils/gameUtils';
 	import type { Country } from '$lib/types';
+
+	type DifficultyMode = 'regular' | 'intermediate';
 
 	let sessionId: string | null = null;
 	let currentQuestion: CapitalQuestion | null = null;
@@ -31,21 +36,68 @@
 	let gameFinished = false;
 	const totalRounds = 10;
 	
-	// Store all countries for translation lookup
+	// Difficulty mode state
+	let difficultyMode: DifficultyMode = 'regular';
+
+	// Text input for intermediate mode
+	let guessInput = '';
+	let guessInputElement: HTMLInputElement | null = null;
+	
+	// Store all countries for translation lookup and capital matching
 	let allCountries: Country[] = [];
 	let countriesLoaded = false;
 
-	// Load countries on mount for translation
-	onMount(async () => {
-		if (!countriesLoaded) {
-			try {
-				const result = await getAllCountries();
-				allCountries = result.countries;
-				countriesLoaded = true;
-			} catch (err) {
-				console.error('Failed to load countries for translation:', err);
-				// Continue without translations - will use English names
+	// Reactive difficulty modes with translations
+	let difficultyModes: DifficultyOption[] = [];
+	$: difficultyModes = [
+		{ 
+			value: 'regular', 
+			label: t('game.capital.difficulty.regular', undefined, currentLocale), 
+			description: t('game.capital.difficulty.regular.desc', undefined, currentLocale) 
+		},
+		{ 
+			value: 'intermediate', 
+			label: t('game.capital.difficulty.intermediate', undefined, currentLocale), 
+			description: t('game.capital.difficulty.intermediate.desc', undefined, currentLocale) 
+		}
+	];
+
+	// Helper to check if mode uses text input
+	function usesTextInput(mode: DifficultyMode): boolean {
+		return mode === 'intermediate';
+	}
+
+	// Helper to find capital name by matching input
+	function findCapitalByName(input: string, countryCca2: string): string | null {
+		if (!input || !allCountries.length) return null;
+		
+		const inputLower = input.trim().toLowerCase();
+		if (inputLower === '') return null;
+
+		// Find the country for this question
+		const country = allCountries.find(c => c.cca2 === countryCca2);
+		if (!country || !country.capital || country.capital.length === 0) return null;
+
+		// Check if input matches any capital name (case-insensitive)
+		for (const capital of country.capital) {
+			if (capital.toLowerCase() === inputLower) {
+				return capital; // Return the original capital name
 			}
+		}
+
+		return null;
+	}
+
+	// Load countries on mount for translation and capital matching
+	onMount(async () => {
+		if (!browser || countriesLoaded) return;
+		try {
+			const result = await getAllCountries();
+			allCountries = result.countries;
+			countriesLoaded = true;
+		} catch (err) {
+			console.error('Failed to load countries for translation:', err);
+			// Continue without translations - will use English names
 		}
 	});
 
@@ -65,13 +117,13 @@
 	$: loadingCountriesText = t('library.loading', undefined, currentLocale);
 	$: failedToStartGameError = t('common.error', undefined, currentLocale);
 
-	async function handleStartGame(event: CustomEvent<{ region: string }>) {
+	async function handleStartGame(event: CustomEvent<{ region?: string }>) {
 		isLoading = true;
 		error = null;
 		gameFinished = false;
 		score = 0;
 		total = 0;
-		selectedRegion = event.detail.region;
+		selectedRegion = event.detail.region || '';
 		
 		try {
 			const result = await startCapitalGame(selectedRegion || '');
@@ -129,12 +181,19 @@
 		isLoading = true;
 		error = null;
 		selectedAnswer = null;
+		guessInput = '';
 		
 		try {
 			const question = await getCapitalQuestion(sessionId);
 			currentQuestion = question;
 			// Reset selectedAnswer when new question loads
 			selectedAnswer = null;
+			// Focus input if using text input mode
+			if (usesTextInput(difficultyMode) && guessInputElement) {
+				setTimeout(() => {
+					guessInputElement?.focus();
+				}, 0);
+			}
 		} catch (err) {
 			error = err instanceof Error ? err.message : failedToStartGameError;
 			console.error('Load question error:', err);
@@ -170,6 +229,61 @@
 		}
 	}
 
+	async function handleSubmitTextGuess() {
+		if (showFeedback || !sessionId || !currentQuestion || !guessInput.trim() || isLoading) return;
+
+		const capitalName = guessInput.trim();
+		isLoading = true;
+		error = null;
+
+		try {
+			// Find capital by name using helper function
+			const matchedCapital = findCapitalByName(capitalName, currentQuestion.countryCca2);
+
+			if (!matchedCapital) {
+				error = t('game.guessing.not_found', undefined, currentLocale) || 'Capital not found';
+				isLoading = false;
+				setTimeout(() => {
+					guessInputElement?.focus();
+				}, 0);
+				return;
+			}
+
+			const result = await submitCapitalAnswer(sessionId, currentQuestion.questionId, matchedCapital);
+			isCorrect = result.correct;
+			correctCapital = result.correctCapital;
+			score = result.score;
+			total = result.total;
+			showFeedback = true;
+			guessInput = '';
+
+			setTimeout(async () => {
+				showFeedback = false;
+				if (result.finished || total >= totalRounds) {
+					gameFinished = true;
+					gameStarted = false;
+				} else {
+					await loadNextQuestion();
+				}
+			}, 2000);
+		} catch (err) {
+			error = err instanceof Error ? err.message : failedToStartGameError;
+			console.error('Submit answer error:', err);
+		} finally {
+			isLoading = false;
+		}
+	}
+
+	function handleKeyPress(event: KeyboardEvent) {
+		if (event.key === 'Enter' && !isLoading) {
+			handleSubmitTextGuess();
+		}
+	}
+
+	function handleDifficultySelect(event: CustomEvent<{ value: string }>) {
+		difficultyMode = event.detail.value as DifficultyMode;
+	}
+
 	function handlePlayAgain() {
 		gameStarted = false;
 		gameFinished = false;
@@ -179,6 +293,8 @@
 		total = 0;
 		selectedAnswer = null;
 		showFeedback = false;
+		guessInput = '';
+		difficultyMode = 'regular'; // Reset to default
 	}
 
 </script>
@@ -198,7 +314,17 @@
 				{error}
 				bind:selectedRegion
 				on:start={handleStartGame}
-			/>
+			>
+				<div slot="options" class="mb-8">
+					<div class="max-w-2xl mx-auto">
+						<DifficultySelector
+							options={difficultyModes}
+							selected={difficultyMode}
+							on:select={handleDifficultySelect}
+						/>
+					</div>
+				</div>
+			</GameSetupScreen>
 		{:else if gameFinished}
 			<GameOverScreen
 				{score}
@@ -228,19 +354,47 @@
 					
 					<div class="mb-10"></div>
 					
-					<AnswerGrid
-						key={currentQuestion.questionId}
-						options={currentQuestion.options}
-						{selectedAnswer}
-						correctAnswer={correctCapital}
-						{showFeedback}
-						{isCorrect}
-						disabled={isLoading}
-						on:select={handleSelectAnswer}
-						columns={1}
-					/>
+					{#if usesTextInput(difficultyMode)}
+						<!-- Text input for intermediate mode -->
+						<div class="w-full">
+							<div class="flex flex-col sm:flex-row gap-3">
+								<input
+									type="text"
+									bind:this={guessInputElement}
+									bind:value={guessInput}
+									on:keypress={handleKeyPress}
+									placeholder={t('game.guessing.enter_capital', undefined, currentLocale)}
+									disabled={isLoading || showFeedback || gameFinished}
+									class="flex-1 px-4 py-3 rounded-lg border-2 border-white/20 bg-white/5 text-sandy-light placeholder:text-text-muted focus:outline-none focus:border-primary transition-all disabled:opacity-50"
+									autocomplete="off"
+								/>
+								<button
+									on:click={handleSubmitTextGuess}
+									disabled={isLoading || !guessInput.trim() || showFeedback || gameFinished}
+									class="btn-primary px-8 py-3 font-semibold disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+								>
+									{t('game.guessing.guess', undefined, currentLocale)}
+								</button>
+							</div>
+							{#if error && !showFeedback}
+								<p class="text-error text-sm text-center mt-3">{error}</p>
+							{/if}
+						</div>
+					{:else}
+						<!-- Multiple choice for regular mode -->
+						<AnswerGrid
+							options={currentQuestion.options}
+							{selectedAnswer}
+							correctAnswer={correctCapital}
+							{showFeedback}
+							{isCorrect}
+							disabled={isLoading}
+							on:select={handleSelectAnswer}
+							columns={1}
+						/>
+					{/if}
 					
-					{#if error}
+					{#if error && !usesTextInput(difficultyMode)}
 						<div class="mt-6 p-4 bg-error/20 border border-error rounded-lg">
 							<p class="text-error font-semibold text-center">{error}</p>
 						</div>

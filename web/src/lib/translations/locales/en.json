@@ -93,6 +93,7 @@
   "game.guessing.population": "Population",
   "game.guessing.area": "Area",
   "game.guessing.not_found": "Country not found!",
+  "game.guessing.capital_not_found": "Capital not found!",
   "game.guessing.correct": "Correct! It was %s!",
   "game.worldle.description": "Guess the country by comparing continent, population, and area!",
   "game.higher_lower.description": "Try to guess which country has a higher population!",

@@ -372,7 +372,9 @@
 								</button>
 							</div>
 							{#if error && !showFeedback}
-								<p class="text-error text-sm text-center mt-3">{error}</p>
+								<div class="mt-3 p-3 bg-error/20 border border-error rounded-lg">
+									<p class="text-error text-sm text-center font-medium">{error}</p>
+								</div>
 							{/if}
 						</div>
 					{:else}

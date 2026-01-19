@@ -525,6 +525,23 @@ func (h *DebugHandler) GetAllGeoJSON(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// GetWorldGeoJSON returns the world GeoJSON data
+func (h *DebugHandler) GetWorldGeoJSON(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	worldGeo, err := data.LoadWorldGeoData()
+	if err != nil {
+		http.Error(w, "Failed to load world GeoJSON: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(worldGeo)
+}
+
 // ============================================
 // Shape Game Handler
 // ============================================

@@ -3,6 +3,7 @@ package data
 import (
 	"embed"
 	"encoding/json"
+	"fmt"
 	"flagged-it/internal/data/models"
 	"sync"
 )
@@ -16,14 +17,20 @@ var factsData []byte
 //go:embed sources/geo/*.json
 var geoFS embed.FS
 
+//go:embed sources/geo.json
+var worldGeoData []byte
+
 var (
 	cachedCountries    []models.Country
 	cachedCountryFacts map[string]models.CountryFacts
 	cachedGeoData      map[string]models.GeoJSON
+	cachedWorldGeo     *models.GeoJSON
 	countriesOnce      sync.Once
 	factsOnce          sync.Once
 	geoOnce            sync.Once
+	worldGeoOnce       sync.Once
 	geoMutex           sync.RWMutex
+	worldGeoMutex      sync.RWMutex
 )
 
 func LoadCountries() []models.Country {
@@ -75,3 +82,25 @@ func LoadGeoData(cca3 string) (models.GeoJSON, error) {
 	return geoData, nil
 }
 
+// LoadWorldGeoData loads and caches the world GeoJSON data
+func LoadWorldGeoData() (*models.GeoJSON, error) {
+	var loadErr error
+	worldGeoOnce.Do(func() {
+		var worldGeo models.GeoJSON
+		if err := json.Unmarshal(worldGeoData, &worldGeo); err != nil {
+			loadErr = err
+			return
+		}
+		cachedWorldGeo = &worldGeo
+	})
+
+	if loadErr != nil {
+		return nil, fmt.Errorf("failed to load world GeoJSON: %w", loadErr)
+	}
+
+	if cachedWorldGeo == nil {
+		return nil, fmt.Errorf("failed to load world GeoJSON")
+	}
+
+	return cachedWorldGeo, nil
+}

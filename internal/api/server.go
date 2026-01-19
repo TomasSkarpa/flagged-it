@@ -141,6 +141,7 @@ func SetupRoutes() {
 	http.HandleFunc("/api/debug/countries", combinedMiddleware(debugHandler.GetAllCountries))
 	http.HandleFunc("/api/debug/geojson", combinedMiddleware(debugHandler.GetCountryGeoJSON))
 	http.HandleFunc("/api/debug/geojson/all", combinedMiddleware(debugHandler.GetAllGeoJSON))
+	http.HandleFunc("/api/debug/geojson/world", combinedMiddleware(debugHandler.GetWorldGeoJSON))
 
 	// Health check (no rate limiting for monitoring, but include CORS and logging)
 	http.HandleFunc("/api/health", LoggingMiddleware(corsMiddleware(func(w http.ResponseWriter, r *http.Request) {

@@ -81,6 +81,7 @@ export const API_ENDPOINTS = {
 	DEBUG_COUNTRIES: '/debug/countries',
 	DEBUG_GEOJSON: '/debug/geojson',
 	DEBUG_GEOJSON_ALL: '/debug/geojson/all',
+	DEBUG_GEOJSON_WORLD: '/debug/geojson/world',
 	
 	// Health check
 	HEALTH: '/health',

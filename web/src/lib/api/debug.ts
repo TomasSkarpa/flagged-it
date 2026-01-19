@@ -36,3 +36,11 @@ export async function getAllCountriesWithGeo(): Promise<CountriesResponse> {
 	}
 	return response.json();
 }
+
+export async function getWorldGeoJSON(): Promise<any> {
+	const response = await fetch(getApiUrl(API_ENDPOINTS.DEBUG_GEOJSON_WORLD));
+	if (!response.ok) {
+		throw new Error('Failed to fetch world GeoJSON');
+	}
+	return response.json();
+}

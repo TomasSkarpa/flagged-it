@@ -7,13 +7,15 @@
 		GameHeader, 
 		GameContainer, 
 		AnswerGrid, 
-		GameOverScreen 
+		GameOverScreen,
+		DifficultySelector
 	} from '$lib/components/game';
+	import type { DifficultyOption } from '$lib/components/game/DifficultySelector.svelte';
 	import { startShapeGame, getShapeQuestion, submitShapeAnswer } from '$lib/api/shapeGame';
 	import type { Country } from '$lib/types';
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
-	import { getCountryNameForLocale } from '$lib/utils/countryNames';
+	import { getCountryNameForLocale, findCountryByName } from '$lib/utils/countryNames';
 	import { calculateCurrentRound } from '$lib/utils/gameUtils';
 	import { getAllCountries } from '$lib/api/debug';
 	import { onMount } from 'svelte';
@@ -47,24 +49,25 @@
 	let countriesLoaded = false;
 
 	// Reactive difficulty modes with translations
+	let difficultyModes: DifficultyOption[] = [];
 	$: difficultyModes = [
 		{ 
-			value: 'beginner' as DifficultyMode, 
+			value: 'beginner', 
 			label: t('game.shape.difficulty.beginner', undefined, currentLocale), 
 			description: t('game.shape.difficulty.beginner.desc', undefined, currentLocale) 
 		},
 		{ 
-			value: 'intermediate' as DifficultyMode, 
+			value: 'intermediate', 
 			label: t('game.shape.difficulty.intermediate', undefined, currentLocale), 
 			description: t('game.shape.difficulty.intermediate.desc', undefined, currentLocale) 
 		},
 		{ 
-			value: 'advanced' as DifficultyMode, 
+			value: 'advanced', 
 			label: t('game.shape.difficulty.advanced', undefined, currentLocale), 
 			description: t('game.shape.difficulty.advanced.desc', undefined, currentLocale) 
 		},
 		{ 
-			value: 'expert' as DifficultyMode, 
+			value: 'expert', 
 			label: t('game.shape.difficulty.expert', undefined, currentLocale), 
 			description: t('game.shape.difficulty.expert.desc', undefined, currentLocale) 
 		}
@@ -213,17 +216,8 @@
 		error = null;
 
 		try {
-			// Find country by name
-			const matchedCountry = allCountries.find(c => {
-				const nameLower = countryName.toLowerCase();
-				return (
-					c.name.common.toLowerCase() === nameLower ||
-					c.name.official.toLowerCase() === nameLower ||
-					c.cca2.toLowerCase() === nameLower ||
-					c.cca3.toLowerCase() === nameLower ||
-					(getCountryNameForLocale(c).toLowerCase() === nameLower)
-				);
-			});
+			// Find country by name using reusable utility
+			const matchedCountry = findCountryByName(allCountries, countryName, currentLocale);
 
 			if (!matchedCountry) {
 				error = t('game.guessing.not_found', undefined, currentLocale) || 'Country not found';
@@ -266,6 +260,10 @@
 		}
 	}
 
+	function handleDifficultySelect(event: CustomEvent<{ value: string }>) {
+		difficultyMode = event.detail.value as DifficultyMode;
+	}
+
 	function handlePlayAgain() {
 		gameStarted = false;
 		gameFinished = false;
@@ -297,20 +295,12 @@
 				on:start={handleStartGame}
 			>
 				<div slot="options" class="mb-8">
-					<div class="category-grid max-w-2xl mx-auto">
-						{#each difficultyModes as mode}
-							<button
-								class="category-card"
-								class:selected={difficultyMode === mode.value}
-								on:click={() => {
-									difficultyMode = mode.value;
-								}}
-								type="button"
-							>
-								<span class="category-label">{mode.label}</span>
-								<span class="category-desc">{mode.description}</span>
-							</button>
-						{/each}
+					<div class="max-w-2xl mx-auto">
+						<DifficultySelector
+							options={difficultyModes}
+							selected={difficultyMode}
+							on:select={handleDifficultySelect}
+						/>
 					</div>
 				</div>
 			</GameSetupScreen>
@@ -444,70 +434,4 @@
 		}
 	}
 
-	/* Category Grid (for difficulty mode selection) */
-	.category-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-		gap: 1rem;
-	}
-	
-	.category-card {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.5rem;
-		padding: 1.5rem 1rem;
-		background: var(--color-surface);
-		border: 2px solid transparent;
-		border-radius: 1rem;
-		cursor: pointer;
-		transition: all 0.2s;
-	}
-	
-	.category-card:hover {
-		border-color: var(--color-primary);
-		transform: translateY(-2px);
-	}
-	
-	.category-card.selected {
-		border-color: var(--color-primary);
-		background: rgba(99, 102, 241, 0.1);
-	}
-	
-	.category-label {
-		font-size: 1.125rem;
-		font-weight: 600;
-		color: var(--color-text-light);
-	}
-	
-	.category-desc {
-		font-size: 0.75rem;
-		color: var(--color-text-muted);
-		text-align: center;
-	}
-
-	/* Light Mode Styles */
-	:global(:root.light) .category-card {
-		background: rgba(255, 255, 255, 0.9);
-		border-color: rgba(15, 23, 42, 0.2);
-	}
-
-	:global(:root.light) .category-card:hover {
-		border-color: var(--color-primary);
-		background: rgba(255, 255, 255, 1);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	}
-
-	:global(:root.light) .category-card.selected {
-		border-color: var(--color-primary);
-		background: rgba(99, 102, 241, 0.15);
-	}
-
-	:global(:root.light) .category-label {
-		color: #0F172A;
-	}
-
-	:global(:root.light) .category-desc {
-		color: #64748B;
-	}
 </style>

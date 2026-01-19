@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount, afterUpdate } from 'svelte';
-	import { geoPath, geoIdentity } from 'd3-geo';
+	import { geoPath, geoMercator } from 'd3-geo';
 	import type { GeoJSON } from '$lib/api/shapeGame';
 
 	export let geoJson: GeoJSON;
@@ -94,10 +94,10 @@
 		// Add padding
 		const padding = 20;
 		
-		// Use geoIdentity with fitExtent to fit the shape within the padded area
+		// Use geoMercator (spherical projection) with fitExtent to fit the shape within the padded area
 		// fitExtent takes a bounding box [[x0, y0], [x1, y1]] and fits the geometry to it
-		const projection = geoIdentity()
-			.reflectY(true) // Flip Y because SVG Y increases downward, but geo lat increases upward
+		// geoMercator preserves local shapes (conformal) and accounts for Earth's curvature
+		const projection = geoMercator()
 			.fitExtent(
 				[[padding, padding], [width - padding, height - padding]], 
 				feature as any

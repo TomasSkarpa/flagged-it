@@ -13,8 +13,6 @@
   "game.higher_lower.highest_streak_label": "สายต่อเนื่องสูงสุด",
   "game.correct_short": "ถูกต้อง!",
   "game.wrong_short": "ผิด!",
-  "game.list.country_item": "%d. %s",
-  "game.list.country_unknown": "%d. ?",
   "game.guessing.correct": "ถูกต้อง! มันคือ %s!",
   "game.worldle.description": "ทายประเทศโดยเปรียบเทียบทวีป ประชากร และพื้นที่!",
   "game.higher_lower.description": "ลองเดาว่าประเทศไหนมีประชากรมากกว่า!",

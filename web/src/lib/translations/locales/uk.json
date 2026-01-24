@@ -13,8 +13,6 @@
   "game.higher_lower.highest_streak_label": "Найвища Серія",
   "game.correct_short": "Правильно!",
   "game.wrong_short": "Неправильно!",
-  "game.list.country_item": "%d. %s",
-  "game.list.country_unknown": "%d. ?",
   "game.guessing.correct": "Правильно! Це була %s!",
   "game.worldle.description": "Вгадай країну, порівнявши континент, населення та площу!",
   "game.higher_lower.description": "Спробуй вгадати, яка країна має більше населення!",

@@ -41,8 +41,8 @@ jobs:
         with:
           # Use PAT if available, fallback to GITHUB_TOKEN
           # Note: GITHUB_TOKEN may not have permissions to create PRs in some repos
-          # Create a PAT with 'repo' and 'pull_requests' permissions and add as GITHUB_PAT secret
-          token: ${{ secrets.GITHUB_PAT || secrets.GITHUB_TOKEN }}
+          # Create a PAT with 'repo' and 'pull_requests' permissions and add as PAT_TOKEN secret
+          token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
           commit-message: "🌍 Auto-translate missing keys"
           title: "🌍 Auto-translate missing keys"
           body: |

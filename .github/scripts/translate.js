@@ -7,8 +7,19 @@
  * 1. Reads en.json (source of truth)
  * 2. Reads all other locale files
  * 3. Finds missing keys per language
- * 4. Calls Groq API to translate missing keys
+ * 4. Calls Groq API to translate missing keys (with exponential backoff retry)
  * 5. Updates locale files with new translations
+ * 
+ * Rate Limiting & Model Fallback:
+ * - Uses 3-second delay between requests (20 req/min, well within free tier 30 req/min limit)
+ * - Implements exponential backoff for 429 rate limit errors
+ * - Automatic model fallback: tries multiple models if one hits rate limits
+ *   - Primary: llama-3.3-70b-versatile (best quality)
+ *   - Fallback 1: llama-3.1-70b-versatile (similar quality, different rate limit pool)
+ *   - Fallback 2: llama-3.1-8b-instant (faster, often higher rate limits)
+ *   - Fallback 3: mixtral-8x7b-32768 (alternative model)
+ * - Retries each model up to 2 times before trying next model
+ * - Respects Retry-After header if provided by API
  */
 
 import { readFileSync, writeFileSync } from 'fs';
@@ -63,8 +74,16 @@ const LOCALE_TO_LANGUAGE = {
 
 // Groq API configuration
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-const GROQ_MODEL = 'llama-3.3-70b-versatile';
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
+
+// Model fallback chain - try models in order if one fails or hits rate limits
+// Different models may have different rate limit pools, so this increases success rate
+const GROQ_MODELS = [
+  'llama-3.3-70b-versatile',  // Primary: best quality
+  'llama-3.1-70b-versatile',  // Fallback 1: similar quality, different rate limit pool
+  'llama-3.1-8b-instant',     // Fallback 2: faster, often higher rate limits
+  'mixtral-8x7b-32768'        // Fallback 3: alternative model
+];
 
 if (!GROQ_API_KEY) {
   console.error('❌ Error: GROQ_API_KEY environment variable is not set');
@@ -112,7 +131,14 @@ function findMissingKeys(enKeys, localeData) {
 }
 
 /**
- * Translate missing keys using Groq API
+ * Sleep for specified milliseconds
+ */
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+/**
+ * Translate missing keys using Groq API with model fallback and exponential backoff retry
  */
 async function translateKeys(missingKeys, targetLanguage) {
   if (Object.keys(missingKeys).length === 0) {
@@ -144,79 +170,148 @@ JSON to translate:
 
 Return the translated JSON:`;
 
-  try {
-    const response = await fetch(GROQ_API_URL, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${GROQ_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: GROQ_MODEL,
-        messages: [
-          {
-            role: 'system',
-            content: 'You are a professional translator. Return only valid JSON without any markdown formatting or explanations.'
+  // Try each model in the fallback chain
+  for (let modelIndex = 0; modelIndex < GROQ_MODELS.length; modelIndex++) {
+    const model = GROQ_MODELS[modelIndex];
+    const isLastModel = modelIndex === GROQ_MODELS.length - 1;
+    const retriesPerModel = 2; // Retry each model 2 times before moving to next
+
+    console.log(`  🔄 Trying model: ${model}${modelIndex > 0 ? ' (fallback)' : ''}`);
+
+    for (let attempt = 0; attempt < retriesPerModel; attempt++) {
+      try {
+        const response = await fetch(GROQ_API_URL, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${GROQ_API_KEY}`,
+            'Content-Type': 'application/json',
           },
-          {
-            role: 'user',
-            content: prompt
+          body: JSON.stringify({
+            model: model,
+            messages: [
+              {
+                role: 'system',
+                content: 'You are a professional translator. Return only valid JSON without any markdown formatting or explanations.'
+              },
+              {
+                role: 'user',
+                content: prompt
+              }
+            ],
+            temperature: 0.3,
+            max_tokens: 4000,
+          }),
+        });
+
+        // Handle rate limiting (429) - try next model or retry with backoff
+        if (response.status === 429) {
+          const retryAfter = response.headers.get('retry-after');
+          const waitTime = retryAfter 
+            ? parseInt(retryAfter) * 1000 
+            : Math.min(1000 * Math.pow(2, attempt), 30000); // Max 30 seconds
+          
+          // If not last attempt on this model, retry with backoff
+          if (attempt < retriesPerModel - 1) {
+            console.warn(`  ⚠️  Rate limited (429) on ${model}. Waiting ${waitTime / 1000}s before retry ${attempt + 1}/${retriesPerModel}...`);
+            await sleep(waitTime);
+            continue;
+          } else {
+            // Last attempt on this model failed - try next model
+            console.warn(`  ⚠️  Rate limited (429) on ${model} after ${retriesPerModel} attempts. Trying next model...`);
+            await sleep(2000); // Brief pause before switching models
+            break; // Break inner loop to try next model
           }
-        ],
-        temperature: 0.3,
-        max_tokens: 4000,
-      }),
-    });
+        }
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Groq API error: ${response.status} ${response.statusText} - ${errorText}`);
-    }
+        if (!response.ok) {
+          const errorText = await response.text();
+          // For non-429 errors, if it's the last attempt on last model, throw
+          if (attempt === retriesPerModel - 1 && isLastModel) {
+            throw new Error(`Groq API error: ${response.status} ${response.statusText} - ${errorText}`);
+          }
+          // Otherwise, try next attempt or next model
+          if (attempt < retriesPerModel - 1) {
+            const waitTime = Math.min(1000 * Math.pow(2, attempt), 5000);
+            console.warn(`  ⚠️  Error on ${model} (attempt ${attempt + 1}/${retriesPerModel}): ${response.status}. Retrying in ${waitTime / 1000}s...`);
+            await sleep(waitTime);
+            continue;
+          } else {
+            console.warn(`  ⚠️  Error on ${model} after ${retriesPerModel} attempts. Trying next model...`);
+            await sleep(2000);
+            break;
+          }
+        }
 
-    const data = await response.json();
-    const translatedText = data.choices[0]?.message?.content?.trim();
+        const data = await response.json();
+        const translatedText = data.choices[0]?.message?.content?.trim();
 
-    if (!translatedText) {
-      throw new Error('No translation received from API');
-    }
+        if (!translatedText) {
+          throw new Error('No translation received from API');
+        }
 
-    // Clean up the response - remove markdown code blocks if present
-    let cleanedText = translatedText;
-    if (cleanedText.startsWith('```json')) {
-      cleanedText = cleanedText.replace(/^```json\n?/, '').replace(/\n?```$/, '');
-    } else if (cleanedText.startsWith('```')) {
-      cleanedText = cleanedText.replace(/^```\n?/, '').replace(/\n?```$/, '');
-    }
+        // Clean up the response - remove markdown code blocks if present
+        let cleanedText = translatedText;
+        if (cleanedText.startsWith('```json')) {
+          cleanedText = cleanedText.replace(/^```json\n?/, '').replace(/\n?```$/, '');
+        } else if (cleanedText.startsWith('```')) {
+          cleanedText = cleanedText.replace(/^```\n?/, '').replace(/\n?```$/, '');
+        }
 
-    // Parse the translated JSON
-    let translated;
-    try {
-      translated = JSON.parse(cleanedText);
-    } catch (parseError) {
-      console.error(`  ❌ Failed to parse translation response: ${parseError.message}`);
-      console.error(`  Response preview: ${cleanedText.substring(0, 200)}...`);
-      return {};
-    }
-    
-    // Validate that all keys are present
-    const missingInResponse = [];
-    for (const key of Object.keys(missingKeys)) {
-      if (!(key in translated)) {
-        missingInResponse.push(key);
+        // Parse the translated JSON
+        let translated;
+        try {
+          translated = JSON.parse(cleanedText);
+        } catch (parseError) {
+          console.error(`  ❌ Failed to parse translation response from ${model}: ${parseError.message}`);
+          console.error(`  Response preview: ${cleanedText.substring(0, 200)}...`);
+          // Try next model if available
+          if (!isLastModel) {
+            console.warn(`  ⚠️  Trying next model...`);
+            await sleep(2000);
+            break;
+          }
+          return {};
+        }
+        
+        // Validate that all keys are present
+        const missingInResponse = [];
+        for (const key of Object.keys(missingKeys)) {
+          if (!(key in translated)) {
+            missingInResponse.push(key);
+          }
+        }
+
+        if (missingInResponse.length > 0) {
+          console.warn(`  ⚠️  Warning: ${missingInResponse.length} keys missing in translation response from ${model}`);
+          // Still return what we got - partial translation is better than nothing
+        }
+
+        console.log(`  ✅ Successfully translated using ${model}`);
+        return translated;
+      } catch (error) {
+        // If it's the last attempt on the last model, give up
+        if (attempt === retriesPerModel - 1 && isLastModel) {
+          console.error(`  ❌ Error translating to ${targetLanguage} after trying all models:`, error.message);
+          return {};
+        }
+        
+        // For other errors, wait and retry or try next model
+        if (attempt < retriesPerModel - 1) {
+          const waitTime = Math.min(1000 * Math.pow(2, attempt), 10000); // Max 10 seconds
+          console.warn(`  ⚠️  Error on ${model} (attempt ${attempt + 1}/${retriesPerModel}): ${error.message}. Retrying in ${waitTime / 1000}s...`);
+          await sleep(waitTime);
+        } else {
+          console.warn(`  ⚠️  Error on ${model} after ${retriesPerModel} attempts: ${error.message}. Trying next model...`);
+          await sleep(2000);
+          break; // Try next model
+        }
       }
     }
-
-    if (missingInResponse.length > 0) {
-      console.warn(`  ⚠️  Warning: ${missingInResponse.length} keys missing in translation response`);
-      // Still return what we got - partial translation is better than nothing
-    }
-
-    return translated;
-  } catch (error) {
-    console.error(`  ❌ Error translating to ${targetLanguage}:`, error.message);
-    // Return empty object on error - we'll skip this language
-    return {};
   }
+
+  // If we get here, all models failed
+  console.error(`  ❌ All models failed for ${targetLanguage}`);
+  return {};
 }
 
 /**
@@ -279,8 +374,10 @@ async function main() {
       totalTranslated += Object.keys(translations).length;
     }
 
-    // Rate limiting: wait a bit between API calls to respect rate limits
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Rate limiting: wait between API calls to respect rate limits
+    // Increased delay to 3 seconds to stay well within free tier limits (30 req/min)
+    // This gives us ~20 requests per minute, leaving buffer for retries
+    await sleep(3000);
   }
 
   console.log('\n' + '='.repeat(50));

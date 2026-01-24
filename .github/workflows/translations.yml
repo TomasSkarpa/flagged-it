@@ -20,7 +20,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          # Use PAT if available, fallback to GITHUB_TOKEN
+          # PAT is required for PR creation in some repository settings
+          token: ${{ secrets.GITHUB_PAT || secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -36,7 +39,10 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          # Use PAT if available, fallback to GITHUB_TOKEN
+          # Note: GITHUB_TOKEN may not have permissions to create PRs in some repos
+          # Create a PAT with 'repo' and 'pull_requests' permissions and add as GITHUB_PAT secret
+          token: ${{ secrets.GITHUB_PAT || secrets.GITHUB_TOKEN }}
           commit-message: "🌍 Auto-translate missing keys"
           title: "🌍 Auto-translate missing keys"
           body: |
@@ -44,6 +50,11 @@ jobs:
             
             The script compared `en.json` with all other locale files and translated any missing keys using the Groq API (llama-3.3-70b-versatile).
             
+            **Note:** Translations are done with exponential backoff retry logic to handle rate limits gracefully.
+            
             Please review the translations before merging.
           branch: auto-translate-missing-keys
           delete-branch: true
+          labels: |
+            translation
+            automated

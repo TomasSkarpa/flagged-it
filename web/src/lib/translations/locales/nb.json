@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Vanlig",
   "game.capital.difficulty.regular.desc": "4 alternativer å velge fra",
   "game.capital.difficulty.intermediate": "Middels",
-  "game.capital.difficulty.intermediate.desc": "Skriv svaret for å vinne"
+  "game.capital.difficulty.intermediate.desc": "Skriv svaret for å vinne",
+  "game.list.title": "Liste alle land",
+  "game.list.select_region": "Velg region",
+  "game.list.choose_region": "Velg en region og prøv å navngi alle land i den!",
+  "game.list.enter_country": "Skriv inn landsnavn...",
+  "game.list.guess": "Gjett",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Start gjetting land!",
+  "game.list.completion": "Fullføring: %.0f%%",
+  "game.list.correct_added": "Riktig! %s lagt til listen.",
+  "game.list.not_found": "Ikke funnet eller allerede gjettet. Prøv igjen!",
+  "game.list.congratulations": "Gratulerer! Du har listet alle land!",
+  "game.list.progress": "%s: %d/%d land funnet"
 }

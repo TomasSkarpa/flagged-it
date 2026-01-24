@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Ya Kawaida",
   "game.capital.difficulty.regular.desc": "Chaguo 4 za kuchagua",
   "game.capital.difficulty.intermediate": "Wa Kati",
-  "game.capital.difficulty.intermediate.desc": "Andika jibu ili ushinde"
+  "game.capital.difficulty.intermediate.desc": "Andika jibu ili ushinde",
+  "game.list.title": "Orodhesha Nchi Zote",
+  "game.list.select_region": "Chagua Mkoa",
+  "game.list.choose_region": "Chagua eneo na jaribu kutaja nchi zote zilizo humo!",
+  "game.list.enter_country": "Ingiza jina la nchi...",
+  "game.list.guess": "Jaribu",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Anza kujaribu kutambua nchi!",
+  "game.list.completion": "Kukamilika: %.0f%%",
+  "game.list.correct_added": "Sahihi! %s imewekwa kwenye orodha.",
+  "game.list.not_found": "Haipatikani au tayari imetambuliwa. Jaribu tena!",
+  "game.list.congratulations": "Hongera! Umeorodhesha nchi zote!",
+  "game.list.progress": "%s: %d/%d nchi zimepatikana"
 }

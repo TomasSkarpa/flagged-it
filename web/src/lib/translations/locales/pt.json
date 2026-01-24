@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Regular",
   "game.capital.difficulty.regular.desc": "4 opções para escolher",
   "game.capital.difficulty.intermediate": "Intermediário",
-  "game.capital.difficulty.intermediate.desc": "Digite a resposta para ganhar"
+  "game.capital.difficulty.intermediate.desc": "Digite a resposta para ganhar",
+  "game.list.title": "Lista Todos os Países",
+  "game.list.select_region": "Selecione Região",
+  "game.list.choose_region": "Escolha uma região e tente nomear todos os países nela!",
+  "game.list.enter_country": "Digite o nome do país...",
+  "game.list.guess": "Adivinhar",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Comece a adivinhar países!",
+  "game.list.completion": "Conclusão: %.0f%%",
+  "game.list.correct_added": "Correto! %s adicionado à lista.",
+  "game.list.not_found": "Não encontrado ou já adivinhado. Tente novamente!",
+  "game.list.congratulations": "Parabéns! Você listou todos os países!",
+  "game.list.progress": "%s: %d/%d países encontrados"
 }

@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "通常",
   "game.capital.difficulty.regular.desc": "4 つの選択肢から選ぶ",
   "game.capital.difficulty.intermediate": "中級",
-  "game.capital.difficulty.intermediate.desc": "答えを入力して勝つ"
+  "game.capital.difficulty.intermediate.desc": "答えを入力して勝つ",
+  "game.list.title": "すべての国をリストする",
+  "game.list.select_region": "地域を選択",
+  "game.list.choose_region": "地域を選択して、その地域にあるすべての国を名前で当ててみましょう！",
+  "game.list.enter_country": "国名を入力...",
+  "game.list.guess": "当てる",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "国名を当て始めましょう！",
+  "game.list.completion": "完了率: %.0f%%",
+  "game.list.correct_added": "正解！%s がリストに追加されました。",
+  "game.list.not_found": "見つかりませんでした、またはすでに当てた国です。もう一度試してください！",
+  "game.list.congratulations": "おめでとう！すべての国をリストしました！",
+  "game.list.progress": "%s: %d/%d 個の国が見つかりました"
 }

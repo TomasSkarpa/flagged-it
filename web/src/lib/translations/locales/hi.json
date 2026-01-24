@@ -202,5 +202,18 @@
   "game.capital.difficulty.regular": "नियमित",
   "game.capital.difficulty.regular.desc": "चुनने के लिए 4 विकल्प",
   "game.capital.difficulty.intermediate": "मध्यवर्ती",
-  "game.capital.difficulty.intermediate.desc": "जीतने के लिए उत्तर टाइप करें"
+  "game.capital.difficulty.intermediate.desc": "जीतने के लिए उत्तर टाइप करें",
+  "game.list.title": "सभी देशों की सूची",
+  "game.list.select_region": "क्षेत्र चुनें",
+  "game.list.choose_region": "एक क्षेत्र चुनें और उसमें सभी देशों के नाम बताने की कोशिश करें!",
+  "game.list.enter_country": "देश का नाम दर्ज करें...",
+  "game.list.guess": "अनुमान लगाएं",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "देशों का अनुमान लगाना शुरू करें!",
+  "game.list.completion": "पूर्णता: %.0f%%",
+  "game.list.correct_added": "सही! %s सूची में जोड़ा गया है।",
+  "game.list.not_found": "पाया नहीं गया या पहले से ही अनुमान लगाया गया है। फिर से कोशिश करें!",
+  "game.list.congratulations": "बधाई हो! आपने सभी देशों की सूची बना ली है!",
+  "game.list.progress": "%s: %d/%d देश पाए गए"
 }

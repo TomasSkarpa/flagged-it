@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Κανονικό",
   "game.capital.difficulty.regular.desc": "4 επιλογές για επιλογή",
   "game.capital.difficulty.intermediate": "Μεσαίος",
-  "game.capital.difficulty.intermediate.desc": "Γράψτε την απάντηση για να κερδίσετε"
+  "game.capital.difficulty.intermediate.desc": "Γράψτε την απάντηση για να κερδίσετε",
+  "game.list.title": "Λίστα Όλων των Χωρών",
+  "game.list.select_region": "Επιλέξτε Περιοχή",
+  "game.list.choose_region": "Επιλέξτε μια περιοχή και προσπαθήστε να ονομάσετε όλες τις χώρες σε αυτή!",
+  "game.list.enter_country": "Εισαγωγή ονόματος χώρας...",
+  "game.list.guess": "Εκτίμηση",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Ξεκινήστε να εκτιμάτε τις χώρες!",
+  "game.list.completion": "Ολοκλήρωση: %.0f%%",
+  "game.list.correct_added": "Σωστά! %s προστέθηκε στη λίστα.",
+  "game.list.not_found": "Δεν βρέθηκε ή ήδη έχει εκτιμηθεί. Προσπαθήστε ξανά!",
+  "game.list.congratulations": "Συγχαρητήρια! Έχετε λίστα όλες τις χώρες!",
+  "game.list.progress": "%s: %d/%d χώρες βρέθηκαν"
 }

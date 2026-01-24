@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Normal",
   "game.capital.difficulty.regular.desc": "Seçmek için 4 seçenek",
   "game.capital.difficulty.intermediate": "Orta",
-  "game.capital.difficulty.intermediate.desc": "Kazanmak için cevabı yazın"
+  "game.capital.difficulty.intermediate.desc": "Kazanmak için cevabı yazın",
+  "game.list.title": "Tüm Ülkeleri Listele",
+  "game.list.select_region": "Bölge Seç",
+  "game.list.choose_region": "Bir bölge seçin ve bu bölgedeki tüm ülkeleri adlandırmağa çalışın!",
+  "game.list.enter_country": "Ülke adını girin...",
+  "game.list.guess": "Tahmin Et",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Ülkeleri tahmin etmeye başlayın!",
+  "game.list.completion": "Tamamlanma: %.0f%%",
+  "game.list.correct_added": "Doğru! %s listeye eklendi.",
+  "game.list.not_found": "Bulunamadı veya zaten tahmin edildi. Tekrar deneyin!",
+  "game.list.congratulations": "Tebrikler! Tüm ülkeleri listelediniz!",
+  "game.list.progress": "%s: %d/%d ülke bulundu"
 }

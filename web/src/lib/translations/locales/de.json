@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Regulär",
   "game.capital.difficulty.regular.desc": "4 Optionen zur Auswahl",
   "game.capital.difficulty.intermediate": "Fortgeschritten",
-  "game.capital.difficulty.intermediate.desc": "Tippe die Antwort, um zu gewinnen"
+  "game.capital.difficulty.intermediate.desc": "Tippe die Antwort, um zu gewinnen",
+  "game.list.title": "Alle Länder auflisten",
+  "game.list.select_region": "Region auswählen",
+  "game.list.choose_region": "Wählen Sie eine Region aus und versuchen Sie, alle Länder in ihr zu benennen!",
+  "game.list.enter_country": "Landname eingeben...",
+  "game.list.guess": "Erraten",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Mit dem Erraten von Ländern beginnen!",
+  "game.list.completion": "Vervollständigung: %.0f%%",
+  "game.list.correct_added": "Richtig! %s zur Liste hinzugefügt.",
+  "game.list.not_found": "Nicht gefunden oder bereits erraten. Versuchen Sie es erneut!",
+  "game.list.congratulations": "Herzlichen Glückwunsch! Sie haben alle Länder aufgelistet!",
+  "game.list.progress": "%s: %d/%d Länder gefunden"
 }

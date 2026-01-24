@@ -202,5 +202,18 @@
   "game.capital.difficulty.regular": "عادي",
   "game.capital.difficulty.regular.desc": "4 خيارات لل选择 منها",
   "game.capital.difficulty.intermediate": "متوسط",
-  "game.capital.difficulty.intermediate.desc": "اكتب الجواب للفوز"
+  "game.capital.difficulty.intermediate.desc": "اكتب الجواب للفوز",
+  "game.list.title": "قائمة جميع الدول",
+  "game.list.select_region": "حدد المنطقة",
+  "game.list.choose_region": "اختر منطقة وحاول تسمية جميع الدول فيها!",
+  "game.list.enter_country": "ادخل اسم الدولة...",
+  "game.list.guess": "اخمن",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "ابدأ في تخمين الدول!",
+  "game.list.completion": "الاستكمال: %.0f%%",
+  "game.list.correct_added": "صحيح! %s تمت إضافته إلى القائمة.",
+  "game.list.not_found": "لم يتم العثور عليه أو تم تخمينه بالفعل. حاول مرة أخرى!",
+  "game.list.congratulations": "تهانينا! لقد قمت بlisting جميع الدول!",
+  "game.list.progress": "%s: %d/%d دولة تم العثور عليها"
 }

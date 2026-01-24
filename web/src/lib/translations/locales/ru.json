@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Обычный",
   "game.capital.difficulty.regular.desc": "4 варианта на выбор",
   "game.capital.difficulty.intermediate": "Средний",
-  "game.capital.difficulty.intermediate.desc": "Введите ответ, чтобы выиграть"
+  "game.capital.difficulty.intermediate.desc": "Введите ответ, чтобы выиграть",
+  "game.list.title": "Список всех стран",
+  "game.list.select_region": "Выберите регион",
+  "game.list.choose_region": "Выберите регион и попробуйте назвать все страны в нём!",
+  "game.list.enter_country": "Введите название страны...",
+  "game.list.guess": "Угадать",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Начните угадывать страны!",
+  "game.list.completion": "Выполнение: %.0f%%",
+  "game.list.correct_added": "Верно! %s добавлено в список.",
+  "game.list.not_found": "Не найдено или уже угадано. Попробуйте снова!",
+  "game.list.congratulations": "Поздравляем! Вы перечислили все страны!",
+  "game.list.progress": "%s: %d/%d стран найдено"
 }

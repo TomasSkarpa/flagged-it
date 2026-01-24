@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Biasa",
   "game.capital.difficulty.regular.desc": "4 pilihan untuk dipilih",
   "game.capital.difficulty.intermediate": "Pertengahan",
-  "game.capital.difficulty.intermediate.desc": "Taip jawapan untuk menang"
+  "game.capital.difficulty.intermediate.desc": "Taip jawapan untuk menang",
+  "game.list.title": "Senarai Semua Negara",
+  "game.list.select_region": "Pilih Kawasan",
+  "game.list.choose_region": "Pilih kawasan dan cuba namakan semua negara di dalamnya!",
+  "game.list.enter_country": "Masukkan nama negara...",
+  "game.list.guess": "Teka",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Mulakan tekaan negara!",
+  "game.list.completion": "Penyiapan: %.0f%%",
+  "game.list.correct_added": "BETUL! %s ditambah ke senarai.",
+  "game.list.not_found": "Tidak dijumpai atau sudah diteka. Cubalah lagi!",
+  "game.list.congratulations": "Tahniah! Anda telah menyenaraikan semua negara!",
+  "game.list.progress": "%s: %d/%d negara dijumpai"
 }

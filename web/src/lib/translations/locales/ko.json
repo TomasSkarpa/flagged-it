@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "일반",
   "game.capital.difficulty.regular.desc": "4개의 선택지 중 하나를 선택",
   "game.capital.difficulty.intermediate": "중급",
-  "game.capital.difficulty.intermediate.desc": "정답을 입력하여 승리"
+  "game.capital.difficulty.intermediate.desc": "정답을 입력하여 승리",
+  "game.list.title": "모든 국가 목록",
+  "game.list.select_region": "지역 선택",
+  "game.list.choose_region": "지역을 선택하고 그 지역의 모든 국가를 이름으로 불러보세요!",
+  "game.list.enter_country": "국가 이름 입력...",
+  "game.list.guess": "추측",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "국가 추측을 시작하세요!",
+  "game.list.completion": "완료: %.0f%%",
+  "game.list.correct_added": "정답! %s가 목록에 추가되었습니다.",
+  "game.list.not_found": "찾을 수 없거나 이미 추측한 국가입니다. 다시 시도하세요!",
+  "game.list.congratulations": "축하합니다! 모든 국가를 목록에 올렸습니다!",
+  "game.list.progress": "%s: %d/%d개 국가 발견"
 }

@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Regulier",
   "game.capital.difficulty.regular.desc": "4 opties om uit te kiezen",
   "game.capital.difficulty.intermediate": "Gevorderd",
-  "game.capital.difficulty.intermediate.desc": "Typ antwoord om te winnen"
+  "game.capital.difficulty.intermediate.desc": "Typ antwoord om te winnen",
+  "game.list.title": "Lijst van alle landen",
+  "game.list.select_region": "Selecteer regio",
+  "game.list.choose_region": "Kies een regio en probeer alle landen daarin te noemen!",
+  "game.list.enter_country": "Voer landnaam in...",
+  "game.list.guess": "Raad",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Begin met raden van landen!",
+  "game.list.completion": "Voltooiing: %.0f%%",
+  "game.list.correct_added": "Correct! %s toegevoegd aan de lijst.",
+  "game.list.not_found": "Niet gevonden of al geraden. Probeer opnieuw!",
+  "game.list.congratulations": "Gefeliciteerd! Je hebt alle landen genoemd!",
+  "game.list.progress": "%s: %d/%d landen gevonden"
 }

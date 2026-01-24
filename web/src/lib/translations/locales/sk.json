@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Bežný",
   "game.capital.difficulty.regular.desc": "4 možnosti na výber",
   "game.capital.difficulty.intermediate": "Stredne pokročilý",
-  "game.capital.difficulty.intermediate.desc": "Zadajte odpoveď, aby ste vyhrali"
+  "game.capital.difficulty.intermediate.desc": "Zadajte odpoveď, aby ste vyhrali",
+  "game.list.title": "Zoznam všetkých krajín",
+  "game.list.select_region": "Vyberte región",
+  "game.list.choose_region": "Vyberte región a skúste menovať všetky krajiny v ňom!",
+  "game.list.enter_country": "Zadajte názov krajiny...",
+  "game.list.guess": "Hádaj",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Začíname hádať krajiny!",
+  "game.list.completion": "Dokončenie: %.0f%%",
+  "game.list.correct_added": "Správne! %s bol pridaný do zoznamu.",
+  "game.list.not_found": "Nenájdené alebo už uhádnuté. Skúste to znova!",
+  "game.list.congratulations": "Gratulujeme! Zoznamli ste všetky krajiny!",
+  "game.list.progress": "%s: %d/%d krajín nájdených"
 }

@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Uobičajeno",
   "game.capital.difficulty.regular.desc": "4 opcije za izbor",
   "game.capital.difficulty.intermediate": "Srednji",
-  "game.capital.difficulty.intermediate.desc": "Upišite odgovor za pobjedu"
+  "game.capital.difficulty.intermediate.desc": "Upišite odgovor za pobjedu",
+  "game.list.title": "Popis svih zemalja",
+  "game.list.select_region": "Odaberi regiju",
+  "game.list.choose_region": "Odaberi regiju i pokušaj navesti sve zemlje u njoj!",
+  "game.list.enter_country": "Unesi ime zemlje...",
+  "game.list.guess": "Pogodi",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Počni pogadjanje zemalja!",
+  "game.list.completion": "Završenost: %.0f%%",
+  "game.list.correct_added": "Točno! %s dodano na popis.",
+  "game.list.not_found": "Nije pronađeno ili već pogodjeno. Pokušaj ponovno!",
+  "game.list.congratulations": "Čestitamo! Popisali ste sve zemlje!",
+  "game.list.progress": "%s: %d/%d zemlja pronađeno"
 }

@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Biasa",
   "game.capital.difficulty.regular.desc": "4 pilihan untuk dipilih",
   "game.capital.difficulty.intermediate": "Menengah",
-  "game.capital.difficulty.intermediate.desc": "Tulis jawaban untuk menang"
+  "game.capital.difficulty.intermediate.desc": "Tulis jawaban untuk menang",
+  "game.list.title": "Daftar Semua Negara",
+  "game.list.select_region": "Pilih Wilayah",
+  "game.list.choose_region": "Pilih wilayah dan coba sebutkan semua negara di dalamnya!",
+  "game.list.enter_country": "Masukkan nama negara...",
+  "game.list.guess": "Tebak",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Mulai menebak negara!",
+  "game.list.completion": "Penyelesaian: %.0f%%",
+  "game.list.correct_added": "Benar! %s ditambahkan ke daftar.",
+  "game.list.not_found": "Tidak ditemukan atau sudah ditebak. Coba lagi!",
+  "game.list.congratulations": "Selamat! Anda telah mendata semua negara!",
+  "game.list.progress": "%s: %d/%d negara ditemukan"
 }

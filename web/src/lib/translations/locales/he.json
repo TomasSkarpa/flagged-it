@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "רגיל",
   "game.capital.difficulty.regular.desc": "4 אפשרויות לבחור מהן",
   "game.capital.difficulty.intermediate": "בינוני",
-  "game.capital.difficulty.intermediate.desc": "הקלד תשובה כדי לנצח"
+  "game.capital.difficulty.intermediate.desc": "הקלד תשובה כדי לנצח",
+  "game.list.title": "רשימת כל המדינות",
+  "game.list.select_region": "בחר אזור",
+  "game.list.choose_region": "בחר אזור ונסה לפרט את כל המדינות בו!",
+  "game.list.enter_country": "הקלד שם מדינה...",
+  "game.list.guess": "נחש",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "התחל לנחש מדינות!",
+  "game.list.completion": "השלמה: %.0f%%",
+  "game.list.correct_added": "נכון! %s הוסף לרשימה.",
+  "game.list.not_found": "לא נמצא או כבר נחש. נסה שוב!",
+  "game.list.congratulations": "ברכות! הצלחת לרשום את כל המדינות!",
+  "game.list.progress": "%s: %d/%d מדינות נמצאו"
 }

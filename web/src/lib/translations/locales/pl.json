@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Zwykły",
   "game.capital.difficulty.regular.desc": "4 opcje do wyboru",
   "game.capital.difficulty.intermediate": "Średniozaawansowany",
-  "game.capital.difficulty.intermediate.desc": "Wpisz odpowiedź, aby wygrać"
+  "game.capital.difficulty.intermediate.desc": "Wpisz odpowiedź, aby wygrać",
+  "game.list.title": "Lista wszystkich krajów",
+  "game.list.select_region": "Wybierz region",
+  "game.list.choose_region": "Wybierz region i spróbuj nazwać wszystkie kraje w nim!",
+  "game.list.enter_country": "Wpisz nazwę kraju...",
+  "game.list.guess": "Zgadnij",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Zacznij zgadywać kraje!",
+  "game.list.completion": "Stopień ukończenia: %.0f%%",
+  "game.list.correct_added": "Poprawnie! %s dodany do listy.",
+  "game.list.not_found": "Nie znaleziono lub już zgadnięto. Spróbuj ponownie!",
+  "game.list.congratulations": "Gratulacje! Zgadłeś wszystkie kraje!",
+  "game.list.progress": "%s: %d/%d krajów znaleziono"
 }

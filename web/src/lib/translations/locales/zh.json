@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "普通",
   "game.capital.difficulty.regular.desc": "从4个选项中选择",
   "game.capital.difficulty.intermediate": "中级",
-  "game.capital.difficulty.intermediate.desc": "输入答案即可获胜"
+  "game.capital.difficulty.intermediate.desc": "输入答案即可获胜",
+  "game.list.title": "列出所有国家",
+  "game.list.select_region": "选择地区",
+  "game.list.choose_region": "选择一个地区，尝试命名其中的所有国家！",
+  "game.list.enter_country": "输入国家名称...",
+  "game.list.guess": "猜测",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "开始猜测国家！",
+  "game.list.completion": "完成度: %.0f%%",
+  "game.list.correct_added": "正确！%s 添加到列表中。",
+  "game.list.not_found": "未找到或已经猜过。再试一次！",
+  "game.list.congratulations": "恭喜！您已经列出了所有国家！",
+  "game.list.progress": "%s: %d/%d 个国家已找到"
 }

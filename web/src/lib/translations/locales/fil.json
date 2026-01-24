@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Pangkaraniwan",
   "game.capital.difficulty.regular.desc": "4 mga pagpipilian upang pumili",
   "game.capital.difficulty.intermediate": "Intermedyo",
-  "game.capital.difficulty.intermediate.desc": "Itype ang sagot upang manalo"
+  "game.capital.difficulty.intermediate.desc": "Itype ang sagot upang manalo",
+  "game.list.title": "Talaan ng Lahat ng Mga Bansa",
+  "game.list.select_region": "Pumili ng Rehiyon",
+  "game.list.choose_region": "Pumili ng isang rehiyon at subukang pangalanan ang lahat ng mga bansa sa loob nito!",
+  "game.list.enter_country": "Ilagay ang pangalan ng bansa...",
+  "game.list.guess": "Hulaan",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Simulan ang paghula ng mga bansa!",
+  "game.list.completion": "Kompletong Bahagi: %.0f%%",
+  "game.list.correct_added": "Tama! %s na naidagdag sa talaan.",
+  "game.list.not_found": "Hindi natagpuan o na-hulaan na. Subukang muli!",
+  "game.list.congratulations": "Pagbati! Nakapaglista ka na ng lahat ng mga bansa!",
+  "game.list.progress": "%s: %d/%d mga bansa na natagpuan"
 }

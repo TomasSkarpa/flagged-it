@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Almindelig",
   "game.capital.difficulty.regular.desc": "4 muligheder at vælge imellem",
   "game.capital.difficulty.intermediate": "Mellemliggende",
-  "game.capital.difficulty.intermediate.desc": "Skriv svaret for at vinde"
+  "game.capital.difficulty.intermediate.desc": "Skriv svaret for at vinde",
+  "game.list.title": "Vis alle lande",
+  "game.list.select_region": "Vælg region",
+  "game.list.choose_region": "Vælg en region og prøv at navngive alle lande i den!",
+  "game.list.enter_country": "Indtast landets navn...",
+  "game.list.guess": "Gæt",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Start med at gætte lande!",
+  "game.list.completion": "Fuldførelse: %.0f%%",
+  "game.list.correct_added": "Korrekt! %s tilføjet til listen.",
+  "game.list.not_found": "Ikke fundet eller allerede gættet. Prøv igen!",
+  "game.list.congratulations": "Tillykke! Du har listede alle lande!",
+  "game.list.progress": "%s: %d/%d lande fundet"
 }

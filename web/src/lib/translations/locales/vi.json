@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Thông thường",
   "game.capital.difficulty.regular.desc": "4 lựa chọn để chọn",
   "game.capital.difficulty.intermediate": "Trung cấp",
-  "game.capital.difficulty.intermediate.desc": "Nhập câu trả lời để thắng"
+  "game.capital.difficulty.intermediate.desc": "Nhập câu trả lời để thắng",
+  "game.list.title": "Danh Sách Tất Cả Các Quốc Gia",
+  "game.list.select_region": "Chọn Khu Vực",
+  "game.list.choose_region": "Chọn một khu vực và thử đặt tên cho tất cả các quốc gia trong đó!",
+  "game.list.enter_country": "Nhập tên quốc gia...",
+  "game.list.guess": "Đoán",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Bắt đầu đoán quốc gia!",
+  "game.list.completion": "Hoàn Thành: %.0f%%",
+  "game.list.correct_added": "Đúng! %s đã được thêm vào danh sách.",
+  "game.list.not_found": "Không tìm thấy hoặc đã đoán. Thử lại!",
+  "game.list.congratulations": "Chúc Mừng! Bạn đã liệt kê tất cả các quốc gia!",
+  "game.list.progress": "%s: %d/%d quốc gia được tìm thấy"
 }

@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Vanlig",
   "game.capital.difficulty.regular.desc": "4 alternativ att välja mellan",
   "game.capital.difficulty.intermediate": "Mellan",
-  "game.capital.difficulty.intermediate.desc": "Skriv svar för att vinna"
+  "game.capital.difficulty.intermediate.desc": "Skriv svar för att vinna",
+  "game.list.title": "Lista alla länder",
+  "game.list.select_region": "Välj region",
+  "game.list.choose_region": "Välj en region och försök namnge alla länder i den!",
+  "game.list.enter_country": "Ange landsnamn...",
+  "game.list.guess": "Gissa",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Börja gissa länder!",
+  "game.list.completion": "Färdigställande: %.0f%%",
+  "game.list.correct_added": "Korrekt! %s lagt till i listan.",
+  "game.list.not_found": "Hittades inte eller redan gissat. Försök igen!",
+  "game.list.congratulations": "Grattis! Du har listat alla länder!",
+  "game.list.progress": "%s: %d/%d länder hittade"
 }

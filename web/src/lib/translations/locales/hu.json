@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Normál",
   "game.capital.difficulty.regular.desc": "4 válaszlehetőség közül választhatsz",
   "game.capital.difficulty.intermediate": "Közepes",
-  "game.capital.difficulty.intermediate.desc": "Írd be a választ, hogy nyerj"
+  "game.capital.difficulty.intermediate.desc": "Írd be a választ, hogy nyerj",
+  "game.list.title": "Összes ország listája",
+  "game.list.select_region": "Régió kiválasztása",
+  "game.list.choose_region": "Válassz egy régiót és próbáld meg nevezni az összes országot benne!",
+  "game.list.enter_country": "Írd be az ország nevét...",
+  "game.list.guess": "Tippelés",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Kezd el tippelni az országokat!",
+  "game.list.completion": "Kitöltés: %.0f%%",
+  "game.list.correct_added": "Helyes! %s hozzáadva a listához.",
+  "game.list.not_found": "Nem található vagy már tippelték. Próbálkozz újra!",
+  "game.list.congratulations": "Gratulálunk! Összes országot listáztál!",
+  "game.list.progress": "%s: %d/%d ország találva"
 }

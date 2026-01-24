@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Normal",
   "game.capital.difficulty.regular.desc": "4 opțiuni de ales",
   "game.capital.difficulty.intermediate": "Intermediar",
-  "game.capital.difficulty.intermediate.desc": "Tastează răspunsul pentru a câștiga"
+  "game.capital.difficulty.intermediate.desc": "Tastează răspunsul pentru a câștiga",
+  "game.list.title": "Listați Toate Țările",
+  "game.list.select_region": "Selectați Regiunea",
+  "game.list.choose_region": "Alegeți o regiune și încercați să numiți toate țările din aceasta!",
+  "game.list.enter_country": "Introduceți numele țării...",
+  "game.list.guess": "Ghiciti",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Începeți să ghiciți țările!",
+  "game.list.completion": "Finalizare: %.0f%%",
+  "game.list.correct_added": "Corect! %s a fost adăugat în listă.",
+  "game.list.not_found": "Nu a fost găsit sau a fost deja ghicit. Încercați din nou!",
+  "game.list.congratulations": "Felicitări! Ați listat toate țările!",
+  "game.list.progress": "%s: %d/%d țări găsite"
 }

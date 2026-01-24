@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Tavallinen",
   "game.capital.difficulty.regular.desc": "4 vaihtoehtoa valittavaksi",
   "game.capital.difficulty.intermediate": "Keskitaso",
-  "game.capital.difficulty.intermediate.desc": "Kirjoita vastaus voittaaksesi"
+  "game.capital.difficulty.intermediate.desc": "Kirjoita vastaus voittaaksesi",
+  "game.list.title": "Lista kaikki maat",
+  "game.list.select_region": "Valitse alue",
+  "game.list.choose_region": "Valitse alue ja yritä nimetä kaikki siinä olevat maat!",
+  "game.list.enter_country": "Syötä maan nimi...",
+  "game.list.guess": "Arvaa",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Aloita arvaaminen!",
+  "game.list.completion": "Täydellisyys: %.0f%%",
+  "game.list.correct_added": "Oikein! %s lisätty listaan.",
+  "game.list.not_found": "Ei löydy tai jo arvattu. Yritä uudelleen!",
+  "game.list.congratulations": "Onnittelut! Olet listannut kaikki maat!",
+  "game.list.progress": "%s: %d/%d maata löydetty"
 }

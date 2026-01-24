@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Pravidelný",
   "game.capital.difficulty.regular.desc": "4 možnosti na výběr",
   "game.capital.difficulty.intermediate": "Pokročilý",
-  "game.capital.difficulty.intermediate.desc": "Zadejte odpověď pro výhru"
+  "game.capital.difficulty.intermediate.desc": "Zadejte odpověď pro výhru",
+  "game.list.title": "Seznam všech zemí",
+  "game.list.select_region": "Vyberte region",
+  "game.list.choose_region": "Vyberte region a zkuste pojmenovat všechny země v něm!",
+  "game.list.enter_country": "Zadejte název země...",
+  "game.list.guess": "Uhodněte",
+  "game.list.country_item": "%d. %s",
+  "game.list.country_unknown": "%d. ?",
+  "game.list.start_guessing": "Začněte uhádnout země!",
+  "game.list.completion": "Dokončení: %.0f%%",
+  "game.list.correct_added": "Správně! %s přidán do seznamu.",
+  "game.list.not_found": "Nenalezeno nebo již uhodnuto. Zkuste to znovu!",
+  "game.list.congratulations": "Blahopřejeme! Seznam všech zemí jste dokončili!",
+  "game.list.progress": "%s: %d/%d zemí nalezeno"
 }

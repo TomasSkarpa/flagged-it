@@ -74,11 +74,6 @@
 	// Reactive formatted fact - ensure it updates when currentFact changes
 	$: formattedFact = currentFact && currentFact.trim() !== '' ? formatFact(currentFact) : '';
 	$: hasFact = currentFact && currentFact.trim() !== '' && formattedFact && formattedFact.trim() !== '';
-	
-	// Debug: Log when currentFact changes
-	$: if (browser) {
-		console.log('currentFact reactive:', currentFact?.substring(0, 50), 'formatted:', formattedFact?.substring(0, 50), 'hasFact:', hasFact);
-	}
 
 	onMount(async () => {
 		// Only load countries in browser, not during SSR
@@ -118,9 +113,7 @@
 		currentFact = ''; // Reset current fact
 		
 		try {
-			console.log('Starting facts game...');
 			const result = await startFactsGame();
-			console.log('Facts game started:', result);
 			
 			// Set gameStarted first to ensure proper state
 			gameStarted = true;
@@ -128,18 +121,12 @@
 			
 			sessionId = result.sessionId;
 			
-			// Ensure currentFact is properly set - check multiple possible fields
-			const factValue = result.currentFact || result.fact || '';
-			currentFact = factValue;
+			// Ensure currentFact is properly set
+			currentFact = result.currentFact || '';
 			factNumber = result.factNumber || 1;
 			triesLeft = result.triesLeft || 3;
 			score = result.score || 0;
 			total = result.total || 0;
-			
-			console.log('currentFact set to:', currentFact);
-			console.log('factNumber set to:', factNumber);
-			console.log('gameStarted:', gameStarted);
-			console.log('Will display fact?', currentFact && currentFact.trim() !== '');
 			
 			if (!currentFact || currentFact.trim() === '') {
 				error = 'No fact was returned from the server. Please try again.';
@@ -195,6 +182,7 @@
 				isCorrect = true;
 
 				// Wait 2 seconds, then start next round or finish game
+				// Don't change fact here - let handleNextRound load the new fact
 				setTimeout(async () => {
 					if (result.isComplete) {
 						gameFinished = true;
@@ -215,6 +203,7 @@
 				isCorrect = false;
 
 				// Wait 2 seconds, then start next round or finish game
+				// Don't change fact here - let handleNextRound load the new fact
 				setTimeout(async () => {
 					if (result.isComplete) {
 						gameFinished = true;
@@ -229,14 +218,6 @@
 					currentFact = result.nextFact;
 					factNumber = result.factNumber !== undefined ? result.factNumber : factNumber + 1;
 					statusMessage = wrongNextText;
-					console.log('Updated currentFact with nextFact:', currentFact);
-					console.log('Updated factNumber:', factNumber);
-				} else if (result.currentFact && result.currentFact.trim() !== '') {
-					// Fallback: use currentFact if nextFact is not provided
-					currentFact = result.currentFact;
-					factNumber = result.factNumber !== undefined ? result.factNumber : factNumber + 1;
-					statusMessage = wrongNextText;
-					console.log('Updated currentFact from currentFact field:', currentFact);
 				} else {
 					statusMessage = wrongNoMoreText;
 					console.warn('No nextFact in response, keeping current fact:', currentFact);
@@ -302,15 +283,14 @@
 		guessInput = ''; // Clear input
 
 		try {
-			console.log('Skipping round...');
 			const result = await skipRound(sessionId);
-			console.log('Skip result:', result);
 			
 			isCorrect = false;
 			triesLeft = result.triesLeft || 0;
 			score = result.score || 0;
 			total = result.total || 0;
-			guessHistory = result.guessHistory || [];
+			// Clear guess history when skipping - don't show Previous Guesses for skipped facts
+			guessHistory = [];
 
 			// Show skipped message with correct answer
 			if (result.correctCountry) {
@@ -326,6 +306,7 @@
 			showFeedback = true;
 
 			// Wait 2 seconds, then start next round or finish game
+			// Don't change fact here - let handleNextRound load the new fact
 			setTimeout(async () => {
 				showFeedback = false;
 				statusMessage = '';
@@ -334,9 +315,6 @@
 					gameStarted = false;
 					isLoading = false;
 				} else {
-					// Clear current fact before loading next round
-					currentFact = '';
-					factNumber = 0;
 					await handleNextRound();
 				}
 			}, 2000);
@@ -413,8 +391,9 @@
 					{totalRounds}
 				/>
 
-				<!-- Current Fact Display - Always show when game is started -->
-				<div class="card-game relative">
+				<!-- Fact Display and Input - Combined in one card-game -->
+				<div class="card-game relative overflow-hidden">
+					<!-- Header -->
 					<div class="flex items-center justify-between mb-4">
 						<div class="flex items-center gap-3">
 							<span class="text-3xl">📚</span>
@@ -430,7 +409,8 @@
 						{/if}
 					</div>
 					
-					<div class="p-6 bg-white/5 rounded-lg border border-white/10 min-h-[120px] flex items-center justify-center">
+					<!-- Fact Content -->
+					<div class="p-6 bg-white/5 rounded-lg border border-white/10 min-h-[120px] flex items-center justify-center mb-6 {showFeedback ? 'opacity-0' : ''}">
 						{#if hasFact}
 							<div class="w-full">
 								<div class="text-xl md:text-2xl text-sandy-light font-medium leading-relaxed text-center whitespace-normal break-words">
@@ -443,90 +423,92 @@
 								{#if error}
 									<p class="text-error text-sm mt-2">{error}</p>
 								{/if}
-								{#if browser && currentFact}
-									<p class="text-xs text-text-muted mt-2">Debug: fact length={currentFact.length}, formatted length={formattedFact?.length || 0}</p>
-								{/if}
 							</div>
 						{/if}
 					</div>
-				</div>
 
-				<!-- Feedback Message -->
-				{#if showFeedback && statusMessage}
-					{@const isSkip = statusMessage.toLowerCase().includes('skipped')}
-					<div class={`card-game ${isCorrect === true ? 'bg-success/20 border-success' : isCorrect === false && !isSkip ? 'bg-error/20 border-error' : isSkip ? 'bg-white/10 border-white/30' : ''}`}>
-						<div class="flex items-center justify-center gap-3 mb-2">
-							{#if isCorrect === true}
-								<span class="text-3xl">✓</span>
-							{:else if isSkip}
-								<span class="text-3xl">⏭️</span>
-							{:else if isCorrect === false}
-								<span class="text-3xl">✗</span>
+					<!-- Guess Input Section -->
+					{#if !gameFinished}
+						<div class="w-full">
+							<p class="text-center text-lg font-medium text-sandy-light mb-4">{makeGuessText}</p>
+							{#if triesLeft > 0 && !showFeedback}
+								<p class="text-center text-sm text-text-muted mb-3">{triesLeftText.replace('%d', triesLeft.toString())}</p>
 							{/if}
-							<p class="text-center font-semibold text-lg status-message {isCorrect === true ? 'text-success' : isCorrect === false && !isSkip ? 'text-error' : isSkip ? 'text-text-light' : 'text-sandy-light'}">
-								{statusMessage}
-							</p>
-						</div>
-						{#if correctCountryName && (isCorrect || triesLeft === 0 || isSkip)}
-							<div class="flex items-center justify-center gap-2 mt-3 pt-3 border-t border-white/10">
-								{#if correctCountryCca2}
-									<img 
-										src="/assets/twemoji_flags_cca2/{correctCountryCca2}.svg" 
-										alt="{correctCountryName} flag"
-										class="w-6 h-4 object-cover rounded"
-									/>
-								{/if}
-								<span class="text-text-light font-medium correct-country-name">{correctCountryName}</span>
+							<div class="flex flex-col sm:flex-row gap-3">
+								<input
+									type="text"
+									bind:this={guessInputElement}
+									bind:value={guessInput}
+									on:keypress={handleKeyPress}
+									placeholder={enterCountryText}
+									disabled={isLoading || showFeedback || gameFinished}
+									class="flex-1 px-4 py-3 rounded-lg border-2 border-white/20 bg-white/5 text-sandy-light placeholder:text-text-muted focus:outline-none focus:border-primary transition-all disabled:opacity-50"
+									autocomplete="off"
+								/>
+								<button
+									on:click={handleSubmitGuess}
+									disabled={isLoading || !guessInput.trim() || showFeedback || gameFinished}
+									class="btn-primary px-8 py-3 font-semibold disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+								>
+									{guessText}
+								</button>
 							</div>
-						{/if}
-					</div>
-				{/if}
+							<div class="flex justify-center mt-4 pt-4 border-t border-white/10">
+								<button
+									on:click={handleSkip}
+									disabled={isLoading || gameFinished}
+									class="flex items-center gap-2 px-4 py-2 text-sm text-text-muted hover:text-sandy-light border border-white/20 hover:border-white/40 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+								>
+									<span>⏭️</span>
+									<span>I don't know / Skip</span>
+								</button>
+							</div>
+							{#if error && !showFeedback}
+								<div class="mt-3 p-3 bg-error/20 border border-error rounded-lg">
+									<p class="text-error text-sm text-center font-medium">{error}</p>
+								</div>
+							{/if}
+						</div>
+					{/if}
 
-				<!-- Guess Input Section -->
-				{#if triesLeft > 0 && (!isCorrect || !showFeedback)}
-					<div class="card-game">
-						<p class="text-center text-lg font-medium text-sandy-light mb-4">{makeGuessText}</p>
-						{#if triesLeft > 0 && !showFeedback}
-							<p class="text-center text-sm text-text-muted mb-3">{triesLeftText.replace('%d', triesLeft.toString())}</p>
-						{/if}
-						<div class="flex flex-col sm:flex-row gap-3">
-							<input
-								type="text"
-								bind:this={guessInputElement}
-								bind:value={guessInput}
-								on:keypress={handleKeyPress}
-								placeholder={enterCountryText}
-								disabled={isLoading || showFeedback || gameFinished}
-								class="flex-1 px-4 py-3 rounded-lg border-2 border-white/20 bg-white/5 text-sandy-light placeholder:text-text-muted focus:outline-none focus:border-primary transition-all disabled:opacity-50"
-								autocomplete="off"
-							/>
-							<button
-								on:click={handleSubmitGuess}
-								disabled={isLoading || !guessInput.trim() || showFeedback || gameFinished}
-								class="btn-primary px-8 py-3 font-semibold disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-							>
-								{guessText}
-							</button>
+					<!-- Feedback Overlay - Covers entire card-game -->
+					{#if showFeedback && statusMessage}
+						{@const isSkip = statusMessage.toLowerCase().includes('skipped')}
+						<div class="feedback-overlay absolute inset-0 flex items-center justify-center rounded-card z-30 animate-fade-in {isCorrect === true ? 'overlay-success' : isCorrect === false && !isSkip ? 'overlay-error' : 'overlay-skip'}">
+							<div class="text-center px-4">
+								<div class="text-6xl mb-4 overlay-icon">
+									{#if isCorrect === true}
+										✓
+									{:else if isSkip}
+										⏭️
+									{:else if isCorrect === false}
+										✗
+									{/if}
+								</div>
+								<p class="text-3xl font-bold overlay-text status-message mb-2">{statusMessage}</p>
+								{#if correctCountryName && (isCorrect || triesLeft === 0 || isSkip)}
+									<div class="flex items-center justify-center gap-2 mt-3">
+										{#if correctCountryCca2}
+											<img 
+												src="/assets/twemoji_flags_cca2/{correctCountryCca2}.svg" 
+												alt="{correctCountryName} flag"
+												class="w-6 h-4 object-cover rounded"
+											/>
+										{/if}
+										<span class="text-xl font-medium overlay-text correct-country-name">{correctCountryName}</span>
+									</div>
+								{/if}
+							</div>
 						</div>
-						<div class="flex justify-center mt-4 pt-4 border-t border-white/10">
-							<button
-								on:click={handleSkip}
-								disabled={isLoading || showFeedback || gameFinished}
-								class="flex items-center gap-2 px-4 py-2 text-sm text-text-muted hover:text-sandy-light border border-white/20 hover:border-white/40 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-							>
-								<span>⏭️</span>
-								<span>I don't know / Skip</span>
-							</button>
-						</div>
-						{#if error && !showFeedback}
-							<p class="text-error text-sm text-center mt-3">{error}</p>
-						{/if}
-					</div>
-				{/if}
+					{/if}
+				</div>
 
 				<!-- Previous Guesses History -->
 				{#if guessHistory.length > 0}
-					<FactsGuessHistory guesses={guessHistory} />
+					{@const nonSkipGuesses = guessHistory.filter(entry => entry.guess.toLowerCase().trim() !== 'skip')}
+					{#if nonSkipGuesses.length > 0}
+						<FactsGuessHistory guesses={nonSkipGuesses} />
+					{/if}
 				{/if}
 			</div>
 		{/if}
@@ -541,6 +523,57 @@
 
 	:global(:root.light) .fact-bold {
 		color: var(--color-text) !important;
+	}
+
+	/* Feedback Overlay Styles */
+	/* Dark mode: dark overlay with light text */
+	.feedback-overlay {
+		background-color: rgba(0, 0, 0, 0.9);
+	}
+
+	.feedback-overlay.overlay-success {
+		background-color: rgba(34, 197, 94, 0.9); /* success green */
+	}
+
+	.feedback-overlay.overlay-error {
+		background-color: rgba(239, 68, 68, 0.9); /* error red */
+	}
+
+	.feedback-overlay.overlay-skip {
+		background-color: rgba(0, 0, 0, 0.9) !important; /* dark overlay for skip in dark mode */
+	}
+
+	.overlay-text {
+		color: white;
+	}
+
+	.overlay-icon {
+		color: white;
+	}
+
+	/* Light mode: white-ish overlay with black text */
+	:global(:root.light) .feedback-overlay {
+		background-color: rgba(255, 255, 255, 0.95) !important;
+	}
+
+	:global(:root.light) .feedback-overlay.overlay-success {
+		background-color: rgba(34, 197, 94, 0.9) !important;
+	}
+
+	:global(:root.light) .feedback-overlay.overlay-error {
+		background-color: rgba(239, 68, 68, 0.9) !important;
+	}
+
+	:global(:root.light) .feedback-overlay.overlay-skip {
+		background-color: rgba(255, 255, 255, 0.98) !important;
+	}
+
+	:global(:root.light) .overlay-text {
+		color: #0F172A !important; /* black text */
+	}
+
+	:global(:root.light) .overlay-icon {
+		color: #0F172A !important; /* black icon */
 	}
 
 	/* Light mode: correct country name should be black */

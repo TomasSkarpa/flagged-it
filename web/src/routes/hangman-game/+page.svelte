@@ -115,23 +115,40 @@
 	// Track previous locale to detect changes
 	let previousLocale = currentLocale;
 	
-	// Update game locale when locale changes (only restart if locale actually changed)
+	// Restart entire game when locale changes
 	$: if (game && currentLocale && currentLocale !== previousLocale && gameStarted && !gameFinished) {
 		previousLocale = currentLocale;
-		game.setLocale(currentLocale);
-		// Restart current round with new locale
-		game.newRound();
-		const newState = game.getState();
-		currentWord = newState.currentWord;
-		guessedWord = newState.guessedWord;
-		guessedLetters = newState.guessedLetters;
-		wrongGuesses = newState.wrongGuesses;
-		currentCountry = newState.country;
-		keyStates = {};
-		showFeedback = false;
-		isCorrect = false;
-		correctAnswer = '';
-		customMessage = '';
+		
+		// Filter countries by region if selected
+		let filteredCountries = countries;
+		if (selectedRegion) {
+			filteredCountries = countries.filter(c => c.region === selectedRegion);
+		}
+
+		if (filteredCountries.length > 0) {
+			// Create new game instance with current locale (full restart)
+			game = new HangmanGame(filteredCountries, currentLocale);
+			game.newRound();
+			
+			// Reset all game state
+			const state = game.getState();
+			currentWord = state.currentWord;
+			guessedWord = state.guessedWord;
+			guessedLetters = state.guessedLetters;
+			wrongGuesses = state.wrongGuesses;
+			score = 0; // Reset score
+			total = 0; // Reset total
+			currentCountry = state.country;
+			keyStates = {};
+			showFeedback = false;
+			isCorrect = false;
+			correctAnswer = '';
+			customMessage = '';
+			gameStarted = true;
+			gameFinished = false;
+		} else {
+			error = 'No countries available for selected region';
+		}
 	}
 
 	function handleKeyPress(event: CustomEvent<{ key: string }>) {

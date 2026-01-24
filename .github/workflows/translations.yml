@@ -22,7 +22,7 @@ jobs:
         with:
           # Use PAT if available, fallback to GITHUB_TOKEN
           # PAT is required for PR creation in some repository settings
-          token: ${{ secrets.GITHUB_PAT || secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
       - name: Setup Node.js

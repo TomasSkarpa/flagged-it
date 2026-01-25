@@ -1,7 +1,6 @@
 <script lang="ts">
 	// @ts-nocheck
-	// svelte-ignore unused-export-let
-	export let params: Record<string, string> = {}; // SvelteKit passes this prop
+	export const params: Record<string, string> = {}; // SvelteKit passes this prop (for external reference only)
 	
 	// Component imports
 	import Button from '$lib/components/ui/Button.svelte';
@@ -13,14 +12,11 @@
 	import StreakCounter from '$lib/components/ui/StreakCounter.svelte';
 	import AchievementBadge from '$lib/components/ui/AchievementBadge.svelte';
 	import Toggle from '$lib/components/ui/Toggle.svelte';
-	import FeedbackCorrect from '$lib/components/ui/FeedbackCorrect.svelte';
-	import FeedbackWrong from '$lib/components/ui/FeedbackWrong.svelte';
 	import HintSystem from '$lib/components/ui/HintSystem.svelte';
 	import FlagGrid from '$lib/components/ui/FlagGrid.svelte';
 	import EmptyState from '$lib/components/ui/EmptyState.svelte';
 	import LoadingSpinner from '$lib/components/ui/LoadingSpinner.svelte';
 	import ProgressBar from '$lib/components/ui/ProgressBar.svelte';
-	import GameModeCard from '$lib/components/ui/GameModeCard.svelte';
 	import RegionSelector from '$lib/components/ui/RegionSelector.svelte';
 	import ScoreDisplay from '$lib/components/ui/ScoreDisplay.svelte';
 	import AnswerButton from '$lib/components/ui/AnswerButton.svelte';
@@ -29,16 +25,12 @@
 	import LeaderboardRow from '$lib/components/ui/LeaderboardRow.svelte';
 	import StatusIndicator from '$lib/components/ui/StatusIndicator.svelte';
 	import TrendIndicator from '$lib/components/ui/TrendIndicator.svelte';
-	import GuessHistoryTable from '$lib/components/ui/GuessHistoryTable.svelte';
 	import MapWithPin from '$lib/components/ui/MapWithPin.svelte';
 	import MapWithPinInfo from '$lib/components/ui/MapWithPinInfo.svelte';
 	import MapWithPinPlaceGuess from '$lib/components/ui/MapWithPinPlaceGuess.svelte';
 	import MapWithPinCompare from '$lib/components/ui/MapWithPinCompare.svelte';
-	import MapWithPinAreaGuess from '$lib/components/ui/MapWithPinAreaGuess.svelte';
-	import GuessConfirmation from '$lib/components/ui/GuessConfirmation.svelte';
 	import ScoreDistanceFeedback from '$lib/components/ui/ScoreDistanceFeedback.svelte';
 	import TimerRoundHUD from '$lib/components/ui/TimerRoundHUD.svelte';
-	import LanguageSelector from '$lib/components/nav/LanguageSelector.svelte';
 	import Keyboard from '$lib/components/ui/Keyboard.svelte';
 	import type { KeyboardLayout, KeyState } from '$lib/components/ui';
 	
@@ -54,8 +46,6 @@
 	let maxTimer = 60;
 	let distance = 250;
 	let streak = 7;
-	let showCorrect = false;
-	let showWrong = false;
 	let toggleHints = false;
 	let toggleSound = false;
 	let toggleDarkMode = false;
@@ -374,10 +364,6 @@
 				</div>
 				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 					<GameCard>
-						<h3 class="text-lg font-semibold text-text-light mb-4">Language Selector</h3>
-						<LanguageSelector />
-					</GameCard>
-					<GameCard>
 						<h3 class="text-lg font-semibold text-text-light mb-4">Toggle Switch</h3>
 						<div class="space-y-4">
 							<Toggle bind:checked={toggleHints} label="Enable hints" />
@@ -613,14 +599,12 @@
 					</GameCard>
 					<GameCard>
 						<h3 class="text-lg font-semibold text-text-light mb-4">Feedback Overlays</h3>
-						<div class="flex gap-3">
-							<Button variant="primary" on:click={() => { showCorrect = true; setTimeout(() => showCorrect = false, 2000); }}>
-								Show Correct
-							</Button>
-							<Button variant="danger" on:click={() => { showWrong = true; setTimeout(() => showWrong = false, 2000); }}>
-								Show Wrong
-							</Button>
-						</div>
+						<p class="text-text-muted mb-4">
+							Feedback overlays are handled by the <code class="px-2 py-1 bg-white/5 rounded">GameContainer</code> component's built-in <code class="px-2 py-1 bg-white/5 rounded">FeedbackOverlay</code>.
+						</p>
+						<p class="text-sm text-text-muted">
+							See the Game Components section below for examples of feedback in action.
+						</p>
 					</GameCard>
 				</div>
 			</section>
@@ -635,29 +619,9 @@
 					<!-- Game Mode Cards -->
 					<div>
 						<h3 class="text-xl font-semibold text-text-light mb-4">Game Mode Selector</h3>
-						<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-							<GameModeCard
-								title="Flag Guessing"
-								description="Guess the country by its flag"
-								icon="🏳️"
-								difficulty="easy"
-								selected={false}
-							/>
-							<GameModeCard
-								title="Country Guessing"
-								description="Guess the country by clues"
-								icon="🌍"
-								difficulty="medium"
-								selected={false}
-							/>
-							<GameModeCard
-								title="Shape Guessing"
-								description="Identify countries by their shape"
-								icon="🗺️"
-								difficulty="hard"
-								selected={false}
-							/>
-						</div>
+						<p class="text-sm text-text-muted mb-4">
+							Game mode selection uses <code class="px-2 py-1 bg-white/5 rounded">CategoryCard</code> through the <code class="px-2 py-1 bg-white/5 rounded">DifficultySelector</code> component. See the DifficultySelector example below.
+						</p>
 					</div>
 
 					<!-- Answer Buttons -->
@@ -742,39 +706,6 @@
 							on:guess={(e) => { console.log('Guess with distance:', e.detail); }}
 						/>
 					</GameCard>
-					
-					<GameCard>
-						<h3 class="text-lg font-semibold text-text-light mb-4">Map with Pin - Area Guess</h3>
-						<p class="text-sm text-text-muted mb-3">Click within a state/area boundary</p>
-						<MapWithPinAreaGuess 
-							areaBoundary={[
-								[40.0, -75.0], // Example: Pennsylvania approximate boundary
-								[40.0, -80.0],
-								[42.0, -80.0],
-								[42.0, -75.0],
-								[40.0, -75.0]
-							]}
-							zoom={6}
-							showArea={true}
-							height="300px"
-							on:guess={(e) => { console.log('Area guess:', e.detail); }}
-						/>
-					</GameCard>
-
-					<!-- Guess Confirmation -->
-					<GameCard>
-						<h3 class="text-lg font-semibold text-text-light mb-4">Guess Confirmation</h3>
-						<div class="space-y-4 max-w-md">
-							<div>
-								<p class="text-sm text-text-muted mb-3">Enabled State</p>
-								<GuessConfirmation />
-							</div>
-							<div>
-								<p class="text-sm text-text-muted mb-3">Disabled State</p>
-								<GuessConfirmation disabled={true} />
-							</div>
-						</div>
-					</GameCard>
 
 					<!-- Hint System -->
 					<GameCard>
@@ -808,50 +739,6 @@
 							<LeaderboardRow rank={4} player="You" score={7} total={10} isCurrentUser={true} />
 							<LeaderboardRow rank={5} player="MapLover" score={6} total={10} />
 						</div>
-					</GameCard>
-
-					<!-- Guess History Table -->
-					<GameCard>
-						<h3 class="text-lg font-semibold text-text-light mb-4">Guess History Table</h3>
-						<GuessHistoryTable
-							columns={[
-								{ key: 'flag', label: 'Flag', type: 'flag' },
-								{ key: 'country', label: 'Country', type: 'text' },
-								{ key: 'continent', label: 'Continent', type: 'status' },
-								{ key: 'population', label: 'Population', type: 'trend' },
-								{ key: 'area', label: 'Area', type: 'trend' }
-							]}
-							guesses={[
-								{
-									flag: '/assets/twemoji_flags_cca2/IT.svg',
-									country: 'Italy',
-									continent: { status: 'no-match', text: 'Europe' },
-									population: { value: 58927633, direction: 'down' },
-									area: { value: 301336, direction: 'down' }
-								},
-								{
-									flag: '/assets/twemoji_flags_cca2/ET.svg',
-									country: 'Ethiopia',
-									continent: { status: 'no-match', text: 'Africa' },
-									population: { value: 111652998, direction: 'down' },
-									area: { value: 1104300, direction: 'down' }
-								},
-								{
-									flag: '/assets/twemoji_flags_cca2/NZ.svg',
-									country: 'New Zealand',
-									continent: { status: 'match', text: 'Oceania' },
-									population: { value: 5324700, direction: 'down' },
-									area: { value: 268838, direction: 'down' }
-								},
-								{
-									flag: '/assets/twemoji_flags_cca2/FJ.svg',
-									country: 'Fiji',
-									continent: { status: 'match', text: 'Oceania' },
-									population: { value: 900869, direction: 'down' },
-									area: { value: 18272, direction: 'down' }
-								}
-							]}
-						/>
 					</GameCard>
 
 					<!-- Worldle Game Mock -->
@@ -1062,10 +949,6 @@
 		</div>
 	</div>
 </div>
-
-<!-- Feedback Overlays -->
-<FeedbackCorrect points={100} show={showCorrect} />
-<FeedbackWrong correctAnswer="France" show={showWrong} />
 
 <!-- Modal -->
 <Modal title="Game Settings" open={modalOpen} onClose={() => closeModal()}>

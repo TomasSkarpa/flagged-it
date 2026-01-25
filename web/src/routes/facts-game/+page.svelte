@@ -521,7 +521,7 @@
 		color: var(--color-text-light);
 	}
 
-	:global(:root.light) .fact-bold {
+	:global(:root.light .fact-bold) {
 		color: var(--color-text) !important;
 	}
 

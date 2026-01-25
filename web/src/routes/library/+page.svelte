@@ -316,9 +316,9 @@
 
 				<!-- Region Filter - Full Width -->
 				<div>
-					<label class="block text-sm font-medium text-text-muted mb-2">
+					<p class="block text-sm font-medium text-text-muted mb-2">
 						{filterRegionLabel}
-					</label>
+					</p>
 					<RegionSelector
 						regions={regions}
 						bind:selected={selectedRegion}

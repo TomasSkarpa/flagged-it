@@ -165,8 +165,9 @@
 		<div class="card-game mb-6">
 			<div class="flex flex-col md:flex-row gap-4">
 				<div class="flex-1">
-					<label class="block text-sm font-semibold text-sandy-light mb-2">Search</label>
+					<label for="search-shapes" class="block text-sm font-semibold text-sandy-light mb-2">Search</label>
 					<input 
+						id="search-shapes"
 						type="text" 
 						class="input-base" 
 						placeholder="Search by name or code..."
@@ -174,8 +175,8 @@
 					/>
 				</div>
 				<div class="md:w-48">
-					<label class="block text-sm font-semibold text-sandy-light mb-2">Region</label>
-					<select class="input-base" bind:value={selectedRegion}>
+					<label for="region-shapes" class="block text-sm font-semibold text-sandy-light mb-2">Region</label>
+					<select id="region-shapes" class="input-base" bind:value={selectedRegion}>
 						<option value="">All Regions</option>
 						{#each regions as region}
 							<option value={region}>{region}</option>

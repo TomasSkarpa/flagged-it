@@ -5,12 +5,14 @@
 	export let disabled = false;
 	export let type = 'button';
 	export let icon = null;
+	
+	$: buttonClass = `btn-${variant} ${size === 'sm' ? 'px-4 py-2 text-sm' : size === 'lg' ? 'px-8 py-4 text-lg' : ''}`;
 </script>
 
 <button
 	type="{type}"
 	{disabled}
-	class="btn-{variant} {size === 'sm' ? 'px-4 py-2 text-sm' : size === 'lg' ? 'px-8 py-4 text-lg' : ''}"
+	class={buttonClass}
 	aria-disabled={disabled}
 	on:click
 >

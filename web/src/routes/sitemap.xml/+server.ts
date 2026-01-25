@@ -7,7 +7,7 @@ export const GET: RequestHandler = async ({ url }) => {
 		excludeRoutePatterns: ['^/debug.*', '^/ui-kit.*'],
 		defaultChangefreq: 'weekly',
 		defaultPriority: 0.8,
-		processPaths: (paths: sitemap.PathObj[]) => {
+		processPaths: (paths: Array<{ path: string; [key: string]: any }>) => {
 			return paths.map((path) => {
 				// Homepage gets highest priority
 				if (path.path === '/') {

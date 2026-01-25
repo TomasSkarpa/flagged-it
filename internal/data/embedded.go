@@ -3,8 +3,8 @@ package data
 import (
 	"embed"
 	"encoding/json"
-	"fmt"
 	"flagged-it/internal/data/models"
+	"fmt"
 	"sync"
 )
 

@@ -1,8 +1,7 @@
-<script>
-	// @ts-nocheck
+<script lang="ts">
 	export let open = false;
 	export let title = '';
-	export let onClose = null;
+	export let onClose: (() => void) | null = null;
 	
 	function handleBackdropClick(event) {
 		if (onClose && typeof onClose === 'function') {

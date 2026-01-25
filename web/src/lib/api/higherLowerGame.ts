@@ -97,8 +97,6 @@ export function getCategoryLabel(category: HigherLowerCategory): string {
 			return 'Population';
 		case 'area':
 			return 'Area (km²)';
-		case 'continents':
-			return 'Countries';
 		default:
 			return 'Value';
 	}
@@ -110,8 +108,6 @@ export function getCategoryDescription(category: HigherLowerCategory): string {
 			return 'Which country has more people?';
 		case 'area':
 			return 'Which country is larger?';
-		case 'continents':
-			return 'Which continent has more countries?';
 		default:
 			return 'Which is higher?';
 	}

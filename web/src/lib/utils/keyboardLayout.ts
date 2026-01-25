@@ -1,4 +1,4 @@
-import type { KeyboardLayout } from '$lib/components/ui/Keyboard.svelte';
+import type { KeyboardLayout } from '$lib/components/ui/keyboardTypes';
 
 /**
  * Maps locale codes to keyboard layouts

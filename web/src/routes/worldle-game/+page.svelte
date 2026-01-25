@@ -114,7 +114,7 @@
 			const result = await submitGuess(sessionId, countryName);
 			
 			if (!result.isValidGuess) {
-				error = notFoundText || result.error;
+				error = notFoundText || result.error || null;
 				isLoading = false;
 				// Focus input so user can correct their guess
 				setTimeout(() => {

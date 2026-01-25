@@ -45,7 +45,8 @@
 	// Store and utility imports
 	import { locale } from '$lib/stores/locale';
 	import { getKeyboardLayoutForLocale } from '$lib/utils/keyboardLayout';
-	import { onMount } from 'svelte';
+	import { triggerConfetti } from '$lib/utils/confetti';
+	import { onMount, onDestroy } from 'svelte';
 	import { browser } from '$app/environment';
 
 	// Component state
@@ -75,6 +76,10 @@
 	let keyboardKeyStates: Record<string, KeyState> = {};
 	let keyboardDisabled = false;
 	
+	// Confetti debug state
+	let confettiLoopEnabled = false;
+	let confettiLoopInterval: ReturnType<typeof setInterval> | null = null;
+	
 	// Reactive values for template
 	$: currentLocale = (browser && $locale) ? $locale : 'en';
 	$: detectedKeyboardLayout = currentLocale ? getKeyboardLayoutForLocale(currentLocale) : 'english';
@@ -88,6 +93,40 @@
 		toastShow = true;
 		setTimeout(() => { toastShow = false; }, 3000);
 	}
+	
+	function triggerConfettiOnce() {
+		triggerConfetti({
+			particleCount: 50,
+			spread: 70,
+			origin: { x: 0.5, y: 0.5 },
+			duration: 3000
+		});
+	}
+	
+	function toggleConfettiLoop() {
+		confettiLoopEnabled = !confettiLoopEnabled;
+		if (confettiLoopEnabled) {
+			confettiLoopInterval = setInterval(() => {
+				triggerConfetti({
+					particleCount: 50,
+					spread: 70,
+					origin: { x: Math.random(), y: Math.random() },
+					duration: 3000
+				});
+			}, 2000); // Trigger every 2 seconds
+		} else {
+			if (confettiLoopInterval) {
+				clearInterval(confettiLoopInterval);
+				confettiLoopInterval = null;
+			}
+		}
+	}
+	
+	onDestroy(() => {
+		if (confettiLoopInterval) {
+			clearInterval(confettiLoopInterval);
+		}
+	});
 	
 	const sampleFlags = [
 		{ code: 'US', name: 'United States', flagUrl: '/assets/twemoji_flags_cca2/US.svg' },
@@ -127,6 +166,7 @@
 					<a href="#cards" class="px-4 py-2 rounded-lg bg-surface-light hover:bg-surface text-sm font-medium transition-colors">Cards</a>
 					<a href="#forms" class="px-4 py-2 rounded-lg bg-surface-light hover:bg-surface text-sm font-medium transition-colors">Forms</a>
 					<a href="#feedback" class="px-4 py-2 rounded-lg bg-surface-light hover:bg-surface text-sm font-medium transition-colors">Feedback</a>
+					<a href="#confetti" class="px-4 py-2 rounded-lg bg-surface-light hover:bg-surface text-sm font-medium transition-colors">Confetti</a>
 					<a href="#game" class="px-4 py-2 rounded-lg bg-surface-light hover:bg-surface text-sm font-medium transition-colors">Game Components</a>
 				</div>
 			</div>
@@ -229,6 +269,37 @@
 								<Button variant="primary">Normal</Button>
 								<Button variant="primary" disabled>Disabled</Button>
 							</div>
+						</div>
+					</div>
+				</GameCard>
+			</section>
+
+			<!-- Confetti Debug -->
+			<section id="confetti" class="scroll-mt-24">
+				<div class="mb-6">
+					<h2 class="text-3xl font-bold text-text-light mb-2">Confetti Debug</h2>
+					<p class="text-text-muted">Test confetti effects for debugging purposes</p>
+				</div>
+				<GameCard>
+					<div class="space-y-6">
+						<div>
+							<h3 class="text-lg font-semibold text-text-light mb-4">Confetti Controls</h3>
+							<div class="flex flex-wrap gap-4">
+								<Button variant="primary" on:click={triggerConfettiOnce}>
+									🎉 Trigger Confetti Once
+								</Button>
+								<Button 
+									variant={confettiLoopEnabled ? "danger" : "secondary"} 
+									on:click={toggleConfettiLoop}
+								>
+									{confettiLoopEnabled ? "⏸️ Stop Loop" : "▶️ Start Loop"}
+								</Button>
+							</div>
+							{#if confettiLoopEnabled}
+								<p class="mt-4 text-sm text-text-muted">
+									Confetti loop is active - triggering every 2 seconds from random positions
+								</p>
+							{/if}
 						</div>
 					</div>
 				</GameCard>

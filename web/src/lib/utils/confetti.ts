@@ -74,6 +74,11 @@ export function triggerConfetti(options?: {
 	let animationId: number;
 
 	function animate(timestamp: number) {
+		if (!ctx) {
+			document.body.removeChild(canvas);
+			return;
+		}
+		
 		if (!startTime) startTime = timestamp;
 		const elapsed = timestamp - startTime;
 

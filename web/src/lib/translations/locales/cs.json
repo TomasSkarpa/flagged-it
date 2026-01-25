@@ -140,7 +140,7 @@
   "library.title": "Knihovna Zemí",
   "library.description": "Prozkoumejte komplexní informace o zemích po celém světě",
   "library.search.label": "Vyhledat Země",
-  "library.search.placeholder": "Hledat podle názvu, hlavního města...",
+  "library.search.placeholder": "Hledat podle názvu, nebo hlavního města",
   "library.filter.region": "Filtrovat podle Regionu",
   "library.view.grid": "Mřížkové zobrazení",
   "library.view.list": "Seznamové zobrazení",

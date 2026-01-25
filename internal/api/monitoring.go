@@ -11,8 +11,8 @@ import (
 
 // Metrics tracks server performance metrics
 type Metrics struct {
-	TotalRequests    uint64            // Total number of requests processed
-	ActiveConnections int32            // Current active connections
+	TotalRequests     uint64            // Total number of requests processed
+	ActiveConnections int32             // Current active connections
 	ResponseTimeSum   uint64            // Sum of all response times in milliseconds
 	SlowRequests      uint64            // Count of requests taking > 1 second
 	RequestsByStatus  map[int]uint64    // Requests grouped by HTTP status code
@@ -143,7 +143,7 @@ func LoggingMiddleware(next http.HandlerFunc) http.HandlerFunc {
 		// Track slow requests (> 1 second)
 		if duration > time.Second {
 			atomic.AddUint64(&globalMetrics.SlowRequests, 1)
-			log.Printf("[SLOW] %s %s %s - %d - %v (IP: %s)", 
+			log.Printf("[SLOW] %s %s %s - %d - %v (IP: %s)",
 				r.Method, r.URL.Path, r.Proto, wrapper.statusCode, duration, ip)
 		}
 
@@ -152,7 +152,7 @@ func LoggingMiddleware(next http.HandlerFunc) http.HandlerFunc {
 
 		// Log request (only log API requests, not static assets to reduce noise)
 		if len(r.URL.Path) >= 4 && r.URL.Path[:4] == "/api" {
-			log.Printf("[REQUEST] %s %s - %d - %v (IP: %s, Active: %d)", 
+			log.Printf("[REQUEST] %s %s - %d - %v (IP: %s, Active: %d)",
 				r.Method, r.URL.Path, wrapper.statusCode, duration, ip, atomic.LoadInt32(&globalMetrics.ActiveConnections))
 		}
 	}
@@ -189,7 +189,7 @@ func GetStatsHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Build response
 	stats := map[string]interface{}{
-		"totalRequests":    metrics.TotalRequests,
+		"totalRequests":     metrics.TotalRequests,
 		"activeConnections": metrics.ActiveConnections,
 		"uniqueActiveIPs":   uniqueIPs,
 		"avgResponseTimeMs": avgResponseTime,
@@ -202,7 +202,7 @@ func GetStatsHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Cache-Control", "no-cache")
-	
+
 	// Simple JSON encoding (could use json package for prettier output)
 	log.Printf("[STATS] Stats requested - Active: %d, Total: %d, AvgTime: %.2fms, IPs: %d",
 		metrics.ActiveConnections, metrics.TotalRequests, avgResponseTime, uniqueIPs)

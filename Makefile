@@ -70,6 +70,10 @@ check:
 	@echo '<!DOCTYPE html><html><head><title>Flagged It</title></head><body><h1>Flagged It</h1></body></html>' > cmd/desktop/frontend/build/index.html
 	@go vet ./...
 	@go fmt ./...
+	@echo ""
+	@echo "Running frontend checks..."
+	@cd web && npm run check
+	@echo ""
 	@echo "Done"
 
 # -------------------------------------------------------------------

@@ -138,8 +138,8 @@ func (l *Logic) MakeGuess(guess string) (*GuessResult, error) {
 	})
 
 	result := &GuessResult{
-		IsValidGuess:    true,
-		IsCorrect:       isCorrect,
+		IsValidGuess:   true,
+		IsCorrect:      isCorrect,
 		CorrectCountry: l.state.CurrentCountry,
 		TriesLeft:      l.state.TriesLeft,
 		Score:          l.state.Score,

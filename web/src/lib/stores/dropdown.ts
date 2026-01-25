@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-type DropdownType = 'language' | 'theme' | null;
+type DropdownType = 'language' | 'theme' | 'sort' | null;
 
 /**
  * Store to manage which dropdown is currently open.

@@ -8,7 +8,7 @@
 		GameOverScreen 
 	} from '$lib/components/game';
 	import Keyboard from '$lib/components/ui/Keyboard.svelte';
-	import type { KeyState } from '$lib/components/ui/Keyboard.svelte';
+	import type { KeyState } from '$lib/components/ui/keyboardTypes';
 	import { HangmanGame } from '$lib/api/hangmanGame';
 	import { getAllCountries } from '$lib/api/debug';
 	import type { Country } from '$lib/types';
@@ -76,8 +76,8 @@
 		}
 	});
 
-	function handleStartGame(event: CustomEvent<{ region: string }>) {
-		selectedRegion = event.detail.region;
+	function handleStartGame(event: CustomEvent<{ region?: string; category?: string; [key: string]: any }>) {
+		selectedRegion = event.detail.region ?? '';
 		
 		// Filter countries by region if selected
 		let filteredCountries = countries;
@@ -299,7 +299,6 @@
 	<div class="min-h-screen py-2 px-4">
 		<div class="max-w-4xl mx-auto">
 			<GameHeader
-				title={hangmanTitle}
 				score={score}
 				total={5}
 				currentRound={calculateCurrentRound(total, 5)}

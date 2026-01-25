@@ -3,14 +3,9 @@
 	import { locale } from '$lib/stores/locale';
 	import { getKeyboardLayoutForLocale } from '$lib/utils/keyboardLayout';
 
-	// Type definitions
-	type KeyboardLayout = 
-		| 'english' | 'korean' | 'japanese' | 'russian' | 'ukrainian'
-		| 'arabic' | 'turkish' | 'thai' | 'greek' | 'hebrew' 
-		| 'vietnamese' | 'spanish' | 'polish' | 'czech' | 'indonesian';
-	type KeyState = 'default' | 'correct' | 'incorrect' | 'disabled';
-
-	// Export types for use in other components
+	import type { KeyboardLayout, KeyState } from './keyboardTypes';
+	
+	// Re-export types for use in other components
 	export type { KeyboardLayout, KeyState };
 
 	export let layout: KeyboardLayout | null = null; // null = auto-detect from locale

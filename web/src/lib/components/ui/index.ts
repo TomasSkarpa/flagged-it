@@ -7,5 +7,4 @@ export { default as RegionDropdown } from './RegionDropdown.svelte';
 export { default as ScoreDisplay } from './ScoreDisplay.svelte';
 
 // Re-export types from Keyboard component
-export type KeyboardLayout = import('./Keyboard.svelte').KeyboardLayout;
-export type KeyState = import('./Keyboard.svelte').KeyState;
+export type { KeyboardLayout, KeyState } from './keyboardTypes';

@@ -472,7 +472,9 @@ func (h *DebugHandler) GetAllCountries(w http.ResponseWriter, r *http.Request) {
 	// Translate country names based on locale
 	translatedCountries := getTranslatedCountries(countries, locale)
 
+	// Set cache headers - countries data is static and only changes on rebuild
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Cache-Control", "public, max-age=604800") // Cache for 1 week (data only changes on rebuild)
 	json.NewEncoder(w).Encode(map[string]interface{}{
 		"countries": translatedCountries,
 		"total":     len(translatedCountries),

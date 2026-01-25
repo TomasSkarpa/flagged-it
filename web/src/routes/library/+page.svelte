@@ -202,8 +202,8 @@
 	<meta name="description" content={libraryDescription} />
 </svelte:head>
 
-<div class="min-h-screen p-4 md:p-8">
-	<div class="max-w-7xl mx-auto">
+<div class="min-h-screen p-4 md:p-8 overflow-x-hidden">
+	<div class="max-w-7xl mx-auto w-full">
 		<!-- Header -->
 		<div class="text-center mb-8">
 			<h1 class="text-4xl md:text-5xl font-bold mb-4">
@@ -329,7 +329,7 @@
 		{:else if viewMode === 'grid'}
 			<!-- Grid View -->
 			<div class="library-grid">
-				{#each filteredCountries as country}
+				{#each filteredCountries as country (country.cca2)}
 					<button
 						on:click={() => handleCountryClick(country)}
 						class="library-grid-item"
@@ -345,11 +345,11 @@
 			</div>
 		{:else}
 			<!-- List View -->
-			<div class="space-y-3">
-				{#each filteredCountries as country}
+			<div class="space-y-3 library-list">
+				{#each filteredCountries as country (country.cca2)}
 					<button
 						on:click={() => handleCountryClick(country)}
-						class="w-full text-left"
+						class="w-full text-left library-list-item"
 					>
 						<div class="card-game hover:shadow-glow transition-all">
 							<div class="flex items-center gap-4">
@@ -357,6 +357,8 @@
 									src="/assets/twemoji_flags_cca2/{country.cca2}.svg"
 									alt="{country.name.common} flag"
 									class="w-16 h-12 object-contain rounded"
+									loading="lazy"
+									decoding="async"
 								/>
 								<div class="flex-1">
 									<h3 class="text-xl font-bold text-sandy-light mb-1">
@@ -399,6 +401,8 @@
 							src="/assets/twemoji_flags_cca2/{selectedCountry.cca2}.svg"
 							alt="{selectedCountry.name.common} flag"
 							class="w-32 h-auto rounded"
+							loading="eager"
+							decoding="async"
 						/>
 					</div>
 				</div>
@@ -489,6 +493,11 @@
 		grid-template-columns: repeat(2, 1fr);
 		gap: 1rem;
 		align-items: stretch;
+		will-change: scroll-position;
+		width: 100%;
+		max-width: 100%;
+		overflow-x: hidden;
+		overflow-y: visible;
 	}
 	
 	@media (min-width: 640px) {
@@ -513,16 +522,33 @@
 		display: flex;
 		flex-direction: column;
 		width: 100%;
+		min-width: 0;
 		height: 100%;
 		text-align: left;
 		background: transparent;
 		border: none;
-		padding: 0;
+		padding: 8px 4px 4px 4px;
 		cursor: pointer;
+		overflow: visible;
 	}
 	
 	.library-grid-item:focus {
-		outline: 2px solid var(--color-primary);
-		outline-offset: 2px;
+		outline: none;
 	}
+	
+	.library-grid-item:focus :global(.card-country-library) {
+		border-color: var(--color-accent);
+		background-color: var(--color-surface-light);
+		box-shadow: 0 8px 24px 0 rgba(6, 182, 212, 0.2);
+	}
+	
+	:global(:root.light) .library-grid-item:focus :global(.card-country-library) {
+		border-color: var(--color-accent) !important;
+		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
+	}
+	
+	.library-list {
+		will-change: scroll-position;
+	}
+	
 </style>

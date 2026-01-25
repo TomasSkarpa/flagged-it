@@ -10,7 +10,13 @@
 <div class="card-country card-country-library {selected ? 'selected' : ''}">
 	{#if hasFlag}
 		<div class="flag-container">
-			<img src={flagUrl} alt={`${countryName} flag`} class="flag-image" />
+			<img 
+				src={flagUrl} 
+				alt={`${countryName} flag`} 
+				class="flag-image"
+				loading="lazy"
+				decoding="async"
+			/>
 		</div>
 	{/if}
 	<div class="card-content">
@@ -28,6 +34,9 @@
 		flex-direction: column;
 		height: 100%;
 		min-height: 200px;
+		width: 100%;
+		min-width: 0;
+		overflow: visible;
 	}
 	
 	.flag-container {
@@ -51,6 +60,7 @@
 		height: 100%;
 		object-fit: contain;
 		border-radius: 0.25rem;
+		will-change: transform;
 	}
 	
 	.card-content {

@@ -326,20 +326,19 @@
 				</div>
 
 				<!-- Results Count and Controls -->
-				<div class="flex items-center justify-between mt-6">
+				<div class="flex flex-col-reverse md:flex-row items-start md:items-center justify-between gap-4 mt-6">
 					<div class="text-sm text-text-muted">
 						{resultsCountText}
 					</div>
 					
 					<!-- Sort and View Toggle -->
-					<div class="flex items-center gap-2">
+					<div class="flex items-center gap-2 w-full md:w-auto flex-shrink-0">
 						<!-- Sort Dropdown -->
 						<div class="library-sort-selector">
 							<button
 								bind:this={sortButtonRef}
 								on:click|stopPropagation={toggleSortDropdown}
-								class="px-3 py-2 rounded-lg border-2 transition-all bg-white/5 border-white/20 text-text-muted hover:border-accent text-sm flex items-center gap-2"
-								style="min-width: 200px;"
+								class="px-3 py-2 rounded-lg border-2 transition-all bg-white/5 border-white/20 text-text-muted hover:border-accent text-sm flex items-center gap-2 md:min-w-[200px]"
 								aria-label="Select sort option"
 								aria-expanded={isSortDropdownOpen}
 							>

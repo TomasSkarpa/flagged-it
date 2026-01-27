@@ -14,7 +14,7 @@ export const GET: RequestHandler = async ({ url }) => {
 					return {
 						...path,
 						priority: 1.0,
-						changefreq: 'weekly'
+						changefreq: 'daily'
 					};
 				}
 				
@@ -28,7 +28,7 @@ export const GET: RequestHandler = async ({ url }) => {
 					return {
 						...path,
 						priority: 0.9,
-						changefreq: 'weekly'
+						changefreq: 'daily'
 					};
 				}
 				

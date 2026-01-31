@@ -3,10 +3,11 @@
 	import '../app.css';
 	import { locale } from '$lib/stores/locale';
 	import { theme } from '$lib/stores/theme';
-	import { getMetaDescription } from '$lib/translations/meta';
+	import { getMetaDescription, getOGTitle, getOGDescription, getOGImage, getOGUrl } from '$lib/translations/meta';
 	import { Navigation } from '$lib/components/nav';
 	import { hasAppleEmoji } from '$lib/utils/platform';
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 	// These props are provided by SvelteKit but not used in this layout
 	export const data: any = {};
 	export const params: Record<string, string> = {};
@@ -49,6 +50,7 @@
 		const unsubscribe = locale.subscribe(value => {
 			currentLocale = value;
 			updateMetaDescription();
+			updateOGTags();
 			
 			// Set lang attribute and text direction for RTL languages
 			if (typeof document !== 'undefined') {
@@ -61,8 +63,18 @@
 			}
 		});
 		
+		// Subscribe to page changes to update OG URL
+		const unsubscribePage = page.subscribe((pageData) => {
+			updateOGTags(pageData.url.pathname);
+		});
+		
 		updateMetaDescription();
-		return unsubscribe;
+		updateOGTags();
+		
+		return () => {
+			unsubscribe();
+			unsubscribePage();
+		};
 	});
 	
 	function updateMetaDescription() {
@@ -72,6 +84,36 @@
 				metaDesc.setAttribute('content', getMetaDescription(currentLocale));
 			}
 		}
+	}
+	
+	function updateOGTags(path?: string) {
+		if (typeof document === 'undefined') return;
+		
+		// Get current path - use provided path or fallback to window.location
+		const currentPath = path || (typeof window !== 'undefined' ? window.location.pathname : '/');
+		const ogDescription = getOGDescription(currentLocale);
+		const ogUrl = getOGUrl(currentPath);
+		
+		// Update OG title (use page title if available, otherwise default)
+		const pageTitle = document.querySelector('title')?.textContent || '';
+		const ogTitle = pageTitle ? getOGTitle(pageTitle.replace(' - Flagged It', '').replace(' - Country Guessing Games', ''), currentLocale) : getOGTitle(undefined, currentLocale);
+		
+		// Update OG tags
+		const ogTitleEl = document.getElementById('og-title');
+		if (ogTitleEl) ogTitleEl.setAttribute('content', ogTitle);
+		
+		const ogDescEl = document.getElementById('og-description');
+		if (ogDescEl) ogDescEl.setAttribute('content', ogDescription);
+		
+		const ogUrlEl = document.getElementById('og-url');
+		if (ogUrlEl) ogUrlEl.setAttribute('content', ogUrl);
+		
+		// Update Twitter tags
+		const twitterTitleEl = document.getElementById('twitter-title');
+		if (twitterTitleEl) twitterTitleEl.setAttribute('content', ogTitle);
+		
+		const twitterDescEl = document.getElementById('twitter-description');
+		if (twitterDescEl) twitterDescEl.setAttribute('content', ogDescription);
 	}
 </script>
 

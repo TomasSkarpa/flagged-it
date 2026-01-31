@@ -45,6 +45,18 @@
 		<meta name="apple-mobile-web-app-title" content="Flagged It" />
 		<meta http-equiv="content-language" id="meta-content-language" content="en" />
 		<meta name="description" id="meta-description" content="Learn about countries playing different game modes - guessing games, flag recognition, and shape identification." />
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" id="og-title" content="Flagged It - Learn Countries Through Fun Guessing Games" />
+		<meta property="og:description" id="og-description" content="Learn about countries playing different game modes - guessing games, flag recognition, and shape identification." />
+		<meta property="og:image" id="og-image" content="https://flaggedit.app/assets/favicon/apple-touch-icon.png" />
+		<meta property="og:url" id="og-url" content="https://flaggedit.app/" />
+		<meta property="og:site_name" content="Flagged It" />
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" id="twitter-title" content="Flagged It - Learn Countries Through Fun Guessing Games" />
+		<meta name="twitter:description" id="twitter-description" content="Learn about countries playing different game modes - guessing games, flag recognition, and shape identification." />
+		<meta name="twitter:image" id="twitter-image" content="https://flaggedit.app/assets/favicon/apple-touch-icon.png" />
 		<script>
 			// Update content-language meta tag and description based on user's preferred language
 			(function() {
@@ -78,12 +90,90 @@
 					ms: 'Pelajari negara dengan memainkan pelbagai mod permainan - permainan tekaan, pengenalan bendera dan pengenalan bentuk.',
 					fil: 'Matuto tungkol sa mga bansa sa pamamagitan ng paglalaro ng iba\'t ibang mga mode ng laro - mga laro ng paghula, pagkilala ng watawat at pagkilala ng hugis.',
 					sw: 'Jifunze kuhusu nchi kwa kucheza njia tofauti za mchezo - michezo ya kukisia, utambuzi wa bendera na utambuzi wa umbo.',
-					vi: 'Tìm hiểu về các quốc gia bằng cách chơi các chế độ trò chơi khác nhau - trò chơi đoán, nhận dạng cờ và nhận dạng hình dạng.'
+					vi: 'Tìm hiểu về các quốc gia bằng cách chơi các chế độ trò chơi khác nhau - trò chơi đoán, nhận dạng cờ và nhận dạng hình dạng.',
+					ar: 'تعرف على البلدان من خلال لعب أنماط ألعاب مختلفة - ألعاب التخمين، التعرف على الأعلام وتحديد الأشكال.',
+					el: 'Μάθετε για τις χώρες παίζοντας διαφορετικούς τρόπους παιχνιδιού - παιχνίδια εικασίας, αναγνώριση σημαιών και αναγνώριση σχημάτων.',
+					he: 'למד על מדינות על ידי משחק במצבי משחק שונים - משחקי ניחוש, זיהוי דגלים וזיהוי צורות.',
+					hi: 'विभिन्न गेम मोड खेलकर देशों के बारे में जानें - अनुमान लगाने वाले खेल, झंडा पहचान और आकार पहचान।',
+					ja: 'さまざまなゲームモードをプレイして国について学ぶ - 推測ゲーム、旗の認識、形状の識別。',
+					ko: '다양한 게임 모드를 플레이하여 국가에 대해 알아보세요 - 추측 게임, 깃발 인식 및 모양 식별.',
+					ru: 'Узнавайте о странах, играя в различные игровые режимы - игры на угадывание, распознавание флагов и определение форм.',
+					th: 'เรียนรู้เกี่ยวกับประเทศต่างๆ โดยเล่นโหมดเกมที่แตกต่างกัน - เกมทาย, การจดจำธงและการระบุรูปร่าง.',
+					uk: 'Дізнавайтеся про країни, граючи в різні ігрові режими - ігри на вгадування, розпізнавання прапорів та визначення форм.',
+					zh: '通过玩不同的游戏模式了解国家 - 猜谜游戏、旗帜识别和形状识别。'
+				};
+				const titles = {
+					en: 'Flagged It - Learn Countries Through Fun Guessing Games',
+					es: 'Flagged It - Aprende sobre países con juegos de adivinanza',
+					fr: 'Flagged It - Apprenez-en sur les pays avec des jeux amusants',
+					de: 'Flagged It - Lernen Sie Länder durch unterhaltsame Ratespiele kennen',
+					nl: 'Flagged It - Leer over landen door leuke raadspelletjes',
+					nb: 'Flagged It - Lær om land gjennom morsomme gjettespill',
+					da: 'Flagged It - Lær om lande gennem sjove gættespil',
+					sv: 'Flagged It - Lär dig om länder genom roliga gissningsspel',
+					fi: 'Flagged It - Opi maita hauskojen arvauspelien kautta',
+					pt: 'Flagged It - Aprenda sobre países através de jogos divertidos',
+					tr: 'Flagged It - Eğlenceli tahmin oyunlarıyla ülkeler hakkında bilgi edinin',
+					ro: 'Flagged It - Află despre țări prin jocuri distractive',
+					hu: 'Flagged It - Ismerjen meg országokat szórakoztató játékokkal',
+					hr: 'Flagged It - Saznajte više o zemljama kroz zabavne igre',
+					cs: 'Flagged It - Poznejte země prostřednictvím zábavných her',
+					sk: 'Flagged It - Zistite viac o krajinách cez zábavné hry',
+					pl: 'Flagged It - Poznaj kraje poprzez zabawne gry',
+					it: 'Flagged It - Scopri i paesi attraverso giochi divertenti',
+					id: 'Flagged It - Pelajari negara melalui permainan yang menyenangkan',
+					ms: 'Flagged It - Pelajari negara melalui permainan yang menyeronokkan',
+					fil: 'Flagged It - Matuto tungkol sa mga bansa sa pamamagitan ng masasayang laro',
+					sw: 'Flagged It - Jifunze kuhusu nchi kupitia michezo ya kufurahisha',
+					vi: 'Flagged It - Tìm hiểu về các quốc gia thông qua các trò chơi thú vị',
+					ar: 'Flagged It - تعرف على البلدان من خلال ألعاب التخمين الممتعة',
+					el: 'Flagged It - Μάθετε για τις χώρες μέσα από διασκεδαστικά παιχνίδια εικασίας',
+					he: 'Flagged It - למד על מדינות באמצעות משחקי ניחוש מהנים',
+					hi: 'Flagged It - मजेदार अनुमान लगाने वाले खेलों के माध्यम से देशों के बारे में जानें',
+					ja: 'Flagged It - 楽しい推測ゲームで国について学ぶ',
+					ko: 'Flagged It - 재미있는 추측 게임을 통해 국가에 대해 알아보세요',
+					ru: 'Flagged It - Узнавайте о странах через увлекательные игры на угадывание',
+					th: 'Flagged It - เรียนรู้เกี่ยวกับประเทศต่างๆ ผ่านเกมทายที่สนุกสนาน',
+					uk: 'Flagged It - Дізнавайтеся про країни через цікаві ігри на вгадування',
+					zh: 'Flagged It - 通过有趣的猜谜游戏了解国家'
 				};
 				const description = descriptions[locale] || descriptions.en;
+				const title = titles[locale] || titles.en;
+				
 				const metaDesc = document.getElementById('meta-description');
 				if (metaDesc) {
 					metaDesc.setAttribute('content', description);
+				}
+				
+				// Update OG title
+				const ogTitle = document.getElementById('og-title');
+				if (ogTitle) {
+					ogTitle.setAttribute('content', title);
+				}
+				
+				// Update OG description
+				const ogDesc = document.getElementById('og-description');
+				if (ogDesc) {
+					ogDesc.setAttribute('content', description);
+				}
+				
+				// Update Twitter title
+				const twitterTitle = document.getElementById('twitter-title');
+				if (twitterTitle) {
+					twitterTitle.setAttribute('content', title);
+				}
+				
+				// Update Twitter description
+				const twitterDesc = document.getElementById('twitter-description');
+				if (twitterDesc) {
+					twitterDesc.setAttribute('content', description);
+				}
+				
+				// Update OG URL with current path
+				const ogUrl = document.getElementById('og-url');
+				if (ogUrl) {
+					const currentPath = window.location.pathname;
+					ogUrl.setAttribute('content', 'https://flaggedit.app' + currentPath);
 				}
 			})();
 		</script>

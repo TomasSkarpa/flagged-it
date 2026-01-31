@@ -206,5 +206,6 @@
   "game.round.label": "Kolo",
   "game.round.progress": "Kolo %d / %d",
   "game.hangman.title": "Oběšenec",
-  "game.facts.title": "Hádej podle faktů"
+  "game.facts.title": "Hádej podle faktů",
+  "game.hangman.description": "Otestujte své znalosti geografie! Hádajte názvy států písmeno po písmenu, než vám dojdou pokusy."
 }

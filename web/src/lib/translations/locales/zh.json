@@ -206,5 +206,6 @@
   "game.round.label": "轮次",
   "game.round.progress": "轮次%d/%d",
   "game.hangman.title": "猜单词",
-  "game.facts.title": "根据事实猜谜"
+  "game.facts.title": "根据事实猜谜",
+  "game.hangman.description": "测试你的地理知识！在猜测次数用完之前，逐个字母猜测国家名称。"
 }

@@ -206,5 +206,6 @@
   "scoreboard.description": "تتبع تقدمك وتنافس مع الآخرين!",
   "scoreboard.coming_soon": "قريباً",
   "game.hangman.title": "تخمين الكلمات",
-  "game.facts.title": "خمن من خلال الحقائق"
+  "game.facts.title": "خمن من خلال الحقائق",
+  "game.hangman.description": "اختبر معرفتك الجغرافية! خمن أسماء الدول حرفًا بحرف قبل أن تنفد تخميناتك."
 }

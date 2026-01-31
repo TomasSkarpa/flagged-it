@@ -206,5 +206,6 @@
   "scoreboard.description": "עקוב אחר התקדמותך ותחרה עם אחרים!",
   "scoreboard.coming_soon": "בקרוב",
   "game.hangman.title": "איש תלוי",
-  "game.facts.title": "ניחוש לפי עובדות"
+  "game.facts.title": "ניחוש לפי עובדות",
+  "game.hangman.description": "בדוק את הידע שלך בגיאוגרפיה! נחש שמות של מדינות אות אחר אות לפני שיגמרו לך הניחושים."
 }

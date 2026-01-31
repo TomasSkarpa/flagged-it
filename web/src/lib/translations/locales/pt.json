@@ -206,5 +206,6 @@
   "game.round.label": "Rodada",
   "game.round.progress": "Rodada %d / %d",
   "game.hangman.title": "Jogo de Adivinhação de Palavras",
-  "game.facts.title": "Adivinhe pelos Fatos"
+  "game.facts.title": "Adivinhe pelos Fatos",
+  "game.hangman.description": "Teste seus conhecimentos de geografia! Adivinhe nomes de países letra por letra antes de acabar as tentativas."
 }

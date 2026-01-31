@@ -206,5 +206,6 @@
   "game.round.label": "Runde",
   "game.round.progress": "Runde %d / %d",
   "game.hangman.title": "Gjett ordet",
-  "game.facts.title": "Giss etter Fakta"
+  "game.facts.title": "Giss etter Fakta",
+  "game.hangman.description": "Test din geografiske kunnskap! Giss landnavn bokstav for bokstav før du går tom for gissinger."
 }

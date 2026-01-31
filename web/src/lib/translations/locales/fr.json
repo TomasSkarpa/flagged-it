@@ -206,5 +206,6 @@
   "game.round.label": "Tour",
   "game.round.progress": "Tour %d / %d",
   "game.hangman.title": "Pendu",
-  "game.facts.title": "Devinez par les faits"
+  "game.facts.title": "Devinez par les faits",
+  "game.hangman.description": "Testez vos connaissances en géographie ! Devinez les noms de pays lettre par lettre avant de manquer de chances."
 }

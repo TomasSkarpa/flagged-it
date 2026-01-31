@@ -206,5 +206,6 @@
   "game.round.label": "Ronda",
   "game.round.progress": "Ronda %d / %d",
   "game.hangman.title": "El Ahorcado",
-  "game.facts.title": "Adivina por Hechos"
+  "game.facts.title": "Adivina por Hechos",
+  "game.hangman.description": "¡Pon a prueba tus conocimientos de geografía! Adivina los nombres de países letra por letra antes de que se te acaben las oportunidades."
 }

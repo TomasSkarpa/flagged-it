@@ -206,5 +206,6 @@
   "game.round.label": "Ronde",
   "game.round.progress": "Ronde %d / %d",
   "game.hangman.title": "Tebak Kata",
-  "game.facts.title": "Tebak dari Fakta"
+  "game.facts.title": "Tebak dari Fakta",
+  "game.hangman.description": "Uji pengetahuan geografi Anda! Tebak nama negara huruf per huruf sebelum kehabisan tebakan."
 }

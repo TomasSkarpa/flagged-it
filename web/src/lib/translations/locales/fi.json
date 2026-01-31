@@ -206,5 +206,6 @@
   "game.round.label": "Kierros",
   "game.round.progress": "Kierros %d / %d",
   "game.hangman.title": "Hirsipuu",
-  "game.facts.title": "Arvaa tosiasioista"
+  "game.facts.title": "Arvaa tosiasioista",
+  "game.hangman.description": "Testaa maantieteellistä osaamisesi! Arvaa maan nimi kirjain kerrallaan ennen kuin loput vääristä vastauksista ovat käytetty."
 }

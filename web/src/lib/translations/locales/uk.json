@@ -206,5 +206,6 @@
   "scoreboard.description": "Відстежуйте свій прогрес та змагайтесь з іншими!",
   "scoreboard.coming_soon": "Незабаром",
   "game.hangman.title": "Шибениця",
-  "game.facts.title": "Вгадайте за фактами"
+  "game.facts.title": "Вгадайте за фактами",
+  "game.hangman.description": "Перевірте свої знання географії! Вгадуйте назви країн літера за літерою, перш ніж закінчаться спроби."
 }

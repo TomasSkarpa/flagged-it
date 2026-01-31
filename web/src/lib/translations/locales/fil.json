@@ -206,5 +206,6 @@
   "game.round.label": "Ronda",
   "game.round.progress": "Ronda %d / %d",
   "game.hangman.title": "Taya ng Salita",
-  "game.facts.title": "Hula sa mga Katotohanan"
+  "game.facts.title": "Hula sa mga Katotohanan",
+  "game.hangman.description": "Subukin ang iyong kaalaman sa heograpiya! Hulaan ang mga pangalan ng bansa letra sa letra bago maubos ang iyong mga pagtatangka."
 }

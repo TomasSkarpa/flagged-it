@@ -206,5 +206,6 @@
   "game.round.label": "라운드",
   "game.round.progress": "라운드 %d / %d",
   "game.hangman.title": "행맨",
-  "game.facts.title": "사실로 맞추기"
+  "game.facts.title": "사실로 맞추기",
+  "game.hangman.description": "지리 지식 테스트! 추측이 끝나기 전에 국가 이름을 글자별로 맞춰보세요."
 }

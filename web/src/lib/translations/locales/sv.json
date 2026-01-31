@@ -206,5 +206,6 @@
   "game.round.label": "Runda",
   "game.round.progress": "Runda %d / %d",
   "game.hangman.title": "Ord Gissning",
-  "game.facts.title": "Gissa med Fakta"
+  "game.facts.title": "Gissa med Fakta",
+  "game.hangman.description": "Testa dina geografiska kunskaper! Gissa ländernamn bokstav för bokstav innan du tar slut på gissningar."
 }

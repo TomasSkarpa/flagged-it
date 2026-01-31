@@ -206,5 +206,6 @@
   "game.round.label": "Rundă",
   "game.round.progress": "Rundă %d / %d",
   "game.hangman.title": "Joc de Ghicit Cuvântul",
-  "game.facts.title": "Ghiceste după Fapte"
+  "game.facts.title": "Ghiceste după Fapte",
+  "game.hangman.description": "Testează-ți cunoștințele de geografie! Ghicește numele țărilor litera cu litera înainte de a rămâne fără încercări."
 }

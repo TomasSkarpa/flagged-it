@@ -206,5 +206,6 @@
   "game.round.label": "Раунд",
   "game.round.progress": "Раунд %d / %d",
   "game.hangman.title": "Виселица",
-  "game.facts.title": "Угадай по Фактам"
+  "game.facts.title": "Угадай по Фактам",
+  "game.hangman.description": "Проверьте свои знания географии! Угадывайте названия стран по буквам, прежде чем закончатся попытки."
 }

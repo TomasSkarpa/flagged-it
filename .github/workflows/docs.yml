@@ -69,10 +69,9 @@ jobs:
             
             This ensures documentation accurately reflects the actual code implementation."
             
-            # Detect the default branch (usually master for wikis)
-            DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@' || echo "master")
-            git push origin HEAD:$DEFAULT_BRANCH
-            echo "✅ Changes pushed to wiki ($DEFAULT_BRANCH branch)"
+            # Push to master branch (GitHub wikis use master as default)
+            git push origin HEAD:master
+            echo "✅ Changes pushed to wiki (master branch)"
           else
             echo "No changes detected, skipping commit"
           fi

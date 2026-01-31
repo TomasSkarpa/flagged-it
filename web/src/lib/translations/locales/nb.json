@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Vanlig",
   "game.capital.difficulty.regular.desc": "4 alternativer å velge fra",
   "game.capital.difficulty.intermediate": "Middels",
-  "game.capital.difficulty.intermediate.desc": "Skriv svaret for å vinne"
+  "game.capital.difficulty.intermediate.desc": "Skriv svaret for å vinne",
+  "game.facts.try_left": "prøv venstre",
+  "game.facts.tries_left_short": "forsøk igjen",
+  "game.facts.fact_header": "Fakt #{{.Variable}}",
+  "game.facts.guess_country_header": "Gjett landet",
+  "game.facts.skip_button": "Jeg vet ikke / Spring over",
+  "game.facts.skipped": "Sprunget!",
+  "game.facts.skipped_answer": "Sprunget! Svaret var %s",
+  "library.sort.alphabetical_asc": "Alfabetisk (A→Z)",
+  "library.sort.alphabetical_desc": "Alfabetisk (Z→A)",
+  "library.sort.population_asc": "Befolkning (laveste→høyeste)",
+  "library.sort.population_desc": "Befolkning (høyeste→laveste)",
+  "library.sort.area_asc": "Areale (smålst→størst)",
+  "library.sort.area_desc": "Areale (størst→smålst)"
 }

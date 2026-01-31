@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Pravidelný",
   "game.capital.difficulty.regular.desc": "4 možnosti na výběr",
   "game.capital.difficulty.intermediate": "Pokročilý",
-  "game.capital.difficulty.intermediate.desc": "Zadejte odpověď pro výhru"
+  "game.capital.difficulty.intermediate.desc": "Zadejte odpověď pro výhru",
+  "game.facts.try_left": "Zkuste levou",
+  "game.facts.tries_left_short": "Zkázání",
+  "game.facts.fact_header": "Fakta #%d",
+  "game.facts.guess_country_header": "Zkuste zemi",
+  "game.facts.skip_button": "Nevím / Přeskakovat",
+  "game.facts.skipped": "Přeskočeno!",
+  "game.facts.skipped_answer": "Přeskočeno! Odpověď byla %s",
+  "library.sort.alphabetical_asc": "Abecední (A→Z)",
+  "library.sort.alphabetical_desc": "Abecední (Z→A)",
+  "library.sort.population_asc": "Počet obyvatel (nejmenší→největší)",
+  "library.sort.population_desc": "Počet obyvatel (největší→nejmenší)",
+  "library.sort.area_asc": "Rozloha (nejmenší→největší)",
+  "library.sort.area_desc": "Rozloha (největší→nejmenší)"
 }

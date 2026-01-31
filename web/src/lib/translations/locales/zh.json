@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "普通",
   "game.capital.difficulty.regular.desc": "从4个选项中选择",
   "game.capital.difficulty.intermediate": "中级",
-  "game.capital.difficulty.intermediate.desc": "输入答案即可获胜"
+  "game.capital.difficulty.intermediate.desc": "输入答案即可获胜",
+  "game.facts.try_left": "试左",
+  "game.facts.tries_left_short": "剩余次数",
+  "game.facts.fact_header": "事实#%d",
+  "game.facts.guess_country_header": "猜国旗",
+  "game.facts.skip_button": "不知道 / 跳过",
+  "game.facts.skipped": "跳过!",
+  "game.facts.skipped_answer": "跳过!答案是 %s",
+  "library.sort.alphabetical_asc": "字母顺序 (A→Z)",
+  "library.sort.alphabetical_desc": "字母顺序 (Z→A)",
+  "library.sort.population_asc": "人口 (最少→最多)",
+  "library.sort.population_desc": "人口 (最多→最少)",
+  "library.sort.area_asc": "面积 (最小→最大)",
+  "library.sort.area_desc": "面积 (最大→最小)"
 }

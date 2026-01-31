@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Regolare",
   "game.capital.difficulty.regular.desc": "4 opzioni da scegliere",
   "game.capital.difficulty.intermediate": "Intermedio",
-  "game.capital.difficulty.intermediate.desc": "Digita la risposta per vincere"
+  "game.capital.difficulty.intermediate.desc": "Digita la risposta per vincere",
+  "game.facts.try_left": "prova sinistra",
+  "game.facts.tries_left_short": "prove rimanenti",
+  "game.facts.fact_header": "Fatto #{{.Variable}}",
+  "game.facts.guess_country_header": "Indovina il Paese",
+  "game.facts.skip_button": "Non so / Saltare",
+  "game.facts.skipped": "Saltato!",
+  "game.facts.skipped_answer": "Saltato! La risposta era %s",
+  "library.sort.alphabetical_asc": "Alfabetico (A→Z)",
+  "library.sort.alphabetical_desc": "Alfabetico (Z→A)",
+  "library.sort.population_asc": "Popolazione (Minore→Maggiore)",
+  "library.sort.population_desc": "Popolazione (Maggiore→Minore)",
+  "library.sort.area_asc": "Area (Minima→Massima)",
+  "library.sort.area_desc": "Area (Massima→Minima)"
 }

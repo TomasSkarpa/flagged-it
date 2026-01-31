@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Uobičajeno",
   "game.capital.difficulty.regular.desc": "4 opcije za izbor",
   "game.capital.difficulty.intermediate": "Srednji",
-  "game.capital.difficulty.intermediate.desc": "Upišite odgovor za pobjedu"
+  "game.capital.difficulty.intermediate.desc": "Upišite odgovor za pobjedu",
+  "game.facts.try_left": "pokušaj lijevo",
+  "game.facts.tries_left_short": "pokušaji ostali",
+  "game.facts.fact_header": "Fakt #%d",
+  "game.facts.guess_country_header": "Napomeni državu",
+  "game.facts.skip_button": "Ne znam / Prepusti",
+  "game.facts.skipped": "Prepušteno!",
+  "game.facts.skipped_answer": "Prepušteno! Odgovor je bio %s",
+  "library.sort.alphabetical_asc": "Abecedni (A→Z)",
+  "library.sort.alphabetical_desc": "Abecedni (Z→A)",
+  "library.sort.population_asc": "Populacija (najmanje→najviše)",
+  "library.sort.population_desc": "Populacija (najviše→najmanje)",
+  "library.sort.area_asc": "Površina (najmanja→najveća)",
+  "library.sort.area_desc": "Površina (najveća→najmanja)"
 }

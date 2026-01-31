@@ -197,5 +197,22 @@
   "game.capital.difficulty.regular": "Pangkaraniwan",
   "game.capital.difficulty.regular.desc": "4 mga pagpipilian upang pumili",
   "game.capital.difficulty.intermediate": "Intermedyo",
-  "game.capital.difficulty.intermediate.desc": "Itype ang sagot upang manalo"
+  "game.capital.difficulty.intermediate.desc": "Itype ang sagot upang manalo",
+  "button.dashboard": "Dashboard",
+  "game.facts.try_left": "subukan ang kaliwa",
+  "game.facts.tries_left_short": "tries left",
+  "game.facts.fact_header": "Fact #%d",
+  "game.facts.guess_country_header": "Tukoyin ang Bansa",
+  "game.facts.skip_button": "Hindi ko alam / Skip",
+  "game.facts.skipped": "Nabanggit!",
+  "game.facts.skipped_answer": "Nabanggit! Ang sagot ay %s",
+  "library.sort.alphabetical_asc": "Alpabetiko (A→Z)",
+  "library.sort.alphabetical_desc": "Alpabetiko (Z→A)",
+  "library.sort.population_asc": "Populasyon (Pinakamaliit→Pinakamataas)",
+  "library.sort.population_desc": "Populasyon (Pinakamataas→Pinakamaliit)",
+  "library.sort.area_asc": "Lupain (Pinakamaliit→Pinakamalaki)",
+  "library.sort.area_desc": "Lupain (Pinakamalaki→Pinakamaliit)",
+  "common.home": "Tahanan",
+  "common.go_home": "Pumunta sa Tahanan",
+  "error.go_home": "Pumunta sa Tahanan"
 }

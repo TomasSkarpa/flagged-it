@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Zwykły",
   "game.capital.difficulty.regular.desc": "4 opcje do wyboru",
   "game.capital.difficulty.intermediate": "Średniozaawansowany",
-  "game.capital.difficulty.intermediate.desc": "Wpisz odpowiedź, aby wygrać"
+  "game.capital.difficulty.intermediate.desc": "Wpisz odpowiedź, aby wygrać",
+  "game.facts.try_left": "spróbuj lewą",
+  "game.facts.tries_left_short": "próby pozostałe",
+  "game.facts.fact_header": "Fakt #%d",
+  "game.facts.guess_country_header": "Zgadnij kraj",
+  "game.facts.skip_button": "Nie wiem / Pomiń",
+  "game.facts.skipped": "Pomiń!",
+  "game.facts.skipped_answer": "Pomiń! Odpowiedź była %s",
+  "library.sort.alphabetical_asc": "Alfabetyczne (A→Z)",
+  "library.sort.alphabetical_desc": "Alfabetyczne (Z→A)",
+  "library.sort.population_asc": "Populacja (najmniej→najwięcej)",
+  "library.sort.population_desc": "Populacja (najwięcej→najmniej)",
+  "library.sort.area_asc": "Powierzchnia (najmniejsza→największa)",
+  "library.sort.area_desc": "Powierzchnia (największa→najmniejsza)"
 }

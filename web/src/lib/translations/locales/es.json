@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Regular",
   "game.capital.difficulty.regular.desc": "4 opciones para elegir",
   "game.capital.difficulty.intermediate": "Intermedio",
-  "game.capital.difficulty.intermediate.desc": "Escribe la respuesta para ganar"
+  "game.capital.difficulty.intermediate.desc": "Escribe la respuesta para ganar",
+  "game.facts.try_left": "intenta a la izquierda",
+  "game.facts.tries_left_short": "intentos restantes",
+  "game.facts.fact_header": "Hecho #%d",
+  "game.facts.guess_country_header": "Adivina el País",
+  "game.facts.skip_button": "No sé / Saltar",
+  "game.facts.skipped": "Saltado!",
+  "game.facts.skipped_answer": "Saltado! La respuesta era %s",
+  "library.sort.alphabetical_asc": "Alfabético (A→Z)",
+  "library.sort.alphabetical_desc": "Alfabético (Z→A)",
+  "library.sort.population_asc": "Población (Menor→Mayor)",
+  "library.sort.population_desc": "Población (Mayor→Menor)",
+  "library.sort.area_asc": "Área (Más pequeña→Más grande)",
+  "library.sort.area_desc": "Área (Más grande→Más pequeña)"
 }

@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "일반",
   "game.capital.difficulty.regular.desc": "4개의 선택지 중 하나를 선택",
   "game.capital.difficulty.intermediate": "중급",
-  "game.capital.difficulty.intermediate.desc": "정답을 입력하여 승리"
+  "game.capital.difficulty.intermediate.desc": "정답을 입력하여 승리",
+  "game.facts.try_left": "왼쪽으로 시도하세요",
+  "game.facts.tries_left_short": "남은 시도",
+  "game.facts.fact_header": "사실 #%d",
+  "game.facts.guess_country_header": "나라를 맞춰보세요",
+  "game.facts.skip_button": "몰라요 / 건너뛰기",
+  "game.facts.skipped": "건너뛰었습니다!",
+  "game.facts.skipped_answer": "건너뛰었습니다! 정답은 %s",
+  "library.sort.alphabetical_asc": "알파벳 순 (A→Z)",
+  "library.sort.alphabetical_desc": "알파벳 순 (Z→A)",
+  "library.sort.population_asc": "인구 순 (낮음→높음)",
+  "library.sort.population_desc": "인구 순 (높음→낮음)",
+  "library.sort.area_asc": "면적 순 (작은→큰)",
+  "library.sort.area_desc": "면적 순 (큰→작은)"
 }

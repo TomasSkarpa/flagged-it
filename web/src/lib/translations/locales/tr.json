@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Normal",
   "game.capital.difficulty.regular.desc": "Seçmek için 4 seçenek",
   "game.capital.difficulty.intermediate": "Orta",
-  "game.capital.difficulty.intermediate.desc": "Kazanmak için cevabı yazın"
+  "game.capital.difficulty.intermediate.desc": "Kazanmak için cevabı yazın",
+  "game.facts.try_left": "Sol taraftan deneme yap",
+  "game.facts.tries_left_short": "Denemeler kaldı",
+  "game.facts.fact_header": "Fak #%d",
+  "game.facts.guess_country_header": "Ülke Bil",
+  "game.facts.skip_button": "Bilmiyorum / Atla",
+  "game.facts.skipped": "Atlandı!",
+  "game.facts.skipped_answer": "Atlandı! Cevap %s",
+  "library.sort.alphabetical_asc": "Alfabetik (A→Z)",
+  "library.sort.alphabetical_desc": "Alfabetik (Z→A)",
+  "library.sort.population_asc": "Nüfus (En Düşük→En Yüksek)",
+  "library.sort.population_desc": "Nüfus (En Yüksek→En Düşük)",
+  "library.sort.area_asc": "Alan (En Küçük→En Büyük)",
+  "library.sort.area_desc": "Alan (En Büyük→En Küçük)"
 }

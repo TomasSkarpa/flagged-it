@@ -200,5 +200,19 @@
   "game.capital.difficulty.regular": "Regulär",
   "game.capital.difficulty.regular.desc": "4 Optionen zur Auswahl",
   "game.capital.difficulty.intermediate": "Fortgeschritten",
-  "game.capital.difficulty.intermediate.desc": "Tippe die Antwort, um zu gewinnen"
+  "game.capital.difficulty.intermediate.desc": "Tippe die Antwort, um zu gewinnen",
+  "button.dashboard": "Übersicht",
+  "game.facts.try_left": "links probieren",
+  "game.facts.tries_left_short": "versuche übrig",
+  "game.facts.fact_header": "Tatsache #{{.Variable}}",
+  "game.facts.guess_country_header": "Land erraten",
+  "game.facts.skip_button": "Ich weiß nicht / Auslassen",
+  "game.facts.skipped": "Ausgelassen!",
+  "game.facts.skipped_answer": "Ausgelassen! Die Antwort war %s",
+  "library.sort.alphabetical_asc": "Alphabetisch (A→Z)",
+  "library.sort.alphabetical_desc": "Alphabetisch (Z→A)",
+  "library.sort.population_asc": "Einwohnerzahl (Niedrigste→Höchste)",
+  "library.sort.population_desc": "Einwohnerzahl (Höchste→Niedrigste)",
+  "library.sort.area_asc": "Fläche (Kleinste→Größte)",
+  "library.sort.area_desc": "Fläche (Größte→Kleinste)"
 }

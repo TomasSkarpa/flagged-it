@@ -366,13 +366,14 @@ Return ONLY the markdown content, no explanations or code blocks.`;
         });
 
         if (response.status === 429) {
+          // Custom wait times: attempt 1 = 1s, attempt 2 = 5s, then +5s per additional attempt
+          // Cap at reasonable maximum (60s) even if Retry-After suggests longer
           const retryAfter = response.headers.get('retry-after');
-          const waitTime = retryAfter 
-            ? parseInt(retryAfter) * 1000 
-            : Math.min(1000 * Math.pow(2, attempt), 30000);
+          const retryAfterMs = retryAfter ? Math.min(parseInt(retryAfter) * 1000, 60000) : null;
+          const waitTime = retryAfterMs || (attempt === 0 ? 1000 : attempt * 5000); // 1s, 5s, 10s, 15s, ...
           
           if (attempt < retriesPerModel - 1) {
-            console.warn(`  ⚠️  Rate limited (429) on ${model}. Waiting ${waitTime / 1000}s...`);
+            console.warn(`  ⚠️  Rate limited (429) on ${model}. Waiting ${waitTime / 1000}s before retry ${attempt + 1}/${retriesPerModel}...`);
             await sleep(waitTime);
             continue;
           } else {

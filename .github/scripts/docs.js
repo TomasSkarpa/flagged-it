@@ -30,11 +30,13 @@ const WEB_GAMES_DIR = join(PROJECT_ROOT, 'web', 'src', 'lib', 'api');
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
+// Model fallback chain - try models in order if one fails or hits rate limits
+// Rate limits: All models have 30 RPM minimum, so we wait 2.5s between requests (24 RPM = safe buffer)
 const GROQ_MODELS = [
-  'llama-3.3-70b-versatile',
-  'llama-3.1-70b-versatile',
-  'llama-3.1-8b-instant',
-  'mixtral-8x7b-32768'
+  'llama-3.3-70b-versatile',              // Primary: best quality (30 RPM, 12k TPM)
+  'meta-llama/llama-4-scout-17b-16e-instruct', // Fallback 1: next-gen performance (30 RPM, 30k TPM)
+  'qwen/qwen3-32b',                       // Fallback 2: excellent for coding/math (60 RPM, 6k TPM)
+  'llama-3.1-8b-instant'                  // Fallback 3: pure speed (30 RPM, 6k TPM)
 ];
 
 if (!GROQ_API_KEY) {
@@ -505,8 +507,10 @@ async function main() {
       console.log(`  ✓ ${gameWikiName}.md - No changes needed`);
     }
 
-    // Rate limiting: wait between API calls
-    await sleep(3000);
+    // Rate limiting: wait between API calls to respect rate limits
+    // Minimum RPM is 30 (llama-3.3-70b, llama-4-scout, llama-3.1-8b)
+    // Using 2.5s delay = 24 RPM, safely under 30 RPM limit to prevent blocking
+    await sleep(2500);
   }
 
   console.log('\n' + '='.repeat(50));

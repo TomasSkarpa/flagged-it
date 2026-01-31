@@ -1,218 +1,866 @@
 {
-  "button.dashboard": "Dashboard",
-  "button.new_game": "New Game",
-  "dashboard.title": "Choose Your Game Mode",
-  "game.flag.title": "Guess by Flag",
-  "game.flag.setup.title": "Flag Guessing Game",
-  "game.flag.setup.description": "Test your knowledge of world flags! Guess the country from its flag.",
-  "game.flag.over.excellent": "Excellent work! You're a flag expert! 🌟",
-  "game.shape.title": "Guess by Shape",
-  "game.hangman.title": "Hangman",
-  "game.facts.title": "Guess by Facts",
-  "game.facts.description": "Guess countries based on interesting facts!",
-  "home.game.facts.description": "Guess countries based on interesting facts!",
-  "game.higher_lower.title": "Higher or Lower",
-  "game.higher_lower.current_streak_label": "Current Streak",
-  "game.higher_lower.highest_streak_label": "Highest Streak",
-  "game.guessing.title": "What Country is This",
-  "game.worldle.title": "Worldle",
-  "game.flag.question": "Which country does this flag belong to?",
-  "game.flag.difficulty.regular": "Regular",
-  "game.flag.difficulty.regular.desc": "4 options to pick from",
-  "game.flag.difficulty.expert": "Expert",
-  "game.flag.difficulty.expert.desc": "Type answer to win",
-  "game.correct": "Correct! It's {{.Country}}!",
-  "game.wrong": "Wrong! It was {{.Country}}",
-  "game.correct_short": "Correct!",
-  "game.wrong_short": "Wrong!",
-  "game.score": "Score: {{.Score}}/10",
-  "game.complete": "Game Complete! Final Score: {{.Score}}/10 ({{.Percent}}%)",
-  "error.loading_countries": "Error loading countries data",
-  "game.hangman.guess_country": "Guess the country name!",
-  "game.hangman.already_guessed": "Already guessed that letter!",
-  "game.hangman.game_over": "Game Over! The word was: %s",
-  "game.hangman.congratulations": "Congratulations! You won!",
-  "game.hangman.letters_words": "%d letters, %d %s",
-  "game.hangman.word": "word",
-  "game.hangman.words": "words",
-  "game.hangman.wrong_guesses": "Wrong guesses: %d/%d",
-  "game.hangman.score": "Score: %d/5",
-  "game.shape.select_region": "Select Region",
-  "game.shape.choose_region": "Choose a region and guess all country shapes!",
-  "game.shape.difficulty.beginner": "Beginner",
-  "game.shape.difficulty.beginner.desc": "4 options, neighbors visible",
-  "game.shape.difficulty.intermediate": "Intermediate",
-  "game.shape.difficulty.intermediate.desc": "Type answer, neighbors visible",
-  "game.shape.difficulty.advanced": "Advanced",
-  "game.shape.difficulty.advanced.desc": "4 options, silhouette only",
-  "game.shape.difficulty.expert": "Expert",
-  "game.shape.difficulty.expert.desc": "Type answer, silhouette only",
-  "game.shape.enter_country": "Enter country name...",
-  "game.shape.guess": "Guess",
-  "game.shape.score": "Score: %d/%d",
-  "game.shape.progress": "%s: Country %d/%d",
-  "game.shape.correct": "Correct! It's %s",
-  "game.shape.wrong": "Wrong! It's %s",
-  "game.shape.complete": "Game Complete! Final Score: %d/%d (%.0f%%)",
-  "game.facts.enter_country": "Enter country name...",
-  "game.facts.guess": "Guess",
-  "game.facts.score": "Score: %d/5",
-  "game.facts.complete": "Game Complete! Final Score: %d/5 (%.0f%%)",
-  "game.facts.no_facts": "No countries with facts available",
-  "game.facts.fact_number": "Fact %d: %s",
-  "game.facts.guess_country": "Guess the country based on the fact!",
-  "game.facts.tries_left": "Tries left: %d",
-  "game.facts.try_left": "try left",
-  "game.facts.tries_left_short": "tries left",
-  "game.facts.fact_header": "Fact #%d",
-  "game.facts.guess_country_header": "Guess the Country",
-  "game.facts.skip_button": "I don't know / Skip",
-  "game.facts.skipped": "Skipped!",
-  "game.facts.skipped_answer": "Skipped! The answer was %s",
-  "game.facts.correct": "Correct! It was %s!",
-  "game.facts.game_over": "Game Over! It was %s %s",
-  "game.facts.wrong_next": "Wrong! Try again with the next fact.",
-  "game.facts.wrong_no_more": "Wrong! No more facts available.",
-  "game.facts.previous_guesses": "Previous Guesses:",
-  "game.facts.fact_label": "Fact: %s",
-  "game.facts.guess_number": "Guess %d: %s",
-  "game.guessing.make_guess": "Make a guess!",
-  "game.guessing.enter_country": "Enter country name...",
-  "game.guessing.enter_capital": "Enter capital name...",
-  "game.guessing.guess": "Guess",
-  "game.guessing.history": "Guess History:",
-  "game.guessing.flag": "Flag",
-  "game.guessing.country": "Country",
-  "game.guessing.continent": "Continent",
-  "game.guessing.population": "Population",
-  "game.guessing.area": "Area",
-  "game.guessing.not_found": "Country not found!",
-  "game.guessing.capital_not_found": "Capital not found!",
-  "game.guessing.correct": "Correct! It was %s!",
-  "game.worldle.description": "Guess the country by comparing continent, population, and area!",
-  "game.higher_lower.description": "Try to guess which country has a higher population!",
-  "game.higher_lower.score": "Score: %d",
-  "game.higher_lower.higher": "Higher",
-  "game.higher_lower.lower": "Lower",
-  "game.higher_lower.next_round": "Next Round",
-  "game.higher_lower.start": "Start Game",
-  "game.higher_lower.population": "Population: %d",
-  "game.higher_lower.population_unknown": "Population: ?",
-  "region.world": "World",
-  "region.africa": "Africa",
-  "region.asia": "Asia",
-  "region.europe": "Europe",
-  "region.americas": "Americas",
-  "region.oceania": "Oceania",
-  "html.loading": "Shifting tectonic plates to form countries...",
-  "html.loading_app": "Loading application...",
-  "html.error_title": "⚠️ Error Loading Application",
-  "html.error_message": "Failed to load the application. Please refresh the page and try again.",
-  "promo.europe_flags.title": "European Flags",
-  "promo.europe_flags.desc": "Master the flags of Europe",
-  "promo.asia_shapes.title": "Asian Shapes",
-  "promo.asia_shapes.desc": "Guess countries by shape",
-  "promo.hangman.desc": "Classic word guessing game",
-  "promo.higher_lower.desc": "Compare country stats",
-  "promo.badge.popular": "Popular",
-  "promo.badge.new": "New",
-  "scoreboard.empty": "No scores yet! Play some games to see your progress here.",
-  "scoreboard.score": "Score",
-  "scoreboard.percent": "Percent",
-  "scoreboard.date": "Date",
-  "home.hero.title": "Flagged It",
-  "home.hero.subtitle": "Test Your Geography Knowledge",
-  "home.hero.description": "Play fun games and learn about countries around the world!",
-  "home.game.flag.description": "Identify countries by their flags",
-  "home.game.shape.description": "Identify countries by their shape",
-  "home.game.capital.title": "Guess the Capital",
-  "home.game.capital.description": "Match countries with their capitals",
-  "home.game.higher_lower.description": "Compare countries by population, area, and more",
-  "home.game.play_now": "Play Now →",
-  "home.game.coming_soon": "Coming Soon",
-  "home.features.title": "Features",
-  "home.features.multiple_modes.title": "Multiple Game Modes",
-  "home.features.multiple_modes.description": "Choose from various game types to test different aspects of your geography knowledge",
-  "home.features.regional.title": "Regional Focus",
-  "home.features.regional.description": "Filter by continent to focus on specific regions of the world",
-  "home.features.progress.title": "Track Progress",
-  "home.features.progress.description": "See your scores and track your improvement over time",
-  "game.capital.title": "Capital City Game",
-  "game.capital.description": "Test your knowledge of world capitals! Guess the capital city of each country.",
-  "game.capital.question": "What is the capital of {{.Country}}?",
-  "game.capital.difficulty.regular": "Regular",
-  "game.capital.difficulty.regular.desc": "4 options to pick from",
-  "game.capital.difficulty.intermediate": "Intermediate",
-  "game.capital.difficulty.intermediate.desc": "Type answer to win",
-  "game.shape.description": "Test your geography knowledge! Identify countries by their silhouette.",
-  "game.shape.question": "Which country has this shape?",
-  "game.setup.select_region": "Select Region (Optional)",
-  "game.setup.start_game": "Start Game",
-  "game.setup.starting": "Starting...",
-  "game.over.title": "Game Over!",
-  "game.over.excellent": "Excellent work! You're a geography expert! 🌟",
-  "game.over.good": "Great job! Keep practicing! 👍",
-  "game.over.encourage": "Good effort! Try again to improve your score! 💪",
-  "game.over.play_again": "Play Again",
-  "game.higher_lower.setup.description": "Test your knowledge! Guess if the value is higher or lower.",
-  "game.higher_lower.category.population": "Population",
-  "game.higher_lower.category.population.desc": "Which country has more people?",
-  "game.higher_lower.category.area": "Area",
-  "game.higher_lower.category.area.desc": "Which country is larger?",
-  "game.higher_lower.category.continents": "Continents",
-  "game.higher_lower.category.continents.desc": "Which continent has more countries?",
-  "game.higher_lower.loading": "Loading...",
-  "game.higher_lower.game_over": "Game Over!",
-  "game.higher_lower.final_score": "Final Score",
-  "game.higher_lower.high_score": "High Score",
-  "game.higher_lower.than": "than",
-  "game.higher_lower.has": "has",
-  "library.title": "Country Library",
-  "library.description": "Explore comprehensive information about countries around the world",
-  "library.search.label": "Search Countries",
-  "library.search.placeholder": "Search by name or capital",
-  "library.filter.region": "Filter by Region",
-  "library.view.grid": "Grid view",
-  "library.view.list": "List view",
-  "library.results": "Showing %d of %d countries",
-  "library.loading": "Loading countries...",
-  "library.empty": "No countries found matching your search.",
-  "library.detail.capital": "Capital",
-  "library.detail.subregion": "Subregion",
-  "library.detail.languages": "Languages",
-  "library.detail.location": "Location",
-  "library.detail.code": "Code",
-  "library.detail.region": "Region",
-  "library.detail.population": "Population",
-  "library.detail.area": "Area",
-  "library.detail.people": "people",
-  "library.sort.alphabetical_asc": "Alphabetical (A→Z)",
-  "library.sort.alphabetical_desc": "Alphabetical (Z→A)",
-  "library.sort.population_asc": "Population (Lowest→Highest)",
-  "library.sort.population_desc": "Population (Highest→Lowest)",
-  "library.sort.area_asc": "Area (Smallest→Largest)",
-  "library.sort.area_desc": "Area (Largest→Smallest)",
-  "nav.games": "Games",
-  "nav.library": "Library",
-  "nav.scoreboard": "Scoreboard",
-  "common.loading": "Loading...",
-  "common.error": "Error",
-  "common.cancel": "Cancel",
-  "common.apply": "Apply",
-  "common.close": "Close",
-  "common.save": "Save",
-  "common.back": "Back",
-  "common.next": "Next",
-  "common.previous": "Previous",
-  "common.home": "Home",
-  "common.go_home": "Go Home",
-  "scoreboard.title": "Scoreboard",
-  "scoreboard.description": "Track your progress and compete with others!",
-  "scoreboard.coming_soon": "Coming Soon",
-  "error.title": "Oooops,",
-  "error.message": "Something went wrong. Please try again later.",
-  "error.go_home": "Go Home",
-  "game.score.label": "Score",
-  "game.round.label": "Round",
-  "game.round.progress": "Round %d / %d"
+  "button.dashboard": {
+    "value": "Dashboard",
+    "_context": "Navigation button to return to the main dashboard/game selection screen."
+  },
+  "button.new_game": {
+    "value": "New Game",
+    "_context": "Button label for starting a new game session. Keep it short and action-oriented."
+  },
+  "dashboard.title": {
+    "value": "Choose Your Game Mode",
+    "_context": "Main heading on the dashboard screen where users select which game mode to play."
+  },
+  "game.flag.title": {
+    "value": "Guess by Flag",
+    "_context": "Title of the flag guessing game mode. Players identify countries from their flag images."
+  },
+  "game.flag.setup.title": {
+    "value": "Flag Guessing Game",
+    "_context": "Title displayed on the game setup screen before starting a flag guessing game session."
+  },
+  "game.flag.setup.description": {
+    "value": "Test your knowledge of world flags! Guess the country from its flag.",
+    "_context": "Description text explaining the flag guessing game mechanics shown on the setup screen."
+  },
+  "game.flag.over.excellent": {
+    "value": "Excellent work! You're a flag expert! 🌟",
+    "_context": "Encouraging message displayed when player achieves an excellent score in the flag game."
+  },
+  "game.shape.title": {
+    "value": "Guess by Shape",
+    "_context": "Title of the shape guessing game mode. Players identify countries from their geographic silhouettes."
+  },
+  "game.hangman.title": {
+    "value": "Hangman",
+    "_context": "Title of the hangman word guessing game mode. Players guess country names letter by letter."
+  },
+  "game.facts.title": {
+    "value": "Guess by Facts",
+    "_context": "Title of the facts guessing game mode. Players identify countries based on interesting facts about them."
+  },
+  "game.facts.description": {
+    "value": "Guess countries based on interesting facts!",
+    "_context": "Description text explaining the facts guessing game mechanics. Used in game setup and home page."
+  },
+  "home.game.facts.description": {
+    "value": "Guess countries based on interesting facts!",
+    "_context": "Description text for the facts game shown on the home page game card."
+  },
+  "game.higher_lower.title": {
+    "value": "Higher or Lower",
+    "_context": "Title of the higher/lower comparison game mode. Players guess if one country's statistic is higher or lower than another."
+  },
+  "game.higher_lower.current_streak_label": {
+    "value": "Current Streak",
+    "_context": "Label for displaying the player's current consecutive correct answers in the higher/lower game."
+  },
+  "game.higher_lower.highest_streak_label": {
+    "value": "Highest Streak",
+    "_context": "Label for displaying the player's best consecutive correct answers streak in the higher/lower game."
+  },
+  "game.guessing.title": {
+    "value": "What Country is This",
+    "_context": "Generic title for guessing games where players identify countries. Used in Worldle and similar modes."
+  },
+  "game.worldle.title": {
+    "value": "Worldle",
+    "_context": "Title of the Worldle game mode. A Wordle-style game where players guess a country using hints about continent, population, and area."
+  },
+  "game.flag.question": {
+    "value": "Which country does this flag belong to?",
+    "_context": "Question prompt displayed during flag guessing rounds, shown above the flag image."
+  },
+  "game.flag.difficulty.regular": {
+    "value": "Regular",
+    "_context": "Difficulty level name for flag game with multiple choice (4 options). Easier mode for beginners."
+  },
+  "game.flag.difficulty.regular.desc": {
+    "value": "4 options to pick from",
+    "_context": "Description of the regular difficulty mode in flag game, explaining that players select from 4 multiple choice options."
+  },
+  "game.flag.difficulty.expert": {
+    "value": "Expert",
+    "_context": "Difficulty level name for flag game requiring typed answers. Harder mode for advanced players."
+  },
+  "game.flag.difficulty.expert.desc": {
+    "value": "Type answer to win",
+    "_context": "Description of the expert difficulty mode in flag game, explaining that players must type the country name."
+  },
+  "game.correct": {
+    "value": "Correct! It's {{.Country}}!",
+    "_context": "Success message displayed when player answers correctly. Template variable {{.Country}} is replaced with the correct country name."
+  },
+  "game.wrong": {
+    "value": "Wrong! It was {{.Country}}",
+    "_context": "Error message displayed when player answers incorrectly. Template variable {{.Country}} is replaced with the correct country name."
+  },
+  "game.correct_short": {
+    "value": "Correct!",
+    "_context": "Short success message displayed in feedback overlays when player answers correctly. Used in GameContainer component."
+  },
+  "game.wrong_short": {
+    "value": "Wrong!",
+    "_context": "Short error message displayed in feedback overlays when player answers incorrectly. Used in GameContainer component."
+  },
+  "game.score": {
+    "value": "Score: {{.Score}}/10",
+    "_context": "Score display format showing current score out of 10 rounds. Template variables {{.Score}} is replaced with the score number."
+  },
+  "game.complete": {
+    "value": "Game Complete! Final Score: {{.Score}}/10 ({{.Percent}}%)",
+    "_context": "Completion message displayed at the end of a game session. Shows final score and percentage. Template variables: {{.Score}} for score, {{.Percent}} for percentage."
+  },
+  "error.loading_countries": {
+    "value": "Error loading countries data",
+    "_context": "Error message displayed when the application fails to load country data from the API or data source."
+  },
+  "game.hangman.guess_country": {
+    "value": "Guess the country name!",
+    "_context": "Instruction prompt displayed during hangman game rounds, encouraging players to guess letters to form the country name."
+  },
+  "game.hangman.already_guessed": {
+    "value": "Already guessed that letter!",
+    "_context": "Warning message shown when player tries to guess a letter they've already attempted in the hangman game."
+  },
+  "game.hangman.game_over": {
+    "value": "Game Over! The word was: %s",
+    "_context": "Message displayed when player loses a hangman round (runs out of wrong guesses). %s placeholder is replaced with the correct country name."
+  },
+  "game.hangman.congratulations": {
+    "value": "Congratulations! You won!",
+    "_context": "Success message displayed when player successfully guesses the country name in hangman game."
+  },
+  "game.hangman.letters_words": {
+    "value": "%d letters, %d %s",
+    "_context": "Format string showing word statistics in hangman game. First %d is letter count, second %d is word count, %s is 'word' or 'words' (singular/plural)."
+  },
+  "game.hangman.word": {
+    "value": "word",
+    "_context": "Singular form of 'word' used in hangman statistics when country name consists of a single word."
+  },
+  "game.hangman.words": {
+    "value": "words",
+    "_context": "Plural form of 'word' used in hangman statistics when country name consists of multiple words."
+  },
+  "game.hangman.wrong_guesses": {
+    "value": "Wrong guesses: %d/%d",
+    "_context": "Counter showing incorrect letter guesses in hangman game. First %d is current wrong guesses, second %d is maximum allowed (typically 6)."
+  },
+  "game.hangman.score": {
+    "value": "Score: %d/5",
+    "_context": "Score display format for hangman game showing current score out of 5 rounds. %d placeholder is replaced with the score number."
+  },
+  "game.shape.select_region": {
+    "value": "Select Region",
+    "_context": "Label for the region selection dropdown in shape game setup screen."
+  },
+  "game.shape.choose_region": {
+    "value": "Choose a region and guess all country shapes!",
+    "_context": "Description text explaining the shape game mechanics and encouraging players to select a region filter."
+  },
+  "game.shape.difficulty.beginner": {
+    "value": "Beginner",
+    "_context": "Difficulty level name for shape game with multiple choice (4 options) and neighboring countries visible on the map."
+  },
+  "game.shape.difficulty.beginner.desc": {
+    "value": "4 options, neighbors visible",
+    "_context": "Description of beginner difficulty in shape game, explaining multiple choice format and that neighboring countries are shown on the map."
+  },
+  "game.shape.difficulty.intermediate": {
+    "value": "Intermediate",
+    "_context": "Difficulty level name for shape game requiring typed answers with neighboring countries visible on the map."
+  },
+  "game.shape.difficulty.intermediate.desc": {
+    "value": "Type answer, neighbors visible",
+    "_context": "Description of intermediate difficulty in shape game, explaining typed answer format and that neighboring countries are shown on the map."
+  },
+  "game.shape.difficulty.advanced": {
+    "value": "Advanced",
+    "_context": "Difficulty level name for shape game with multiple choice (4 options) but only the country silhouette visible (no neighbors)."
+  },
+  "game.shape.difficulty.advanced.desc": {
+    "value": "4 options, silhouette only",
+    "_context": "Description of advanced difficulty in shape game, explaining multiple choice format but only the country shape is shown without neighbors."
+  },
+  "game.shape.difficulty.expert": {
+    "value": "Expert",
+    "_context": "Difficulty level name for shape game requiring typed answers with only the country silhouette visible (no neighbors)."
+  },
+  "game.shape.difficulty.expert.desc": {
+    "value": "Type answer, silhouette only",
+    "_context": "Description of expert difficulty in shape game, explaining typed answer format and only the country shape is shown without neighbors."
+  },
+  "game.shape.enter_country": {
+    "value": "Enter country name...",
+    "_context": "Placeholder text for the country name input field in shape game when difficulty requires typing answers."
+  },
+  "game.shape.guess": {
+    "value": "Guess",
+    "_context": "Button label for submitting a country name guess in the shape game."
+  },
+  "game.shape.score": {
+    "value": "Score: %d/%d",
+    "_context": "Score display format for shape game showing current score out of total rounds. First %d is score, second %d is total rounds (typically 10)."
+  },
+  "game.shape.progress": {
+    "value": "%s: Country %d/%d",
+    "_context": "Progress indicator for shape game showing region name and current round. %s is region name, first %d is current round, second %d is total rounds."
+  },
+  "game.shape.correct": {
+    "value": "Correct! It's %s",
+    "_context": "Success message displayed when player correctly identifies a country shape. %s placeholder is replaced with the correct country name."
+  },
+  "game.shape.wrong": {
+    "value": "Wrong! It's %s",
+    "_context": "Error message displayed when player incorrectly identifies a country shape. %s placeholder is replaced with the correct country name."
+  },
+  "game.shape.complete": {
+    "value": "Game Complete! Final Score: %d/%d (%.0f%%)",
+    "_context": "Completion message displayed at the end of shape game session. Shows final score and percentage. First %d is score, second %d is total, %.0f%% is percentage."
+  },
+  "game.facts.enter_country": {
+    "value": "Enter country name...",
+    "_context": "Placeholder text for the country name input field in facts guessing game."
+  },
+  "game.facts.guess": {
+    "value": "Guess",
+    "_context": "Button label for submitting a country name guess in the facts game."
+  },
+  "game.facts.score": {
+    "value": "Score: %d/5",
+    "_context": "Score display format for facts game showing current score out of 5 rounds. %d placeholder is replaced with the score number."
+  },
+  "game.facts.complete": {
+    "value": "Game Complete! Final Score: %d/5 (%.0f%%)",
+    "_context": "Completion message displayed at the end of facts game session. Shows final score and percentage. First %d is score, second %d is total (5), %.0f%% is percentage."
+  },
+  "game.facts.no_facts": {
+    "value": "No countries with facts available",
+    "_context": "Error message displayed when the facts game cannot find any countries with fact data to use for questions."
+  },
+  "game.facts.fact_number": {
+    "value": "Fact %d: %s",
+    "_context": "Format string for displaying fact text with its number. First %d is fact number (1-3), %s is the fact text content."
+  },
+  "game.facts.guess_country": {
+    "value": "Guess the country based on the fact!",
+    "_context": "Instruction prompt displayed during facts game rounds, encouraging players to guess the country based on the displayed fact."
+  },
+  "game.facts.tries_left": {
+    "value": "Tries left: %d",
+    "_context": "Counter showing remaining attempts in facts game. Players have 3 tries per round. %d placeholder is replaced with tries remaining."
+  },
+  "game.facts.try_left": {
+    "value": "try left",
+    "_context": "Singular form used in facts game when displaying '1 try left' (singular). Used with the tries counter."
+  },
+  "game.facts.tries_left_short": {
+    "value": "tries left",
+    "_context": "Plural form used in facts game when displaying '2 tries left' or '3 tries left' (plural). Used with the tries counter."
+  },
+  "game.facts.fact_header": {
+    "value": "Fact #%d",
+    "_context": "Header text displayed above the fact content in facts game. %d placeholder is replaced with the fact number (1, 2, or 3)."
+  },
+  "game.facts.guess_country_header": {
+    "value": "Guess the Country",
+    "_context": "Subheader text displayed below the fact header in facts game, indicating the action the player should take."
+  },
+  "game.facts.skip_button": {
+    "value": "I don't know / Skip",
+    "_context": "Button label allowing players to skip a fact round if they don't know the answer. Moves to next round without penalty."
+  },
+  "game.facts.skipped": {
+    "value": "Skipped!",
+    "_context": "Short message displayed when player skips a fact round. Shown in feedback overlay."
+  },
+  "game.facts.skipped_answer": {
+    "value": "Skipped! The answer was %s",
+    "_context": "Message displayed when player skips a fact round, revealing the correct answer. %s placeholder is replaced with the correct country name."
+  },
+  "game.facts.correct": {
+    "value": "Correct! It was %s!",
+    "_context": "Success message displayed when player correctly guesses the country from a fact. %s placeholder is replaced with the correct country name."
+  },
+  "game.facts.game_over": {
+    "value": "Game Over! It was %s %s",
+    "_context": "Message displayed when player runs out of tries in facts game. First %s is the correct country name, second %s appears to be unused/legacy."
+  },
+  "game.facts.wrong_next": {
+    "value": "Wrong! Try again with the next fact.",
+    "_context": "Message displayed when player guesses incorrectly but still has tries remaining. Indicates the next fact will be revealed."
+  },
+  "game.facts.wrong_no_more": {
+    "value": "Wrong! No more facts available.",
+    "_context": "Message displayed when player guesses incorrectly and there are no more facts available for that country (all 3 facts used)."
+  },
+  "game.facts.previous_guesses": {
+    "value": "Previous Guesses:",
+    "_context": "Header text for the guess history section in facts game, showing all previous attempts for the current round."
+  },
+  "game.facts.fact_label": {
+    "value": "Fact: %s",
+    "_context": "Label format for displaying fact text. %s placeholder is replaced with the fact content. Used in guess history display."
+  },
+  "game.facts.guess_number": {
+    "value": "Guess %d: %s",
+    "_context": "Format string for displaying guess history entries. First %d is guess number (1st, 2nd, 3rd attempt), %s is the guessed country name."
+  },
+  "game.guessing.make_guess": {
+    "value": "Make a guess!",
+    "_context": "Instruction prompt encouraging players to submit a guess in Worldle or similar guessing games."
+  },
+  "game.guessing.enter_country": {
+    "value": "Enter country name...",
+    "_context": "Placeholder text for country name input field used in Worldle and other guessing games."
+  },
+  "game.guessing.enter_capital": {
+    "value": "Enter capital name...",
+    "_context": "Placeholder text for capital city input field used in capital guessing game mode."
+  },
+  "game.guessing.guess": {
+    "value": "Guess",
+    "_context": "Button label for submitting a guess in Worldle, capital game, or other guessing modes."
+  },
+  "game.guessing.history": {
+    "value": "Guess History:",
+    "_context": "Header text for the guess history section showing all previous attempts in Worldle or similar games."
+  },
+  "game.guessing.flag": {
+    "value": "Flag",
+    "_context": "Column header label in guess history table showing the country flag image."
+  },
+  "game.guessing.country": {
+    "value": "Country",
+    "_context": "Column header label in guess history table showing the guessed country name."
+  },
+  "game.guessing.continent": {
+    "value": "Continent",
+    "_context": "Column header label in guess history table showing the continent information for Worldle guesses."
+  },
+  "game.guessing.population": {
+    "value": "Population",
+    "_context": "Column header label in guess history table showing population comparison data for Worldle guesses (higher/lower/same)."
+  },
+  "game.guessing.area": {
+    "value": "Area",
+    "_context": "Column header label in guess history table showing area comparison data for Worldle guesses (higher/lower/same)."
+  },
+  "game.guessing.not_found": {
+    "value": "Country not found!",
+    "_context": "Error message displayed when player enters a country name that doesn't exist in the database or is misspelled."
+  },
+  "game.guessing.capital_not_found": {
+    "value": "Capital not found!",
+    "_context": "Error message displayed when player enters a capital city name that doesn't exist in the database or is misspelled."
+  },
+  "game.guessing.correct": {
+    "value": "Correct! It was %s!",
+    "_context": "Success message displayed when player correctly guesses the target country in Worldle or similar games. %s placeholder is replaced with the correct country name."
+  },
+  "game.worldle.description": {
+    "value": "Guess the country by comparing continent, population, and area!",
+    "_context": "Description text explaining Worldle game mechanics. Players get hints about how their guess compares to the target country."
+  },
+  "game.higher_lower.description": {
+    "value": "Try to guess which country has a higher population!",
+    "_context": "Description text for higher/lower game. Note: This is a generic description; the actual game supports multiple categories (population, area, continents)."
+  },
+  "game.higher_lower.score": {
+    "value": "Score: %d",
+    "_context": "Score display format for higher/lower game showing current streak/score. %d placeholder is replaced with the score number."
+  },
+  "game.higher_lower.higher": {
+    "value": "Higher",
+    "_context": "Button label for selecting 'higher' option in higher/lower game. Player guesses that the right country's value is higher than the left."
+  },
+  "game.higher_lower.lower": {
+    "value": "Lower",
+    "_context": "Button label for selecting 'lower' option in higher/lower game. Player guesses that the right country's value is lower than the left."
+  },
+  "game.higher_lower.next_round": {
+    "value": "Next Round",
+    "_context": "Button label for proceeding to the next comparison round in higher/lower game. Currently not actively used as game auto-advances."
+  },
+  "game.higher_lower.start": {
+    "value": "Start Game",
+    "_context": "Button label for starting a new higher/lower game session from the setup screen."
+  },
+  "game.higher_lower.population": {
+    "value": "Population: %d",
+    "_context": "Format string for displaying population value in higher/lower game. %d placeholder is replaced with the population number (formatted with commas)."
+  },
+  "game.higher_lower.population_unknown": {
+    "value": "Population: ?",
+    "_context": "Display format for unknown population value in higher/lower game. Shown on the right panel before player makes a guess."
+  },
+  "region.world": {
+    "value": "World",
+    "_context": "Region filter option for selecting all countries worldwide (no regional filter)."
+  },
+  "region.africa": {
+    "value": "Africa",
+    "_context": "Region filter option for selecting only African countries in game setup screens."
+  },
+  "region.asia": {
+    "value": "Asia",
+    "_context": "Region filter option for selecting only Asian countries in game setup screens."
+  },
+  "region.europe": {
+    "value": "Europe",
+    "_context": "Region filter option for selecting only European countries in game setup screens."
+  },
+  "region.americas": {
+    "value": "Americas",
+    "_context": "Region filter option for selecting only countries from North and South America in game setup screens."
+  },
+  "region.oceania": {
+    "value": "Oceania",
+    "_context": "Region filter option for selecting only Oceanian countries (Australia, New Zealand, Pacific islands) in game setup screens."
+  },
+  "html.loading": {
+    "value": "Shifting tectonic plates to form countries...",
+    "_context": "Creative loading message displayed during initial application load. Shown while the app is initializing."
+  },
+  "html.loading_app": {
+    "value": "Loading application...",
+    "_context": "Generic loading message displayed while the application is loading or initializing."
+  },
+  "html.error_title": {
+    "value": "⚠️ Error Loading Application",
+    "_context": "Error page title displayed when the application fails to load or encounters a critical error."
+  },
+  "html.error_message": {
+    "value": "Failed to load the application. Please refresh the page and try again.",
+    "_context": "Error message displayed on error page, instructing users to refresh if the application fails to load."
+  },
+  "promo.europe_flags.title": {
+    "value": "European Flags",
+    "_context": "Promotional card title on home page promoting the European flags game mode or challenge."
+  },
+  "promo.europe_flags.desc": {
+    "value": "Master the flags of Europe",
+    "_context": "Promotional card description encouraging players to practice European flags on the home page."
+  },
+  "promo.asia_shapes.title": {
+    "value": "Asian Shapes",
+    "_context": "Promotional card title on home page promoting the Asian shapes game mode or challenge."
+  },
+  "promo.asia_shapes.desc": {
+    "value": "Guess countries by shape",
+    "_context": "Promotional card description explaining the shape guessing game on the home page."
+  },
+  "promo.hangman.desc": {
+    "value": "Classic word guessing game",
+    "_context": "Promotional card description for hangman game mode shown on the home page."
+  },
+  "promo.higher_lower.desc": {
+    "value": "Compare country stats",
+    "_context": "Promotional card description for higher/lower game mode shown on the home page."
+  },
+  "promo.badge.popular": {
+    "value": "Popular",
+    "_context": "Badge label displayed on promotional cards to indicate a popular or trending game mode."
+  },
+  "promo.badge.new": {
+    "value": "New",
+    "_context": "Badge label displayed on promotional cards to indicate a newly added game mode."
+  },
+  "scoreboard.empty": {
+    "value": "No scores yet! Play some games to see your progress here.",
+    "_context": "Empty state message displayed on scoreboard page when user hasn't played any games yet or has no saved scores."
+  },
+  "scoreboard.score": {
+    "value": "Score",
+    "_context": "Column header label in scoreboard table showing the score value for each game session."
+  },
+  "scoreboard.percent": {
+    "value": "Percent",
+    "_context": "Column header label in scoreboard table showing the percentage score (accuracy) for each game session."
+  },
+  "scoreboard.date": {
+    "value": "Date",
+    "_context": "Column header label in scoreboard table showing when each game session was played."
+  },
+  "home.hero.title": {
+    "value": "Flagged It",
+    "_context": "Main hero title on the home page, the application name/brand."
+  },
+  "home.hero.subtitle": {
+    "value": "Test Your Geography Knowledge",
+    "_context": "Subtitle text on home page hero section, describing the main purpose of the application."
+  },
+  "home.hero.description": {
+    "value": "Play fun games and learn about countries around the world!",
+    "_context": "Description text in home page hero section, explaining what users can do with the application."
+  },
+  "home.game.flag.description": {
+    "value": "Identify countries by their flags",
+    "_context": "Short description for flag game mode shown on home page game cards."
+  },
+  "home.game.shape.description": {
+    "value": "Identify countries by their shape",
+    "_context": "Short description for shape game mode shown on home page game cards."
+  },
+  "home.game.capital.title": {
+    "value": "Guess the Capital",
+    "_context": "Title for capital city game mode shown on home page game cards."
+  },
+  "home.game.capital.description": {
+    "value": "Match countries with their capitals",
+    "_context": "Short description for capital city game mode shown on home page game cards."
+  },
+  "home.game.higher_lower.description": {
+    "value": "Compare countries by population, area, and more",
+    "_context": "Short description for higher/lower game mode shown on home page game cards."
+  },
+  "home.game.play_now": {
+    "value": "Play Now →",
+    "_context": "Call-to-action button label on home page game cards, linking to the game mode."
+  },
+  "home.game.coming_soon": {
+    "value": "Coming Soon",
+    "_context": "Label displayed on home page game cards for game modes that are not yet available but planned."
+  },
+  "home.features.title": {
+    "value": "Features",
+    "_context": "Section heading on home page for the features showcase section."
+  },
+  "home.features.multiple_modes.title": {
+    "value": "Multiple Game Modes",
+    "_context": "Feature title on home page describing the variety of available game types."
+  },
+  "home.features.multiple_modes.description": {
+    "value": "Choose from various game types to test different aspects of your geography knowledge",
+    "_context": "Feature description on home page explaining the multiple game modes available."
+  },
+  "home.features.regional.title": {
+    "value": "Regional Focus",
+    "_context": "Feature title on home page describing the ability to filter games by region."
+  },
+  "home.features.regional.description": {
+    "value": "Filter by continent to focus on specific regions of the world",
+    "_context": "Feature description on home page explaining the regional filtering capability."
+  },
+  "home.features.progress.title": {
+    "value": "Track Progress",
+    "_context": "Feature title on home page describing the scoreboard and progress tracking feature."
+  },
+  "home.features.progress.description": {
+    "value": "See your scores and track your improvement over time",
+    "_context": "Feature description on home page explaining the progress tracking capability."
+  },
+  "game.capital.title": {
+    "value": "Capital City Game",
+    "_context": "Title of the capital city guessing game mode. Players identify capital cities for given countries."
+  },
+  "game.capital.description": {
+    "value": "Test your knowledge of world capitals! Guess the capital city of each country.",
+    "_context": "Description text explaining the capital city game mechanics shown on the setup screen."
+  },
+  "game.capital.question": {
+    "value": "What is the capital of {{.Country}}?",
+    "_context": "Question prompt displayed during capital guessing rounds. Template variable {{.Country}} is replaced with the country name."
+  },
+  "game.capital.difficulty.regular": {
+    "value": "Regular",
+    "_context": "Difficulty level name for capital game with multiple choice (4 options). Easier mode for beginners."
+  },
+  "game.capital.difficulty.regular.desc": {
+    "value": "4 options to pick from",
+    "_context": "Description of the regular difficulty mode in capital game, explaining that players select from 4 multiple choice options."
+  },
+  "game.capital.difficulty.intermediate": {
+    "value": "Intermediate",
+    "_context": "Difficulty level name for capital game requiring typed answers. Harder mode for intermediate players."
+  },
+  "game.capital.difficulty.intermediate.desc": {
+    "value": "Type answer to win",
+    "_context": "Description of the intermediate difficulty mode in capital game, explaining that players must type the capital city name."
+  },
+  "game.shape.description": {
+    "value": "Test your geography knowledge! Identify countries by their silhouette.",
+    "_context": "Description text explaining the shape guessing game mechanics shown on the setup screen."
+  },
+  "game.shape.question": {
+    "value": "Which country has this shape?",
+    "_context": "Question prompt displayed during shape guessing rounds, shown above the country silhouette map."
+  },
+  "game.setup.select_region": {
+    "value": "Select Region (Optional)",
+    "_context": "Label for the optional region selection dropdown in game setup screens. Allows filtering countries by continent."
+  },
+  "game.setup.start_game": {
+    "value": "Start Game",
+    "_context": "Button label for starting a game session from the setup screen."
+  },
+  "game.setup.starting": {
+    "value": "Starting...",
+    "_context": "Loading state text displayed on start button while the game is initializing and loading data."
+  },
+  "game.over.title": {
+    "value": "Game Over!",
+    "_context": "Main heading displayed on the game over screen after completing a game session."
+  },
+  "game.over.excellent": {
+    "value": "Excellent work! You're a geography expert! 🌟",
+    "_context": "Encouraging message displayed when player achieves an excellent score (typically 90%+ or perfect score) at game end."
+  },
+  "game.over.good": {
+    "value": "Great job! Keep practicing! 👍",
+    "_context": "Encouraging message displayed when player achieves a good score (typically 70-89%) at game end."
+  },
+  "game.over.encourage": {
+    "value": "Good effort! Try again to improve your score! 💪",
+    "_context": "Encouraging message displayed when player achieves a lower score (typically below 70%) at game end, motivating them to try again."
+  },
+  "game.over.play_again": {
+    "value": "Play Again",
+    "_context": "Button label on game over screen allowing players to start a new game session immediately."
+  },
+  "game.higher_lower.setup.description": {
+    "value": "Test your knowledge! Guess if the value is higher or lower.",
+    "_context": "Description text explaining the higher/lower game mechanics shown on the setup screen."
+  },
+  "game.higher_lower.category.population": {
+    "value": "Population",
+    "_context": "Category option label for higher/lower game mode comparing country populations."
+  },
+  "game.higher_lower.category.population.desc": {
+    "value": "Which country has more people?",
+    "_context": "Description text for population category in higher/lower game, explaining what players are comparing."
+  },
+  "game.higher_lower.category.area": {
+    "value": "Area",
+    "_context": "Category option label for higher/lower game mode comparing country land areas."
+  },
+  "game.higher_lower.category.area.desc": {
+    "value": "Which country is larger?",
+    "_context": "Description text for area category in higher/lower game, explaining what players are comparing."
+  },
+  "game.higher_lower.category.continents": {
+    "value": "Continents",
+    "_context": "Category option label for higher/lower game mode comparing number of countries per continent."
+  },
+  "game.higher_lower.category.continents.desc": {
+    "value": "Which continent has more countries?",
+    "_context": "Description text for continents category in higher/lower game, explaining what players are comparing."
+  },
+  "game.higher_lower.loading": {
+    "value": "Loading...",
+    "_context": "Loading state text displayed while higher/lower game is fetching comparison data or initializing."
+  },
+  "game.higher_lower.game_over": {
+    "value": "Game Over!",
+    "_context": "Main heading displayed on the game over screen after player makes an incorrect guess in higher/lower game."
+  },
+  "game.higher_lower.final_score": {
+    "value": "Final Score",
+    "_context": "Label for displaying the final score achieved in higher/lower game on the game over screen."
+  },
+  "game.higher_lower.high_score": {
+    "value": "High Score",
+    "_context": "Label for displaying the highest score/streak achieved in higher/lower game, shown during gameplay and on game over screen."
+  },
+  "game.higher_lower.than": {
+    "value": "than",
+    "_context": "Preposition used in higher/lower game comparison text, e.g., 'higher than' or 'lower than' when comparing values."
+  },
+  "game.higher_lower.has": {
+    "value": "has",
+    "_context": "Verb used in higher/lower game to describe country statistics, e.g., 'Country X has Population: 50,000,000'."
+  },
+  "library.title": {
+    "value": "Country Library",
+    "_context": "Main page title for the country library/encyclopedia section where users can browse country information."
+  },
+  "library.description": {
+    "value": "Explore comprehensive information about countries around the world",
+    "_context": "Description text explaining the purpose of the country library page."
+  },
+  "library.search.label": {
+    "value": "Search Countries",
+    "_context": "Label for the search input field in the country library page."
+  },
+  "library.search.placeholder": {
+    "value": "Search by name or capital",
+    "_context": "Placeholder text in search input field, indicating users can search by country name or capital city name."
+  },
+  "library.filter.region": {
+    "value": "Filter by Region",
+    "_context": "Label for the region filter dropdown in country library page."
+  },
+  "library.view.grid": {
+    "value": "Grid view",
+    "_context": "View mode option label for displaying countries in a grid layout in the library."
+  },
+  "library.view.list": {
+    "value": "List view",
+    "_context": "View mode option label for displaying countries in a list layout in the library."
+  },
+  "library.results": {
+    "value": "Showing %d of %d countries",
+    "_context": "Results counter text showing filtered/displayed countries count. First %d is displayed count, second %d is total available."
+  },
+  "library.loading": {
+    "value": "Loading countries...",
+    "_context": "Loading state message displayed while country library data is being fetched from the API."
+  },
+  "library.empty": {
+    "value": "No countries found matching your search.",
+    "_context": "Empty state message displayed when search or filter returns no matching countries in the library."
+  },
+  "library.detail.capital": {
+    "value": "Capital",
+    "_context": "Label for capital city field in country detail view in the library."
+  },
+  "library.detail.subregion": {
+    "value": "Subregion",
+    "_context": "Label for subregion field in country detail view in the library (e.g., 'Western Europe', 'Southeast Asia')."
+  },
+  "library.detail.languages": {
+    "value": "Languages",
+    "_context": "Label for languages field in country detail view in the library, showing official languages."
+  },
+  "library.detail.location": {
+    "value": "Location",
+    "_context": "Label for location/geographic coordinates field in country detail view in the library."
+  },
+  "library.detail.code": {
+    "value": "Code",
+    "_context": "Label for country code field in country detail view in the library (ISO codes like CCA2, CCA3)."
+  },
+  "library.detail.region": {
+    "value": "Region",
+    "_context": "Label for region field in country detail view in the library (continent name)."
+  },
+  "library.detail.population": {
+    "value": "Population",
+    "_context": "Label for population field in country detail view in the library."
+  },
+  "library.detail.area": {
+    "value": "Area",
+    "_context": "Label for area field in country detail view in the library (land area in square kilometers)."
+  },
+  "library.detail.people": {
+    "value": "people",
+    "_context": "Unit label appended after population numbers in country detail view, e.g., '50,000,000 people'."
+  },
+  "library.sort.alphabetical_asc": {
+    "value": "Alphabetical (A→Z)",
+    "_context": "Sort option label for sorting countries alphabetically from A to Z in the library."
+  },
+  "library.sort.alphabetical_desc": {
+    "value": "Alphabetical (Z→A)",
+    "_context": "Sort option label for sorting countries alphabetically from Z to A (reverse) in the library."
+  },
+  "library.sort.population_asc": {
+    "value": "Population (Lowest→Highest)",
+    "_context": "Sort option label for sorting countries by population from lowest to highest in the library."
+  },
+  "library.sort.population_desc": {
+    "value": "Population (Highest→Lowest)",
+    "_context": "Sort option label for sorting countries by population from highest to lowest in the library."
+  },
+  "library.sort.area_asc": {
+    "value": "Area (Smallest→Largest)",
+    "_context": "Sort option label for sorting countries by area from smallest to largest in the library."
+  },
+  "library.sort.area_desc": {
+    "value": "Area (Largest→Smallest)",
+    "_context": "Sort option label for sorting countries by area from largest to smallest in the library."
+  },
+  "nav.games": {
+    "value": "Games",
+    "_context": "Navigation menu item label linking to the games/dashboard page."
+  },
+  "nav.library": {
+    "value": "Library",
+    "_context": "Navigation menu item label linking to the country library/encyclopedia page."
+  },
+  "nav.scoreboard": {
+    "value": "Scoreboard",
+    "_context": "Navigation menu item label linking to the scoreboard page showing game history and statistics."
+  },
+  "common.loading": {
+    "value": "Loading...",
+    "_context": "Generic loading state text used throughout the application when data is being fetched or processed."
+  },
+  "common.error": {
+    "value": "Error",
+    "_context": "Generic error label used in error messages and error states throughout the application."
+  },
+  "common.cancel": {
+    "value": "Cancel",
+    "_context": "Button label for canceling an action or closing a dialog/modal."
+  },
+  "common.apply": {
+    "value": "Apply",
+    "_context": "Button label for applying changes or confirming selections in dialogs or filters."
+  },
+  "common.close": {
+    "value": "Close",
+    "_context": "Button label for closing dialogs, modals, or panels."
+  },
+  "common.save": {
+    "value": "Save",
+    "_context": "Button label for saving changes or settings."
+  },
+  "common.back": {
+    "value": "Back",
+    "_context": "Button label for navigating back to the previous page or screen."
+  },
+  "common.next": {
+    "value": "Next",
+    "_context": "Button label for proceeding to the next step, page, or item."
+  },
+  "common.previous": {
+    "value": "Previous",
+    "_context": "Button label for going back to the previous step, page, or item."
+  },
+  "common.home": {
+    "value": "Home",
+    "_context": "Navigation label for returning to the home page."
+  },
+  "common.go_home": {
+    "value": "Go Home",
+    "_context": "Button label for navigating to the home page, typically used in error pages or after completing actions."
+  },
+  "scoreboard.title": {
+    "value": "Scoreboard",
+    "_context": "Main page title for the scoreboard page showing game history and statistics."
+  },
+  "scoreboard.description": {
+    "value": "Track your progress and compete with others!",
+    "_context": "Description text explaining the purpose of the scoreboard page."
+  },
+  "scoreboard.coming_soon": {
+    "value": "Coming Soon",
+    "_context": "Placeholder message displayed on scoreboard page if the feature is not yet fully implemented."
+  },
+  "error.title": {
+    "value": "Oooops,",
+    "_context": "Friendly error page title displayed when an unexpected error occurs in the application."
+  },
+  "error.message": {
+    "value": "Something went wrong. Please try again later.",
+    "_context": "Generic error message displayed on error pages, instructing users to retry their action."
+  },
+  "error.go_home": {
+    "value": "Go Home",
+    "_context": "Button label on error page for navigating back to the home page."
+  },
+  "game.score.label": {
+    "value": "Score",
+    "_context": "Generic label for score display in game headers and components."
+  },
+  "game.round.label": {
+    "value": "Round",
+    "_context": "Generic label for round number display in game headers and components."
+  },
+  "game.round.progress": {
+    "value": "Round %d / %d",
+    "_context": "Format string for displaying round progress in game headers. First %d is current round, second %d is total rounds."
+  }
 }

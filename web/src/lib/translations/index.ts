@@ -37,8 +37,19 @@ import uk from './locales/uk.json';
 import he from './locales/he.json';
 import el from './locales/el.json';
 
-// Translation dictionary
-const translations: Record<string, Record<string, string>> = {
+// Helper function to extract translation value (handles both string and object formats)
+function getTranslationValue(entry: string | { value: string; _context?: string } | undefined): string {
+	if (typeof entry === 'string') {
+		return entry;
+	}
+	if (typeof entry === 'object' && entry !== null && 'value' in entry) {
+		return entry.value;
+	}
+	return '';
+}
+
+// Translation dictionary - values can be strings or objects with { value, _context }
+const translations: Record<string, Record<string, string | { value: string; _context?: string }>> = {
 	en,
 	es,
 	fr,
@@ -97,7 +108,9 @@ export function t(
 	const loc = currentLocale || get(locale);
 	const translationDict = translations[loc] || translations[defaultLocale];
 	
-	let translation = translationDict[key] || translations[defaultLocale][key] || key;
+	// Get translation entry (can be string or object with { value, _context })
+	const translationEntry = translationDict[key] || translations[defaultLocale][key];
+	let translation = getTranslationValue(translationEntry as string | { value: string; _context?: string }) || key;
 	
 	// Handle template variables {{.Variable}} or {{Variable}}
 	if (params && typeof params === 'object' && !Array.isArray(params)) {
@@ -167,7 +180,8 @@ export function $t(
 export function hasTranslation(key: string, currentLocale?: Locale): boolean {
 	const loc = currentLocale || get(locale);
 	const translationDict = translations[loc] || translations[defaultLocale];
-	return key in translationDict;
+	const entry = translationDict[key];
+	return key in translationDict && getTranslationValue(entry as string | { value: string; _context?: string }) !== '';
 }
 
 /**

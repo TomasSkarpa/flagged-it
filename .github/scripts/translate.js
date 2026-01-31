@@ -14,10 +14,11 @@
  * - Uses 3-second delay between requests (20 req/min, well within free tier 30 req/min limit)
  * - Implements exponential backoff for 429 rate limit errors
  * - Automatic model fallback: tries multiple models if one hits rate limits
- *   - Primary: llama-3.3-70b-versatile (best quality)
- *   - Fallback 1: llama-3.1-70b-versatile (similar quality, different rate limit pool)
- *   - Fallback 2: llama-3.1-8b-instant (faster, often higher rate limits)
- *   - Fallback 3: mixtral-8x7b-32768 (alternative model)
+ *   - Primary: llama-3.3-70b-versatile (best quality, 30 RPM)
+ *   - Fallback 1: llama-4-scout-17b (next-gen performance, 30 RPM)
+ *   - Fallback 2: qwen3-32b (excellent for coding/math, 60 RPM)
+ *   - Fallback 3: llama-3.1-8b-instant (pure speed, 30 RPM)
+ * - Rate limiting: 2.5s delay between requests (24 RPM, safely under 30 RPM limit)
  * - Retries each model up to 2 times before trying next model
  * - Respects Retry-After header if provided by API
  */
@@ -77,12 +78,12 @@ const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
 // Model fallback chain - try models in order if one fails or hits rate limits
-// Different models may have different rate limit pools, so this increases success rate
+// Rate limits: All models have 30 RPM minimum, so we wait 2.5s between requests (24 RPM = safe buffer)
 const GROQ_MODELS = [
-  'llama-3.3-70b-versatile',  // Primary: best quality
-  'llama-3.1-70b-versatile',  // Fallback 1: similar quality, different rate limit pool
-  'llama-3.1-8b-instant',     // Fallback 2: faster, often higher rate limits
-  'mixtral-8x7b-32768'        // Fallback 3: alternative model
+  'llama-3.3-70b-versatile',              // Primary: best quality (30 RPM, 12k TPM)
+  'meta-llama/llama-4-scout-17b-16e-instruct', // Fallback 1: next-gen performance (30 RPM, 30k TPM)
+  'qwen/qwen3-32b',                       // Fallback 2: excellent for coding/math (60 RPM, 6k TPM)
+  'llama-3.1-8b-instant'                  // Fallback 3: pure speed (30 RPM, 6k TPM)
 ];
 
 if (!GROQ_API_KEY) {
@@ -118,16 +119,53 @@ function writeJSON(filePath, data) {
 }
 
 /**
+ * Extract value from translation entry (handles both string and object formats)
+ */
+function getTranslationValue(entry) {
+  if (typeof entry === 'string') {
+    return entry;
+  }
+  if (typeof entry === 'object' && entry !== null && 'value' in entry) {
+    return entry.value;
+  }
+  return entry;
+}
+
+/**
+ * Extract context hint from translation entry (if available)
+ */
+function getTranslationContext(entry) {
+  if (typeof entry === 'object' && entry !== null && '_context' in entry) {
+    return entry._context;
+  }
+  return null;
+}
+
+/**
  * Find missing keys in a locale file compared to English
+ * Returns object with keys mapped to { value, context } structure
  */
 function findMissingKeys(enKeys, localeData) {
   const missing = {};
+  const missingWithContext = {};
+  
   for (const key of Object.keys(enKeys)) {
-    if (!(key in localeData) || !localeData[key] || localeData[key].trim() === '') {
-      missing[key] = enKeys[key];
+    const enValue = getTranslationValue(enKeys[key]);
+    const enContext = getTranslationContext(enKeys[key]);
+    
+    // Check if key is missing or empty in locale file
+    const localeValue = localeData[key];
+    const localeTranslatedValue = getTranslationValue(localeValue);
+    
+    if (!(key in localeData) || !localeTranslatedValue || localeTranslatedValue.trim() === '') {
+      missing[key] = enValue;
+      if (enContext) {
+        missingWithContext[key] = enContext;
+      }
     }
   }
-  return missing;
+  
+  return { missing, contexts: missingWithContext };
 }
 
 /**
@@ -140,20 +178,31 @@ function sleep(ms) {
 /**
  * Translate missing keys using Groq API with model fallback and exponential backoff retry
  */
-async function translateKeys(missingKeys, targetLanguage) {
+async function translateKeys(missingKeys, contexts, targetLanguage) {
   if (Object.keys(missingKeys).length === 0) {
     return {};
   }
 
   console.log(`  📝 Translating ${Object.keys(missingKeys).length} keys to ${targetLanguage}...`);
 
-  // Prepare the translation request
-  // Format: key-value pairs as JSON
+  // Prepare the translation request with context hints
+  // Format: key-value pairs as JSON, with context hints included in the prompt
   const keysToTranslate = Object.entries(missingKeys)
-    .map(([key, value]) => `"${key}": "${value}"`)
+    .map(([key, value]) => {
+      const context = contexts[key];
+      if (context) {
+        return `"${key}": "${value}" // Context: ${context}`;
+      }
+      return `"${key}": "${value}"`;
+    })
     .join(',\n    ');
 
-  const prompt = `You are a professional translator. Translate the following JSON key-value pairs from English to ${targetLanguage}.
+  const contextInstructions = Object.keys(contexts).length > 0
+    ? `\n\nTRANSLATION CONTEXT HINTS (use these to guide your translation):
+${Object.entries(contexts).map(([key, context]) => `- "${key}": ${context}`).join('\n')}`
+    : '';
+
+  const prompt = `You are a professional translator. Translate the following JSON key-value pairs from English to ${targetLanguage}.${contextInstructions}
 
 IMPORTANT INSTRUCTIONS:
 1. Translate ONLY the values, keep the keys exactly as they are
@@ -162,6 +211,7 @@ IMPORTANT INSTRUCTIONS:
 4. Preserve emojis and special characters
 5. Return ONLY valid JSON, no explanations or markdown formatting
 6. Maintain the same structure and formatting
+7. Use the context hints (if provided) to guide your translation style and meaning
 
 JSON to translate:
 {
@@ -342,8 +392,8 @@ async function main() {
       continue;
     }
 
-    // Find missing keys
-    const missingKeys = findMissingKeys(enData, localeData);
+    // Find missing keys (now returns { missing, contexts })
+    const { missing: missingKeys, contexts } = findMissingKeys(enData, localeData);
 
     if (Object.keys(missingKeys).length === 0) {
       console.log(`✓ ${locale}.json - No missing keys`);
@@ -352,8 +402,8 @@ async function main() {
 
     console.log(`\n📋 ${locale}.json - Found ${Object.keys(missingKeys).length} missing keys`);
 
-    // Translate missing keys
-    const translations = await translateKeys(missingKeys, LOCALE_TO_LANGUAGE[locale]);
+    // Translate missing keys (pass contexts for translation hints)
+    const translations = await translateKeys(missingKeys, contexts, LOCALE_TO_LANGUAGE[locale]);
 
     if (Object.keys(translations).length === 0) {
       console.warn(`  ⚠️  No translations received, skipping ${locale}.json`);
@@ -374,9 +424,9 @@ async function main() {
     }
 
     // Rate limiting: wait between API calls to respect rate limits
-    // Increased delay to 3 seconds to stay well within free tier limits (30 req/min)
-    // This gives us ~20 requests per minute, leaving buffer for retries
-    await sleep(3000);
+    // Minimum RPM is 30 (llama-3.3-70b, llama-4-scout, llama-3.1-8b)
+    // Using 2.5s delay = 24 RPM, safely under 30 RPM limit to prevent blocking
+    await sleep(2500);
   }
 
   console.log('\n' + '='.repeat(50));

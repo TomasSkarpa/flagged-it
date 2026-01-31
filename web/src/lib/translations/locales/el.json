@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Κανονικό",
   "game.capital.difficulty.regular.desc": "4 επιλογές για επιλογή",
   "game.capital.difficulty.intermediate": "Μεσαίος",
-  "game.capital.difficulty.intermediate.desc": "Γράψτε την απάντηση για να κερδίσετε"
+  "game.capital.difficulty.intermediate.desc": "Γράψτε την απάντηση για να κερδίσετε",
+  "game.facts.try_left": "Προσπάθησε αριστερά",
+  "game.facts.tries_left_short": "Προσπάθειες αριστερά",
+  "game.facts.fact_header": "Πραγματικότητα #%d",
+  "game.facts.guess_country_header": "Επιβεβαιώσε την χώρα",
+  "game.facts.skip_button": "Δεν ξέρω / Παράβλεψη",
+  "game.facts.skipped": "Παράβλεψη!",
+  "game.facts.skipped_answer": "Παράβλεψη! Η απάντηση ήταν %s",
+  "library.sort.alphabetical_asc": "Αλφαβητική (Α→Ζ)",
+  "library.sort.alphabetical_desc": "Αλφαβητική (Ζ→Α)",
+  "library.sort.population_asc": "Πληθυσμός (Ελάχιστος→Υψηλότερος)",
+  "library.sort.population_desc": "Πληθυσμός (Υψηλότερος→Ελάχιστος)",
+  "library.sort.area_asc": "Περιοχή (Ελάχιστη→Μεγαλύτερη)",
+  "library.sort.area_desc": "Περιοχή (Μεγαλύτερη→Ελάχιστη)"
 }

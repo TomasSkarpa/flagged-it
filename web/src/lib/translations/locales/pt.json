@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Regular",
   "game.capital.difficulty.regular.desc": "4 opções para escolher",
   "game.capital.difficulty.intermediate": "Intermediário",
-  "game.capital.difficulty.intermediate.desc": "Digite a resposta para ganhar"
+  "game.capital.difficulty.intermediate.desc": "Digite a resposta para ganhar",
+  "game.facts.try_left": "tentar à esquerda",
+  "game.facts.tries_left_short": "tentativas restantes",
+  "game.facts.fact_header": "Fato #%d",
+  "game.facts.guess_country_header": "Adivinhe o País",
+  "game.facts.skip_button": "Não sei / Pular",
+  "game.facts.skipped": "Pulou!",
+  "game.facts.skipped_answer": "Pulou! A resposta era %s",
+  "library.sort.alphabetical_asc": "Alfabético (A→Z)",
+  "library.sort.alphabetical_desc": "Alfabético (Z→A)",
+  "library.sort.population_asc": "População (Menor→Maior)",
+  "library.sort.population_desc": "População (Maior→Menor)",
+  "library.sort.area_asc": "Área (Menor→Maior)",
+  "library.sort.area_desc": "Área (Maior→Menor)"
 }

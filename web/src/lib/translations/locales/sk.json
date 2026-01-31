@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Bežný",
   "game.capital.difficulty.regular.desc": "4 možnosti na výber",
   "game.capital.difficulty.intermediate": "Stredne pokročilý",
-  "game.capital.difficulty.intermediate.desc": "Zadajte odpoveď, aby ste vyhrali"
+  "game.capital.difficulty.intermediate.desc": "Zadajte odpoveď, aby ste vyhrali",
+  "game.facts.try_left": "skús ľavú stranu",
+  "game.facts.tries_left_short": "skúšania zostávajú",
+  "game.facts.fact_header": "Fakt #{{.Variable}}",
+  "game.facts.guess_country_header": "Hádz sa krajina",
+  "game.facts.skip_button": "Neviem / Prepustiť",
+  "game.facts.skipped": "Prepustené!",
+  "game.facts.skipped_answer": "Prepustené! Odpoveď bola {{Variable}}",
+  "library.sort.alphabetical_asc": "Abecedný (A→Z)",
+  "library.sort.alphabetical_desc": "Abecedný (Z→A)",
+  "library.sort.population_asc": "Počet obyvateľov (najnižší→najvyšší)",
+  "library.sort.population_desc": "Počet obyvateľov (najvyšší→najnižší)",
+  "library.sort.area_asc": "Plocha (najmenší→najväčší)",
+  "library.sort.area_desc": "Plocha (najväčší→najmenší)"
 }

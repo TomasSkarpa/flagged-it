@@ -202,5 +202,18 @@
   "game.capital.difficulty.regular": "नियमित",
   "game.capital.difficulty.regular.desc": "चुनने के लिए 4 विकल्प",
   "game.capital.difficulty.intermediate": "मध्यवर्ती",
-  "game.capital.difficulty.intermediate.desc": "जीतने के लिए उत्तर टाइप करें"
+  "game.capital.difficulty.intermediate.desc": "जीतने के लिए उत्तर टाइप करें",
+  "game.facts.try_left": "प्रयास बाएं",
+  "game.facts.tries_left_short": "प्रयास शेष",
+  "game.facts.fact_header": "फैक्ट #%d",
+  "game.facts.guess_country_header": "देश का अनुमान लगाएं",
+  "game.facts.skip_button": "मुझे पता नहीं है / छोड़ दें",
+  "game.facts.skipped": "छोड़ दिया!",
+  "game.facts.skipped_answer": "छोड़ दिया! उत्तर %s था",
+  "library.sort.alphabetical_asc": "वर्णक्रम (A→Z)",
+  "library.sort.alphabetical_desc": "वर्णक्रम (Z→A)",
+  "library.sort.population_asc": "जनसंख्या (निम्नतम→सर्वाधिक)",
+  "library.sort.population_desc": "जनसंख्या (सर्वाधिक→निम्नतम)",
+  "library.sort.area_asc": "क्षेत्रफल (सबसे छोटा→सबसे बड़ा)",
+  "library.sort.area_desc": "क्षेत्रफल (सबसे बड़ा→सबसे छोटा)"
 }

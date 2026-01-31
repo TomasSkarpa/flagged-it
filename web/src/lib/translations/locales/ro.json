@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Normal",
   "game.capital.difficulty.regular.desc": "4 opțiuni de ales",
   "game.capital.difficulty.intermediate": "Intermediar",
-  "game.capital.difficulty.intermediate.desc": "Tastează răspunsul pentru a câștiga"
+  "game.capital.difficulty.intermediate.desc": "Tastează răspunsul pentru a câștiga",
+  "game.facts.try_left": "încercare stânga",
+  "game.facts.tries_left_short": "încercări stânga",
+  "game.facts.fact_header": "Fapt #{{.Variable}}",
+  "game.facts.guess_country_header": "Încearcă țara",
+  "game.facts.skip_button": "Nu știu / Sărit",
+  "game.facts.skipped": "Sărit!",
+  "game.facts.skipped_answer": "Sărit! Răspunsul era %s",
+  "library.sort.alphabetical_asc": "Alfabetice (A→Z)",
+  "library.sort.alphabetical_desc": "Alfabetice (Z→A)",
+  "library.sort.population_asc": "Populație (Cel mai mic→Cel mai mare)",
+  "library.sort.population_desc": "Populație (Cel mai mare→Cel mai mic)",
+  "library.sort.area_asc": "Suprafață (Cel mai mic→Cel mai mare)",
+  "library.sort.area_desc": "Suprafață (Cel mai mare→Cel mai mic)"
 }

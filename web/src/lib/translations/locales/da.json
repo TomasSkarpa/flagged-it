@@ -200,5 +200,19 @@
   "game.capital.difficulty.regular": "Almindelig",
   "game.capital.difficulty.regular.desc": "4 muligheder at vælge imellem",
   "game.capital.difficulty.intermediate": "Mellemliggende",
-  "game.capital.difficulty.intermediate.desc": "Skriv svaret for at vinde"
+  "game.capital.difficulty.intermediate.desc": "Skriv svaret for at vinde",
+  "button.dashboard": "Oversigt",
+  "game.facts.try_left": "prøv venstre",
+  "game.facts.tries_left_short": "forsøg tilbage",
+  "game.facts.fact_header": "Fakt #{{.Variable}}",
+  "game.facts.guess_country_header": "Gæt landet",
+  "game.facts.skip_button": "Jeg ved ikke / Spring over",
+  "game.facts.skipped": "Springet!",
+  "game.facts.skipped_answer": "Springet! Svaret var %s",
+  "library.sort.alphabetical_asc": "Alfabetisk (A→Z)",
+  "library.sort.alphabetical_desc": "Alfabetisk (Z→A)",
+  "library.sort.population_asc": "Befolkning (lavest→højeste)",
+  "library.sort.population_desc": "Befolkning (højeste→laveste)",
+  "library.sort.area_asc": "Areal (småligst→størst)",
+  "library.sort.area_desc": "Areal (størst→småligst)"
 }

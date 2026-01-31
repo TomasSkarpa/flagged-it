@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Thông thường",
   "game.capital.difficulty.regular.desc": "4 lựa chọn để chọn",
   "game.capital.difficulty.intermediate": "Trung cấp",
-  "game.capital.difficulty.intermediate.desc": "Nhập câu trả lời để thắng"
+  "game.capital.difficulty.intermediate.desc": "Nhập câu trả lời để thắng",
+  "game.facts.try_left": "Thử trái",
+  "game.facts.tries_left_short": "Thử còn lại",
+  "game.facts.fact_header": "Fact #%d",
+  "game.facts.guess_country_header": "Tìm quốc gia",
+  "game.facts.skip_button": "Tôi không biết / Bỏ qua",
+  "game.facts.skipped": "Bỏ qua!",
+  "game.facts.skipped_answer": "Bỏ qua! Đáp án là %s",
+  "library.sort.alphabetical_asc": "Nguyên bản (A→Z)",
+  "library.sort.alphabetical_desc": "Nguyên bản (Z→A)",
+  "library.sort.population_asc": "Số dân (Nhỏ nhất→Lớn nhất)",
+  "library.sort.population_desc": "Số dân (Lớn nhất→Nhỏ nhất)",
+  "library.sort.area_asc": "Diện tích (Nhỏ nhất→Lớn nhất)",
+  "library.sort.area_desc": "Diện tích (Lớn nhất→Nhỏ nhất)"
 }

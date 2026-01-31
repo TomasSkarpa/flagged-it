@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Biasa",
   "game.capital.difficulty.regular.desc": "4 pilihan untuk dipilih",
   "game.capital.difficulty.intermediate": "Menengah",
-  "game.capital.difficulty.intermediate.desc": "Tulis jawaban untuk menang"
+  "game.capital.difficulty.intermediate.desc": "Tulis jawaban untuk menang",
+  "game.facts.try_left": "coba kiri",
+  "game.facts.tries_left_short": "cobaan kiri",
+  "game.facts.fact_header": "Fakta #d",
+  "game.facts.guess_country_header": "Tebak Negara",
+  "game.facts.skip_button": "Saya tidak tahu / Lewati",
+  "game.facts.skipped": "Dilewati!",
+  "game.facts.skipped_answer": "Dilewati! Jawabannya adalah %s",
+  "library.sort.alphabetical_asc": "Abjad (A→Z)",
+  "library.sort.alphabetical_desc": "Abjad (Z→A)",
+  "library.sort.population_asc": "Populasi (Terendah→Tertinggi)",
+  "library.sort.population_desc": "Populasi (Tertinggi→Terendah)",
+  "library.sort.area_asc": "Luas (Terkecil→Terbesar)",
+  "library.sort.area_desc": "Luas (Terbesar→Terkecil)"
 }

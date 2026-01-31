@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Vanlig",
   "game.capital.difficulty.regular.desc": "4 alternativ att välja mellan",
   "game.capital.difficulty.intermediate": "Mellan",
-  "game.capital.difficulty.intermediate.desc": "Skriv svar för att vinna"
+  "game.capital.difficulty.intermediate.desc": "Skriv svar för att vinna",
+  "game.facts.try_left": "Försök vänster",
+  "game.facts.tries_left_short": "Försök kvar",
+  "game.facts.fact_header": "Sak #%d",
+  "game.facts.guess_country_header": "Gissa land",
+  "game.facts.skip_button": "Jag vet inte / Hoppa över",
+  "game.facts.skipped": "Hoppade över!",
+  "game.facts.skipped_answer": "Hoppade över! Svaret var %s",
+  "library.sort.alphabetical_asc": "Alfabetiskt (A→Z)",
+  "library.sort.alphabetical_desc": "Alfabetiskt (Z→A)",
+  "library.sort.population_asc": "Befolkning (Lägst→Högst)",
+  "library.sort.population_desc": "Befolkning (Högst→Lägst)",
+  "library.sort.area_asc": "Yta (Minst→Störst)",
+  "library.sort.area_desc": "Yta (Störst→Minst)"
 }

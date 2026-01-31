@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Ya Kawaida",
   "game.capital.difficulty.regular.desc": "Chaguo 4 za kuchagua",
   "game.capital.difficulty.intermediate": "Wa Kati",
-  "game.capital.difficulty.intermediate.desc": "Andika jibu ili ushinde"
+  "game.capital.difficulty.intermediate.desc": "Andika jibu ili ushinde",
+  "game.facts.try_left": "jaribu upande wa kushoto",
+  "game.facts.tries_left_short": "majaribio yaliyosalia",
+  "game.facts.fact_header": "Ukweli #%d",
+  "game.facts.guess_country_header": "Nadhania Nchi",
+  "game.facts.skip_button": "Siijui / Pita",
+  "game.facts.skipped": "Imepitwa!",
+  "game.facts.skipped_answer": "Imepitwa! Jibu lilikuwa %s",
+  "library.sort.alphabetical_asc": "Alfabeti (A→Z)",
+  "library.sort.alphabetical_desc": "Alfabeti (Z→A)",
+  "library.sort.population_asc": "Idadi ya Watu (Ndogo→Kubwa)",
+  "library.sort.population_desc": "Idadi ya Watu (Kubwa→Ndogo)",
+  "library.sort.area_asc": "Eneo (Dogodogo→Kubwa)",
+  "library.sort.area_desc": "Eneo (Kubwa→Dogodogo)"
 }

@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Обычный",
   "game.capital.difficulty.regular.desc": "4 варианта на выбор",
   "game.capital.difficulty.intermediate": "Средний",
-  "game.capital.difficulty.intermediate.desc": "Введите ответ, чтобы выиграть"
+  "game.capital.difficulty.intermediate.desc": "Введите ответ, чтобы выиграть",
+  "game.facts.try_left": "попробовать слева",
+  "game.facts.tries_left_short": "попыток осталось",
+  "game.facts.fact_header": "Факт #%d",
+  "game.facts.guess_country_header": "Угадай страну",
+  "game.facts.skip_button": "Не знаю / Пропустить",
+  "game.facts.skipped": "Пропущено!",
+  "game.facts.skipped_answer": "Пропущено! Правильный ответ был %s",
+  "library.sort.alphabetical_asc": "Алфавитное (A→Z)",
+  "library.sort.alphabetical_desc": "Алфавитное (Z→A)",
+  "library.sort.population_asc": "Население (наименьшее→наибольшее)",
+  "library.sort.population_desc": "Население (наибольшее→наименьшее)",
+  "library.sort.area_asc": "Площадь (наименьшая→наибольшая)",
+  "library.sort.area_desc": "Площадь (наибольшая→наименьшая)"
 }

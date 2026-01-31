@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "通常",
   "game.capital.difficulty.regular.desc": "4 つの選択肢から選ぶ",
   "game.capital.difficulty.intermediate": "中級",
-  "game.capital.difficulty.intermediate.desc": "答えを入力して勝つ"
+  "game.capital.difficulty.intermediate.desc": "答えを入力して勝つ",
+  "game.facts.try_left": "左に試行",
+  "game.facts.tries_left_short": "残り試行",
+  "game.facts.fact_header": "事実 #%d",
+  "game.facts.guess_country_header": "国を当てろ",
+  "game.facts.skip_button": "わからない / スキップ",
+  "game.facts.skipped": "スキップ!",
+  "game.facts.skipped_answer": "スキップ! 正解は %s",
+  "library.sort.alphabetical_asc": "アルファベット (A→Z)",
+  "library.sort.alphabetical_desc": "アルファベット (Z→A)",
+  "library.sort.population_asc": "人口 (最小→最大)",
+  "library.sort.population_desc": "人口 (最大→最小)",
+  "library.sort.area_asc": "面積 (最小→最大)",
+  "library.sort.area_desc": "面積 (最大→最小)"
 }

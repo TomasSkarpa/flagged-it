@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Normál",
   "game.capital.difficulty.regular.desc": "4 válaszlehetőség közül választhatsz",
   "game.capital.difficulty.intermediate": "Közepes",
-  "game.capital.difficulty.intermediate.desc": "Írd be a választ, hogy nyerj"
+  "game.capital.difficulty.intermediate.desc": "Írd be a választ, hogy nyerj",
+  "game.facts.try_left": "balra próbálj",
+  "game.facts.tries_left_short": "próbálkozások maradtak",
+  "game.facts.fact_header": "Tény #%d",
+  "game.facts.guess_country_header": "Tippeld a országot",
+  "game.facts.skip_button": "Nem tudom / Ugrás",
+  "game.facts.skipped": "Elugrott!",
+  "game.facts.skipped_answer": "Elugrott! A válasz %s volt",
+  "library.sort.alphabetical_asc": "ABC-sorrend (A→Z)",
+  "library.sort.alphabetical_desc": "ABC-sorrend (Z→A)",
+  "library.sort.population_asc": "Népesség (legkisebb→legnagyobb)",
+  "library.sort.population_desc": "Népesség (legnagyobb→legkisebb)",
+  "library.sort.area_asc": "Terület (legkisebb→legnagyobb)",
+  "library.sort.area_desc": "Terület (legnagyobb→legkisebb)"
 }

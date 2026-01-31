@@ -197,5 +197,22 @@
   "game.capital.difficulty.regular": "Regulier",
   "game.capital.difficulty.regular.desc": "4 opties om uit te kiezen",
   "game.capital.difficulty.intermediate": "Gevorderd",
-  "game.capital.difficulty.intermediate.desc": "Typ antwoord om te winnen"
+  "game.capital.difficulty.intermediate.desc": "Typ antwoord om te winnen",
+  "button.dashboard": "Dashboard",
+  "game.facts.try_left": "probeer links",
+  "game.facts.tries_left_short": "pogingen over",
+  "game.facts.fact_header": "Fact #d",
+  "game.facts.guess_country_header": "Gok het land",
+  "game.facts.skip_button": "Ik weet het niet / Overslaan",
+  "game.facts.skipped": "Overslaan!",
+  "game.facts.skipped_answer": "Overslaan! Het antwoord was %s",
+  "library.sort.alphabetical_asc": "Alfabetisch (A→Z)",
+  "library.sort.alphabetical_desc": "Alfabetisch (Z→A)",
+  "library.sort.population_asc": "Bevolking (laagste→hoogste)",
+  "library.sort.population_desc": "Bevolking (hoogste→laagste)",
+  "library.sort.area_asc": "Oppervlakte (kleinst→grootste)",
+  "library.sort.area_desc": "Oppervlakte (grootste→kleinst)",
+  "common.home": "Home",
+  "common.go_home": "Ga naar Home",
+  "error.go_home": "Ga naar Home"
 }

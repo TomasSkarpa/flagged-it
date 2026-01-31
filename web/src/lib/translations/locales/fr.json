@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Régulier",
   "game.capital.difficulty.regular.desc": "4 options à choisir",
   "game.capital.difficulty.intermediate": "Intermédiaire",
-  "game.capital.difficulty.intermediate.desc": "Tapez la réponse pour gagner"
+  "game.capital.difficulty.intermediate.desc": "Tapez la réponse pour gagner",
+  "game.facts.try_left": "essai gauche",
+  "game.facts.tries_left_short": "essais gauche",
+  "game.facts.fact_header": "Faits #%d",
+  "game.facts.guess_country_header": "Devine le pays",
+  "game.facts.skip_button": "Je ne sais pas / Passer",
+  "game.facts.skipped": "Sauté!",
+  "game.facts.skipped_answer": "Sauté ! La réponse était %s",
+  "library.sort.alphabetical_asc": "Alphabétique (A→Z)",
+  "library.sort.alphabetical_desc": "Alphabétique (Z→A)",
+  "library.sort.population_asc": "Population (Moins→Plus)",
+  "library.sort.population_desc": "Population (Plus→Moins)",
+  "library.sort.area_asc": "Superficie (La plus petite→La plus grande)",
+  "library.sort.area_desc": "Superficie (La plus grande→La plus petite)"
 }

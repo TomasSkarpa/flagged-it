@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "רגיל",
   "game.capital.difficulty.regular.desc": "4 אפשרויות לבחור מהן",
   "game.capital.difficulty.intermediate": "בינוני",
-  "game.capital.difficulty.intermediate.desc": "הקלד תשובה כדי לנצח"
+  "game.capital.difficulty.intermediate.desc": "הקלד תשובה כדי לנצח",
+  "game.facts.try_left": "נסה שמאלה",
+  "game.facts.tries_left_short": "ניסיונות שמאלה",
+  "game.facts.fact_header": "עובדה #%d",
+  "game.facts.guess_country_header": "ניחא את המדינה",
+  "game.facts.skip_button": "איני יודע / עבור",
+  "game.facts.skipped": "נעלם!",
+  "game.facts.skipped_answer": "נעלם! התשובה הייתה %s",
+  "library.sort.alphabetical_asc": "אלפביתי (A→Z)",
+  "library.sort.alphabetical_desc": "אלפביתי (Z→A)",
+  "library.sort.population_asc": "אוכלוסייה (נמוך→גבוה)",
+  "library.sort.population_desc": "אוכלוסייה (גבוה→נמוך)",
+  "library.sort.area_asc": "שטח (קטן→גדול)",
+  "library.sort.area_desc": "שטח (גדול→קטן)"
 }

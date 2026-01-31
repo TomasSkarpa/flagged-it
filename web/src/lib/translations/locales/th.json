@@ -201,5 +201,18 @@
   "promo.badge.popular": "ยอดนิยม",
   "promo.badge.new": "ใหม่",
   "game.shape.description": "ทดสอบความรู้ทางภูมิศาสตร์! ระบุประเทศจากรูปร่าง",
-  "game.shape.question": "ประเทศไหนมีรูปร่างนี้?"
+  "game.shape.question": "ประเทศไหนมีรูปร่างนี้?",
+  "game.facts.try_left": "ลองซ้าย",
+  "game.facts.tries_left_short": "เหลือทั้งหมด",
+  "game.facts.fact_header": "ข้อเท็จจริง #{{.Variable}}",
+  "game.facts.guess_country_header": "เดาว่าประเทศคืออะไร",
+  "game.facts.skip_button": "ไม่รู้ / Skip",
+  "game.facts.skipped": "ข้าม!",
+  "game.facts.skipped_answer": "ข้าม! คำตอบคือ %s",
+  "library.sort.alphabetical_asc": "เรียงตามอักษร (A→Z)",
+  "library.sort.alphabetical_desc": "เรียงตามอักษร (Z→A)",
+  "library.sort.population_asc": "เรียงตามจำนวนประชากร (น้อย→มาก)",
+  "library.sort.population_desc": "เรียงตามจำนวนประชากร (มาก→น้อย)",
+  "library.sort.area_asc": "เรียงตามพื้นที่ (น้อย→มาก)",
+  "library.sort.area_desc": "เรียงตามพื้นที่ (มาก→น้อย)"
 }

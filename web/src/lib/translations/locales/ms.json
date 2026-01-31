@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Biasa",
   "game.capital.difficulty.regular.desc": "4 pilihan untuk dipilih",
   "game.capital.difficulty.intermediate": "Pertengahan",
-  "game.capital.difficulty.intermediate.desc": "Taip jawapan untuk menang"
+  "game.capital.difficulty.intermediate.desc": "Taip jawapan untuk menang",
+  "game.facts.try_left": "cubaikan kiri",
+  "game.facts.tries_left_short": "cubaikan yang tinggal",
+  "game.facts.fact_header": "Fakta #{{.Variable}}",
+  "game.facts.guess_country_header": "Tentukan Negara",
+  "game.facts.skip_button": "Saya tidak tahu / Lewati",
+  "game.facts.skipped": "Dilewati!",
+  "game.facts.skipped_answer": "Dilewati! Jawaban yang sebenarnya adalah %s",
+  "library.sort.alphabetical_asc": "Abjad (A→Z)",
+  "library.sort.alphabetical_desc": "Abjad (Z→A)",
+  "library.sort.population_asc": "Populasi (Terendah→Tertinggi)",
+  "library.sort.population_desc": "Populasi (Tertinggi→Terendah)",
+  "library.sort.area_asc": "Luas (Terkecil→Terbesar)",
+  "library.sort.area_desc": "Luas (Terbesar→Terkecil)"
 }

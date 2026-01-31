@@ -201,5 +201,18 @@
   "game.capital.difficulty.regular": "Tavallinen",
   "game.capital.difficulty.regular.desc": "4 vaihtoehtoa valittavaksi",
   "game.capital.difficulty.intermediate": "Keskitaso",
-  "game.capital.difficulty.intermediate.desc": "Kirjoita vastaus voittaaksesi"
+  "game.capital.difficulty.intermediate.desc": "Kirjoita vastaus voittaaksesi",
+  "game.facts.try_left": "yritä vasemmalla",
+  "game.facts.tries_left_short": "yritäjä jäljellä",
+  "game.facts.fact_header": "Tiedonhetki #{{.Variable}}",
+  "game.facts.guess_country_header": "Arvaa maa",
+  "game.facts.skip_button": "Ei tiedä / Ohita",
+  "game.facts.skipped": "Ohitettu!",
+  "game.facts.skipped_answer": "Ohitettu! Oikea vastaus oli %s",
+  "library.sort.alphabetical_asc": "Aakkosjärjestys (A→Z)",
+  "library.sort.alphabetical_desc": "Aakkosjärjestys (Z→A)",
+  "library.sort.population_asc": "Asukasluku (vähiten→eniten)",
+  "library.sort.population_desc": "Asukasluku (eniten→vähiten)",
+  "library.sort.area_asc": "Pinta-ala (pienin→suurin)",
+  "library.sort.area_desc": "Pinta-ala (suurin→pienin)"
 }

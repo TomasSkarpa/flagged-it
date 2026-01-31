@@ -202,5 +202,18 @@
   "game.capital.difficulty.regular": "عادي",
   "game.capital.difficulty.regular.desc": "4 خيارات لل选择 منها",
   "game.capital.difficulty.intermediate": "متوسط",
-  "game.capital.difficulty.intermediate.desc": "اكتب الجواب للفوز"
+  "game.capital.difficulty.intermediate.desc": "اكتب الجواب للفوز",
+  "game.facts.try_left": "حاول من اليسار",
+  "game.facts.tries_left_short": "حاولات باقية",
+  "game.facts.fact_header": "حقيقة #{{.Variable}}",
+  "game.facts.guess_country_header": "أهدي بلد",
+  "game.facts.skip_button": "لا أعرف / تخطي",
+  "game.facts.skipped": "تخطيت!",
+  "game.facts.skipped_answer": "تخطيت! الإجابة كانت %s",
+  "library.sort.alphabetical_asc": "ترتيب أبجدي (أ→ي)",
+  "library.sort.alphabetical_desc": "ترتيب أبجدي (ي→أ)",
+  "library.sort.population_asc": "السكان (أقل→أكبر)",
+  "library.sort.population_desc": "السكان (أكبر→أقل)",
+  "library.sort.area_asc": "المساحة (أقل→أكبر)",
+  "library.sort.area_desc": "المساحة (أكبر→أقل)"
 }

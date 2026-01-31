@@ -212,5 +212,7 @@
   "error.go_home": "На главную",
   "game.score.label": "Счёт",
   "game.round.label": "Раунд",
-  "game.round.progress": "Раунд %d / %d"
+  "game.round.progress": "Раунд %d / %d",
+  "game.hangman.title": "Виселица",
+  "game.facts.title": "Угадай по Фактам"
 }

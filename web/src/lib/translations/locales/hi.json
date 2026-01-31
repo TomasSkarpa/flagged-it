@@ -212,5 +212,7 @@
   "game.shape.question": "कौन सा देश इस आकार का है?",
   "game.setup.select_region": "क्षेत्र चुनें (वैकल्पिक)",
   "game.setup.start_game": "गेम शुरू करें",
-  "game.setup.starting": "शुरू हो रहा है..."
+  "game.setup.starting": "शुरू हो रहा है...",
+  "game.hangman.title": "शब्द अनुमान",
+  "game.facts.title": "तथ्यों से अनुमान लगाएं"
 }

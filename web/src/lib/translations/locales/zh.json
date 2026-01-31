@@ -204,5 +204,7 @@
   "error.go_home": "返回首页",
   "game.score.label": "分数",
   "game.round.label": "轮次",
-  "game.round.progress": "轮次%d/%d"
+  "game.round.progress": "轮次%d/%d",
+  "game.hangman.title": "",
+  "game.facts.title": ""
 }

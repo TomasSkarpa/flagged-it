@@ -204,5 +204,7 @@
   "error.go_home": "Kienda Nyumbani",
   "game.score.label": "Alama",
   "game.round.label": "Mzunguko",
-  "game.round.progress": "Mzunguko %d / %d"
+  "game.round.progress": "Mzunguko %d / %d",
+  "game.hangman.title": "Mchezo wa Kubahatisha Neno",
+  "game.facts.title": "Tambua kwa Mambo"
 }

@@ -212,5 +212,7 @@
   "error.go_home": "Kembali ke Halaman Utama",
   "game.score.label": "Markah",
   "game.round.label": "Pusingan",
-  "game.round.progress": "Pusingan %d / %d"
+  "game.round.progress": "Pusingan %d / %d",
+  "game.hangman.title": "Tebak Kata",
+  "game.facts.title": "Tebak dari Fakta"
 }

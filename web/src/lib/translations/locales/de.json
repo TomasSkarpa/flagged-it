@@ -212,5 +212,7 @@
   "error.go_home": "Nach Hause",
   "game.score.label": "Punkte",
   "game.round.label": "Runde",
-  "game.round.progress": "Runde %d / %d"
+  "game.round.progress": "Runde %d / %d",
+  "game.hangman.title": "Worterraten",
+  "game.facts.title": "Erraten durch Fakten"
 }

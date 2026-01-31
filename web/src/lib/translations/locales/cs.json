@@ -212,5 +212,7 @@
   "error.go_home": "Domů",
   "game.score.label": "Skóre",
   "game.round.label": "Kolo",
-  "game.round.progress": "Kolo %d / %d"
+  "game.round.progress": "Kolo %d / %d",
+  "game.hangman.title": "Hádej Slovo",
+  "game.facts.title": "Uhádni ze Skutečností"
 }

@@ -212,5 +212,7 @@
   "common.go_home": "Перейти на головну",
   "scoreboard.title": "Таблиця результатів",
   "scoreboard.description": "Відстежуйте свій прогрес та змагайтесь з іншими!",
-  "scoreboard.coming_soon": "Незабаром"
+  "scoreboard.coming_soon": "Незабаром",
+  "game.hangman.title": "Віселица",
+  "game.facts.title": "Вгадайте за фактами"
 }

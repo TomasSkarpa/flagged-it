@@ -212,5 +212,7 @@
   "common.go_home": "Μετάβαση στην Αρχική",
   "scoreboard.title": "Πίνακας Βαθμολογίας",
   "scoreboard.description": "Παρακολουθήστε την πρόοδό σας και ανταγωνιστείτε με άλλους!",
-  "scoreboard.coming_soon": "Έρχεται Σύντομα"
+  "scoreboard.coming_soon": "Έρχεται Σύντομα",
+  "game.hangman.title": "Κρεμαλιά",
+  "game.facts.title": "Μαντέψτε με Γεγονότα"
 }

@@ -204,5 +204,7 @@
   "error.go_home": "Retour à l'accueil",
   "game.score.label": "Score",
   "game.round.label": "Tour",
-  "game.round.progress": "Tour %d / %d"
+  "game.round.progress": "Tour %d / %d",
+  "game.hangman.title": "Pendu",
+  "game.facts.title": "Devinez par les faits"
 }

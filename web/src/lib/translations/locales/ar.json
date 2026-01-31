@@ -204,5 +204,7 @@
   "common.go_home": "العودة إلى الرئيسية",
   "scoreboard.title": "لوحة النتائج",
   "scoreboard.description": "تتبع تقدمك وتنافس مع الآخرين!",
-  "scoreboard.coming_soon": "قريباً"
+  "scoreboard.coming_soon": "قريباً",
+  "game.hangman.title": "الخمن الحروف",
+  "game.facts.title": "خمن من خلال الحقائق"
 }

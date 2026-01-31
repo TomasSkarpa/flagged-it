@@ -204,5 +204,7 @@
   "error.go_home": "Domov",
   "game.score.label": "Skóre",
   "game.round.label": "Kolo",
-  "game.round.progress": "Kolo %d / %d"
+  "game.round.progress": "Kolo %d / %d",
+  "game.hangman.title": "Hádaj slovo",
+  "game.facts.title": "Hádaj podľa faktov"
 }

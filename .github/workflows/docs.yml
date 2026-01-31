@@ -49,6 +49,8 @@ jobs:
           node .github/scripts/docs.js
 
       - name: Commit and push wiki changes
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           cd wiki
           git config user.name "github-actions[bot]"
@@ -68,6 +70,9 @@ jobs:
             4. Generate updated markdown files following the format specified in WIKI_DOCUMENTATION_FORMAT.md
             
             This ensures documentation accurately reflects the actual code implementation."
+            
+            # Configure remote URL with PAT token for authentication
+            git remote set-url origin https://${PAT_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git
             
             # Push to master branch (GitHub wikis use master as default)
             git push origin HEAD:master

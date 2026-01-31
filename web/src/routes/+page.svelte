@@ -41,7 +41,7 @@
 		{
 			id: 'hangman',
 			title: t('game.hangman.title', undefined, currentLocale),
-			description: t('game.hangman.title', undefined, currentLocale),
+			description: t('game.hangman.description', undefined, currentLocale),
 			icon: '🎯',
 			route: '/hangman-game',
 			available: true

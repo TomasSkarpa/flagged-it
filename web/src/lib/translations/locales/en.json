@@ -35,6 +35,10 @@
     "value": "Hangman",
     "_context": "Title for a word guessing game where players guess country names letter by letter. The game name 'Hangman' is a classic word game concept. If translating, use a culturally appropriate equivalent word-guessing game name from your language/culture, or translate as 'Word Guessing' / 'Letter Guessing' / 'Guess the Word' if no direct equivalent exists. The key concept is: players see blank spaces representing letters, guess one letter at a time, and try to complete the country name before running out of guesses."
   },
+  "game.hangman.description": {
+    "value": "Test your geography knowledge! Guess country names letter by letter before running out of guesses.",
+    "_context": "Description text explaining the hangman game mechanics shown on the setup screen."
+  },
   "game.facts.title": {
     "value": "Guess by Facts",
     "_context": "Title for a geography quiz game where players identify countries based on interesting facts about them. Players read facts (like population, landmarks, culture, geography) and guess which country matches those facts. Translate as 'Guess by Facts' / 'Identify by Facts' / 'Country Facts Quiz' - emphasizing that players use factual clues to identify countries."

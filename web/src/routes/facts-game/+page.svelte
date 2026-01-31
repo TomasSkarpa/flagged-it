@@ -46,6 +46,13 @@
 	$: guessText = t('game.guessing.guess', undefined, currentLocale);
 	$: previousGuessesText = t('game.facts.previous_guesses', undefined, currentLocale);
 	$: triesLeftText = t('game.facts.tries_left', undefined, currentLocale);
+	$: tryLeftText = t('game.facts.try_left', undefined, currentLocale);
+	$: triesLeftShortText = t('game.facts.tries_left_short', undefined, currentLocale);
+	$: factHeaderText = t('game.facts.fact_header', undefined, currentLocale);
+	$: guessCountryHeaderText = t('game.facts.guess_country_header', undefined, currentLocale);
+	$: skipButtonText = t('game.facts.skip_button', undefined, currentLocale);
+	$: skippedText = t('game.facts.skipped', undefined, currentLocale);
+	$: skippedAnswerText = t('game.facts.skipped_answer', undefined, currentLocale);
 	$: correctText = t('game.facts.correct', undefined, currentLocale);
 	$: gameOverText = t('game.facts.game_over', undefined, currentLocale);
 	$: wrongNextText = t('game.facts.wrong_next', undefined, currentLocale);
@@ -297,9 +304,9 @@
 				const country = allCountries.find(c => c.cca2 === result.correctCountry!.cca2);
 				correctCountryName = country ? getCountryNameForLocale(country) : result.correctCountry.name;
 				correctCountryCca2 = result.correctCountry.cca2;
-				statusMessage = `Skipped! The answer was ${correctCountryName}`;
+				statusMessage = skippedAnswerText.replace('%s', correctCountryName);
 			} else {
-				statusMessage = 'Skipped!';
+				statusMessage = skippedText;
 				correctCountryName = '';
 				correctCountryCca2 = '';
 			}
@@ -398,13 +405,13 @@
 						<div class="flex items-center gap-3">
 							<span class="text-3xl">📚</span>
 							<div>
-								<h3 class="text-lg font-semibold text-sandy-light">Fact #{factNumber || 1}</h3>
-								<p class="text-xs text-text-muted uppercase tracking-wide">Guess the Country</p>
+								<h3 class="text-lg font-semibold text-sandy-light">{factHeaderText.replace('%d', (factNumber || 1).toString())}</h3>
+								<p class="text-xs text-text-muted uppercase tracking-wide">{guessCountryHeaderText}</p>
 							</div>
 						</div>
 						{#if triesLeft !== undefined && triesLeft > 0 && !showFeedback}
 							<div class="px-3 py-1 bg-primary/20 rounded-full border border-primary/30">
-								<span class="text-sm font-semibold text-primary">{triesLeft} {triesLeft === 1 ? 'try' : 'tries'} left</span>
+								<span class="text-sm font-semibold text-primary">{triesLeft} {triesLeft === 1 ? tryLeftText : triesLeftShortText}</span>
 							</div>
 						{/if}
 					</div>
@@ -460,7 +467,7 @@
 									class="flex items-center gap-2 px-4 py-2 text-sm text-text-muted hover:text-sandy-light border border-white/20 hover:border-white/40 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
 								>
 									<span>⏭️</span>
-									<span>I don't know / Skip</span>
+									<span>{skipButtonText}</span>
 								</button>
 							</div>
 							{#if error && !showFeedback}

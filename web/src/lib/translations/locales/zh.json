@@ -205,6 +205,6 @@
   "game.score.label": "分数",
   "game.round.label": "轮次",
   "game.round.progress": "轮次%d/%d",
-  "game.hangman.title": "",
-  "game.facts.title": ""
+  "game.hangman.title": "猜单词",
+  "game.facts.title": "根据事实猜谜"
 }

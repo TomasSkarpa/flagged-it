@@ -213,6 +213,6 @@
   "game.score.label": "Skóre",
   "game.round.label": "Kolo",
   "game.round.progress": "Kolo %d / %d",
-  "game.hangman.title": "Hádej Slovo",
-  "game.facts.title": "Uhádni ze Skutečností"
+  "game.hangman.title": "Oběšenec",
+  "game.facts.title": "Hádej podle faktů"
 }

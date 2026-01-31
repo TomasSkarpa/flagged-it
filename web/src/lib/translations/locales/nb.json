@@ -213,6 +213,6 @@
   "game.score.label": "Poeng",
   "game.round.label": "Runde",
   "game.round.progress": "Runde %d / %d",
-  "game.hangman.title": "Ord Gissning",
+  "game.hangman.title": "Gjett ordet",
   "game.facts.title": "Giss etter Fakta"
 }

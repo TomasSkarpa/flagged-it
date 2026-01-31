@@ -205,6 +205,6 @@
   "game.score.label": "Puntuación",
   "game.round.label": "Ronda",
   "game.round.progress": "Ronda %d / %d",
-  "game.hangman.title": "Adivina la Palabra",
+  "game.hangman.title": "El Ahorcado",
   "game.facts.title": "Adivina por Hechos"
 }

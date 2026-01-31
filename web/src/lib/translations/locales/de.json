@@ -213,6 +213,6 @@
   "game.score.label": "Punkte",
   "game.round.label": "Runde",
   "game.round.progress": "Runde %d / %d",
-  "game.hangman.title": "Worterraten",
+  "game.hangman.title": "Galgenmännchen",
   "game.facts.title": "Erraten durch Fakten"
 }

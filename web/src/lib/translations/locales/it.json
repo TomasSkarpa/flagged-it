@@ -213,6 +213,6 @@
   "game.score.label": "Punteggio",
   "game.round.label": "Round",
   "game.round.progress": "Round %d / %d",
-  "game.hangman.title": "Indovina la Parola",
+  "game.hangman.title": "L'impiccato",
   "game.facts.title": "Indovina dai Fatti"
 }

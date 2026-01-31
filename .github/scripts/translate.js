@@ -17,14 +17,14 @@
  * 
  * Rate Limiting & Model Fallback:
  * - Uses 2.5-second delay between batches (24 req/min, safely under 30 req/min limit)
- * - Implements exponential backoff for 429 rate limit errors
- * - Automatic model fallback: tries multiple models if one hits rate limits
+ * - Retries each model up to 5 times with 5-second wait between attempts
+ * - Automatic model fallback: tries next model if current model fails after 5 attempts
  *   - Primary: llama-3.3-70b-versatile (best quality, 30 RPM)
  *   - Fallback 1: llama-4-scout-17b (next-gen performance, 30 RPM)
  *   - Fallback 2: qwen3-32b (excellent for coding/math, 60 RPM)
  *   - Fallback 3: llama-3.1-8b-instant (pure speed, 30 RPM)
- * - Retries each model up to 2 times before trying next model
- * - Respects Retry-After header if provided by API
+ * - Waits 5 seconds between retry attempts on the same model
+ * - Switches to next model after 5 failed attempts
  */
 
 import { readFileSync, writeFileSync } from 'fs';
@@ -241,7 +241,8 @@ Return the translated JSON:`;
   for (let modelIndex = 0; modelIndex < GROQ_MODELS.length; modelIndex++) {
     const model = GROQ_MODELS[modelIndex];
     const isLastModel = modelIndex === GROQ_MODELS.length - 1;
-    const retriesPerModel = 2; // Retry each model 2 times before moving to next
+    const retriesPerModel = 5; // Retry each model 5 times before moving to next
+    const waitBetweenAttempts = 5000; // Wait 5 seconds between attempts
 
     console.log(`  🔄 Trying model: ${model}${modelIndex > 0 ? ' (fallback)' : ''}`);
 
@@ -270,16 +271,12 @@ Return the translated JSON:`;
           }),
         });
 
-        // Handle rate limiting (429) - try next model or retry with backoff
+        // Handle rate limiting (429) - retry with 5s wait
         if (response.status === 429) {
-          // Custom wait times: attempt 1 = 1s, attempt 2 = 5s, then +5s per additional attempt
-          // Ignore Retry-After header and use our custom pattern instead
-          const waitTime = attempt === 0 ? 1000 : attempt * 5000; // 1s, 5s, 10s, 15s, ...
-          
-          // If not last attempt on this model, retry with backoff
+          // If not last attempt on this model, retry after 5s
           if (attempt < retriesPerModel - 1) {
-            console.warn(`  ⚠️  Rate limited (429) on ${model}. Waiting ${waitTime / 1000}s before retry ${attempt + 1}/${retriesPerModel}...`);
-            await sleep(waitTime);
+            console.warn(`  ⚠️  Rate limited (429) on ${model}. Waiting ${waitBetweenAttempts / 1000}s before retry ${attempt + 1}/${retriesPerModel}...`);
+            await sleep(waitBetweenAttempts);
             continue;
           } else {
             // Last attempt on this model failed - try next model
@@ -297,9 +294,8 @@ Return the translated JSON:`;
           }
           // Otherwise, try next attempt or next model
           if (attempt < retriesPerModel - 1) {
-            const waitTime = Math.min(1000 * Math.pow(2, attempt), 5000);
-            console.warn(`  ⚠️  Error on ${model} (attempt ${attempt + 1}/${retriesPerModel}): ${response.status}. Retrying in ${waitTime / 1000}s...`);
-            await sleep(waitTime);
+            console.warn(`  ⚠️  Error on ${model} (attempt ${attempt + 1}/${retriesPerModel}): ${response.status}. Retrying in ${waitBetweenAttempts / 1000}s...`);
+            await sleep(waitBetweenAttempts);
             continue;
           } else {
             console.warn(`  ⚠️  Error on ${model} after ${retriesPerModel} attempts. Trying next model...`);
@@ -330,9 +326,15 @@ Return the translated JSON:`;
         } catch (parseError) {
           console.error(`  ❌ Failed to parse translation response from ${model}: ${parseError.message}`);
           console.error(`  Response preview: ${cleanedText.substring(0, 200)}...`);
+          // If not last attempt, retry after 5s
+          if (attempt < retriesPerModel - 1) {
+            console.warn(`  ⚠️  Parse error on ${model} (attempt ${attempt + 1}/${retriesPerModel}). Retrying in ${waitBetweenAttempts / 1000}s...`);
+            await sleep(waitBetweenAttempts);
+            continue;
+          }
           // Try next model if available
           if (!isLastModel) {
-            console.warn(`  ⚠️  Trying next model...`);
+            console.warn(`  ⚠️  Parse error after ${retriesPerModel} attempts. Trying next model...`);
             await sleep(2000);
             break;
           }
@@ -361,11 +363,10 @@ Return the translated JSON:`;
           return {};
         }
         
-        // For other errors, wait and retry or try next model
+        // For other errors, wait 5s and retry or try next model
         if (attempt < retriesPerModel - 1) {
-          const waitTime = Math.min(1000 * Math.pow(2, attempt), 10000); // Max 10 seconds
-          console.warn(`  ⚠️  Error on ${model} (attempt ${attempt + 1}/${retriesPerModel}): ${error.message}. Retrying in ${waitTime / 1000}s...`);
-          await sleep(waitTime);
+          console.warn(`  ⚠️  Error on ${model} (attempt ${attempt + 1}/${retriesPerModel}): ${error.message}. Retrying in ${waitBetweenAttempts / 1000}s...`);
+          await sleep(waitBetweenAttempts);
         } else {
           console.warn(`  ⚠️  Error on ${model} after ${retriesPerModel} attempts: ${error.message}. Trying next model...`);
           await sleep(2000);

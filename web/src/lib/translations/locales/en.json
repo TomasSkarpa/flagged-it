@@ -435,38 +435,6 @@
     "value": "Failed to load the application. Please refresh the page and try again.",
     "_context": "Error message displayed on error page, instructing users to refresh if the application fails to load."
   },
-  "promo.europe_flags.title": {
-    "value": "European Flags",
-    "_context": "Promotional card title on home page promoting the European flags game mode or challenge."
-  },
-  "promo.europe_flags.desc": {
-    "value": "Master the flags of Europe",
-    "_context": "Promotional card description encouraging players to practice European flags on the home page."
-  },
-  "promo.asia_shapes.title": {
-    "value": "Asian Shapes",
-    "_context": "Promotional card title on home page promoting the Asian shapes game mode or challenge."
-  },
-  "promo.asia_shapes.desc": {
-    "value": "Guess countries by shape",
-    "_context": "Promotional card description explaining the shape guessing game on the home page."
-  },
-  "promo.hangman.desc": {
-    "value": "Classic word guessing game",
-    "_context": "Promotional card description for hangman game mode shown on the home page."
-  },
-  "promo.higher_lower.desc": {
-    "value": "Compare country stats",
-    "_context": "Promotional card description for higher/lower game mode shown on the home page."
-  },
-  "promo.badge.popular": {
-    "value": "Popular",
-    "_context": "Badge label displayed on promotional cards to indicate a popular or trending game mode."
-  },
-  "promo.badge.new": {
-    "value": "New",
-    "_context": "Badge label displayed on promotional cards to indicate a newly added game mode."
-  },
   "scoreboard.empty": {
     "value": "No scores yet! Play some games to see your progress here.",
     "_context": "Empty state message displayed on scoreboard page when user hasn't played any games yet or has no saved scores."

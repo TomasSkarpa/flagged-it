@@ -44,7 +44,7 @@
 	// Reactive translations
 	$: currentLocale = $locale;
 	$: hangmanTitle = t('game.hangman.title', undefined, currentLocale);
-	$: hangmanDescription = t('promo.hangman.desc', undefined, currentLocale) || t('game.hangman.title', undefined, currentLocale);
+	$: hangmanDescription = t('game.hangman.title', undefined, currentLocale);
 	$: guessCountryText = t('game.hangman.guess_country', undefined, currentLocale);
 	$: alreadyGuessedText = t('game.hangman.already_guessed', undefined, currentLocale);
 	$: congratulationsText = t('game.hangman.congratulations', undefined, currentLocale);

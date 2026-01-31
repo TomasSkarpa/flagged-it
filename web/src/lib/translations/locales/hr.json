@@ -212,5 +212,7 @@
   "error.go_home": "Vrati se na početnu stranicu",
   "game.score.label": "Bodovi",
   "game.round.label": "Runda",
-  "game.round.progress": "Runda %d / %d"
+  "game.round.progress": "Runda %d / %d",
+  "game.hangman.title": "Pogađaj riječ",
+  "game.facts.title": "Pogađaj po činjenicama"
 }

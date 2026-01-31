@@ -212,5 +212,7 @@
   "error.go_home": "Acasă",
   "game.score.label": "Scor",
   "game.round.label": "Rundă",
-  "game.round.progress": "Rundă %d / %d"
+  "game.round.progress": "Rundă %d / %d",
+  "game.hangman.title": "Joc de Ghicit Cuvântul",
+  "game.facts.title": "Ghiceste după Fapte"
 }

@@ -212,5 +212,7 @@
   "error.go_home": "홈으로 이동",
   "game.score.label": "점수",
   "game.round.label": "라운드",
-  "game.round.progress": "라운드 %d / %d"
+  "game.round.progress": "라운드 %d / %d",
+  "game.hangman.title": "행맨",
+  "game.facts.title": "사실로 맞추기"
 }

@@ -204,5 +204,7 @@
   "error.go_home": "Ir al inicio",
   "game.score.label": "Puntuación",
   "game.round.label": "Ronda",
-  "game.round.progress": "Ronda %d / %d"
+  "game.round.progress": "Ronda %d / %d",
+  "game.hangman.title": "Adivina la Palabra",
+  "game.facts.title": "Adivina por Hechos"
 }

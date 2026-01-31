@@ -204,5 +204,7 @@
   "error.go_home": "Kezdőlapra",
   "game.score.label": "Pontszám",
   "game.round.label": "Kör",
-  "game.round.progress": "Kör %d / %d"
+  "game.round.progress": "Kör %d / %d",
+  "game.hangman.title": "Keresd a szót",
+  "game.facts.title": "Kitaláld a tény alapján"
 }

@@ -204,5 +204,7 @@
   "error.go_home": "Gå hem",
   "game.score.label": "Poäng",
   "game.round.label": "Runda",
-  "game.round.progress": "Runda %d / %d"
+  "game.round.progress": "Runda %d / %d",
+  "game.hangman.title": "Ord Gissning",
+  "game.facts.title": "Gissa med Fakta"
 }

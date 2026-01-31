@@ -212,5 +212,7 @@
   "error.go_home": "Gå til hjem",
   "game.score.label": "Score",
   "game.round.label": "Runde",
-  "game.round.progress": "Runde %d / %d"
+  "game.round.progress": "Runde %d / %d",
+  "game.hangman.title": "Bogstav Gæt",
+  "game.facts.title": "Gæt ved Fakta"
 }

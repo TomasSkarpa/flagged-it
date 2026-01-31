@@ -204,5 +204,7 @@
   "game.score.label": "スコア",
   "game.round.label": "ラウンド",
   "game.round.progress": "%d/%dラウンド",
-  "scoreboard.coming_soon": "まだ準備中です"
+  "scoreboard.coming_soon": "まだ準備中です",
+  "game.hangman.title": "ワード予想",
+  "game.facts.title": "事実から推測"
 }

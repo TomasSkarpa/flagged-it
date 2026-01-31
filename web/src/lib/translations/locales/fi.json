@@ -212,5 +212,7 @@
   "error.go_home": "Kotiin",
   "game.score.label": "Pisteet",
   "game.round.label": "Kierros",
-  "game.round.progress": "Kierros %d / %d"
+  "game.round.progress": "Kierros %d / %d",
+  "game.hangman.title": "Sanahahmotus",
+  "game.facts.title": "Arvaa tosiasioista"
 }

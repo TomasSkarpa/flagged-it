@@ -212,5 +212,7 @@
   "error.go_home": "Pumunta sa Homepage",
   "game.score.label": "Puntos",
   "game.round.label": "Ronda",
-  "game.round.progress": "Ronda %d / %d"
+  "game.round.progress": "Ronda %d / %d",
+  "game.hangman.title": "Taya ng Salita",
+  "game.facts.title": "Hula sa mga Katotohanan"
 }

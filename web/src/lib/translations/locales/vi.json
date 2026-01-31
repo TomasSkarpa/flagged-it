@@ -212,5 +212,7 @@
   "error.go_home": "Trở về Trang chủ",
   "game.score.label": "Điểm số",
   "game.round.label": "Vòng",
-  "game.round.progress": "Vòng %d / %d"
+  "game.round.progress": "Vòng %d / %d",
+  "game.hangman.title": "Đoán từ",
+  "game.facts.title": "Đoán bằng sự kiện"
 }

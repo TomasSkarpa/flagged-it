@@ -212,5 +212,7 @@
   "error.go_home": "Powrót do strony głównej",
   "game.score.label": "Punkty",
   "game.round.label": "Runda",
-  "game.round.progress": "Runda %d / %d"
+  "game.round.progress": "Runda %d / %d",
+  "game.hangman.title": "Wisielec",
+  "game.facts.title": "Zgadnij po Faktach"
 }

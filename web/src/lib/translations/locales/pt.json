@@ -212,5 +212,7 @@
   "error.go_home": "Voltar para a Página Inicial",
   "game.score.label": "Pontuação",
   "game.round.label": "Rodada",
-  "game.round.progress": "Rodada %d / %d"
+  "game.round.progress": "Rodada %d / %d",
+  "game.hangman.title": "Jogo de Adivinhação de Palavras",
+  "game.facts.title": "Adivinhe pelo Fatos"
 }

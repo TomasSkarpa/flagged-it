@@ -206,9 +206,10 @@ Return the translated JSON:`;
         // Handle rate limiting (429) - try next model or retry with backoff
         if (response.status === 429) {
           const retryAfter = response.headers.get('retry-after');
+          // Custom wait times: attempt 1 = 1s, attempt 2 = 5s, then +5s per additional attempt
           const waitTime = retryAfter 
             ? parseInt(retryAfter) * 1000 
-            : Math.min(1000 * Math.pow(2, attempt), 30000); // Max 30 seconds
+            : (attempt === 0 ? 1000 : attempt * 5000); // 1s, 5s, 10s, 15s, ...
           
           // If not last attempt on this model, retry with backoff
           if (attempt < retriesPerModel - 1) {

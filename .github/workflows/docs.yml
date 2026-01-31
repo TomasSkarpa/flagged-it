@@ -1,0 +1,88 @@
+name: Auto-update Documentation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'internal/games/**/*.go'
+      - 'internal/api/handlers.go'
+  workflow_dispatch: # Allow manual triggering
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Checkout wiki
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}.wiki
+          path: wiki
+          token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+
+      - name: Update documentation with AI
+        env:
+          WIKI_ROOT: ${{ github.workspace }}/wiki
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: |
+          node .github/scripts/docs.js
+
+      - name: Check for changes
+        id: check-changes
+        run: |
+          cd wiki
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            git status --short
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.check-changes.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
+          path: wiki
+          commit-message: "📚 Auto-update game mode documentation"
+          title: "📚 Auto-update game mode documentation"
+          body: |
+            This PR was automatically created to update game mode documentation based on the current code implementation.
+            
+            The documentation generator uses AI to:
+            1. Analyze Go logic files (`internal/games/*/logic.go`) and handler files (`internal/api/handlers.go`)
+            2. Review web API files (`web/src/lib/api/*Game.ts`) for frontend behavior
+            3. Compare with existing documentation
+            4. Generate updated markdown files following the format specified in `.github/scripts/WIKI_DOCUMENTATION_FORMAT.md`
+            
+            This ensures documentation accurately reflects the actual code implementation.
+            
+            **Note:** This ensures documentation stays in sync with code changes. Please review the changes before merging.
+          branch: auto-update-docs
+          delete-branch: true
+          labels: |
+            documentation
+            automated

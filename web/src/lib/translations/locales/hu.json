@@ -211,5 +211,8 @@
   "scoreboard.coming_soon": "Hamarosan",
   "error.title": "Hoppá",
   "error.message": "Valami hiba történt. Kérjük, próbálja meg újra később.",
-  "error.go_home": "Kezdőlapra"
+  "error.go_home": "Kezdőlapra",
+  "game.score.label": "Pontszám",
+  "game.round.label": "Kör",
+  "game.round.progress": "Kör %d / %d"
 }

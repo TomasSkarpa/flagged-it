@@ -211,5 +211,8 @@
   "scoreboard.coming_soon": "Inakuja Hivi Karibuni",
   "error.title": "Oooops,",
   "error.message": "Kitu kiliharibika. Jaribu tena baadaye.",
-  "error.go_home": "Kienda Nyumbani"
+  "error.go_home": "Kienda Nyumbani",
+  "game.score.label": "Alama",
+  "game.round.label": "Mzunguko",
+  "game.round.progress": "Mzunguko %d / %d"
 }

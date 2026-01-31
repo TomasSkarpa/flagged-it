@@ -1,5 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
 </script>
 
 <svelte:head>
@@ -17,44 +20,20 @@
 		</p>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-			<button 
-				class="card-game text-left hover:ring-2 hover:ring-accent transition-all"
-				on:click={() => goto('/debug/flags')}
-			>
-				<div class="flex items-start gap-4">
-					<div class="text-5xl leading-none pt-1">🚩</div>
-					<div class="flex-1">
-						<h2 class="text-2xl font-bold text-sandy-light mb-2">All Flags</h2>
-						<p class="text-text-muted">Browse all country flags with navigation</p>
+			{#each data.routes as route}
+				<button 
+					class="card-game text-left hover:ring-2 hover:ring-accent transition-all"
+					on:click={() => goto(route.route)}
+				>
+					<div class="flex items-start gap-4">
+						<div class="text-5xl leading-none pt-1">{route.icon}</div>
+						<div class="flex-1">
+							<h2 class="text-2xl font-bold text-sandy-light mb-2">{route.title}</h2>
+							<p class="text-text-muted">{route.description}</p>
+						</div>
 					</div>
-				</div>
-			</button>
-
-			<button 
-				class="card-game text-left hover:ring-2 hover:ring-accent transition-all"
-				on:click={() => goto('/debug/shapes')}
-			>
-				<div class="flex items-start gap-4">
-					<div class="text-5xl leading-none pt-1">🗺️</div>
-					<div class="flex-1">
-						<h2 class="text-2xl font-bold text-sandy-light mb-2">All Shapes</h2>
-						<p class="text-text-muted">Browse all country silhouettes</p>
-					</div>
-				</div>
-			</button>
-
-			<button 
-				class="card-game text-left hover:ring-2 hover:ring-accent transition-all"
-				on:click={() => goto('/debug/country-names')}
-			>
-				<div class="flex items-start gap-4">
-					<div class="text-5xl leading-none pt-1">🌍</div>
-					<div class="flex-1">
-						<h2 class="text-2xl font-bold text-sandy-light mb-2">Country Names</h2>
-						<p class="text-text-muted">View all country names in different languages</p>
-					</div>
-				</div>
-			</button>
+				</button>
+			{/each}
 		</div>
 	</div>
 </div>

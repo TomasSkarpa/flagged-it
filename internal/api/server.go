@@ -1,10 +1,13 @@
 package api
 
 import (
+	"flagged-it/internal/multiplayer"
+	"flagged-it/internal/multiplayer/adapters"
+	"flagged-it/internal/data/models"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
-	"strings"
 	"time"
 )
 
@@ -22,78 +25,7 @@ func SetupRoutes() {
 	rateLimitMiddleware := RateLimitMiddleware(rateLimiter)
 
 	// CORS middleware - handles preflight and actual requests
-	corsMiddleware := func(next http.HandlerFunc) http.HandlerFunc {
-		return func(w http.ResponseWriter, r *http.Request) {
-			origin := r.Header.Get("Origin")
-
-			// Check if origin should be allowed
-			shouldAllow := false
-
-			if origin != "" {
-				// Explicitly allow localhost:5173 (Svelte dev server default)
-				if origin == "http://localhost:5173" {
-					shouldAllow = true
-				}
-				// Allow localhost with any port
-				if strings.HasPrefix(origin, "http://localhost:") {
-					shouldAllow = true
-				}
-				// Allow 127.0.0.1 with any port
-				if strings.HasPrefix(origin, "http://127.0.0.1:") {
-					shouldAllow = true
-				}
-				// Allow bare localhost or 127.0.0.1
-				if origin == "http://localhost" || origin == "http://127.0.0.1" {
-					shouldAllow = true
-				}
-
-				// Allow local network IPs
-				if strings.HasPrefix(origin, "http://192.168.") ||
-					strings.HasPrefix(origin, "http://10.") ||
-					strings.HasPrefix(origin, "http://172.16.") ||
-					strings.HasPrefix(origin, "http://172.17.") ||
-					strings.HasPrefix(origin, "http://172.18.") ||
-					strings.HasPrefix(origin, "http://172.19.") ||
-					strings.HasPrefix(origin, "http://172.2") ||
-					strings.HasPrefix(origin, "http://172.3") {
-					shouldAllow = true
-				}
-
-				// Allow production domains
-				if origin == "https://flaggedit.vercel.app" ||
-					origin == "http://flaggedit.vercel.app" ||
-					origin == "https://flaggedit.app" ||
-					origin == "http://flaggedit.app" {
-					shouldAllow = true
-				}
-			}
-
-			// Handle preflight OPTIONS request FIRST - before anything else
-			if r.Method == http.MethodOptions {
-				// Set CORS headers for preflight - browser requires these
-				// Only set Allow-Origin if the origin is allowed
-				if shouldAllow && origin != "" {
-					w.Header().Set("Access-Control-Allow-Origin", origin)
-				}
-				// Always set these headers for OPTIONS (even if origin is not allowed)
-				w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-				w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-				w.Header().Set("Access-Control-Max-Age", "3600")
-				w.WriteHeader(http.StatusNoContent)
-				return
-			}
-
-			// Set CORS headers for actual requests
-			if shouldAllow && origin != "" {
-				w.Header().Set("Access-Control-Allow-Origin", origin)
-			}
-			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-			w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-			w.Header().Set("Access-Control-Max-Age", "3600")
-
-			next(w, r)
-		}
-	}
+	corsMiddleware := CORSMiddleware()
 
 	// Combine logging, rate limiting and CORS middleware
 	// IMPORTANT: CORS must run first to handle OPTIONS preflight requests
@@ -151,6 +83,33 @@ func SetupRoutes() {
 
 	// Stats/metrics endpoint (no rate limiting for monitoring, but include CORS and logging)
 	http.HandleFunc("/api/stats", LoggingMiddleware(corsMiddleware(GetStatsHandler)))
+
+	// Multiplayer routes
+	rm := multiplayer.GetRoomManager()
+	
+	// Set up game engine factory to avoid import cycles
+	multiplayer.SetEngineFactory(func(mode multiplayer.GameMode, config multiplayer.RoomConfig, countries []models.Country) (multiplayer.GameEngine, error) {
+		switch mode {
+		case multiplayer.GameModeFlag:
+			return adapters.NewFlagGameEngine(config, countries)
+		case multiplayer.GameModeShape:
+			return adapters.NewShapeGameEngine(config, countries)
+		case multiplayer.GameModeCapital:
+			return adapters.NewCapitalGameEngine(config, countries)
+		case multiplayer.GameModeHigherLower:
+			return adapters.NewHigherLowerGameEngine(config, countries)
+		case multiplayer.GameModeFacts:
+			return adapters.NewFactsGameEngine(config, countries)
+		case multiplayer.GameModeWorldle:
+			return adapters.NewWorldleGameEngine(config, countries)
+		default:
+			return nil, fmt.Errorf("unsupported game mode: %s", mode)
+		}
+	})
+	
+	hub := multiplayer.NewHub(rm)
+	go hub.Run()
+	multiplayer.SetupMultiplayerRoutes(rm, hub, corsMiddleware, LoggingMiddleware)
 
 	log.Println("API routes configured")
 }

@@ -77,6 +77,12 @@ export const API_ENDPOINTS = {
 		FACTS_SKIP: '/game/facts/skip',
 		FACTS_NEXT: '/game/facts/next',
 	
+	// Multiplayer endpoints
+	ROOMS: '/rooms',
+	ROOMS_PUBLIC: '/rooms/public',
+	ROOMS_CODE: '/rooms/code',
+	WS_ROOMS: '/ws/rooms',
+	
 	// Debug/Browse endpoints
 	DEBUG_COUNTRIES: '/debug/countries',
 	DEBUG_GEOJSON: '/debug/geojson',
@@ -115,4 +121,13 @@ export function getApiUrl(endpoint: string): string {
 	}
 	// Fallback for SSR
 	return `http://localhost:8080/api${endpoint}`;
+}
+
+/**
+ * Get WebSocket URL for an endpoint
+ * Converts HTTP URL to WebSocket URL (ws:// or wss://)
+ */
+export function getWebSocketUrl(endpoint: string): string {
+	const httpUrl = getApiUrl(endpoint);
+	return httpUrl.replace(/^http:\/\//, 'ws://').replace(/^https:\/\//, 'wss://');
 }

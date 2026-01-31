@@ -203,5 +203,8 @@
   "scoreboard.coming_soon": "Čoskoro",
   "error.title": "Oooops,",
   "error.message": "Niečo sa pokazilo. Prosím, skúste to znova neskôr.",
-  "error.go_home": "Domov"
+  "error.go_home": "Domov",
+  "game.score.label": "Skóre",
+  "game.round.label": "Kolo",
+  "game.round.progress": "Kolo %d / %d"
 }

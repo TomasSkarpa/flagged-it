@@ -203,5 +203,8 @@
   "scoreboard.coming_soon": "Gelecekte",
   "error.title": "Hata!",
   "error.message": "Bir şeyler yanlış gitti. Lütfen daha sonra tekrar deneyin.",
-  "error.go_home": "Anasayfaya Git"
+  "error.go_home": "Anasayfaya Git",
+  "game.score.label": "Skor",
+  "game.round.label": "Tur",
+  "game.round.progress": "Tur %d / %d"
 }

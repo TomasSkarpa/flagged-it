@@ -205,5 +205,6 @@
   "error.go_home": "ホームへ",
   "game.score.label": "スコア",
   "game.round.label": "ラウンド",
-  "game.round.progress": "%d/%dラウンド"
+  "game.round.progress": "%d/%dラウンド",
+  "scoreboard.coming_soon": "近日公開予定"
 }

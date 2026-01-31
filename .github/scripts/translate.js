@@ -7,18 +7,22 @@
  * 1. Reads en.json (source of truth)
  * 2. Reads all other locale files
  * 3. Finds missing keys per language
- * 4. Calls Groq API to translate missing keys (with exponential backoff retry)
+ * 4. Calls Groq API to translate missing keys in batches (max 30 keys per request)
  * 5. Updates locale files with new translations
  * 
+ * Batching:
+ * - Maximum 30 translations per API request to avoid token limits
+ * - Large translation sets are automatically split into batches
+ * - 2.5s delay between batches to respect rate limits
+ * 
  * Rate Limiting & Model Fallback:
- * - Uses 3-second delay between requests (20 req/min, well within free tier 30 req/min limit)
+ * - Uses 2.5-second delay between batches (24 req/min, safely under 30 req/min limit)
  * - Implements exponential backoff for 429 rate limit errors
  * - Automatic model fallback: tries multiple models if one hits rate limits
  *   - Primary: llama-3.3-70b-versatile (best quality, 30 RPM)
  *   - Fallback 1: llama-4-scout-17b (next-gen performance, 30 RPM)
  *   - Fallback 2: qwen3-32b (excellent for coding/math, 60 RPM)
  *   - Fallback 3: llama-3.1-8b-instant (pure speed, 30 RPM)
- * - Rate limiting: 2.5s delay between requests (24 RPM, safely under 30 RPM limit)
  * - Retries each model up to 2 times before trying next model
  * - Respects Retry-After header if provided by API
  */
@@ -176,20 +180,33 @@ function sleep(ms) {
 }
 
 /**
- * Translate missing keys using Groq API with model fallback and exponential backoff retry
+ * Split an object into chunks of specified size
  */
-async function translateKeys(missingKeys, contexts, targetLanguage) {
-  if (Object.keys(missingKeys).length === 0) {
+function chunkObject(obj, chunkSize) {
+  const entries = Object.entries(obj);
+  const chunks = [];
+  for (let i = 0; i < entries.length; i += chunkSize) {
+    chunks.push(Object.fromEntries(entries.slice(i, i + chunkSize)));
+  }
+  return chunks;
+}
+
+/**
+ * Translate a single batch of keys using Groq API with model fallback and exponential backoff retry
+ */
+async function translateKeyBatch(keyBatch, contextBatch, targetLanguage, batchNumber, totalBatches) {
+  if (Object.keys(keyBatch).length === 0) {
     return {};
   }
 
-  console.log(`  📝 Translating ${Object.keys(missingKeys).length} keys to ${targetLanguage}...`);
+  const batchInfo = totalBatches > 1 ? ` (batch ${batchNumber}/${totalBatches})` : '';
+  console.log(`  📝 Translating ${Object.keys(keyBatch).length} keys${batchInfo}...`);
 
   // Prepare the translation request with context hints
   // Format: key-value pairs as JSON, with context hints included in the prompt
-  const keysToTranslate = Object.entries(missingKeys)
+  const keysToTranslate = Object.entries(keyBatch)
     .map(([key, value]) => {
-      const context = contexts[key];
+      const context = contextBatch[key];
       if (context) {
         return `"${key}": "${value}" // Context: ${context}`;
       }
@@ -197,9 +214,9 @@ async function translateKeys(missingKeys, contexts, targetLanguage) {
     })
     .join(',\n    ');
 
-  const contextInstructions = Object.keys(contexts).length > 0
+  const contextInstructions = Object.keys(contextBatch).length > 0
     ? `\n\nTRANSLATION CONTEXT HINTS (use these to guide your translation):
-${Object.entries(contexts).map(([key, context]) => `- "${key}": ${context}`).join('\n')}`
+${Object.entries(contextBatch).map(([key, context]) => `- "${key}": ${context}`).join('\n')}`
     : '';
 
   const prompt = `You are a professional translator. Translate the following JSON key-value pairs from English to ${targetLanguage}.${contextInstructions}
@@ -324,7 +341,7 @@ Return the translated JSON:`;
         
         // Validate that all keys are present
         const missingInResponse = [];
-        for (const key of Object.keys(missingKeys)) {
+        for (const key of Object.keys(keyBatch)) {
           if (!(key in translated)) {
             missingInResponse.push(key);
           }
@@ -361,6 +378,60 @@ Return the translated JSON:`;
   // If we get here, all models failed
   console.error(`  ❌ All models failed for ${targetLanguage}`);
   return {};
+}
+
+/**
+ * Translate missing keys using Groq API with batching (max 30 keys per request)
+ * Uses model fallback and exponential backoff retry
+ */
+async function translateKeys(missingKeys, contexts, targetLanguage) {
+  if (Object.keys(missingKeys).length === 0) {
+    return {};
+  }
+
+  const MAX_KEYS_PER_REQUEST = 30;
+  const totalKeys = Object.keys(missingKeys).length;
+  
+  console.log(`  📝 Translating ${totalKeys} keys to ${targetLanguage}...`);
+
+  // Split keys into chunks of MAX_KEYS_PER_REQUEST
+  const keyChunks = chunkObject(missingKeys, MAX_KEYS_PER_REQUEST);
+  const contextChunks = keyChunks.map(chunk => {
+    const chunkContexts = {};
+    for (const key of Object.keys(chunk)) {
+      if (contexts[key]) {
+        chunkContexts[key] = contexts[key];
+      }
+    }
+    return chunkContexts;
+  });
+
+  const totalBatches = keyChunks.length;
+  const allTranslations = {};
+
+  // Process each batch sequentially
+  for (let i = 0; i < keyChunks.length; i++) {
+    const keyBatch = keyChunks[i];
+    const contextBatch = contextChunks[i];
+    
+    const batchTranslations = await translateKeyBatch(
+      keyBatch,
+      contextBatch,
+      targetLanguage,
+      i + 1,
+      totalBatches
+    );
+
+    // Merge batch translations into result
+    Object.assign(allTranslations, batchTranslations);
+
+    // Rate limiting: wait between batches (except for the last batch)
+    if (i < keyChunks.length - 1) {
+      await sleep(2500); // 2.5s delay between batches
+    }
+  }
+
+  return allTranslations;
 }
 
 /**

@@ -7,22 +7,23 @@
  * 1. Reads en.json (source of truth)
  * 2. Reads all other locale files
  * 3. Finds missing keys per language
- * 4. Calls Groq API to translate missing keys in batches (max 30 keys per request)
+ * 4. Calls translation provider API (Groq/Gemini) to translate missing keys in batches (max 30 keys per request)
  * 5. Updates locale files with new translations
+ * 
+ * Provider Selection:
+ * - Default provider: Groq (can be changed via TRANSLATION_PROVIDER environment variable)
+ * - Available providers: 'groq', 'gemini'
+ * - Set TRANSLATION_PROVIDER=gemini to use Google Gemini API
  * 
  * Batching:
  * - Maximum 30 translations per API request to avoid token limits
  * - Large translation sets are automatically split into batches
- * - 2.5s delay between batches to respect rate limits
+ * - Provider-specific delays between batches to respect rate limits
  * 
  * Rate Limiting & Model Fallback:
- * - Uses 2.5-second delay between batches (24 req/min, safely under 30 req/min limit)
+ * - Provider-specific retry logic and model fallback chains
  * - Retries each model up to 5 times with 5-second wait between attempts
  * - Automatic model fallback: tries next model if current model fails after 5 attempts
- *   - Primary: llama-3.3-70b-versatile (best quality, 30 RPM)
- *   - Fallback 1: llama-4-scout-17b (next-gen performance, 30 RPM)
- *   - Fallback 2: qwen3-32b (excellent for coding/math, 60 RPM)
- *   - Fallback 3: llama-3.1-8b-instant (pure speed, 30 RPM)
  * - Waits 5 seconds between retry attempts on the same model
  * - Switches to next model after 5 failed attempts
  */
@@ -30,6 +31,7 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { getAvailableProvider } from './providers/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -41,7 +43,7 @@ const PROJECT_ROOT = join(__dirname, '../..');
 const LOCALES_DIR = join(PROJECT_ROOT, 'web/src/lib/translations/locales');
 const EN_FILE = join(LOCALES_DIR, 'en.json');
 
-// Locale code to language name mapping for Groq API
+// Locale code to language name mapping for translation providers
 const LOCALE_TO_LANGUAGE = {
   'es': 'Spanish',
   'fr': 'French',
@@ -102,8 +104,8 @@ const LOCALE_TO_NARRATIVE = {
   // Neutral/Polite Group
   'en': 'Use active, imperative verbs. Friendly and direct.',
   'ja': 'Use polite neutral (e.g., Desu/Masu in Japanese). Avoid "dictionary form" (too blunt) or "honorifics" (too stiff).',
-  'ko': 'Use polite neutral (e.g., Desu/Masu in Japanese). Avoid "dictionary form" (too blunt) or "honorifics" (too stiff).',
-  'zh': 'Use polite neutral (e.g., Desu/Masu in Japanese). Avoid "dictionary form" (too blunt) or "honorifics" (too stiff).',
+  'ko': 'Use polite neutral (Haeyo-che style). Avoid the very formal Hasipsio-che or blunt Panmal.',
+  'zh': 'Use a friendly, standard neutral tone. Avoid overly formal officialese.',
   'ar': 'Use Modern Standard Arabic (MSA). Use the masculine singular imperative as the neutral default.',
   'hi': 'Use friendly, polite imperative. Use standard polite particles common in apps.',
   'th': 'Use friendly, polite imperative. Use standard polite particles common in apps.',
@@ -114,23 +116,8 @@ const LOCALE_TO_NARRATIVE = {
   'sw': 'Use standard friendly imperative. Focus on clarity and engagement.'
 };
 
-// Groq API configuration
-const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-const GROQ_API_KEY = process.env.GROQ_API_KEY;
-
-// Model fallback chain - try models in order if one fails or hits rate limits
-// Rate limits: All models have 30 RPM minimum, so we wait 2.5s between requests (24 RPM = safe buffer)
-const GROQ_MODELS = [
-  'llama-3.3-70b-versatile',              // Primary: best quality (30 RPM, 12k TPM)
-  'meta-llama/llama-4-scout-17b-16e-instruct', // Fallback 1: next-gen performance (30 RPM, 30k TPM)
-  'qwen/qwen3-32b',                       // Fallback 2: excellent for coding/math (60 RPM, 6k TPM)
-  'llama-3.1-8b-instant'                  // Fallback 3: pure speed (30 RPM, 6k TPM)
-];
-
-if (!GROQ_API_KEY) {
-  console.error('❌ Error: GROQ_API_KEY environment variable is not set');
-  process.exit(1);
-}
+// Translation provider (will be initialized in main function)
+let translationProvider = null;
 
 /**
  * Read and parse JSON file
@@ -229,18 +216,15 @@ function chunkObject(obj, chunkSize) {
 }
 
 /**
- * Translate a single batch of keys using Groq API with model fallback and exponential backoff retry
+ * Build translation prompt with context hints and narrative instructions
+ * @param {Object} keyBatch - Object with keys to translate
+ * @param {Object} contextBatch - Object with context hints for keys
+ * @param {string} targetLanguage - Target language name (e.g., "Spanish")
+ * @param {string|null} narrativeInstruction - Narrative instruction for locale (optional)
+ * @returns {string} Formatted translation prompt
  */
-async function translateKeyBatch(keyBatch, contextBatch, targetLanguage, localeCode, batchNumber, totalBatches) {
-  if (Object.keys(keyBatch).length === 0) {
-    return {};
-  }
-
-  const batchInfo = totalBatches > 1 ? ` (batch ${batchNumber}/${totalBatches})` : '';
-  console.log(`  📝 Translating ${Object.keys(keyBatch).length} keys${batchInfo}...`);
-
+export function buildTranslationPrompt(keyBatch, contextBatch, targetLanguage, narrativeInstruction = null) {
   // Prepare the translation request with context hints
-  // Format: key-value pairs as JSON, with context hints included in the prompt
   const keysToTranslate = Object.entries(keyBatch)
     .map(([key, value]) => {
       const context = contextBatch[key];
@@ -256,12 +240,11 @@ async function translateKeyBatch(keyBatch, contextBatch, targetLanguage, localeC
 ${Object.entries(contextBatch).map(([key, context]) => `- "${key}": ${context}`).join('\n')}`
     : '';
 
-  // Get narrative instruction for this locale (if available)
-  const narrativeInstruction = LOCALE_TO_NARRATIVE[localeCode]
-    ? `\n\nNARRATIVE STYLE INSTRUCTION:\n${LOCALE_TO_NARRATIVE[localeCode]}`
+  const narrativeSection = narrativeInstruction
+    ? `\n\nNARRATIVE STYLE INSTRUCTION:\n${narrativeInstruction}`
     : '';
 
-  const prompt = `You are a professional translator. Translate the following JSON key-value pairs from English to ${targetLanguage}.${contextInstructions}${narrativeInstruction}
+  const prompt = `You are a professional translator. Translate the following JSON key-value pairs from English to ${targetLanguage}.${contextInstructions}${narrativeSection}
 
 IMPORTANT INSTRUCTIONS:
 1. Translate ONLY the values, keep the keys exactly as they are
@@ -270,7 +253,7 @@ IMPORTANT INSTRUCTIONS:
 4. Preserve emojis and special characters
 5. Return ONLY valid JSON, no explanations or markdown formatting
 6. Maintain the same structure and formatting
-7. Use the context hints (if provided) to guide your translation style and meaning${narrativeInstruction ? '\n8. Follow the narrative style instruction above for the appropriate tone and formality level' : ''}
+7. Use the context hints (if provided) to guide your translation style and meaning${narrativeSection ? '\n8. Follow the narrative style instruction above for the appropriate tone and formality level' : ''}
 
 JSON to translate:
 {
@@ -279,153 +262,74 @@ JSON to translate:
 
 Return the translated JSON:`;
 
-  // Try each model in the fallback chain
-  for (let modelIndex = 0; modelIndex < GROQ_MODELS.length; modelIndex++) {
-    const model = GROQ_MODELS[modelIndex];
-    const isLastModel = modelIndex === GROQ_MODELS.length - 1;
-    const retriesPerModel = 5; // Retry each model 5 times before moving to next
-    const waitBetweenAttempts = 5000; // Wait 5 seconds between attempts
-
-    console.log(`  🔄 Trying model: ${model}${modelIndex > 0 ? ' (fallback)' : ''}`);
-
-    for (let attempt = 0; attempt < retriesPerModel; attempt++) {
-      try {
-        const response = await fetch(GROQ_API_URL, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${GROQ_API_KEY}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            model: model,
-            messages: [
-              {
-                role: 'system',
-                content: 'You are a professional translator. Return only valid JSON without any markdown formatting or explanations.'
-              },
-              {
-                role: 'user',
-                content: prompt
-              }
-            ],
-            temperature: 0.3,
-            max_tokens: 4000,
-          }),
-        });
-
-        // Handle rate limiting (429) - retry with 5s wait
-        if (response.status === 429) {
-          // If not last attempt on this model, retry after 5s
-          if (attempt < retriesPerModel - 1) {
-            console.warn(`  ⚠️  Rate limited (429) on ${model}. Waiting ${waitBetweenAttempts / 1000}s before retry ${attempt + 1}/${retriesPerModel}...`);
-            await sleep(waitBetweenAttempts);
-            continue;
-          } else {
-            // Last attempt on this model failed - try next model
-            console.warn(`  ⚠️  Rate limited (429) on ${model} after ${retriesPerModel} attempts. Trying next model...`);
-            await sleep(2000); // Brief pause before switching models
-            break; // Break inner loop to try next model
-          }
-        }
-
-        if (!response.ok) {
-          const errorText = await response.text();
-          // For non-429 errors, if it's the last attempt on last model, throw
-          if (attempt === retriesPerModel - 1 && isLastModel) {
-            throw new Error(`Groq API error: ${response.status} ${response.statusText} - ${errorText}`);
-          }
-          // Otherwise, try next attempt or next model
-          if (attempt < retriesPerModel - 1) {
-            console.warn(`  ⚠️  Error on ${model} (attempt ${attempt + 1}/${retriesPerModel}): ${response.status}. Retrying in ${waitBetweenAttempts / 1000}s...`);
-            await sleep(waitBetweenAttempts);
-            continue;
-          } else {
-            console.warn(`  ⚠️  Error on ${model} after ${retriesPerModel} attempts. Trying next model...`);
-            await sleep(2000);
-            break;
-          }
-        }
-
-        const data = await response.json();
-        const translatedText = data.choices[0]?.message?.content?.trim();
-
-        if (!translatedText) {
-          throw new Error('No translation received from API');
-        }
-
-        // Clean up the response - remove markdown code blocks if present
-        let cleanedText = translatedText;
-        if (cleanedText.startsWith('```json')) {
-          cleanedText = cleanedText.replace(/^```json\n?/, '').replace(/\n?```$/, '');
-        } else if (cleanedText.startsWith('```')) {
-          cleanedText = cleanedText.replace(/^```\n?/, '').replace(/\n?```$/, '');
-        }
-
-        // Parse the translated JSON
-        let translated;
-        try {
-          translated = JSON.parse(cleanedText);
-        } catch (parseError) {
-          console.error(`  ❌ Failed to parse translation response from ${model}: ${parseError.message}`);
-          console.error(`  Response preview: ${cleanedText.substring(0, 200)}...`);
-          // If not last attempt, retry after 5s
-          if (attempt < retriesPerModel - 1) {
-            console.warn(`  ⚠️  Parse error on ${model} (attempt ${attempt + 1}/${retriesPerModel}). Retrying in ${waitBetweenAttempts / 1000}s...`);
-            await sleep(waitBetweenAttempts);
-            continue;
-          }
-          // Try next model if available
-          if (!isLastModel) {
-            console.warn(`  ⚠️  Parse error after ${retriesPerModel} attempts. Trying next model...`);
-            await sleep(2000);
-            break;
-          }
-          return {};
-        }
-        
-        // Validate that all keys are present
-        const missingInResponse = [];
-        for (const key of Object.keys(keyBatch)) {
-          if (!(key in translated)) {
-            missingInResponse.push(key);
-          }
-        }
-
-        if (missingInResponse.length > 0) {
-          console.warn(`  ⚠️  Warning: ${missingInResponse.length} keys missing in translation response from ${model}`);
-          // Still return what we got - partial translation is better than nothing
-        }
-
-        console.log(`  ✅ Successfully translated using ${model}`);
-        return translated;
-      } catch (error) {
-        // If it's the last attempt on the last model, give up
-        if (attempt === retriesPerModel - 1 && isLastModel) {
-          console.error(`  ❌ Error translating to ${targetLanguage} after trying all models:`, error.message);
-          return {};
-        }
-        
-        // For other errors, wait 5s and retry or try next model
-        if (attempt < retriesPerModel - 1) {
-          console.warn(`  ⚠️  Error on ${model} (attempt ${attempt + 1}/${retriesPerModel}): ${error.message}. Retrying in ${waitBetweenAttempts / 1000}s...`);
-          await sleep(waitBetweenAttempts);
-        } else {
-          console.warn(`  ⚠️  Error on ${model} after ${retriesPerModel} attempts: ${error.message}. Trying next model...`);
-          await sleep(2000);
-          break; // Try next model
-        }
-      }
-    }
-  }
-
-  // If we get here, all models failed
-  console.error(`  ❌ All models failed for ${targetLanguage}`);
-  return {};
+  return prompt;
 }
 
 /**
- * Translate missing keys using Groq API with batching (max 30 keys per request)
- * Uses model fallback and exponential backoff retry
+ * Clean and parse JSON response from API
+ * Removes markdown code blocks if present
+ * @param {string} text - Raw response text from API
+ * @returns {Object|null} Parsed JSON object or null if parsing fails
+ */
+export function parseTranslationResponse(text) {
+  if (!text) {
+    return null;
+  }
+
+  let cleanedText = text.trim();
+  
+  // Remove markdown code blocks if present
+  if (cleanedText.startsWith('```json')) {
+    cleanedText = cleanedText.replace(/^```json\n?/, '').replace(/\n?```$/, '');
+  } else if (cleanedText.startsWith('```')) {
+    cleanedText = cleanedText.replace(/^```\n?/, '').replace(/\n?```$/, '');
+  }
+
+  try {
+    return JSON.parse(cleanedText);
+  } catch (error) {
+    return null;
+  }
+}
+
+/**
+ * Translate a single batch of keys using the configured translation provider
+ * @param {Object} keyBatch - Object with keys to translate
+ * @param {Object} contextBatch - Object with context hints for keys
+ * @param {string} targetLanguage - Target language name (e.g., "Spanish")
+ * @param {string} localeCode - Locale code (e.g., "es")
+ * @param {number} batchNumber - Current batch number (for logging)
+ * @param {number} totalBatches - Total number of batches (for logging)
+ * @returns {Promise<Object>} Translated keys object
+ */
+async function translateKeyBatch(keyBatch, contextBatch, targetLanguage, localeCode, batchNumber, totalBatches) {
+  if (Object.keys(keyBatch).length === 0) {
+    return {};
+  }
+
+  // Get narrative instruction for this locale (if available)
+  const narrativeInstruction = LOCALE_TO_NARRATIVE[localeCode] || null;
+
+  // Use provider's translateBatch function
+  return await translationProvider.translateBatch(
+    keyBatch,
+    contextBatch,
+    targetLanguage,
+    localeCode,
+    narrativeInstruction,
+    batchNumber,
+    totalBatches
+  );
+}
+
+/**
+ * Translate missing keys using the configured translation provider with batching (max 30 keys per request)
+ * Uses provider-specific model fallback and exponential backoff retry
+ * @param {Object} missingKeys - Object with missing keys to translate
+ * @param {Object} contexts - Object with context hints for keys
+ * @param {string} targetLanguage - Target language name (e.g., "Spanish")
+ * @param {string} localeCode - Locale code (e.g., "es")
+ * @returns {Promise<Object>} Translated keys object
  */
 async function translateKeys(missingKeys, contexts, targetLanguage, localeCode) {
   if (Object.keys(missingKeys).length === 0) {
@@ -452,6 +356,9 @@ async function translateKeys(missingKeys, contexts, targetLanguage, localeCode) 
   const totalBatches = keyChunks.length;
   const allTranslations = {};
 
+  // Get provider-specific batch delay
+  const batchDelay = translationProvider.getBatchDelay();
+
   // Process each batch sequentially
   for (let i = 0; i < keyChunks.length; i++) {
     const keyBatch = keyChunks[i];
@@ -471,7 +378,7 @@ async function translateKeys(missingKeys, contexts, targetLanguage, localeCode) 
 
     // Rate limiting: wait between batches (except for the last batch)
     if (i < keyChunks.length - 1) {
-      await sleep(2500); // 2.5s delay between batches
+      await sleep(batchDelay);
     }
   }
 
@@ -483,6 +390,18 @@ async function translateKeys(missingKeys, contexts, targetLanguage, localeCode) 
  */
 async function main() {
   console.log('🚀 Starting translation process...\n');
+
+  // Initialize translation provider (checks availability and selects best option)
+  translationProvider = await getAvailableProvider();
+  
+  if (!translationProvider) {
+    console.error('❌ No translation providers available. Please check your API keys:');
+    console.error('   - GROQ_API_KEY for Groq');
+    console.error('   - GEMINI_API_KEY for Gemini');
+    process.exit(1);
+  }
+
+  console.log(`✓ Using translation provider: ${translationProvider.getProviderName()}\n`);
 
   // Read English file (source of truth)
   const enData = readJSON(EN_FILE);
@@ -539,9 +458,8 @@ async function main() {
     }
 
     // Rate limiting: wait between API calls to respect rate limits
-    // Minimum RPM is 30 (llama-3.3-70b, llama-4-scout, llama-3.1-8b)
-    // Using 2.5s delay = 24 RPM, safely under 30 RPM limit to prevent blocking
-    await sleep(2500);
+    // Use provider-specific delay
+    await sleep(translationProvider.getBatchDelay());
   }
 
   console.log('\n' + '='.repeat(50));

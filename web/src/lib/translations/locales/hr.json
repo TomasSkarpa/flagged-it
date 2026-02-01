@@ -206,5 +206,6 @@
   "game.round.label": "Runda",
   "game.round.progress": "Runda %d / %d",
   "game.hangman.title": "Pogađaj riječ",
-  "game.facts.title": "Pogađaj po činjenicama"
+  "game.facts.title": "Pogađaj po činjenicama",
+  "game.hangman.description": "Testirajte svoje geografsko znanje! Pogađajte nazive zemalja slovo po slovo prije nego što vam ponestane pokušaja."
 }

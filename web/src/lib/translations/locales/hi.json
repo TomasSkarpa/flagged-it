@@ -206,5 +206,6 @@
   "game.setup.start_game": "गेम शुरू करें",
   "game.setup.starting": "शुरू हो रहा है...",
   "game.hangman.title": "शब्द अनुमान",
-  "game.facts.title": "तथ्यों से अनुमान लगाएं"
+  "game.facts.title": "तथ्यों से अनुमान लगाएं",
+  "game.hangman.description": "अपनी भूगोल ज्ञान का परीक्षण करें! अनुमानों से बाहर होने से पहले देश के नामों का अक्षर दर अक्षर अनुमान लगाएं।"
 }

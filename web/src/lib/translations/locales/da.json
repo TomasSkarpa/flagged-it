@@ -206,5 +206,6 @@
   "game.round.label": "Runde",
   "game.round.progress": "Runde %d / %d",
   "game.hangman.title": "Bogstav Gæt",
-  "game.facts.title": "Gæt ved Fakta"
+  "game.facts.title": "Gæt ved Fakta",
+  "game.hangman.description": "Test din geografikundskab! Gæt landenavne bogstav for bogstav, før du løber tør for gæt."
 }

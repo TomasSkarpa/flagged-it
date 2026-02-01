@@ -206,5 +206,6 @@
   "game.round.label": "Kör",
   "game.round.progress": "Kör %d / %d",
   "game.hangman.title": "Keresd a szót",
-  "game.facts.title": "Találd ki tények alapján"
+  "game.facts.title": "Találd ki tények alapján",
+  "game.hangman.description": "Teszteld földrajzi ismereteidet! Találd ki az országneveket betűről betűre, mielőtt elfogynának a tippjeid."
 }

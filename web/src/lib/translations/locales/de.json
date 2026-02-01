@@ -206,5 +206,6 @@
   "game.round.label": "Runde",
   "game.round.progress": "Runde %d / %d",
   "game.hangman.title": "Galgenmännchen",
-  "game.facts.title": "Erraten durch Fakten"
+  "game.facts.title": "Erraten durch Fakten",
+  "game.hangman.description": "Testen Sie Ihr geografisches Wissen! Erraten Sie Ländernamen Buchstabe für Buchstabe, bevor Sie keine Versuche mehr haben."
 }

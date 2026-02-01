@@ -206,5 +206,6 @@
   "game.round.label": "Mzunguko",
   "game.round.progress": "Mzunguko %d / %d",
   "game.hangman.title": "Mchezo wa Kubahatisha Neno",
-  "game.facts.title": "Tambua kwa Mambo"
+  "game.facts.title": "Tambua kwa Mambo",
+  "game.hangman.description": "Jaribu ujuzi wako wa jiografia! Kisia majina ya nchi herufi kwa herufi kabla ya muda wa kukisia kumalizika."
 }

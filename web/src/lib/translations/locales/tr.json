@@ -206,5 +206,6 @@
   "game.round.label": "Tur",
   "game.round.progress": "Tur %d / %d",
   "game.hangman.title": "Adam Asmaca",
-  "game.facts.title": "Gerçeklerden Tahmin Et"
+  "game.facts.title": "Gerçeklerden Tahmin Et",
+  "game.hangman.description": "Coğrafya bilginizi test edin! Harcadığınız tahmin sayısı bitmeden ülke adlarını harf harf tahmin edin."
 }

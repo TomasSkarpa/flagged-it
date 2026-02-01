@@ -206,5 +206,6 @@
   "game.round.label": "รอบ",
   "game.round.progress": "รอบ %d / %d",
   "game.hangman.title": "เกมทายคำ",
-  "game.facts.title": "ทายประเทศจากข้อมูล"
+  "game.facts.title": "ทายประเทศจากข้อมูล",
+  "game.hangman.description": "ทดสอบความรู้ภูมิศาสตร์ของคุณ! ทายชื่อประเทศทีละตัวอักษร ก่อนที่จะหมดโอกาสทาย"
 }

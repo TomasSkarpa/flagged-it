@@ -206,5 +206,6 @@
   "game.round.label": "Ronde",
   "game.round.progress": "Ronde %d / %d",
   "game.hangman.title": "Letteren Raden",
-  "game.facts.title": "Raad het Land met Feiten"
+  "game.facts.title": "Raad het Land met Feiten",
+  "game.hangman.description": "Test je kennis van aardrijkskunde! Raad landnamen letter voor letter voordat je geen pogingen meer over hebt."
 }

@@ -206,5 +206,6 @@
   "game.round.label": "Runda",
   "game.round.progress": "Runda %d / %d",
   "game.hangman.title": "Wisielec",
-  "game.facts.title": "Zgadnij po Faktach"
+  "game.facts.title": "Zgadnij po Faktach",
+  "game.hangman.description": "Przetestuj swoją wiedzę geograficzną! Odgadnij nazwy krajów litera po literze, zanim skończą się twoje próby."
 }

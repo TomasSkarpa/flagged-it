@@ -206,5 +206,6 @@
   "game.round.label": "Kolo",
   "game.round.progress": "Kolo %d / %d",
   "game.hangman.title": "Hádaj slovo",
-  "game.facts.title": "Hádaj podľa faktov"
+  "game.facts.title": "Hádaj podľa faktov",
+  "game.hangman.description": "Otestujte svoje znalosti geografie! Hádajte názvy krajín písmeno po písmene skôr, než vám dôjdu možnosti."
 }

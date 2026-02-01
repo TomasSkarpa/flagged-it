@@ -401,8 +401,6 @@ async function main() {
     process.exit(1);
   }
 
-  console.log(`✓ Using translation provider: ${translationProvider.getProviderName()}\n`);
-
   // Read English file (source of truth)
   const enData = readJSON(EN_FILE);
   if (!enData) {

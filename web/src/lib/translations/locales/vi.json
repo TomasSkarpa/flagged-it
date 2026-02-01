@@ -205,7 +205,7 @@
   "game.score.label": "Điểm số",
   "game.round.label": "Vòng",
   "game.round.progress": "Vòng %d / %d",
-  "game.hangman.title": "Đoán từ",
+  "game.hangman.title": "Đoán chữ",
   "game.facts.title": "Đoán bằng sự kiện",
-  "game.hangman.description": "Kiểm tra kiến thức địa lý của bạn! Đoán tên quốc gia từng chữ cái trước khi hết lượt đoán."
+  "game.hangman.description": "Kiểm tra kiến thức địa lý của bạn! Đoán tên quốc gia từng chữ cái trước khi hết lượt."
 }

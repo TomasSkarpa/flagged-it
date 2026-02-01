@@ -77,6 +77,43 @@ const LOCALE_TO_LANGUAGE = {
   'el': 'Greek'
 };
 
+// Locale code to narrative instruction mapping for translation tone/style
+const LOCALE_TO_NARRATIVE = {
+  // Informal Group (T-form)
+  'cs': 'Use informal singular (T-form). Avoid formal plural unless addressing multiple people.',
+  'sk': 'Use informal singular (T-form). Avoid formal plural unless addressing multiple people.',
+  'hr': 'Use informal singular (T-form). Avoid formal plural unless addressing multiple people.',
+  'pl': 'Use informal singular (T-form). Avoid formal plural unless addressing multiple people.',
+  'ru': 'Use informal singular (T-form). Avoid formal plural unless addressing multiple people.',
+  'uk': 'Use informal singular (T-form). Avoid formal plural unless addressing multiple people.',
+  'de': 'Use informal (Du-form). Avoid the formal Sie.',
+  'nl': 'Use informal (Du-form). Avoid the formal Sie.',
+  'fr': 'Use informal (Tu). Avoid the formal Vous.',
+  'it': 'Use informal (Tu). Avoid the formal Lei.',
+  'es': 'Use informal (Tú). Avoid the formal Usted.',
+  'pt': 'Use informal (Tu). Avoid the formal Você.',
+  'da': 'Use informal. (Formal address is rare in modern digital contexts here).',
+  'sv': 'Use informal. (Formal address is rare in modern digital contexts here).',
+  'nb': 'Use informal. (Formal address is rare in modern digital contexts here).',
+  'fi': 'Use informal. (Formal address is rare in modern digital contexts here).',
+  'hu': 'Use informal singular.',
+  'tr': 'Use informal singular.',
+  'ro': 'Use informal singular.',
+  // Neutral/Polite Group
+  'en': 'Use active, imperative verbs. Friendly and direct.',
+  'ja': 'Use polite neutral (e.g., Desu/Masu in Japanese). Avoid "dictionary form" (too blunt) or "honorifics" (too stiff).',
+  'ko': 'Use polite neutral (e.g., Desu/Masu in Japanese). Avoid "dictionary form" (too blunt) or "honorifics" (too stiff).',
+  'zh': 'Use polite neutral (e.g., Desu/Masu in Japanese). Avoid "dictionary form" (too blunt) or "honorifics" (too stiff).',
+  'ar': 'Use Modern Standard Arabic (MSA). Use the masculine singular imperative as the neutral default.',
+  'hi': 'Use friendly, polite imperative. Use standard polite particles common in apps.',
+  'th': 'Use friendly, polite imperative. Use standard polite particles common in apps.',
+  'vi': 'Use friendly, polite imperative. Use standard polite particles common in apps.',
+  'id': 'Use standard friendly imperative. Focus on clarity and engagement.',
+  'ms': 'Use standard friendly imperative. Focus on clarity and engagement.',
+  'fil': 'Use standard friendly imperative. Focus on clarity and engagement.',
+  'sw': 'Use standard friendly imperative. Focus on clarity and engagement.'
+};
+
 // Groq API configuration
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
@@ -194,7 +231,7 @@ function chunkObject(obj, chunkSize) {
 /**
  * Translate a single batch of keys using Groq API with model fallback and exponential backoff retry
  */
-async function translateKeyBatch(keyBatch, contextBatch, targetLanguage, batchNumber, totalBatches) {
+async function translateKeyBatch(keyBatch, contextBatch, targetLanguage, localeCode, batchNumber, totalBatches) {
   if (Object.keys(keyBatch).length === 0) {
     return {};
   }
@@ -219,7 +256,12 @@ async function translateKeyBatch(keyBatch, contextBatch, targetLanguage, batchNu
 ${Object.entries(contextBatch).map(([key, context]) => `- "${key}": ${context}`).join('\n')}`
     : '';
 
-  const prompt = `You are a professional translator. Translate the following JSON key-value pairs from English to ${targetLanguage}.${contextInstructions}
+  // Get narrative instruction for this locale (if available)
+  const narrativeInstruction = LOCALE_TO_NARRATIVE[localeCode]
+    ? `\n\nNARRATIVE STYLE INSTRUCTION:\n${LOCALE_TO_NARRATIVE[localeCode]}`
+    : '';
+
+  const prompt = `You are a professional translator. Translate the following JSON key-value pairs from English to ${targetLanguage}.${contextInstructions}${narrativeInstruction}
 
 IMPORTANT INSTRUCTIONS:
 1. Translate ONLY the values, keep the keys exactly as they are
@@ -228,7 +270,7 @@ IMPORTANT INSTRUCTIONS:
 4. Preserve emojis and special characters
 5. Return ONLY valid JSON, no explanations or markdown formatting
 6. Maintain the same structure and formatting
-7. Use the context hints (if provided) to guide your translation style and meaning
+7. Use the context hints (if provided) to guide your translation style and meaning${narrativeInstruction ? '\n8. Follow the narrative style instruction above for the appropriate tone and formality level' : ''}
 
 JSON to translate:
 {
@@ -385,7 +427,7 @@ Return the translated JSON:`;
  * Translate missing keys using Groq API with batching (max 30 keys per request)
  * Uses model fallback and exponential backoff retry
  */
-async function translateKeys(missingKeys, contexts, targetLanguage) {
+async function translateKeys(missingKeys, contexts, targetLanguage, localeCode) {
   if (Object.keys(missingKeys).length === 0) {
     return {};
   }
@@ -419,6 +461,7 @@ async function translateKeys(missingKeys, contexts, targetLanguage) {
       keyBatch,
       contextBatch,
       targetLanguage,
+      localeCode,
       i + 1,
       totalBatches
     );
@@ -474,8 +517,8 @@ async function main() {
 
     console.log(`\n📋 ${locale}.json - Found ${Object.keys(missingKeys).length} missing keys`);
 
-    // Translate missing keys (pass contexts for translation hints)
-    const translations = await translateKeys(missingKeys, contexts, LOCALE_TO_LANGUAGE[locale]);
+    // Translate missing keys (pass contexts for translation hints and locale code for narrative instructions)
+    const translations = await translateKeys(missingKeys, contexts, LOCALE_TO_LANGUAGE[locale], locale);
 
     if (Object.keys(translations).length === 0) {
       console.warn(`  ⚠️  No translations received, skipping ${locale}.json`);

@@ -15,10 +15,10 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 // Preferred model order (will be filtered by availability and generateContent support)
 const PREFERRED_MODELS = [
-  'gemini-2.0-flash-exp',           // Primary: latest experimental model (fast, high quality)
-  'gemini-1.5-pro',                 // Fallback 1: high quality, good for complex translations
-  'gemini-1.5-flash',                // Fallback 2: fast, efficient
-  'gemini-1.0-pro'                   // Fallback 3: stable, reliable
+  'gemini-2.5-flash',                // Primary: latest flash model (fast, high quality)
+  'gemini-2.5-pro',                  // Fallback 1: latest pro model (high quality, good for complex translations)
+  'gemini-1.5-pro',                  // Fallback 2: stable pro model (high quality)
+  'gemini-1.5-flash'                  // Fallback 3: stable flash model (fast, efficient)
 ];
 
 // Discovered available models (will be populated by checkAvailability)

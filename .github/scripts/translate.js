@@ -11,9 +11,9 @@
  * 5. Updates locale files with new translations
  * 
  * Provider Selection:
- * - Default provider: Groq (can be changed via TRANSLATION_PROVIDER environment variable)
- * - Available providers: 'groq', 'gemini'
- * - Set TRANSLATION_PROVIDER=gemini to use Google Gemini API
+ * - Default provider: Gemini (can be changed via TRANSLATION_PROVIDER environment variable)
+ * - Available providers: 'gemini', 'groq'
+ * - Set TRANSLATION_PROVIDER=groq to use Groq API instead
  * 
  * Batching:
  * - Maximum 30 translations per API request to avoid token limits

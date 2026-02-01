@@ -74,7 +74,7 @@ export async function checkAllProviders() {
 }
 
 /**
- * Get the first available provider (preference: Groq > Gemini)
+ * Get the first available provider (preference: Gemini > Groq)
  * @returns {Promise<Object>} Available provider module or null if none available
  */
 export async function getAvailableProvider() {
@@ -94,7 +94,7 @@ export async function getAvailableProvider() {
   }
 
   // Try providers in preference order
-  const preferenceOrder = ['groq', 'gemini'];
+  const preferenceOrder = ['gemini', 'groq'];
   
   for (const providerName of preferenceOrder) {
     const result = results[providerName];

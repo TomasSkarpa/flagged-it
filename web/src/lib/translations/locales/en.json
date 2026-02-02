@@ -457,7 +457,7 @@
   },
   "home.hero.title": {
     "value": "Flagged It",
-    "_context": "Main hero title on the home page, the application name/brand."
+    "_context": "Main hero title on the home page, the application name/brand. Do not translate, keep as 'Flagged It'."
   },
   "home.hero.subtitle": {
     "value": "Test Your Geography Knowledge",

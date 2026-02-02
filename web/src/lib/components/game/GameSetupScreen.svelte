@@ -60,7 +60,7 @@
 	}
 </script>
 
-<div class="text-center">
+<div class="text-center px-4 md:px-8">
 	<h1 class="text-4xl md:text-6xl font-bold text-sandy-light mb-4">
 		{#if emoji}
 			<span class="mr-2 emoji-blue">{emoji}</span>

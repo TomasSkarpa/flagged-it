@@ -240,7 +240,7 @@
 				<!-- Guess Input -->
 				<div class="card-game max-w-2xl mx-auto">
 					<p class="text-lg text-text-muted mb-4 text-center">{makeGuessText}</p>
-					<div class="flex gap-4">
+					<div class="flex flex-col sm:flex-row gap-4">
 						<input
 							type="text"
 							bind:this={guessInputElement}
@@ -248,12 +248,12 @@
 							on:keypress={handleKeyPress}
 							placeholder={enterCountryText}
 							disabled={isLoading || gameComplete}
-							class="flex-1 px-4 py-3 rounded-lg border-2 border-white/20 bg-white/5 text-sandy-light placeholder:text-text-muted focus:outline-none focus:border-primary disabled:opacity-50"
+							class="flex-1 px-4 py-3 rounded-lg border-2 border-white/20 bg-white/5 text-sandy-light placeholder:text-text-muted focus:outline-none focus:border-primary disabled:opacity-50 min-w-0"
 						/>
 						<button
 							on:click={handleSubmitGuess}
 							disabled={isLoading || !guessInput.trim() || gameComplete}
-							class="btn-primary px-8 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+							class="btn-primary px-6 sm:px-8 py-3 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap flex-shrink-0"
 						>
 							{guessText}
 						</button>

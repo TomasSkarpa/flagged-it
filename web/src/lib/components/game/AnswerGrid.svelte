@@ -66,7 +66,7 @@
 	}
 </script>
 
-<div class="grid gap-4 mb-6 {columns === 1 ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'}">
+<div class="grid gap-4 {columns === 1 ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'}">
 	{#each options as option, index (getOptionKey(option, index))}
 		<button
 			on:click={() => handleSelect(option)}

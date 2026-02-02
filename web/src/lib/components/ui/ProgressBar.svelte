@@ -14,7 +14,7 @@
 	}[color] || 'bg-terracotta';
 </script>
 
-<div class="w-full">
+<div class="w-full my-[5%]">
 	{#if showLabel && label}
 		<div class="flex justify-between items-center mb-2">
 			<span class="text-sm text-sandy-light font-medium">{label}</span>

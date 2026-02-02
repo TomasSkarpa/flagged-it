@@ -44,6 +44,7 @@
 	let guessInputElement: HTMLInputElement | null = null;
 	let allCountries: Country[] = [];
 	let countriesLoaded = false;
+	let flagImageLoaded = false;
 
 	// Reactive translations - will update when locale changes
 	$: currentLocale = $locale;
@@ -90,6 +91,7 @@
 		score = 0;
 		total = 0;
 		selectedRegion = event.detail.region || '';
+		flagImageLoaded = false;
 		
 		try {
 			const result = await startGame(selectedRegion || '');
@@ -152,6 +154,7 @@
 		try {
 			const question = await getQuestion(sessionId);
 			currentQuestion = question;
+			flagImageLoaded = false; // Reset flag loading state for new question
 			// Reset selectedAnswer when new question loads
 			selectedAnswer = null;
 			// Focus input if using text input mode
@@ -179,8 +182,9 @@
 	}
 
 	// Re-fetch current question when locale changes (to update country names)
-	let previousLocale: string = currentLocale;
-	$: if (gameStarted && currentQuestion && currentLocale !== previousLocale && !showFeedback && !isLoading) {
+	// Initialize to null to avoid triggering on initial mount
+	let previousLocale: string | null = null;
+	$: if (gameStarted && currentQuestion && previousLocale !== null && currentLocale !== previousLocale && !showFeedback && !isLoading) {
 		previousLocale = currentLocale;
 		// Re-fetch the current question with new locale to get translated country names
 		if (sessionId && currentQuestion) {
@@ -193,6 +197,10 @@
 				console.error('Failed to reload question with new locale:', err);
 			});
 		}
+	}
+	// Set previousLocale when game starts to track future locale changes
+	$: if (gameStarted && currentQuestion && previousLocale === null) {
+		previousLocale = currentLocale;
 	}
 
 	async function handleSubmitTextGuess() {
@@ -313,12 +321,18 @@
 				{correctAnswer}
 				{error}
 			>
-				<img 
-					slot="content"
-					src={currentQuestion.flagUrl} 
-					alt="Country flag" 
-					class="w-80 h-auto"
-				/>
+				<div slot="content" class="relative w-full max-w-80 aspect-square flex items-center justify-center mx-auto">
+					{#if !flagImageLoaded}
+						<div class="absolute w-full max-w-80 aspect-[3/2.1] bg-white/5 rounded-[25px] animate-pulse border border-white/10"></div>
+					{/if}
+					<img 
+						src={currentQuestion.flagUrl} 
+						alt="Country flag" 
+						class="w-full max-w-80 h-auto relative {flagImageLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200"
+						on:load={() => flagImageLoaded = true}
+						on:error={() => flagImageLoaded = true}
+					/>
+				</div>
 				
 				<div slot="answers">
 					{#if usesTextInput(difficultyMode)}

@@ -16,7 +16,7 @@
 </script>
 
 <div class="card-game relative overflow-hidden">
-	<h2 class="text-xl md:text-2xl font-bold text-sandy-light text-center mb-3">
+	<h2 class="text-xl md:text-2xl font-bold text-sandy-light text-center mb-3 mt-2">
 		{question}
 	</h2>
 	
@@ -46,7 +46,13 @@
 				{#if !isCorrect && correctAnswer && !customMessage}
 					<p class="text-xl text-white/90 mt-2">{correctAnswer}</p>
 				{/if}
-			</div>
-		</div>
+	</div>
+</div>
+
+<style>
+	.card-game h2 {
+		margin-top: 0.5rem !important;
+	}
+</style>
 	{/if}
 </div>

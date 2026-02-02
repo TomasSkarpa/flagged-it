@@ -16,11 +16,11 @@
 </script>
 
 <div class="mb-2">
-	<div class="flex flex-col md:flex-row items-center justify-between gap-2 mb-2">
-		<ScoreDisplay {score} {total} showPercentage={false} showProgress={false} />
+	<div class="flex flex-row items-center justify-between gap-2 mb-2">
 		<div class="text-base text-text-light font-semibold stat-number round-counter">
 			{roundText}
 		</div>
+		<ScoreDisplay {score} {total} showPercentage={false} showProgress={false} />
 	</div>
 	{#if showProgressBar}
 		<ProgressBar current={total} total={totalRounds} showLabel={false} />

@@ -1,16 +1,4 @@
 {
-  "button.dashboard": {
-    "value": "Dashboard",
-    "_context": "Navigation button to return to the main dashboard/game selection screen."
-  },
-  "button.new_game": {
-    "value": "New Game",
-    "_context": "Button label for starting a new game session. Keep it short and action-oriented."
-  },
-  "dashboard.title": {
-    "value": "Choose Your Game Mode",
-    "_context": "Main heading on the dashboard screen where users select which game mode to play."
-  },
   "game.flag.title": {
     "value": "Guess by Flag",
     "_context": "Title of the flag guessing game mode. Players identify countries from their flag images."
@@ -55,14 +43,6 @@
     "value": "Higher or Lower",
     "_context": "Title of the higher/lower comparison game mode. Players guess if one country's statistic is higher or lower than another."
   },
-  "game.higher_lower.current_streak_label": {
-    "value": "Current Streak",
-    "_context": "Label for displaying the player's current consecutive correct answers in the higher/lower game."
-  },
-  "game.higher_lower.highest_streak_label": {
-    "value": "Highest Streak",
-    "_context": "Label for displaying the player's best consecutive correct answers streak in the higher/lower game."
-  },
   "game.guessing.title": {
     "value": "What Country is This",
     "_context": "Generic title for guessing games where players identify countries. Used in Worldle and similar modes."
@@ -91,14 +71,6 @@
     "value": "Type answer to win",
     "_context": "Description of the expert difficulty mode in flag game, explaining that players must type the country name."
   },
-  "game.correct": {
-    "value": "Correct! It's {{.Country}}!",
-    "_context": "Success message displayed when player answers correctly. Template variable {{.Country}} is replaced with the correct country name."
-  },
-  "game.wrong": {
-    "value": "Wrong! It was {{.Country}}",
-    "_context": "Error message displayed when player answers incorrectly. Template variable {{.Country}} is replaced with the correct country name."
-  },
   "game.correct_short": {
     "value": "Correct!",
     "_context": "Short success message displayed in feedback overlays when player answers correctly. Used in GameContainer component."
@@ -106,18 +78,6 @@
   "game.wrong_short": {
     "value": "Wrong!",
     "_context": "Short error message displayed in feedback overlays when player answers incorrectly. Used in GameContainer component."
-  },
-  "game.score": {
-    "value": "Score: {{.Score}}/10",
-    "_context": "Score display format showing current score out of 10 rounds. Template variables {{.Score}} is replaced with the score number."
-  },
-  "game.complete": {
-    "value": "Game Complete! Final Score: {{.Score}}/10 ({{.Percent}}%)",
-    "_context": "Completion message displayed at the end of a game session. Shows final score and percentage. Template variables: {{.Score}} for score, {{.Percent}} for percentage."
-  },
-  "error.loading_countries": {
-    "value": "Error loading countries data",
-    "_context": "Error message displayed when the application fails to load country data from the API or data source."
   },
   "game.hangman.guess_country": {
     "value": "Guess the country name!",
@@ -151,18 +111,6 @@
     "value": "Wrong guesses: %d/%d",
     "_context": "Counter showing incorrect letter guesses in hangman game. First %d is current wrong guesses, second %d is maximum allowed (typically 6)."
   },
-  "game.hangman.score": {
-    "value": "Score: %d/5",
-    "_context": "Score display format for hangman game showing current score out of 5 rounds. %d placeholder is replaced with the score number."
-  },
-  "game.shape.select_region": {
-    "value": "Select Region",
-    "_context": "Label for the region selection dropdown in shape game setup screen."
-  },
-  "game.shape.choose_region": {
-    "value": "Choose a region and guess all country shapes!",
-    "_context": "Description text explaining the shape game mechanics and encouraging players to select a region filter."
-  },
   "game.shape.difficulty.beginner": {
     "value": "Beginner",
     "_context": "Difficulty level name for shape game with multiple choice (4 options) and neighboring countries visible on the map."
@@ -194,58 +142,6 @@
   "game.shape.difficulty.expert.desc": {
     "value": "Type answer, silhouette only",
     "_context": "Description of expert difficulty in shape game, explaining typed answer format and only the country shape is shown without neighbors."
-  },
-  "game.shape.enter_country": {
-    "value": "Enter country name...",
-    "_context": "Placeholder text for the country name input field in shape game when difficulty requires typing answers."
-  },
-  "game.shape.guess": {
-    "value": "Guess",
-    "_context": "Button label for submitting a country name guess in the shape game."
-  },
-  "game.shape.score": {
-    "value": "Score: %d/%d",
-    "_context": "Score display format for shape game showing current score out of total rounds. First %d is score, second %d is total rounds (typically 10)."
-  },
-  "game.shape.progress": {
-    "value": "%s: Country %d/%d",
-    "_context": "Progress indicator for shape game showing region name and current round. %s is region name, first %d is current round, second %d is total rounds."
-  },
-  "game.shape.correct": {
-    "value": "Correct! It's %s",
-    "_context": "Success message displayed when player correctly identifies a country shape. %s placeholder is replaced with the correct country name."
-  },
-  "game.shape.wrong": {
-    "value": "Wrong! It's %s",
-    "_context": "Error message displayed when player incorrectly identifies a country shape. %s placeholder is replaced with the correct country name."
-  },
-  "game.shape.complete": {
-    "value": "Game Complete! Final Score: %d/%d (%.0f%%)",
-    "_context": "Completion message displayed at the end of shape game session. Shows final score and percentage. First %d is score, second %d is total, %.0f%% is percentage."
-  },
-  "game.facts.enter_country": {
-    "value": "Enter country name...",
-    "_context": "Placeholder text for the country name input field in facts guessing game."
-  },
-  "game.facts.guess": {
-    "value": "Guess",
-    "_context": "Button label for submitting a country name guess in the facts game."
-  },
-  "game.facts.score": {
-    "value": "Score: %d/5",
-    "_context": "Score display format for facts game showing current score out of 5 rounds. %d placeholder is replaced with the score number."
-  },
-  "game.facts.complete": {
-    "value": "Game Complete! Final Score: %d/5 (%.0f%%)",
-    "_context": "Completion message displayed at the end of facts game session. Shows final score and percentage. First %d is score, second %d is total (5), %.0f%% is percentage."
-  },
-  "game.facts.no_facts": {
-    "value": "No countries with facts available",
-    "_context": "Error message displayed when the facts game cannot find any countries with fact data to use for questions."
-  },
-  "game.facts.fact_number": {
-    "value": "Fact %d: %s",
-    "_context": "Format string for displaying fact text with its number. First %d is fact number (1-3), %s is the fact text content."
   },
   "game.facts.guess_country": {
     "value": "Guess the country based on the fact!",
@@ -303,14 +199,6 @@
     "value": "Previous Guesses:",
     "_context": "Header text for the guess history section in facts game, showing all previous attempts for the current round."
   },
-  "game.facts.fact_label": {
-    "value": "Fact: %s",
-    "_context": "Label format for displaying fact text. %s placeholder is replaced with the fact content. Used in guess history display."
-  },
-  "game.facts.guess_number": {
-    "value": "Guess %d: %s",
-    "_context": "Format string for displaying guess history entries. First %d is guess number (1st, 2nd, 3rd attempt), %s is the guessed country name."
-  },
   "game.guessing.make_guess": {
     "value": "Make a guess!",
     "_context": "Instruction prompt encouraging players to submit a guess in Worldle or similar guessing games."
@@ -367,10 +255,6 @@
     "value": "Guess the country by comparing continent, population, and area!",
     "_context": "Description text explaining Worldle game mechanics. Players get hints about how their guess compares to the target country."
   },
-  "game.higher_lower.description": {
-    "value": "Try to guess which country has a higher population!",
-    "_context": "Description text for higher/lower game. Note: This is a generic description; the actual game supports multiple categories (population, area, continents)."
-  },
   "game.higher_lower.score": {
     "value": "Score: %d",
     "_context": "Score display format for higher/lower game showing current streak/score. %d placeholder is replaced with the score number."
@@ -383,21 +267,9 @@
     "value": "Lower",
     "_context": "Button label for selecting 'lower' option in higher/lower game. Player guesses that the right country's value is lower than the left."
   },
-  "game.higher_lower.next_round": {
-    "value": "Next Round",
-    "_context": "Button label for proceeding to the next comparison round in higher/lower game. Currently not actively used as game auto-advances."
-  },
   "game.higher_lower.start": {
     "value": "Start Game",
     "_context": "Button label for starting a new higher/lower game session from the setup screen."
-  },
-  "game.higher_lower.population": {
-    "value": "Population: %d",
-    "_context": "Format string for displaying population value in higher/lower game. %d placeholder is replaced with the population number (formatted with commas)."
-  },
-  "game.higher_lower.population_unknown": {
-    "value": "Population: ?",
-    "_context": "Display format for unknown population value in higher/lower game. Shown on the right panel before player makes a guess."
   },
   "region.world": {
     "value": "World",
@@ -422,38 +294,6 @@
   "region.oceania": {
     "value": "Oceania",
     "_context": "Region filter option for selecting only Oceanian countries (Australia, New Zealand, Pacific islands) in game setup screens."
-  },
-  "html.loading": {
-    "value": "Shifting tectonic plates to form countries...",
-    "_context": "Creative loading message displayed during initial application load. Shown while the app is initializing."
-  },
-  "html.loading_app": {
-    "value": "Loading application...",
-    "_context": "Generic loading message displayed while the application is loading or initializing."
-  },
-  "html.error_title": {
-    "value": "⚠️ Error Loading Application",
-    "_context": "Error page title displayed when the application fails to load or encounters a critical error."
-  },
-  "html.error_message": {
-    "value": "Failed to load the application. Please refresh the page and try again.",
-    "_context": "Error message displayed on error page, instructing users to refresh if the application fails to load."
-  },
-  "scoreboard.empty": {
-    "value": "No scores yet! Play some games to see your progress here.",
-    "_context": "Empty state message displayed on scoreboard page when user hasn't played any games yet or has no saved scores."
-  },
-  "scoreboard.score": {
-    "value": "Score",
-    "_context": "Column header label in scoreboard table showing the score value for each game session."
-  },
-  "scoreboard.percent": {
-    "value": "Percent",
-    "_context": "Column header label in scoreboard table showing the percentage score (accuracy) for each game session."
-  },
-  "scoreboard.date": {
-    "value": "Date",
-    "_context": "Column header label in scoreboard table showing when each game session was played."
   },
   "home.hero.title": {
     "value": "Flagged It",
@@ -611,14 +451,6 @@
     "value": "Which country is larger?",
     "_context": "Description text for area category in higher/lower game, explaining what players are comparing."
   },
-  "game.higher_lower.category.continents": {
-    "value": "Continents",
-    "_context": "Category option label for higher/lower game mode comparing number of countries per continent."
-  },
-  "game.higher_lower.category.continents.desc": {
-    "value": "Which continent has more countries?",
-    "_context": "Description text for continents category in higher/lower game, explaining what players are comparing."
-  },
   "game.higher_lower.loading": {
     "value": "Loading...",
     "_context": "Loading state text displayed while higher/lower game is fetching comparison data or initializing."
@@ -763,41 +595,9 @@
     "value": "Error",
     "_context": "Generic error label used in error messages and error states throughout the application."
   },
-  "common.cancel": {
-    "value": "Cancel",
-    "_context": "Button label for canceling an action or closing a dialog/modal."
-  },
-  "common.apply": {
-    "value": "Apply",
-    "_context": "Button label for applying changes or confirming selections in dialogs or filters."
-  },
-  "common.close": {
-    "value": "Close",
-    "_context": "Button label for closing dialogs, modals, or panels."
-  },
-  "common.save": {
-    "value": "Save",
-    "_context": "Button label for saving changes or settings."
-  },
-  "common.back": {
-    "value": "Back",
-    "_context": "Button label for navigating back to the previous page or screen."
-  },
-  "common.next": {
-    "value": "Next",
-    "_context": "Button label for proceeding to the next step, page, or item."
-  },
-  "common.previous": {
-    "value": "Previous",
-    "_context": "Button label for going back to the previous step, page, or item."
-  },
   "common.home": {
     "value": "Home",
     "_context": "Navigation label for returning to the home page."
-  },
-  "common.go_home": {
-    "value": "Go Home",
-    "_context": "Button label for navigating to the home page, typically used in error pages or after completing actions."
   },
   "scoreboard.title": {
     "value": "Scoreboard",
@@ -826,10 +626,6 @@
   "game.score.label": {
     "value": "Score",
     "_context": "Generic label for score display in game headers and components."
-  },
-  "game.round.label": {
-    "value": "Round",
-    "_context": "Generic label for round number display in game headers and components."
   },
   "game.round.progress": {
     "value": "Round %d / %d",

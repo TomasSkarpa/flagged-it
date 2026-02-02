@@ -176,7 +176,7 @@
   "game.facts.complete": "गेम पूरा हुआ! अंतिम स्कोर: %d/5 (%.0f%%)",
   "game.facts.no_facts": "कोई तथ्य उपलब्ध नहीं हैं",
   "scoreboard.date": "तारीख",
-  "home.hero.title": "फ्लैग्ड इट",
+  "home.hero.title": "Flagged It",
   "home.hero.subtitle": "अपने भूगोल ज्ञान का परीक्षण करें",
   "home.hero.description": "मजेदार गेम खेलें और दुनिया भर के देशों के बारे में जानें!",
   "home.game.flag.description": "झंडों से देशों की पहचान करें",

@@ -19,6 +19,12 @@
 	import { getAllCountries } from '$lib/api/debug';
 	import { calculateCurrentRound } from '$lib/utils/gameUtils';
 
+	const DEFAULT_MAX_ROUNDS = 10;
+	const DEFAULT_TIME_LIMIT = 10; // seconds
+	const FEEDBACK_DISPLAY_DURATION = 2000; // milliseconds
+	const FEEDBACK_FADE_DELAY = 150; // milliseconds
+	const MS_TO_SECONDS = 1000; // conversion factor
+	
 	let sessionId: string | null = null;
 	let currentQuestion: SpeedChallengeQuestion | null = null;
 	let currentGameType: string = '';
@@ -26,10 +32,10 @@
 	let score = 0; // Total points
 	let total = 0; // Rounds completed
 	let correctAnswers = 0; // Number of correct answers
-	let maxRounds = 10;
-	let originalMaxRounds = 10; // Preserve original maxRounds for game over screen
-	let timeLimit = 30; // seconds
-	let timeRemaining = 30;
+	let maxRounds = DEFAULT_MAX_ROUNDS;
+	let originalMaxRounds = DEFAULT_MAX_ROUNDS; // Preserve original maxRounds for game over screen
+	let timeLimit = DEFAULT_TIME_LIMIT; // seconds
+	let timeRemaining = DEFAULT_TIME_LIMIT;
 	let isLoading = false;
 	let isSubmittingAnswer = false;
 	let error: string | null = null;
@@ -120,7 +126,7 @@
 		score = 0;
 		total = 0;
 		correctAnswers = 0;
-		timeRemaining = timeLimit;
+		timeRemaining = timeLimit || DEFAULT_TIME_LIMIT;
 		
 		try {
 			const result = await startSpeedChallenge(timeLimit, maxRounds);
@@ -138,9 +144,9 @@
 			
 			currentQuestion = result.question;
 			currentGameType = result.currentGameType || result.question?.gameType || '';
-			maxRounds = result.maxRounds || 10;
+			maxRounds = result.maxRounds || DEFAULT_MAX_ROUNDS;
 			originalMaxRounds = maxRounds; // Preserve for game over screen
-			timeLimit = result.timeLimit || 30;
+			timeLimit = result.timeLimit || DEFAULT_TIME_LIMIT;
 			timeRemaining = timeLimit;
 			score = result.score || 0;
 			total = result.total || 0;
@@ -169,7 +175,7 @@
 		timerInterval = setInterval(() => {
 			if (showFeedback) return;
 			
-			const elapsed = (Date.now() - questionStartTime) / 1000;
+			const elapsed = (Date.now() - questionStartTime) / MS_TO_SECONDS;
 			timeRemaining = Math.max(0, timeLimit - elapsed);
 			
 			if (timeRemaining <= 0) {
@@ -228,7 +234,7 @@
 					if (result.finished) {
 						// Ensure originalMaxRounds is preserved before finishing
 						if (!originalMaxRounds || originalMaxRounds === 0) {
-							originalMaxRounds = maxRounds || 10;
+							originalMaxRounds = maxRounds || DEFAULT_MAX_ROUNDS;
 						}
 						gameFinished = true;
 						gameStarted = false;
@@ -242,8 +248,8 @@
 						factsInput = '';
 						startTimer();
 					}
-				}, 150);
-			}, 2000);
+				}, FEEDBACK_FADE_DELAY);
+			}, FEEDBACK_DISPLAY_DURATION);
 		} catch (err) {
 			isSubmittingAnswer = false;
 			error = err instanceof Error ? err.message : 'Failed to submit answer';
@@ -295,7 +301,7 @@
 		/>
 		{:else if gameFinished}
 			{@const finalCorrectAnswers = Math.min(correctAnswers || 0, total || 0)}
-			{@const finalMaxRounds = originalMaxRounds > 0 ? originalMaxRounds : (maxRounds > 0 ? maxRounds : 10)}
+			{@const finalMaxRounds = originalMaxRounds > 0 ? originalMaxRounds : (maxRounds > 0 ? maxRounds : DEFAULT_MAX_ROUNDS)}
 			<GameOverScreen
 				score={finalCorrectAnswers}
 				totalRounds={finalMaxRounds}

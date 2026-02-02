@@ -61,12 +61,21 @@
 				// Reset to current theme if interrupted
 				if (currentThemeIndex !== -1) {
 					displayedIconIndex = currentThemeIndex;
+					isAnimating = false;
 				}
 				return;
 			}
 			
-			isAnimating = true;
+			// Set the icon index first
 			displayedIconIndex = currentCycleIndex;
+			
+			// Safari: Use requestAnimationFrame to ensure proper class application
+			// For the first icon, ensure animation starts properly
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					isAnimating = true;
+				});
+			});
 			
 			currentCycleIndex++;
 			
@@ -77,20 +86,38 @@
 					setTimeout(showNext, 100); // Delay between transitions
 				}, 800);
 			} else {
-				// After showing all, return to current theme
+				// After showing all themes (0, 1, 2), return to current theme
+				// At this point, displayedIconIndex is 2 (the last icon shown)
 				setTimeout(() => {
-					isAnimating = false;
 					if (currentThemeIndex !== -1) {
-						displayedIconIndex = currentThemeIndex;
+						// Ensure we're showing the current theme icon
+						// If it's already correct, we can just clear animation
+						// Otherwise, set it first to ensure it's visible
+						if (displayedIconIndex !== currentThemeIndex) {
+							displayedIconIndex = currentThemeIndex;
+						}
+						// Clear animation after ensuring icon is set
+						// Use a small delay to ensure the index is applied
+						setTimeout(() => {
+							isAnimating = false;
+							scheduleNextShowcase();
+						}, 10);
+					} else {
+						isAnimating = false;
+						scheduleNextShowcase();
 					}
-					// Schedule next showcase with random delay
-					scheduleNextShowcase();
 				}, 800);
 			}
 		};
 		
-		// Start the quick showcase
-		showNext();
+		// Start the cycle - ensure first icon (sun/light at index 0) is shown properly
+		// Clear any existing animation state first
+		isAnimating = false;
+		// Small delay to ensure Safari processes the state change, then start cycle
+		// The first call to showNext() will show index 0 (sun), then cycle through 1 (moon), 2 (computer)
+		setTimeout(() => {
+			showNext();
+		}, 100);
 	}
 	
 	function scheduleNextShowcase() {
@@ -303,6 +330,9 @@
 		width: 1.125rem;
 		height: 1.125rem;
 		overflow: hidden;
+		/* Safari: Force hardware acceleration */
+		transform: translateZ(0);
+		-webkit-transform: translateZ(0);
 	}
 	
 	.theme-icon {
@@ -316,29 +346,55 @@
 		align-items: center;
 		justify-content: center;
 		opacity: 0;
-		transform: translateX(100%);
+		transform: translateX(100%) translateZ(0);
+		-webkit-transform: translateX(100%) translateZ(0);
 		transition: opacity 0.7s ease, transform 0.7s ease;
 		pointer-events: none;
+		/* Safari: Force hardware acceleration and prevent flickering */
+		will-change: transform, opacity;
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
 	}
 	
 	.theme-icon.active {
 		opacity: 1;
-		transform: translateX(0);
+		transform: translateX(0) translateZ(0);
+		-webkit-transform: translateX(0) translateZ(0);
 		pointer-events: auto;
 	}
 	
 	.theme-icon.animating {
 		animation: iconSlide 0.7s ease;
+		/* Safari: Ensure animation uses hardware acceleration */
+		will-change: transform, opacity;
 	}
 	
 	@keyframes iconSlide {
 		0% {
-			transform: translateX(-100%);
+			transform: translateX(-100%) translateZ(0);
+			-webkit-transform: translateX(-100%) translateZ(0);
 			opacity: 0;
 		}
 		100% {
-			transform: translateX(0);
+			transform: translateX(0) translateZ(0);
+			-webkit-transform: translateX(0) translateZ(0);
 			opacity: 1;
+		}
+	}
+	
+	/* Safari-specific fixes */
+	@supports (-webkit-appearance: none) {
+		.theme-icon {
+			/* Safari: Ensure proper stacking */
+			z-index: 1;
+		}
+		
+		.theme-icon.active {
+			z-index: 2;
+		}
+		
+		.theme-icon.animating {
+			z-index: 3;
 		}
 	}
 	

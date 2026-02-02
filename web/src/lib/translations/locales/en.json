@@ -267,10 +267,6 @@
     "value": "Lower",
     "_context": "Button label for selecting 'lower' option in higher/lower game. Player guesses that the right country's value is lower than the left."
   },
-  "game.higher_lower.start": {
-    "value": "Start Game",
-    "_context": "Button label for starting a new higher/lower game session from the setup screen."
-  },
   "region.world": {
     "value": "World",
     "_context": "Region filter option for selecting all countries worldwide (no regional filter)."
@@ -454,10 +450,6 @@
   "game.higher_lower.loading": {
     "value": "Loading...",
     "_context": "Loading state text displayed while higher/lower game is fetching comparison data or initializing."
-  },
-  "game.higher_lower.game_over": {
-    "value": "Game Over!",
-    "_context": "Main heading displayed on the game over screen after player makes an incorrect guess in higher/lower game."
   },
   "game.higher_lower.final_score": {
     "value": "Final Score",

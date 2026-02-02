@@ -37,11 +37,11 @@
 	$: currentLocale = $locale;
 	$: setupDescription = t('game.higher_lower.setup.description', undefined, currentLocale);
 	$: higherLowerTitle = t('game.higher_lower.title', undefined, currentLocale);
-	$: gameOverText = t('game.higher_lower.game_over', undefined, currentLocale);
+	$: gameOverText = t('game.over.title', undefined, currentLocale);
 	$: finalScoreText = t('game.higher_lower.final_score', undefined, currentLocale);
 	$: highScoreText = t('game.higher_lower.high_score', undefined, currentLocale);
 	$: loadingText = t('game.higher_lower.loading', undefined, currentLocale);
-	$: startText = t('game.higher_lower.start', undefined, currentLocale);
+	$: startText = t('game.setup.start_game', undefined, currentLocale);
 	$: playAgainText = t('game.over.play_again', undefined, currentLocale);
 	$: hasText = t('game.higher_lower.has', undefined, currentLocale);
 	$: thanText = t('game.higher_lower.than', undefined, currentLocale);

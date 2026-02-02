@@ -61,6 +61,14 @@
 			icon: '📚',
 			route: '/facts-game',
 			available: true
+		},
+		{
+			id: 'speed-challenge',
+			title: t('game.speed_challenge.setup.title', undefined, currentLocale) || 'Speed Challenge',
+			description: t('home.game.speed_challenge.description', undefined, currentLocale) || t('game.speed_challenge.setup.description', undefined, currentLocale) || 'Test your geography knowledge across multiple game types with time pressure!',
+			icon: '⚡',
+			route: '/speed-challenge',
+			available: true
 		}
 	];
 	

@@ -39,6 +39,10 @@
     "value": "Guess countries based on interesting facts!",
     "_context": "Description text for the facts game shown on the home page game card."
   },
+  "home.game.speed_challenge.description": {
+    "value": "Test your geography knowledge across multiple game types with time pressure! Answer quickly to earn bonus points.",
+    "_context": "Description text for the Speed Challenge game shown on the home page game card."
+  },
   "game.higher_lower.title": {
     "value": "Higher or Lower",
     "_context": "Title of the higher/lower comparison game mode. Players guess if one country's statistic is higher or lower than another."
@@ -50,6 +54,14 @@
   "game.worldle.title": {
     "value": "Worldle",
     "_context": "Title of the Worldle game mode. A Wordle-style game where players guess a country using hints about continent, population, and area."
+  },
+  "game.speed_challenge.setup.title": {
+    "value": "Speed Challenge",
+    "_context": "Title of the Speed Challenge game mode. A fast-paced game combining multiple game types with time pressure."
+  },
+  "game.speed_challenge.setup.description": {
+    "value": "Test your geography knowledge across multiple game types with time pressure! Answer quickly to earn bonus points.",
+    "_context": "Description text explaining the Speed Challenge game mechanics shown on the setup screen."
   },
   "game.flag.question": {
     "value": "Which country does this flag belong to?",

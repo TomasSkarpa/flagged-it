@@ -137,6 +137,13 @@ func SetupRoutes() {
 	http.HandleFunc("/api/game/facts/skip", combinedMiddleware(factsHandler.Skip))
 	http.HandleFunc("/api/game/facts/next", combinedMiddleware(factsHandler.NextRound))
 
+	// Speed Challenge game routes
+	speedChallengeHandler := &SpeedChallengeHandler{}
+	http.HandleFunc("/api/game/speed_challenge/start", combinedMiddleware(speedChallengeHandler.StartGame))
+	http.HandleFunc("/api/game/speed_challenge/question", combinedMiddleware(speedChallengeHandler.GetQuestion))
+	http.HandleFunc("/api/game/speed_challenge/answer", combinedMiddleware(speedChallengeHandler.SubmitAnswer))
+	http.HandleFunc("/api/game/speed_challenge/score", combinedMiddleware(speedChallengeHandler.GetScore))
+
 	// Debug/Browse routes
 	http.HandleFunc("/api/debug/countries", combinedMiddleware(debugHandler.GetAllCountries))
 	http.HandleFunc("/api/debug/geojson", combinedMiddleware(debugHandler.GetCountryGeoJSON))

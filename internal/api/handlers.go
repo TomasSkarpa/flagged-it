@@ -2134,3 +2134,782 @@ func (h *FactsGameHandler) Skip(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
 }
+
+// ============================================
+// Speed Challenge Game Handler
+// ============================================
+
+type SpeedChallengeHandler struct{}
+
+type SpeedChallengeGameType string
+
+const (
+	GameTypeFlag        SpeedChallengeGameType = "flag"
+	GameTypeShape       SpeedChallengeGameType = "shape"
+	GameTypeCapital     SpeedChallengeGameType = "capital"
+	GameTypeFacts       SpeedChallengeGameType = "facts"
+	GameTypeHigherLower SpeedChallengeGameType = "higher_lower"
+	GameTypeWorldle     SpeedChallengeGameType = "worldle"
+)
+
+type SpeedChallengeSession struct {
+	SessionID       string                   `json:"sessionId"`
+	Score           int                      `json:"score"`
+	Total           int                      `json:"total"`
+	Locale          string                   `json:"-"`
+	CurrentRound    int                      `json:"currentRound"`
+	CurrentGameType SpeedChallengeGameType   `json:"currentGameType"`
+	TimeLimit       int                      `json:"timeLimit"` // seconds per question
+	StartTime       time.Time                `json:"-"`
+	GameTypeOrder   []SpeedChallengeGameType `json:"-"`
+	SubSessions     map[string]interface{}   `json:"-"` // Store sub-game sessions
+	RoundHistory    []RoundResult            `json:"-"`
+	MaxRounds       int                      `json:"maxRounds"`
+	IsComplete      bool                     `json:"isComplete"`
+}
+
+type RoundResult struct {
+	RoundNumber int    `json:"roundNumber"`
+	GameType    string `json:"gameType"`
+	Correct     bool   `json:"correct"`
+	TimeTaken   int    `json:"timeTaken"` // milliseconds
+	Points      int    `json:"points"`
+}
+
+var (
+	speedChallengeSessions      = make(map[string]*SpeedChallengeSession)
+	speedChallengeSessionsMutex sync.RWMutex
+)
+
+// Available game types (excluding hangman and worldle for now)
+var availableGameTypes = []SpeedChallengeGameType{
+	GameTypeFlag,
+	GameTypeShape,
+	GameTypeCapital,
+	GameTypeFacts,
+	GameTypeHigherLower,
+	// GameTypeWorldle, // Skip worldle for now as it requires more complex logic
+}
+
+func (h *SpeedChallengeHandler) StartGame(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var req struct {
+		TimeLimit int    `json:"timeLimit"` // seconds per question, default 30
+		MaxRounds int    `json:"maxRounds"` // total rounds, default 10
+		Locale    string `json:"locale"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		// Use defaults if body is empty
+		req.TimeLimit = 30
+		req.MaxRounds = 10
+		req.Locale = "en"
+	}
+
+	// Default values
+	timeLimit := req.TimeLimit
+	if timeLimit <= 0 {
+		timeLimit = 30
+	}
+	maxRounds := req.MaxRounds
+	if maxRounds <= 0 {
+		maxRounds = 10
+	}
+
+	locale := req.Locale
+	if locale == "" {
+		locale = "en"
+	}
+
+	// Create game type order (shuffle for variety)
+	gameTypeOrder := make([]SpeedChallengeGameType, len(availableGameTypes))
+	copy(gameTypeOrder, availableGameTypes)
+	rand.Shuffle(len(gameTypeOrder), func(i, j int) {
+		gameTypeOrder[i], gameTypeOrder[j] = gameTypeOrder[j], gameTypeOrder[i]
+	})
+
+	// Create session
+	sessionID := generateSessionID()
+	session := &SpeedChallengeSession{
+		SessionID:     sessionID,
+		Score:         0,
+		Total:         0,
+		Locale:        locale,
+		CurrentRound:  0,
+		TimeLimit:     timeLimit,
+		StartTime:     time.Now(),
+		GameTypeOrder: gameTypeOrder,
+		SubSessions:   make(map[string]interface{}),
+		RoundHistory:  []RoundResult{},
+		MaxRounds:     maxRounds,
+		IsComplete:    false,
+	}
+
+	speedChallengeSessionsMutex.Lock()
+	speedChallengeSessions[sessionID] = session
+	speedChallengeSessionsMutex.Unlock()
+
+	// Generate first question
+	question, err := h.generateQuestion(session)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"sessionId":       sessionID,
+		"question":        question,
+		"currentRound":    session.CurrentRound,
+		"currentGameType": string(session.CurrentGameType),
+		"timeLimit":       session.TimeLimit,
+		"maxRounds":       session.MaxRounds,
+		"score":           session.Score,
+		"total":           session.Total,
+	})
+}
+
+func (h *SpeedChallengeHandler) GetQuestion(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	sessionID := r.URL.Query().Get("sessionId")
+	if sessionID == "" {
+		http.Error(w, "Session ID required", http.StatusBadRequest)
+		return
+	}
+
+	speedChallengeSessionsMutex.RLock()
+	session, exists := speedChallengeSessions[sessionID]
+	speedChallengeSessionsMutex.RUnlock()
+
+	if !exists {
+		http.Error(w, "Session not found", http.StatusNotFound)
+		return
+	}
+
+	question, err := h.generateQuestion(session)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"question":        question,
+		"currentRound":    session.CurrentRound,
+		"currentGameType": string(session.CurrentGameType),
+		"timeLimit":       session.TimeLimit,
+		"score":           session.Score,
+		"total":           session.Total,
+	})
+}
+
+func (h *SpeedChallengeHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var req struct {
+		SessionID  string      `json:"sessionId"`
+		QuestionID string      `json:"questionId"`
+		Answer     interface{} `json:"answer"`    // Can be string, CCA2, or "higher"/"lower"
+		TimeTaken  int         `json:"timeTaken"` // milliseconds
+		Locale     string      `json:"locale"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Invalid request", http.StatusBadRequest)
+		return
+	}
+
+	speedChallengeSessionsMutex.Lock()
+	session, exists := speedChallengeSessions[req.SessionID]
+	speedChallengeSessionsMutex.Unlock()
+
+	if !exists {
+		http.Error(w, "Session not found", http.StatusNotFound)
+		return
+	}
+
+	if session.IsComplete {
+		http.Error(w, "Game is complete", http.StatusBadRequest)
+		return
+	}
+
+	// Update locale if provided
+	locale := req.Locale
+	if locale == "" {
+		locale = session.Locale
+	}
+	if locale == "" {
+		locale = "en"
+	}
+	session.Locale = locale
+
+	// Submit answer to appropriate game handler
+	correct, _, err := h.submitAnswerToGame(session, req.Answer, req.QuestionID, locale)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Calculate points based on speed
+	timeTaken := req.TimeTaken
+	if timeTaken <= 0 {
+		timeTaken = session.TimeLimit * 1000 // Default to full time if not provided
+	}
+	calculatedPoints := calculateSpeedPoints(correct, timeTaken, session.TimeLimit*1000)
+
+	// Update session
+	session.Total++
+	if correct {
+		session.Score += calculatedPoints
+	}
+
+	// Record round result
+	roundResult := RoundResult{
+		RoundNumber: session.CurrentRound,
+		GameType:    string(session.CurrentGameType),
+		Correct:     correct,
+		TimeTaken:   timeTaken,
+		Points:      calculatedPoints,
+	}
+	session.RoundHistory = append(session.RoundHistory, roundResult)
+
+	// Extract correct answer from session metadata
+	var correctAnswerText string
+	if session.SubSessions != nil {
+		if name, ok := session.SubSessions["currentCorrectName"].(string); ok && name != "" {
+			correctAnswerText = name
+		} else if capital, ok := session.SubSessions["currentCorrectCapital"].(string); ok && capital != "" {
+			correctAnswerText = capital
+		} else if cca2, ok := session.SubSessions["currentCorrectCCA2"].(string); ok && cca2 != "" {
+			// Try to get country name from CCA2
+			for _, c := range countries {
+				if c.CCA2 == cca2 {
+					correctAnswerText = c.GetTranslatedName(locale)
+					break
+				}
+			}
+		}
+	}
+
+	// Check if game is complete
+	isComplete := session.Total >= session.MaxRounds
+	session.IsComplete = isComplete
+
+	// Generate next question if not complete
+	var nextQuestion interface{}
+	var nextGameType string
+	if !isComplete {
+		session.CurrentRound++
+		question, err := h.generateQuestion(session)
+		if err == nil {
+			nextQuestion = question
+			nextGameType = string(session.CurrentGameType)
+		}
+	}
+
+	response := map[string]interface{}{
+		"correct":       correct,
+		"points":        calculatedPoints,
+		"score":         session.Score,
+		"total":         session.Total,
+		"timeTaken":     timeTaken,
+		"finished":      isComplete,
+		"currentRound":  session.CurrentRound,
+		"correctAnswer": correctAnswerText,
+	}
+
+	if nextQuestion != nil {
+		response["nextQuestion"] = nextQuestion
+		response["nextGameType"] = nextGameType
+		response["timeLimit"] = session.TimeLimit
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
+}
+
+func (h *SpeedChallengeHandler) GetScore(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	sessionID := r.URL.Query().Get("sessionId")
+	if sessionID == "" {
+		http.Error(w, "Session ID required", http.StatusBadRequest)
+		return
+	}
+
+	speedChallengeSessionsMutex.RLock()
+	session, exists := speedChallengeSessions[sessionID]
+	speedChallengeSessionsMutex.RUnlock()
+
+	if !exists {
+		http.Error(w, "Session not found", http.StatusNotFound)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"score":        session.Score,
+		"total":        session.Total,
+		"maxRounds":    session.MaxRounds,
+		"isComplete":   session.IsComplete,
+		"roundHistory": session.RoundHistory,
+	})
+}
+
+// Helper methods
+
+func (h *SpeedChallengeHandler) generateQuestion(session *SpeedChallengeSession) (interface{}, error) {
+	// Determine current game type based on round
+	gameTypeIndex := session.CurrentRound % len(session.GameTypeOrder)
+	session.CurrentGameType = session.GameTypeOrder[gameTypeIndex]
+
+	// Delegate to appropriate game handler
+	switch session.CurrentGameType {
+	case GameTypeFlag:
+		return h.generateFlagQuestion(session)
+	case GameTypeShape:
+		return h.generateShapeQuestion(session)
+	case GameTypeCapital:
+		return h.generateCapitalQuestion(session)
+	case GameTypeFacts:
+		return h.generateFactsQuestion(session)
+	case GameTypeHigherLower:
+		return h.generateHigherLowerQuestion(session)
+	case GameTypeWorldle:
+		return h.generateWorldleQuestion(session)
+	default:
+		return nil, fmt.Errorf("unknown game type: %s", session.CurrentGameType)
+	}
+}
+
+func (h *SpeedChallengeHandler) generateFlagQuestion(session *SpeedChallengeSession) (interface{}, error) {
+	// Use existing flag game handler logic
+	filteredCountries := countries
+	usedCountries := make(map[string]bool)
+
+	// Get a random country
+	var country models.Country
+	maxAttempts := len(filteredCountries) * 2
+	attempts := 0
+	for {
+		country = filteredCountries[rand.Intn(len(filteredCountries))]
+		if !usedCountries[country.CCA2] {
+			break
+		}
+		attempts++
+		if attempts >= maxAttempts {
+			usedCountries = make(map[string]bool)
+			break
+		}
+	}
+
+	// Generate options
+	options := []models.Country{country}
+	usedOptions := make(map[string]bool)
+	usedOptions[country.CCA2] = true
+
+	for len(options) < 4 {
+		option := filteredCountries[rand.Intn(len(filteredCountries))]
+		if !usedOptions[option.CCA2] {
+			options = append(options, option)
+			usedOptions[option.CCA2] = true
+		}
+	}
+
+	rand.Shuffle(len(options), func(i, j int) {
+		options[i], options[j] = options[j], options[i]
+	})
+
+	translatedOptions := getTranslatedCountries(options, session.Locale)
+	flagURL := "/assets/twemoji_flags_cca2/" + country.CCA2 + ".svg"
+	questionID := generateQuestionID()
+
+	// Store correct answer in session metadata
+	if session.SubSessions == nil {
+		session.SubSessions = make(map[string]interface{})
+	}
+	session.SubSessions["currentCorrectCCA2"] = country.CCA2
+	session.SubSessions["currentCorrectName"] = country.Name.Common
+
+	return map[string]interface{}{
+		"gameType":   "flag",
+		"flagUrl":    flagURL,
+		"options":    translatedOptions,
+		"questionId": questionID,
+	}, nil
+}
+
+func (h *SpeedChallengeHandler) generateShapeQuestion(session *SpeedChallengeSession) (interface{}, error) {
+	// Use countries with geo data
+	filteredCountries := countriesWithGeo("")
+	if len(filteredCountries) == 0 {
+		return nil, fmt.Errorf("no countries with geo data available")
+	}
+
+	var country models.Country
+	var geoData models.GeoJSON
+	var err error
+
+	maxAttempts := len(filteredCountries) * 2
+	attempts := 0
+	for {
+		country = filteredCountries[rand.Intn(len(filteredCountries))]
+		geoData, err = data.LoadGeoData(country.CCA3)
+		if err == nil {
+			break
+		}
+		attempts++
+		if attempts >= maxAttempts {
+			return nil, fmt.Errorf("failed to load geo data")
+		}
+	}
+
+	// Generate options
+	options := []models.Country{country}
+	usedOptions := make(map[string]bool)
+	usedOptions[country.CCA2] = true
+
+	for len(options) < 4 {
+		option := filteredCountries[rand.Intn(len(filteredCountries))]
+		if !usedOptions[option.CCA2] {
+			options = append(options, option)
+			usedOptions[option.CCA2] = true
+		}
+	}
+
+	rand.Shuffle(len(options), func(i, j int) {
+		options[i], options[j] = options[j], options[i]
+	})
+
+	translatedOptions := getTranslatedCountries(options, session.Locale)
+	questionID := generateQuestionID()
+
+	// Store correct answer
+	if session.SubSessions == nil {
+		session.SubSessions = make(map[string]interface{})
+	}
+	session.SubSessions["currentCorrectCCA2"] = country.CCA2
+	session.SubSessions["currentCorrectName"] = country.Name.Common
+
+	return map[string]interface{}{
+		"gameType":   "shape",
+		"geoJson":    geoData,
+		"options":    translatedOptions,
+		"questionId": questionID,
+	}, nil
+}
+
+func (h *SpeedChallengeHandler) generateCapitalQuestion(session *SpeedChallengeSession) (interface{}, error) {
+	// Filter countries with capitals
+	filteredCountries := []models.Country{}
+	for _, country := range countries {
+		if len(country.Capital) > 0 && country.Capital[0] != "" {
+			filteredCountries = append(filteredCountries, country)
+		}
+	}
+
+	if len(filteredCountries) < 4 {
+		return nil, fmt.Errorf("not enough countries with capitals")
+	}
+
+	var country models.Country
+	for {
+		country = filteredCountries[rand.Intn(len(filteredCountries))]
+		if len(country.Capital) > 0 {
+			break
+		}
+	}
+
+	correctCapital := country.Capital[0]
+	translatedCountryName := country.GetTranslatedName(session.Locale)
+
+	// Generate options
+	options := []string{correctCapital}
+	usedCapitals := make(map[string]bool)
+	usedCapitals[correctCapital] = true
+
+	for len(options) < 4 {
+		option := filteredCountries[rand.Intn(len(filteredCountries))]
+		if len(option.Capital) > 0 && !usedCapitals[option.Capital[0]] {
+			options = append(options, option.Capital[0])
+			usedCapitals[option.Capital[0]] = true
+		}
+	}
+
+	rand.Shuffle(len(options), func(i, j int) {
+		options[i], options[j] = options[j], options[i]
+	})
+
+	questionID := generateQuestionID()
+
+	// Store correct answer
+	if session.SubSessions == nil {
+		session.SubSessions = make(map[string]interface{})
+	}
+	session.SubSessions["currentCorrectCapital"] = correctCapital
+	session.SubSessions["currentCorrectCCA2"] = country.CCA2
+	session.SubSessions["currentCorrectName"] = translatedCountryName
+
+	return map[string]interface{}{
+		"gameType":    "capital",
+		"countryName": translatedCountryName,
+		"countryCca2": country.CCA2,
+		"options":     options,
+		"questionId":  questionID,
+	}, nil
+}
+
+func (h *SpeedChallengeHandler) generateFactsQuestion(session *SpeedChallengeSession) (interface{}, error) {
+	// Find countries with facts
+	var availableCountries []models.Country
+	for _, country := range countries {
+		if _, hasFacts := factsData[country.CCA2]; hasFacts {
+			availableCountries = append(availableCountries, country)
+		}
+	}
+
+	if len(availableCountries) == 0 {
+		return nil, fmt.Errorf("no countries with facts available")
+	}
+
+	country := availableCountries[rand.Intn(len(availableCountries))]
+	facts := factsData[country.CCA2].Facts
+
+	if len(facts) == 0 {
+		return nil, fmt.Errorf("no facts available for country")
+	}
+
+	// Get a random fact
+	factIndex := rand.Intn(len(facts))
+	fact := facts[factIndex]
+
+	questionID := generateQuestionID()
+
+	// Store correct answer
+	if session.SubSessions == nil {
+		session.SubSessions = make(map[string]interface{})
+	}
+	session.SubSessions["currentCorrectCCA2"] = country.CCA2
+	session.SubSessions["currentCorrectName"] = country.Name.Common
+	session.SubSessions["currentFact"] = fact
+
+	return map[string]interface{}{
+		"gameType":   "facts",
+		"fact":       fact,
+		"questionId": questionID,
+	}, nil
+}
+
+func (h *SpeedChallengeHandler) generateHigherLowerQuestion(session *SpeedChallengeSession) (interface{}, error) {
+	// Use population comparison
+	validCountries := []models.Country{}
+	for _, c := range countries {
+		if c.Population > 0 {
+			validCountries = append(validCountries, c)
+		}
+	}
+
+	if len(validCountries) < 2 {
+		return nil, fmt.Errorf("not enough countries available")
+	}
+
+	left := validCountries[rand.Intn(len(validCountries))]
+	var right models.Country
+	for {
+		right = validCountries[rand.Intn(len(validCountries))]
+		if right.CCA2 != left.CCA2 {
+			break
+		}
+	}
+
+	leftItem := map[string]interface{}{
+		"name":     left.GetTranslatedName(session.Locale),
+		"value":    float64(left.Population),
+		"cca2":     left.CCA2,
+		"imageUrl": "/assets/twemoji_flags_cca2/" + left.CCA2 + ".svg",
+	}
+
+	rightItem := map[string]interface{}{
+		"name":     right.GetTranslatedName(session.Locale),
+		"value":    float64(right.Population),
+		"cca2":     right.CCA2,
+		"imageUrl": "/assets/twemoji_flags_cca2/" + right.CCA2 + ".svg",
+	}
+
+	questionID := generateQuestionID()
+
+	// Store correct answer (right should be higher or lower than left)
+	if session.SubSessions == nil {
+		session.SubSessions = make(map[string]interface{})
+	}
+	session.SubSessions["leftValue"] = float64(left.Population)
+	session.SubSessions["rightValue"] = float64(right.Population)
+	session.SubSessions["leftCountry"] = left.CCA2
+	session.SubSessions["rightCountry"] = right.CCA2
+
+	return map[string]interface{}{
+		"gameType":   "higher_lower",
+		"left":       leftItem,
+		"right":      rightItem,
+		"category":   "population",
+		"valueLabel": "population",
+		"questionId": questionID,
+	}, nil
+}
+
+func (h *SpeedChallengeHandler) generateWorldleQuestion(session *SpeedChallengeSession) (interface{}, error) {
+	// For speed challenge, skip worldle for now as it's complex
+	// Instead, generate another game type
+	// This is a placeholder - can be implemented later
+	return nil, fmt.Errorf("worldle not implemented for speed challenge")
+}
+
+func (h *SpeedChallengeHandler) submitAnswerToGame(session *SpeedChallengeSession, answer interface{}, questionID string, locale string) (bool, int, error) {
+	switch session.CurrentGameType {
+	case GameTypeFlag:
+		return h.submitFlagAnswer(session, answer, locale)
+	case GameTypeShape:
+		return h.submitShapeAnswer(session, answer, locale)
+	case GameTypeCapital:
+		return h.submitCapitalAnswer(session, answer, locale)
+	case GameTypeFacts:
+		return h.submitFactsAnswer(session, answer, locale)
+	case GameTypeHigherLower:
+		return h.submitHigherLowerAnswer(session, answer, locale)
+	case GameTypeWorldle:
+		return h.submitWorldleAnswer(session, answer, locale)
+	default:
+		return false, 0, fmt.Errorf("unknown game type: %s", session.CurrentGameType)
+	}
+}
+
+func (h *SpeedChallengeHandler) submitFlagAnswer(session *SpeedChallengeSession, answer interface{}, locale string) (bool, int, error) {
+	answerCCA2, ok := answer.(string)
+	if !ok {
+		return false, 0, fmt.Errorf("invalid answer format")
+	}
+
+	correctCCA2, ok := session.SubSessions["currentCorrectCCA2"].(string)
+	if !ok {
+		return false, 0, fmt.Errorf("correct answer not found")
+	}
+
+	return answerCCA2 == correctCCA2, 0, nil
+}
+
+func (h *SpeedChallengeHandler) submitShapeAnswer(session *SpeedChallengeSession, answer interface{}, locale string) (bool, int, error) {
+	answerCCA2, ok := answer.(string)
+	if !ok {
+		return false, 0, fmt.Errorf("invalid answer format")
+	}
+
+	correctCCA2, ok := session.SubSessions["currentCorrectCCA2"].(string)
+	if !ok {
+		return false, 0, fmt.Errorf("correct answer not found")
+	}
+
+	return answerCCA2 == correctCCA2, 0, nil
+}
+
+func (h *SpeedChallengeHandler) submitCapitalAnswer(session *SpeedChallengeSession, answer interface{}, locale string) (bool, int, error) {
+	answerStr, ok := answer.(string)
+	if !ok {
+		return false, 0, fmt.Errorf("invalid answer format")
+	}
+
+	correctCapital, ok := session.SubSessions["currentCorrectCapital"].(string)
+	if !ok {
+		return false, 0, fmt.Errorf("correct answer not found")
+	}
+
+	return answerStr == correctCapital, 0, nil
+}
+
+func (h *SpeedChallengeHandler) submitFactsAnswer(session *SpeedChallengeSession, answer interface{}, locale string) (bool, int, error) {
+	answerStr, ok := answer.(string)
+	if !ok {
+		return false, 0, fmt.Errorf("invalid answer format")
+	}
+
+	correctCCA2, ok := session.SubSessions["currentCorrectCCA2"].(string)
+	if !ok {
+		return false, 0, fmt.Errorf("correct answer not found")
+	}
+
+	// Match country name
+	for _, country := range countries {
+		if country.CCA2 == correctCCA2 {
+			if utils.MatchCountry(answerStr, country, utils.MatchAll) {
+				return true, 0, nil
+			}
+			break
+		}
+	}
+
+	return false, 0, nil
+}
+
+func (h *SpeedChallengeHandler) submitHigherLowerAnswer(session *SpeedChallengeSession, answer interface{}, locale string) (bool, int, error) {
+	answerStr, ok := answer.(string)
+	if !ok {
+		return false, 0, fmt.Errorf("invalid answer format")
+	}
+
+	leftValue, ok1 := session.SubSessions["leftValue"].(float64)
+	rightValue, ok2 := session.SubSessions["rightValue"].(float64)
+
+	if !ok1 || !ok2 {
+		return false, 0, fmt.Errorf("comparison values not found")
+	}
+
+	var correct bool
+	if answerStr == "higher" {
+		correct = rightValue >= leftValue
+	} else if answerStr == "lower" {
+		correct = rightValue <= leftValue
+	} else {
+		return false, 0, fmt.Errorf("invalid answer, must be 'higher' or 'lower'")
+	}
+
+	return correct, 0, nil
+}
+
+func (h *SpeedChallengeHandler) submitWorldleAnswer(session *SpeedChallengeSession, answer interface{}, locale string) (bool, int, error) {
+	// Simplified: for speed challenge, worldle can be skipped or simplified
+	// For now, return false as it requires more complex logic
+	return false, 0, fmt.Errorf("worldle not fully implemented for speed challenge")
+}
+
+// Calculate points based on speed and correctness
+func calculateSpeedPoints(correct bool, timeTaken int, timeLimit int) int {
+	if !correct {
+		return 0
+	}
+
+	basePoints := 10
+	timeRatio := float64(timeTaken) / float64(timeLimit)
+	speedBonus := int((1.0 - timeRatio) * 10) // 0-10 bonus based on speed
+
+	if speedBonus < 0 {
+		speedBonus = 0
+	}
+	if speedBonus > 10 {
+		speedBonus = 10
+	}
+
+	return basePoints + speedBonus
+}

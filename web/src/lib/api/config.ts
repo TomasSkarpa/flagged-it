@@ -77,6 +77,12 @@ export const API_ENDPOINTS = {
 		FACTS_SKIP: '/game/facts/skip',
 		FACTS_NEXT: '/game/facts/next',
 	
+	// Speed Challenge game endpoints
+	SPEED_CHALLENGE_START: '/game/speed_challenge/start',
+	SPEED_CHALLENGE_QUESTION: '/game/speed_challenge/question',
+	SPEED_CHALLENGE_ANSWER: '/game/speed_challenge/answer',
+	SPEED_CHALLENGE_SCORE: '/game/speed_challenge/score',
+	
 	// Debug/Browse endpoints
 	DEBUG_COUNTRIES: '/debug/countries',
 	DEBUG_GEOJSON: '/debug/geojson',

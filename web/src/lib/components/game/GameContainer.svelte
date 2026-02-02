@@ -11,11 +11,17 @@
 
 	$: currentLocale = $locale;
 	$: correctText = t('game.correct_short', undefined, currentLocale);
-	$: wrongText = t('game.wrong_short', undefined, currentLocale);
-	$: displayMessage = customMessage || (isCorrect ? correctText : wrongText);
+	$: displayMessage = customMessage || (isCorrect ? correctText : (correctAnswer ? `The correct answer is: ${correctAnswer}` : 'Incorrect'));
 </script>
 
 <div class="card-game relative overflow-hidden">
+	<!-- Optional header slot for additional info (timer, game type, etc.) -->
+	{#if $$slots.header}
+		<div class="pt-2 pb-1">
+			<slot name="header" />
+		</div>
+	{/if}
+	
 	<h2 class="text-xl md:text-2xl font-bold text-sandy-light text-center mb-3 mt-2">
 		{question}
 	</h2>
@@ -37,7 +43,7 @@
 	<!-- Feedback Overlay -->
 	{#if showFeedback}
 		<div 
-			class="absolute inset-0 flex items-center justify-center rounded-card animate-fade-in z-20
+			class="feedback-overlay absolute inset-0 flex items-center justify-center rounded-card z-20
 				{isCorrect ? 'bg-success/50' : 'bg-error/50'}"
 		>
 			<div class="text-center">
@@ -46,13 +52,26 @@
 				{#if !isCorrect && correctAnswer && !customMessage}
 					<p class="text-xl text-white/90 mt-2">{correctAnswer}</p>
 				{/if}
-	</div>
+			</div>
+		</div>
+	{/if}
 </div>
 
 <style>
 	.card-game h2 {
 		margin-top: 0.5rem !important;
 	}
+	
+	.feedback-overlay {
+		animation: fadeIn 0.2s ease-in;
+	}
+	
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
 </style>
-	{/if}
-</div>

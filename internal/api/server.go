@@ -66,6 +66,11 @@ func SetupRoutes() {
 					origin == "http://flaggedit.app" {
 					shouldAllow = true
 				}
+
+				// Allow all Vercel preview deployments (any subdomain of vercel.app)
+				if strings.HasSuffix(origin, ".vercel.app") && strings.HasPrefix(origin, "https://") {
+					shouldAllow = true
+				}
 			}
 
 			// Handle preflight OPTIONS request FIRST - before anything else

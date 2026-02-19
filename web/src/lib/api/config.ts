@@ -77,11 +77,11 @@ export const API_ENDPOINTS = {
 		FACTS_SKIP: '/game/facts/skip',
 		FACTS_NEXT: '/game/facts/next',
 	
-	// Debug/Browse endpoints
-	DEBUG_COUNTRIES: '/debug/countries',
-	DEBUG_GEOJSON: '/debug/geojson',
-	DEBUG_GEOJSON_ALL: '/debug/geojson/all',
-	DEBUG_GEOJSON_WORLD: '/debug/geojson/world',
+	// Countries and GeoJSON
+	COUNTRIES: '/countries',
+	GEOJSON: '/geojson',
+	GEOJSON_ALL: '/geojson/all',
+	GEOJSON_WORLD: '/geojson/world',
 	
 	// Health check
 	HEALTH: '/health',

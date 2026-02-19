@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { getAllCountries } from '$lib/api/debug';
+	import { getAllCountries } from '$lib/api/data';
 	import { locale } from '$lib/stores/locale';
 	import type { Country } from '$lib/types';
 	import LoadingSpinner from '$lib/components/ui/LoadingSpinner.svelte';

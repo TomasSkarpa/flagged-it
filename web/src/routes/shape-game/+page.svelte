@@ -17,7 +17,7 @@
 	import { locale } from '$lib/stores/locale';
 	import { getCountryNameForLocale, findCountryByName } from '$lib/utils/countryNames';
 	import { calculateCurrentRound } from '$lib/utils/gameUtils';
-	import { getAllCountries } from '$lib/api/debug';
+	import { getAllCountries } from '$lib/api/data';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 

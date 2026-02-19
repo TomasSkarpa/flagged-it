@@ -9,7 +9,7 @@
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
 	import { getCountryNameForLocale } from '$lib/utils/countryNames';
-	import { getAllCountries } from '$lib/api/debug';
+	import { getAllCountries } from '$lib/api/data';
 	import type { Country } from '$lib/types';
 
 	let sessionId: string | null = null;

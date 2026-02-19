@@ -10,7 +10,7 @@
 	import Keyboard from '$lib/components/ui/Keyboard.svelte';
 	import type { KeyState } from '$lib/components/ui/keyboardTypes';
 	import { HangmanGame } from '$lib/api/hangmanGame';
-	import { getAllCountries } from '$lib/api/debug';
+	import { getAllCountries } from '$lib/api/data';
 	import type { Country } from '$lib/types';
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';

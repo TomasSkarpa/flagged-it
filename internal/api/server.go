@@ -142,11 +142,11 @@ func SetupRoutes() {
 	http.HandleFunc("/api/game/facts/skip", combinedMiddleware(factsHandler.Skip))
 	http.HandleFunc("/api/game/facts/next", combinedMiddleware(factsHandler.NextRound))
 
-	// Debug/Browse routes
-	http.HandleFunc("/api/debug/countries", combinedMiddleware(debugHandler.GetAllCountries))
-	http.HandleFunc("/api/debug/geojson", combinedMiddleware(debugHandler.GetCountryGeoJSON))
-	http.HandleFunc("/api/debug/geojson/all", combinedMiddleware(debugHandler.GetAllGeoJSON))
-	http.HandleFunc("/api/debug/geojson/world", combinedMiddleware(debugHandler.GetWorldGeoJSON))
+	// Countries and GeoJSON (used by library, games, map)
+	http.HandleFunc("/api/countries", combinedMiddleware(debugHandler.GetAllCountries))
+	http.HandleFunc("/api/geojson", combinedMiddleware(debugHandler.GetCountryGeoJSON))
+	http.HandleFunc("/api/geojson/all", combinedMiddleware(debugHandler.GetAllGeoJSON))
+	http.HandleFunc("/api/geojson/world", combinedMiddleware(debugHandler.GetWorldGeoJSON))
 
 	// Health check (no rate limiting for monitoring, but include CORS and logging)
 	http.HandleFunc("/api/health", LoggingMiddleware(corsMiddleware(func(w http.ResponseWriter, r *http.Request) {

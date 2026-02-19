@@ -4,7 +4,7 @@
 	import CountryCard from '$lib/components/ui/CountryCard.svelte';
 	import Modal from '$lib/components/ui/Modal.svelte';
 	import RegionSelector from '$lib/components/ui/RegionSelector.svelte';
-	import { getAllCountries } from '$lib/api/debug';
+	import { getAllCountries } from '$lib/api/data';
 	import type { Country } from '$lib/types';
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';

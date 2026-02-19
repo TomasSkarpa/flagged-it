@@ -14,7 +14,7 @@
 	import type { CapitalQuestion } from '$lib/api/capitalGame';
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
-	import { getAllCountries } from '$lib/api/debug';
+	import { getAllCountries } from '$lib/api/data';
 	import { getCountryNameForLocale } from '$lib/utils/countryNames';
 	import { calculateCurrentRound } from '$lib/utils/gameUtils';
 	import type { Country } from '$lib/types';

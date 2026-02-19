@@ -10,11 +10,10 @@ export interface CountriesResponse {
 
 export async function getAllCountries(localeOverride?: string): Promise<CountriesResponse> {
 	const currentLocale = localeOverride || get(locale);
-	const url = `${getApiUrl(API_ENDPOINTS.DEBUG_COUNTRIES)}?locale=${currentLocale}`;
+	const url = `${getApiUrl(API_ENDPOINTS.COUNTRIES)}?locale=${currentLocale}`;
 	const response = await fetch(url);
 	if (!response.ok) {
 		const errorText = await response.text();
-		console.error('API Error:', errorText);
 		throw new Error(`Failed to fetch countries: ${response.status} ${response.statusText}`);
 	}
 	const data = await response.json();
@@ -22,7 +21,7 @@ export async function getAllCountries(localeOverride?: string): Promise<Countrie
 }
 
 export async function getCountryGeoJSON(cca3: string): Promise<any> {
-	const response = await fetch(`${getApiUrl(API_ENDPOINTS.DEBUG_GEOJSON)}?cca3=${cca3}`);
+	const response = await fetch(`${getApiUrl(API_ENDPOINTS.GEOJSON)}?cca3=${cca3}`);
 	if (!response.ok) {
 		throw new Error(`Failed to fetch GeoJSON for ${cca3}`);
 	}
@@ -30,7 +29,7 @@ export async function getCountryGeoJSON(cca3: string): Promise<any> {
 }
 
 export async function getAllCountriesWithGeo(): Promise<CountriesResponse> {
-	const response = await fetch(getApiUrl(API_ENDPOINTS.DEBUG_GEOJSON_ALL));
+	const response = await fetch(getApiUrl(API_ENDPOINTS.GEOJSON_ALL));
 	if (!response.ok) {
 		throw new Error('Failed to fetch countries with GeoJSON');
 	}
@@ -38,7 +37,7 @@ export async function getAllCountriesWithGeo(): Promise<CountriesResponse> {
 }
 
 export async function getWorldGeoJSON(): Promise<any> {
-	const response = await fetch(getApiUrl(API_ENDPOINTS.DEBUG_GEOJSON_WORLD));
+	const response = await fetch(getApiUrl(API_ENDPOINTS.GEOJSON_WORLD));
 	if (!response.ok) {
 		throw new Error('Failed to fetch world GeoJSON');
 	}

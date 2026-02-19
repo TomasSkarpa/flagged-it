@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { getAllCountriesWithGeo, getCountryGeoJSON } from '$lib/api/debug';
+	import { getAllCountriesWithGeo, getCountryGeoJSON } from '$lib/api/data';
 	import type { Country } from '$lib/types';
 	import LoadingSpinner from '$lib/components/ui/LoadingSpinner.svelte';
 	import ShapeRenderer from '$lib/components/ShapeRenderer.svelte';

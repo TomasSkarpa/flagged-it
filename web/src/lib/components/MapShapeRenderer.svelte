@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, afterUpdate } from 'svelte';
 	import { geoPath, geoMercator, geoBounds, geoDistance } from 'd3-geo';
-	import { getWorldGeoJSON } from '$lib/api/debug';
+	import { getWorldGeoJSON } from '$lib/api/data';
 	import type { GeoJSON } from '$lib/api/shapeGame';
 
 	export let targetGeoJson: GeoJSON;

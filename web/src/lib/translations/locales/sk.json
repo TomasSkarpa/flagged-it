@@ -113,6 +113,7 @@
   "game.higher_lower.high_score": "Najvyššie skóre",
   "game.higher_lower.than": "než",
   "game.higher_lower.has": "má",
+  "game.higher_lower.question": "Má {{.RightCountry}} {{.Higher}} alebo {{.Lower}} {{.ValueLabel}} {{.Than}} {{.LeftCountry}}?",
   "library.title": "Knižnica krajín",
   "library.description": "Prezrite si komplexné informácie o krajinách sveta",
   "library.search.label": "Hľadať krajiny",

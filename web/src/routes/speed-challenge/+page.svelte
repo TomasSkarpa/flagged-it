@@ -51,7 +51,7 @@
 
 	// Initialize translation variables with defaults
 	let speedChallengeTitle = 'Speed Challenge';
-	let speedChallengeDescription = 'Test your geography knowledge across multiple game types with time pressure! Answer quickly to earn bonus points.';
+	let speedChallengeDescription = 'Multiple game types with time pressure!';
 
 	// Reactive translations with proper fallbacks
 	$: currentLocale = $locale || 'en';
@@ -109,13 +109,26 @@
 			case 'shape':
 				return t('game.shape.question', undefined, currentLocale) || 'Which country is this?';
 			case 'capital':
-				return `What is the capital of ${question.countryName || 'this country'}?`;
+				return t('game.capital.question', { Country: question.countryName || 'this country' }, currentLocale) || `What is the capital of ${question.countryName || 'this country'}?`;
 			case 'facts':
 				return t('game.facts.guess_country', undefined, currentLocale) || 'Guess the country based on the fact!';
-			case 'higher_lower':
-				return `Does ${question.right?.name || 'the second country'} have higher or lower ${question.valueLabel || 'population'} than ${question.left?.name || 'the first country'}?`;
+			case 'higher_lower': {
+				const rightCountry = question.right?.name || 'the second country';
+				const leftCountry = question.left?.name || 'the first country';
+				const valueLabel = question.valueLabel || t('game.higher_lower.category.population', undefined, currentLocale) || 'population';
+				const hasText = t('game.higher_lower.has', undefined, currentLocale) || 'has';
+				const thanText = t('game.higher_lower.than', undefined, currentLocale) || 'than';
+				const higherText = t('game.higher_lower.higher', undefined, currentLocale) || 'higher';
+				const lowerText = t('game.higher_lower.lower', undefined, currentLocale) || 'lower';
+				const questionTemplate = t('game.higher_lower.question', { RightCountry: rightCountry, LeftCountry: leftCountry, ValueLabel: valueLabel, Has: hasText, Than: thanText, Higher: higherText, Lower: lowerText }, currentLocale);
+				if (questionTemplate && typeof questionTemplate === 'string' && questionTemplate !== 'game.higher_lower.question') {
+					return questionTemplate;
+				}
+				// Fallback: use all English words if translation template is missing
+				return `Does ${rightCountry} have ${higherText} or ${lowerText} ${valueLabel} ${thanText} ${leftCountry}?`;
+			}
 			default:
-				return 'Answer the question!';
+				return t('game.speed_challenge.default_question', undefined, currentLocale) || 'Answer the question!';
 		}
 	}
 
@@ -294,7 +307,7 @@
 		{#if !gameStarted && !gameFinished}
 		<GameSetupScreen
 			title={speedChallengeTitle || 'Speed Challenge'}
-			description={speedChallengeDescription || 'Test your geography knowledge across multiple game types with time pressure!'}
+			description={speedChallengeDescription || 'Multiple game types with time pressure!'}
 			emoji="⚡"
 			showRegionSelector={false}
 			on:start={handleStartGame}

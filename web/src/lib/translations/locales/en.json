@@ -40,7 +40,7 @@
     "_context": "Description text for the facts game shown on the home page game card."
   },
   "home.game.speed_challenge.description": {
-    "value": "Test your geography knowledge across multiple game types with time pressure! Answer quickly to earn bonus points.",
+    "value": "Multiple game types with time pressure!",
     "_context": "Description text for the Speed Challenge game shown on the home page game card."
   },
   "game.higher_lower.title": {
@@ -60,7 +60,7 @@
     "_context": "Title of the Speed Challenge game mode. A fast-paced game combining multiple game types with time pressure."
   },
   "game.speed_challenge.setup.description": {
-    "value": "Test your geography knowledge across multiple game types with time pressure! Answer quickly to earn bonus points.",
+    "value": "Multiple game types with time pressure!",
     "_context": "Description text explaining the Speed Challenge game mechanics shown on the setup screen."
   },
   "game.flag.question": {
@@ -278,6 +278,10 @@
   "game.higher_lower.lower": {
     "value": "Lower",
     "_context": "Button label for selecting 'lower' option in higher/lower game. Player guesses that the right country's value is lower than the left."
+  },
+  "game.higher_lower.question": {
+    "value": "Does {{.RightCountry}} have {{.Higher}} or {{.Lower}} {{.ValueLabel}} {{.Than}} {{.LeftCountry}}?",
+    "_context": "Question template for higher/lower game. Variables: RightCountry, LeftCountry, ValueLabel, Has, Than, Higher, Lower."
   },
   "region.world": {
     "value": "World",

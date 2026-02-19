@@ -15,6 +15,14 @@
 			available: true
 		},
 		{
+			id: 'speed-challenge',
+			title: t('game.speed_challenge.setup.title', undefined, currentLocale) || 'Speed Challenge',
+			description: t('home.game.speed_challenge.description', undefined, currentLocale) || t('game.speed_challenge.setup.description', undefined, currentLocale) || 'Multiple game types with time pressure!',
+			icon: '⚡',
+			route: '/speed-challenge',
+			available: true
+		},
+		{
 			id: 'shape',
 			title: t('game.shape.title', undefined, currentLocale),
 			description: t('home.game.shape.description', undefined, currentLocale),
@@ -60,14 +68,6 @@
 			description: t('home.game.facts.description', undefined, currentLocale) || t('game.facts.description', undefined, currentLocale),
 			icon: '📚',
 			route: '/facts-game',
-			available: true
-		},
-		{
-			id: 'speed-challenge',
-			title: t('game.speed_challenge.setup.title', undefined, currentLocale) || 'Speed Challenge',
-			description: t('home.game.speed_challenge.description', undefined, currentLocale) || t('game.speed_challenge.setup.description', undefined, currentLocale) || 'Test your geography knowledge across multiple game types with time pressure!',
-			icon: '⚡',
-			route: '/speed-challenge',
 			available: true
 		}
 	];

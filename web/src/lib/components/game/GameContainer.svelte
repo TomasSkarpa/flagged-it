@@ -58,6 +58,22 @@
 </div>
 
 <style>
+	.card-game {
+		min-height: 550px;
+	}
+	
+	@media (min-height: 600px) {
+		.card-game {
+			min-height: 65vh;
+		}
+	}
+	
+	@media (min-height: 900px) {
+		.card-game {
+			min-height: 60vh;
+		}
+	}
+	
 	.card-game h2 {
 		margin-top: 0.5rem !important;
 	}

@@ -8,7 +8,7 @@
 
 	export let score: number;
 	export let totalRounds: number;
-	export let title: string = 'Game Complete!';
+	export let title: string = '';
 	export let emoji: string = '🎉';
 	export let playAgainText: string = '';
 	export let showHomeButton: boolean = false;
@@ -19,6 +19,7 @@
 	export let encourageMessage: string = '';
 
 	$: currentLocale = $locale;
+	$: finalTitle = title || t('game.over.title', undefined, currentLocale);
 	$: finalPlayAgainText = playAgainText || t('game.over.play_again', undefined, currentLocale);
 	$: finalExcellentMessage = excellentMessage || t('game.over.excellent', undefined, currentLocale);
 	$: finalGoodMessage = goodMessage || t('game.over.good', undefined, currentLocale);
@@ -56,7 +57,7 @@
 <div class="text-center">
 	<div class="card-game max-w-2xl mx-auto">
 		<div class="text-6xl mb-6">{emoji}</div>
-		<h2 class="text-4xl font-bold text-sandy-light mb-4">{title}</h2>
+		<h2 class="text-4xl font-bold text-sandy-light mb-4">{finalTitle}</h2>
 		<div class="mb-8">
 			<ScoreDisplay {score} total={totalRounds} showPercentage={true} showProgress={true} />
 		</div>

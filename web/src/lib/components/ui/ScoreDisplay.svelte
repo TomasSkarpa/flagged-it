@@ -15,15 +15,15 @@
 
 <div class="card-stats px-6 py-3">
 	<p class="text-xs text-sandy uppercase tracking-wide font-semibold">{scoreLabel}</p>
-	<div class="flex items-baseline gap-2">
-		<p class="text-2xl font-bold stat-number text-sandy-light leading-none">{score}</p>
-		<span class="text-base text-slate-light">/ {total}</span>
+	<div class="flex flex-nowrap items-baseline gap-2 w-full min-w-0 whitespace-nowrap">
+		<p class="text-2xl font-bold stat-number text-sandy-light leading-none shrink-0">{score}</p>
+		<span class="text-base text-slate-light shrink-0">/ {total}</span>
 		{#if showPercentage}
-			<span class="text-base font-bold {percentageClass} stat-number">({percentage}%)</span>
+			<span class="text-base font-bold {percentageClass} stat-number shrink-0">({percentage}%)</span>
 		{/if}
 	</div>
 	{#if showProgress}
-		<div class="mt-2 w-32">
+		<div class="mt-2 w-full">
 			<div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
 				<div 
 					class="h-full bg-terracotta transition-all duration-300 rounded-full"

@@ -15,6 +15,7 @@ func SetupRoutes() {
 	higherLowerHandler := &HigherLowerHandler{}
 	worldleHandler := &WorldleGameHandler{}
 	factsHandler := &FactsGameHandler{}
+	quizHandler := &QuizHandler{}
 	debugHandler := &DebugHandler{}
 
 	// Rate limiter: 100 requests per minute, burst of 20
@@ -141,6 +142,21 @@ func SetupRoutes() {
 	http.HandleFunc("/api/game/facts/guess", combinedMiddleware(factsHandler.SubmitGuess))
 	http.HandleFunc("/api/game/facts/skip", combinedMiddleware(factsHandler.Skip))
 	http.HandleFunc("/api/game/facts/next", combinedMiddleware(factsHandler.NextRound))
+
+	// Quiz routes (combined rounds)
+	http.HandleFunc("/api/quiz/start", combinedMiddleware(quizHandler.Start))
+	http.HandleFunc("/api/quiz/round", combinedMiddleware(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodGet {
+			quizHandler.GetRound(w, r)
+		} else if r.Method == http.MethodPost {
+			quizHandler.SubmitRound(w, r)
+		} else {
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		}
+	}))
+	// Random one-question (single round, no full quiz)
+	http.HandleFunc("/api/quiz/random", combinedMiddleware(quizHandler.RandomRound))
+	http.HandleFunc("/api/quiz/random/submit", combinedMiddleware(quizHandler.RandomRoundSubmit))
 
 	// Debug/Browse routes
 	http.HandleFunc("/api/debug/countries", combinedMiddleware(debugHandler.GetAllCountries))

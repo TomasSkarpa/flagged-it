@@ -61,6 +61,14 @@
 			icon: '📚',
 			route: '/facts-game',
 			available: true
+		},
+		{
+			id: 'quiz',
+			title: t('game.quiz.title', undefined, currentLocale) || 'Quiz',
+			description: t('game.quiz.description', undefined, currentLocale) || 'Play a mix of rounds from different games.',
+			icon: '🎲',
+			route: '/quiz',
+			available: true
 		}
 	];
 	

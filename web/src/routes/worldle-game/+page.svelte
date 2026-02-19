@@ -9,6 +9,7 @@
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
 	import { getCountryNameForLocale } from '$lib/utils/countryNames';
+	import { resolveAssetUrl } from '$lib/api/config';
 	import { getAllCountries } from '$lib/api/debug';
 	import type { Country } from '$lib/types';
 
@@ -282,7 +283,7 @@
 									<tr class="border-b border-white/10 hover:bg-white/5">
 										<td class="px-4 py-3">
 											<img 
-												src={guess.country.flagUrl} 
+												src={resolveAssetUrl(guess.country.flagUrl)} 
 												alt={guess.country.name}
 												class="w-12 h-8 object-cover rounded"
 											/>

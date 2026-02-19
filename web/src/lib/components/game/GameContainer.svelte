@@ -21,7 +21,7 @@
 	</h2>
 	
 	<!-- Main content slot (flag, shape, etc.) -->
-	<div class="mb-3 flex justify-center">
+	<div class="card-game-content mb-3 flex justify-center min-h-[140px]">
 		<slot name="content" />
 	</div>
 	

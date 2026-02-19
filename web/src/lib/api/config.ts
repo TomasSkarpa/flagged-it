@@ -42,6 +42,33 @@ function getApiBaseUrl(): string {
 
 export const API_BASE_URL = getApiBaseUrl();
 
+/**
+ * Base URL for /assets/* (flags, icons, etc.). In dev (Vite on 5173, Go on 8080)
+ * assets are served by the API server, so we need an absolute URL. In production
+ * use relative path (same origin or proxied).
+ */
+export function getAssetsBaseUrl(): string {
+	if (typeof window === 'undefined') return '';
+	const hostname = window.location.hostname;
+	if (isLocalNetwork(hostname)) {
+		return `${window.location.protocol}//${hostname}:8080`;
+	}
+	return '';
+}
+
+/**
+ * Resolve an asset path for use in img src, url(), etc. Use this for any path
+ * under /assets/ so dev (frontend on 5173, assets on 8080) works correctly.
+ * @param path - Path like "/assets/twemoji_flags_cca2/XX.svg"
+ * @returns Full URL in dev, or path as-is when same-origin in production
+ */
+export function resolveAssetUrl(path: string): string {
+	if (!path || typeof path !== 'string') return path;
+	if (!path.startsWith('/')) return path;
+	const base = getAssetsBaseUrl();
+	return base ? base + path : path;
+}
+
 export const API_ENDPOINTS = {
 	// Flag game endpoints (without /api prefix - getApiUrl adds it)
 	FLAG_START: '/game/flag/start',
@@ -83,6 +110,14 @@ export const API_ENDPOINTS = {
 	DEBUG_GEOJSON_ALL: '/debug/geojson/all',
 	DEBUG_GEOJSON_WORLD: '/debug/geojson/world',
 	
+	// Quiz (combined rounds)
+	QUIZ_START: '/quiz/start',
+	QUIZ_ROUND: '/quiz/round',
+	QUIZ_SUBMIT: '/quiz/submit',
+	// Random one question
+	QUIZ_RANDOM: '/quiz/random',
+	QUIZ_RANDOM_SUBMIT: '/quiz/random/submit',
+
 	// Health check
 	HEALTH: '/health',
 } as const;

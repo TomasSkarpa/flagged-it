@@ -1,17 +1,20 @@
 <script>
+	import { resolveAssetUrl } from '$lib/api/config';
+
 	export let selected = false;
 	export let flagUrl = '';
 	export let countryName = '';
 	export let stat = '';
 	
 	$: hasFlag = flagUrl && flagUrl !== '';
+	$: resolvedFlagUrl = flagUrl ? resolveAssetUrl(flagUrl) : '';
 </script>
 
 <div class="card-country card-country-library {selected ? 'selected' : ''}">
 	{#if hasFlag}
 		<div class="flag-container">
 			<img 
-				src={flagUrl} 
+				src={resolvedFlagUrl} 
 				alt={`${countryName} flag`} 
 				class="flag-image"
 				loading="lazy"

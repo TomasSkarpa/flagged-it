@@ -15,6 +15,7 @@
 	import { locale } from '$lib/stores/locale';
 	import { getCountryNameForLocale, findCountryByName } from '$lib/utils/countryNames';
 	import { calculateCurrentRound } from '$lib/utils/gameUtils';
+	import { resolveAssetUrl } from '$lib/api/config';
 	import { getAllCountries } from '$lib/api/debug';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
@@ -326,7 +327,7 @@
 						<div class="absolute w-full max-w-80 aspect-[3/2.1] bg-white/5 rounded-[25px] animate-pulse border border-white/10"></div>
 					{/if}
 					<img 
-						src={currentQuestion.flagUrl} 
+						src={resolveAssetUrl(currentQuestion.flagUrl)} 
 						alt="Country flag" 
 						class="w-full max-w-80 h-auto relative {flagImageLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200"
 						on:load={() => flagImageLoaded = true}

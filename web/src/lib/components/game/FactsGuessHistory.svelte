@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { GuessHistoryEntry } from '$lib/api/factsGame';
+	import { resolveAssetUrl } from '$lib/api/config';
 
 	export let guesses: GuessHistoryEntry[] = [];
 
@@ -64,7 +65,7 @@
 							<td class="px-4 py-3">
 								{#if entry.country}
 									<img 
-										src={entry.country.flagUrl} 
+										src={resolveAssetUrl(entry.country.flagUrl)} 
 										alt={entry.country.name}
 										class="w-12 h-8 object-cover rounded"
 									/>

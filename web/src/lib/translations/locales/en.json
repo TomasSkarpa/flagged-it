@@ -622,5 +622,25 @@
   "game.round.progress": {
     "value": "Round %d / %d",
     "_context": "Format string for displaying round progress in game headers. First %d is current round, second %d is total rounds."
+  },
+  "game.quiz.title": {
+    "value": "Quiz",
+    "_context": "Title of the quiz game mode. A mix of rounds from different games (flag, shape, facts, capital, higher/lower)."
+  },
+  "game.quiz.description": {
+    "value": "Play a mix of rounds from different games.",
+    "_context": "Description text for the quiz game shown on setup and home page."
+  },
+  "game.quiz.over.title": {
+    "value": "Quiz complete",
+    "_context": "Title displayed on the game over screen when the quiz session is finished."
+  },
+  "game.quiz.preset.flag_shape_facts": {
+    "value": "Flag + Shape + Facts",
+    "_context": "Quiz preset label: mix of flag, shape, and facts rounds."
+  },
+  "game.quiz.preset.mixed": {
+    "value": "Mixed (5 rounds)",
+    "_context": "Quiz preset label: five rounds mixing flag, shape, capital, facts, and higher/lower."
   }
 }

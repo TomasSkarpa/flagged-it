@@ -12,6 +12,7 @@
 	import { locale } from '$lib/stores/locale';
 	import { getCountryNameForLocale } from '$lib/utils/countryNames';
 	import { calculateCurrentRound } from '$lib/utils/gameUtils';
+	import { resolveAssetUrl } from '$lib/api/config';
 	import { getAllCountries } from '$lib/api/debug';
 	import type { Country } from '$lib/types';
 
@@ -497,7 +498,7 @@
 									<div class="flex items-center justify-center gap-2 mt-3">
 										{#if correctCountryCca2}
 											<img 
-												src="/assets/twemoji_flags_cca2/{correctCountryCca2}.svg" 
+												src={resolveAssetUrl(`/assets/twemoji_flags_cca2/${correctCountryCca2}.svg`)} 
 												alt="{correctCountryName} flag"
 												class="w-6 h-4 object-cover rounded"
 											/>

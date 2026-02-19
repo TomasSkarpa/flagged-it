@@ -16,6 +16,7 @@
 	import { locale } from '$lib/stores/locale';
 	import { getKeyboardLayoutForLocale } from '$lib/utils/keyboardLayout';
 	import { calculateCurrentRound } from '$lib/utils/gameUtils';
+	import { resolveAssetUrl } from '$lib/api/config';
 	import { triggerConfetti } from '$lib/utils/confetti';
 
 	let countries: Country[] = [];
@@ -316,7 +317,7 @@
 					<!-- Hangman Image -->
 					<div class="hangman-container relative w-48 h-56 md:w-56 md:h-64 flex items-center justify-center">
 						<img 
-							src="/assets/iconography/hangman.svg" 
+							src={resolveAssetUrl('/assets/iconography/hangman.svg')} 
 							alt="Hangman"
 							class="hangman-image w-full h-full object-contain"
 							style="opacity: {Math.max(0.1, hangmanStage)}; filter: {wrongGuesses >= maxWrongGuesses ? 'grayscale(100%)' : 'none'};"

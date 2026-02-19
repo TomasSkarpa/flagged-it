@@ -1,4 +1,6 @@
 <script>
+	import { resolveAssetUrl } from '$lib/api/config';
+
 	export let flags = [];
 	export let selected = [];
 	export let searchQuery = '';
@@ -35,7 +37,7 @@
 			>
 				<!-- Larger flag area - no inner box -->
 				<div class="mb-2 flex items-center justify-center h-24">
-					<img src={flag.flagUrl} alt={`${flag.name} flag`} class="max-w-full max-h-full object-contain rounded-sm" />
+					<img src={resolveAssetUrl(flag.flagUrl)} alt={`${flag.name} flag`} class="max-w-full max-h-full object-contain rounded-sm" />
 				</div>
 				<p class="text-sm text-white font-medium">{flag.name}</p>
 				{#if selected.includes(flag.code)}

@@ -17,6 +17,7 @@
 	import { getAllCountries } from '$lib/api/debug';
 	import { getCountryNameForLocale } from '$lib/utils/countryNames';
 	import { calculateCurrentRound } from '$lib/utils/gameUtils';
+	import { resolveAssetUrl } from '$lib/api/config';
 	import type { Country } from '$lib/types';
 
 	type DifficultyMode = 'regular' | 'intermediate';
@@ -101,8 +102,9 @@
 		}
 	});
 
-	// Reactive translations
+	// Reactive translations and asset URL for flag background
 	$: currentLocale = $locale;
+	$: flagBgUrl = currentQuestion ? resolveAssetUrl(`/assets/twemoji_flags_cca2/${currentQuestion.countryCca2}.svg`) : '';
 	$: gameTitle = t('game.capital.title', undefined, currentLocale);
 	$: gameDescription = t('game.capital.description', undefined, currentLocale);
 	// Translate country name in question text
@@ -342,7 +344,7 @@
 			
 			<div 
 				class="card-game relative overflow-hidden flag-background-container"
-				style="background-image: url('/assets/twemoji_flags_cca2/{currentQuestion.countryCca2}.svg');"
+				style="background-image: url('{flagBgUrl}');"
 				data-flag-background="true"
 			>
 				<div class="flag-overlay"></div>

@@ -29,6 +29,7 @@
 	export let selectedRegion: string = '';
 	export let startButtonText: string = 'Start Game';
 	export let loadingText: string = 'Starting...';
+	export let showStartButton: boolean = true;
 	
 	// Use translations for default values if not provided
 	$: finalStartButtonText = startButtonText === 'Start Game' ? t('game.setup.start_game', undefined, currentLocale) : startButtonText;
@@ -85,13 +86,15 @@
 	<!-- Custom content slot (for additional options) -->
 	<slot name="options" />
 	
-	<button 
-		class="btn-primary px-12 py-4 text-xl font-bold"
-		disabled={isLoading}
-		on:click={handleStart}
-	>
-		{isLoading ? finalLoadingText : finalStartButtonText}
-	</button>
+	{#if showStartButton}
+		<button 
+			class="btn-primary px-12 py-4 text-xl font-bold"
+			disabled={isLoading}
+			on:click={handleStart}
+		>
+			{isLoading ? finalLoadingText : finalStartButtonText}
+		</button>
+	{/if}
 	
 	{#if error}
 		<div class="mt-6 p-4 bg-error/20 border border-error rounded-lg max-w-md mx-auto">

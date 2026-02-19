@@ -95,8 +95,9 @@ func (h *FlagGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		Region string `json:"region"`
-		Locale string `json:"locale"`
+		Region    string `json:"region"`
+		Locale    string `json:"locale"`
+		RoundCount int    `json:"roundCount"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -636,8 +637,9 @@ func (h *ShapeGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		Region string `json:"region"`
-		Locale string `json:"locale"`
+		Region    string `json:"region"`
+		Locale    string `json:"locale"`
+		RoundCount int    `json:"roundCount"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -929,8 +931,9 @@ func (h *CapitalGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		Region string `json:"region"`
-		Locale string `json:"locale"`
+		Region    string `json:"region"`
+		Locale    string `json:"locale"`
+		RoundCount int    `json:"roundCount"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -1241,8 +1244,9 @@ func (h *HigherLowerHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		Category string `json:"category"`
-		Locale   string `json:"locale"`
+		Category  string `json:"category"`
+		Locale    string `json:"locale"`
+		RoundCount int    `json:"roundCount"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -1559,7 +1563,8 @@ func (h *WorldleGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		Locale string `json:"locale"`
+		Locale    string `json:"locale"`
+		RoundCount int    `json:"roundCount"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -1581,8 +1586,12 @@ func (h *WorldleGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	roundCount := req.RoundCount
+	if roundCount <= 0 {
+		roundCount = 5
+	}
 	// Create game logic instance
-	gameLogic := guessing.NewLogic(filteredCountries)
+	gameLogic := guessing.NewLogic(filteredCountries, roundCount)
 	if err := gameLogic.NewGame(); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -1788,7 +1797,8 @@ func (h *FactsGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		Locale string `json:"locale"`
+		Locale    string `json:"locale"`
+		RoundCount int    `json:"roundCount"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -1802,8 +1812,12 @@ func (h *FactsGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 		locale = "en"
 	}
 
+	roundCount := req.RoundCount
+	if roundCount <= 0 {
+		roundCount = 5
+	}
 	// Create game logic instance
-	gameLogic := facts.NewLogic(countries, factsData)
+	gameLogic := facts.NewLogic(countries, factsData, roundCount)
 	if err := gameLogic.NewRound(); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

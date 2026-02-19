@@ -34,17 +34,19 @@ type ComparisonResult struct {
 
 // Logic handles the game logic for country guessing
 type Logic struct {
-	countries []models.Country
-	state     *State
+	countries  []models.Country
+	state      *State
+	roundCount  int
 }
 
 // NewLogic creates a new guessing game logic instance
-func NewLogic(countries []models.Country) *Logic {
+func NewLogic(countries []models.Country, maxRounds int) *Logic {
 	return &Logic{
 		countries: countries,
 		state: &State{
 			Guesses: []GuessEntry{},
 		},
+		roundCount: maxRounds,
 	}
 }
 

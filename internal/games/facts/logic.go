@@ -34,18 +34,18 @@ type Logic struct {
 	countries []models.Country
 	factsData map[string]models.CountryFacts
 	state     *State
-	maxRounds int
+	roundCount int
 }
 
 // NewLogic creates a new facts game logic instance
-func NewLogic(countries []models.Country, factsData map[string]models.CountryFacts) *Logic {
+func NewLogic(countries []models.Country, factsData map[string]models.CountryFacts, maxRounds int) *Logic {
 	return &Logic{
 		countries: countries,
 		factsData: factsData,
 		state: &State{
 			UsedFacts: make(map[int]bool),
 		},
-		maxRounds: 5,
+		roundCount: maxRounds,
 	}
 }
 
@@ -56,7 +56,7 @@ func (l *Logic) GetState() *State {
 
 // NewRound starts a new round of the game
 func (l *Logic) NewRound() error {
-	if l.state.Total >= l.maxRounds {
+	if l.state.Total >= l.roundCount {
 		l.state.IsComplete = true
 		return ErrGameComplete
 	}
@@ -152,7 +152,7 @@ func (l *Logic) MakeGuess(guess string) (*GuessResult, error) {
 		l.state.Score++
 		result.Score = l.state.Score
 		result.Total = l.state.Total
-		result.IsComplete = l.state.Total >= l.maxRounds
+		result.IsComplete = l.state.Total >= l.roundCount
 		if result.IsComplete {
 			l.state.IsComplete = true
 		}
@@ -166,7 +166,7 @@ func (l *Logic) MakeGuess(guess string) (*GuessResult, error) {
 	if l.state.TriesLeft == 0 {
 		l.state.Total++
 		result.Total = l.state.Total
-		result.IsComplete = l.state.Total >= l.maxRounds
+		result.IsComplete = l.state.Total >= l.roundCount
 		if result.IsComplete {
 			l.state.IsComplete = true
 		}
@@ -202,7 +202,7 @@ func (l *Logic) Skip() (*GuessResult, error) {
 		TriesLeft:      0,
 		Score:          l.state.Score,
 		Total:          l.state.Total,
-		IsComplete:     l.state.Total >= l.maxRounds,
+		IsComplete:     l.state.Total >= l.roundCount,
 		GuessHistory:   l.state.GuessHistory,
 	}
 

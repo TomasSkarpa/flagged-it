@@ -26,6 +26,7 @@ export interface GameSession {
 export interface StartGameRequest {
 	region?: string;
 	locale?: string;
+	roundCount?: number;
 }
 
 export interface SubmitAnswerRequest {
@@ -41,14 +42,21 @@ function getCurrentLocale(): string {
 	return get(locale) || 'en';
 }
 
-export async function startGame(region: string = ''): Promise<GameSession> {
-	const currentLocale = getCurrentLocale();
+export async function startGame(
+	region: string = '',
+	opts?: { locale?: string; roundCount?: number }
+): Promise<GameSession> {
+	const currentLocale = opts?.locale ?? getCurrentLocale();
+	const body: StartGameRequest = { region, locale: currentLocale };
+	if (opts?.roundCount != null && opts.roundCount > 0) {
+		body.roundCount = opts.roundCount;
+	}
 	const response = await fetch(getApiUrl(API_ENDPOINTS.FLAG_START), {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ region, locale: currentLocale }),
+		body: JSON.stringify(body),
 	});
 
 	if (!response.ok) {

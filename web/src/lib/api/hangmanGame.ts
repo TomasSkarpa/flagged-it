@@ -34,7 +34,7 @@ export class HangmanGame {
 	private countries: Country[] = [];
 	private state: HangmanGameState;
 	private locale: string = 'en';
-	private maxRounds: number = 5;
+	private roundCount: number = 5;
 
 	constructor(countries: Country[], locale: string = 'en') {
 		this.countries = countries;
@@ -62,7 +62,7 @@ export class HangmanGame {
 
 	// Start a new round
 	newRound(): void {
-		if (this.state.total >= this.maxRounds) {
+		if (this.state.total >= this.roundCount) {
 			this.state.isComplete = true;
 			return;
 		}
@@ -161,7 +161,7 @@ export class HangmanGame {
 				isGameOver: false,
 				score: this.state.score,
 				total: this.state.total,
-				isComplete: this.state.total >= this.maxRounds,
+				isComplete: this.state.total >= this.roundCount,
 				revealedWord: isWon ? this.state.currentWord : undefined
 			};
 		} else {
@@ -182,7 +182,7 @@ export class HangmanGame {
 				isGameOver: isGameOver,
 				score: this.state.score,
 				total: this.state.total,
-				isComplete: this.state.total >= this.maxRounds,
+				isComplete: this.state.total >= this.roundCount,
 				revealedWord: isGameOver ? this.state.currentWord : undefined
 			};
 		}

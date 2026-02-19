@@ -25,18 +25,18 @@ type State struct {
 type Logic struct {
 	countries []models.Country
 	state     *State
-	maxRounds int
+	roundCount int
 }
 
 // NewLogic creates a new hangman game logic instance
-func NewLogic(countries []models.Country) *Logic {
+func NewLogic(countries []models.Country, maxRounds int) *Logic {
 	return &Logic{
 		countries: countries,
 		state: &State{
 			GuessedLetters:  make(map[rune]bool),
 			MaxWrongGuesses: 6,
 		},
-		maxRounds: 5,
+		roundCount: maxRounds,
 	}
 }
 
@@ -47,7 +47,7 @@ func (l *Logic) GetState() *State {
 
 // NewRound starts a new round with a random country name
 func (l *Logic) NewRound() error {
-	if l.state.Total >= l.maxRounds {
+	if l.state.Total >= l.roundCount {
 		l.state.IsComplete = true
 		return ErrGameComplete
 	}
@@ -122,7 +122,7 @@ func (l *Logic) MakeGuess(letter rune) (*GuessResult, error) {
 			l.state.Score++
 			result.Score = l.state.Score
 			result.Total = l.state.Total
-			result.IsComplete = l.state.Total >= l.maxRounds
+			result.IsComplete = l.state.Total >= l.roundCount
 			if result.IsComplete {
 				l.state.IsComplete = true
 			}
@@ -147,7 +147,7 @@ func (l *Logic) MakeGuess(letter rune) (*GuessResult, error) {
 	if isGameOver {
 		l.state.Total++
 		result.Total = l.state.Total
-		result.IsComplete = l.state.Total >= l.maxRounds
+		result.IsComplete = l.state.Total >= l.roundCount
 		result.RevealedWord = l.state.CurrentWord // Reveal on loss
 		if result.IsComplete {
 			l.state.IsComplete = true

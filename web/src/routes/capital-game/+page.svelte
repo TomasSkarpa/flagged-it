@@ -117,16 +117,18 @@
 	$: loadingCountriesText = t('library.loading', undefined, currentLocale);
 	$: failedToStartGameError = t('common.error', undefined, currentLocale);
 
-	async function handleStartGame(event: CustomEvent<{ region?: string }>) {
+	async function handleStartGame(event: CustomEvent<{ region?: string; roundCount?: number }>) {
 		isLoading = true;
 		error = null;
 		gameFinished = false;
 		score = 0;
 		total = 0;
 		selectedRegion = event.detail.region || '';
-		
+		const opts = event.detail.roundCount != null && event.detail.roundCount > 0
+			? { roundCount: event.detail.roundCount }
+			: undefined;
 		try {
-			const result = await startCapitalGame(selectedRegion || '');
+			const result = await startCapitalGame(selectedRegion || '', opts);
 			sessionId = result.sessionId;
 			currentQuestion = result.question;
 			gameStarted = true;

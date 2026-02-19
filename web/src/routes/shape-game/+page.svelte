@@ -94,7 +94,7 @@
 		}
 	});
 
-	async function handleStartGame(event: CustomEvent<{ region?: string; [key: string]: any }>) {
+	async function handleStartGame(event: CustomEvent<{ region?: string; roundCount?: number; [key: string]: any }>) {
 		isLoading = true;
 		error = null;
 		gameFinished = false;
@@ -102,9 +102,11 @@
 		total = 0;
 		selectedRegion = event.detail.region || '';
 		guessInput = '';
-		
+		const opts = event.detail.roundCount != null && event.detail.roundCount > 0
+			? { roundCount: event.detail.roundCount }
+			: undefined;
 		try {
-			const result = await startShapeGame(selectedRegion || '');
+			const result = await startShapeGame(selectedRegion || '', opts);
 			sessionId = result.sessionId;
 			currentQuestion = result.question;
 			gameStarted = true;

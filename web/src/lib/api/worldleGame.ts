@@ -59,14 +59,18 @@ export interface GameState {
 	isComplete: boolean;
 }
 
-export async function startWorldleGame(): Promise<WorldleGameSession> {
+export async function startWorldleGame(opts?: { roundCount?: number }): Promise<WorldleGameSession> {
 	const currentLocale = getCurrentLocale();
+	const body: { locale: string; roundCount?: number } = { locale: currentLocale };
+	if (opts?.roundCount != null && opts.roundCount > 0) {
+		body.roundCount = opts.roundCount;
+	}
 	const response = await fetch(getApiUrl(API_ENDPOINTS.WORLDLE_START), {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ locale: currentLocale }),
+		body: JSON.stringify(body),
 	});
 
 	if (!response.ok) {

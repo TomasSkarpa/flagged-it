@@ -75,7 +75,7 @@
 	// Custom start data that will be passed with the start event (reactive)
 	$: customStartData = { category: selectedCategory };
 
-	async function handleStartGame(event: CustomEvent<{ category?: string; region?: string; [key: string]: any }>) {
+	async function handleStartGame(event: CustomEvent<{ category?: string; region?: string; roundCount?: number; [key: string]: any }>) {
 		// Get category from event or fallback to selectedCategory
 		const category = (event.detail.category || selectedCategory) as HigherLowerCategory;
 		isLoading = true;
@@ -83,9 +83,11 @@
 		gameOver = false;
 		showRightValue = false;
 		isCorrect = null;
-		
+		const opts = event.detail.roundCount != null && event.detail.roundCount > 0
+			? { roundCount: event.detail.roundCount }
+			: undefined;
 		try {
-			const result = await startHigherLowerGame(category);
+			const result = await startHigherLowerGame(category, opts);
 			sessionId = result.sessionId;
 			comparison = result.comparison;
 			score = result.score;

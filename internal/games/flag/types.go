@@ -4,14 +4,14 @@ import "flagged-it/internal/data/models"
 
 // GameConfig holds configuration for the flag game
 type GameConfig struct {
-	MaxRounds int
+	RoundCount int
 	Region    string
 }
 
 // DefaultGameConfig returns the default configuration
 func DefaultGameConfig() GameConfig {
 	return GameConfig{
-		MaxRounds: 10,
+		RoundCount: 10,
 		Region:    "",
 	}
 }

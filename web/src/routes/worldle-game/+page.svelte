@@ -81,16 +81,18 @@
 		}
 	});
 
-	async function handleStartGame(event?: CustomEvent<{ region?: string }>) {
+	async function handleStartGame(event?: CustomEvent<{ region?: string; roundCount?: number }>) {
 		isLoading = true;
 		error = null;
 		gameComplete = false;
 		guesses = [];
 		guessCount = 0;
 		guessInput = '';
-		
+		const opts = event?.detail?.roundCount != null && event.detail.roundCount > 0
+			? { roundCount: event.detail.roundCount }
+			: undefined;
 		try {
-			const result = await startWorldleGame();
+			const result = await startWorldleGame(opts);
 			sessionId = result.sessionId;
 			guessCount = result.guessCount;
 			gameStarted = true;

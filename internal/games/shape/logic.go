@@ -22,18 +22,18 @@ type Logic struct {
 	allCountries []models.Country
 	countries    []models.Country
 	state        *State
-	maxRounds    int
+	roundCount    int
 }
 
 // NewLogic creates a new shape game logic instance
-func NewLogic(allCountries []models.Country) *Logic {
+func NewLogic(allCountries []models.Country, maxRounds int) *Logic {
 	return &Logic{
 		allCountries: allCountries,
 		countries:    allCountries,
 		state: &State{
 			SelectedRegion: "",
 		},
-		maxRounds: 10,
+		roundCount: maxRounds,
 	}
 }
 
@@ -61,7 +61,7 @@ func (l *Logic) GetState() *State {
 
 // NewRound starts a new round with a random country
 func (l *Logic) NewRound() error {
-	if l.state.Total >= l.maxRounds {
+	if l.state.Total >= l.roundCount {
 		l.state.IsComplete = true
 		return ErrGameComplete
 	}
@@ -109,7 +109,7 @@ func (l *Logic) MakeGuess(guessCountryName string) (*GuessResult, error) {
 		CorrectCountry: l.state.CurrentCountry, // Revealed after guess
 		Score:          l.state.Score,
 		Total:          l.state.Total,
-		IsComplete:     l.state.Total >= l.maxRounds,
+		IsComplete:     l.state.Total >= l.roundCount,
 	}
 
 	if result.IsComplete {

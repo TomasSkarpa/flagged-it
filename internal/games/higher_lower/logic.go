@@ -20,17 +20,17 @@ type State struct {
 type Logic struct {
 	countries []models.Country
 	state     *State
-	maxRounds int
+	roundCount int
 }
 
 // NewLogic creates a new higher/lower game logic instance
-func NewLogic(countries []models.Country) *Logic {
+func NewLogic(countries []models.Country, maxRounds int) *Logic {
 	return &Logic{
 		countries: countries,
 		state: &State{
 			ComparisonType: "population",
 		},
-		maxRounds: 10,
+		roundCount: maxRounds,
 	}
 }
 
@@ -48,7 +48,7 @@ func (l *Logic) GetState() *State {
 
 // NewRound starts a new round
 func (l *Logic) NewRound() error {
-	if l.state.Total >= l.maxRounds {
+	if l.state.Total >= l.roundCount {
 		l.state.IsComplete = true
 		return ErrGameComplete
 	}
@@ -117,7 +117,7 @@ func (l *Logic) MakeGuess(guess string) (*GuessResult, error) {
 		Score:          l.state.Score,
 		Total:          l.state.Total,
 		ComparisonType: l.state.ComparisonType,
-		IsComplete:     l.state.Total >= l.maxRounds,
+		IsComplete:     l.state.Total >= l.roundCount,
 	}
 
 	// Move to next round

@@ -48,14 +48,24 @@ export interface ShapeGameSession {
 	question: ShapeQuestion;
 }
 
-export async function startShapeGame(region: string = ''): Promise<ShapeGameSession> {
+export async function startShapeGame(
+	region: string = '',
+	opts?: { roundCount?: number }
+): Promise<ShapeGameSession> {
 	const currentLocale = getCurrentLocale();
+	const body: { region: string; locale: string; roundCount?: number } = {
+		region,
+		locale: currentLocale,
+	};
+	if (opts?.roundCount != null && opts.roundCount > 0) {
+		body.roundCount = opts.roundCount;
+	}
 	const response = await fetch(getApiUrl(API_ENDPOINTS.SHAPE_START), {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ region, locale: currentLocale }),
+		body: JSON.stringify(body),
 	});
 
 	if (!response.ok) {

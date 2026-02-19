@@ -41,12 +41,22 @@ export interface HigherLowerAnswerResponse {
 	nextComparison?: HigherLowerComparison;
 }
 
-export async function startHigherLowerGame(category: HigherLowerCategory = 'population'): Promise<HigherLowerStartResponse> {
+export async function startHigherLowerGame(
+	category: HigherLowerCategory = 'population',
+	opts?: { roundCount?: number }
+): Promise<HigherLowerStartResponse> {
 	const currentLocale = getCurrentLocale();
+	const body: { category: HigherLowerCategory; locale: string; roundCount?: number } = {
+		category,
+		locale: currentLocale,
+	};
+	if (opts?.roundCount != null && opts.roundCount > 0) {
+		body.roundCount = opts.roundCount;
+	}
 	const response = await fetch(getApiUrl(API_ENDPOINTS.HIGHER_LOWER_START), {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ category, locale: currentLocale }),
+		body: JSON.stringify(body),
 	});
 	if (!response.ok) {
 		throw new Error('Failed to start game');

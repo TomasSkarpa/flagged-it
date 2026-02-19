@@ -84,7 +84,7 @@
 		}
 	});
 
-	async function handleStartGame(event: CustomEvent<{ region?: string }>) {
+	async function handleStartGame(event: CustomEvent<{ region?: string; roundCount?: number }>) {
 		isLoading = true;
 		error = null;
 		gameFinished = false;
@@ -92,9 +92,11 @@
 		total = 0;
 		selectedRegion = event.detail.region || '';
 		flagImageLoaded = false;
-		
+		const opts = event.detail.roundCount != null && event.detail.roundCount > 0
+			? { roundCount: event.detail.roundCount }
+			: undefined;
 		try {
-			const result = await startGame(selectedRegion || '');
+			const result = await startGame(selectedRegion || '', opts);
 			sessionId = result.sessionId;
 			currentQuestion = result.question;
 			gameStarted = true;

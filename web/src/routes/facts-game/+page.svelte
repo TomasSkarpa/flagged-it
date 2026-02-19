@@ -107,7 +107,7 @@
 		}
 	});
 
-	async function handleStartGame(event?: CustomEvent<{ region?: string }>) {
+	async function handleStartGame(event?: CustomEvent<{ region?: string; roundCount?: number }>) {
 		isLoading = true;
 		error = null;
 		gameFinished = false;
@@ -118,9 +118,11 @@
 		showFeedback = false;
 		guessInput = '';
 		currentFact = ''; // Reset current fact
-		
+		const opts = event?.detail?.roundCount != null && event.detail.roundCount > 0
+			? { roundCount: event.detail.roundCount }
+			: undefined;
 		try {
-			const result = await startFactsGame();
+			const result = await startFactsGame(opts);
 			
 			// Set gameStarted first to ensure proper state
 			gameStarted = true;

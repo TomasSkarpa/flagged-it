@@ -37,7 +37,7 @@ Each game mode documentation file follows this structure:
 The documentation generator extracts the following information from game logic files:
 
 ### Core Game Properties
-- `maxRounds`: Number of rounds in a game (extracted from `maxRounds` field in Logic struct)
+- `roundCount`: Number of rounds in a game (extracted from `roundCount` field in Logic struct)
 - `purpose`: Description of what the game does (from comments or inferred)
 
 ### Game-Specific Rules

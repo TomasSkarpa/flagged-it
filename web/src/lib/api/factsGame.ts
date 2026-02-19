@@ -47,14 +47,18 @@ export interface GuessResponse {
 	};
 }
 
-export async function startFactsGame(): Promise<FactsGameSession> {
+export async function startFactsGame(opts?: { roundCount?: number }): Promise<FactsGameSession> {
 	const currentLocale = getCurrentLocale();
+	const body: { locale: string; roundCount?: number } = { locale: currentLocale };
+	if (opts?.roundCount != null && opts.roundCount > 0) {
+		body.roundCount = opts.roundCount;
+	}
 	const response = await fetch(getApiUrl(API_ENDPOINTS.FACTS_START), {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ locale: currentLocale }),
+		body: JSON.stringify(body),
 	});
 
 	if (!response.ok) {

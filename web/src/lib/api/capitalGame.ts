@@ -29,12 +29,22 @@ export interface CapitalGameSession {
 	question: CapitalQuestion;
 }
 
-export async function startCapitalGame(region: string = ''): Promise<CapitalGameSession> {
+export async function startCapitalGame(
+	region: string = '',
+	opts?: { roundCount?: number }
+): Promise<CapitalGameSession> {
 	const currentLocale = getCurrentLocale();
+	const body: { region: string; locale: string; roundCount?: number } = {
+		region,
+		locale: currentLocale,
+	};
+	if (opts?.roundCount != null && opts.roundCount > 0) {
+		body.roundCount = opts.roundCount;
+	}
 	const response = await fetch(getApiUrl(API_ENDPOINTS.CAPITAL_START), {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ region, locale: currentLocale }),
+		body: JSON.stringify(body),
 	});
 	if (!response.ok) {
 		throw new Error('Failed to start capital game');

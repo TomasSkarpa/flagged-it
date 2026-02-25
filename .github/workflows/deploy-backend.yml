@@ -11,7 +11,6 @@ on:
       - 'go.mod'
       - 'go.sum'
       - '.github/workflows/deploy-backend.yml'
-      - '.github/deploy/flagged-it.service'
   workflow_dispatch: # Allow manual triggering
 
 jobs:
@@ -26,6 +25,7 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: '1.22'
+          cache: false  # avoid tar "File exists" on self-hosted when restoring into shared GOMODCACHE
 
       - name: Install dependencies
         run: go mod download
@@ -53,33 +53,8 @@ jobs:
           
           sudo cp -r assets /opt/flagged-it/
           sudo chown -R $USER:$USER /opt/flagged-it/assets
-          
-          # Update systemd service file if it exists in the repo
-          if [ -f .github/deploy/flagged-it.service ]; then
-            sudo cp .github/deploy/flagged-it.service /etc/systemd/system/flagged-it.service
-            sudo systemctl daemon-reload
-          fi
 
-            # Update NGINX configuration
-          if [ -f .github/deploy/nginx.conf ]; then
-            # Clean up old security traps directory if it exists
-            sudo rm -rf /opt/flagged-it/deploy/nginx
-            
-            # Copy main site config
-            sudo cp .github/deploy/nginx.conf /etc/nginx/sites-available/flagged-it.conf
-            
-            # Enable the site if it's not already enabled
-            sudo ln -sf /etc/nginx/sites-available/flagged-it.conf /etc/nginx/sites-enabled/flagged-it.conf
-            
-            # Remove default or old-style extensionless config to avoid conflicts
-            sudo rm -f /etc/nginx/sites-enabled/default
-            sudo rm -f /etc/nginx/sites-enabled/flagged-it
-            
-            # Test and reload NGINX
-            sudo nginx -t && sudo systemctl reload nginx
-          fi
-
-          # Start service
+          # Start service (systemd unit and nginx config are managed by IaC, not this workflow)
           sudo systemctl start flagged-it.service
           sleep 2
           sudo systemctl status flagged-it.service --no-pager -l || true

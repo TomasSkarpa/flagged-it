@@ -663,6 +663,294 @@
     "value": "Go Home",
     "_context": "Button label on error page for navigating back to the home page."
   },
+  "error.404.fr.meta_title": {
+    "value": "404 — White flag",
+    "_context": "Document title for French-themed 404 page."
+  },
+  "error.404.fr.line1": {
+    "value": "This page surrendered faster than France in 1940.",
+    "_context": "First line of French-themed 404 joke (full-bleed layout)."
+  },
+  "error.404.fr.button": {
+    "value": "I Surrender – Take Me Back",
+    "_context": "Primary CTA on French-themed 404 page."
+  },
+  "error.404.fr.image_alt": {
+    "value": "Waving white flag on a pole",
+    "_context": "Alt text for French 404 illustration."
+  },
+  "error.404.us.meta_title": {
+    "value": "404 — This page left the building",
+    "_context": "Document title for US-themed 404 page."
+  },
+  "error.404.us.line1": {
+    "value": "This page has left the building.",
+    "_context": "First line of US-themed 404 joke."
+  },
+  "error.404.us.line2": {
+    "value": "More missing than American common sense in an election year.",
+    "_context": "Second line of US-themed 404 joke."
+  },
+  "error.404.us.button": {
+    "value": "Make America Navigate Again",
+    "_context": "Primary CTA on US-themed 404 page; political slogan parody."
+  },
+  "error.404.us.image_alt": {
+    "value": "Cartoon bald eagle holding a Lost sign (placeholder art)",
+    "_context": "Alt text for US 404 placeholder illustration."
+  },
+  "error.404.ja.meta_title": {
+    "value": "404 — Our apologies",
+    "_context": "Document title for Japanese-themed 404 page."
+  },
+  "error.404.ja.line1": {
+    "value": "We are deeply, profoundly, formally sorry this page does not exist.",
+    "_context": "First line of Japanese-themed 404 joke."
+  },
+  "error.404.ja.line2": {
+    "value": "The page is also sorry.",
+    "_context": "Second line of Japanese-themed 404 joke."
+  },
+  "error.404.ja.button": {
+    "value": "We Humbly Accept Your Return",
+    "_context": "Primary CTA on Japanese-themed 404 page."
+  },
+  "error.404.ja.image_alt": {
+    "value": "Figure bowing deeply toward an empty chair (placeholder art)",
+    "_context": "Alt text for Japanese 404 placeholder illustration."
+  },
+  "error.404.ca.meta_title": {
+    "value": "404 — Sorry, eh",
+    "_context": "Document title for Canadian-themed 404 page."
+  },
+  "error.404.ca.line1": {
+    "value": "Oh, this page isn't here right now — but it's really sorry about that.",
+    "_context": "First line of Canadian-themed 404 joke."
+  },
+  "error.404.ca.line2": {
+    "value": "Hope you're having a great day though, eh?",
+    "_context": "Second line of Canadian-themed 404 joke."
+  },
+  "error.404.ca.button": {
+    "value": "No Worries, Take Me Back (Sorry Again)",
+    "_context": "Primary CTA on Canadian-themed 404 page."
+  },
+  "error.404.ca.image_alt": {
+    "value": "Door with an out-of-office sign and snow outside (placeholder art)",
+    "_context": "Alt text for Canadian 404 placeholder illustration."
+  },
+  "error.404.it.meta_title": {
+    "value": "404 — Ma che cosa",
+    "_context": "Document title for Italian-themed 404 page."
+  },
+  "error.404.it.line1": {
+    "value": "This page is gone. Just gone.",
+    "_context": "First line of Italian-themed 404 joke."
+  },
+  "error.404.it.line2": {
+    "value": "You come all this way and there's nothing. Sit down. I'll make you something.",
+    "_context": "Second line of Italian-themed 404 joke."
+  },
+  "error.404.it.button": {
+    "value": "Fine. Feed Me.",
+    "_context": "Primary CTA on Italian-themed 404 page."
+  },
+  "error.404.it.image_alt": {
+    "value": "Nonna with hands on cheeks, dismayed (placeholder art)",
+    "_context": "Alt text for Italian 404 placeholder illustration."
+  },
+  "error.404.gb.meta_title": {
+    "value": "404 — Please queue",
+    "_context": "Document title for British-themed 404 page."
+  },
+  "error.404.gb.line1": {
+    "value": "This page has gone. We've added you to the waitlist for a new one.",
+    "_context": "First line of British-themed 404 joke."
+  },
+  "error.404.gb.line2": {
+    "value": "Please queue here. Someone will be with you shortly. (They won't.)",
+    "_context": "Second line of British-themed 404 joke."
+  },
+  "error.404.gb.button": {
+    "value": "I'll Wait My Turn",
+    "_context": "Primary CTA on British-themed 404 page."
+  },
+  "error.404.gb.image_alt": {
+    "value": "Man in a suit standing alone in a very long queue (placeholder art)",
+    "_context": "Alt text for British 404 placeholder illustration."
+  },
+  "error.404.de.meta_title": {
+    "value": "404 — Formal inquiry",
+    "_context": "Document title for German-themed 404 page."
+  },
+  "error.404.de.line1": {
+    "value": "This page is missing. A formal inquiry has been filed.",
+    "_context": "First line of German-themed 404 joke."
+  },
+  "error.404.de.line2": {
+    "value": "Please allow 6–8 weeks for processing. You will receive a letter.",
+    "_context": "Second line of German-themed 404 joke."
+  },
+  "error.404.de.button": {
+    "value": "Submit My Complaint",
+    "_context": "Primary CTA on German-themed 404 page."
+  },
+  "error.404.de.image_alt": {
+    "value": "Thick official form titled Request to Locate Missing Page (placeholder art)",
+    "_context": "Alt text for German 404 placeholder illustration."
+  },
+  "error.404.au.meta_title": {
+    "value": "404 — Yeah nah",
+    "_context": "Document title for Australian-themed 404 page."
+  },
+  "error.404.au.line1": {
+    "value": "Mate, this page is gone. Dunno where.",
+    "_context": "First line of Australian-themed 404 joke."
+  },
+  "error.404.au.line2": {
+    "value": "Probably dead. Could've been spiders. Anyway — you right?",
+    "_context": "Second line of Australian-themed 404 joke."
+  },
+  "error.404.au.button": {
+    "value": "Yeah Nah, Take Me Back",
+    "_context": "Primary CTA on Australian-themed 404 page."
+  },
+  "error.404.au.image_alt": {
+    "value": "Kangaroo shrugging (placeholder art)",
+    "_context": "Alt text for Australian 404 placeholder illustration."
+  },
+  "error.404.ru.meta_title": {
+    "value": "404 — Have a nice day",
+    "_context": "Document title for Russian-themed 404 page."
+  },
+  "error.404.ru.line1": {
+    "value": "Page does not exist. Page never existed. You did not look for page.",
+    "_context": "First line of Russian-themed 404 joke."
+  },
+  "error.404.ru.line2": {
+    "value": "Have a nice day.",
+    "_context": "Second line of Russian-themed 404 joke."
+  },
+  "error.404.ru.button": {
+    "value": "I Was Never Here",
+    "_context": "Primary CTA on Russian-themed 404 page."
+  },
+  "error.404.ru.image_alt": {
+    "value": "Single bare lightbulb in an empty room (placeholder art)",
+    "_context": "Alt text for Russian 404 placeholder illustration."
+  },
+  "error.404.es.meta_title": {
+    "value": "404 — Siesta",
+    "_context": "Document title for Spanish-themed 404 page."
+  },
+  "error.404.es.line1": {
+    "value": "This page is sleeping. It will be back.",
+    "_context": "First line of Spanish-themed 404 joke."
+  },
+  "error.404.es.line2": {
+    "value": "Maybe at 5. Maybe tomorrow. It's fine. Relax.",
+    "_context": "Second line of Spanish-themed 404 joke."
+  },
+  "error.404.es.button": {
+    "value": "I'll Come Back Later",
+    "_context": "Primary CTA on Spanish-themed 404 page."
+  },
+  "error.404.es.image_alt": {
+    "value": "Closed shop with shutters down and a Siesta sign, 2pm (placeholder art)",
+    "_context": "Alt text for Spanish 404 placeholder illustration."
+  },
+  "error.404.ch.meta_title": {
+    "value": "404 — Please say nothing",
+    "_context": "Document title for Swiss-themed 404 page."
+  },
+  "error.404.ch.line1": {
+    "value": "This page is missing. This has never happened before.",
+    "_context": "First line of Swiss-themed 404 joke."
+  },
+  "error.404.ch.line2": {
+    "value": "We are confused. Please do not tell anyone.",
+    "_context": "Second line of Swiss-themed 404 joke."
+  },
+  "error.404.ch.button": {
+    "value": "I Saw Nothing",
+    "_context": "Primary CTA on Swiss-themed 404 page."
+  },
+  "error.404.ch.image_alt": {
+    "value": "Luxury watch with hands pointing nowhere (placeholder art)",
+    "_context": "Alt text for Swiss 404 placeholder illustration."
+  },
+  "error.404.br.meta_title": {
+    "value": "404 — Carnival",
+    "_context": "Document title for Brazilian-themed 404 page."
+  },
+  "error.404.br.line1": {
+    "value": "The page isn't here but honestly — look at this parade.",
+    "_context": "First line of Brazilian-themed 404 joke."
+  },
+  "error.404.br.line2": {
+    "value": "Who cares. Dance.",
+    "_context": "Second line of Brazilian-themed 404 joke."
+  },
+  "error.404.br.button": {
+    "value": "Fine, I'll Dance",
+    "_context": "Primary CTA on Brazilian-themed 404 page."
+  },
+  "error.404.br.image_alt": {
+    "value": "Carnival parade passing the empty spot where the page was (placeholder art)",
+    "_context": "Alt text for Brazilian 404 placeholder illustration."
+  },
+  "error.404.ie.meta_title": {
+    "value": "404 — Another round",
+    "_context": "Document title for Irish-themed 404 page."
+  },
+  "error.404.ie.line1": {
+    "value": "Ah, this page? Gone. Years ago. There's a great story about it, actually.",
+    "_context": "First line of Irish-themed 404 joke."
+  },
+  "error.404.ie.line2": {
+    "value": "Will I tell ya? Sit down. Another round first.",
+    "_context": "Second line of Irish-themed 404 joke."
+  },
+  "error.404.ie.button": {
+    "value": "Go On Then",
+    "_context": "Primary CTA on Irish-themed 404 page."
+  },
+  "error.404.ie.image_alt": {
+    "value": "Two old men at a pub, one gesturing into the distance (placeholder art)",
+    "_context": "Alt text for Irish 404 placeholder illustration."
+  },
+  "error.404.nordic.meta_title": {
+    "value": "404 — The fjord remains",
+    "_context": "Document title for Scandinavian-themed 404 page."
+  },
+  "error.404.nordic.line1": {
+    "value": "The page is gone. Everything is temporary.",
+    "_context": "First line of Scandinavian-themed 404 joke."
+  },
+  "error.404.nordic.line2": {
+    "value": "The fjord remains. Is that not enough?",
+    "_context": "Second line of Scandinavian-themed 404 joke."
+  },
+  "error.404.nordic.button": {
+    "value": "The Fjord Is Enough",
+    "_context": "Primary CTA on Scandinavian-themed 404 page."
+  },
+  "error.404.nordic.image_alt": {
+    "value": "Lone figure staring at a fjord in the rain (placeholder art)",
+    "_context": "Alt text for Scandinavian 404 placeholder illustration."
+  },
+  "error.500.meta_title": {
+    "value": "500 — C'est la 500",
+    "_context": "HTML document title for HTTP 500 error page; playful French-flavored pun (c'est la vie)."
+  },
+  "error.500.heading": {
+    "value": "C'est la 500",
+    "_context": "Main heading on 500 page; pun mixing French 'c'est la vie' with HTTP 500."
+  },
+  "error.500.message": {
+    "value": "A 500 means our servers tripped while handling your request—not that you picked a dead URL or that something was 'supposed' to be here and vanished. Pure backstage chaos. The stack trace then did the classic white-flag routine with suspiciously French timing. (Sorry, France—we're roasting our own deploy, not you.) Engineers are on it; try again in a moment.",
+    "_context": "500 page body: clarifies 500 vs 404, playful white-flag/French joke aimed at the server, reassurance."
+  },
   "game.score.label": {
     "value": "Score",
     "_context": "Generic label for score display in game headers and components."

@@ -6,8 +6,19 @@
 	import { getMetaDescription, getOGTitle, getOGDescription, getOGImage, getOGUrl } from '$lib/translations/meta';
 	import { Navigation } from '$lib/components/nav';
 	import { hasAppleEmoji } from '$lib/utils/platform';
-	import { onMount, tick } from 'svelte';
+	import { browser } from '$app/environment';
+	import { onDestroy, onMount, tick } from 'svelte';
 	import { page } from '$app/stores';
+
+	$: is404Page = $page.status === 404;
+
+	$: if (browser) {
+		document.body.classList.toggle('page-404', is404Page);
+	}
+
+	onDestroy(() => {
+		if (browser) document.body.classList.remove('page-404');
+	});
 	// These props are provided by SvelteKit but not used in this layout
 	export const data: any = {};
 	export const params: Record<string, string> = {};
@@ -113,7 +124,7 @@
 
 <Navigation />
 
-<main>
+<main class:main-404-flush={is404Page}>
 	<slot />
 </main>
 
@@ -125,6 +136,18 @@
 
 	main {
 		min-height: calc(100vh - 4rem);
+	}
+
+	main.main-404-flush {
+		padding: 0;
+		margin: 0;
+		width: 100%;
+		max-width: none;
+	}
+
+	:global(body.page-404) {
+		padding: 0;
+		margin: 0;
 	}
 </style>
 

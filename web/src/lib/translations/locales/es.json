@@ -154,5 +154,17 @@
   "game.round.progress": "Ronda %d / %d",
   "game.hangman.title": "El Ahorcado",
   "game.facts.title": "Adivina por Hechos",
-  "game.hangman.description": "¡Pon a prueba tus conocimientos de geografía! Adivina los nombres de países letra por letra antes de que se te acaben las oportunidades."
+  "game.hangman.description": "¡Pon a prueba tus conocimientos de geografía! Adivina los nombres de países letra por letra antes de que se te acaben las oportunidades.",
+  "debug.hub.document_title": "Depuración - Flagged It",
+  "debug.hub.meta_description": "Centro de depuración interno para Flagged It: explora banderas de países, formas de mapas, nombres localizados y otras herramientas para desarrolladores.",
+  "debug.flags.document_title": "Todas las Banderas - Depuración",
+  "debug.flags.meta_description": "Explora cada bandera de país en el conjunto de datos de Flagged It con búsqueda, filtros de región y vista individual o de cuadrícula. Herramienta de depuración interna.",
+  "debug.shapes.document_title": "Todas las Formas - Depuración",
+  "debug.shapes.meta_description": "Explora las formas de contorno de países (GeoJSON) para Flagged It con búsqueda, filtros de región y vista individual o de cuadrícula. Herramienta de depuración interna.",
+  "debug.country_names.document_title": "Depuración de Nombres de Países - Flagged It",
+  "debug.country_names.meta_description": "Compara los nombres de países localizados en todos los idiomas compatibles en Flagged It. Herramienta de depuración interna para desarrollo y control de calidad.",
+  "debug.background_test.document_title": "Prueba de Fondo - Flagged It",
+  "debug.background_test.meta_description": "Prueba diferentes estilos de fondo para la silueta del mapa mundial. Página de depuración interna para Flagged It.",
+  "ui_kit.document_title": "Kit de UI - Flagged It",
+  "ui_kit.meta_description": "Muestra completa de componentes de UI para los juegos de geografía de Flagged It. Referencia de desarrollo interna."
 }

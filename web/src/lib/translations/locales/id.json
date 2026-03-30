@@ -154,5 +154,17 @@
   "game.round.progress": "Ronde %d / %d",
   "game.hangman.title": "Tebak Kata",
   "game.facts.title": "Tebak dari Fakta",
-  "game.hangman.description": "Uji pengetahuan geografi Anda! Tebak nama negara huruf per huruf sebelum kehabisan tebakan."
+  "game.hangman.description": "Uji pengetahuan geografi Anda! Tebak nama negara huruf per huruf sebelum kehabisan tebakan.",
+  "debug.hub.document_title": "Debug - Flagged It",
+  "debug.hub.meta_description": "Pusat debug internal untuk Flagged It: jelajahi bendera negara, bentuk peta, nama terlokalisasi, dan alat pengembang lainnya.",
+  "debug.flags.document_title": "Semua Bendera - Debug",
+  "debug.flags.meta_description": "Jelajahi setiap bendera negara dalam dataset Flagged It dengan pencarian, filter wilayah, dan tampilan tunggal atau kisi. Alat debug internal.",
+  "debug.shapes.document_title": "Semua Bentuk - Debug",
+  "debug.shapes.meta_description": "Jelajahi bentuk garis besar negara (GeoJSON) untuk Flagged It dengan pencarian, filter wilayah, dan tampilan tunggal atau kisi. Alat debug internal.",
+  "debug.country_names.document_title": "Debug Nama Negara - Flagged It",
+  "debug.country_names.meta_description": "Bandingkan nama negara terlokalisasi di semua bahasa yang didukung di Flagged It. Alat debug internal untuk pengembangan dan QA.",
+  "debug.background_test.document_title": "Uji Latar Belakang - Flagged It",
+  "debug.background_test.meta_description": "Uji gaya latar belakang yang berbeda untuk siluet peta dunia. Halaman debug internal untuk Flagged It.",
+  "ui_kit.document_title": "UI Kit - Flagged It",
+  "ui_kit.meta_description": "Pameran komponen UI lengkap untuk game geografi Flagged It. Referensi pengembangan internal."
 }

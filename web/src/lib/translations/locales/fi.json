@@ -154,5 +154,17 @@
   "game.round.progress": "Kierros %d / %d",
   "game.hangman.title": "Hirsipuu",
   "game.facts.title": "Arvaa tosiasioista",
-  "game.hangman.description": "Testaa maantieteellistä osaamisesi! Arvaa maan nimi kirjain kerrallaan ennen kuin loput vääristä vastauksista ovat käytetty."
+  "game.hangman.description": "Testaa maantieteellistä osaamisesi! Arvaa maan nimi kirjain kerrallaan ennen kuin loput vääristä vastauksista ovat käytetty.",
+  "debug.hub.document_title": "Debug - Flagged It",
+  "debug.hub.meta_description": "Flagged Itin sisäinen debug-keskus: selaa maiden lippuja, karttamuotoja, lokalisoituja nimiä ja muita kehittäjän työkaluja.",
+  "debug.flags.document_title": "Kaikki liput - Debug",
+  "debug.flags.meta_description": "Selaa jokaista Flagged It -aineiston maan lippua haun, alueellisten suodattimien sekä yksittäis- tai ruudukkonäkymän avulla. Sisäinen debug-työkalu.",
+  "debug.shapes.document_title": "Kaikki muodot - Debug",
+  "debug.shapes.meta_description": "Selaa Flagged Itin maiden ääriviivamuotoja (GeoJSON) haun, alueellisten suodattimien sekä yksittäis- tai ruudukkonäkymän avulla. Sisäinen debug-työkalu.",
+  "debug.country_names.document_title": "Maannimien debug - Flagged It",
+  "debug.country_names.meta_description": "Vertaa lokalisoituja maannimiä kaikilla tuetuilla kielillä Flagged Itissä. Sisäinen debug-työkalu kehitykseen ja laadunvarmistukseen.",
+  "debug.background_test.document_title": "Taustatesti - Flagged It",
+  "debug.background_test.meta_description": "Testaa erilaisia taustatyylejä maailmankartan siluetille. Flagged Itin sisäinen debug-sivu.",
+  "ui_kit.document_title": "UI Kit - Flagged It",
+  "ui_kit.meta_description": "Kattava käyttöliittymäkomponenttien esittely Flagged It -maantietopelejä varten. Sisäinen kehitysreferenssi."
 }

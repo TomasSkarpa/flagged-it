@@ -154,5 +154,17 @@
   "scoreboard.coming_soon": "まだ準備中です",
   "game.hangman.title": "ワード予想",
   "game.facts.title": "事実から推測",
-  "game.hangman.description": "あなたの地理の知識を試してみよう！国名を一文字ずつ当てて、間違える回数がなくなる前に正解を出そう。"
+  "game.hangman.description": "あなたの地理の知識を試してみよう！国名を一文字ずつ当てて、間違える回数がなくなる前に正解を出そう。",
+  "debug.hub.document_title": "デバッグ - Flagged It",
+  "debug.hub.meta_description": "Flagged It の内部デバッグハブです。国旗、地図の形状、ローカライズされた国名、その他の開発者ツールを閲覧できます。",
+  "debug.flags.document_title": "すべての国旗 - デバッグ",
+  "debug.flags.meta_description": "検索、地域フィルター、単一またはグリッド表示で、Flagged It データセット内のすべての国旗を閲覧できます。内部デバッグツールです。",
+  "debug.shapes.document_title": "すべての形状 - デバッグ",
+  "debug.shapes.meta_description": "検索、地域フィルター、単一またはグリッド表示で、Flagged It の国の輪郭形状 (GeoJSON) を閲覧できます。内部デバッグツールです。",
+  "debug.country_names.document_title": "国名デバッグ - Flagged It",
+  "debug.country_names.meta_description": "Flagged It でサポートされているすべての言語のローカライズされた国名を比較できます。開発およびQA用の内部デバッグツールです。",
+  "debug.background_test.document_title": "背景テスト - Flagged It",
+  "debug.background_test.meta_description": "世界地図のシルエットの様々な背景スタイルをテストできます。Flagged It の内部デバッグページです。",
+  "ui_kit.document_title": "UIキット - Flagged It",
+  "ui_kit.meta_description": "Flagged It の地理ゲーム用の完全なUIコンポーネントショーケースです。内部開発リファレンスです。"
 }

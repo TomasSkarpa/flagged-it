@@ -154,5 +154,17 @@
   "game.round.progress": "Ronde %d / %d",
   "game.hangman.title": "Letteren Raden",
   "game.facts.title": "Raad het Land met Feiten",
-  "game.hangman.description": "Test je kennis van aardrijkskunde! Raad landnamen letter voor letter voordat je geen pogingen meer over hebt."
+  "game.hangman.description": "Test je kennis van aardrijkskunde! Raad landnamen letter voor letter voordat je geen pogingen meer over hebt.",
+  "debug.hub.document_title": "Debug - Flagged It",
+  "debug.hub.meta_description": "Interne debug-hub voor Flagged It: blader door landenvlaggen, kaartvormen, gelokaliseerde namen en andere ontwikkelaarstools.",
+  "debug.flags.document_title": "Alle Vlaggen - Debug",
+  "debug.flags.meta_description": "Blader door elke landenvlag in de Flagged It-dataset met zoekfunctie, regiofilters en enkele of rasterweergave. Interne debug-tool.",
+  "debug.shapes.document_title": "Alle Vormen - Debug",
+  "debug.shapes.meta_description": "Blader door landcontouren (GeoJSON) voor Flagged It met zoekfunctie, regiofilters en enkele of rasterweergave. Interne debug-tool.",
+  "debug.country_names.document_title": "Landennamen Debug - Flagged It",
+  "debug.country_names.meta_description": "Vergelijk gelokaliseerde landennamen in alle ondersteunde talen in Flagged It. Interne debug-tool voor ontwikkeling en QA.",
+  "debug.background_test.document_title": "Achtergrondtest - Flagged It",
+  "debug.background_test.meta_description": "Test verschillende achtergrondstijlen voor het silhouet van de wereldkaart. Interne debug-pagina voor Flagged It.",
+  "ui_kit.document_title": "UI Kit - Flagged It",
+  "ui_kit.meta_description": "Complete showcase van UI-componenten voor Flagged It geografiespellen. Interne ontwikkelingsreferentie."
 }

@@ -154,5 +154,17 @@
   "game.round.progress": "Pusingan %d / %d",
   "game.hangman.title": "Tebak Kata",
   "game.facts.title": "Tebak dari Fakta",
-  "game.hangman.description": "Uji pengetahuan geografi anda! Tebak nama negara huruf demi huruf sebelum kehabisan tekaan."
+  "game.hangman.description": "Uji pengetahuan geografi anda! Tebak nama negara huruf demi huruf sebelum kehabisan tekaan.",
+  "debug.hub.document_title": "Nyahpepijat - Flagged It",
+  "debug.hub.meta_description": "Hab nyahpepijat dalaman untuk Flagged It: semak imbas bendera negara, bentuk peta, nama setempat, dan alatan pembangun lain.",
+  "debug.flags.document_title": "Semua Bendera - Nyahpepijat",
+  "debug.flags.meta_description": "Semak imbas setiap bendera negara dalam set data Flagged It dengan carian, penapis wilayah, dan paparan tunggal atau grid. Alat nyahpepijat dalaman.",
+  "debug.shapes.document_title": "Semua Bentuk - Nyahpepijat",
+  "debug.shapes.meta_description": "Semak imbas bentuk garis besar negara (GeoJSON) untuk Flagged It dengan carian, penapis wilayah, dan paparan tunggal atau grid. Alat nyahpepijat dalaman.",
+  "debug.country_names.document_title": "Nyahpepijat Nama Negara - Flagged It",
+  "debug.country_names.meta_description": "Bandingkan nama negara setempat merentasi semua bahasa yang disokong dalam Flagged It. Alat nyahpepijat dalaman untuk pembangunan dan QA.",
+  "debug.background_test.document_title": "Ujian Latar Belakang - Flagged It",
+  "debug.background_test.meta_description": "Uji gaya latar belakang yang berbeza untuk siluet peta dunia. Halaman nyahpepijat dalaman untuk Flagged It.",
+  "ui_kit.document_title": "Kit UI - Flagged It",
+  "ui_kit.meta_description": "Pameran komponen UI lengkap untuk permainan geografi Flagged It. Rujukan pembangunan dalaman."
 }

@@ -154,5 +154,17 @@
   "game.round.progress": "Vòng %d / %d",
   "game.hangman.title": "Đoán từng chữ",
   "game.facts.title": "Đoán bằng sự kiện",
-  "game.hangman.description": "Đoán tên quốc gia từng chữ một — hết lượt là thua! Bạn thuộc bao nhiêu nước?"
+  "game.hangman.description": "Đoán tên quốc gia từng chữ một — hết lượt là thua! Bạn thuộc bao nhiêu nước?",
+  "debug.hub.document_title": "Gỡ lỗi - Flagged It",
+  "debug.hub.meta_description": "Trung tâm gỡ lỗi nội bộ của Flagged It: duyệt cờ quốc gia, hình dạng bản đồ, tên đã bản địa hóa và các công cụ phát triển khác.",
+  "debug.flags.document_title": "Tất cả cờ - Gỡ lỗi",
+  "debug.flags.meta_description": "Duyệt mọi lá cờ quốc gia trong bộ dữ liệu Flagged It với tính năng tìm kiếm, bộ lọc khu vực và chế độ xem đơn hoặc dạng lưới. Đây là công cụ gỡ lỗi nội bộ.",
+  "debug.shapes.document_title": "Tất cả hình dạng - Gỡ lỗi",
+  "debug.shapes.meta_description": "Duyệt các hình dạng đường viền quốc gia (GeoJSON) cho Flagged It với tính năng tìm kiếm, bộ lọc khu vực và chế độ xem đơn hoặc dạng lưới. Đây là công cụ gỡ lỗi nội bộ.",
+  "debug.country_names.document_title": "Gỡ lỗi tên quốc gia - Flagged It",
+  "debug.country_names.meta_description": "So sánh tên quốc gia đã bản địa hóa trên tất cả các ngôn ngữ được Flagged It hỗ trợ. Đây là công cụ gỡ lỗi nội bộ dành cho phát triển và QA.",
+  "debug.background_test.document_title": "Kiểm tra nền - Flagged It",
+  "debug.background_test.meta_description": "Kiểm tra các kiểu nền khác nhau cho hình bóng bản đồ thế giới. Đây là trang gỡ lỗi nội bộ của Flagged It.",
+  "ui_kit.document_title": "UI Kit - Flagged It",
+  "ui_kit.meta_description": "Trình diễn đầy đủ các thành phần UI cho các trò chơi địa lý của Flagged It. Tài liệu tham khảo phát triển nội bộ."
 }

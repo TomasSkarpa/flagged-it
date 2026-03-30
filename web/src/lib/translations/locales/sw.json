@@ -154,5 +154,17 @@
   "game.round.progress": "Mzunguko %d / %d",
   "game.hangman.title": "Mchezo wa Kubahatisha Neno",
   "game.facts.title": "Tambua kwa Mambo",
-  "game.hangman.description": "Jaribu ujuzi wako wa jiografia! Kisia majina ya nchi herufi kwa herufi kabla ya muda wa kukisia kumalizika."
+  "game.hangman.description": "Jaribu ujuzi wako wa jiografia! Kisia majina ya nchi herufi kwa herufi kabla ya muda wa kukisia kumalizika.",
+  "debug.hub.document_title": "Utatuzi - Flagged It",
+  "debug.hub.meta_description": "Kituo cha ndani cha utatuzi cha Flagged It: vinjari bendera za nchi, maumbo ya ramani, majina yaliyojanibishwa, na zana zingine za wasanidi.",
+  "debug.flags.document_title": "Bendera Zote - Utatuzi",
+  "debug.flags.meta_description": "Vinjari kila bendera ya nchi katika hifadhidata ya Flagged It ukitumia utafutaji, vichujio vya kanda, na mwonekano mmoja au gridi. Zana ya ndani ya utatuzi.",
+  "debug.shapes.document_title": "Maumbo Yote - Utatuzi",
+  "debug.shapes.meta_description": "Vinjari maumbo ya mipaka ya nchi (GeoJSON) kwa Flagged It ukitumia utafutaji, vichujio vya kanda, na mwonekano mmoja au gridi. Zana ya ndani ya utatuzi.",
+  "debug.country_names.document_title": "Utatuzi wa Majina ya Nchi - Flagged It",
+  "debug.country_names.meta_description": "Linganisha majina ya nchi yaliyojanibishwa katika lugha zote zinazotumika katika Flagged It. Zana ya ndani ya utatuzi kwa ajili ya uundaji na uhakiki wa ubora.",
+  "debug.background_test.document_title": "Jaribio la Mandharinyuma - Flagged It",
+  "debug.background_test.meta_description": "Jaribu mitindo tofauti ya mandharinyuma kwa taswira ya ramani ya dunia. Ukurasa wa ndani wa utatuzi kwa Flagged It.",
+  "ui_kit.document_title": "Seti ya UI - Flagged It",
+  "ui_kit.meta_description": "Onyesho kamili la vipengele vya UI kwa michezo ya jiografia ya Flagged It. Rejea ya ndani ya uundaji."
 }

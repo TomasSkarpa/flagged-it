@@ -154,5 +154,17 @@
   "game.round.progress": "รอบ %d / %d",
   "game.hangman.title": "เกมทายคำ",
   "game.facts.title": "ทายประเทศจากข้อมูล",
-  "game.hangman.description": "ทดสอบความรู้ภูมิศาสตร์ของคุณ! ทายชื่อประเทศทีละตัวอักษร ก่อนที่จะหมดโอกาสทาย"
+  "game.hangman.description": "ทดสอบความรู้ภูมิศาสตร์ของคุณ! ทายชื่อประเทศทีละตัวอักษร ก่อนที่จะหมดโอกาสทาย",
+  "debug.hub.document_title": "ดีบัก - Flagged It",
+  "debug.hub.meta_description": "ศูนย์รวมเครื่องมือดีบักภายในสำหรับ Flagged It: เรียกดูธงชาติ, รูปร่างแผนที่, ชื่อที่แปลเป็นภาษาท้องถิ่น และเครื่องมือสำหรับนักพัฒนาอื่นๆ",
+  "debug.flags.document_title": "ธงทั้งหมด - ดีบัก",
+  "debug.flags.meta_description": "เรียกดูธงชาติทั้งหมดในชุดข้อมูล Flagged It พร้อมการค้นหา, ตัวกรองภูมิภาค และมุมมองแบบเดี่ยวหรือแบบตาราง เครื่องมือดีบักภายใน",
+  "debug.shapes.document_title": "รูปร่างทั้งหมด - ดีบัก",
+  "debug.shapes.meta_description": "เรียกดูรูปร่างโครงร่างประเทศ (GeoJSON) สำหรับ Flagged It พร้อมการค้นหา, ตัวกรองภูมิภาค และมุมมองแบบเดี่ยวหรือแบบตาราง เครื่องมือดีบักภายใน",
+  "debug.country_names.document_title": "ดีบักชื่อประเทศ - Flagged It",
+  "debug.country_names.meta_description": "เปรียบเทียบชื่อประเทศที่แปลเป็นภาษาท้องถิ่นในทุกภาษาที่รองรับใน Flagged It เครื่องมือดีบักภายในสำหรับการพัฒนาและ QA",
+  "debug.background_test.document_title": "ทดสอบพื้นหลัง - Flagged It",
+  "debug.background_test.meta_description": "ทดสอบรูปแบบพื้นหลังที่แตกต่างกันสำหรับเงาแผนที่โลก หน้าดีบักภายในสำหรับ Flagged It",
+  "ui_kit.document_title": "ชุด UI - Flagged It",
+  "ui_kit.meta_description": "การแสดงส่วนประกอบ UI ทั้งหมดสำหรับเกมภูมิศาสตร์ Flagged It ข้อมูลอ้างอิงสำหรับการพัฒนาภายใน"
 }

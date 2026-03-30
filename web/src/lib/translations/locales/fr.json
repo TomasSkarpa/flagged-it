@@ -154,5 +154,17 @@
   "game.round.progress": "Tour %d / %d",
   "game.hangman.title": "Pendu",
   "game.facts.title": "Devinez par les faits",
-  "game.hangman.description": "Testez vos connaissances en géographie ! Devinez les noms de pays lettre par lettre avant de manquer de chances."
+  "game.hangman.description": "Testez vos connaissances en géographie ! Devinez les noms de pays lettre par lettre avant de manquer de chances.",
+  "debug.hub.document_title": "Débogage - Flagged It",
+  "debug.hub.meta_description": "Centre de débogage interne pour Flagged It : parcours les drapeaux de pays, les formes de cartes, les noms localisés et d'autres outils de développement.",
+  "debug.flags.document_title": "Tous les drapeaux - Débogage",
+  "debug.flags.meta_description": "Parcours tous les drapeaux de pays de l'ensemble de données Flagged It avec recherche, filtres de région et vue simple ou en grille. Outil de débogage interne.",
+  "debug.shapes.document_title": "Toutes les formes - Débogage",
+  "debug.shapes.meta_description": "Parcours les formes de contour de pays (GeoJSON) pour Flagged It avec recherche, filtres de région et vue simple ou en grille. Outil de débogage interne.",
+  "debug.country_names.document_title": "Débogage des noms de pays - Flagged It",
+  "debug.country_names.meta_description": "Compare les noms de pays localisés dans toutes les langues prises en charge par Flagged It. Outil de débogage interne pour le développement et l'assurance qualité.",
+  "debug.background_test.document_title": "Test de fond - Flagged It",
+  "debug.background_test.meta_description": "Teste différents styles de fond pour la silhouette de la carte du monde. Page de débogage interne pour Flagged It.",
+  "ui_kit.document_title": "Kit UI - Flagged It",
+  "ui_kit.meta_description": "Présentation complète des composants UI pour les jeux de géographie Flagged It. Référence de développement interne."
 }

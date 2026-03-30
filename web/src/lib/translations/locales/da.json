@@ -154,5 +154,17 @@
   "game.round.progress": "Runde %d / %d",
   "game.hangman.title": "Bogstav Gæt",
   "game.facts.title": "Gæt ved Fakta",
-  "game.hangman.description": "Test din geografikundskab! Gæt landenavne bogstav for bogstav, før du løber tør for gæt."
+  "game.hangman.description": "Test din geografikundskab! Gæt landenavne bogstav for bogstav, før du løber tør for gæt.",
+  "debug.hub.document_title": "Fejlfinding - Flagged It",
+  "debug.hub.meta_description": "Intern fejlfindingshub for Flagged It: gennemse landeflag, kortformer, lokaliserede navne og andre udviklerværktøjer.",
+  "debug.flags.document_title": "Alle Flag - Fejlfinding",
+  "debug.flags.meta_description": "Gennemse alle landeflag i Flagged It-datasættet med søgning, regionsfiltre og enkelt- eller gittervisning. Internt fejlfindingsværktøj.",
+  "debug.shapes.document_title": "Alle Former - Fejlfinding",
+  "debug.shapes.meta_description": "Gennemse landeomridsformer (GeoJSON) for Flagged It med søgning, regionsfiltre og enkelt- eller gittervisning. Internt fejlfindingsværktøj.",
+  "debug.country_names.document_title": "Landenavne Fejlfinding - Flagged It",
+  "debug.country_names.meta_description": "Sammenlign lokaliserede landenavne på tværs af alle understøttede sprog i Flagged It. Internt fejlfindingsværktøj til udvikling og QA.",
+  "debug.background_test.document_title": "Baggrundstest - Flagged It",
+  "debug.background_test.meta_description": "Test forskellige baggrundsstile til verdenskortets silhuet. Intern fejlfindingsside for Flagged It.",
+  "ui_kit.document_title": "UI Kit - Flagged It",
+  "ui_kit.meta_description": "Komplet fremvisning af UI-komponenter til Flagged It geografispil. Intern udviklingsreference."
 }

@@ -154,5 +154,17 @@
   "game.round.progress": "Runda %d / %d",
   "game.hangman.title": "Pogađaj riječ",
   "game.facts.title": "Pogađaj po činjenicama",
-  "game.hangman.description": "Testirajte svoje geografsko znanje! Pogađajte nazive zemalja slovo po slovo prije nego što vam ponestane pokušaja."
+  "game.hangman.description": "Testirajte svoje geografsko znanje! Pogađajte nazive zemalja slovo po slovo prije nego što vam ponestane pokušaja.",
+  "debug.hub.document_title": "Otklanjanje pogrešaka - Flagged It",
+  "debug.hub.meta_description": "Interno središte za otklanjanje pogrešaka za Flagged It: pregledaj zastave država, oblike karata, lokalizirane nazive i druge alate za razvojne programere.",
+  "debug.flags.document_title": "Sve zastave - Otklanjanje pogrešaka",
+  "debug.flags.meta_description": "Pregledaj svaku zastavu države u Flagged It skupu podataka s pretraživanjem, filtrima po regijama i prikazom pojedinačno ili u mreži. Interni alat za otklanjanje pogrešaka.",
+  "debug.shapes.document_title": "Svi oblici - Otklanjanje pogrešaka",
+  "debug.shapes.meta_description": "Pregledaj obrise oblika država (GeoJSON) za Flagged It s pretraživanjem, filtrima po regijama i prikazom pojedinačno ili u mreži. Interni alat za otklanjanje pogrešaka.",
+  "debug.country_names.document_title": "Otklanjanje pogrešaka naziva država - Flagged It",
+  "debug.country_names.meta_description": "Usporedi lokalizirane nazive država na svim podržanim jezicima u Flagged It. Interni alat za otklanjanje pogrešaka za razvoj i QA.",
+  "debug.background_test.document_title": "Test pozadine - Flagged It",
+  "debug.background_test.meta_description": "Testiraj različite stilove pozadine za siluetu karte svijeta. Interna stranica za otklanjanje pogrešaka za Flagged It.",
+  "ui_kit.document_title": "UI Kit - Flagged It",
+  "ui_kit.meta_description": "Potpuna prezentacija UI komponenti za Flagged It geografske igre. Interna referenca za razvoj."
 }

@@ -154,5 +154,17 @@
   "game.round.progress": "Runda %d / %d",
   "game.hangman.title": "Wisielec",
   "game.facts.title": "Zgadnij po Faktach",
-  "game.hangman.description": "Przetestuj swoją wiedzę geograficzną! Odgadnij nazwy krajów litera po literze, zanim skończą się twoje próby."
+  "game.hangman.description": "Przetestuj swoją wiedzę geograficzną! Odgadnij nazwy krajów litera po literze, zanim skończą się twoje próby.",
+  "debug.hub.document_title": "Debugowanie - Flagged It",
+  "debug.hub.meta_description": "Wewnętrzne centrum debugowania dla Flagged It: przeglądaj flagi krajów, kształty map, zlokalizowane nazwy i inne narzędzia dla deweloperów.",
+  "debug.flags.document_title": "Wszystkie Flagi - Debugowanie",
+  "debug.flags.meta_description": "Przeglądaj każdą flagę kraju w zbiorze danych Flagged It z wyszukiwaniem, filtrami regionów oraz widokiem pojedynczym lub siatki. Wewnętrzne narzędzie do debugowania.",
+  "debug.shapes.document_title": "Wszystkie Kształty - Debugowanie",
+  "debug.shapes.meta_description": "Przeglądaj kształty konturów krajów (GeoJSON) dla Flagged It z wyszukiwaniem, filtrami regionów oraz widokiem pojedynczym lub siatki. Wewnętrzne narzędzie do debugowania.",
+  "debug.country_names.document_title": "Debugowanie Nazw Krajów - Flagged It",
+  "debug.country_names.meta_description": "Porównaj zlokalizowane nazwy krajów we wszystkich obsługiwanych językach w Flagged It. Wewnętrzne narzędzie do debugowania dla rozwoju i QA.",
+  "debug.background_test.document_title": "Test Tła - Flagged It",
+  "debug.background_test.meta_description": "Testuj różne style tła dla sylwetki mapy świata. Wewnętrzna strona debugowania dla Flagged It.",
+  "ui_kit.document_title": "Zestaw UI - Flagged It",
+  "ui_kit.meta_description": "Kompletna prezentacja komponentów UI dla gier geograficznych Flagged It. Wewnętrzne odniesienie deweloperskie."
 }

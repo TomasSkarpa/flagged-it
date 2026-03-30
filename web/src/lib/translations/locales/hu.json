@@ -154,5 +154,17 @@
   "game.round.progress": "Kör %d / %d",
   "game.hangman.title": "Keresd a szót",
   "game.facts.title": "Találd ki tények alapján",
-  "game.hangman.description": "Teszteld földrajzi ismereteidet! Találd ki az országneveket betűről betűre, mielőtt elfogynának a tippjeid."
+  "game.hangman.description": "Teszteld földrajzi ismereteidet! Találd ki az országneveket betűről betűre, mielőtt elfogynának a tippjeid.",
+  "debug.hub.document_title": "Hibakeresés - Flagged It",
+  "debug.hub.meta_description": "Belső hibakereső központ a Flagged It-hez: böngéssz országzászlókat, térképformákat, lokalizált neveket és egyéb fejlesztői eszközöket.",
+  "debug.flags.document_title": "Összes zászló - Hibakeresés",
+  "debug.flags.meta_description": "Böngéssz minden országzászlót a Flagged It adatbázisában kereséssel, régiószűrőkkel, valamint egyedi vagy rácsnézettel. Belső hibakereső eszköz.",
+  "debug.shapes.document_title": "Összes forma - Hibakeresés",
+  "debug.shapes.meta_description": "Böngéssz országkontúr formákat (GeoJSON) a Flagged It-hez kereséssel, régiószűrőkkel, valamint egyedi vagy rácsnézettel. Belső hibakereső eszköz.",
+  "debug.country_names.document_title": "Országnevek hibakeresés - Flagged It",
+  "debug.country_names.meta_description": "Hasonlítsd össze a lokalizált országneveket a Flagged It összes támogatott nyelvében. Belső hibakereső eszköz fejlesztéshez és QA-hoz.",
+  "debug.background_test.document_title": "Háttér teszt - Flagged It",
+  "debug.background_test.meta_description": "Tesztelj különböző háttérstílusokat a világtérkép sziluettjéhez. Belső hibakereső oldal a Flagged It-hez.",
+  "ui_kit.document_title": "UI Készlet - Flagged It",
+  "ui_kit.meta_description": "Teljes UI komponens bemutató a Flagged It földrajzi játékaihoz. Belső fejlesztési referencia."
 }

@@ -154,5 +154,17 @@
   "game.round.progress": "Runde %d / %d",
   "game.hangman.title": "Galgenmännchen",
   "game.facts.title": "Erraten durch Fakten",
-  "game.hangman.description": "Testen Sie Ihr geografisches Wissen! Erraten Sie Ländernamen Buchstabe für Buchstabe, bevor Sie keine Versuche mehr haben."
+  "game.hangman.description": "Testen Sie Ihr geografisches Wissen! Erraten Sie Ländernamen Buchstabe für Buchstabe, bevor Sie keine Versuche mehr haben.",
+  "debug.hub.document_title": "Debug - Flagged It",
+  "debug.hub.meta_description": "Interner Debug-Hub für Flagged It: Durchsuche Länderflaggen, Kartenformen, lokalisierte Namen und andere Entwicklertools.",
+  "debug.flags.document_title": "Alle Flaggen - Debug",
+  "debug.flags.meta_description": "Durchsuche jede Länderflagge im Flagged It Datensatz mit Suchfunktion, Regionsfiltern und Einzel- oder Gitteransicht. Internes Debug-Tool.",
+  "debug.shapes.document_title": "Alle Formen - Debug",
+  "debug.shapes.meta_description": "Durchsuche Länderumrissformen (GeoJSON) für Flagged It mit Suchfunktion, Regionsfiltern und Einzel- oder Gitteransicht. Internes Debug-Tool.",
+  "debug.country_names.document_title": "Ländernamen Debug - Flagged It",
+  "debug.country_names.meta_description": "Vergleiche lokalisierte Ländernamen in allen unterstützten Sprachen von Flagged It. Internes Debug-Tool für Entwicklung und Qualitätssicherung.",
+  "debug.background_test.document_title": "Hintergrundtest - Flagged It",
+  "debug.background_test.meta_description": "Teste verschiedene Hintergrundstile für die Weltkarten-Silhouette. Interne Debug-Seite für Flagged It.",
+  "ui_kit.document_title": "UI Kit - Flagged It",
+  "ui_kit.meta_description": "Vollständige UI-Komponenten-Präsentation für Flagged It Geografie-Spiele. Interne Entwicklungsreferenz."
 }

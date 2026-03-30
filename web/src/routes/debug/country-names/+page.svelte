@@ -5,6 +5,7 @@
 	import type { Country } from '$lib/types';
 	import LoadingSpinner from '$lib/components/ui/LoadingSpinner.svelte';
 	import { getCountryNameForLocale } from '$lib/utils/countryNames';
+	import { t } from '$lib/translations';
 
 	const languages = locale.getSupportedLocales();
 	
@@ -19,6 +20,8 @@
 
 	$: currentLanguage = languages[currentLanguageIndex];
 	$: currentLocale = currentLanguage?.code || 'en';
+	$: debugCountryNamesTitle = t('debug.country_names.document_title', undefined, $locale);
+	$: debugCountryNamesDescription = t('debug.country_names.meta_description', undefined, $locale);
 
 	onMount(async () => {
 		await loadCountries();
@@ -82,7 +85,8 @@
 </script>
 
 <svelte:head>
-	<title>Country Names Debug - Flagged It</title>
+	<title>{debugCountryNamesTitle}</title>
+	<meta name="description" content={debugCountryNamesDescription} />
 </svelte:head>
 
 <div class="min-h-screen p-4 md:p-8">

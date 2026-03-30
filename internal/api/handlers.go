@@ -95,8 +95,8 @@ func (h *FlagGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		Region    string `json:"region"`
-		Locale    string `json:"locale"`
+		Region     string `json:"region"`
+		Locale     string `json:"locale"`
 		RoundCount int    `json:"roundCount"`
 	}
 
@@ -637,8 +637,8 @@ func (h *ShapeGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		Region    string `json:"region"`
-		Locale    string `json:"locale"`
+		Region     string `json:"region"`
+		Locale     string `json:"locale"`
 		RoundCount int    `json:"roundCount"`
 	}
 
@@ -931,8 +931,8 @@ func (h *CapitalGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		Region    string `json:"region"`
-		Locale    string `json:"locale"`
+		Region     string `json:"region"`
+		Locale     string `json:"locale"`
 		RoundCount int    `json:"roundCount"`
 	}
 
@@ -1244,8 +1244,8 @@ func (h *HigherLowerHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		Category  string `json:"category"`
-		Locale    string `json:"locale"`
+		Category   string `json:"category"`
+		Locale     string `json:"locale"`
 		RoundCount int    `json:"roundCount"`
 	}
 
@@ -1563,7 +1563,7 @@ func (h *WorldleGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		Locale    string `json:"locale"`
+		Locale     string `json:"locale"`
 		RoundCount int    `json:"roundCount"`
 	}
 
@@ -1797,7 +1797,7 @@ func (h *FactsGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req struct {
-		Locale    string `json:"locale"`
+		Locale     string `json:"locale"`
 		RoundCount int    `json:"roundCount"`
 	}
 

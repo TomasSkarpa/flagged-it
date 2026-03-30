@@ -36,6 +36,7 @@
 	
 	// Store and utility imports
 	import { locale } from '$lib/stores/locale';
+	import { t } from '$lib/translations';
 	import { getKeyboardLayoutForLocale } from '$lib/utils/keyboardLayout';
 	import { triggerConfetti } from '$lib/utils/confetti';
 	import { onMount, onDestroy } from 'svelte';
@@ -73,6 +74,8 @@
 	// Reactive values for template
 	$: currentLocale = (browser && $locale) ? $locale : 'en';
 	$: detectedKeyboardLayout = currentLocale ? getKeyboardLayoutForLocale(currentLocale) : 'english';
+	$: uiKitDocumentTitle = t('ui_kit.document_title', undefined, currentLocale);
+	$: uiKitMetaDescription = t('ui_kit.meta_description', undefined, currentLocale);
 	
 	function closeModal() {
 		modalOpen = false;
@@ -135,8 +138,8 @@
 </script>
 
 <svelte:head>
-	<title>UI Kit - Flagged It</title>
-	<meta name="description" content="Complete UI component showcase" />
+	<title>{uiKitDocumentTitle}</title>
+	<meta name="description" content={uiKitMetaDescription} />
 </svelte:head>
 
 <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">

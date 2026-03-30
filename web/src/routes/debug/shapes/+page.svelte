@@ -4,6 +4,12 @@
 	import type { Country } from '$lib/types';
 	import LoadingSpinner from '$lib/components/ui/LoadingSpinner.svelte';
 	import ShapeRenderer from '$lib/components/ShapeRenderer.svelte';
+	import { t } from '$lib/translations';
+	import { locale } from '$lib/stores/locale';
+
+	$: currentLocale = $locale;
+	$: debugShapesTitle = t('debug.shapes.document_title', undefined, currentLocale);
+	$: debugShapesDescription = t('debug.shapes.meta_description', undefined, currentLocale);
 
 	let countries: Country[] = [];
 	let filteredCountries: Country[] = [];
@@ -128,7 +134,8 @@
 </script>
 
 <svelte:head>
-	<title>All Shapes - Debug</title>
+	<title>{debugShapesTitle}</title>
+	<meta name="description" content={debugShapesDescription} />
 </svelte:head>
 
 <svelte:window on:keydown={handleKeydown} />

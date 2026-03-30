@@ -3,6 +3,12 @@
 	import { getAllCountries } from '$lib/api/data';
 	import type { Country } from '$lib/types';
 	import LoadingSpinner from '$lib/components/ui/LoadingSpinner.svelte';
+	import { t } from '$lib/translations';
+	import { locale } from '$lib/stores/locale';
+
+	$: currentLocale = $locale;
+	$: debugFlagsTitle = t('debug.flags.document_title', undefined, currentLocale);
+	$: debugFlagsDescription = t('debug.flags.meta_description', undefined, currentLocale);
 
 	let countries: Country[] = [];
 	let filteredCountries: Country[] = [];
@@ -69,7 +75,8 @@
 </script>
 
 <svelte:head>
-	<title>All Flags - Debug</title>
+	<title>{debugFlagsTitle}</title>
+	<meta name="description" content={debugFlagsDescription} />
 </svelte:head>
 
 <svelte:window on:keydown={handleKeydown} />

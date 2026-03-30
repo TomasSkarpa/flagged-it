@@ -1,9 +1,16 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { t } from '$lib/translations';
+	import { locale } from '$lib/stores/locale';
+
+	$: currentLocale = $locale;
+	$: debugHubTitle = t('debug.hub.document_title', undefined, currentLocale);
+	$: debugHubDescription = t('debug.hub.meta_description', undefined, currentLocale);
 </script>
 
 <svelte:head>
-	<title>Debug - Flagged It</title>
+	<title>{debugHubTitle}</title>
+	<meta name="description" content={debugHubDescription} />
 </svelte:head>
 
 <div class="min-h-screen p-4 md:p-8">

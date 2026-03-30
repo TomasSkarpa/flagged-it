@@ -37,6 +37,7 @@
 	$: currentLocale = $locale;
 	$: setupDescription = t('game.higher_lower.setup.description', undefined, currentLocale);
 	$: higherLowerTitle = t('game.higher_lower.title', undefined, currentLocale);
+	$: higherLowerPageDescription = t('home.game.higher_lower.description', undefined, currentLocale);
 	$: gameOverText = t('game.over.title', undefined, currentLocale);
 	$: finalScoreText = t('game.higher_lower.final_score', undefined, currentLocale);
 	$: highScoreText = t('game.higher_lower.high_score', undefined, currentLocale);
@@ -164,7 +165,8 @@
 </script>
 
 <svelte:head>
-	<title>Higher or Lower - Flagged It</title>
+	<title>{higherLowerTitle} - Flagged It</title>
+	<meta name="description" content={higherLowerPageDescription} />
 </svelte:head>
 
 {#if !gameStarted && !gameOver}

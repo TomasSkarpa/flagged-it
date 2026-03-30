@@ -25,6 +25,10 @@
 
 	// Reactive translations
 	$: currentLocale = $locale;
+	$: shapeSeoTitle = t('game.shape.title', undefined, currentLocale);
+	$: shapePageDescription =
+		t('home.game.shape.description', undefined, currentLocale) ||
+		t('game.shape.description', undefined, currentLocale);
 
 	let sessionId: string | null = null;
 	let currentQuestion: any = null;
@@ -281,7 +285,8 @@
 </script>
 
 <svelte:head>
-	<title>Shape Game - Flagged It</title>
+	<title>{shapeSeoTitle} - Flagged It</title>
+	<meta name="description" content={shapePageDescription} />
 </svelte:head>
 
 <div class="min-h-screen p-4 md:p-8">

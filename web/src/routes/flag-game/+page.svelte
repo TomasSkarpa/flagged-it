@@ -50,6 +50,8 @@
 	$: currentLocale = $locale;
 	$: flagGameTitle = t('game.flag.setup.title', undefined, currentLocale);
 	$: flagGameDescription = t('game.flag.setup.description', undefined, currentLocale);
+	$: flagSeoTitle = t('game.flag.title', undefined, currentLocale);
+	$: flagPageDescription = t('home.game.flag.description', undefined, currentLocale);
 	$: flagQuestionText = t('game.flag.question', undefined, currentLocale);
 	$: excellentMessage = t('game.flag.over.excellent', undefined, currentLocale);
 
@@ -276,7 +278,8 @@
 </script>
 
 <svelte:head>
-	<title>Flag Game - Flagged It</title>
+	<title>{flagSeoTitle} - Flagged It</title>
+	<meta name="description" content={flagPageDescription} />
 </svelte:head>
 
 <div class="min-h-screen p-4 md:p-8">

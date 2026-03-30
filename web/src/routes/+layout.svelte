@@ -6,7 +6,7 @@
 	import { getMetaDescription, getOGTitle, getOGDescription, getOGImage, getOGUrl } from '$lib/translations/meta';
 	import { Navigation } from '$lib/components/nav';
 	import { hasAppleEmoji } from '$lib/utils/platform';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import { page } from '$app/stores';
 	// These props are provided by SvelteKit but not used in this layout
 	export const data: any = {};
@@ -47,11 +47,9 @@
 			}
 		}
 		
-		const unsubscribe = locale.subscribe(value => {
+		const unsubscribe = locale.subscribe((value) => {
 			currentLocale = value;
-			updateMetaDescription();
-			updateOGTags();
-			
+
 			// Set lang attribute and text direction for RTL languages
 			if (typeof document !== 'undefined') {
 				document.documentElement.lang = value;
@@ -61,15 +59,16 @@
 					document.documentElement.dir = 'ltr';
 				}
 			}
+
+			void tick().then(() => updateOGTags());
 		});
-		
+
 		// Subscribe to page changes to update OG URL
 		const unsubscribePage = page.subscribe((pageData) => {
-			updateOGTags(pageData.url.pathname);
+			void tick().then(() => updateOGTags(pageData.url.pathname));
 		});
-		
-		updateMetaDescription();
-		updateOGTags();
+
+		void tick().then(() => updateOGTags());
 		
 		return () => {
 			unsubscribe();
@@ -77,21 +76,16 @@
 		};
 	});
 	
-	function updateMetaDescription() {
-		if (typeof document !== 'undefined') {
-			const metaDesc = document.querySelector('meta[name="description"]');
-			if (metaDesc) {
-				metaDesc.setAttribute('content', getMetaDescription(currentLocale));
-			}
-		}
-	}
-	
 	function updateOGTags(path?: string) {
 		if (typeof document === 'undefined') return;
-		
+
 		// Get current path - use provided path or fallback to window.location
 		const currentPath = path || (typeof window !== 'undefined' ? window.location.pathname : '/');
-		const ogDescription = getOGDescription(currentLocale);
+		const metaDescContent = document
+			.querySelector('meta[name="description"]')
+			?.getAttribute('content')
+			?.trim();
+		const ogDescription = metaDescContent || getOGDescription(currentLocale);
 		const ogUrl = getOGUrl(currentPath);
 		
 		// Update OG title (use page title if available, otherwise default)
@@ -116,10 +110,6 @@
 		if (twitterDescEl) twitterDescEl.setAttribute('content', ogDescription);
 	}
 </script>
-
-<svelte:head>
-	<meta name="description" content={getMetaDescription(currentLocale)} />
-</svelte:head>
 
 <Navigation />
 

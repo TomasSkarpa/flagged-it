@@ -23,8 +23,8 @@ type State struct {
 
 // Logic handles the game logic for hangman
 type Logic struct {
-	countries []models.Country
-	state     *State
+	countries  []models.Country
+	state      *State
 	roundCount int
 }
 

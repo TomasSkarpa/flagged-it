@@ -18,8 +18,8 @@ type State struct {
 
 // Logic handles the game logic for higher/lower
 type Logic struct {
-	countries []models.Country
-	state     *State
+	countries  []models.Country
+	state      *State
 	roundCount int
 }
 

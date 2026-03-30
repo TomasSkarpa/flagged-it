@@ -22,7 +22,7 @@ type Logic struct {
 	allCountries []models.Country
 	countries    []models.Country
 	state        *State
-	roundCount    int
+	roundCount   int
 }
 
 // NewLogic creates a new shape game logic instance

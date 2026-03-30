@@ -19,7 +19,6 @@
 
 	export let options: DifficultyOption[] = [];
 	export let selected: string = '';
-	export let columns: number | 'auto' = 'auto';
 
 	const dispatch = createEventDispatcher<{
 		select: { value: string };
@@ -32,7 +31,7 @@
 </script>
 
 <div class="difficulty-selector">
-	<div class="category-grid" class:auto-columns={columns === 'auto'}>
+	<div class="category-grid">
 		{#each options as option}
 			<CategoryCard
 				selected={selected === option.value}
@@ -52,12 +51,35 @@
 
 	.category-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 		gap: 1rem;
+		/* Default: 3 columns (5+ items, or if :has() is unsupported) */
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
 
-	.category-grid.auto-columns {
-		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+	/* Exactly 4 → 2×2 */
+	.category-grid:has(> :nth-child(4):last-child) {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	/* Exactly 3 → one row */
+	.category-grid:has(> :nth-child(3):last-child) {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	/* Exactly 2 */
+	.category-grid:has(> :nth-child(2):last-child) {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	/* Single card */
+	.category-grid:has(> :only-child) {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	@media (max-width: 480px) {
+		.difficulty-selector .category-grid {
+			grid-template-columns: minmax(0, 1fr);
+		}
 	}
 
 </style>

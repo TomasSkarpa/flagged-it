@@ -154,5 +154,17 @@
   "game.round.progress": "轮次%d/%d",
   "game.hangman.title": "猜单词",
   "game.facts.title": "根据事实猜谜",
-  "game.hangman.description": "测试你的地理知识！在猜测次数用完之前，逐个字母猜测国家名称。"
+  "game.hangman.description": "测试你的地理知识！在猜测次数用完之前，逐个字母猜测国家名称。",
+  "debug.hub.document_title": "调试 - Flagged It",
+  "debug.hub.meta_description": "Flagged It 的内部调试中心：浏览国家/地区旗帜、地图形状、本地化名称以及其他开发者工具。",
+  "debug.flags.document_title": "所有旗帜 - 调试",
+  "debug.flags.meta_description": "在 Flagged It 数据集中浏览所有国家/地区旗帜，支持搜索、区域筛选以及单张或网格视图。内部调试工具。",
+  "debug.shapes.document_title": "所有形状 - 调试",
+  "debug.shapes.meta_description": "浏览 Flagged It 的国家/地区轮廓形状 (GeoJSON)，支持搜索、区域筛选以及单张或网格视图。内部调试工具。",
+  "debug.country_names.document_title": "国家/地区名称调试 - Flagged It",
+  "debug.country_names.meta_description": "在 Flagged It 中比较所有支持语言的本地化国家/地区名称。用于开发和质量保证的内部调试工具。",
+  "debug.background_test.document_title": "背景测试 - Flagged It",
+  "debug.background_test.meta_description": "测试世界地图轮廓的不同背景样式。Flagged It 的内部调试页面。",
+  "ui_kit.document_title": "UI 工具包 - Flagged It",
+  "ui_kit.meta_description": "Flagged It 地理游戏的完整 UI 组件展示。内部开发参考。"
 }

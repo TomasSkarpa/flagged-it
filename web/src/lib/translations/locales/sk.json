@@ -154,5 +154,17 @@
   "game.round.progress": "Kolo %d / %d",
   "game.hangman.title": "Hádaj slovo",
   "game.facts.title": "Hádaj podľa faktov",
-  "game.hangman.description": "Otestujte svoje znalosti geografie! Hádajte názvy krajín písmeno po písmene skôr, než vám dôjdu možnosti."
+  "game.hangman.description": "Otestujte svoje znalosti geografie! Hádajte názvy krajín písmeno po písmene skôr, než vám dôjdu možnosti.",
+  "debug.hub.document_title": "Ladenie - Flagged It",
+  "debug.hub.meta_description": "Interné centrum ladenia pre Flagged It: prehliadaj vlajky krajín, tvary máp, lokalizované názvy a ďalšie nástroje pre vývojárov.",
+  "debug.flags.document_title": "Všetky vlajky - Ladenie",
+  "debug.flags.meta_description": "Prehliadaj každú vlajku krajiny v dátovej sade Flagged It s vyhľadávaním, filtrami regiónov a zobrazením jedného prvku alebo mriežky. Interný nástroj na ladenie.",
+  "debug.shapes.document_title": "Všetky tvary - Ladenie",
+  "debug.shapes.meta_description": "Prehliadaj obrysové tvary krajín (GeoJSON) pre Flagged It s vyhľadávaním, filtrami regiónov a zobrazením jedného prvku alebo mriežky. Interný nástroj na ladenie.",
+  "debug.country_names.document_title": "Ladenie názvov krajín - Flagged It",
+  "debug.country_names.meta_description": "Porovnaj lokalizované názvy krajín vo všetkých podporovaných jazykoch v Flagged It. Interný nástroj na ladenie pre vývoj a QA.",
+  "debug.background_test.document_title": "Test pozadia - Flagged It",
+  "debug.background_test.meta_description": "Testuj rôzne štýly pozadia pre siluetu mapy sveta. Interná stránka na ladenie pre Flagged It.",
+  "ui_kit.document_title": "UI Kit - Flagged It",
+  "ui_kit.meta_description": "Kompletná ukážka UI komponentov pre geografické hry Flagged It. Interná referenčná príručka pre vývoj."
 }

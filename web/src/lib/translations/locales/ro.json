@@ -154,5 +154,17 @@
   "game.round.progress": "Rundă %d / %d",
   "game.hangman.title": "Joc de Ghicit Cuvântul",
   "game.facts.title": "Ghiceste după Fapte",
-  "game.hangman.description": "Testează-ți cunoștințele de geografie! Ghicește numele țărilor litera cu litera înainte de a rămâne fără încercări."
+  "game.hangman.description": "Testează-ți cunoștințele de geografie! Ghicește numele țărilor litera cu litera înainte de a rămâne fără încercări.",
+  "debug.hub.document_title": "Depanare - Flagged It",
+  "debug.hub.meta_description": "Centru intern de depanare pentru Flagged It: răsfoiește steaguri de țări, forme de hărți, nume localizate și alte instrumente pentru dezvoltatori.",
+  "debug.flags.document_title": "Toate Steagurile - Depanare",
+  "debug.flags.meta_description": "Răsfoiește fiecare steag de țară din setul de date Flagged It cu căutare, filtre de regiune și vizualizare individuală sau grilă. Instrument intern de depanare.",
+  "debug.shapes.document_title": "Toate Formele - Depanare",
+  "debug.shapes.meta_description": "Răsfoiește formele de contur ale țărilor (GeoJSON) pentru Flagged It cu căutare, filtre de regiune și vizualizare individuală sau grilă. Instrument intern de depanare.",
+  "debug.country_names.document_title": "Depanare Nume Țări - Flagged It",
+  "debug.country_names.meta_description": "Compară numele localizate ale țărilor în toate limbile suportate în Flagged It. Instrument intern de depanare pentru dezvoltare și QA.",
+  "debug.background_test.document_title": "Test Fundal - Flagged It",
+  "debug.background_test.meta_description": "Testează diferite stiluri de fundal pentru silueta hărții lumii. Pagină internă de depanare pentru Flagged It.",
+  "ui_kit.document_title": "Kit UI - Flagged It",
+  "ui_kit.meta_description": "Prezentare completă a componentelor UI pentru jocurile de geografie Flagged It. Referință internă de dezvoltare."
 }

@@ -154,5 +154,17 @@
   "game.round.progress": "Tur %d / %d",
   "game.hangman.title": "Adam Asmaca",
   "game.facts.title": "Gerçeklerden Tahmin Et",
-  "game.hangman.description": "Coğrafya bilginizi test edin! Harcadığınız tahmin sayısı bitmeden ülke adlarını harf harf tahmin edin."
+  "game.hangman.description": "Coğrafya bilginizi test edin! Harcadığınız tahmin sayısı bitmeden ülke adlarını harf harf tahmin edin.",
+  "debug.hub.document_title": "Hata Ayıklama - Flagged It",
+  "debug.hub.meta_description": "Flagged It için dahili hata ayıklama merkezi: ülke bayraklarına, harita şekillerine, yerelleştirilmiş adlara ve diğer geliştirici araçlarına göz at.",
+  "debug.flags.document_title": "Tüm Bayraklar - Hata Ayıklama",
+  "debug.flags.meta_description": "Flagged It veri kümesindeki her ülke bayrağına arama, bölge filtreleri ve tekli veya ızgara görünümü ile göz at. Dahili hata ayıklama aracı.",
+  "debug.shapes.document_title": "Tüm Şekiller - Hata Ayıklama",
+  "debug.shapes.meta_description": "Flagged It için ülke anahat şekillerine (GeoJSON) arama, bölge filtreleri ve tekli veya ızgara görünümü ile göz at. Dahili hata ayıklama aracı.",
+  "debug.country_names.document_title": "Ülke Adları Hata Ayıklama - Flagged It",
+  "debug.country_names.meta_description": "Flagged It'teki tüm desteklenen dillerdeki yerelleştirilmiş ülke adlarını karşılaştır. Geliştirme ve kalite güvencesi için dahili hata ayıklama aracı.",
+  "debug.background_test.document_title": "Arka Plan Testi - Flagged It",
+  "debug.background_test.meta_description": "Dünya haritası silueti için farklı arka plan stillerini test et. Flagged It için dahili hata ayıklama sayfası.",
+  "ui_kit.document_title": "Kullanıcı Arayüzü Kiti - Flagged It",
+  "ui_kit.meta_description": "Flagged It coğrafya oyunları için eksiksiz kullanıcı arayüzü bileşenleri sergisi. Dahili geliştirme referansı."
 }

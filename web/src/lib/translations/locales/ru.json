@@ -154,5 +154,17 @@
   "game.round.progress": "Раунд %d / %d",
   "game.hangman.title": "Виселица",
   "game.facts.title": "Угадай по Фактам",
-  "game.hangman.description": "Проверьте свои знания географии! Угадывайте названия стран по буквам, прежде чем закончатся попытки."
+  "game.hangman.description": "Проверьте свои знания географии! Угадывайте названия стран по буквам, прежде чем закончатся попытки.",
+  "debug.hub.document_title": "Отладка - Flagged It",
+  "debug.hub.meta_description": "Внутренний центр отладки для Flagged It: просматривай флаги стран, формы карт, локализованные названия и другие инструменты разработчика.",
+  "debug.flags.document_title": "Все флаги - Отладка",
+  "debug.flags.meta_description": "Просматривай каждый флаг страны в наборе данных Flagged It с поиском, фильтрами по регионам и одиночным или сеточным видом. Внутренний инструмент отладки.",
+  "debug.shapes.document_title": "Все формы - Отладка",
+  "debug.shapes.meta_description": "Просматривай контурные формы стран (GeoJSON) для Flagged It с поиском, фильтрами по регионам и одиночным или сеточным видом. Внутренний инструмент отладки.",
+  "debug.country_names.document_title": "Отладка названий стран - Flagged It",
+  "debug.country_names.meta_description": "Сравнивай локализованные названия стран на всех поддерживаемых языках в Flagged It. Внутренний инструмент отладки для разработки и контроля качества.",
+  "debug.background_test.document_title": "Тест фона - Flagged It",
+  "debug.background_test.meta_description": "Тестируй различные стили фона для силуэта карты мира. Внутренняя страница отладки для Flagged It.",
+  "ui_kit.document_title": "UI Kit - Flagged It",
+  "ui_kit.meta_description": "Полная демонстрация компонентов пользовательского интерфейса для географических игр Flagged It. Внутренний справочник для разработки."
 }

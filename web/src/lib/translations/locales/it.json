@@ -154,5 +154,17 @@
   "game.round.progress": "Round %d / %d",
   "game.hangman.title": "L'impiccato",
   "game.facts.title": "Indovina dai Fatti",
-  "game.hangman.description": "Mettiti alla prova con la geografia! Indovina i nomi dei paesi lettera per lettera prima di esaurire i tentativi."
+  "game.hangman.description": "Mettiti alla prova con la geografia! Indovina i nomi dei paesi lettera per lettera prima di esaurire i tentativi.",
+  "debug.hub.document_title": "Debug - Flagged It",
+  "debug.hub.meta_description": "Hub di debug interno per Flagged It: sfoglia bandiere di paesi, forme di mappe, nomi localizzati e altri strumenti per sviluppatori.",
+  "debug.flags.document_title": "Tutte le bandiere - Debug",
+  "debug.flags.meta_description": "Sfoglia ogni bandiera di paese nel dataset di Flagged It con ricerca, filtri per regione e visualizzazione singola o a griglia. Strumento di debug interno.",
+  "debug.shapes.document_title": "Tutte le forme - Debug",
+  "debug.shapes.meta_description": "Sfoglia le forme dei contorni dei paesi (GeoJSON) per Flagged It con ricerca, filtri per regione e visualizzazione singola o a griglia. Strumento di debug interno.",
+  "debug.country_names.document_title": "Debug Nomi Paesi - Flagged It",
+  "debug.country_names.meta_description": "Compara i nomi localizzati dei paesi in tutte le lingue supportate in Flagged It. Strumento di debug interno per lo sviluppo e il QA.",
+  "debug.background_test.document_title": "Test Sfondo - Flagged It",
+  "debug.background_test.meta_description": "Testa diversi stili di sfondo per la silhouette della mappa del mondo. Pagina di debug interna per Flagged It.",
+  "ui_kit.document_title": "UI Kit - Flagged It",
+  "ui_kit.meta_description": "Vetrina completa dei componenti UI per i giochi di geografia di Flagged It. Riferimento di sviluppo interno."
 }

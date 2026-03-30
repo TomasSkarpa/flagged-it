@@ -154,5 +154,17 @@
   "error.message": "Něco se pokazilo. Zkus to prosím později.",
   "error.go_home": "Jít domů",
   "game.score.label": "Skóre",
-  "game.round.progress": "Kolo %d / %d"
+  "game.round.progress": "Kolo %d / %d",
+  "debug.hub.document_title": "Ladění - Flagged It",
+  "debug.hub.meta_description": "Interní centrum ladění pro Flagged It: procházej vlajky zemí, tvary map, lokalizované názvy a další vývojářské nástroje.",
+  "debug.flags.document_title": "Všechny vlajky - Ladění",
+  "debug.flags.meta_description": "Procházej každou vlajku země v datové sadě Flagged It s vyhledáváním, filtry regionů a zobrazením jednotlivě nebo v mřížce. Interní nástroj pro ladění.",
+  "debug.shapes.document_title": "Všechny tvary - Ladění",
+  "debug.shapes.meta_description": "Procházej obrysové tvary zemí (GeoJSON) pro Flagged It s vyhledáváním, filtry regionů a zobrazením jednotlivě nebo v mřížce. Interní nástroj pro ladění.",
+  "debug.country_names.document_title": "Ladění názvů zemí - Flagged It",
+  "debug.country_names.meta_description": "Porovnej lokalizované názvy zemí napříč všemi podporovanými jazyky ve Flagged It. Interní nástroj pro ladění pro vývoj a QA.",
+  "debug.background_test.document_title": "Test pozadí - Flagged It",
+  "debug.background_test.meta_description": "Testuj různé styly pozadí pro siluetu mapy světa. Interní stránka pro ladění pro Flagged It.",
+  "ui_kit.document_title": "UI Kit - Flagged It",
+  "ui_kit.meta_description": "Kompletní přehled UI komponent pro geografické hry Flagged It. Interní vývojová reference."
 }

@@ -154,5 +154,17 @@
   "game.round.progress": "Runde %d / %d",
   "game.hangman.title": "Gjett ordet",
   "game.facts.title": "Giss etter Fakta",
-  "game.hangman.description": "Test din geografiske kunnskap! Giss landnavn bokstav for bokstav før du går tom for gissinger."
+  "game.hangman.description": "Test din geografiske kunnskap! Giss landnavn bokstav for bokstav før du går tom for gissinger.",
+  "debug.hub.document_title": "Feilsøking - Flagged It",
+  "debug.hub.meta_description": "Intern feilsøkingshub for Flagged It: bla gjennom landsflagg, kartformer, lokaliserte navn og andre utviklerverktøy.",
+  "debug.flags.document_title": "Alle flagg - Feilsøking",
+  "debug.flags.meta_description": "Bla gjennom alle landsflagg i Flagged It-datasettet med søk, regionfiltre og enkelt- eller rutenettvisning. Internt feilsøkingsverktøy.",
+  "debug.shapes.document_title": "Alle former - Feilsøking",
+  "debug.shapes.meta_description": "Bla gjennom landkonturformer (GeoJSON) for Flagged It med søk, regionfiltre og enkelt- eller rutenettvisning. Internt feilsøkingsverktøy.",
+  "debug.country_names.document_title": "Landnavn feilsøking - Flagged It",
+  "debug.country_names.meta_description": "Sammenlign lokaliserte landnavn på tvers av alle støttede språk i Flagged It. Internt feilsøkingsverktøy for utvikling og QA.",
+  "debug.background_test.document_title": "Bakgrunnstest - Flagged It",
+  "debug.background_test.meta_description": "Test ulike bakgrunnsstiler for verdenskartets silhuett. Intern feilsøkingsside for Flagged It.",
+  "ui_kit.document_title": "UI Kit - Flagged It",
+  "ui_kit.meta_description": "Komplett fremvisning av UI-komponenter for Flagged It geografispill. Intern utviklingsreferanse."
 }

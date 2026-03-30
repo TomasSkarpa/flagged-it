@@ -154,5 +154,17 @@
   "game.round.progress": "Ronda %d / %d",
   "game.hangman.title": "Taya ng Salita",
   "game.facts.title": "Hula sa mga Katotohanan",
-  "game.hangman.description": "Subukin ang iyong kaalaman sa heograpiya! Hulaan ang mga pangalan ng bansa letra sa letra bago maubos ang iyong mga pagtatangka."
+  "game.hangman.description": "Subukin ang iyong kaalaman sa heograpiya! Hulaan ang mga pangalan ng bansa letra sa letra bago maubos ang iyong mga pagtatangka.",
+  "debug.hub.document_title": "Debug - Flagged It",
+  "debug.hub.meta_description": "Panloob na debug hub para sa Flagged It: mag-browse ng mga bandila ng bansa, hugis ng mapa, lokal na pangalan, at iba pang tool ng developer.",
+  "debug.flags.document_title": "Lahat ng Bandila - Debug",
+  "debug.flags.meta_description": "I-browse ang bawat bandila ng bansa sa dataset ng Flagged It na may paghahanap, mga filter ng rehiyon, at single o grid view. Panloob na tool sa pag-debug.",
+  "debug.shapes.document_title": "Lahat ng Hugis - Debug",
+  "debug.shapes.meta_description": "I-browse ang mga hugis ng balangkas ng bansa (GeoJSON) para sa Flagged It na may paghahanap, mga filter ng rehiyon, at single o grid view. Panloob na tool sa pag-debug.",
+  "debug.country_names.document_title": "Debug ng mga Pangalan ng Bansa - Flagged It",
+  "debug.country_names.meta_description": "Ikumpara ang mga lokal na pangalan ng bansa sa lahat ng sinusuportahang wika sa Flagged It. Panloob na tool sa pag-debug para sa development at QA.",
+  "debug.background_test.document_title": "Pagsubok sa Background - Flagged It",
+  "debug.background_test.meta_description": "Subukan ang iba't ibang estilo ng background para sa silhouette ng mapa ng mundo. Panloob na pahina ng debug para sa Flagged It.",
+  "ui_kit.document_title": "UI Kit - Flagged It",
+  "ui_kit.meta_description": "Kumpletong showcase ng bahagi ng UI para sa mga laro ng heograpiya ng Flagged It. Panloob na sanggunian sa development."
 }

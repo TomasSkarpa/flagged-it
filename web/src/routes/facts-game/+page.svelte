@@ -41,6 +41,10 @@
 	$: currentLocale = $locale;
 	$: factsTitle = t('game.facts.title', undefined, currentLocale);
 	$: factsDescription = t('game.facts.description', undefined, currentLocale) || t('home.game.facts.description', undefined, currentLocale) || t('game.facts.guess_country', undefined, currentLocale);
+	$: factsMetaDescription =
+		t('home.game.facts.description', undefined, currentLocale) ||
+		t('game.facts.description', undefined, currentLocale) ||
+		t('game.facts.guess_country', undefined, currentLocale);
 	$: makeGuessText = t('game.facts.guess_country', undefined, currentLocale);
 	$: enterCountryText = t('game.guessing.enter_country', undefined, currentLocale);
 	$: guessText = t('game.guessing.guess', undefined, currentLocale);
@@ -368,6 +372,7 @@
 
 <svelte:head>
 	<title>{factsTitle} - Flagged It</title>
+	<meta name="description" content={factsMetaDescription} />
 </svelte:head>
 
 <div class="min-h-screen p-4 md:p-8">

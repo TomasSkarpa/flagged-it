@@ -31,9 +31,9 @@ type GuessHistoryEntry struct {
 
 // Logic handles the game logic for facts guessing
 type Logic struct {
-	countries []models.Country
-	factsData map[string]models.CountryFacts
-	state     *State
+	countries  []models.Country
+	factsData  map[string]models.CountryFacts
+	state      *State
 	roundCount int
 }
 

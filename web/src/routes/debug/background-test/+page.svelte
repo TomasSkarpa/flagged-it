@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import GameCard from '$lib/components/ui/GameCard.svelte';
+	import { t } from '$lib/translations';
+	import { locale } from '$lib/stores/locale';
+
+	$: currentLocale = $locale;
+	$: backgroundTestTitle = t('debug.background_test.document_title', undefined, currentLocale);
+	$: backgroundTestDescription = t('debug.background_test.meta_description', undefined, currentLocale);
 
 	let currentIndex = 0;
 	let previewMode = false;
@@ -656,8 +662,8 @@
 </script>
 
 <svelte:head>
-	<title>Background Test - Flagged It</title>
-	<meta name="description" content="Test different background styles for the world map silhouette" />
+	<title>{backgroundTestTitle}</title>
+	<meta name="description" content={backgroundTestDescription} />
 </svelte:head>
 
 <div class="background-test-page min-h-screen p-4 md:p-8 relative overflow-hidden">

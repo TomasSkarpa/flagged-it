@@ -105,6 +105,8 @@
 	$: currentLocale = $locale;
 	$: gameTitle = t('game.capital.title', undefined, currentLocale);
 	$: gameDescription = t('game.capital.description', undefined, currentLocale);
+	$: capitalPageDescription =
+		t('home.game.capital.description', undefined, currentLocale) || gameDescription;
 	// Translate country name in question text
 	$: translatedCountryName = currentQuestion && allCountries.length > 0
 		? (() => {
@@ -303,6 +305,7 @@
 
 <svelte:head>
 	<title>{gameTitle} - Flagged It</title>
+	<meta name="description" content={capitalPageDescription} />
 </svelte:head>
 
 <div class="min-h-screen p-4 md:p-8">

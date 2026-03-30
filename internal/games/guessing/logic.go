@@ -36,7 +36,7 @@ type ComparisonResult struct {
 type Logic struct {
 	countries  []models.Country
 	state      *State
-	roundCount  int
+	roundCount int
 }
 
 // NewLogic creates a new guessing game logic instance

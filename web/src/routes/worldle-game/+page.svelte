@@ -208,6 +208,7 @@
 
 <svelte:head>
 	<title>{worldleTitle} - Flagged It</title>
+	<meta name="description" content={worldleDescription} />
 </svelte:head>
 
 <div class="min-h-screen p-4 md:p-8">

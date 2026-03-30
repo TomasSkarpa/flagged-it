@@ -10,6 +10,7 @@
 
 <svelte:head>
 	<title>{title} - Flagged It</title>
+	<meta name="description" content={description} />
 </svelte:head>
 
 <div class="min-h-screen p-4 md:p-8">

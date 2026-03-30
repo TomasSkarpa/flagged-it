@@ -603,6 +603,54 @@
     "value": "Coming Soon",
     "_context": "Placeholder message displayed on scoreboard page if the feature is not yet fully implemented."
   },
+  "debug.hub.document_title": {
+    "value": "Debug - Flagged It",
+    "_context": "HTML document title for the debug tools index page."
+  },
+  "debug.hub.meta_description": {
+    "value": "Internal debug hub for Flagged It: browse country flags, map shapes, localized names, and other developer tools.",
+    "_context": "Meta description for the debug tools index page (SEO / sharing)."
+  },
+  "debug.flags.document_title": {
+    "value": "All Flags - Debug",
+    "_context": "HTML document title for the debug page that lists all country flags."
+  },
+  "debug.flags.meta_description": {
+    "value": "Browse every country flag in the Flagged It dataset with search, region filters, and single or grid view. Internal debug tool.",
+    "_context": "Meta description for the all-flags debug page."
+  },
+  "debug.shapes.document_title": {
+    "value": "All Shapes - Debug",
+    "_context": "HTML document title for the debug page that lists all country map shapes."
+  },
+  "debug.shapes.meta_description": {
+    "value": "Browse country outline shapes (GeoJSON) for Flagged It with search, region filters, and single or grid view. Internal debug tool.",
+    "_context": "Meta description for the all-shapes debug page."
+  },
+  "debug.country_names.document_title": {
+    "value": "Country Names Debug - Flagged It",
+    "_context": "HTML document title for the localized country names debug page."
+  },
+  "debug.country_names.meta_description": {
+    "value": "Compare localized country names across all supported languages in Flagged It. Internal debug tool for development and QA.",
+    "_context": "Meta description for the country names debug page."
+  },
+  "debug.background_test.document_title": {
+    "value": "Background Test - Flagged It",
+    "_context": "HTML document title for the world map background style debug page."
+  },
+  "debug.background_test.meta_description": {
+    "value": "Test different background styles for the world map silhouette. Internal debug page for Flagged It.",
+    "_context": "Meta description for the background test debug page."
+  },
+  "ui_kit.document_title": {
+    "value": "UI Kit - Flagged It",
+    "_context": "HTML document title for the UI component showcase page."
+  },
+  "ui_kit.meta_description": {
+    "value": "Complete UI component showcase for Flagged It geography games. Internal development reference.",
+    "_context": "Meta description for the UI kit / component library page."
+  },
   "error.title": {
     "value": "Oooops,",
     "_context": "Friendly error page title displayed when an unexpected error occurs in the application."

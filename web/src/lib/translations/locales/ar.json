@@ -154,5 +154,17 @@
   "scoreboard.coming_soon": "قريباً",
   "game.hangman.title": "تخمين الكلمات",
   "game.facts.title": "خمن من خلال الحقائق",
-  "game.hangman.description": "اختبر معرفتك الجغرافية! خمن أسماء الدول حرفًا بحرف قبل أن تنفد تخميناتك."
+  "game.hangman.description": "اختبر معرفتك الجغرافية! خمن أسماء الدول حرفًا بحرف قبل أن تنفد تخميناتك.",
+  "debug.hub.document_title": "تصحيح الأخطاء - Flagged It",
+  "debug.hub.meta_description": "مركز تصحيح الأخطاء الداخلي لـ Flagged It: تصفح أعلام الدول، وأشكال الخرائط، والأسماء المترجمة، وأدوات المطورين الأخرى.",
+  "debug.flags.document_title": "جميع الأعلام - تصحيح الأخطاء",
+  "debug.flags.meta_description": "تصفح كل علم دولة في مجموعة بيانات Flagged It مع البحث، وفلاتر المناطق، وعرض فردي أو شبكي. أداة تصحيح أخطاء داخلية.",
+  "debug.shapes.document_title": "جميع الأشكال - تصحيح الأخطاء",
+  "debug.shapes.meta_description": "تصفح أشكال حدود الدول (GeoJSON) لـ Flagged It مع البحث، وفلاتر المناطق، وعرض فردي أو شبكي. أداة تصحيح أخطاء داخلية.",
+  "debug.country_names.document_title": "تصحيح أخطاء أسماء الدول - Flagged It",
+  "debug.country_names.meta_description": "قارن أسماء الدول المترجمة عبر جميع اللغات المدعومة في Flagged It. أداة تصحيح أخطاء داخلية للتطوير وضمان الجودة.",
+  "debug.background_test.document_title": "اختبار الخلفية - Flagged It",
+  "debug.background_test.meta_description": "اختبر أنماط خلفية مختلفة لخريطة العالم الظلية. صفحة تصحيح أخطاء داخلية لـ Flagged It.",
+  "ui_kit.document_title": "مجموعة واجهة المستخدم - Flagged It",
+  "ui_kit.meta_description": "عرض كامل لمكونات واجهة المستخدم لألعاب الجغرافيا في Flagged It. مرجع تطوير داخلي."
 }

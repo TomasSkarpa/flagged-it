@@ -154,5 +154,17 @@
   "game.round.progress": "라운드 %d / %d",
   "game.hangman.title": "행맨",
   "game.facts.title": "사실로 맞추기",
-  "game.hangman.description": "지리 지식 테스트! 추측이 끝나기 전에 국가 이름을 글자별로 맞춰보세요."
+  "game.hangman.description": "지리 지식 테스트! 추측이 끝나기 전에 국가 이름을 글자별로 맞춰보세요.",
+  "debug.hub.document_title": "디버그 - Flagged It",
+  "debug.hub.meta_description": "Flagged It의 내부 디버그 허브입니다: 국가 깃발, 지도 모양, 현지화된 이름 및 기타 개발자 도구를 찾아보세요.",
+  "debug.flags.document_title": "모든 깃발 - 디버그",
+  "debug.flags.meta_description": "검색, 지역 필터, 단일 또는 그리드 보기로 Flagged It 데이터셋의 모든 국가 깃발을 찾아보세요. 내부 디버그 도구입니다.",
+  "debug.shapes.document_title": "모든 모양 - 디버그",
+  "debug.shapes.meta_description": "검색, 지역 필터, 단일 또는 그리드 보기로 Flagged It의 국가 윤곽 모양(GeoJSON)을 찾아보세요. 내부 디버그 도구입니다.",
+  "debug.country_names.document_title": "국가 이름 디버그 - Flagged It",
+  "debug.country_names.meta_description": "Flagged It에서 지원되는 모든 언어의 현지화된 국가 이름을 비교해 보세요. 개발 및 QA를 위한 내부 디버그 도구입니다.",
+  "debug.background_test.document_title": "배경 테스트 - Flagged It",
+  "debug.background_test.meta_description": "세계 지도 실루엣의 다양한 배경 스타일을 테스트해 보세요. Flagged It의 내부 디버그 페이지입니다.",
+  "ui_kit.document_title": "UI 키트 - Flagged It",
+  "ui_kit.meta_description": "Flagged It 지리 게임을 위한 완벽한 UI 컴포넌트 쇼케이스입니다. 내부 개발 참고 자료입니다."
 }

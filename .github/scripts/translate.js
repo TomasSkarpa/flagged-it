@@ -113,7 +113,13 @@ const LOCALE_TO_NARRATIVE = {
   'id': 'Use standard friendly imperative. Focus on clarity and engagement.',
   'ms': 'Use standard friendly imperative. Focus on clarity and engagement.',
   'fil': 'Use standard friendly imperative. Focus on clarity and engagement.',
-  'sw': 'Use standard friendly imperative. Focus on clarity and engagement.'
+  'sw': 'Use standard friendly imperative. Focus on clarity and engagement.',
+  // Greek — orthography and grammar rules for UI strings (do not rely on English title case)
+  'el':
+    'Modern Greek (Ελληνικά): Use polite plural or neutral app tone consistent with the English source (match formality of the English string). ' +
+    'CAPITALIZATION: Use sentence-style capitalization only. Capitalize the first word of each complete sentence or standalone headline; do NOT use English-style title case—keep common nouns mid-sentence in lowercase (e.g. «Μαντεύστε την πρωτεύουσα», not «...την Πρωτεύουσα»). ' +
+    'GRAMMAR: Enforce correct gender, number, and case agreement—articles (ο/η/το, του/της/του, etc.) and adjectives must agree with their nouns (masculine/feminine/neuter). Examples: neuter «σχήμα» takes «το σχήμα», never «την σχήμα»; feminine «χώρα» takes «η χώρα» / «τη χώρα» as context requires. Proofread every noun phrase. ' +
+    'Leave true proper names (official country/city names, brand «Flagged It») as appropriate for Greek; do not introduce English fragments except established loanwords where natural.'
 };
 
 // Translation provider (will be initialized in main function)

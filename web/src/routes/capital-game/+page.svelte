@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import LoadingSpinner from '$lib/components/ui/LoadingSpinner.svelte';
 	import { 
@@ -14,8 +13,9 @@
 	import type { CapitalQuestion } from '$lib/api/capitalGame';
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
-	import { getAllCountries } from '$lib/api/data';
+	import { fetchCountriesListForLocale } from '$lib/utils/countriesLoader';
 	import { getCountryNameForLocale } from '$lib/utils/countryNames';
+	import { normalizeAnswerForCompare } from '$lib/utils/answerNormalize';
 	import { calculateCurrentRound } from '$lib/utils/gameUtils';
 	import type { Country } from '$lib/types';
 
@@ -71,35 +71,37 @@
 	function findCapitalByName(input: string, countryCca2: string): string | null {
 		if (!input || !allCountries.length) return null;
 		
-		const inputLower = input.trim().toLowerCase();
-		if (inputLower === '') return null;
+		const normInput = normalizeAnswerForCompare(input);
+		if (normInput === '') return null;
 
 		// Find the country for this question
 		const country = allCountries.find(c => c.cca2 === countryCca2);
 		if (!country || !country.capital || country.capital.length === 0) return null;
 
-		// Check if input matches any capital name (case-insensitive)
 		for (const capital of country.capital) {
-			if (capital.toLowerCase() === inputLower) {
-				return capital; // Return the original capital name
+			if (normalizeAnswerForCompare(capital) === normInput) {
+				return capital;
 			}
 		}
 
 		return null;
 	}
 
-	// Load countries on mount for translation and capital matching
-	onMount(async () => {
-		if (!browser || countriesLoaded) return;
-		try {
-			const result = await getAllCountries();
-			allCountries = result.countries;
-			countriesLoaded = true;
-		} catch (err) {
-			console.error('Failed to load countries for translation:', err);
-			// Continue without translations - will use English names
-		}
-	});
+	let countriesFetchSeq = 0;
+	$: if (browser && $locale) {
+		const seq = ++countriesFetchSeq;
+		const loc = $locale;
+		fetchCountriesListForLocale(loc)
+			.then((list) => {
+				if (seq !== countriesFetchSeq) return;
+				allCountries = list;
+				countriesLoaded = true;
+			})
+			.catch((err) => {
+				if (seq !== countriesFetchSeq) return;
+				console.error('Failed to load countries for translation:', err);
+			});
+	}
 
 	// Reactive translations
 	$: currentLocale = $locale;

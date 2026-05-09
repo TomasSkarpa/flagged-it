@@ -9,7 +9,7 @@
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
 	import { getCountryNameForLocale } from '$lib/utils/countryNames';
-	import { getAllCountries } from '$lib/api/data';
+	import { fetchCountriesListForLocale } from '$lib/utils/countriesLoader';
 	import type { Country } from '$lib/types';
 
 	let sessionId: string | null = null;
@@ -56,26 +56,28 @@
 		});
 	}
 
-	onMount(async () => {
-		// Only load countries in browser, not during SSR
+	let countriesFetchSeq = 0;
+	$: if (browser && currentLocale) {
+		const seq = ++countriesFetchSeq;
+		fetchCountriesListForLocale(currentLocale)
+			.then((list) => {
+				if (seq !== countriesFetchSeq) return;
+				allCountries = list;
+				countriesLoaded = true;
+			})
+			.catch((err) => {
+				if (seq !== countriesFetchSeq) return;
+				console.warn('Failed to load countries for translation (API server may not be running):', err);
+			});
+	}
+
+	onMount(() => {
 		if (!browser) {
-			// Auto-start game immediately if no game mode selection is needed
 			if (!gameStarted && !gameComplete) {
 				handleStartGame();
 			}
 			return;
 		}
-		
-		try {
-			const result = await getAllCountries();
-			allCountries = result.countries;
-			countriesLoaded = true;
-		} catch (err) {
-			// Silently fail - will use English names as fallback
-			console.warn('Failed to load countries for translation (API server may not be running):', err);
-		}
-		
-		// Auto-start game if no game mode selection is needed
 		if (!gameStarted && !gameComplete) {
 			handleStartGame();
 		}

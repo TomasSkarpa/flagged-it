@@ -1,3 +1,6 @@
+// Package shape holds standalone guess-validation logic. The live HTTP API in internal/api
+// validates shape rounds using session state and client-submitted answerCca2; this logic is
+// unused by handlers but kept for clarity and potential reuse.
 package shape
 
 import (
@@ -127,14 +130,10 @@ func (l *Logic) Reset() {
 	l.state.IsComplete = false
 }
 
-// findCountry finds a country by name (server-side lookup)
+// findCountry finds a country by name (server-side lookup).
+// locale is empty so only embedded common/official/codes match (this package is not wired by HTTP handlers).
 func (l *Logic) findCountry(name string) *models.Country {
-	for _, country := range l.countries {
-		if utils.MatchCountry(name, country, utils.MatchAll) {
-			return &country
-		}
-	}
-	return nil
+	return utils.FindCountryByGuess(name, "", l.countries)
 }
 
 // GuessResult represents the result of a guess (server response)

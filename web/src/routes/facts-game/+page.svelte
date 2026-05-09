@@ -12,7 +12,7 @@
 	import { locale } from '$lib/stores/locale';
 	import { getCountryNameForLocale } from '$lib/utils/countryNames';
 	import { calculateCurrentRound } from '$lib/utils/gameUtils';
-	import { getAllCountries } from '$lib/api/data';
+	import { fetchCountriesListForLocale } from '$lib/utils/countriesLoader';
 	import type { Country } from '$lib/types';
 
 	let sessionId: string | null = null;
@@ -86,26 +86,28 @@
 	$: formattedFact = currentFact && currentFact.trim() !== '' ? formatFact(currentFact) : '';
 	$: hasFact = currentFact && currentFact.trim() !== '' && formattedFact && formattedFact.trim() !== '';
 
-	onMount(async () => {
-		// Only load countries in browser, not during SSR
+	let countriesFetchSeq = 0;
+	$: if (browser && currentLocale) {
+		const seq = ++countriesFetchSeq;
+		fetchCountriesListForLocale(currentLocale)
+			.then((list) => {
+				if (seq !== countriesFetchSeq) return;
+				allCountries = list;
+				countriesLoaded = true;
+			})
+			.catch((err) => {
+				if (seq !== countriesFetchSeq) return;
+				console.warn('Failed to load countries for translation (API server may not be running):', err);
+			});
+	}
+
+	onMount(() => {
 		if (!browser) {
-			// Auto-start game immediately if no game mode selection is needed
 			if (!gameStarted && !gameFinished) {
 				handleStartGame();
 			}
 			return;
 		}
-		
-		try {
-			const result = await getAllCountries();
-			allCountries = result.countries;
-			countriesLoaded = true;
-		} catch (err) {
-			// Silently fail - will use English names as fallback
-			console.warn('Failed to load countries for translation (API server may not be running):', err);
-		}
-		
-		// Auto-start game if no game mode selection is needed
 		if (!gameStarted && !gameFinished) {
 			handleStartGame();
 		}
@@ -546,11 +548,13 @@
 	}
 
 	.feedback-overlay.overlay-success {
-		background-color: rgba(34, 197, 94, 0.9); /* success green */
+		/* Match GameContainer feedback: bg-success/50 */
+		background-color: color-mix(in srgb, var(--color-success) 50%, transparent);
 	}
 
 	.feedback-overlay.overlay-error {
-		background-color: rgba(239, 68, 68, 0.9); /* error red */
+		/* Match GameContainer feedback: bg-error/50 */
+		background-color: color-mix(in srgb, var(--color-error) 50%, transparent);
 	}
 
 	.feedback-overlay.overlay-skip {
@@ -571,11 +575,11 @@
 	}
 
 	:global(:root.light) .feedback-overlay.overlay-success {
-		background-color: rgba(34, 197, 94, 0.9) !important;
+		background-color: color-mix(in srgb, var(--color-success) 50%, transparent) !important;
 	}
 
 	:global(:root.light) .feedback-overlay.overlay-error {
-		background-color: rgba(239, 68, 68, 0.9) !important;
+		background-color: color-mix(in srgb, var(--color-error) 50%, transparent) !important;
 	}
 
 	:global(:root.light) .feedback-overlay.overlay-skip {

@@ -106,8 +106,8 @@ func (l *Logic) GetCurrentFact() (string, error) {
 	return fact, nil
 }
 
-// MakeGuess processes a guess and returns the result
-func (l *Logic) MakeGuess(guess string) (*GuessResult, error) {
+// MakeGuess processes a guess and returns the result.
+func (l *Logic) MakeGuess(guess string, locale string) (*GuessResult, error) {
 	if l.state.IsComplete {
 		return nil, ErrGameComplete
 	}
@@ -121,7 +121,7 @@ func (l *Logic) MakeGuess(guess string) (*GuessResult, error) {
 	}
 
 	// Validate that the guessed country exists
-	guessedCountry := l.findCountry(guess)
+	guessedCountry := l.findCountry(guess, locale)
 	if guessedCountry == nil {
 		return &GuessResult{
 			IsValidGuess: false,
@@ -224,14 +224,9 @@ func (l *Logic) Reset() {
 	l.state.IsComplete = false
 }
 
-// findCountry finds a country by name (server-side lookup)
-func (l *Logic) findCountry(name string) *models.Country {
-	for _, country := range l.countries {
-		if utils.MatchCountry(name, country, utils.MatchAll) {
-			return &country
-		}
-	}
-	return nil
+// findCountry finds a country by name (server-side lookup).
+func (l *Logic) findCountry(name string, locale string) *models.Country {
+	return utils.FindCountryByGuess(name, locale, l.countries)
 }
 
 // GuessResult represents the result of a guess

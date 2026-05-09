@@ -175,14 +175,9 @@ func (l *Logic) calculateProximity(guess, target float64) string {
 	return "far"
 }
 
-// findCountry finds a country by name (server-side lookup)
+// findCountry finds a country by name (server-side lookup).
 func (l *Logic) findCountry(name string, locale string) *models.Country {
-	for _, country := range l.countries {
-		if utils.MatchesCountry(name, country, locale) {
-			return &country
-		}
-	}
-	return nil
+	return utils.FindCountryByGuess(name, locale, l.countries)
 }
 
 // GuessResult represents the result of a guess (server response)

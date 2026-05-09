@@ -15,8 +15,7 @@
 	import { locale } from '$lib/stores/locale';
 	import { getCountryNameForLocale, findCountryByName } from '$lib/utils/countryNames';
 	import { calculateCurrentRound } from '$lib/utils/gameUtils';
-	import { getAllCountries } from '$lib/api/data';
-	import { onMount } from 'svelte';
+	import { fetchCountriesListForLocale } from '$lib/utils/countriesLoader';
 	import { browser } from '$app/environment';
 
 	type DifficultyMode = 'regular' | 'expert';
@@ -75,16 +74,20 @@
 		return mode === 'expert';
 	}
 
-	onMount(async () => {
-		if (!browser) return;
-		try {
-			const result = await getAllCountries();
-			allCountries = result.countries;
-			countriesLoaded = true;
-		} catch (err) {
-			console.warn('Failed to load countries for translation:', err);
-		}
-	});
+	let countriesFetchSeq = 0;
+	$: if (browser && currentLocale) {
+		const seq = ++countriesFetchSeq;
+		fetchCountriesListForLocale(currentLocale)
+			.then((list) => {
+				if (seq !== countriesFetchSeq) return;
+				allCountries = list;
+				countriesLoaded = true;
+			})
+			.catch((err) => {
+				if (seq !== countriesFetchSeq) return;
+				console.warn('Failed to load countries for translation:', err);
+			});
+	}
 
 	async function handleStartGame(event: CustomEvent<{ region?: string; roundCount?: number }>) {
 		isLoading = true;

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import LoadingSpinner from '$lib/components/ui/LoadingSpinner.svelte';
 	import { 
 		GameSetupScreen, 
@@ -10,10 +9,11 @@
 	import Keyboard from '$lib/components/ui/Keyboard.svelte';
 	import type { KeyState } from '$lib/components/ui/keyboardTypes';
 	import { HangmanGame } from '$lib/api/hangmanGame';
-	import { getAllCountries } from '$lib/api/data';
 	import type { Country } from '$lib/types';
 	import { t } from '$lib/translations';
 	import { locale } from '$lib/stores/locale';
+	import { browser } from '$app/environment';
+	import { fetchCountriesListForLocale } from '$lib/utils/countriesLoader';
 	import { getKeyboardLayoutForLocale } from '$lib/utils/keyboardLayout';
 	import { calculateCurrentRound } from '$lib/utils/gameUtils';
 	import { triggerConfetti } from '$lib/utils/confetti';
@@ -63,18 +63,26 @@
 	// Keyboard layout based on locale
 	$: keyboardLayout = getKeyboardLayoutForLocale(currentLocale);
 
-	onMount(async () => {
-		isLoading = true;
-		try {
-			const result = await getAllCountries();
-			countries = result.countries;
-		} catch (err) {
-			error = err instanceof Error ? err.message : 'Failed to load countries';
-			console.error('Error loading countries:', err);
-		} finally {
-			isLoading = false;
+	let countriesFetchSeq = 0;
+	$: if (browser && currentLocale) {
+		const seq = ++countriesFetchSeq;
+		if (countries.length === 0) {
+			isLoading = true;
 		}
-	});
+		fetchCountriesListForLocale(currentLocale)
+			.then((list) => {
+				if (seq !== countriesFetchSeq) return;
+				countries = list;
+				isLoading = false;
+				error = null;
+			})
+			.catch((err) => {
+				if (seq !== countriesFetchSeq) return;
+				error = err instanceof Error ? err.message : 'Failed to load countries';
+				console.error('Error loading countries:', err);
+				isLoading = false;
+			});
+	}
 
 	function handleStartGame(event: CustomEvent<{ region?: string; category?: string; [key: string]: any }>) {
 		selectedRegion = event.detail.region ?? '';
@@ -286,15 +294,19 @@
 		on:start={handleStartGame}
 	/>
 {:else if gameFinished}
-	<GameOverScreen
-		title={t('game.over.title', undefined, currentLocale)}
-		score={score}
-		totalRounds={5}
-		excellentMessage={t('game.over.excellent', undefined, currentLocale)}
-		goodMessage={t('game.over.good', undefined, currentLocale)}
-		encourageMessage={t('game.over.encourage', undefined, currentLocale)}
-		on:playAgain={handlePlayAgain}
-	/>
+	<div class="min-h-screen py-2 px-4">
+		<div class="max-w-4xl mx-auto">
+			<GameOverScreen
+				title={t('game.over.title', undefined, currentLocale)}
+				{score}
+				totalRounds={5}
+				excellentMessage={t('game.over.excellent', undefined, currentLocale)}
+				goodMessage={t('game.over.good', undefined, currentLocale)}
+				encourageMessage={t('game.over.encourage', undefined, currentLocale)}
+				on:playAgain={handlePlayAgain}
+			/>
+		</div>
+	</div>
 {:else}
 	<div class="min-h-screen py-2 px-4">
 		<div class="max-w-4xl mx-auto">

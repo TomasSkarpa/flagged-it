@@ -1080,7 +1080,7 @@ func (h *CapitalGameHandler) SubmitAnswer(w http.ResponseWriter, r *http.Request
 	var correct bool
 	if !alreadyFinished {
 		session.Total++
-		correct = req.Answer == session.CurrentCorrectCapital
+		correct = utils.NormalizeAnswerForCompare(req.Answer) == utils.NormalizeAnswerForCompare(session.CurrentCorrectCapital)
 		if correct {
 			session.Score++
 		}
@@ -1890,7 +1890,7 @@ func (h *FactsGameHandler) SubmitGuess(w http.ResponseWriter, r *http.Request) {
 	session.Locale = locale
 
 	// Make guess using game logic
-	result, err := session.Logic.MakeGuess(req.CountryName)
+	result, err := session.Logic.MakeGuess(req.CountryName, locale)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -1927,14 +1927,11 @@ func (h *FactsGameHandler) SubmitGuess(w http.ResponseWriter, r *http.Request) {
 		// Find country from guess string (skip if guess is "Skip")
 		var countryInfo map[string]interface{}
 		if strings.ToLower(strings.TrimSpace(entry.Guess)) != "skip" {
-			for _, country := range countries {
-				if utils.MatchCountry(entry.Guess, country, utils.MatchAll) {
-					countryInfo = map[string]interface{}{
-						"cca2":    country.CCA2,
-						"name":    country.GetTranslatedName(locale),
-						"flagUrl": "/assets/twemoji_flags_cca2/" + country.CCA2 + ".svg",
-					}
-					break
+			if matched := utils.FindCountryByGuess(entry.Guess, locale, countries); matched != nil {
+				countryInfo = map[string]interface{}{
+					"cca2":    matched.CCA2,
+					"name":    matched.GetTranslatedName(locale),
+					"flagUrl": "/assets/twemoji_flags_cca2/" + matched.CCA2 + ".svg",
 				}
 			}
 		}
@@ -2102,14 +2099,11 @@ func (h *FactsGameHandler) Skip(w http.ResponseWriter, r *http.Request) {
 		// Find country from guess string (skip if guess is "Skip")
 		var countryInfo map[string]interface{}
 		if strings.ToLower(strings.TrimSpace(entry.Guess)) != "skip" {
-			for _, country := range countries {
-				if utils.MatchCountry(entry.Guess, country, utils.MatchAll) {
-					countryInfo = map[string]interface{}{
-						"cca2":    country.CCA2,
-						"name":    country.GetTranslatedName(locale),
-						"flagUrl": "/assets/twemoji_flags_cca2/" + country.CCA2 + ".svg",
-					}
-					break
+			if matched := utils.FindCountryByGuess(entry.Guess, locale, countries); matched != nil {
+				countryInfo = map[string]interface{}{
+					"cca2":    matched.CCA2,
+					"name":    matched.GetTranslatedName(locale),
+					"flagUrl": "/assets/twemoji_flags_cca2/" + matched.CCA2 + ".svg",
 				}
 			}
 		}

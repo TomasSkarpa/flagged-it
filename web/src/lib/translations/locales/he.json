@@ -154,5 +154,17 @@
   "scoreboard.coming_soon": "בקרוב",
   "game.hangman.title": "איש תלוי",
   "game.facts.title": "ניחוש לפי עובדות",
-  "game.hangman.description": "בדוק את הידע שלך בגיאוגרפיה! נחש שמות של מדינות אות אחר אות לפני שיגמרו לך הניחושים."
+  "game.hangman.description": "בדוק את הידע שלך בגיאוגרפיה! נחש שמות של מדינות אות אחר אות לפני שיגמרו לך הניחושים.",
+  "debug.hub.document_title": "ניפוי באגים - Flagged It",
+  "debug.hub.meta_description": "מרכז ניפוי באגים פנימי עבור Flagged It: עיין בדגלי מדינות, צורות מפה, שמות מקומיים וכלי פיתוח נוספים.",
+  "debug.flags.document_title": "כל הדגלים - ניפוי באגים",
+  "debug.flags.meta_description": "עיין בכל דגל מדינה במאגר הנתונים של Flagged It עם חיפוש, סינוני אזורים ותצוגת יחיד או רשת. כלי ניפוי באגים פנימי.",
+  "debug.shapes.document_title": "כל הצורות - ניפוי באגים",
+  "debug.shapes.meta_description": "עיין בצורות מתאר של מדינות (GeoJSON) עבור Flagged It עם חיפוש, סינוני אזורים ותצוגת יחיד או רשת. כלי ניפוי באגים פנימי.",
+  "debug.country_names.document_title": "ניפוי באגים של שמות מדינות - Flagged It",
+  "debug.country_names.meta_description": "השווה שמות מדינות מקומיים בכל השפות הנתמכות ב-Flagged It. כלי ניפוי באגים פנימי לפיתוח ובקרת איכות.",
+  "debug.background_test.document_title": "בדיקת רקע - Flagged It",
+  "debug.background_test.meta_description": "בדוק סגנונות רקע שונים עבור צללית מפת העולם. דף ניפוי באגים פנימי עבור Flagged It.",
+  "ui_kit.document_title": "ערכת UI - Flagged It",
+  "ui_kit.meta_description": "תצוגת רכיבי UI מלאה עבור משחקי הגאוגרפיה של Flagged It. אסמכתא פנימית לפיתוח."
 }

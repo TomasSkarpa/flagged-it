@@ -154,5 +154,17 @@
   "scoreboard.coming_soon": "Незабаром",
   "game.hangman.title": "Шибениця",
   "game.facts.title": "Вгадайте за фактами",
-  "game.hangman.description": "Перевірте свої знання географії! Вгадуйте назви країн літера за літерою, перш ніж закінчаться спроби."
+  "game.hangman.description": "Перевірте свої знання географії! Вгадуйте назви країн літера за літерою, перш ніж закінчаться спроби.",
+  "debug.hub.document_title": "Налагодження - Flagged It",
+  "debug.hub.meta_description": "Внутрішній центр налагодження для Flagged It: переглядай прапори країн, форми карт, локалізовані назви та інші інструменти розробника.",
+  "debug.flags.document_title": "Усі прапори - Налагодження",
+  "debug.flags.meta_description": "Переглядай кожен прапор країни в наборі даних Flagged It за допомогою пошуку, регіональних фільтрів та одиночного або сіткового перегляду. Внутрішній інструмент налагодження.",
+  "debug.shapes.document_title": "Усі форми - Налагодження",
+  "debug.shapes.meta_description": "Переглядай контурні форми країн (GeoJSON) для Flagged It за допомогою пошуку, регіональних фільтрів та одиночного або сіткового перегляду. Внутрішній інструмент налагодження.",
+  "debug.country_names.document_title": "Налагодження назв країн - Flagged It",
+  "debug.country_names.meta_description": "Порівнюй локалізовані назви країн усіма підтримуваними мовами в Flagged It. Внутрішній інструмент налагодження для розробки та контролю якості.",
+  "debug.background_test.document_title": "Тест фону - Flagged It",
+  "debug.background_test.meta_description": "Тестуй різні стилі фону для силуету карти світу. Внутрішня сторінка налагодження для Flagged It.",
+  "ui_kit.document_title": "Набір UI - Flagged It",
+  "ui_kit.meta_description": "Повна демонстрація компонентів UI для географічних ігор Flagged It. Внутрішній довідник для розробки."
 }

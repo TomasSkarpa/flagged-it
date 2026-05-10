@@ -40,6 +40,27 @@ func TestPointsDecreasesWithDelta(t *testing.T) {
 	}
 }
 
+// TestPointsCurveIsBenevolent guards the concave decay: small and medium
+// ΔE values should award noticeably more than a pure linear ramp would.
+func TestPointsCurveIsBenevolent(t *testing.T) {
+	cases := []struct {
+		deltaE float64
+		min    int
+	}{
+		{5, PointsMaxPerRound}, // visually identical matches must be perfect
+		{8, 95},                // barely-perceptible miss still feels perfect-ish
+		{12, 90},               // mid-range mistakes stay in the "excellent" tier
+		{20, 75},               // visible miss still scores well into "great"
+		{30, 55},               // clearly off but not punished into the floor
+	}
+	for _, c := range cases {
+		got := PointsFromDeltaE(c.deltaE)
+		if got < c.min {
+			t.Fatalf("ΔE %.1f: got %d, want >= %d", c.deltaE, got, c.min)
+		}
+	}
+}
+
 func TestGuessHexFromRGB(t *testing.T) {
 	h, err := GuessHexFromRGB(10, 20, 30)
 	if err != nil {

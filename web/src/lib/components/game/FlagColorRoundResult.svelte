@@ -14,19 +14,6 @@
 	export let labelOriginal = 'Original';
 
 	const dispatch = createEventDispatcher<{ continue: void }>();
-
-	function contrastFg(hex: string): string {
-		const h = hex.replace('#', '');
-		if (h.length !== 6) return 'rgba(255,255,255,0.95)';
-		const r = parseInt(h.slice(0, 2), 16);
-		const g = parseInt(h.slice(2, 4), 16);
-		const b = parseInt(h.slice(4, 6), 16);
-		const L = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-		return L > 0.55 ? 'rgba(15,23,42,0.92)' : 'rgba(255,255,255,0.95)';
-	}
-
-	$: fgGuess = contrastFg(guessHex);
-	$: fgCorrect = contrastFg(correctHex);
 </script>
 
 <div class="relative w-full max-w-lg mx-auto rounded-[28px] overflow-hidden border border-white/15 shadow-2xl">
@@ -38,31 +25,32 @@
 
 	<!-- Your selection -->
 	<section
-		class="relative pt-11 pb-8 px-5 sm:px-7 min-h-[140px]"
-		style="background-color: {guessHex}; color: {fgGuess};"
+		class="relative pt-11 pb-8 px-5 sm:px-7 min-h-[140px] flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-start"
+		style="background-color: {guessHex};"
 	>
-		<p class="text-[11px] font-bold uppercase tracking-[0.2em] opacity-80 mb-2">
-			{labelYourSelection}
-		</p>
-		<p class="text-sm sm:text-base font-mono font-semibold opacity-95 mb-4">{guessHsb}</p>
-		<p class="text-[11px] font-mono opacity-70">{guessHex}</p>
-		<div class="absolute top-10 right-5 sm:right-7 text-right">
+		<div class="result-readout-panel w-full sm:w-auto sm:max-w-[min(100%,260px)]">
+			<p class="text-[11px] font-bold uppercase tracking-[0.2em] mb-2 text-white/85">
+				{labelYourSelection}
+			</p>
+			<p class="text-sm sm:text-base font-mono font-semibold text-white mb-2">{guessHsb}</p>
+			<p class="text-[11px] font-mono text-white/75">{guessHex}</p>
+		</div>
+		<div class="result-readout-panel w-full sm:w-auto text-left sm:text-right sm:min-w-[9rem]">
 			<p class="text-4xl sm:text-5xl font-black tabular-nums leading-none tracking-tight">{scoreTen}</p>
-			<p class="text-xs sm:text-sm font-semibold opacity-85 mt-2 max-w-[10rem] ml-auto leading-snug">
+			<p class="text-xs sm:text-sm font-semibold mt-2 max-w-[12rem] sm:max-w-[10rem] sm:ml-auto leading-snug text-white/90">
 				{tierMessage}
 			</p>
-			<p class="text-[10px] sm:text-xs font-mono opacity-65 mt-2">ΔE {deltaE.toFixed(1)}</p>
+			<p class="text-[10px] sm:text-xs font-mono mt-2 text-white/70">ΔE {deltaE.toFixed(1)}</p>
 		</div>
 	</section>
 
 	<!-- Original -->
-	<section
-		class="relative pt-8 pb-14 px-5 sm:px-7 min-h-[130px]"
-		style="background-color: {correctHex}; color: {fgCorrect};"
-	>
-		<p class="text-[11px] font-bold uppercase tracking-[0.2em] opacity-80 mb-2">{labelOriginal}</p>
-		<p class="text-sm sm:text-base font-mono font-semibold opacity-95 mb-2">{correctHsb}</p>
-		<p class="text-[11px] font-mono opacity-75">{correctHex}</p>
+	<section class="relative pt-8 pb-14 px-5 sm:px-7 min-h-[130px]" style="background-color: {correctHex};">
+		<div class="result-readout-panel inline-block max-w-full">
+			<p class="text-[11px] font-bold uppercase tracking-[0.2em] mb-2 text-white/85">{labelOriginal}</p>
+			<p class="text-sm sm:text-base font-mono font-semibold text-white mb-2">{correctHsb}</p>
+			<p class="text-[11px] font-mono text-white/75">{correctHex}</p>
+		</div>
 	</section>
 
 	<button
@@ -74,3 +62,9 @@
 		→
 	</button>
 </div>
+
+<style lang="postcss">
+	.result-readout-panel {
+		@apply rounded-2xl bg-black/55 backdrop-blur-md border border-white/20 px-4 py-3 text-white shadow-lg;
+	}
+</style>

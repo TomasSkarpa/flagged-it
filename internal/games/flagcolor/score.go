@@ -8,8 +8,20 @@ import (
 // PointsMaxPerRound is the highest score achievable on one round before difficulty scaling.
 const PointsMaxPerRound = 100
 
-const deltaPerfect = 2.0
-const deltaZero = 40.0
+// Scoring curve thresholds (ΔE76 in Lab space).
+// Anything at or below deltaPerfect awards full points; anything at or beyond
+// deltaZero awards none. Between them, the falloff uses a concave power curve
+// so small/medium colour mistakes are forgiven more than a strict linear ramp.
+//
+// deltaPerfect of 5 covers the "perceptible only on side-by-side inspection"
+// range, so visually-identical matches always score a clean 10.00.
+const (
+	deltaPerfect = 5.0
+	deltaZero    = 55.0
+	// decayExponent > 1 makes the score curve concave: small errors lose
+	// fewer points, while large errors still fall off toward zero.
+	decayExponent = 1.35
+)
 
 // DeltaE76 computes CIE76 ΔE* in Lab space (sRGB hex inputs, D65).
 func DeltaE76(hexA, hexB string) float64 {
@@ -21,7 +33,9 @@ func DeltaE76(hexA, hexB string) float64 {
 	return math.Sqrt(dL*dL + da*da + db*db)
 }
 
-// PointsFromDeltaE maps ΔE to 0..PointsMaxPerRound (linear decay between thresholds).
+// PointsFromDeltaE maps ΔE to 0..PointsMaxPerRound using a concave decay
+// between deltaPerfect and deltaZero. Players are rewarded generously for
+// near-misses; the score still trends toward zero as the colour drifts far.
 func PointsFromDeltaE(deltaE float64) int {
 	if deltaE <= deltaPerfect {
 		return PointsMaxPerRound
@@ -29,7 +43,8 @@ func PointsFromDeltaE(deltaE float64) int {
 	if deltaE >= deltaZero {
 		return 0
 	}
-	t := 1 - (deltaE-deltaPerfect)/(deltaZero-deltaPerfect)
+	x := (deltaE - deltaPerfect) / (deltaZero - deltaPerfect)
+	t := 1 - math.Pow(x, decayExponent)
 	return int(math.Round(float64(PointsMaxPerRound) * t))
 }
 

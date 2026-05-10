@@ -13,10 +13,9 @@ import (
 )
 
 var (
-	tagRe      = regexp.MustCompile(`<(path|circle|rect)([\s\S]*?)/>`)
-	fillRe     = regexp.MustCompile(`\bfill="#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})"`)
-	guessRe    = regexp.MustCompile(`\bdata-fi-guess="([0-9]+)"`)
-	idPrefixRe = regexp.MustCompile(`\bid="fi-guess-[0-9]+"`)
+	tagRe   = regexp.MustCompile(`<(path|circle|rect)([\s\S]*?)/>`)
+	fillRe  = regexp.MustCompile(`\bfill="#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})"`)
+	guessRe = regexp.MustCompile(`\bdata-fi-guess="([0-9]+)"`)
 )
 
 func main() {
@@ -76,9 +75,6 @@ func annotate(s string) (string, bool) {
 		maxID++
 		id := strconv.Itoa(maxID)
 		insert := fmt.Sprintf(` id="fi-guess-%s" data-fi-guess="%s"`, id, id)
-		if idPrefixRe.MatchString(attrs) {
-			insert = fmt.Sprintf(` data-fi-guess="%s"`, id)
-		}
 		return "<" + name + insert + attrs + "/>"
 	})
 

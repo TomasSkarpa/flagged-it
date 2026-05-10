@@ -22,7 +22,7 @@
 	import { locale } from '$lib/stores/locale';
 	import { calculateCurrentRound } from '$lib/utils/gameUtils';
 	import { hsvToRgb, hexToRgb, rgbToHsv, formatHsbLabel } from '$lib/utils/colorHsv';
-	import { pointsToTenDisplay } from '$lib/utils/flagColorScore';
+	import { flagColorTierFromRawDeltaE, pointsToTenDisplay } from '$lib/utils/flagColorScore';
 	import { recordFlagColorRound } from '$lib/utils/flagColorStats';
 
 	type DifficultyMode = 'easy' | 'hard';
@@ -61,15 +61,6 @@
 
 	$: currentLocale = $locale;
 	$: rgbPreview = hsvToRgb(hue, sat, val);
-
-	function tierLabel(score10: number, loc: string): string {
-		if (score10 >= 9.85) return t('game.flag_color.tier.perfect', undefined, loc);
-		if (score10 >= 8.5) return t('game.flag_color.tier.excellent', undefined, loc);
-		if (score10 >= 7) return t('game.flag_color.tier.great', undefined, loc);
-		if (score10 >= 5) return t('game.flag_color.tier.good', undefined, loc);
-		if (score10 >= 3) return t('game.flag_color.tier.practice', undefined, loc);
-		return t('game.flag_color.tier.try_again', undefined, loc);
-	}
 
 	function clearAdvanceTimer(): void {
 		if (advanceTimer !== null) {
@@ -185,8 +176,7 @@
 			score = r.score;
 			total = r.total;
 			resultScoreTen = pointsToTenDisplay(r.pointsEarned, r.maxPointsPerRound);
-			const s10 = parseFloat(resultScoreTen);
-			resultTierMessage = tierLabel(s10, currentLocale);
+			resultTierMessage = flagColorTierFromRawDeltaE(r.deltaE, currentLocale);
 			resultGuessHsb = formatHsbLabel(hue, sat, val);
 			resultGuessHex = r.guessHex;
 			resultCorrectHex = r.correctHex;

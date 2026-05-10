@@ -55,9 +55,13 @@
 			return;
 		}
 		const safeId = guessableId.replace(/"/g, '');
-		const target = svg.querySelector(`[data-fi-guess="${safeId}"]`);
-		if (!revealFullColor && target instanceof SVGElement) {
-			target.setAttribute('fill', `rgb(${previewR},${previewG},${previewB})`);
+		const targets = svg.querySelectorAll(`[data-fi-guess="${safeId}"]`);
+		if (!revealFullColor) {
+			targets.forEach((el) => {
+				if (el instanceof SVGElement) {
+					el.setAttribute('fill', `rgb(${previewR},${previewG},${previewB})`);
+				}
+			});
 		}
 		const imported = document.importNode(svg, true);
 		container.innerHTML = '';

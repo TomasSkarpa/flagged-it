@@ -66,6 +66,15 @@ func TestPointsFromGuessHex_identicalFullScore(t *testing.T) {
 	}
 }
 
+func TestEffectiveScoringDelta_matchesRaw_whenIdentical(t *testing.T) {
+	h := "#AABBCC"
+	d := DeltaE76(h, h)
+	es := EffectiveScoringDelta(h, h)
+	if es != d {
+		t.Fatalf("effective=%v raw=%v", es, d)
+	}
+}
+
 func TestPointsCurveIsBenevolent(t *testing.T) {
 	cases := []struct {
 		deltaE float64

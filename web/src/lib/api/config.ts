@@ -75,8 +75,13 @@ export const API_ENDPOINTS = {
 		FACTS_START: '/game/facts/start',
 		FACTS_GUESS: '/game/facts/guess',
 		FACTS_SKIP: '/game/facts/skip',
-		FACTS_NEXT: '/game/facts/next',
-	
+	FACTS_NEXT: '/game/facts/next',
+
+	FLAG_COLOR_START: '/game/flag-color/start',
+	FLAG_COLOR_QUESTION: '/game/flag-color/question',
+	FLAG_COLOR_ANSWER: '/game/flag-color/answer',
+	FLAG_COLOR_SCORE: '/game/flag-color/score',
+
 	// Countries and GeoJSON
 	COUNTRIES: '/countries',
 	GEOJSON: '/geojson',

@@ -8,6 +8,8 @@
 
 	export let score: number;
 	export let totalRounds: number;
+	/** Points-style games: denominator for percentage (e.g. totalRounds × max points per round). */
+	export let scoreDenominator: number | null = null;
 	export let title: string = '';
 	export let emoji: string = '🎉';
 	export let playAgainText: string = '';
@@ -31,7 +33,8 @@
 		goHome: void;
 	}>();
 
-	$: percentage = score / totalRounds;
+	$: denom = scoreDenominator ?? totalRounds;
+	$: percentage = denom > 0 ? score / denom : 0;
 	$: message = percentage >= excellentThreshold 
 		? finalExcellentMessage 
 		: percentage >= goodThreshold 
@@ -59,7 +62,7 @@
 		<div class="text-6xl mb-6">{emoji}</div>
 		<h2 class="text-4xl font-bold text-sandy-light mb-4">{finalTitle}</h2>
 		<div class="mb-8">
-			<ScoreDisplay {score} total={totalRounds} showPercentage={true} showProgress={true} />
+			<ScoreDisplay {score} total={denom} showPercentage={true} showProgress={true} />
 		</div>
 		<p class="text-xl text-text-muted mb-8">
 			{message}

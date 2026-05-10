@@ -71,6 +71,110 @@
     "value": "Type answer to win",
     "_context": "Description of the expert difficulty mode in flag game, explaining that players must type the country name."
   },
+  "game.flag_color.title": {
+    "value": "Guess the Missing Flag Color",
+    "_context": "Title for the flag color quiz: players match a hidden stripe or region color using sliders."
+  },
+  "game.flag_color.setup.title": {
+    "value": "Flag Color Quiz",
+    "_context": "Setup screen title for the flag color guessing game."
+  },
+  "game.flag_color.setup.description": {
+    "value": "One flag region is reserved for your guess: it shows a live preview of the color from your sliders. Adjust hue, saturation, and brightness until it matches the real flag.",
+    "_context": "Explains live color preview in the flag region and HSV sliders for the flag color game."
+  },
+  "game.flag_color.question.before_country": {
+    "value": "What is the color of the flag of ",
+    "_context": "Opening phrase for flag color quiz headline; followed by country name in accent style, then question.after_country."
+  },
+  "game.flag_color.question.after_country": {
+    "value": "?",
+    "_context": "Closing punctuation for flag color quiz headline after the highlighted country name."
+  },
+  "game.flag_color.difficulty.easy": {
+    "value": "Easy",
+    "_context": "Easier difficulty for flag color quiz (broader eligible regions)."
+  },
+  "game.flag_color.difficulty.easy.desc": {
+    "value": "Main stripes and bold colors",
+    "_context": "Describes easy mode regions for flag color quiz."
+  },
+  "game.flag_color.difficulty.hard": {
+    "value": "Hard",
+    "_context": "Harder difficulty for flag color quiz (narrower / subtler regions)."
+  },
+  "game.flag_color.difficulty.hard.desc": {
+    "value": "Includes subtler bands and details",
+    "_context": "Describes hard mode for flag color quiz."
+  },
+  "game.flag_color.hue": {
+    "value": "Hue",
+    "_context": "Label for hue slider in flag color quiz."
+  },
+  "game.flag_color.saturation": {
+    "value": "Saturation",
+    "_context": "Label for saturation slider in flag color quiz."
+  },
+  "game.flag_color.value": {
+    "value": "Brightness",
+    "_context": "Label for value/brightness slider in flag color quiz."
+  },
+  "game.flag_color.submit": {
+    "value": "Submit color",
+    "_context": "Button to submit the chosen color in flag color quiz."
+  },
+  "game.flag_color.result.your_selection": {
+    "value": "Your selection",
+    "_context": "Label on round result panel for the player's color in the split comparison view."
+  },
+  "game.flag_color.result.original": {
+    "value": "Original",
+    "_context": "Label on round result panel for the true flag color."
+  },
+  "game.flag_color.tier.perfect": {
+    "value": "Perfect!",
+    "_context": "Round score tier when match is nearly exact (0–10 scale)."
+  },
+  "game.flag_color.tier.excellent": {
+    "value": "Excellent!",
+    "_context": "High round score tier on flag color quiz."
+  },
+  "game.flag_color.tier.great": {
+    "value": "Great job!",
+    "_context": "Good round score tier on flag color quiz."
+  },
+  "game.flag_color.tier.good": {
+    "value": "Close — nice!",
+    "_context": "Mid round score tier on flag color quiz."
+  },
+  "game.flag_color.tier.practice": {
+    "value": "Keep practicing!",
+    "_context": "Below-average round score encouragement on flag color quiz."
+  },
+  "game.flag_color.tier.try_again": {
+    "value": "Nice try!",
+    "_context": "Low round score message on flag color quiz."
+  },
+  "game.flag_color.feedback.summary": {
+    "value": "%s points · ΔE %s",
+    "_context": "Feedback overlay line: first token is points earned, second is color distance delta E."
+  },
+  "game.flag_color.your_guess": {
+    "value": "Your guess",
+    "_context": "Label above swatch for player's guessed color after round."
+  },
+  "game.flag_color.correct_color": {
+    "value": "Correct",
+    "_context": "Label above swatch for target color after round."
+  },
+  "game.flag_color.over.excellent": {
+    "value": "Great eye for color!",
+    "_context": "Encouraging game-over message for flag color quiz."
+  },
+  "home.game.flag_color.description": {
+    "value": "Match hidden flag colors with sliders",
+    "_context": "Short home page card description for flag color quiz mode."
+  },
   "game.correct_short": {
     "value": "Correct!",
     "_context": "Short success message displayed in feedback overlays when player answers correctly. Used in GameContainer component."

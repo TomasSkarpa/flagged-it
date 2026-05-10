@@ -15,6 +15,14 @@
 			available: true
 		},
 		{
+			id: 'flag-color',
+			title: t('game.flag_color.title', undefined, currentLocale),
+			description: t('home.game.flag_color.description', undefined, currentLocale),
+			icon: '🎨',
+			route: '/flag-color-game',
+			available: true
+		},
+		{
 			id: 'shape',
 			title: t('game.shape.title', undefined, currentLocale),
 			description: t('home.game.shape.description', undefined, currentLocale),

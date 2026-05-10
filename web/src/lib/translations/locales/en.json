@@ -747,6 +747,14 @@
     "value": "Test different background styles for the world map silhouette. Internal debug page for Flagged It.",
     "_context": "Meta description for the background test debug page."
   },
+  "debug.flag_color_pickers.document_title": {
+    "value": "Flag Color Pickers - Debug - Flagged It",
+    "_context": "HTML document title for the flag color picker variants debug page."
+  },
+  "debug.flag_color_pickers.meta_description": {
+    "value": "Compare flag color game picker layouts and experiment with HSB controls. Internal debug page for Flagged It.",
+    "_context": "Meta description for the flag color picker experiments debug page."
+  },
   "ui_kit.document_title": {
     "value": "UI Kit - Flagged It",
     "_context": "HTML document title for the UI component showcase page."

@@ -62,6 +62,19 @@
 					</div>
 				</div>
 			</button>
+
+			<button 
+				class="card-game text-left hover:ring-2 hover:ring-accent transition-all"
+				on:click={() => goto('/debug/flag-color-pickers')}
+			>
+				<div class="flex items-start gap-4">
+					<div class="text-5xl leading-none pt-1">🎨</div>
+					<div class="flex-1">
+						<h2 class="text-2xl font-bold text-sandy-light mb-2">Flag Color Pickers</h2>
+						<p class="text-text-muted">Compare HSB picker layouts for the flag color game</p>
+					</div>
+				</div>
+			</button>
 		</div>
 	</div>
 </div>

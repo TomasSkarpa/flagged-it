@@ -35,6 +35,14 @@ export function hsvToRgb(h: number, s: number, v: number): { r: number; g: numbe
 	};
 }
 
+/** sRGB bytes to #RRGGBB (clamped, rounded). */
+export function rgbToHex(r: number, g: number, b: number): string {
+	const clamp = (n: number) => Math.max(0, Math.min(255, Math.round(n)));
+	return `#${[clamp(r), clamp(g), clamp(b)]
+		.map((x) => x.toString(16).padStart(2, '0'))
+		.join('')}`;
+}
+
 /** Parse #RGB or #RRGGBB to sRGB bytes. */
 export function hexToRgb(hex: string): { r: number; g: number; b: number } {
 	let h = hex.trim().replace(/^#/, '');

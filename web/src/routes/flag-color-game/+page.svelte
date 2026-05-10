@@ -10,7 +10,7 @@
 	} from '$lib/components/game';
 	import type { DifficultyOption } from '$lib/components/game/DifficultySelector.svelte';
 	import FlagColorFlag from '$lib/components/game/FlagColorFlag.svelte';
-	import FlagColorVerticalPicker from '$lib/components/game/FlagColorVerticalPicker.svelte';
+	import FlagColorSvPlanePicker from '$lib/components/game/FlagColorSvPlanePicker.svelte';
 	import FlagColorRoundResult from '$lib/components/game/FlagColorRoundResult.svelte';
 	import {
 		startFlagColorGame,
@@ -105,6 +105,7 @@
 	);
 	$: labelYourSelection = t('game.flag_color.result.your_selection', undefined, currentLocale);
 	$: labelOriginal = t('game.flag_color.result.original', undefined, currentLocale);
+	$: hueAriaLabel = t('game.flag_color.hue', undefined, currentLocale);
 
 	async function handleStartGame(event: CustomEvent<{ region?: string }>) {
 		clearAdvanceTimer();
@@ -286,11 +287,22 @@
 				</h2>
 
 				{#if phase === 'playing'}
-					<div class="flex flex-col lg:flex-row gap-6 lg:gap-8 items-stretch justify-center px-2 pb-4">
-						<div class="flex flex-row gap-3 sm:gap-4 flex-1 justify-center lg:justify-end max-w-xl mx-auto lg:mx-0 lg:max-w-none">
-							<FlagColorVerticalPicker bind:hue bind:satPct bind:valPct disabled={isLoading} />
+					<div class="flex flex-col lg:flex-row gap-6 lg:gap-8 items-stretch justify-center px-2 pb-4 min-w-0">
+						<div
+							class="flex flex-col sm:flex-row gap-3 sm:gap-4 flex-1 justify-center lg:justify-end max-w-xl mx-auto lg:mx-0 lg:max-w-none w-full min-w-0"
+						>
+							<div class="w-full min-w-0 flex justify-center shrink-0">
+								<FlagColorSvPlanePicker
+									bind:hue
+									bind:satPct
+									bind:valPct
+									disabled={isLoading}
+									{hueAriaLabel}
+									size="game"
+								/>
+							</div>
 							<div
-								class="flex-1 min-h-[200px] min-w-[120px] sm:min-w-[160px] rounded-3xl border border-white/15 shadow-inner transition-colors duration-150"
+								class="hidden sm:block sm:flex-1 sm:min-h-[200px] sm:min-w-0 rounded-3xl border border-white/15 shadow-inner transition-colors duration-150"
 								style="background-color: rgb({rgbPreview.r},{rgbPreview.g},{rgbPreview.b});"
 								aria-hidden="true"
 							></div>

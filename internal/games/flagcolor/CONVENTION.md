@@ -12,9 +12,7 @@ Guessable regions are marked on Twemoji flag SVGs under `web/static/assets/twemo
 
 Apply annotations only to `<path>`, `<circle>`, or `<rect>` with a **solid** `fill="#RRGGBB"` or `#RGB`. Do not tag gradients or patterns.
 
-## Allowlist
-
-Only countries listed in `allowlist.json` are eligible until more flags are curated.
+Any country may be drawn for flag color mode; the server skips SVGs with no `data-fi-guess` regions (or none matching the round difficulty) and picks another.
 
 ## Lint
 

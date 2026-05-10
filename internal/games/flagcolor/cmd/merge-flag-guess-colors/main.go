@@ -29,6 +29,7 @@ var (
 
 type shard struct {
 	full    string
+	neu     string
 	tagName string
 	attrs   string
 	fillKey string // normalized hex + merge-group or "" if invalid
@@ -111,23 +112,29 @@ func merge(s string) (string, bool) {
 	}
 
 	fillSuffixIndex := make(map[string]int)
-	next := s
-	changed := false
-	for _, sh := range shards {
+	for i := range shards {
+		sh := &shards[i]
 		g := fillToGuess[sh.fillKey]
-		i := fillSuffixIndex[sh.fillKey]
-		fillSuffixIndex[sh.fillKey] = i + 1
-		localID := fmt.Sprintf("fi-guess-%s%s", g, shardSuffix(i))
+		j := fillSuffixIndex[sh.fillKey]
+		fillSuffixIndex[sh.fillKey] = j + 1
+		localID := fmt.Sprintf("fi-guess-%s%s", g, shardSuffix(j))
 		tierOut := mergeTier(fillTierVotes[sh.fillKey])
-		neu := rebuildTag(sh.tagName, sh.attrs, localID, g, tierOut)
-		idx := strings.Index(next, sh.full)
-		if idx < 0 {
-			continue
-		}
-		next = next[:idx] + neu + next[idx+len(sh.full):]
-		changed = true
+		sh.neu = rebuildTag(sh.tagName, sh.attrs, localID, g, tierOut)
 	}
-	return next, changed
+	for _, sh := range shards {
+		if sh.full != sh.neu {
+			next := s
+			for _, sh2 := range shards {
+				idx := strings.Index(next, sh2.full)
+				if idx < 0 {
+					return s, false
+				}
+				next = next[:idx] + sh2.neu + next[idx+len(sh2.full):]
+			}
+			return next, true
+		}
+	}
+	return s, false
 }
 
 func shardSuffix(i int) string {

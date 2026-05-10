@@ -8,7 +8,7 @@ func TestDedupeGuessableParts(t *testing.T) {
 		{GuessID: "4", Fill: "#BF9300"},
 		{GuessID: "5", Fill: "#FFFFFF"},
 	}
-	got := dedupeGuessableParts(parts)
+	got := DedupeGuessableParts(parts)
 	if len(got) != 2 {
 		t.Fatalf("want 2 entries, got %d %#v", len(got), got)
 	}
@@ -17,7 +17,7 @@ func TestDedupeGuessableParts(t *testing.T) {
 		{GuessID: "1", Fill: "#FF0000"},
 		{GuessID: "1", Fill: "#00FF00"},
 	}
-	got2 := dedupeGuessableParts(conflict)
+	got2 := DedupeGuessableParts(conflict)
 	if len(got2) != 2 {
 		t.Fatalf("same GuessID different fills should both remain, got %d", len(got2))
 	}

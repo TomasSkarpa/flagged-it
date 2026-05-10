@@ -1,7 +1,9 @@
+//go:build ignore
+
 // merge-flag-guess-colors rewrites annotated flag SVGs so every solid fill shares one
 // data-fi-guess id per distinct colour (stable order: first occurrence in file).
-// Shards of the same colour get unique id="fi-guess-{n}{suffix}" for DOM validity.
-// data-fi-tier is merged per colour (easy+hard -> both; unanimous tier kept).
+//
+// Run from repo root: go run ./internal/utils/merge-flag-guess-colors.go [path/to/twemoji_flags_cca2]
 package main
 
 import (
@@ -17,24 +19,24 @@ import (
 )
 
 var (
-	tagRe    = regexp.MustCompile(`<(path|circle|rect)([^>]*)/>`)
-	fillRe   = regexp.MustCompile(`\bfill="#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})"`)
-	guessRe  = regexp.MustCompile(`\bdata-fi-guess="([^"]*)"`)
-	tierRe   = regexp.MustCompile(`\bdata-fi-tier="(easy|hard|both)"`)
-	mergeGrpRe = regexp.MustCompile(`\bdata-fi-merge-group="([^"]+)"`)
-	idAttrRe = regexp.MustCompile(`\s*id="[^"]*"`)
+	tagRe       = regexp.MustCompile(`<(path|circle|rect)([^>]*)/>`)
+	fillRe      = regexp.MustCompile(`\bfill="#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})"`)
+	guessRe     = regexp.MustCompile(`\bdata-fi-guess="([^"]*)"`)
+	tierRe      = regexp.MustCompile(`\bdata-fi-tier="(easy|hard|both)"`)
+	mergeGrpRe  = regexp.MustCompile(`\bdata-fi-merge-group="([^"]+)"`)
+	idAttrRe    = regexp.MustCompile(`\s*id="[^"]*"`)
 	guessAttrRe = regexp.MustCompile(`\s*data-fi-guess="[^"]*"`)
-	tierAttrRe = regexp.MustCompile(`\s*data-fi-tier="[^"]*"`)
+	tierAttrRe  = regexp.MustCompile(`\s*data-fi-tier="[^"]*"`)
 )
 
 type shard struct {
-	full    string
-	neu     string
-	tagName string
-	attrs   string
-	fillKey   string // normalized hex + merge-group or "" if invalid
-	tier      string // easy | hard | both (both when omitted)
-	mergeGrp  string // preserved on output when non-empty (same hex, distinct challenges)
+	full     string
+	neu      string
+	tagName  string
+	attrs    string
+	fillKey  string
+	tier     string
+	mergeGrp string
 }
 
 func main() {
@@ -105,11 +107,9 @@ func merge(s string) (string, bool) {
 
 	fillToGuess := make(map[string]string)
 	fillTierVotes := make(map[string][]string)
-	var fillOrder []string
 	for _, sh := range shards {
 		if _, ok := fillToGuess[sh.fillKey]; !ok {
-			fillOrder = append(fillOrder, sh.fillKey)
-			fillToGuess[sh.fillKey] = strconv.Itoa(len(fillOrder))
+			fillToGuess[sh.fillKey] = strconv.Itoa(len(fillToGuess) + 1)
 		}
 		fillTierVotes[sh.fillKey] = append(fillTierVotes[sh.fillKey], sh.tier)
 	}
@@ -144,7 +144,6 @@ func shardSuffix(i int) string {
 	if i == 0 {
 		return ""
 	}
-	// Match existing convention: fi-guess-4, fi-guess-4b, fi-guess-4c, …
 	const letters = "bcdefghijklmnopqrstuvwxyz"
 	if i-1 < len(letters) {
 		return string(letters[i-1])

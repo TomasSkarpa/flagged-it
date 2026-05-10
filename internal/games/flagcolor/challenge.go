@@ -37,7 +37,7 @@ func PickChallenge(difficulty string, pool []models.Country, used map[string]boo
 		if err != nil || len(parts) == 0 {
 			continue
 		}
-		eligible := dedupeGuessableParts(FilterPartsByDifficulty(parts, difficulty))
+		eligible := DedupeGuessableParts(FilterPartsByDifficulty(parts, difficulty))
 		if len(eligible) == 0 {
 			continue
 		}
@@ -51,9 +51,9 @@ func PickChallenge(difficulty string, pool []models.Country, used map[string]boo
 	return nil, fmt.Errorf("%w", ErrNoEligibleChallenge)
 }
 
-// dedupeGuessableParts keeps one entry per (GuessID, Fill) so multiple SVG paths
+// DedupeGuessableParts keeps one entry per (GuessID, Fill) so multiple SVG paths
 // that share the same guess id (e.g. emblem shards) do not skew random selection.
-func dedupeGuessableParts(parts []GuessablePart) []GuessablePart {
+func DedupeGuessableParts(parts []GuessablePart) []GuessablePart {
 	type key struct {
 		id   string
 		fill string

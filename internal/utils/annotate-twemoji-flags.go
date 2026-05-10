@@ -1,5 +1,9 @@
+//go:build ignore
+
 // annotate-twemoji-flags adds data-fi-guess (and matching id) to every solid hex-filled
 // path, circle, or rect in assets/twemoji_flags_cca2/*.svg that is not yet annotated.
+//
+// Run from repo root: go run ./internal/utils/annotate-twemoji-flags.go [path/to/twemoji_flags_cca2]
 package main
 
 import (
@@ -78,6 +82,5 @@ func annotate(s string) (string, bool) {
 		return "<" + name + insert + attrs + "/>"
 	})
 
-	changed := next != s
-	return next, changed
+	return next, next != s
 }

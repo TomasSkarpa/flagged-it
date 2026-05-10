@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Potpuna prezentacija UI komponenti za Flagged It geografske igre. Interna referenca za razvoj.",
   "game.flag_color.title": "Pogodi boju zastave koja nedostaje",
   "game.flag_color.setup.title": "Kviz o bojama zastava",
-  "game.flag_color.setup.description": "Jedan dio zastave rezerviran je za tvoje pogađanje: prikazuje pregled boje uživo s tvojih klizača. Podesi nijansu, zasićenost i svjetlinu dok se ne podudari sa stvarnom zastavom.",
   "game.flag_color.question.before_country": "Koja je boja zastave ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Lako",

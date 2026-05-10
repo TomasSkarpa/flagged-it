@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Prezentare completă a componentelor UI pentru jocurile de geografie Flagged It. Referință internă de dezvoltare.",
   "game.flag_color.title": "Ghicește culoarea lipsă a steagului",
   "game.flag_color.setup.title": "Test de culori de steag",
-  "game.flag_color.setup.description": "O zonă a steagului este rezervată pentru ghicirea ta: arată o previzualizare în timp real a culorii selectate cu glisoarele. Ajustează nuanța, saturația și luminozitatea până se potrivește cu steagul real.",
   "game.flag_color.question.before_country": "Care este culoarea steagului ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Ușor",

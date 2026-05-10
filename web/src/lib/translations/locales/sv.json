@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Komplett showcase för UI-komponenter för Flagged Its geografispel. Intern utvecklingsreferens.",
   "game.flag_color.title": "Gissa den saknade flaggfärgen",
   "game.flag_color.setup.title": "Flaggfärgsquiz",
-  "game.flag_color.setup.description": "En flaggregion är reserverad för din gissning: den visar en liveförhandsvisning av färgen från dina reglage. Justera nyans, mättnad och ljusstyrka tills den matchar den riktiga flaggan.",
   "game.flag_color.question.before_country": "Vilken färg har flaggan för ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Lätt",

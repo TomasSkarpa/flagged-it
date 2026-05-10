@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-	export let roundCurrent = 1;
-	export let roundTotal = 10;
 	export let scoreTen = '0.00';
 	export let deltaE = 0;
 	export let tierMessage = '';
@@ -17,15 +15,9 @@
 </script>
 
 <div class="relative w-full max-w-lg mx-auto rounded-[28px] overflow-hidden border border-white/15 shadow-2xl">
-	<p
-		class="absolute top-3 left-1/2 -translate-x-1/2 z-20 text-[11px] font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-black/35 text-white/90 backdrop-blur-sm border border-white/10"
-	>
-		{roundCurrent}/{roundTotal}
-	</p>
-
 	<!-- Your selection -->
 	<section
-		class="relative pt-11 pb-8 px-5 sm:px-7 min-h-[140px] flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-start"
+		class="relative pt-8 pb-8 px-5 sm:px-7 min-h-[140px] flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-start"
 		style="background-color: {guessHex};"
 	>
 		<div class="result-readout-panel w-full sm:w-auto sm:max-w-[min(100%,260px)]">

@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Mostruário completo de componentes de UI para os jogos de geografia Flagged It. Referência de desenvolvimento interna.",
   "game.flag_color.title": "Adivinha a Cor da Bandeira",
   "game.flag_color.setup.title": "Quiz de Cores de Bandeiras",
-  "game.flag_color.setup.description": "Uma região da bandeira está reservada para o teu palpite: ela mostra uma pré-visualização em tempo real da cor dos teus seletores. Ajusta a matiz, saturação e brilho até corresponder à bandeira real.",
   "game.flag_color.question.before_country": "Qual é a cor da bandeira de ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Fácil",

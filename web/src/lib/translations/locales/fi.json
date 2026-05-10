@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Kattava käyttöliittymäkomponenttien esittely Flagged It -maantietopelejä varten. Sisäinen kehitysreferenssi.",
   "game.flag_color.title": "Arvaa puuttuva lipun väri",
   "game.flag_color.setup.title": "Lipun värivisa",
-  "game.flag_color.setup.description": "Yksi lipun alue on varattu arvauksellesi: se näyttää reaaliaikaisen esikatselun väristä, jonka olet valinnut liukusäätimillä. Säädä sävyä, kylläisyyttä ja kirkkautta, kunnes se vastaa oikeaa lippua.",
   "game.flag_color.question.before_country": "Mikä on lipun väri, ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Helppo",

@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Onyesho kamili la vipengele vya UI kwa michezo ya jiografia ya Flagged It. Rejea ya ndani ya uundaji.",
   "game.flag_color.title": "Nadhani Rangi Inayokosekana ya Bendera",
   "game.flag_color.setup.title": "Maswali ya Rangi ya Bendera",
-  "game.flag_color.setup.description": "Sehemu moja ya bendera imetengwa kwa ajili ya ubashiri wako: inaonyesha onyesho la moja kwa moja la rangi kutoka kwenye vitelezi vyako. Rekebisha mwangaza, uenezaji, na ung'avu hadi ifanane na bendera halisi.",
   "game.flag_color.question.before_country": "Rangi ya bendera ya ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Rahisi",

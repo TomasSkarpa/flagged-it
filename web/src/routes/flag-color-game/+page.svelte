@@ -278,9 +278,9 @@
 				scoreDenominator={scoreDenominator > 0 ? scoreDenominator : maxPointsPerRound}
 			/>
 
-			<div class="card-game overflow-hidden">
+			<div class="card-game overflow-hidden pt-4 lg:pt-8">
 				<h2
-					class="flag-color-headline text-lg sm:text-xl md:text-2xl font-bold text-center mb-5 px-3 md:px-6 leading-snug max-w-3xl mx-auto"
+					class="flag-color-headline mt-4 text-lg sm:text-xl md:text-2xl font-bold text-center mb-5 px-3 md:px-6 leading-snug max-w-3xl mx-auto"
 				>
 					<span class="text-sandy-light/95 font-semibold">{questionBeforeCountry}</span><span
 						class="flag-color-headline-country">{currentQuestion.countryName}</span><span class="text-sandy-light/95 font-semibold">{questionAfterCountry}</span>
@@ -288,10 +288,12 @@
 
 				{#if phase === 'playing'}
 					<div
-						class="flex flex-col lg:flex-row lg:items-start lg:justify-center lg:content-start gap-6 lg:gap-10 px-2 pb-6 min-w-0 w-full max-w-[720px] mx-auto"
+						class="flex flex-col lg:flex-row lg:items-start lg:justify-center lg:content-start gap-0 lg:gap-10 px-2 pb-6 min-w-0 w-full max-w-[720px] mx-auto"
 					>
 						<!-- items-start: avoid stretch-tall column so the SV plane stays top-aligned -->
-						<div class="flex justify-center items-start w-full min-w-0 lg:w-[320px] lg:max-w-[320px] shrink-0 lg:self-start">
+						<div
+							class="flex justify-center items-start w-full min-w-0 lg:w-[320px] lg:max-w-[320px] shrink-0 lg:self-start lg:pt-[38px]"
+						>
 							<FlagColorSvPlanePicker
 								bind:hue
 								bind:satPct
@@ -339,8 +341,6 @@
 						</div>
 						<div class="flex-1 w-full min-w-0">
 							<FlagColorRoundResult
-								roundCurrent={total}
-								roundTotal={totalRounds}
 								scoreTen={resultScoreTen}
 								deltaE={resultDeltaE}
 								tierMessage={resultTierMessage}

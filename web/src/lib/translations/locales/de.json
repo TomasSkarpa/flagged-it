@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Vollständige UI-Komponenten-Präsentation für Flagged It Geografie-Spiele. Interne Entwicklungsreferenz.",
   "game.flag_color.title": "Errate die fehlende Flaggenfarbe",
   "game.flag_color.setup.title": "Flaggenfarben-Quiz",
-  "game.flag_color.setup.description": "Ein Bereich der Flagge ist für deine Schätzung reserviert: Er zeigt eine Live-Vorschau der Farbe von deinen Schiebereglern. Passe Farbton, Sättigung und Helligkeit an, bis sie zur echten Flagge passt.",
   "game.flag_color.question.before_country": "Welche Farbe hat die Flagge von ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Einfach",

@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Trình diễn đầy đủ các thành phần UI cho các trò chơi địa lý của Flagged It. Tài liệu tham khảo phát triển nội bộ.",
   "game.flag_color.title": "Đoán màu cờ bị thiếu",
   "game.flag_color.setup.title": "Đố vui màu cờ",
-  "game.flag_color.setup.description": "Một vùng cờ được dành riêng cho dự đoán của bạn: nó hiển thị bản xem trước trực tiếp màu sắc từ các thanh trượt của bạn. Điều chỉnh sắc độ, độ bão hòa và độ sáng cho đến khi khớp với màu cờ thật.",
   "game.flag_color.question.before_country": "Màu cờ của ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Dễ",

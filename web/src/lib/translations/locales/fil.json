@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Kumpletong showcase ng bahagi ng UI para sa mga laro ng heograpiya ng Flagged It. Panloob na sanggunian sa development.",
   "game.flag_color.title": "Hulaan ang Nawawalang Kulay ng Bandila",
   "game.flag_color.setup.title": "Pagsusulit sa Kulay ng Bandila",
-  "game.flag_color.setup.description": "Isang bahagi ng bandila ang nakalaan para sa iyong hula: ipinapakita nito ang live na preview ng kulay mula sa iyong mga slider. Ayusin ang hue, saturation, at brightness hanggang sa tumugma ito sa totoong kulay ng bandila.",
   "game.flag_color.question.before_country": "Ano ang kulay ng bandila ng ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Madali",

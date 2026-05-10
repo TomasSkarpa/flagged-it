@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Vetrina completa dei componenti UI per i giochi di geografia di Flagged It. Riferimento di sviluppo interno.",
   "game.flag_color.title": "Indovina il colore mancante della bandiera",
   "game.flag_color.setup.title": "Quiz Colore Bandiera",
-  "game.flag_color.setup.description": "Una regione della bandiera è riservata per la tua ipotesi: mostra un'anteprima dal vivo del colore dai tuoi slider. Regola tonalità, saturazione e luminosità finché non corrisponde alla bandiera reale.",
   "game.flag_color.question.before_country": "Qual è il colore della bandiera di ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Facile",

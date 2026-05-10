@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Kompletná ukážka UI komponentov pre geografické hry Flagged It. Interná referenčná príručka pre vývoj.",
   "game.flag_color.title": "Uhádni chýbajúcu farbu vlajky",
   "game.flag_color.setup.title": "Kvíz o farbe vlajky",
-  "game.flag_color.setup.description": "Jedna oblasť vlajky je vyhradená pre tvoj odhad: zobrazuje živý náhľad farby z tvojich posuvníkov. Uprav odtieň, sýtosť a jas, kým sa nezhoduje so skutočnou vlajkou.",
   "game.flag_color.question.before_country": "Aká je farba vlajky ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Jednoduchá",

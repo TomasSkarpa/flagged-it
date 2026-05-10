@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Pameran komponen UI lengkap untuk game geografi Flagged It. Referensi pengembangan internal.",
   "game.flag_color.title": "Tebak Warna Bendera yang Hilang",
   "game.flag_color.setup.title": "Kuis Warna Bendera",
-  "game.flag_color.setup.description": "Satu bagian bendera disediakan untuk tebakan Anda: ini menunjukkan pratinjau langsung warna dari penggeser Anda. Sesuaikan rona, saturasi, dan kecerahan hingga cocok dengan bendera aslinya.",
   "game.flag_color.question.before_country": "Apa warna bendera ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Mudah",

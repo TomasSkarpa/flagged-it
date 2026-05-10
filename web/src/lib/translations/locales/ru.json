@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Полная демонстрация компонентов пользовательского интерфейса для географических игр Flagged It. Внутренний справочник для разработки.",
   "game.flag_color.title": "Угадай недостающий цвет флага",
   "game.flag_color.setup.title": "Викторина: Цвет флага",
-  "game.flag_color.setup.description": "Одна область флага зарезервирована для твоего предположения: она показывает предварительный просмотр цвета с твоих ползунков. Регулируй оттенок, насыщенность и яркость, пока он не совпадет с настоящим флагом.",
   "game.flag_color.question.before_country": "Какого цвета флаг ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Легко",

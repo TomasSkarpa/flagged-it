@@ -80,7 +80,7 @@
     "_context": "Setup screen title for the flag color guessing game."
   },
   "game.flag_color.setup.description": {
-    "value": "One flag region is reserved for your guess: it shows a live preview of the color from your sliders. Adjust hue, saturation, and brightness until it matches the real flag.",
+    "value": "One flag region is reserved for your guess: it shows a live preview of the color from your sliders. Adjust the color until it matches the real flag.",
     "_context": "Explains live color preview in the flag region and HSV sliders for the flag color game."
   },
   "game.flag_color.question.before_country": {

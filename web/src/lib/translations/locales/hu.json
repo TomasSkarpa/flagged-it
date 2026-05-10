@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Teljes UI komponens bemutató a Flagged It földrajzi játékaihoz. Belső fejlesztési referencia.",
   "game.flag_color.title": "Találd ki a hiányzó zászlószínt",
   "game.flag_color.setup.title": "Zászlószín kvíz",
-  "game.flag_color.setup.description": "A zászló egyik része a tippednek van fenntartva: élőben mutatja a csúszkákkal beállított színt. Állítsd be az árnyalatot, telítettséget és fényerőt, amíg meg nem egyezik a valódi zászlóval.",
   "game.flag_color.question.before_country": "Milyen színű a zászlaja a(z) ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Könnyű",

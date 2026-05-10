@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Présentation complète des composants UI pour les jeux de géographie Flagged It. Référence de développement interne.",
   "game.flag_color.title": "Devine la couleur manquante du drapeau",
   "game.flag_color.setup.title": "Quiz des couleurs de drapeaux",
-  "game.flag_color.setup.description": "Une région du drapeau est réservée à ta proposition : elle affiche un aperçu en direct de la couleur de tes curseurs. Ajuste la teinte, la saturation et la luminosité jusqu'à ce qu'elle corresponde au vrai drapeau.",
   "game.flag_color.question.before_country": "Quelle est la couleur du drapeau de ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Facile",

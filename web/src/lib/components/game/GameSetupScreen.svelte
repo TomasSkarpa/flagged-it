@@ -6,7 +6,7 @@
 	
 	export let title: string;
 	export let emoji: string = '';
-	export let description: string;
+	export let description: string = '';
 	export let isLoading: boolean = false;
 	export let error: string | null = null;
 	export let showRegionSelector: boolean = true;
@@ -61,16 +61,20 @@
 </script>
 
 <div class="text-center px-4 md:px-8">
-	<h1 class="text-4xl md:text-6xl font-bold text-sandy-light mb-4">
+	<h1
+		class="text-4xl md:text-6xl font-bold text-sandy-light {description ? 'mb-4' : 'mb-8'}"
+	>
 		{#if emoji}
 			<span class="mr-2 emoji-blue">{emoji}</span>
 		{/if}
 		<span class="gradient-text">{title}</span>
 	</h1>
-	<p class="text-lg text-text-muted mb-8">
-		{description}
-	</p>
-	
+	{#if description}
+		<p class="text-lg text-text-muted mb-8">
+			{description}
+		</p>
+	{/if}
+
 	{#if showRegionSelector}
 		<div class="card-game max-w-md mx-auto mb-8">
 			<RegionDropdown

@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Flagged It 地理游戏的完整 UI 组件展示。内部开发参考。",
   "game.flag_color.title": "猜国旗缺失的颜色",
   "game.flag_color.setup.title": "国旗颜色问答",
-  "game.flag_color.setup.description": "国旗的一个区域会保留给你的猜测：它会实时显示你通过滑块调整的颜色。调整色相、饱和度和亮度，直到它与真实国旗的颜色匹配。",
   "game.flag_color.question.before_country": "的国旗是什么颜色",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "简单",

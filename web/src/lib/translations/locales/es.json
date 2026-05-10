@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Muestra completa de componentes de UI para los juegos de geografía de Flagged It. Referencia de desarrollo interna.",
   "game.flag_color.title": "Adivina el color de la bandera que falta",
   "game.flag_color.setup.title": "Quiz de colores de banderas",
-  "game.flag_color.setup.description": "Una región de la bandera está reservada para tu suposición: muestra una vista previa en vivo del color de tus deslizadores. Ajusta el tono, la saturación y el brillo hasta que coincida con la bandera real.",
   "game.flag_color.question.before_country": "¿Cuál es el color de la bandera de ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Fácil",

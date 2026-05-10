@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Complete showcase van UI-componenten voor Flagged It geografiespellen. Interne ontwikkelingsreferentie.",
   "game.flag_color.title": "Raad de ontbrekende vlagkleur",
   "game.flag_color.setup.title": "Vlagkleurquiz",
-  "game.flag_color.setup.description": "Eén vlagregio is gereserveerd voor jouw gok: het toont een live voorbeeld van de kleur van je schuifregelaars. Pas tint, verzadiging en helderheid aan totdat deze overeenkomt met de echte vlag.",
   "game.flag_color.question.before_country": "Wat is de kleur van de vlag van ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Makkelijk",

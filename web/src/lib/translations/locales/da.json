@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Komplet fremvisning af UI-komponenter til Flagged It geografispil. Intern udviklingsreference.",
   "game.flag_color.title": "Gæt den manglende flagfarve",
   "game.flag_color.setup.title": "Flagfarvequiz",
-  "game.flag_color.setup.description": "Én flagregion er reserveret til dit gæt: den viser en live forhåndsvisning af farven fra dine skydere. Juster nuance, mætning og lysstyrke, indtil den matcher det rigtige flag.",
   "game.flag_color.question.before_country": "Hvilken farve har flaget fra ",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Nem",

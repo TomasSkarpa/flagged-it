@@ -169,7 +169,6 @@
   "ui_kit.meta_description": "Flagged It coğrafya oyunları için eksiksiz kullanıcı arayüzü bileşenleri sergisi. Dahili geliştirme referansı.",
   "game.flag_color.title": "Eksik Bayrak Rengini Tahmin Et",
   "game.flag_color.setup.title": "Bayrak Rengi Bilgi Yarışması",
-  "game.flag_color.setup.description": "Bayrağın bir bölgesi senin tahminin için ayrılmıştır: kaydırıcılarından gelen rengin canlı önizlemesini gösterir. Gerçek bayrakla eşleşene kadar tonu, doygunluğu ve parlaklığı ayarla.",
   "game.flag_color.question.before_country": " bayrağının rengi nedir",
   "game.flag_color.question.after_country": "?",
   "game.flag_color.difficulty.easy": "Kolay",

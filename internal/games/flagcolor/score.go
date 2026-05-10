@@ -15,13 +15,61 @@ const PointsMaxPerRound = 100
 //
 // deltaPerfect of 5 covers the "perceptible only on side-by-side inspection"
 // range, so visually-identical matches always score a clean 10.00.
+//
+// deltaZero is wider than a strict perceptual cutoff so large lightness/chroma
+// shifts in the same hue family (e.g. navy vs sky blue) can still earn partial
+// credit. PointsFromGuessHex applies an extra ab-plane alignment factor before
+// mapping to points; the JSON API still reports raw ΔE76 for transparency.
 const (
 	deltaPerfect = 5.0
-	deltaZero    = 55.0
+	deltaZero    = 72.0
 	// decayExponent > 1 makes the score curve concave: small errors lose
 	// fewer points, while large errors still fall off toward zero.
 	decayExponent = 1.35
+
+	minChromaHueGate = 5.0
+	// hueRelaxMax scales raw ΔE down when (a*,b*) vectors align — same broad
+	// colour direction with different L*/chroma — without helping opposite hues.
+	hueRelaxMax = 0.32
 )
+
+// scoringDelta applies a hue-family relaxation to raw ΔE76 for point mapping only.
+func scoringDelta(hexA, hexB string, rawDelta float64) float64 {
+	if rawDelta <= deltaPerfect || rawDelta == 0 {
+		return rawDelta
+	}
+	_, aa, ba := hexToLab(hexA)
+	_, ab, bb := hexToLab(hexB)
+	ca := math.Hypot(aa, ba)
+	cb := math.Hypot(ab, bb)
+	if math.Min(ca, cb) < minChromaHueGate {
+		return rawDelta
+	}
+	denom := ca*cb + 1e-9
+	cosTheta := (aa*ab + ba*bb) / denom
+	if cosTheta < -1 {
+		cosTheta = -1
+	}
+	if cosTheta > 1 {
+		cosTheta = 1
+	}
+	// 0 = opposite direction in ab plane, 1 = same direction (hue ballpark).
+	align := (cosTheta + 1) / 2
+	chromaRatio := math.Min(ca, cb) / math.Max(ca, cb)
+	weight := align * chromaRatio
+	factor := 1 - hueRelaxMax*weight
+	if factor < 0.55 {
+		factor = 0.55
+	}
+	return rawDelta * factor
+}
+
+// PointsFromGuessHex maps a guessed colour to a score using raw ΔE76 plus a
+// small relaxation when both colours share a similar direction in CIELAB a*b*.
+func PointsFromGuessHex(correctHex, guessHex string) int {
+	raw := DeltaE76(correctHex, guessHex)
+	return PointsFromDeltaE(scoringDelta(correctHex, guessHex, raw))
+}
 
 // DeltaE76 computes CIE76 ΔE* in Lab space (sRGB hex inputs, D65).
 func DeltaE76(hexA, hexB string) float64 {

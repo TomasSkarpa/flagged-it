@@ -1,11 +1,16 @@
 package flagcolor
 
 import (
+	"errors"
 	"fmt"
 	"math/rand"
 
 	"flagged-it/internal/data/models"
 )
+
+// ErrNoEligibleChallenge means no country in the pool had an unused SVG region
+// tagged with data-fi-guess for the current difficulty (after skipping invalid SVGs).
+var ErrNoEligibleChallenge = errors.New("no eligible flag color challenge")
 
 // Challenge is one round's hidden-color target.
 type Challenge struct {
@@ -43,5 +48,5 @@ func PickChallenge(difficulty string, pool []models.Country, used map[string]boo
 			TargetHex:   pick.Fill,
 		}, nil
 	}
-	return nil, fmt.Errorf("no eligible flag color challenge")
+	return nil, fmt.Errorf("%w", ErrNoEligibleChallenge)
 }

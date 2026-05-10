@@ -75,6 +75,6 @@
 
 <div
 	bind:this={container}
-	class="w-full max-w-[280px] md:max-w-xs mx-auto [&_svg]:w-full [&_svg]:h-auto [&_svg]:rounded-[20px] [&_svg]:shadow-lg border border-white/10 bg-black/20 min-h-[120px]"
+	class="w-full max-w-[280px] md:max-w-xs mx-auto [&_svg]:w-full [&_svg]:h-auto [&_svg]:rounded-[20px] min-h-[120px]"
 	aria-hidden={false}
 ></div>

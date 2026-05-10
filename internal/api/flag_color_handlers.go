@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"flagged-it/internal/data/models"
 	"flagged-it/internal/games/flagcolor"
@@ -33,27 +34,17 @@ var (
 	flagColorSessionsMutex sync.RWMutex
 )
 
-func buildFlagColorPool(region string) ([]models.Country, error) {
-	list, err := flagcolor.AllowlistCCA2()
-	if err != nil {
-		return nil, err
-	}
-	allow := make(map[string]bool)
-	for _, c := range list {
-		allow[strings.ToUpper(strings.TrimSpace(c))] = true
-	}
-
+// buildFlagColorPool returns all countries for the selected region. Flags without
+// data-fi-guess annotations are skipped at pick time (see flagcolor.PickChallenge).
+func buildFlagColorPool(region string) []models.Country {
 	var pool []models.Country
 	for _, country := range countries {
-		if !allow[country.CCA2] {
-			continue
-		}
 		if region != "" && region != "World" && country.Region != region {
 			continue
 		}
 		pool = append(pool, country)
 	}
-	return pool, nil
+	return pool
 }
 
 func (h *FlagColorGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
@@ -86,8 +77,8 @@ func (h *FlagColorGameHandler) StartGame(w http.ResponseWriter, r *http.Request)
 		roundLimit = 10
 	}
 
-	pool, err := buildFlagColorPool(req.Region)
-	if err != nil || len(pool) == 0 {
+	pool := buildFlagColorPool(req.Region)
+	if len(pool) == 0 {
 		http.Error(w, "No countries available for flag color mode", http.StatusBadRequest)
 		return
 	}
@@ -122,12 +113,20 @@ func (h *FlagColorGameHandler) StartGame(w http.ResponseWriter, r *http.Request)
 }
 
 func generateFlagColorQuestion(pool []models.Country, session *flagColorSession, locale string) (map[string]interface{}, error) {
-	if len(session.UsedCountries) >= len(pool) {
-		session.UsedCountries = make(map[string]bool)
-	}
-
-	ch, err := flagcolor.PickChallenge(session.Difficulty, pool, session.UsedCountries)
-	if err != nil {
+	var ch *flagcolor.Challenge
+	for {
+		if len(session.UsedCountries) >= len(pool) {
+			session.UsedCountries = make(map[string]bool)
+		}
+		var err error
+		ch, err = flagcolor.PickChallenge(session.Difficulty, pool, session.UsedCountries)
+		if err == nil {
+			break
+		}
+		if errors.Is(err, flagcolor.ErrNoEligibleChallenge) && len(session.UsedCountries) > 0 {
+			session.UsedCountries = make(map[string]bool)
+			continue
+		}
 		return nil, err
 	}
 	session.UsedCountries[ch.Country.CCA2] = true
@@ -153,9 +152,9 @@ func generateFlagColorQuestion(pool []models.Country, session *flagColorSession,
 }
 
 func regenerateFlagColorQuestion(session *flagColorSession, locale string) (map[string]interface{}, error) {
-	pool, err := buildFlagColorPool(session.Region)
-	if err != nil || len(pool) == 0 {
-		return nil, err
+	pool := buildFlagColorPool(session.Region)
+	if len(pool) == 0 {
+		return nil, fmt.Errorf("no countries in pool")
 	}
 	var country models.Country
 	for _, c := range pool {
@@ -211,13 +210,14 @@ func (h *FlagColorGameHandler) GetQuestion(w http.ResponseWriter, r *http.Reques
 	}
 	session.Locale = locale
 
-	pool, err := buildFlagColorPool(session.Region)
-	if err != nil || len(pool) == 0 {
+	pool := buildFlagColorPool(session.Region)
+	if len(pool) == 0 {
 		http.Error(w, "No countries available", http.StatusBadRequest)
 		return
 	}
 
 	var q map[string]interface{}
+	var err error
 	if session.CurrentQuestionID != "" && session.CurrentCCA2 != "" {
 		q, err = regenerateFlagColorQuestion(session, locale)
 	} else {
@@ -279,8 +279,10 @@ func (h *FlagColorGameHandler) SubmitAnswer(w http.ResponseWriter, r *http.Reque
 
 	correctHex := session.TargetHex
 	delta := flagcolor.DeltaE76(correctHex, guessHex)
-	points := flagcolor.PointsFromDeltaE(delta)
-	if session.Difficulty == "hard" {
+	points := flagcolor.PointsFromGuessHex(correctHex, guessHex)
+	// Hard mode scales down imperfect matches only; a round that already scores
+	// the colour maximum (ΔE inside the perfect band) stays at full points.
+	if session.Difficulty == "hard" && points < flagcolor.PointsMaxPerRound {
 		points = int(float64(points) * 0.9)
 		if points < 0 {
 			points = 0
@@ -296,9 +298,11 @@ func (h *FlagColorGameHandler) SubmitAnswer(w http.ResponseWriter, r *http.Reque
 	session.CurrentGuessableID = ""
 	session.TargetHex = ""
 
-	pool, poolErr := buildFlagColorPool(session.Region)
-	if poolErr == nil && !finished && len(pool) > 0 {
-		_, _ = generateFlagColorQuestion(pool, session, session.Locale)
+	if !finished {
+		pool := buildFlagColorPool(session.Region)
+		if len(pool) > 0 {
+			_, _ = generateFlagColorQuestion(pool, session, session.Locale)
+		}
 	}
 
 	flagColorSessionsMutex.Unlock()

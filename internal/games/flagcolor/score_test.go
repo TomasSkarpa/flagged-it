@@ -42,6 +42,30 @@ func TestPointsDecreasesWithDelta(t *testing.T) {
 
 // TestPointsCurveIsBenevolent guards the concave decay: small and medium
 // ΔE values should award noticeably more than a pure linear ramp would.
+func TestPointsFromGuessHex_hueBallparkBonus(t *testing.T) {
+	// Navy vs lighter sky blue: large ΔE76 (lightness + chroma), same broad hue direction.
+	correct, guess := "#002495", "#1D89BF"
+	raw := DeltaE76(correct, guess)
+	if raw < 50 {
+		t.Fatalf("expected large ΔE for fixture, got %.2f", raw)
+	}
+	fromRaw := PointsFromDeltaE(raw)
+	fromGuess := PointsFromGuessHex(correct, guess)
+	if fromGuess <= fromRaw {
+		t.Fatalf("hue relax should score higher than raw ΔE alone: raw=%d guess=%d (ΔE=%.2f)", fromRaw, fromGuess, raw)
+	}
+	if fromGuess <= 0 {
+		t.Fatalf("same-family shade miss should not floor at zero, got %d", fromGuess)
+	}
+}
+
+func TestPointsFromGuessHex_identicalFullScore(t *testing.T) {
+	p := PointsFromGuessHex("#112233", "#112233")
+	if p != PointsMaxPerRound {
+		t.Fatalf("got %d", p)
+	}
+}
+
 func TestPointsCurveIsBenevolent(t *testing.T) {
 	cases := []struct {
 		deltaE float64

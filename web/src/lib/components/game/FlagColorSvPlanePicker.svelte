@@ -105,7 +105,7 @@
 				style="left: calc(8px + (100% - 16px) * {hueN / 359});"
 			></div>
 		</div>
-		<span class="text-[10px] uppercase tracking-wider text-white/75 font-semibold text-center">{hueAriaLabel}</span>
+		<span class="text-[10px] uppercase tracking-wider text-sandy-light font-semibold text-center">{hueAriaLabel}</span>
 	</div>
 </div>
 

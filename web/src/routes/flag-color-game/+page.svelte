@@ -282,8 +282,8 @@
 				<h2
 					class="flag-color-headline mt-4 text-lg sm:text-xl md:text-2xl font-bold text-center mb-5 px-3 md:px-6 leading-snug max-w-3xl mx-auto"
 				>
-					<span class="text-sandy-light/95 font-semibold">{questionBeforeCountry}</span><span
-						class="flag-color-headline-country">{currentQuestion.countryName}</span><span class="text-sandy-light/95 font-semibold">{questionAfterCountry}</span>
+					<span class="text-sandy-light font-semibold">{questionBeforeCountry}</span><span
+						class="flag-color-headline-country">{currentQuestion.countryName}</span><span class="text-sandy-light font-semibold">{questionAfterCountry}</span>
 				</h2>
 
 				{#if phase === 'playing'}

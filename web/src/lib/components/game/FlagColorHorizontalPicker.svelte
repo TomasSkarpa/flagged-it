@@ -48,7 +48,7 @@
 				style="left: calc(8px + (100% - 16px) * {hue / 359});"
 			></div>
 		</div>
-		<span class="text-[10px] uppercase tracking-wider text-white/75 font-semibold text-center">Hue</span>
+		<span class="text-[10px] uppercase tracking-wider text-sandy-light font-semibold text-center">Hue</span>
 	</div>
 
 	<!-- Saturation -->
@@ -73,7 +73,7 @@
 				style="left: calc(8px + (100% - 16px) * {satPct / 100});"
 			></div>
 		</div>
-		<span class="text-[10px] uppercase tracking-wider text-white/75 font-semibold text-center">Sat.</span>
+		<span class="text-[10px] uppercase tracking-wider text-sandy-light font-semibold text-center">Sat.</span>
 	</div>
 
 	<!-- Brightness -->
@@ -98,7 +98,7 @@
 				style="left: calc(8px + (100% - 16px) * {valPct / 100});"
 			></div>
 		</div>
-		<span class="text-[10px] uppercase tracking-wider text-white/75 font-semibold text-center">Bright.</span>
+		<span class="text-[10px] uppercase tracking-wider text-sandy-light font-semibold text-center">Bright.</span>
 	</div>
 </div>
 

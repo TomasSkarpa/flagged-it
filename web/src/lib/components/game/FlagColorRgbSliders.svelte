@@ -65,7 +65,7 @@
 				style="left: calc(8px + (100% - 16px) * {rgb.r / 255});"
 			></div>
 		</div>
-		<span class="text-[10px] uppercase tracking-wider text-white/75 font-semibold text-center">R</span>
+		<span class="text-[10px] uppercase tracking-wider text-sandy-light font-semibold text-center">R</span>
 	</div>
 
 	<div class="flex flex-col gap-2 w-full">
@@ -90,7 +90,7 @@
 				style="left: calc(8px + (100% - 16px) * {rgb.g / 255});"
 			></div>
 		</div>
-		<span class="text-[10px] uppercase tracking-wider text-white/75 font-semibold text-center">G</span>
+		<span class="text-[10px] uppercase tracking-wider text-sandy-light font-semibold text-center">G</span>
 	</div>
 
 	<div class="flex flex-col gap-2 w-full">
@@ -115,7 +115,7 @@
 				style="left: calc(8px + (100% - 16px) * {rgb.b / 255});"
 			></div>
 		</div>
-		<span class="text-[10px] uppercase tracking-wider text-white/75 font-semibold text-center">B</span>
+		<span class="text-[10px] uppercase tracking-wider text-sandy-light font-semibold text-center">B</span>
 	</div>
 </div>
 

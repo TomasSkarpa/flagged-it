@@ -32,7 +32,7 @@
 
 <div class="flex flex-col gap-3 max-w-xs mx-auto touch-manipulation" aria-label="HSB numeric inputs">
 	<label class="flex flex-col gap-1">
-		<span class="text-[10px] uppercase tracking-wider text-white/75 font-semibold">Hue (0–359)</span>
+		<span class="text-[10px] uppercase tracking-wider text-sandy-light font-semibold">Hue (0–359)</span>
 		<input
 			type="number"
 			min="0"
@@ -45,7 +45,7 @@
 		/>
 	</label>
 	<label class="flex flex-col gap-1">
-		<span class="text-[10px] uppercase tracking-wider text-white/75 font-semibold">Saturation (0–100)</span>
+		<span class="text-[10px] uppercase tracking-wider text-sandy-light font-semibold">Saturation (0–100)</span>
 		<input
 			type="number"
 			min="0"
@@ -58,7 +58,7 @@
 		/>
 	</label>
 	<label class="flex flex-col gap-1">
-		<span class="text-[10px] uppercase tracking-wider text-white/75 font-semibold">Brightness (0–100)</span>
+		<span class="text-[10px] uppercase tracking-wider text-sandy-light font-semibold">Brightness (0–100)</span>
 		<input
 			type="number"
 			min="0"

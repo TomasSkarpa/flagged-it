@@ -9,7 +9,12 @@
 
 	$: chroma = hsvToRgb(hue, 1, 1);
 	$: satGradient = `linear-gradient(to top, #808080 0%, rgb(${chroma.r},${chroma.g},${chroma.b}) 100%)`;
-	$: valGradient = `linear-gradient(to top, #000000 0%, rgb(${chroma.r},${chroma.g},${chroma.b}) 50%, #ffffff 100%)`;
+	$: satNorm = satPct / 100;
+	$: valMid = hsvToRgb(hue, satNorm, 1);
+	$: valGradient =
+		satPct <= 0
+			? `linear-gradient(to top, #000000 0%, #ffffff 100%)`
+			: `linear-gradient(to top, #000000 0%, rgb(${valMid.r},${valMid.g},${valMid.b}) 50%, #ffffff 100%)`;
 
 	const trackLen = 200;
 </script>

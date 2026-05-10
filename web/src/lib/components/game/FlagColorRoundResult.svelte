@@ -67,4 +67,9 @@
 	.result-readout-panel {
 		@apply rounded-2xl bg-black/55 backdrop-blur-md border border-white/20 px-4 py-3 text-white shadow-lg;
 	}
+
+	/* Light mode: dark text on lightened backdrop-blur (see app.css). Use :global(:root.light), not `[class*="Toggle"]` (panel is not inside Toggle — unused selector). */
+	:global(:root.light) .result-readout-panel :global(p) {
+		color: #0f172a !important;
+	}
 </style>

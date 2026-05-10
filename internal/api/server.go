@@ -15,6 +15,7 @@ func SetupRoutes() {
 	higherLowerHandler := &HigherLowerHandler{}
 	worldleHandler := &WorldleGameHandler{}
 	factsHandler := &FactsGameHandler{}
+	flagColorHandler := &FlagColorGameHandler{}
 	debugHandler := &DebugHandler{}
 
 	// Rate limiter: 100 requests per minute, burst of 20
@@ -141,6 +142,12 @@ func SetupRoutes() {
 	http.HandleFunc("/api/game/facts/guess", combinedMiddleware(factsHandler.SubmitGuess))
 	http.HandleFunc("/api/game/facts/skip", combinedMiddleware(factsHandler.Skip))
 	http.HandleFunc("/api/game/facts/next", combinedMiddleware(factsHandler.NextRound))
+
+	// Flag color quiz
+	http.HandleFunc("/api/game/flag-color/start", combinedMiddleware(flagColorHandler.StartGame))
+	http.HandleFunc("/api/game/flag-color/question", combinedMiddleware(flagColorHandler.GetQuestion))
+	http.HandleFunc("/api/game/flag-color/answer", combinedMiddleware(flagColorHandler.SubmitAnswer))
+	http.HandleFunc("/api/game/flag-color/score", combinedMiddleware(flagColorHandler.GetScore))
 
 	// Countries and GeoJSON (used by library, games, map)
 	http.HandleFunc("/api/countries", combinedMiddleware(debugHandler.GetAllCountries))

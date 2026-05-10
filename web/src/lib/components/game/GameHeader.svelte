@@ -9,10 +9,13 @@
 	export let currentRound: number;
 	export let totalRounds: number;
 	export let showProgressBar: boolean = true;
+	/** When set (e.g. flag color points / max points), ScoreDisplay uses this as the denominator instead of round count. */
+	export let scoreDenominator: number | null = null;
 	
 	// Reactive translations - will update when locale changes
 	$: currentLocale = $locale;
 	$: roundText = t('game.round.progress', [currentRound, totalRounds], currentLocale);
+	$: scoreDisplayTotal = scoreDenominator ?? total;
 </script>
 
 <div class="mb-2">
@@ -20,7 +23,7 @@
 		<div class="text-base text-text-light font-semibold stat-number round-counter">
 			{roundText}
 		</div>
-		<ScoreDisplay {score} {total} showPercentage={false} showProgress={false} />
+		<ScoreDisplay {score} total={scoreDisplayTotal} showPercentage={false} showProgress={false} />
 	</div>
 	{#if showProgressBar}
 		<ProgressBar current={total} total={totalRounds} showLabel={false} />

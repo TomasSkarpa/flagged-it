@@ -287,45 +287,36 @@
 				</h2>
 
 				{#if phase === 'playing'}
-					<div class="flex flex-col gap-6 px-2 pb-4 min-w-0">
-						<div
-							class="flex flex-col lg:flex-row lg:items-start lg:justify-center gap-6 lg:gap-12 xl:gap-14 w-full min-w-0"
-						>
-							<div
-								class="flex flex-col sm:flex-row lg:flex-col items-center justify-center gap-3 sm:gap-4 w-full min-w-0 lg:w-auto lg:max-w-[320px]"
-							>
-								<div class="w-full min-w-0 flex justify-center shrink-0">
-									<FlagColorSvPlanePicker
-										bind:hue
-										bind:satPct
-										bind:valPct
-										disabled={isLoading}
-										{hueAriaLabel}
-										size="game"
-									/>
-								</div>
-								<div
-									class="hidden sm:block sm:w-28 sm:min-h-[168px] sm:shrink-0 lg:w-full lg:max-w-[300px] lg:min-h-0 lg:h-14 lg:shrink-0 rounded-2xl lg:rounded-xl border border-white/15 shadow-inner transition-colors duration-150"
-									style="background-color: rgb({rgbPreview.r},{rgbPreview.g},{rgbPreview.b});"
-									aria-hidden="true"
-								></div>
-							</div>
-							<div class="flex justify-center shrink-0 lg:pt-1">
-								<FlagColorFlag
-									flagUrl={currentQuestion.flagUrl}
-									guessableId={currentQuestion.guessableId}
-									questionId={currentQuestion.questionId}
-									revealFullColor={false}
-									previewR={rgbPreview.r}
-									previewG={rgbPreview.g}
-									previewB={rgbPreview.b}
-								/>
-							</div>
+					<div
+						class="flex flex-col lg:flex-row lg:items-start lg:justify-center lg:content-start gap-6 lg:gap-10 px-2 pb-6 min-w-0 w-full max-w-[720px] mx-auto"
+					>
+						<!-- items-start: avoid stretch-tall column so the SV plane stays top-aligned -->
+						<div class="flex justify-center items-start w-full min-w-0 lg:w-[320px] lg:max-w-[320px] shrink-0 lg:self-start">
+							<FlagColorSvPlanePicker
+								bind:hue
+								bind:satPct
+								bind:valPct
+								disabled={isLoading}
+								{hueAriaLabel}
+								size="game"
+							/>
 						</div>
-						<div class="flex justify-center w-full">
+						<!-- Flag + submit: stretch + justify-start pins flag to top (items-center is cross-axis only; stretch avoids odd flex sizing) -->
+						<div
+							class="flex flex-col items-stretch justify-start gap-4 w-full min-w-0 lg:w-[280px] lg:max-w-[280px] shrink-0 mx-auto lg:mx-0 lg:self-start"
+						>
+							<FlagColorFlag
+								flagUrl={currentQuestion.flagUrl}
+								guessableId={currentQuestion.guessableId}
+								questionId={currentQuestion.questionId}
+								revealFullColor={false}
+								previewR={rgbPreview.r}
+								previewG={rgbPreview.g}
+								previewB={rgbPreview.b}
+							/>
 							<button
 								type="button"
-								class="btn-primary w-full max-w-md px-8 py-3.5 font-semibold rounded-2xl disabled:opacity-50 shadow-lg"
+								class="btn-primary w-full max-w-xs px-8 py-3.5 font-semibold rounded-2xl disabled:opacity-50 shadow-lg"
 								disabled={isLoading}
 								on:click={handleSubmit}
 							>

@@ -14,7 +14,8 @@
 	let planeEl: HTMLDivElement | null = null;
 	let dragging = false;
 
-	$: chroma = hsvToRgb(hue, 1, 1);
+	$: hueN = Math.min(359, Math.max(0, Math.round(Number(hue))));
+	$: chroma = hsvToRgb(hueN, 1, 1);
 	$: planeBg = `rgb(${chroma.r},${chroma.g},${chroma.b})`;
 
 	$: hueTrackMaxClass = size === 'game' ? 'max-w-[260px]' : 'max-w-[200px]';
@@ -90,15 +91,18 @@
 				type="range"
 				min="0"
 				max="359"
-				bind:value={hue}
+				value={hueN}
 				{disabled}
 				class="absolute z-10 cursor-pointer opacity-0 flag-color-svplane-hue inset-x-0 w-full"
 				style="height: 44px; top: 0;"
 				aria-label={hueAriaLabel}
+				on:input={(e) => {
+					hue = +e.currentTarget.value;
+				}}
 			/>
 			<div
 				class="pointer-events-none absolute top-1/2 -translate-y-1/2 h-[85%] w-1 bg-white rounded-full shadow-md ring-1 ring-black/50 z-[5]"
-				style="left: calc(8px + (100% - 16px) * {hue / 359});"
+				style="left: calc(8px + (100% - 16px) * {hueN / 359});"
 			></div>
 		</div>
 		<span class="text-[10px] uppercase tracking-wider text-white/75 font-semibold text-center">{hueAriaLabel}</span>

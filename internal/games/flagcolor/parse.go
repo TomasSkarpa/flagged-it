@@ -85,6 +85,11 @@ func normalizeHexFill(fill string) (string, error) {
 	}
 }
 
+// NormalizeHexFill canonicalizes solid SVG fills (#RGB / #RRGGBB) for tooling.
+func NormalizeHexFill(fill string) (string, error) {
+	return normalizeHexFill(fill)
+}
+
 func isHex(s string) bool {
 	for _, r := range s {
 		if (r < '0' || r > '9') && (r < 'A' || r > 'F') {

@@ -133,27 +133,27 @@
   },
   "game.flag_color.tier.perfect": {
     "value": "Perfect!",
-    "_context": "Round score tier when match is nearly exact (0–10 scale)."
+    "_context": "Flag color tier when perceptual ΔE is at or below the exact-match band (≤ 5)."
   },
   "game.flag_color.tier.excellent": {
     "value": "Excellent!",
-    "_context": "High round score tier on flag color quiz."
+    "_context": "Flag color tier for strong perceptual matches (ΔE bands above perfect, before great)."
   },
   "game.flag_color.tier.great": {
     "value": "Great job!",
-    "_context": "Good round score tier on flag color quiz."
+    "_context": "Flag color tier for good perceptual ΔE."
   },
   "game.flag_color.tier.good": {
     "value": "Close — nice!",
-    "_context": "Mid round score tier on flag color quiz."
+    "_context": "Flag color tier for moderate perceptual ΔE."
   },
   "game.flag_color.tier.practice": {
     "value": "Keep practicing!",
-    "_context": "Below-average round score encouragement on flag color quiz."
+    "_context": "Flag color tier when perceptual ΔE is fairly large."
   },
   "game.flag_color.tier.try_again": {
     "value": "Nice try!",
-    "_context": "Low round score message on flag color quiz."
+    "_context": "Flag color tier when perceptual ΔE is very large."
   },
   "game.flag_color.feedback.summary": {
     "value": "%s points · ΔE %s",

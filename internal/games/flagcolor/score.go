@@ -64,11 +64,17 @@ func scoringDelta(hexA, hexB string, rawDelta float64) float64 {
 	return rawDelta * factor
 }
 
+// EffectiveScoringDelta is the relaxed ΔE fed to PointsFromDeltaE after hue-family
+// adjustment. The API reports raw DeltaE76 only; this stays internal to scoring.
+func EffectiveScoringDelta(correctHex, guessHex string) float64 {
+	raw := DeltaE76(correctHex, guessHex)
+	return scoringDelta(correctHex, guessHex, raw)
+}
+
 // PointsFromGuessHex maps a guessed colour to a score using raw ΔE76 plus a
 // small relaxation when both colours share a similar direction in CIELAB a*b*.
 func PointsFromGuessHex(correctHex, guessHex string) int {
-	raw := DeltaE76(correctHex, guessHex)
-	return PointsFromDeltaE(scoringDelta(correctHex, guessHex, raw))
+	return PointsFromDeltaE(EffectiveScoringDelta(correctHex, guessHex))
 }
 
 // DeltaE76 computes CIE76 ΔE* in Lab space (sRGB hex inputs, D65).

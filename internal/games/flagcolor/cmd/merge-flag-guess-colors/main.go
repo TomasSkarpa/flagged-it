@@ -32,8 +32,9 @@ type shard struct {
 	neu     string
 	tagName string
 	attrs   string
-	fillKey string // normalized hex + merge-group or "" if invalid
-	tier    string // easy | hard | both (both when omitted)
+	fillKey   string // normalized hex + merge-group or "" if invalid
+	tier      string // easy | hard | both (both when omitted)
+	mergeGrp  string // preserved on output when non-empty (same hex, distinct challenges)
 }
 
 func main() {
@@ -94,7 +95,9 @@ func merge(s string) (string, bool) {
 		if tm := tierRe.FindStringSubmatch(attrs); len(tm) > 1 {
 			tier = strings.ToLower(tm[1])
 		}
-		shards = append(shards, shard{full: full, tagName: tagName, attrs: attrs, fillKey: fillSlot, tier: tier})
+		shards = append(shards, shard{
+			full: full, tagName: tagName, attrs: attrs, fillKey: fillSlot, tier: tier, mergeGrp: mergeGrp,
+		})
 	}
 	if len(shards) == 0 {
 		return s, false
@@ -119,7 +122,7 @@ func merge(s string) (string, bool) {
 		fillSuffixIndex[sh.fillKey] = j + 1
 		localID := fmt.Sprintf("fi-guess-%s%s", g, shardSuffix(j))
 		tierOut := mergeTier(fillTierVotes[sh.fillKey])
-		sh.neu = rebuildTag(sh.tagName, sh.attrs, localID, g, tierOut)
+		sh.neu = rebuildTag(sh.tagName, sh.attrs, localID, g, tierOut, sh.mergeGrp)
 	}
 	for _, sh := range shards {
 		if sh.full != sh.neu {
@@ -173,7 +176,7 @@ func mergeTier(votes []string) string {
 	return ""
 }
 
-func rebuildTag(tagName, attrs, localID, guessNum, tier string) string {
+func rebuildTag(tagName, attrs, localID, guessNum, tier, mergeGrp string) string {
 	inner := strings.TrimSpace(attrs)
 	inner = idAttrRe.ReplaceAllString(inner, "")
 	inner = guessAttrRe.ReplaceAllString(inner, "")
@@ -185,6 +188,9 @@ func rebuildTag(tagName, attrs, localID, guessNum, tier string) string {
 	fmt.Fprintf(&b, `<%s id="%s" data-fi-guess="%s"`, tagName, localID, guessNum)
 	if tier != "" {
 		fmt.Fprintf(&b, ` data-fi-tier="%s"`, tier)
+	}
+	if mergeGrp != "" {
+		fmt.Fprintf(&b, ` data-fi-merge-group="%s"`, mergeGrp)
 	}
 	if inner != "" {
 		b.WriteByte(' ')

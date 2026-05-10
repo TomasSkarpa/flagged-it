@@ -19,7 +19,7 @@ Run once after editing SVGs so each distinct `(fill + optional merge-group)` map
 
 `go run ./internal/games/flagcolor/cmd/merge-flag-guess-colors [path/to/twemoji_flags_cca2]`
 
-The tool strips `data-fi-merge-group` from output; add it again before re-running if you still need separate slots for the same hex.
+Non-empty `data-fi-merge-group` is kept on paths after merging so re-running the tool stays idempotent and same-hex regions (e.g. Egypt field vs emblem) stay separate.
 
 Any country may be drawn for flag color mode; the server skips SVGs with no `data-fi-guess` regions (or none matching the round difficulty) and picks another.
 

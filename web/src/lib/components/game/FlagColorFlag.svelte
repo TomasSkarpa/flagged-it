@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { onDestroy, tick } from 'svelte';
-
-	/** Cached SVG source by asset URL (same flag file across rounds). */
-	const svgTextByUrl = new Map<string, string>();
+	import { getCachedFlagSvgText, setCachedFlagSvgText } from '$lib/utils/flagColorSvgCache';
 
 	/** Absolute URL path e.g. /assets/twemoji_flags_cca2/FR.svg */
 	export let flagUrl: string;
@@ -47,7 +45,7 @@
 			return;
 		}
 
-		const cached = svgTextByUrl.get(flagUrl);
+		const cached = getCachedFlagSvgText(flagUrl);
 		if (cached) {
 			loadKey = key;
 			rawSvgText = cached;
@@ -70,7 +68,7 @@
 			if (controller.signal.aborted || key !== loadKey) return;
 			const text = await res.text();
 			if (controller.signal.aborted || key !== loadKey) return;
-			svgTextByUrl.set(flagUrl, text);
+			setCachedFlagSvgText(flagUrl, text);
 			rawSvgText = text;
 		} catch {
 			if (controller.signal.aborted || key !== loadKey) return;

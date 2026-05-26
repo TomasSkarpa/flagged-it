@@ -294,7 +294,6 @@
 					<div
 						class="flex flex-col lg:flex-row lg:items-start lg:justify-center lg:content-start gap-0 lg:gap-10 px-2 pb-6 min-w-0 w-full max-w-[720px] mx-auto"
 					>
-						<!-- items-start: avoid stretch-tall column so the SV plane stays top-aligned -->
 						<div
 							class="flex justify-center items-start w-full min-w-0 lg:w-[320px] lg:max-w-[320px] shrink-0 lg:self-start lg:pt-[38px]"
 						>
@@ -307,7 +306,6 @@
 								size="game"
 							/>
 						</div>
-						<!-- Flag + submit: stretch + justify-start pins flag to top (items-center is cross-axis only; stretch avoids odd flex sizing) -->
 						<div
 							class="flex flex-col items-stretch justify-start gap-4 w-full min-w-0 lg:w-[280px] lg:max-w-[280px] shrink-0 mx-auto lg:mx-0 lg:self-start"
 						>

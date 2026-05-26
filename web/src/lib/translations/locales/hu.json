@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "A tipped",
   "game.flag_color.correct_color": "Helyes",
   "game.flag_color.over.excellent": "Remek szemed van a színekhez!",
-  "home.game.flag_color.description": "Találd meg a rejtett zászlószíneket csúszkákkal"
+  "home.game.flag_color.description": "Találd meg a rejtett zászlószíneket csúszkákkal",
+  "game.flag_color.setup.description": "Egy zászlórész a tippednek van fenntartva: élőben mutatja a csúszkáidról beállított színt. Állítsd be a színt, amíg meg nem egyezik a valódi zászlóval.",
+  "game.loading": "Betöltés...",
+  "debug.flag_color_pickers.document_title": "Zászló színválasztók – Hibakeresés – Flagged It",
+  "debug.flag_color_pickers.meta_description": "Hasonlítsd össze a zászlószín játék színválasztó elrendezéseit, és kísérletezz a HSB vezérlőkkel. Belső hibakereső oldal a Flagged It-hez."
 }

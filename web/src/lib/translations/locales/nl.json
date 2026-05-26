@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "Jouw gok",
   "game.flag_color.correct_color": "Correct",
   "game.flag_color.over.excellent": "Wat een goed oog voor kleur!",
-  "home.game.flag_color.description": "Match verborgen vlagkleuren met schuifregelaars"
+  "home.game.flag_color.description": "Match verborgen vlagkleuren met schuifregelaars",
+  "game.flag_color.setup.description": "Eén vlagregio is gereserveerd voor jouw gok: het toont een live voorbeeld van de kleur van je schuifregelaars. Pas de kleur aan totdat deze overeenkomt met de echte vlag.",
+  "game.loading": "Laden...",
+  "debug.flag_color_pickers.document_title": "Vlagkleurkiezers - Debug - Flagged It",
+  "debug.flag_color_pickers.meta_description": "Vergelijk lay-outs van vlagkleurkiezers en experimenteer met HSB-bedieningselementen. Interne debugpagina voor Flagged It."
 }

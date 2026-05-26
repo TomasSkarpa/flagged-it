@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "Twoje zgadnięcie",
   "game.flag_color.correct_color": "Prawidłowy",
   "game.flag_color.over.excellent": "Świetne oko do kolorów!",
-  "home.game.flag_color.description": "Dopasuj ukryte kolory flag za pomocą suwaków"
+  "home.game.flag_color.description": "Dopasuj ukryte kolory flag za pomocą suwaków",
+  "game.flag_color.setup.description": "Jeden region flagi jest zarezerwowany na Twoje zgadywanie: pokazuje podgląd koloru na żywo z Twoich suwaków. Dostosuj kolor, aż będzie pasował do prawdziwej flagi.",
+  "game.loading": "Ładowanie...",
+  "debug.flag_color_pickers.document_title": "Wybieraki Kolorów Flag - Debug - Flagged It",
+  "debug.flag_color_pickers.meta_description": "Porównaj układy wybieraków kolorów flag w grze i eksperymentuj z kontrolkami HSB. Wewnętrzna strona debugowania dla Flagged It."
 }

@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "La tua ipotesi",
   "game.flag_color.correct_color": "Corretto",
   "game.flag_color.over.excellent": "Ottimo occhio per i colori!",
-  "home.game.flag_color.description": "Abbina i colori nascosti delle bandiere con gli slider"
+  "home.game.flag_color.description": "Abbina i colori nascosti delle bandiere con gli slider",
+  "game.flag_color.setup.description": "Una regione della bandiera è riservata al tuo tentativo: mostra un'anteprima dal vivo del colore dai tuoi slider. Regola il colore finché non corrisponde alla bandiera reale.",
+  "game.loading": "Caricamento...",
+  "debug.flag_color_pickers.document_title": "Selettori Colore Bandiera - Debug - Flagged It",
+  "debug.flag_color_pickers.meta_description": "Compara i layout dei selettori di colore del gioco bandiera e sperimenta con i controlli HSB. Pagina di debug interna per Flagged It."
 }

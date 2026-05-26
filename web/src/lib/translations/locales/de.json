@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "Deine Schätzung",
   "game.flag_color.correct_color": "Korrekt",
   "game.flag_color.over.excellent": "Tolles Farbgefühl!",
-  "home.game.flag_color.description": "Errate versteckte Flaggenfarben mit Schiebereglern"
+  "home.game.flag_color.description": "Errate versteckte Flaggenfarben mit Schiebereglern",
+  "game.flag_color.setup.description": "Eine Flaggenregion ist für deine Schätzung reserviert: Sie zeigt eine Live-Vorschau der Farbe von deinen Schiebereglern. Passe die Farbe an, bis sie zur echten Flagge passt.",
+  "game.loading": "Lädt...",
+  "debug.flag_color_pickers.document_title": "Flaggenfarbauswähler - Debug - Flagged It",
+  "debug.flag_color_pickers.meta_description": "Vergleiche die Layouts der Flaggenfarb-Auswähler und experimentiere mit HSB-Steuerelementen. Interne Debug-Seite für Flagged It."
 }

@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "Ang iyong hula",
   "game.flag_color.correct_color": "Tama",
   "game.flag_color.over.excellent": "Ang galing ng mata mo sa kulay!",
-  "home.game.flag_color.description": "Itugma ang mga nakatagong kulay ng bandila gamit ang mga slider"
+  "home.game.flag_color.description": "Itugma ang mga nakatagong kulay ng bandila gamit ang mga slider",
+  "game.flag_color.setup.description": "Isang rehiyon ng watawat ang nakareserba para sa iyong hula: ipinapakita nito ang live na preview ng kulay mula sa iyong mga slider. Ayusin ang kulay hanggang sa tumugma ito sa totoong watawat.",
+  "game.loading": "Naglo-load...",
+  "debug.flag_color_pickers.document_title": "Mga Tagapili ng Kulay ng Watawat - Debug - Flagged It",
+  "debug.flag_color_pickers.meta_description": "Paghambingin ang mga layout ng tagapili ng kulay ng watawat at mag-eksperimento sa mga kontrol ng HSB. Panloob na pahina ng debug para sa Flagged It."
 }

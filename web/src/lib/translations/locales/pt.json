@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "O teu palpite",
   "game.flag_color.correct_color": "Correta",
   "game.flag_color.over.excellent": "Ótimo olho para as cores!",
-  "home.game.flag_color.description": "Combina cores de bandeiras escondidas com seletores"
+  "home.game.flag_color.description": "Combina cores de bandeiras escondidas com seletores",
+  "game.flag_color.setup.description": "Uma região da bandeira é reservada para o teu palpite: ela mostra uma prévia ao vivo da cor dos teus seletores. Ajusta a cor até que ela corresponda à bandeira real.",
+  "game.loading": "A carregar...",
+  "debug.flag_color_pickers.document_title": "Seletores de Cores de Bandeiras - Debug - Flagged It",
+  "debug.flag_color_pickers.meta_description": "Compara os layouts dos seletores de cores do jogo de bandeiras e experimenta os controlos HSB. Página de depuração interna para Flagged It."
 }

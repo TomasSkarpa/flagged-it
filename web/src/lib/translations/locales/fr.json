@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "Ta proposition",
   "game.flag_color.correct_color": "Correcte",
   "game.flag_color.over.excellent": "Tu as un excellent œil pour les couleurs !",
-  "home.game.flag_color.description": "Associe les couleurs cachées des drapeaux avec des curseurs"
+  "home.game.flag_color.description": "Associe les couleurs cachées des drapeaux avec des curseurs",
+  "game.flag_color.setup.description": "Une région du drapeau est réservée à ta proposition : elle affiche un aperçu en direct de la couleur de tes curseurs. Ajuste la couleur jusqu'à ce qu'elle corresponde au vrai drapeau.",
+  "game.loading": "Chargement...",
+  "debug.flag_color_pickers.document_title": "Sélecteurs de couleur de drapeau - Débogage - Flagged It",
+  "debug.flag_color_pickers.meta_description": "Compare les mises en page des sélecteurs de couleur de drapeau et expérimente les commandes HSB. Page de débogage interne pour Flagged It."
 }

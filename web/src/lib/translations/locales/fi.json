@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "Arvauksesi",
   "game.flag_color.correct_color": "Oikea",
   "game.flag_color.over.excellent": "Loistava värisilmä!",
-  "home.game.flag_color.description": "Yhdistä piilotetut lipun värit liukusäätimillä"
+  "home.game.flag_color.description": "Yhdistä piilotetut lipun värit liukusäätimillä",
+  "game.flag_color.setup.description": "Yksi lippualue on varattu arvauksellesi: se näyttää liukusäätimistäsi valitun värin reaaliaikaisen esikatselun. Säädä väriä, kunnes se vastaa oikeaa lippua.",
+  "game.loading": "Ladataan...",
+  "debug.flag_color_pickers.document_title": "Lipun värivalitsimet – Debug – Flagged It",
+  "debug.flag_color_pickers.meta_description": "Vertaa lipun väripelin valitsinasetteluja ja kokeile HSB-säätimiä. Flagged Itin sisäinen debug-sivu."
 }

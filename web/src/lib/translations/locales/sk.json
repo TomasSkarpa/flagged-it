@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "Tvoj odhad",
   "game.flag_color.correct_color": "Správna",
   "game.flag_color.over.excellent": "Skvelý cit pre farby!",
-  "home.game.flag_color.description": "Priraď skryté farby vlajok pomocou posuvníkov"
+  "home.game.flag_color.description": "Priraď skryté farby vlajok pomocou posuvníkov",
+  "game.flag_color.setup.description": "Jedna oblasť vlajky je vyhradená pre tvoj odhad: zobrazuje živý náhľad farby z tvojich posuvníkov. Uprav farbu, kým sa nezhoduje so skutočnou vlajkou.",
+  "game.loading": "Načítava sa...",
+  "debug.flag_color_pickers.document_title": "Výbery farieb vlajok – Ladenie – Flagged It",
+  "debug.flag_color_pickers.meta_description": "Porovnaj rozloženia výberov farieb vlajok a experimentuj s ovládacími prvkami HSB. Interná ladiaca stránka pre Flagged It."
 }

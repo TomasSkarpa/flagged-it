@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "Твоё предположение",
   "game.flag_color.correct_color": "Правильный",
   "game.flag_color.over.excellent": "Отличное чувство цвета!",
-  "home.game.flag_color.description": "Подбирай скрытые цвета флагов с помощью ползунков"
+  "home.game.flag_color.description": "Подбирай скрытые цвета флагов с помощью ползунков",
+  "game.flag_color.setup.description": "Одна область флага зарезервирована для твоей догадки: она показывает живой предпросмотр цвета с твоих ползунков. Настрой цвет, пока он не совпадет с настоящим флагом.",
+  "game.loading": "Загрузка...",
+  "debug.flag_color_pickers.document_title": "Выбор цвета флага – Отладка – Flagged It",
+  "debug.flag_color_pickers.meta_description": "Сравни макеты выбора цвета флага и экспериментируй с элементами управления HSB. Внутренняя страница отладки для Flagged It."
 }

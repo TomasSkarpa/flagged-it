@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "Tvoje pogađanje",
   "game.flag_color.correct_color": "Točno",
   "game.flag_color.over.excellent": "Odlično oko za boje!",
-  "home.game.flag_color.description": "Pronađi skrivene boje zastava pomoću klizača"
+  "home.game.flag_color.description": "Pronađi skrivene boje zastava pomoću klizača",
+  "game.flag_color.setup.description": "Jedna regija zastave je rezervirana za tvoju pretpostavku: prikazuje pregled boje uživo s tvojih klizača. Podesi boju dok se ne podudara sa stvarnom zastavom.",
+  "game.loading": "Učitavanje...",
+  "debug.flag_color_pickers.document_title": "Birači boja zastava - Debug - Flagged It",
+  "debug.flag_color_pickers.meta_description": "Usporedi rasporede birača boja u igri zastava i eksperimentiraj s HSB kontrolama. Interna debug stranica za Flagged It."
 }

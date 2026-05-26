@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "Tahminin",
   "game.flag_color.correct_color": "Doğru",
   "game.flag_color.over.excellent": "Renkler konusunda harika bir gözün var!",
-  "home.game.flag_color.description": "Gizli bayrak renklerini kaydırıcılarla eşleştir"
+  "home.game.flag_color.description": "Gizli bayrak renklerini kaydırıcılarla eşleştir",
+  "game.flag_color.setup.description": "Tahminin için bir bayrak bölgesi ayrılmıştır: kaydırıcılarından gelen rengin canlı önizlemesini gösterir. Rengi gerçek bayrakla eşleşene kadar ayarla.",
+  "game.loading": "Yükleniyor...",
+  "debug.flag_color_pickers.document_title": "Bayrak Renk Seçicileri - Hata Ayıklama - Flagged It",
+  "debug.flag_color_pickers.meta_description": "Bayrak rengi oyunu seçici düzenlerini karşılaştır ve HSB kontrolleriyle dene. Flagged It için dahili hata ayıklama sayfası."
 }

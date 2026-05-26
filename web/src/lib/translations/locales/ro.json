@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "Ghicirea ta",
   "game.flag_color.correct_color": "Corect",
   "game.flag_color.over.excellent": "Ai un ochi excelent pentru culori!",
-  "home.game.flag_color.description": "Potrivește culorile ascunse ale steagurilor cu glisoare"
+  "home.game.flag_color.description": "Potrivește culorile ascunse ale steagurilor cu glisoare",
+  "game.flag_color.setup.description": "O regiune de steag este rezervată pentru ghicirea ta: îți arată o previzualizare live a culorii de la glisoarele tale. Ajustează culoarea până se potrivește cu steagul real.",
+  "game.loading": "Se încarcă...",
+  "debug.flag_color_pickers.document_title": "Selectoare de Culoare Steag - Debug - Flagged It",
+  "debug.flag_color_pickers.meta_description": "Compară aspectele selectoarelor de culoare pentru jocul cu steaguri și experimentează cu controalele HSB. Pagină internă de depanare pentru Flagged It."
 }

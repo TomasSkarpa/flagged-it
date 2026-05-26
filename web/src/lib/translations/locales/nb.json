@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "Din gjetning",
   "game.flag_color.correct_color": "Riktig",
   "game.flag_color.over.excellent": "Fantastisk fargesyn!",
-  "home.game.flag_color.description": "Match skjulte flaggfarger med skyveknapper"
+  "home.game.flag_color.description": "Match skjulte flaggfarger med skyveknapper",
+  "game.flag_color.setup.description": "Én flaggregion er reservert for gjetningen din: den viser en live forhåndsvisning av fargen fra skyveknappene dine. Juster fargen til den matcher det ekte flagget.",
+  "game.loading": "Laster inn...",
+  "debug.flag_color_pickers.document_title": "Fargevelgere for flagg – Debug – Flagged It",
+  "debug.flag_color_pickers.meta_description": "Sammenlign layout for fargevelgere i flaggspillet og eksperimenter med HSB-kontroller. Intern debugside for Flagged It."
 }

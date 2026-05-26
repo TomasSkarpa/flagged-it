@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "Tebakan Anda",
   "game.flag_color.correct_color": "Benar",
   "game.flag_color.over.excellent": "Mata Anda jeli untuk warna!",
-  "home.game.flag_color.description": "Cocokkan warna bendera tersembunyi dengan penggeser"
+  "home.game.flag_color.description": "Cocokkan warna bendera tersembunyi dengan penggeser",
+  "game.flag_color.setup.description": "Satu wilayah bendera disediakan untuk tebakanmu: ini menunjukkan pratinjau langsung warna dari penggesermu. Sesuaikan warna hingga cocok dengan bendera aslinya.",
+  "game.loading": "Memuat...",
+  "debug.flag_color_pickers.document_title": "Pemilih Warna Bendera - Debug - Flagged It",
+  "debug.flag_color_pickers.meta_description": "Bandingkan tata letak pemilih warna permainan bendera dan bereksperimenlah dengan kontrol HSB. Halaman debug internal untuk Flagged It."
 }

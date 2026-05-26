@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "Dự đoán của bạn",
   "game.flag_color.correct_color": "Màu đúng",
   "game.flag_color.over.excellent": "Bạn có đôi mắt tinh tường về màu sắc!",
-  "home.game.flag_color.description": "Ghép màu cờ ẩn bằng thanh trượt"
+  "home.game.flag_color.description": "Ghép màu cờ ẩn bằng thanh trượt",
+  "game.flag_color.setup.description": "Một vùng cờ được dành riêng cho dự đoán của bạn: nó hiển thị bản xem trước trực tiếp màu sắc từ thanh trượt của bạn. Hãy điều chỉnh màu sắc cho đến khi khớp với lá cờ thật nhé.",
+  "game.loading": "Đang tải...",
+  "debug.flag_color_pickers.document_title": "Bộ chọn màu cờ - Gỡ lỗi - Flagged It",
+  "debug.flag_color_pickers.meta_description": "So sánh các bố cục bộ chọn màu trong trò chơi cờ và thử nghiệm với các điều khiển HSB. Trang gỡ lỗi nội bộ của Flagged It."
 }

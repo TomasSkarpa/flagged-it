@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "Din gissning",
   "game.flag_color.correct_color": "Rätt",
   "game.flag_color.over.excellent": "Fantastiskt färgsinne!",
-  "home.game.flag_color.description": "Matcha dolda flaggfärger med reglage"
+  "home.game.flag_color.description": "Matcha dolda flaggfärger med reglage",
+  "game.flag_color.setup.description": "En flaggregion är reserverad för din gissning: den visar en liveförhandsvisning av färgen från dina reglage. Justera färgen tills den matchar den riktiga flaggan.",
+  "game.loading": "Laddar...",
+  "debug.flag_color_pickers.document_title": "Färgväljare för flaggor – Felsökning – Flagged It",
+  "debug.flag_color_pickers.meta_description": "Jämför layouter för färgväljare i flaggspelet och experimentera med HSB-kontroller. Intern felsökningssida för Flagged It."
 }

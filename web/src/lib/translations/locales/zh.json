@@ -190,5 +190,9 @@
   "game.flag_color.your_guess": "你的猜测",
   "game.flag_color.correct_color": "正确颜色",
   "game.flag_color.over.excellent": "你对颜色很有眼光！",
-  "home.game.flag_color.description": "用滑块匹配隐藏的国旗颜色"
+  "home.game.flag_color.description": "用滑块匹配隐藏的国旗颜色",
+  "game.flag_color.setup.description": "一个旗帜区域将用于您的猜测：它会实时预览您通过滑块选择的颜色。调整颜色直到它与真实的旗帜匹配。",
+  "game.loading": "加载中...",
+  "debug.flag_color_pickers.document_title": "旗帜颜色选择器 - 调试 - Flagged It",
+  "debug.flag_color_pickers.meta_description": "比较旗帜颜色游戏选择器布局并试验 HSB 控件。Flagged It 的内部调试页面。"
 }

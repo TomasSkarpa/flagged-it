@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { onMount, tick } from 'svelte';
+	import { onDestroy, tick } from 'svelte';
+
+	/** Cached SVG source by asset URL (same flag file across rounds). */
+	const svgTextByUrl = new Map<string, string>();
 
 	/** Absolute URL path e.g. /assets/twemoji_flags_cca2/FR.svg */
 	export let flagUrl: string;
@@ -17,10 +20,20 @@
 	let container: HTMLDivElement | null = null;
 	let rawSvgText = '';
 	let loadKey = '';
+	let fetchAbort: AbortController | null = null;
+
+	function cancelFetch(): void {
+		fetchAbort?.abort();
+		fetchAbort = null;
+	}
+
+	onDestroy(() => cancelFetch());
 
 	async function loadSvg(): Promise<void> {
 		const key = `${flagUrl}|${guessableId}|${questionId}`;
 		if (!flagUrl || !guessableId || !questionId) {
+			cancelFetch();
+			loadKey = '';
 			rawSvgText = '';
 			paint();
 			return;
@@ -29,15 +42,45 @@
 			paint();
 			return;
 		}
-		loadKey = key;
-		rawSvgText = '';
-		paint();
-		try {
-			const res = await fetch(flagUrl);
-			rawSvgText = await res.text();
-		} catch {
-			rawSvgText = '';
+		// Reactive + bind:this can fire twice on mount; do not abort an in-flight load for the same key.
+		if (key === loadKey && fetchAbort !== null) {
+			return;
 		}
+
+		const cached = svgTextByUrl.get(flagUrl);
+		if (cached) {
+			loadKey = key;
+			rawSvgText = cached;
+			await tick();
+			paint();
+			return;
+		}
+
+		cancelFetch();
+		const controller = new AbortController();
+		fetchAbort = controller;
+		const previousKey = loadKey;
+		loadKey = key;
+		if (previousKey !== key) {
+			rawSvgText = '';
+			paint();
+		}
+		try {
+			const res = await fetch(flagUrl, { signal: controller.signal });
+			if (controller.signal.aborted || key !== loadKey) return;
+			const text = await res.text();
+			if (controller.signal.aborted || key !== loadKey) return;
+			svgTextByUrl.set(flagUrl, text);
+			rawSvgText = text;
+		} catch {
+			if (controller.signal.aborted || key !== loadKey) return;
+			rawSvgText = '';
+		} finally {
+			if (fetchAbort === controller) {
+				fetchAbort = null;
+			}
+		}
+		if (key !== loadKey) return;
 		await tick();
 		paint();
 	}
@@ -71,10 +114,6 @@
 	$: flagUrl, guessableId, questionId, void loadSvg();
 
 	$: previewR, previewG, previewB, revealFullColor, rawSvgText, guessableId, container, paint();
-
-	onMount(() => {
-		void loadSvg();
-	});
 </script>
 
 <div

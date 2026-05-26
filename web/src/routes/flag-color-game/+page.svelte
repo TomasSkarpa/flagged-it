@@ -135,16 +135,18 @@
 		}
 	}
 
-	async function loadNextQuestion() {
-		if (!sessionId) return;
+	/** Fetches the next question without updating `currentQuestion` (avoids loading a flag on the result screen). */
+	async function fetchNextQuestion(): Promise<FlagColorQuestion | null> {
+		if (!sessionId) return null;
 		isLoading = true;
 		error = null;
 		try {
 			const question = await getFlagColorQuestion(sessionId);
-			currentQuestion = question;
 			maxPointsPerRound = question.maxPointsRound ?? maxPointsPerRound;
+			return question;
 		} catch (err) {
 			error = err instanceof Error ? err.message : 'Failed to load question';
+			return null;
 		} finally {
 			isLoading = false;
 		}
@@ -159,12 +161,14 @@
 			pendingFinished = false;
 			return;
 		}
-		phase = 'playing';
 		resultScoreTen = '0.00';
-		await loadNextQuestion();
+		const question = await fetchNextQuestion();
+		if (!question) return;
 		hue = 200;
 		satPct = 85;
 		valPct = 75;
+		phase = 'playing';
+		currentQuestion = question;
 	}
 
 	async function handleSubmit() {

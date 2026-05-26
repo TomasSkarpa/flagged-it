@@ -190,5 +190,8 @@
   "game.flag_color.your_guess": "Tu suposición",
   "game.flag_color.correct_color": "Correcto",
   "game.flag_color.over.excellent": "¡Tienes un gran ojo para el color!",
-  "home.game.flag_color.description": "Combina colores de banderas ocultos con deslizadores"
+  "home.game.flag_color.description": "Combina colores de banderas ocultos con deslizadores",
+  "game.flag_color.setup.description": "Una región de la bandera está reservada para tu suposición: muestra una vista previa en vivo del color de tus deslizadores. Ajusta el color hasta que coincida con la bandera real.",
+  "debug.flag_color_pickers.document_title": "Selectores de Color de Bandera - Depuración - Flagged It",
+  "debug.flag_color_pickers.meta_description": "Compara los diseños de los selectores de color del juego de banderas y experimenta con los controles HSB. Página de depuración interna para Flagged It."
 }

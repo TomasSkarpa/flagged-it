@@ -81,7 +81,7 @@ The documentation generator extracts the following information from game logic f
 
 ## Generation Process
 
-1. Parse Go game logic files (`internal/games/*/logic.go`)
+1. Parse Go game packages (`internal/games/*`) and handler files (`internal/api/handlers.go`, `internal/api/*_handlers.go`)
 2. Extract game properties and rules
 3. Parse handler files (`internal/api/handlers.go`) for API-specific behavior
 4. Generate markdown files in the wiki format
@@ -133,10 +133,10 @@ The workflow is triggered on:
 
 When adding a new game mode:
 
-1. Create the game logic file in `internal/games/<package-name>/logic.go`
-2. Add handler in `internal/api/handlers.go` (if needed)
+1. Create the game logic in `internal/games/<package-name>/` (any `.go` files, not only `logic.go`)
+2. Add handler in `internal/api/handlers.go` or `internal/api/<name>_handlers.go`
 3. Add web API file in `web/src/lib/api/<gameName>Game.ts` (if needed)
-4. Run `make docs` - the AI will automatically analyze your code and generate documentation
+4. Run `node .github/scripts/docs.js` (with `GROQ_API_KEY` and `WIKI_ROOT` set) to generate documentation
 5. The automated workflow will keep docs updated going forward
 
 No manual configuration needed - the AI analyzes your code and generates appropriate documentation!

@@ -4,7 +4,7 @@
  * AI-Powered Documentation Updater
  * 
  * This script:
- * 1. Reads game logic files (Go and Svelte/TypeScript)
+ * 1. Reads game source from internal/games/* and handler files (internal/api/*_handlers.go)
  * 2. Reads current wiki documentation
  * 3. Uses AI to analyze code and compare with docs
  * 4. Generates updated markdown files based on actual code implementation
@@ -13,7 +13,7 @@
  */
 
 import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'fs';
-import { join, dirname, extname } from 'path';
+import { join, dirname, basename } from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -23,8 +23,18 @@ const __dirname = dirname(__filename);
 const PROJECT_ROOT = join(__dirname, '../..');
 const WIKI_ROOT = process.env.WIKI_ROOT || join(PROJECT_ROOT, '..', 'flagged-it.wiki');
 const GAMES_DIR = join(PROJECT_ROOT, 'internal', 'games');
-const HANDLERS_FILE = join(PROJECT_ROOT, 'internal', 'api', 'handlers.go');
+const API_DIR = join(PROJECT_ROOT, 'internal', 'api');
+const HANDLERS_FILE = join(API_DIR, 'handlers.go');
 const WEB_GAMES_DIR = join(PROJECT_ROOT, 'web', 'src', 'lib', 'api');
+
+/** Handler type name -> internal/games package or game key */
+const HANDLER_TO_GAME = {
+  WorldleGameHandler: 'guessing',
+  FlagGameHandler: 'flag',
+  FlagColorGameHandler: 'flagcolor',
+};
+
+const NON_GAME_HANDLERS = new Set(['DebugHandler']);
 
 // Groq API configuration
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
@@ -86,7 +96,137 @@ function getHandlerNamePatterns(packageName) {
     // Special cases
     packageName === 'guessing' ? 'WorldleGameHandler' : null,
     packageName === 'flag' ? 'FlagGameHandler' : null,
+    packageName === 'flagcolor' ? 'FlagColorGameHandler' : null,
   ].filter(Boolean);
+}
+
+/**
+ * Convert CamelCase to snake_case
+ */
+function camelToSnakeCase(str) {
+  return str.replace(/([a-z0-9])([A-Z])/g, '$1_$2').toLowerCase();
+}
+
+/**
+ * Derive game key from a handler struct name
+ */
+function handlerNameToGameName(handlerName) {
+  if (HANDLER_TO_GAME[handlerName]) {
+    return HANDLER_TO_GAME[handlerName];
+  }
+  const base = handlerName.replace(/GameHandler$/, '').replace(/Handler$/, '');
+  return camelToSnakeCase(base);
+}
+
+/**
+ * Normalize game keys for deduplication (flag_color vs flagcolor)
+ */
+function normalizeGameKey(name) {
+  return name.replace(/_/g, '').toLowerCase();
+}
+
+/**
+ * List non-test Go source files in a game package directory
+ */
+function listPackageGoFiles(packageDir) {
+  try {
+    return readdirSync(packageDir)
+      .filter((file) => file.endsWith('.go') && !file.endsWith('_test.go'))
+      .map((file) => join(packageDir, file))
+      .sort((a, b) => {
+        if (a.endsWith('logic.go')) return -1;
+        if (b.endsWith('logic.go')) return 1;
+        return a.localeCompare(b);
+      });
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Read handlers.go and internal/api/*_handlers.go
+ */
+function readAllHandlerFiles() {
+  const paths = [HANDLERS_FILE];
+  try {
+    for (const entry of readdirSync(API_DIR)) {
+      if (entry.endsWith('_handlers.go')) {
+        paths.push(join(API_DIR, entry));
+      }
+    }
+  } catch {
+    // API directory missing
+  }
+
+  return paths
+    .filter((filePath) => existsSync(filePath))
+    .map((filePath) => ({ file: filePath, content: readFile(filePath) || '' }));
+}
+
+/**
+ * Scan handler files for game API handler structs
+ */
+function scanGameHandlers(handlerFiles) {
+  const handlers = [];
+  const seen = new Set();
+
+  for (const { file, content } of handlerFiles) {
+    const regex = /type\s+(\w+Handler)\s+struct/g;
+    let match;
+    while ((match = regex.exec(content)) !== null) {
+      const handlerName = match[1];
+      if (NON_GAME_HANDLERS.has(handlerName) || seen.has(handlerName)) {
+        continue;
+      }
+      seen.add(handlerName);
+      handlers.push({ handlerName, handlerFile: file });
+    }
+  }
+
+  return handlers;
+}
+
+/**
+ * Find handler struct name for a game package across all handler files
+ */
+function findHandlerForPackage(packageName, handlerFiles) {
+  for (const { file, content } of handlerFiles) {
+    const handlerName = findHandlerName(packageName, content);
+    if (handlerName) {
+      return { handlerName, handlerFile: file };
+    }
+  }
+  return null;
+}
+
+/**
+ * Extract a handler struct and its methods from a Go source file
+ */
+function extractHandlerSection(handlerContent, handlerName) {
+  if (!handlerContent || !handlerName) {
+    return null;
+  }
+
+  const escaped = handlerName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const handlerMethodsRegex = new RegExp(
+    `(type\\s+${escaped}[\\s\\S]*?func\\s+\\(h\\s+\\*${escaped}\\)[\\s\\S]*?)(?=type\\s+\\w+Handler|\\Z)`,
+    'i'
+  );
+  const methodsMatch = handlerContent.match(handlerMethodsRegex);
+  if (methodsMatch) {
+    return methodsMatch[1].substring(0, 8000);
+  }
+
+  const handlerRegex = new RegExp(
+    `(type\\s+${escaped}[\\s\\S]*?)(?=type\\s+\\w+Handler|\\Z)`,
+    'i'
+  );
+  const match = handlerContent.match(handlerRegex);
+  if (match) {
+    return match[1].substring(0, 8000);
+  }
+
+  return handlerContent.substring(0, 8000);
 }
 
 /**
@@ -96,9 +236,10 @@ function findHandlerName(packageName, handlerContent) {
   const patterns = getHandlerNamePatterns(packageName);
   
   for (const pattern of patterns) {
-    const regex = new RegExp(`type\\s+${pattern}\\s+struct`, 'i');
-    if (regex.test(handlerContent)) {
-      return pattern;
+    const regex = new RegExp(`type\\s+(${pattern})\\s+struct`, 'i');
+    const match = handlerContent.match(regex);
+    if (match) {
+      return match[1];
     }
   }
   
@@ -117,13 +258,13 @@ function findHandlerName(packageName, handlerContent) {
  * Find web API file by convention
  */
 function findWebApiFile(packageName) {
-  // Try common patterns
   const patterns = [
+    // Special cases first (exact filenames)
+    packageName === 'guessing' ? 'worldleGame.ts' : null,
+    packageName === 'flagcolor' ? 'flagColorGame.ts' : null,
     toCamelCase(packageName) + 'Game.ts',
     packageName.replace('_', '') + 'Game.ts',
     packageName + 'Game.ts',
-    // Special cases
-    packageName === 'guessing' ? 'worldleGame.ts' : null,
   ].filter(Boolean);
   
   for (const pattern of patterns) {
@@ -150,35 +291,67 @@ function findWebApiFile(packageName) {
 }
 
 /**
- * Get all game directories - automatically discovers games
+ * Discover games from internal/games packages and internal/api handlers
  */
-function getGameDirectories() {
-  const games = [];
-  const entries = readdirSync(GAMES_DIR);
-  const handlerContent = readFile(HANDLERS_FILE) || '';
-  
-  for (const entry of entries) {
-    const gamePath = join(GAMES_DIR, entry);
-    if (statSync(gamePath).isDirectory()) {
-      const logicFile = join(gamePath, 'logic.go');
-      if (existsSync(logicFile)) {
-        // Auto-detect handler name
-        const handlerName = findHandlerName(entry, handlerContent);
-        
-        // Auto-detect web API file
-        const webApiFile = findWebApiFile(entry);
-        
-        games.push({
-          name: entry,
-          logicFile: logicFile,
-          handlerName: handlerName,
-          webApiFile: webApiFile
-        });
+function discoverGames() {
+  const games = new Map();
+  const handlerFiles = readAllHandlerFiles();
+
+  for (const entry of readdirSync(GAMES_DIR)) {
+    const packageDir = join(GAMES_DIR, entry);
+    if (!statSync(packageDir).isDirectory()) {
+      continue;
+    }
+
+    const goFiles = listPackageGoFiles(packageDir);
+    if (goFiles.length === 0) {
+      continue;
+    }
+
+    const handler = findHandlerForPackage(entry, handlerFiles);
+    games.set(entry, {
+      name: entry,
+      packageDir,
+      goFiles,
+      handlerName: handler?.handlerName ?? null,
+      handlerFile: handler?.handlerFile ?? null,
+      webApiFile: findWebApiFile(entry),
+    });
+  }
+
+  for (const { handlerName, handlerFile } of scanGameHandlers(handlerFiles)) {
+    const gameName = handlerNameToGameName(handlerName);
+    const normalized = normalizeGameKey(gameName);
+
+    let alreadyDiscovered = false;
+    for (const [key, game] of games) {
+      if (
+        normalizeGameKey(key) === normalized ||
+        game.handlerName === handlerName
+      ) {
+        if (!game.handlerName) {
+          game.handlerName = handlerName;
+          game.handlerFile = handlerFile;
+        }
+        alreadyDiscovered = true;
+        break;
       }
     }
+    if (alreadyDiscovered) {
+      continue;
+    }
+
+    games.set(gameName, {
+      name: gameName,
+      packageDir: null,
+      goFiles: [],
+      handlerName,
+      handlerFile,
+      webApiFile: findWebApiFile(gameName),
+    });
   }
-  
-  return games;
+
+  return [...games.values()].sort((a, b) => a.name.localeCompare(b.name));
 }
 
 /**
@@ -186,39 +359,40 @@ function getGameDirectories() {
  */
 function readGameCode(game) {
   const code = {
-    goLogic: readFile(game.logicFile),
+    goLogic: null,
     goHandler: null,
-    webApi: null
+    webApi: null,
+    handlerSource: game.handlerFile ? basename(game.handlerFile) : 'handlers.go',
   };
 
-  // Read handler file (check for game-specific handler)
-  const handlerContent = readFile(HANDLERS_FILE);
-  if (handlerContent && game.handlerName) {
-    // Extract relevant handler section
-    const handlerRegex = new RegExp(
-      `(type\\s+${game.handlerName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[\\s\\S]*?)(?=type\\s+\\w+Handler|type\\s+\\w+Handler|$)`,
-      'i'
-    );
-    const match = handlerContent.match(handlerRegex);
-    if (match) {
-      // Try to get just the handler methods, not the entire section
-      const handlerMethodsRegex = new RegExp(
-        `(type\\s+${game.handlerName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[\\s\\S]*?func\\s+\\(h\\s+\\*${game.handlerName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\)[\\s\\S]*?)(?=type\\s+\\w+Handler|func\\s+\\(h\\s+\\*\\w+Handler\\)|$)`,
-        'i'
-      );
-      const methodsMatch = handlerContent.match(handlerMethodsRegex);
-      if (methodsMatch) {
-        code.goHandler = methodsMatch[1];
-      } else {
-        code.goHandler = match[1].substring(0, 8000); // Limit size
+  if (game.goFiles?.length) {
+    const parts = [];
+    let totalLength = 0;
+    const maxLength = 12000;
+
+    for (const filePath of game.goFiles) {
+      const content = readFile(filePath);
+      if (!content) {
+        continue;
       }
-    } else {
-      // Fallback: include entire handlers file if we can't extract
-      code.goHandler = handlerContent.substring(0, 8000);
+      const chunk = `=== ${basename(filePath)} ===\n${content}`;
+      if (totalLength + chunk.length > maxLength) {
+        break;
+      }
+      parts.push(chunk);
+      totalLength += chunk.length;
+    }
+
+    if (parts.length > 0) {
+      code.goLogic = parts.join('\n\n');
     }
   }
 
-  // Read web API file if it exists
+  if (game.handlerName && game.handlerFile) {
+    const handlerContent = readFile(game.handlerFile);
+    code.goHandler = extractHandlerSection(handlerContent, game.handlerName);
+  }
+
   if (game.webApiFile && existsSync(game.webApiFile)) {
     code.webApi = readFile(game.webApiFile);
   }
@@ -274,7 +448,8 @@ function generateWikiFileName(packageName, code) {
     'capital': 'Capital-City',
     'higher_lower': 'Higher-Lower',
     'hangman': 'Hangman',
-    'facts': 'Facts'
+    'facts': 'Facts',
+    'flagcolor': 'Flag-Color',
   };
   
   // If we have a mapping, use it; otherwise convert package name
@@ -296,10 +471,10 @@ async function generateDocWithAI(packageName, code, currentDoc) {
   const codeContext = [];
   
     if (code.goLogic) {
-      codeContext.push(`=== Go Logic (package: ${packageName}) ===\n${code.goLogic.substring(0, 8000)}`);
+      codeContext.push(`=== Go Game Package (package: ${packageName}) ===\n${code.goLogic.substring(0, 12000)}`);
     }
     if (code.goHandler) {
-      codeContext.push(`=== Go Handler (handlers.go) ===\n${code.goHandler.substring(0, 8000)}`);
+      codeContext.push(`=== Go Handler (${code.handlerSource}) ===\n${code.goHandler.substring(0, 8000)}`);
     }
     if (code.webApi) {
       codeContext.push(`=== Web API (TypeScript) ===\n${code.webApi.substring(0, 4000)}`);
@@ -325,7 +500,7 @@ CODE TO ANALYZE:
 ${codeContext.join('\n\n')}${currentDocSection}
 
 INSTRUCTIONS:
-1. Analyze the Go logic file to understand the game mechanics
+1. Analyze the Go game package source to understand the game mechanics
 2. Check the handler file for API-specific behavior (region filtering, locale support, difficulty modes)
 3. Review web API file for frontend-specific behavior
 4. Compare with current documentation and update it to match the code
@@ -450,7 +625,7 @@ async function main() {
     process.exit(1);
   }
 
-  const games = getGameDirectories();
+  const games = discoverGames();
   console.log(`✓ Found ${games.length} games to process\n`);
 
   let filesUpdated = 0;
@@ -462,8 +637,8 @@ async function main() {
 
     // Read code files
     const code = readGameCode(game);
-    if (!code.goLogic) {
-      console.warn(`  ⚠️  No logic file found, skipping`);
+    if (!code.goLogic && !code.goHandler) {
+      console.warn(`  ⚠️  No game source or handler found, skipping`);
       filesSkipped++;
       continue;
     }

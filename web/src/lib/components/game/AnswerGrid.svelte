@@ -46,7 +46,7 @@
 		if (isSelected) {
 			return 'bg-primary/30 border-primary text-sandy-light';
 		}
-		return 'bg-white/10 border-white/20 text-sandy-light hover:border-accent hover:bg-accent/10';
+		return 'answer-grid-btn border-white/20 text-sandy-light hover:border-accent hover:bg-[var(--color-surface-light)]';
 	}
 
 	function getOptionKey(option: Country | string, index: number): string {

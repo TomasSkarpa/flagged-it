@@ -86,6 +86,12 @@
 		return mode === 'beginner' || mode === 'intermediate';
 	}
 
+	// Game viewBox sizes (25% shorter than original 320×240 / 256×192)
+	const MAP_SHAPE_WIDTH = 320;
+	const MAP_SHAPE_HEIGHT = 180;
+	const SILHOUETTE_SHAPE_WIDTH = 256;
+	const SILHOUETTE_SHAPE_HEIGHT = 144;
+
 	let countriesFetchSeq = 0;
 	$: if (browser && currentLocale) {
 		const seq = ++countriesFetchSeq;
@@ -336,20 +342,20 @@
 				{correctAnswer}
 				error={usesTextInput(difficultyMode) ? null : error}
 			>
-				<div slot="content" class="shape-renderer-container bg-white/5 rounded-lg p-4">
+				<div slot="content" class="shape-renderer-container rounded-lg p-4">
 					{#if usesMapRenderer(difficultyMode)}
 						<MapShapeRenderer 
 							targetGeoJson={currentQuestion.geoJson}
 							mode={difficultyMode === 'beginner' ? 'easy' : 'medium'}
-							width={320}
-							height={240}
+							width={MAP_SHAPE_WIDTH}
+							height={MAP_SHAPE_HEIGHT}
 							targetFillColor="var(--color-sandy-light)"
 						/>
 					{:else}
 						<ShapeRenderer 
 							geoJson={currentQuestion.geoJson}
-							width={256}
-							height={192}
+							width={SILHOUETTE_SHAPE_WIDTH}
+							height={SILHOUETTE_SHAPE_HEIGHT}
 							fillColor="var(--color-sandy-light)"
 						/>
 					{/if}
@@ -357,11 +363,8 @@
 				
 				<div slot="answers">
 					{#if usesTextInput(difficultyMode)}
-						<!-- Text input for intermediate/expert modes -->
-						<div class="card-game">
-							<p class="text-center text-lg font-medium text-sandy-light mb-4">
-								{t('game.guessing.make_guess', undefined, currentLocale)}
-							</p>
+						<!-- Text input for intermediate/expert modes (same layout as flag-game expert) -->
+						<div class="w-full">
 							<div class="flex flex-col sm:flex-row gap-3">
 								<input
 									type="text"
@@ -370,7 +373,7 @@
 									on:keypress={handleKeyPress}
 									placeholder={t('game.guessing.enter_country', undefined, currentLocale)}
 									disabled={isLoading || showFeedback || gameFinished}
-									class="flex-1 px-4 py-3 rounded-lg border-2 border-white/20 bg-white/5 text-sandy-light placeholder:text-text-muted focus:outline-none focus:border-primary transition-all disabled:opacity-50"
+									class="flex-1 px-4 py-3 rounded-lg border-2 border-white/20 bg-[var(--color-surface)] text-sandy-light placeholder:text-text-muted focus:outline-none focus:border-primary focus:bg-[var(--color-surface-light)] transition-all disabled:opacity-50"
 									autocomplete="off"
 								/>
 								<button

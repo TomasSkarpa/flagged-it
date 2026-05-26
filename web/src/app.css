@@ -637,6 +637,19 @@
 		box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 	}
 
+	/* Answer options inside card-game: same surface as the card */
+	.answer-grid-btn {
+		background-color: var(--color-surface);
+	}
+
+	:root.light .answer-grid-btn {
+		border-color: rgba(0, 0, 0, 0.15);
+	}
+
+	:root.light .answer-grid-btn:hover:not(:disabled):not(.bg-success):not(.bg-error):not(.bg-primary\/30) {
+		background-color: var(--color-surface-light) !important;
+	}
+
 	.card-country {
 		@apply rounded-lg shadow-card backdrop-blur-sm border p-4 transition-all duration-300 cursor-pointer;
 		background-color: var(--color-surface);

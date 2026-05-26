@@ -144,14 +144,15 @@
 			geometry: filteredTargetGeometry
 		};
 
-		// Determine padding based on mode
+		// Padding scales with SVG size (tuned for 320×240: easy 80px, medium 60px)
 		// More padding = more zoomed out = more context visible
-		const padding = mode === 'easy' ? 80 : 60; // Medium mode (neighbors) needs more zoom-out too
-		
+		const padX = width * (mode === 'easy' ? 0.25 : 0.1875);
+		const padY = height * (mode === 'easy' ? 80 / 240 : 60 / 240);
+
 		// Create projection and fit to target
 		const projection = geoMercator()
 			.fitExtent(
-				[[padding, padding], [width - padding, height - padding]], 
+				[[padX, padY], [width - padX, height - padY]],
 				filteredTargetFeature as any
 			);
 

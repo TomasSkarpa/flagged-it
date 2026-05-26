@@ -91,15 +91,14 @@
 			geometry: filteredGeometry
 		};
 		
-		// Add padding
-		const padding = 20;
-		
+		// Padding scales with SVG size (tuned for 256×192: 20px)
+		const padX = width * (20 / 256);
+		const padY = height * (20 / 192);
+
 		// Use geoMercator (spherical projection) with fitExtent to fit the shape within the padded area
-		// fitExtent takes a bounding box [[x0, y0], [x1, y1]] and fits the geometry to it
-		// geoMercator preserves local shapes (conformal) and accounts for Earth's curvature
 		const projection = geoMercator()
 			.fitExtent(
-				[[padding, padding], [width - padding, height - padding]], 
+				[[padX, padY], [width - padX, height - padY]],
 				feature as any
 			);
 

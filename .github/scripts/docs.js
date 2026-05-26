@@ -36,6 +36,8 @@ const HANDLER_TO_GAME = {
 
 const NON_GAME_HANDLERS = new Set(['DebugHandler']);
 
+const WIKI_SPECIAL_FILES = new Set(['Home.md', '_Sidebar.md', '_Footer.md']);
+
 // Groq API configuration
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
@@ -427,7 +429,7 @@ function generateWikiFileName(packageName, code) {
     ];
     
     for (const file of wikiFiles) {
-      if (file.endsWith('.md') && file !== 'Home.md' && file !== '_Sidebar.md' && file !== '_Footer.md') {
+      if (file.endsWith('.md') && !WIKI_SPECIAL_FILES.has(file)) {
         const fileBase = file.replace('.md', '').toLowerCase();
         for (const term of searchTerms) {
           if (fileBase.includes(term) || term.includes(fileBase)) {
@@ -614,6 +616,136 @@ Return ONLY the markdown content, no explanations or code blocks.`;
 }
 
 /**
+ * GitHub wiki page title from filename (Flag-Color.md -> Flag Color)
+ */
+function wikiDisplayTitle(fileBase) {
+  return fileBase.replace(/-/g, ' ');
+}
+
+/**
+ * Extract one-line Purpose from a game wiki page
+ */
+function parsePurposeFromDoc(content) {
+  if (!content) {
+    return '';
+  }
+  const match = content.match(/\*\*Purpose:\*\*\s*(.+)/);
+  return match ? match[1].trim() : '';
+}
+
+/**
+ * List game wiki pages (excludes Home, sidebar, footer)
+ */
+function listGameWikiPages() {
+  return readdirSync(WIKI_ROOT)
+    .filter((file) => file.endsWith('.md') && !WIKI_SPECIAL_FILES.has(file))
+    .map((file) => {
+      const fileBase = file.replace('.md', '');
+      return {
+        fileBase,
+        displayTitle: wikiDisplayTitle(fileBase),
+        path: join(WIKI_ROOT, file),
+      };
+    });
+}
+
+/**
+ * Read existing [[Page Title]] order from Home.md Game Modes section
+ */
+function parseHomeGameOrder(homeContent) {
+  if (!homeContent) {
+    return [];
+  }
+
+  const sectionMatch = homeContent.match(/## Game Modes\n([\s\S]*?)(?=\n## |\nUse the sidebar|$)/);
+  if (!sectionMatch) {
+    return [];
+  }
+
+  const titles = [];
+  const linkRegex = /^- \[\[([^\]]+)\]\]/gm;
+  let match;
+  while ((match = linkRegex.exec(sectionMatch[1])) !== null) {
+    titles.push(match[1]);
+  }
+  return titles;
+}
+
+/**
+ * Order wiki pages: keep Home.md order, append new pages alphabetically
+ */
+function orderWikiPages(pages, preferredTitles) {
+  const byTitle = new Map(pages.map((page) => [page.displayTitle, page]));
+  const ordered = [];
+
+  for (const title of preferredTitles) {
+    if (byTitle.has(title)) {
+      ordered.push(byTitle.get(title));
+      byTitle.delete(title);
+    }
+  }
+
+  const remaining = [...byTitle.values()].sort((a, b) =>
+    a.displayTitle.localeCompare(b.displayTitle)
+  );
+  return [...ordered, ...remaining];
+}
+
+/**
+ * Replace the Game Modes bullet list in Home.md
+ */
+function replaceHomeGameModesSection(homeContent, gameLines) {
+  const newSection = `## Game Modes\n\n${gameLines.join('\n')}\n`;
+  const sectionRegex = /## Game Modes\n[\s\S]*?(?=\n## |\nUse the sidebar|$)/;
+
+  if (sectionRegex.test(homeContent)) {
+    return homeContent.replace(sectionRegex, newSection);
+  }
+
+  return `${homeContent.trim()}\n\n${newSection}`;
+}
+
+/**
+ * Sync Home.md and _Sidebar.md with all game wiki pages
+ */
+function updateWikiNavigation() {
+  const pages = listGameWikiPages();
+  if (pages.length === 0) {
+    return { updated: false, changedFiles: [] };
+  }
+
+  const homePath = join(WIKI_ROOT, 'Home.md');
+  const sidebarPath = join(WIKI_ROOT, '_Sidebar.md');
+  const homeContent = readFile(homePath) || '';
+  const ordered = orderWikiPages(pages, parseHomeGameOrder(homeContent));
+
+  const gameLines = ordered.map((page) => {
+    const purpose = parsePurposeFromDoc(readFile(page.path));
+    return purpose
+      ? `- [[${page.displayTitle}]] - ${purpose}`
+      : `- [[${page.displayTitle}]]`;
+  });
+
+  const newHome = replaceHomeGameModesSection(homeContent, gameLines);
+  const newSidebar = `## Games\n\n- [[Home]]\n${ordered.map((page) => `- [[${page.displayTitle}]]`).join('\n')}\n`;
+
+  const changedFiles = [];
+
+  if (newHome.trim() !== homeContent.trim()) {
+    writeFileSync(homePath, newHome, 'utf-8');
+    changedFiles.push('Home.md');
+  }
+
+  const sidebarContent = readFile(sidebarPath) || '';
+  if (newSidebar.trim() !== sidebarContent.trim()) {
+    writeFileSync(sidebarPath, newSidebar, 'utf-8');
+    changedFiles.push('_Sidebar.md');
+  }
+
+  return { updated: changedFiles.length > 0, changedFiles };
+}
+
+/**
  * Main function
  */
 async function main() {
@@ -688,10 +820,19 @@ async function main() {
     await sleep(2500);
   }
 
+  console.log('\n📚 Syncing wiki navigation (Home.md, _Sidebar.md)...');
+  const nav = updateWikiNavigation();
+  if (nav.updated) {
+    console.log(`  ✅ Updated: ${nav.changedFiles.join(', ')}`);
+  } else {
+    console.log('  ✓ Navigation already up to date');
+  }
+
   console.log('\n' + '='.repeat(50));
   console.log(`✅ Documentation update complete!`);
   console.log(`   Files generated: ${filesGenerated}`);
   console.log(`   Files updated: ${filesUpdated}`);
+  console.log(`   Navigation updated: ${nav.changedFiles.join(', ') || 'none'}`);
   console.log(`   Files skipped: ${filesSkipped}`);
   console.log('='.repeat(50));
 }

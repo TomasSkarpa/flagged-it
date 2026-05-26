@@ -110,6 +110,7 @@ This will:
 5. Use AI to analyze code and compare with docs
 6. Generate updated markdown files
 7. Update files in the `../flagged-it.wiki` directory (if it exists)
+8. Sync `Home.md` and `_Sidebar.md` so new game pages appear in the wiki navigation
 
 **Note:** 
 - The wiki must be cloned as a sibling directory to the main repository for local generation to work

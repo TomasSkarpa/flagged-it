@@ -69,6 +69,7 @@ jobs:
             2. Review web API files (web/src/lib/api/*Game.ts) for frontend behavior
             3. Compare with existing documentation
             4. Generate updated markdown files following the format specified in WIKI_DOCUMENTATION_FORMAT.md
+            5. Sync Home.md and _Sidebar.md with all game pages
             
             This ensures documentation accurately reflects the actual code implementation."
             

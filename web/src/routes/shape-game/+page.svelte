@@ -407,7 +407,7 @@
 		{:else if isLoading}
 			<div class="flex flex-col items-center justify-center py-20">
 				<LoadingSpinner />
-				<p class="mt-4 text-text-muted">Loading...</p>
+				<p class="mt-4 text-text-muted">{t('game.loading', undefined, currentLocale)}</p>
 			</div>
 		{/if}
 	</div>

@@ -41,7 +41,7 @@
 	$: gameOverText = t('game.over.title', undefined, currentLocale);
 	$: finalScoreText = t('game.higher_lower.final_score', undefined, currentLocale);
 	$: highScoreText = t('game.higher_lower.high_score', undefined, currentLocale);
-	$: loadingText = t('game.higher_lower.loading', undefined, currentLocale);
+	$: loadingText = t('game.loading', undefined, currentLocale);
 	$: startText = t('game.setup.start_game', undefined, currentLocale);
 	$: playAgainText = t('game.over.play_again', undefined, currentLocale);
 	$: hasText = t('game.higher_lower.has', undefined, currentLocale);

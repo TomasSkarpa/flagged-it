@@ -551,9 +551,9 @@
     "value": "Which country is larger?",
     "_context": "Description text for area category in higher/lower game, explaining what players are comparing."
   },
-  "game.higher_lower.loading": {
+  "game.loading": {
     "value": "Loading...",
-    "_context": "Loading state text displayed while higher/lower game is fetching comparison data or initializing."
+    "_context": "Short loading label shown while game content is being fetched (shape map GeoJSON, higher/lower round data, and similar in-game loads)."
   },
   "game.higher_lower.final_score": {
     "value": "Final Score",

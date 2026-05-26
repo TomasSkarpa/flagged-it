@@ -3,6 +3,8 @@
 	import { geoPath, geoMercator, geoBounds, geoDistance } from 'd3-geo';
 	import { getWorldGeoJSON } from '$lib/api/data';
 	import type { GeoJSON } from '$lib/api/shapeGame';
+	import { t } from '$lib/translations';
+	import { locale } from '$lib/stores/locale';
 
 	export let targetGeoJson: GeoJSON;
 	export let mode: 'easy' | 'medium' = 'easy'; // 'easy' = world view, 'medium' = neighbors view
@@ -17,6 +19,9 @@
 	let targetPathData = '';
 	let isLoading = true;
 	let error: string | null = null;
+
+	$: currentLocale = $locale;
+	$: loadingText = t('game.loading', undefined, currentLocale);
 
 	// Calculate approximate area of a polygon ring using shoelace formula
 	function calculateRingArea(ring: number[][]): number {
@@ -226,7 +231,7 @@
 >
 	{#if isLoading}
 		<text x={width / 2} y={height / 2} text-anchor="middle" class="loading-text">
-			Loading...
+			{loadingText}
 		</text>
 	{:else if error}
 		<text x={width / 2} y={height / 2} text-anchor="middle" class="error-text">

@@ -11,6 +11,8 @@ permissions:
   issues: read
   pull-requests: read
   copilot-requests: write
+engine:
+  model: mini
 tools:
   github:
     mode: gh-proxy

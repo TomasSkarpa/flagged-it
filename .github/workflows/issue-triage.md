@@ -11,8 +11,6 @@ permissions:
   contents: read
   issues: read
   copilot-requests: write
-engine:
-  model: mini
 safe-outputs:
   add-labels:
     allowed: [bug, enhancement, question, documentation]

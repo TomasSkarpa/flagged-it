@@ -97,7 +97,7 @@
 		position: sticky;
 		top: 0;
 		z-index: 50;
-		background: rgba(var(--nav-bg-rgb, 10, 14, 39), 0.85);
+		background: rgba(var(--nav-bg-rgb, 8, 28, 22), 0.85);
 		backdrop-filter: blur(12px);
 		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 	}

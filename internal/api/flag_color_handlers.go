@@ -3,17 +3,19 @@ package api
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"flagged-it/internal/data/models"
 	"flagged-it/internal/games/flagcolor"
+	"fmt"
 	"net/http"
 	"strings"
 	"sync"
+	"time"
 )
 
 type FlagColorGameHandler struct{}
 
 type flagColorSession struct {
+	CreatedAt          time.Time
 	SessionID          string
 	Score              int
 	Total              int
@@ -85,6 +87,7 @@ func (h *FlagColorGameHandler) StartGame(w http.ResponseWriter, r *http.Request)
 
 	sessionID := generateSessionID()
 	session := &flagColorSession{
+		CreatedAt:     time.Now(),
 		SessionID:     sessionID,
 		Score:         0,
 		Total:         0,

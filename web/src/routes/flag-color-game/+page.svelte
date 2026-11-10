@@ -93,14 +93,22 @@
 	$: setupDescription = t('game.flag_color.setup.description', undefined, currentLocale);
 	$: pageTitle = t('game.flag_color.title', undefined, currentLocale);
 	$: pageDesc = t('home.game.flag_color.description', undefined, currentLocale);
-	$: questionBeforeCountry = t(
-		'game.flag_color.question.before_country',
-		undefined,
-		currentLocale
-	);
-	$: questionAfterCountry = t(
-		'game.flag_color.question.after_country',
-		undefined,
+	// One sentence with {{.Country}} so each language puts the country where its
+	// grammar needs it; split around it so the name keeps its accent style.
+	function splitAroundCountry(template: string, loc: string): [string, string] {
+		const m = template.match(/\{\{\.?Country\}\}/);
+		// Not translated yet (t() fell back to English): keep the old two-part text.
+		const untranslated = loc !== 'en' && template === t('game.flag_color.question', undefined, 'en');
+		if (!m || m.index === undefined || untranslated) {
+			return [
+				t('game.flag_color.question.before_country', undefined, loc),
+				t('game.flag_color.question.after_country', undefined, loc)
+			];
+		}
+		return [template.slice(0, m.index), template.slice(m.index + m[0].length)];
+	}
+	$: [questionBeforeCountry, questionAfterCountry] = splitAroundCountry(
+		t('game.flag_color.question', undefined, currentLocale),
 		currentLocale
 	);
 	$: labelYourSelection = t('game.flag_color.result.your_selection', undefined, currentLocale);

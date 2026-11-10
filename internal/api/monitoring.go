@@ -169,6 +169,12 @@ func (rw *responseWriter) WriteHeader(code int) {
 	rw.ResponseWriter.WriteHeader(code)
 }
 
+// Unwrap lets http.ResponseController reach the real writer (needed to flush
+// server-sent events through this wrapper).
+func (rw *responseWriter) Unwrap() http.ResponseWriter {
+	return rw.ResponseWriter
+}
+
 // GetStatsHandler returns current server statistics
 func GetStatsHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {

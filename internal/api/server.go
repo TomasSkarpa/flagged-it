@@ -164,6 +164,9 @@ func SetupRoutes() {
 	// Stats/metrics endpoint (no rate limiting for monitoring, but include CORS and logging)
 	http.HandleFunc("/api/stats", LoggingMiddleware(corsMiddleware(GetStatsHandler)))
 
+	// Multiplayer rooms and challenges
+	setupPartyRoutes(corsMiddleware)
+
 	log.Println("API routes configured")
 }
 

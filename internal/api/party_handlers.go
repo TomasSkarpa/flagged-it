@@ -359,7 +359,8 @@ func partyEvents(w http.ResponseWriter, r *http.Request) {
 			case <-changed:
 				break wait
 			case <-heartbeat.C:
-				if _, err := fmt.Fprint(w, ": ping\n\n"); err != nil {
+				// A real event (not a comment) so the client can tell the stream is alive.
+				if _, err := fmt.Fprint(w, "event: ping\ndata: {}\n\n"); err != nil {
 					return
 				}
 				if err := rc.Flush(); err != nil {

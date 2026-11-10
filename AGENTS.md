@@ -29,6 +29,7 @@ make check   # go vet/fmt + svelte check — run before every PR
 
 - Game state lives on the server in in-memory sessions. The client never gets the answer before it submits one.
 - Hangman is the exception: it runs fully in the browser.
+- Multiplayer ("party") lives in `internal/party` (rooms, rounds, scoring) and `web/src/routes/party`. Live updates use server-sent events. Check it end to end with `go run ./cmd/party-smoke -api <url>`.
 - Add new UI strings to `en.json` only. A workflow translates the other locales and opens a PR.
 - Wiki game pages are generated from `internal/games` by a workflow. Don't edit them by hand.
 - The server's systemd unit and nginx config live in the IaC repo, not here.

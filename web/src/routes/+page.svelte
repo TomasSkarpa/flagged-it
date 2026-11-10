@@ -7,6 +7,14 @@
 	$: currentLocale = $locale;
 	$: games = [
 		{
+			id: 'party',
+			title: t('home.game.party.title', undefined, currentLocale),
+			description: t('home.game.party.description', undefined, currentLocale),
+			icon: '👥',
+			route: '/party',
+			available: true
+		},
+		{
 			id: 'flag',
 			title: t('game.flag.title', undefined, currentLocale),
 			description: t('home.game.flag.description', undefined, currentLocale),

@@ -782,5 +782,269 @@
   "game.round.progress": {
     "value": "Round %d / %d",
     "_context": "Format string for displaying round progress in game headers. First %d is current round, second %d is total rounds."
+  },
+  "home.game.party.title": {
+    "value": "Play with friends",
+    "_context": "Multiplayer page (play with friends). Title of the home page card for the multiplayer mode."
+  },
+  "home.game.party.description": {
+    "value": "Play live together or send friends a challenge link.",
+    "_context": "Multiplayer page (play with friends). Description on the home page card for the multiplayer mode."
+  },
+  "party.title": {
+    "value": "Play with friends",
+    "_context": "Multiplayer page (play with friends). Page title of the multiplayer page."
+  },
+  "party.description": {
+    "value": "Same questions for everyone. Who knows the world best?",
+    "_context": "Multiplayer page (play with friends). Subtitle under the multiplayer page title."
+  },
+  "party.name.label": {
+    "value": "Your name",
+    "_context": "Multiplayer page (play with friends). Label of the player name input."
+  },
+  "party.name.placeholder": {
+    "value": "e.g. Alex",
+    "_context": "Multiplayer page (play with friends). Placeholder in the player name input."
+  },
+  "party.game.label": {
+    "value": "Game",
+    "_context": "Multiplayer page (play with friends). Label above the game type choice."
+  },
+  "party.game.mix": {
+    "value": "Mix",
+    "_context": "Multiplayer page (play with friends). Game type that mixes all round types. Short."
+  },
+  "party.game.flag": {
+    "value": "Flags",
+    "_context": "Multiplayer page (play with friends). Game type: guess the country from its flag. Short."
+  },
+  "party.game.shape": {
+    "value": "Shapes",
+    "_context": "Multiplayer page (play with friends). Game type: guess the country from its outline. Short."
+  },
+  "party.game.capital": {
+    "value": "Capitals",
+    "_context": "Multiplayer page (play with friends). Game type: pick the capital city. Short."
+  },
+  "party.game.compare": {
+    "value": "Bigger or smaller",
+    "_context": "Multiplayer page (play with friends). Game type: pick which of two countries has more people or area. Short."
+  },
+  "party.game.color": {
+    "value": "Flag colours",
+    "_context": "Multiplayer page (play with friends). Game type: pick the hidden colour of a flag. Short."
+  },
+  "party.game.fact": {
+    "value": "Facts",
+    "_context": "Multiplayer page (play with friends). Game type: guess the country from a fact. Short."
+  },
+  "party.mode.live": {
+    "value": "Play live",
+    "_context": "Multiplayer page (play with friends). Mode where everyone answers at the same time."
+  },
+  "party.mode.live.desc": {
+    "value": "Everyone answers the same question at the same time",
+    "_context": "Multiplayer page (play with friends). Description of live mode."
+  },
+  "party.mode.challenge": {
+    "value": "Send a challenge",
+    "_context": "Multiplayer page (play with friends). Mode where friends play the same questions later."
+  },
+  "party.mode.challenge.desc": {
+    "value": "Friends play the same questions whenever they like",
+    "_context": "Multiplayer page (play with friends). Description of challenge mode."
+  },
+  "party.create": {
+    "value": "Create",
+    "_context": "Multiplayer page (play with friends). Button that creates a room or challenge."
+  },
+  "party.creating": {
+    "value": "Creating…",
+    "_context": "Multiplayer page (play with friends). Button text while a room is being created."
+  },
+  "party.join.title": {
+    "value": "Have a code?",
+    "_context": "Multiplayer page (play with friends). Heading above the join-by-code form."
+  },
+  "party.join.placeholder": {
+    "value": "Code",
+    "_context": "Multiplayer page (play with friends). Placeholder of the room code input."
+  },
+  "party.join.button": {
+    "value": "Join",
+    "_context": "Multiplayer page (play with friends). Button to join a room by code."
+  },
+  "party.join.heading": {
+    "value": "Join room {{.Code}}",
+    "_context": "Multiplayer page (play with friends). Heading when opening an invite link. {{.Code}} is the room code."
+  },
+  "party.lobby.code": {
+    "value": "Room code",
+    "_context": "Multiplayer page (play with friends). Label above the big room code."
+  },
+  "party.lobby.share": {
+    "value": "Send the link or tell friends the code.",
+    "_context": "Multiplayer page (play with friends). Hint under the room code."
+  },
+  "party.copy_link": {
+    "value": "Copy link",
+    "_context": "Multiplayer page (play with friends). Button that copies the invite link."
+  },
+  "party.copied": {
+    "value": "Copied!",
+    "_context": "Multiplayer page (play with friends). Shown after the link is copied."
+  },
+  "party.players": {
+    "value": "Players",
+    "_context": "Multiplayer page (play with friends). Heading of the player list."
+  },
+  "party.lobby.start": {
+    "value": "Start game",
+    "_context": "Multiplayer page (play with friends). Host button that starts the game."
+  },
+  "party.lobby.waiting_host": {
+    "value": "Waiting for {{.Name}} to start…",
+    "_context": "Multiplayer page (play with friends). Shown to guests in the lobby. {{.Name}} is the host's name."
+  },
+  "party.lobby.alone": {
+    "value": "You can start alone or wait for friends.",
+    "_context": "Multiplayer page (play with friends). Shown to the host while they are the only player."
+  },
+  "party.host": {
+    "value": "host",
+    "_context": "Multiplayer page (play with friends). Small tag next to the host's name."
+  },
+  "party.you": {
+    "value": "you",
+    "_context": "Multiplayer page (play with friends). Small tag next to your own name."
+  },
+  "party.q.flag": {
+    "value": "Which country has this flag?",
+    "_context": "Multiplayer page (play with friends). Question in a flag round."
+  },
+  "party.q.shape": {
+    "value": "Which country has this shape?",
+    "_context": "Multiplayer page (play with friends). Question in a shape round."
+  },
+  "party.q.capital": {
+    "value": "What is the capital of {{.Country}}?",
+    "_context": "Multiplayer page (play with friends). Question in a capital round. {{.Country}} is a country name."
+  },
+  "party.q.compare.population": {
+    "value": "Which has more people?",
+    "_context": "Multiplayer page (play with friends). Question in a compare round about population."
+  },
+  "party.q.compare.area": {
+    "value": "Which is bigger by area?",
+    "_context": "Multiplayer page (play with friends). Question in a compare round about land area."
+  },
+  "party.q.color": {
+    "value": "Pick the hidden colour in the flag of {{.Country}}",
+    "_context": "Multiplayer page (play with friends). Question in a flag colour round. {{.Country}} is a country name."
+  },
+  "party.q.fact": {
+    "value": "Which country is this about?",
+    "_context": "Multiplayer page (play with friends). Question in a fact round, shown above the fact."
+  },
+  "party.color.submit": {
+    "value": "Lock in colour",
+    "_context": "Multiplayer page (play with friends). Button that submits the chosen colour."
+  },
+  "party.answered": {
+    "value": "Locked in! Waiting for the others…",
+    "_context": "Multiplayer page (play with friends). Shown after you answer in live mode."
+  },
+  "party.answered_count": {
+    "value": "{{.Done}} of {{.Total}} answered",
+    "_context": "Multiplayer page (play with friends). Live mode: how many players have answered."
+  },
+  "party.reveal.correct": {
+    "value": "Correct! +{{.Points}}",
+    "_context": "Multiplayer page (play with friends). Shown after a right answer. {{.Points}} is points earned."
+  },
+  "party.reveal.wrong": {
+    "value": "The answer was {{.Answer}}",
+    "_context": "Multiplayer page (play with friends). Shown after a wrong answer."
+  },
+  "party.reveal.timeout": {
+    "value": "Time's up! The answer was {{.Answer}}",
+    "_context": "Multiplayer page (play with friends). Shown when the player did not answer in time."
+  },
+  "party.reveal.color": {
+    "value": "+{{.Points}} for your colour",
+    "_context": "Multiplayer page (play with friends). Shown after a colour round. {{.Points}} is points earned."
+  },
+  "party.reveal.color_timeout": {
+    "value": "Time's up!",
+    "_context": "Multiplayer page (play with friends). Shown when the player did not pick a colour in time."
+  },
+  "party.next": {
+    "value": "Next",
+    "_context": "Multiplayer page (play with friends). Button to go to the next question in a challenge."
+  },
+  "party.finished.title": {
+    "value": "Final scores",
+    "_context": "Multiplayer page (play with friends). Heading of the final results."
+  },
+  "party.finished.winner": {
+    "value": "{{.Name}} wins!",
+    "_context": "Multiplayer page (play with friends). Shown above the final results. {{.Name}} is the winner."
+  },
+  "party.finished.you_won": {
+    "value": "You win!",
+    "_context": "Multiplayer page (play with friends). Shown when you have the top score."
+  },
+  "party.again": {
+    "value": "Play again",
+    "_context": "Multiplayer page (play with friends). Host button to play again with the same group."
+  },
+  "party.waiting_again": {
+    "value": "Waiting for the host to play again…",
+    "_context": "Multiplayer page (play with friends). Shown to guests on the final screen."
+  },
+  "party.leave": {
+    "value": "Leave",
+    "_context": "Multiplayer page (play with friends). Button to leave the room."
+  },
+  "party.new_game": {
+    "value": "New game",
+    "_context": "Multiplayer page (play with friends). Button to go back to the setup screen."
+  },
+  "party.points": {
+    "value": "pts",
+    "_context": "Multiplayer page (play with friends). Short unit for points."
+  },
+  "party.challenge.from": {
+    "value": "Challenge from {{.Name}}",
+    "_context": "Multiplayer page (play with friends). Heading of a challenge before starting. {{.Name}} is who created it."
+  },
+  "party.challenge.rules": {
+    "value": "{{.Rounds}} questions. Answer fast for more points.",
+    "_context": "Multiplayer page (play with friends). Rules under the challenge heading."
+  },
+  "party.challenge.start": {
+    "value": "Start",
+    "_context": "Multiplayer page (play with friends). Button to start playing a challenge."
+  },
+  "party.challenge.share": {
+    "value": "Send this link to friends so they can try to beat you.",
+    "_context": "Multiplayer page (play with friends). Hint next to the challenge link on the results screen."
+  },
+  "party.challenge.playing": {
+    "value": "playing…",
+    "_context": "Multiplayer page (play with friends). Shown next to a player who has not finished the challenge yet."
+  },
+  "party.error.not_found": {
+    "value": "Room not found. Check the code.",
+    "_context": "Multiplayer page (play with friends). Error when the room code does not exist."
+  },
+  "party.error.full": {
+    "value": "This room is full.",
+    "_context": "Multiplayer page (play with friends). Error when the room has no free seats."
+  },
+  "party.error.generic": {
+    "value": "Something went wrong. Please try again.",
+    "_context": "Multiplayer page (play with friends). Generic error on the multiplayer page."
   }
 }

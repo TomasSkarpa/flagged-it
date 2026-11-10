@@ -83,6 +83,10 @@
     "value": "One flag region is reserved for your guess: it shows a live preview of the color from your sliders. Adjust the color until it matches the real flag.",
     "_context": "Explains live color preview in the flag region and HSV sliders for the flag color game."
   },
+  "game.flag_color.question": {
+    "value": "What is the color of the flag of {{.Country}}?",
+    "_context": "Flag color quiz headline. Keep {{.Country}} exactly as written and put it where the country name belongs in your language (it can be at the start). The country name is shown highlighted."
+  },
   "game.flag_color.question.before_country": {
     "value": "What is the color of the flag of ",
     "_context": "Opening phrase for flag color quiz headline; followed by country name in accent style, then question.after_country."

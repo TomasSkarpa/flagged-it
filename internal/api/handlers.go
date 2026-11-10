@@ -31,6 +31,7 @@ type GameAnswer struct {
 }
 
 type GameSession struct {
+	CreatedAt              time.Time       `json:"-"` // used by the session sweeper
 	SessionID              string          `json:"sessionId"`
 	Score                  int             `json:"score"`
 	Total                  int             `json:"total"`
@@ -130,6 +131,7 @@ func (h *FlagGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	// Create session
 	sessionID := generateSessionID()
 	session := &GameSession{
+		CreatedAt:     time.Now(),
 		SessionID:     sessionID,
 		Score:         0,
 		Total:         0,
@@ -552,6 +554,7 @@ func (h *DebugHandler) GetWorldGeoJSON(w http.ResponseWriter, r *http.Request) {
 type ShapeGameHandler struct{}
 
 type ShapeGameSession struct {
+	CreatedAt          time.Time       `json:"-"` // used by the session sweeper
 	SessionID          string          `json:"sessionId"`
 	Score              int             `json:"score"`
 	Total              int             `json:"total"`
@@ -664,6 +667,7 @@ func (h *ShapeGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	// Create session
 	sessionID := generateSessionID()
 	session := &ShapeGameSession{
+		CreatedAt:     time.Now(),
 		SessionID:     sessionID,
 		Score:         0,
 		Total:         0,
@@ -901,6 +905,7 @@ func generateShapeQuestion(availableCountries []models.Country, session *ShapeGa
 type CapitalGameHandler struct{}
 
 type CapitalGameSession struct {
+	CreatedAt             time.Time       `json:"-"` // used by the session sweeper
 	SessionID             string          `json:"sessionId"`
 	Score                 int             `json:"score"`
 	Total                 int             `json:"total"`
@@ -964,6 +969,7 @@ func (h *CapitalGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 
 	sessionID := generateSessionID()
 	session := &CapitalGameSession{
+		CreatedAt:     time.Now(),
 		SessionID:     sessionID,
 		Score:         0,
 		Total:         0,
@@ -1200,6 +1206,7 @@ type HigherLowerComparison struct {
 }
 
 type HigherLowerSession struct {
+	CreatedAt    time.Time           `json:"-"` // used by the session sweeper
 	SessionID    string              `json:"sessionId"`
 	Score        int                 `json:"score"`
 	HighScore    int                 `json:"highScore"`
@@ -1266,6 +1273,7 @@ func (h *HigherLowerHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 
 	sessionID := generateSessionID()
 	session := &HigherLowerSession{
+		CreatedAt: time.Now(),
 		SessionID: sessionID,
 		Score:     0,
 		HighScore: 0,
@@ -1546,6 +1554,7 @@ func generateContinentPair(session *HigherLowerSession) (HigherLowerItem, Higher
 type WorldleGameHandler struct{}
 
 type WorldleSession struct {
+	CreatedAt time.Time `json:"-"` // used by the session sweeper
 	SessionID string
 	Locale    string // User's locale for translations
 	Logic     *guessing.Logic
@@ -1600,6 +1609,7 @@ func (h *WorldleGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	// Create session
 	sessionID := generateSessionID()
 	session := &WorldleSession{
+		CreatedAt: time.Now(),
 		SessionID: sessionID,
 		Locale:    locale,
 		Logic:     gameLogic,
@@ -1780,6 +1790,7 @@ func (h *WorldleGameHandler) GetState(w http.ResponseWriter, r *http.Request) {
 type FactsGameHandler struct{}
 
 type FactsGameSession struct {
+	CreatedAt time.Time `json:"-"` // used by the session sweeper
 	SessionID string
 	Locale    string // User's locale for translations
 	Logic     *facts.Logic
@@ -1833,6 +1844,7 @@ func (h *FactsGameHandler) StartGame(w http.ResponseWriter, r *http.Request) {
 	// Create session
 	sessionID := generateSessionID()
 	session := &FactsGameSession{
+		CreatedAt: time.Now(),
 		SessionID: sessionID,
 		Locale:    locale,
 		Logic:     gameLogic,

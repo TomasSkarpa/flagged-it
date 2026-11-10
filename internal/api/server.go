@@ -110,44 +110,44 @@ func SetupRoutes() {
 	}
 
 	// Flag game routes
-	http.HandleFunc("/api/game/flag/start", combinedMiddleware(flagHandler.StartGame))
-	http.HandleFunc("/api/game/flag/question", combinedMiddleware(flagHandler.GetQuestion))
-	http.HandleFunc("/api/game/flag/answer", combinedMiddleware(flagHandler.SubmitAnswer))
-	http.HandleFunc("/api/game/flag/score", combinedMiddleware(flagHandler.GetScore))
+	http.HandleFunc("/api/game/flag/start", combinedMiddleware(serialize(&flagGameLock, flagHandler.StartGame)))
+	http.HandleFunc("/api/game/flag/question", combinedMiddleware(serialize(&flagGameLock, flagHandler.GetQuestion)))
+	http.HandleFunc("/api/game/flag/answer", combinedMiddleware(serialize(&flagGameLock, flagHandler.SubmitAnswer)))
+	http.HandleFunc("/api/game/flag/score", combinedMiddleware(serialize(&flagGameLock, flagHandler.GetScore)))
 
 	// Shape game routes
-	http.HandleFunc("/api/game/shape/start", combinedMiddleware(shapeHandler.StartGame))
-	http.HandleFunc("/api/game/shape/question", combinedMiddleware(shapeHandler.GetQuestion))
-	http.HandleFunc("/api/game/shape/answer", combinedMiddleware(shapeHandler.SubmitAnswer))
-	http.HandleFunc("/api/game/shape/score", combinedMiddleware(shapeHandler.GetScore))
+	http.HandleFunc("/api/game/shape/start", combinedMiddleware(serialize(&shapeGameLock, shapeHandler.StartGame)))
+	http.HandleFunc("/api/game/shape/question", combinedMiddleware(serialize(&shapeGameLock, shapeHandler.GetQuestion)))
+	http.HandleFunc("/api/game/shape/answer", combinedMiddleware(serialize(&shapeGameLock, shapeHandler.SubmitAnswer)))
+	http.HandleFunc("/api/game/shape/score", combinedMiddleware(serialize(&shapeGameLock, shapeHandler.GetScore)))
 
 	// Capital game routes
-	http.HandleFunc("/api/game/capital/start", combinedMiddleware(capitalHandler.StartGame))
-	http.HandleFunc("/api/game/capital/question", combinedMiddleware(capitalHandler.GetQuestion))
-	http.HandleFunc("/api/game/capital/answer", combinedMiddleware(capitalHandler.SubmitAnswer))
-	http.HandleFunc("/api/game/capital/score", combinedMiddleware(capitalHandler.GetScore))
+	http.HandleFunc("/api/game/capital/start", combinedMiddleware(serialize(&capitalGameLock, capitalHandler.StartGame)))
+	http.HandleFunc("/api/game/capital/question", combinedMiddleware(serialize(&capitalGameLock, capitalHandler.GetQuestion)))
+	http.HandleFunc("/api/game/capital/answer", combinedMiddleware(serialize(&capitalGameLock, capitalHandler.SubmitAnswer)))
+	http.HandleFunc("/api/game/capital/score", combinedMiddleware(serialize(&capitalGameLock, capitalHandler.GetScore)))
 
 	// Higher/Lower game routes
-	http.HandleFunc("/api/game/higherlower/start", combinedMiddleware(higherLowerHandler.StartGame))
-	http.HandleFunc("/api/game/higherlower/answer", combinedMiddleware(higherLowerHandler.SubmitAnswer))
-	http.HandleFunc("/api/game/higherlower/score", combinedMiddleware(higherLowerHandler.GetScore))
+	http.HandleFunc("/api/game/higherlower/start", combinedMiddleware(serialize(&higherLowerGameLock, higherLowerHandler.StartGame)))
+	http.HandleFunc("/api/game/higherlower/answer", combinedMiddleware(serialize(&higherLowerGameLock, higherLowerHandler.SubmitAnswer)))
+	http.HandleFunc("/api/game/higherlower/score", combinedMiddleware(serialize(&higherLowerGameLock, higherLowerHandler.GetScore)))
 
 	// Worldle game routes
-	http.HandleFunc("/api/game/worldle/start", combinedMiddleware(worldleHandler.StartGame))
-	http.HandleFunc("/api/game/worldle/guess", combinedMiddleware(worldleHandler.SubmitGuess))
-	http.HandleFunc("/api/game/worldle/state", combinedMiddleware(worldleHandler.GetState))
+	http.HandleFunc("/api/game/worldle/start", combinedMiddleware(serialize(&worldleGameLock, worldleHandler.StartGame)))
+	http.HandleFunc("/api/game/worldle/guess", combinedMiddleware(serialize(&worldleGameLock, worldleHandler.SubmitGuess)))
+	http.HandleFunc("/api/game/worldle/state", combinedMiddleware(serialize(&worldleGameLock, worldleHandler.GetState)))
 
 	// Facts game routes
-	http.HandleFunc("/api/game/facts/start", combinedMiddleware(factsHandler.StartGame))
-	http.HandleFunc("/api/game/facts/guess", combinedMiddleware(factsHandler.SubmitGuess))
-	http.HandleFunc("/api/game/facts/skip", combinedMiddleware(factsHandler.Skip))
-	http.HandleFunc("/api/game/facts/next", combinedMiddleware(factsHandler.NextRound))
+	http.HandleFunc("/api/game/facts/start", combinedMiddleware(serialize(&factsGameLock, factsHandler.StartGame)))
+	http.HandleFunc("/api/game/facts/guess", combinedMiddleware(serialize(&factsGameLock, factsHandler.SubmitGuess)))
+	http.HandleFunc("/api/game/facts/skip", combinedMiddleware(serialize(&factsGameLock, factsHandler.Skip)))
+	http.HandleFunc("/api/game/facts/next", combinedMiddleware(serialize(&factsGameLock, factsHandler.NextRound)))
 
 	// Flag color quiz
-	http.HandleFunc("/api/game/flag-color/start", combinedMiddleware(flagColorHandler.StartGame))
-	http.HandleFunc("/api/game/flag-color/question", combinedMiddleware(flagColorHandler.GetQuestion))
-	http.HandleFunc("/api/game/flag-color/answer", combinedMiddleware(flagColorHandler.SubmitAnswer))
-	http.HandleFunc("/api/game/flag-color/score", combinedMiddleware(flagColorHandler.GetScore))
+	http.HandleFunc("/api/game/flag-color/start", combinedMiddleware(serialize(&flagColorGameLock, flagColorHandler.StartGame)))
+	http.HandleFunc("/api/game/flag-color/question", combinedMiddleware(serialize(&flagColorGameLock, flagColorHandler.GetQuestion)))
+	http.HandleFunc("/api/game/flag-color/answer", combinedMiddleware(serialize(&flagColorGameLock, flagColorHandler.SubmitAnswer)))
+	http.HandleFunc("/api/game/flag-color/score", combinedMiddleware(serialize(&flagColorGameLock, flagColorHandler.GetScore)))
 
 	// Countries and GeoJSON (used by library, games, map)
 	http.HandleFunc("/api/countries", combinedMiddleware(debugHandler.GetAllCountries))
@@ -166,6 +166,8 @@ func SetupRoutes() {
 
 	// Multiplayer rooms and challenges
 	setupPartyRoutes(corsMiddleware)
+
+	startSessionSweeper()
 
 	log.Println("API routes configured")
 }

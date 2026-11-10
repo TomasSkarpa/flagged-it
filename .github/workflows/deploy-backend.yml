@@ -61,6 +61,8 @@ jobs:
 
       - name: Verify deployment
         run: |
-          sleep 3
-          curl -f http://localhost:8080/api/health || exit 1
-          echo "✓ Backend is running and healthy"
+          # The port comes from the systemd unit (owned by IaC), e.g. "-port=8081". Default 8080.
+          PORT=$(systemctl show -p ExecStart --value flagged-it.service | grep -oE -- '-port[= ][0-9]+' | grep -oE '[0-9]+' | head -1)
+          PORT=${PORT:-8080}
+          curl -fsS --retry 10 --retry-delay 1 --retry-all-errors "http://localhost:$PORT/api/health"
+          echo "✓ Backend is running and healthy on port $PORT"

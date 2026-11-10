@@ -19,7 +19,8 @@ export interface HigherLowerItem {
 
 export interface HigherLowerComparison {
 	left: HigherLowerItem;
-	right: HigherLowerItem;
+	/** The server leaves out `value` until the player answers (see HigherLowerAnswerResponse.rightValue). */
+	right: Omit<HigherLowerItem, 'value'> & { value?: number };
 	category: HigherLowerCategory;
 	valueLabel: string;
 }

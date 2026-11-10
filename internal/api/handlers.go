@@ -1198,11 +1198,19 @@ type HigherLowerItem struct {
 	ImageURL string  `json:"imageUrl,omitempty"`
 }
 
+// HigherLowerHiddenItem is the right-hand item as sent to the client: no value,
+// so the answer can't be read before the player picks higher or lower.
+type HigherLowerHiddenItem struct {
+	Name     string `json:"name"`
+	CCA2     string `json:"cca2,omitempty"`
+	ImageURL string `json:"imageUrl,omitempty"`
+}
+
 type HigherLowerComparison struct {
-	Left       HigherLowerItem     `json:"left"`
-	Right      HigherLowerItem     `json:"right"`
-	Category   HigherLowerCategory `json:"category"`
-	ValueLabel string              `json:"valueLabel"`
+	Left       HigherLowerItem       `json:"left"`
+	Right      HigherLowerHiddenItem `json:"right"`
+	Category   HigherLowerCategory   `json:"category"`
+	ValueLabel string                `json:"valueLabel"`
 }
 
 type HigherLowerSession struct {
@@ -1436,7 +1444,7 @@ func generateHigherLowerComparison(session *HigherLowerSession, locale string) *
 
 	return &HigherLowerComparison{
 		Left:       left,
-		Right:      right,
+		Right:      HigherLowerHiddenItem{Name: right.Name, CCA2: right.CCA2, ImageURL: right.ImageURL},
 		Category:   session.Category,
 		ValueLabel: valueLabel,
 	}

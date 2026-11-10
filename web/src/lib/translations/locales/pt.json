@@ -260,5 +260,6 @@
   "party.challenge.playing": "jogando…",
   "party.error.not_found": "Sala não encontrada. Verifica o código.",
   "party.error.full": "Esta sala está cheia.",
-  "party.error.generic": "Algo deu errado. Tenta de novo."
+  "party.error.generic": "Algo deu errado. Tenta de novo.",
+  "game.flag_color.question": "Qual é a cor da bandeira do {{.Country}}?"
 }

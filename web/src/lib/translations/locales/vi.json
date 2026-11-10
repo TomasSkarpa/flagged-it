@@ -260,5 +260,6 @@
   "party.challenge.playing": "đang chơi…",
   "party.error.not_found": "Không tìm thấy phòng. Kiểm tra mã.",
   "party.error.full": "Phòng này đã đầy.",
-  "party.error.generic": "Đã xảy ra lỗi. Vui lòng thử lại."
+  "party.error.generic": "Đã xảy ra lỗi. Vui lòng thử lại.",
+  "game.flag_color.question": "Hãy cho biết màu của cờ của {{.Country}} là gì?"
 }

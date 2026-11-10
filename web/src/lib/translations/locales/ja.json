@@ -260,5 +260,6 @@
   "party.challenge.playing": "プレイ中…",
   "party.error.not_found": "部屋が見つかりません。コードを確認してください。",
   "party.error.full": "この部屋は満席です。",
-  "party.error.generic": "何か問題が発生しました。もう一度お試しください。"
+  "party.error.generic": "何か問題が発生しました。もう一度お試しください。",
+  "game.flag_color.question": "{{.Country}}の旗の色は何ですか？\nゲーム「旗の色カスタム」のタイトルです。{{.Country}}は強調されています。"
 }

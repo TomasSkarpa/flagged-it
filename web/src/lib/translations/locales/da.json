@@ -260,5 +260,6 @@
   "party.challenge.playing": "spiller…",
   "party.error.not_found": "Rummet findes ikke. Tjek koden.",
   "party.error.full": "Dette rum er fuldt.",
-  "party.error.generic": "Noget gik galt. Prøv igen."
+  "party.error.generic": "Noget gik galt. Prøv igen.",
+  "game.flag_color.question": "Hvad er farven på flagget til {{.Country}}?"
 }

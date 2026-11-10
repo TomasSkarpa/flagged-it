@@ -260,5 +260,6 @@
   "party.challenge.playing": "oynuyor…",
   "party.error.not_found": "Oda bulunamadı. Kodu kontrol et.",
   "party.error.full": "Bu oda dolu.",
-  "party.error.generic": "Bir şey ters gitti. Lütfen tekrar dene."
+  "party.error.generic": "Bir şey ters gitti. Lütfen tekrar dene.",
+  "game.flag_color.question": "{{.Country}}'nin sarılığını şu anda tanıyamıyorum. Lütfen başlıkta gösterilen şekilde soruyorum: '{{.Country}}'nin sarılığını anlamak için yardımcı ol."
 }

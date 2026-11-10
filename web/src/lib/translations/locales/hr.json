@@ -260,5 +260,6 @@
   "party.challenge.playing": "igrajući…",
   "party.error.not_found": "Soba nije pronađena. Provjeri kod.",
   "party.error.full": "Ova soba je puna.",
-  "party.error.generic": "Nešto je pošlo po zlu. Pokušaj ponovno."
+  "party.error.generic": "Nešto je pošlo po zlu. Pokušaj ponovno.",
+  "game.flag_color.question": "Koja je boja zastave {{.Country}}?"
 }

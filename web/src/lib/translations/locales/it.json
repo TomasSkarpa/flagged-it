@@ -260,5 +260,6 @@
   "party.challenge.playing": "in gioco…",
   "party.error.not_found": "Stanza non trovata. Controlla il codice.",
   "party.error.full": "Questa stanza è piena.",
-  "party.error.generic": "Qualcosa è andato storto. Riprova."
+  "party.error.generic": "Qualcosa è andato storto. Riprova.",
+  "game.flag_color.question": "Qual è il colore della bandiera di {{.Country}}?"
 }

@@ -260,5 +260,6 @@
   "party.challenge.playing": "en cours…",
   "party.error.not_found": "Salle non trouvée. Vérifie le code.",
   "party.error.full": "Cette salle est pleine.",
-  "party.error.generic": "Une erreur est survenue. Réessaie."
+  "party.error.generic": "Une erreur est survenue. Réessaie.",
+  "game.flag_color.question": "Quelle est la couleur du drapeau de {{.Country}}?"
 }

@@ -260,5 +260,6 @@
   "party.challenge.playing": "يُلعَب…",
   "party.error.not_found": "لم يتم العثور على الغرفة. تحقق من الرمز.",
   "party.error.full": "هذه الغرفة ممتلئة.",
-  "party.error.generic": "حدث خطأ ما. حاول مرة أخرى."
+  "party.error.generic": "حدث خطأ ما. حاول مرة أخرى.",
+  "game.flag_color.question": "ما لون علم {{.Country}}؟"
 }

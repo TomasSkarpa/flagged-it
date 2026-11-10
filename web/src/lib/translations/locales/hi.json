@@ -260,5 +260,6 @@
   "party.challenge.playing": "खेल रहा है…",
   "party.error.not_found": "कमरा नहीं मिला। कोड जाँचें।",
   "party.error.full": "यह कमरा भर गया है।",
-  "party.error.generic": "कुछ गलत हो गया। कृपया फिर से प्रयास करें।"
+  "party.error.generic": "कुछ गलत हो गया। कृपया फिर से प्रयास करें।",
+  "game.flag_color.question": "क्या {{.Country}} के प्रतिटी की रंग क्या है।"
 }

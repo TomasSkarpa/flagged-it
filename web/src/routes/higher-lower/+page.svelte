@@ -29,6 +29,7 @@
 	
 	// Animation states
 	let showRightValue = false;
+	let revealedRightValue = 0;
 	let isCorrect: boolean | null = null;
 	let isAnimating = false;
 	let slideDirection: 'left' | null = null;
@@ -105,10 +106,11 @@
 		if (!sessionId || isAnimating) return;
 		
 		isAnimating = true;
-		showRightValue = true;
 		
 		try {
 			const result = await submitHigherLowerAnswer(sessionId, answer);
+			revealedRightValue = result.rightValue;
+			showRightValue = true;
 			isCorrect = result.correct;
 			score = result.score;
 			highScore = result.highScore;
@@ -147,7 +149,7 @@
 		isCorrect = null;
 	}
 
-	function getBackgroundGradient(item: HigherLowerItem, side: 'left' | 'right'): string {
+	function getBackgroundGradient(item: { name: string }, side: 'left' | 'right'): string {
 		// Generate unique gradients based on country/continent name
 		const hash = item.name.split('').reduce((a, b) => {
 			a = ((a << 5) - a) + b.charCodeAt(0);
@@ -285,7 +287,7 @@
 					
 					{#if showRightValue}
 						<p class="panel-value animate-reveal" class:correct={isCorrect} class:wrong={isCorrect === false}>
-							{formatValue(comparison.right.value, comparison.category)}
+							{formatValue(revealedRightValue, comparison.category)}
 						</p>
 						<p class="panel-label">{comparison.valueLabel}</p>
 					{:else}
